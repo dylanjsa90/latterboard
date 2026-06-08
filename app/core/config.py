@@ -1,13 +1,12 @@
+import os
+import secrets
+import warnings
+from typing import Annotated, Any, Dict, List, Literal, Optional, Union
 from xml.etree.ElementTree import QName
 
-from pydantic_settings import BaseSettings
-import os
-from typing import Any, Dict, List, Optional, Union
-from pydantic import AnyHttpUrl, EmailStr, HttpUrl, PostgresDsn, validator
 from dotenv import load_dotenv
-from typing import Annotated, Any, Literal
-
 from pydantic import (
+    AnyHttpUrl,
     AnyUrl,
     BeforeValidator,
     EmailStr,
@@ -15,10 +14,8 @@ from pydantic import (
     PostgresDsn,
     computed_field,
     model_validator,
+    validator,
 )
-import secrets
-import warnings
-
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing_extensions import Self
 
