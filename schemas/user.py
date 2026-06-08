@@ -1,14 +1,13 @@
 from datetime import datetime
-from typing import Optional
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 
 class UserBase(BaseModel):
     email: EmailStr
     username: str
-    hashed_password: Optional[str] = None
-
+    is_active: bool | None = None
+    is_superuser: bool
 
 class UserCreate(UserBase):
     password: str
@@ -23,12 +22,10 @@ class UserUpdate(BaseModel):
 
 class UserPublic(UserBase):
     id: int
-    is_active: bool
     created_at: datetime
     updated_at: datetime
 
     model_config = {"from_attributes": True}
-
 
 # JSON payload containing access token
 class Token(BaseModel):
@@ -39,3 +36,14 @@ class Token(BaseModel):
 # Contents of JWT token
 class TokenPayload(BaseModel):
     sub: str | None = None
+
+
+class NewPassword(BaseModel):
+    token: str
+    new_password: str = Field(min_length=8, max_length=128)
+
+# Generic message
+class Message(BaseModel):
+    message: str
+
+

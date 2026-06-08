@@ -1,0 +1,30 @@
+import logging
+import pathlib
+
+# create logs folder if needed
+pathlib.Path('logs').mkdir(parents=True, exist_ok=True)
+name = __name__
+def config_logging():
+  # Create a custom logger
+  logger = logging.getLogger(name)
+  logger.setLevel(logging.INFO)
+
+  # Create handlers
+  c_handler = logging.StreamHandler()
+  f_handler = logging.FileHandler('./logs/logs_error.log')
+  f_info_handler = logging.FileHandler('./logs/logs_info.log')
+  c_handler.setLevel(logging.WARNING)
+  f_handler.setLevel(logging.ERROR)
+  f_info_handler.setLevel(logging.INFO)
+
+  # Create formatters and add it to handlers
+  c_format = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
+  f_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+  c_handler.setFormatter(c_format)
+  f_handler.setFormatter(f_format)
+  f_info_handler.setFormatter(f_format)
+  
+  # Add handlers to the logger
+  logger.addHandler(c_handler)
+  logger.addHandler(f_handler)
+  logger.addHandler(f_info_handler)

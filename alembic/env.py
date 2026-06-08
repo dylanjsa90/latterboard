@@ -16,7 +16,7 @@ if config.config_file_name is not None:
 # Override sqlalchemy.url from environment so .env is the single source of truth
 config.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
 
-from app.database import Base  # noqa: E402
+from app.core.base_class import Base
 import app.models  # noqa: E402, F401 — register all models with Base
 
 target_metadata = Base.metadata
