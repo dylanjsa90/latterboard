@@ -4,9 +4,8 @@ from typing import Annotated
 import jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from passlib.exc import InvalidTokenError
+from jwt.exceptions import InvalidTokenError
 from pydantic import ValidationError
-from sqlmodel import Session
 
 from app.core import security
 from app.core.config import settings
@@ -29,7 +28,7 @@ def get_db() -> Generator:
   finally:
       db.close()
 
-SessionDep = Annotated[Session, Depends(get_db)]
+SessionDep = Annotated[SessionLocal, Depends(get_db)]
 TokenDep = Annotated[str, Depends(reusable_oauth2)]
 
 

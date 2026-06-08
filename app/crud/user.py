@@ -1,13 +1,10 @@
-from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
+from app.core.security import get_password_hash, verify_password
 from app.models.user import User
 from app.schemas import UserCreate, UserUpdate
 
 from .base import CRUDBase
-from app.core.security import verify_password
-
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
@@ -26,7 +23,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
     user = User( # type: ignore
       email=user_in.email,
       username=user_in.username,
-      hashed_password=pwd_context.hash(user_in.password),
+      hashed_password=get_password_hash(user_in.password),
     )
     db.add(user)
     db.commit()
@@ -36,11 +33,11 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
   def update_user(self, db: Session, user: User, user_in: UserUpdate) -> User:
     update_data = user_in.model_dump(exclude_unset=True)
     if "password" in update_data:
-      update_data["hashed_password"] = pwd_context.hash(update_data.pop("password"))
-      for field, value in update_data.items():
-        setattr(user, field, value)
-      db.commit()
-      db.refresh(user)
+      update_data["hashed_password"] = get_password_hash(update_data.pop("password"))
+    for field, value in update_data.items():
+      setattr(user, field, value)
+    db.commit()
+    db.refresh(user)
     return user
 
   def delete_user(self, db: Session, user: User) -> User | None:       

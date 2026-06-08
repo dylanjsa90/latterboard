@@ -14,11 +14,16 @@ dependencies = [
     "alembic<2.0.0,>=1.12.1",
     "httpx<1.0.0,>=0.25.1",
     "psycopg[binary]<4.0.0,>=3.1.13",
-    "sqlmodel<1.0.0,>=0.0.21",
     "pydantic-settings<3.0.0,>=2.2.1",
     "sentry-sdk[fastapi]>=2.0.0,<3.0.0",
     "pyjwt<3.0.0,>=2.8.0",
     "pwdlib[argon2,bcrypt]>=0.3.0",
+    "fastapi-cache2>=0.2.2",
+    "Jinja2>=3.1.6",
+    "redis>=7.4.0",
+    "pydantic>=1.10.19",
+    "sqlalchemy>=1.4.41",
+    "passlib==1.7.4",
 ]
 
 [dependency-groups]
@@ -34,6 +39,9 @@ dev = [
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [tool.mypy]
 strict = true
