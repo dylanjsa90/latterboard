@@ -4,8 +4,15 @@ __pycache__/
 *.pyc
 *.pyo
 .pytest_cache/
-
+logs/*
+.vscode/
 .claude/
 .env.local
 test_app.db
 sql_app.db
+**/.env.local
+**/.env
+**/test_app.db
+**/sql_app.db
+.env.production
+.env.staging

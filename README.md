@@ -1,8 +1,9 @@
-# Games API
+# Latterboard  API
 
 A FastAPI service for tracking game scores and leaderboards with JWT authentication.
 
 ## Setup
+If uv has not yet been installed instructions can be found at https://docs.astral.sh/uv/getting-started/installation/
 
 ```bash
 uv sync                      # install dependencies
