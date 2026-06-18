@@ -20,4 +20,4 @@ ENV PATH="/app/.venv/bin:$PATH"
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "python -m app.backend_pre_start && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port 8000"]
