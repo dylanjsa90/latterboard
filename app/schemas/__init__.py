@@ -7,6 +7,7 @@ from .user import (
     UserPublic,
     UserUpdate,
 )
+from .ws import TopicPresence
 
 __all__ = [
     "UserCreate",
@@ -18,4 +19,5 @@ __all__ = [
     "GameScoreCreate",
     "GameScorePublic",
     "LeaderboardEntry",
+    "TopicPresence",
 ]
