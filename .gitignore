@@ -16,3 +16,4 @@ sql_app.db
 **/sql_app.db
 .env.production
 .env.staging
+logs/**
