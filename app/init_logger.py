@@ -1,21 +1,36 @@
 import logging
+import os
 import pathlib
+import sys
 
 # create logs folder if needed
 pathlib.Path("logs").mkdir(parents=True, exist_ok=True)
-name = __name__
+
+logger = logging.getLogger("uvicorn")
+logger.setLevel(logging.INFO)
 
 
-def config_logging():
+def config_logging(logger_name="uvicorn"):
+    logger = logging.getLogger(logger_name)
     # Create a custom logger
-    logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
+    if os.getenv("DEBUG", "0") == "1":
+        logger.setLevel(logging.DEBUG)
+    
+    stdout_handler = logging.StreamHandler(sys.stdout)
+
+    log_format = logging.Formatter(
+        fmt="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S"
+    )
+    stdout_handler.setFormatter(log_format)
+    logger.addHandler(stdout_handler)
 
     # Create handlers
     c_handler = logging.StreamHandler()
     f_handler = logging.FileHandler("./logs/logs_error.log")
     f_info_handler = logging.FileHandler("./logs/logs_info.log")
-    c_handler.setLevel(logging.WARNING)
+    c_handler.setLevel(logging.INFO)
     f_handler.setLevel(logging.ERROR)
     f_info_handler.setLevel(logging.INFO)
 
