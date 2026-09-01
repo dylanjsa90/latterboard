@@ -14,6 +14,9 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
     def get_user_by_email(self, db: Session, email: str) -> User | None:
         return db.query(self.model).filter(self.model.email == email).first()
 
+    def get_user_by_username(self, db: Session, username: str) -> User | None:
+        return db.query(self.model).filter(self.model.username == username).first()
+
     def get_users(self, db: Session, skip: int = 0, limit: int = 100) -> list[User]:
         return db.query(self.model).offset(skip).limit(limit).all()
 
