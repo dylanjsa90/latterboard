@@ -1,4 +1,13 @@
 from .game_score import GameScoreCreate, GameScorePublic, LeaderboardEntry
+from .match import (
+    LetterResultOut,
+    MatchDetail,
+    MatchGuessCreate,
+    MatchGuessResult,
+    MatchInviteCreate,
+    MatchPublic,
+    PendingInvite,
+)
 from .user import (
     Token,
     TokenPayload,
@@ -20,4 +29,11 @@ __all__ = [
     "GameScorePublic",
     "LeaderboardEntry",
     "TopicPresence",
+    "MatchInviteCreate",
+    "LetterResultOut",
+    "MatchGuessCreate",
+    "MatchPublic",
+    "MatchGuessResult",
+    "MatchDetail",
+    "PendingInvite",
 ]

@@ -123,6 +123,9 @@ class Settings(BaseSettings):
 
     WS_HEARTBEAT_SECONDS: int = 30
 
+    MATCH_MAX_GUESSES: int = 6
+    MATCH_INVITE_EXPIRY_MINUTES: int = 15
+
     def _check_default_secret(self, var_name: str, value: str | None) -> None:
         if value == "changethis":
             message = (
