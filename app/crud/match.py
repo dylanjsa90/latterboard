@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from sqlalchemy import and_, func, or_
 from sqlalchemy.orm import Session
@@ -38,7 +38,7 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             status="pending_invite",
             target_word=wordle.select_word(),
             max_guesses=max_guesses,
-            invite_expires_at=datetime.utcnow() + timedelta(minutes=expiry_minutes),
+            invite_expires_at=datetime.now(timezone.utc) + timedelta(minutes=expiry_minutes),
         )
         db.add(match)
         db.commit()
@@ -49,7 +49,7 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
         if (
             match.status == "pending_invite"
             and match.invite_expires_at is not None
-            and match.invite_expires_at < datetime.utcnow()
+            and match.invite_expires_at < datetime.now(timezone.utc)
         ):
             match.status = "expired"
             db.add(match)
