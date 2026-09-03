@@ -1,9 +1,11 @@
+from app.core.config import settings
+
 LOGIN_URL = "/api/v1/login/access-token"
 TEST_TOKEN_URL = "/api/v1/login/test-token"
 
 # Credentials for the default user seeded by init_db
-DEFAULT_EMAIL = "default.user@dev.com"
-DEFAULT_PASSWORD = "password"
+DEFAULT_EMAIL = settings.DEFAULT_USER
+DEFAULT_PASSWORD = settings.DEFAULT_USER_PASSWORD
 
 
 def test_login_valid_credentials(client):
