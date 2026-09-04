@@ -89,7 +89,7 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
 
     def accept_invite(self, db: Session, match: Match) -> Match:
         match.status = "in_progress"
-        match.started_at = datetime.utcnow()
+        match.started_at = datetime.now(timezone.utc)
         match.current_turn_user_id = match.inviter_id
         db.add(match)
         db.commit()
@@ -136,12 +136,12 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
         if is_correct:
             match.status = "completed"
             match.winner_id = user.id
-            match.completed_at = datetime.utcnow()
+            match.completed_at = datetime.now(timezone.utc)
             match.current_turn_user_id = None
         elif turn_number >= match.max_guesses:
             match.status = "completed"
             match.winner_id = None
-            match.completed_at = datetime.utcnow()
+            match.completed_at = datetime.now(timezone.utc)
             match.current_turn_user_id = None
         else:
             match.current_turn_user_id = (
