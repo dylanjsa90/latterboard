@@ -20,6 +20,10 @@ BROADCAST_CHANNEL = "ws:broadcast"
 # every heartbeat, which is what evicts the tally of a worker that died without cleanup.
 PRESENCE_PREFIX = "ws:presence"
 
+# Mirrors PRESENCE_PREFIX but holds each worker's set of connected usernames per topic
+# under ws:usernames:{topic}:{worker_id}, so the full list is the union across workers.
+USERNAMES_PREFIX = "ws:usernames"
+
 
 def _escape_glob(value: str) -> str:
     """Neutralise glob metacharacters so a topic name can't widen a SCAN match."""
@@ -30,7 +34,7 @@ class ConnectionManager:
     """Tracks the websockets held by this process and fans messages out over Redis."""
 
     def __init__(self) -> None:
-        self._topics: dict[str, set[WebSocket]] = {}
+        self._topics: dict[str, dict[WebSocket, str]] = {}
         self._redis: aioredis.Redis | None = None
         self._pubsub = None
         self._listener_task: asyncio.Task | None = None
@@ -71,10 +75,14 @@ class ConnectionManager:
             self._redis = None
         logger.info("ConnectionManager stopped")
 
-    async def connect(self, websocket: WebSocket, topic: str) -> None:
+    async def connect(self, websocket: WebSocket, topic: str, username: str) -> None:
         """Accept the handshake and subscribe the connection to a topic."""
         await websocket.accept()
-        self._topics.setdefault(topic, set()).add(websocket)
+        await self.join(websocket, topic, username)
+
+    async def join(self, websocket: WebSocket, topic: str, username: str) -> None:
+        """Subscribe an already-accepted connection to an additional topic."""
+        self._topics.setdefault(topic, {})[websocket] = username
         logger.info("Websocket joined topic %s (%d on topic)", topic, len(self._topics[topic]))
         await self._sync_presence()
 
@@ -83,7 +91,7 @@ class ConnectionManager:
         connections = self._topics.get(topic)
         if connections is None:
             return
-        connections.discard(websocket)
+        connections.pop(websocket, None)
         if not connections:
             del self._topics[topic]
         await self._sync_presence()
@@ -102,11 +110,29 @@ class ConnectionManager:
             return 0
         return sum(int(value) for value in await self._redis.mget(keys) if value)
 
+    async def usernames(self, topic: str) -> list[str]:
+        """Distinct usernames currently connected to a topic, unioned across every worker.
+
+        Subject to the same staleness window as count(): a worker that dies without
+        cleanup keeps its usernames listed until its key expires.
+        """
+        if self._redis is None:
+            raise RuntimeError("ConnectionManager.start() has not been called")
+        pattern = f"{USERNAMES_PREFIX}:{_escape_glob(topic)}:*"
+        keys = [key async for key in self._redis.scan_iter(match=pattern)]
+        if not keys:
+            return []
+        return sorted(await self._redis.sunion(keys))
+
     def _presence_key(self, topic: str) -> str:
         return f"{PRESENCE_PREFIX}:{topic}:{self._worker_id}"
 
+    def _usernames_key(self, topic: str) -> str:
+        return f"{USERNAMES_PREFIX}:{topic}:{self._worker_id}"
+
     async def _sync_presence(self) -> None:
-        """Write this worker's per-topic counts to Redis, dropping topics it has left.
+        """Write this worker's per-topic counts and usernames to Redis, dropping topics
+        it has left.
 
         Never raises: presence is a read-only convenience, and a Redis blip must not
         take down a live connection by propagating out of connect/disconnect.
@@ -114,19 +140,32 @@ class ConnectionManager:
         if self._redis is None:
             return
         try:
+            ttl = settings.WS_HEARTBEAT_SECONDS * 3
             async with self._redis.pipeline(transaction=False) as pipe:
                 for topic, connections in self._topics.items():
-                    pipe.set(
-                        self._presence_key(topic),
-                        len(connections),
-                        ex=settings.WS_HEARTBEAT_SECONDS * 3,
-                    )
+                    pipe.set(self._presence_key(topic), len(connections), ex=ttl)
+                    usernames_key = self._usernames_key(topic)
+                    pipe.delete(usernames_key)
+                    distinct_usernames = set(connections.values())
+                    if distinct_usernames:
+                        pipe.sadd(usernames_key, *distinct_usernames)
+                        pipe.expire(usernames_key, ttl)
                 for topic in self._published_topics - set(self._topics):
                     pipe.delete(self._presence_key(topic))
+                    pipe.delete(self._usernames_key(topic))
                 await pipe.execute()
             self._published_topics = set(self._topics)
         except Exception:
             logger.exception("Failed to sync presence counts")
+
+    async def disconnect_all(self, websocket: WebSocket) -> None:
+        """Remove a connection from every topic it currently holds. Safe to call more than once."""
+        for topic in [t for t, conns in self._topics.items() if websocket in conns]:
+            await self.disconnect(websocket, topic)
+
+    async def send_to_user(self, user_id: int, message: dict) -> None:
+        """Deliver a message only to the given user's connection(s)."""
+        await self.broadcast(message, topic=f"user:{user_id}")
 
     async def broadcast(self, message: dict, topic: str | None = None) -> None:
         """Publish a message to one topic, or to every active connection when topic is None."""
@@ -147,9 +186,8 @@ class ConnectionManager:
                     logger.exception("Discarding malformed broadcast payload")
         except asyncio.CancelledError:
             raise
-        except Exception:
-            logger.exception("Broadcast listener stopped")
-
+        except Exception as e:
+            logger.exception("Broadcast listener stopped", e)
     async def _heartbeat(self) -> None:
         """Send an app-level ping so clients (and we) can tell a live socket from a stale one."""
         try:
