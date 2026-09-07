@@ -16,3 +16,5 @@ sql_app.db
 **/sql_app.db
 .env.production
 .env.staging
+.DS_STORE
+**/.DS_STORE
