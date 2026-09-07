@@ -1,4 +1,5 @@
 from datetime import date, datetime, timezone
+from zoneinfo import ZoneInfo
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
@@ -19,8 +20,9 @@ def submit_score(
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
 ):
+    pacific_today = datetime.now(ZoneInfo("America/Los_Angeles")).date()
     count = crud_score.get_daily_play_count(
-        db, current_user.id, score_in.game, datetime.now(timezone.utc).date()
+        db, current_user.id, score_in.game, pacific_today
     )
     if count >= settings.MAX_DAILY_PLAYS_PER_GAME:
         raise HTTPException(
@@ -75,6 +77,17 @@ def leaderboard_monthly(
         LeaderboardEntry(rank=i, username=u, score=s, achieved_at=a)
         for i, (u, s, a) in enumerate(rows, 1)
     ]
+
+
+@router.get("/me/{game}/daily-count")
+def my_daily_count(
+    game: str,
+    current_user: User = Depends(deps.get_current_user),
+    db: Session = Depends(deps.get_db),
+):
+    pacific_today = datetime.now(ZoneInfo("America/Los_Angeles")).date()
+    count = crud_score.get_daily_play_count(db, current_user.id, game, pacific_today)
+    return {"count": count}
 
 
 @router.get("/me/{game}", response_model=list[GameScorePublic])

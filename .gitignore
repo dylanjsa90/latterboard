@@ -18,3 +18,5 @@ sql_app.db
 .env.staging
 logs/**
 *.log
+.DS_STORE
+**/.DS_STORE

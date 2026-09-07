@@ -49,8 +49,10 @@ class Settings(BaseSettings):
     SECRET_KEY: str = os.environ.get("SECRET_KEY", "changethis")
     # 60 minutes * 24 hours * 8 days = 8 days
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
+    
     FRONTEND_HOST: str = "http://localhost:5173"
     FRONTEND_HOST_ALT: str = "http://localhost:5174"
+    FRONTEND_HOST_BY_ENV: str = os.environ.get("FRONTEND_HOST", "http://localhost:4173")
     ENVIRONMENT: Literal["local", "staging", "production"] = "local"
 
     BACKEND_CORS_ORIGINS: Annotated[
@@ -63,6 +65,7 @@ class Settings(BaseSettings):
         return [str(origin).rstrip("/") for origin in self.BACKEND_CORS_ORIGINS] + [
             self.FRONTEND_HOST,
             self.FRONTEND_HOST_ALT,
+            self.FRONTEND_HOST_BY_ENV,
         ]
 
     PROJECT_NAME: str = os.environ.get("PROJECT_NAME", "Latterboard API")
