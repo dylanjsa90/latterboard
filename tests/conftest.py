@@ -2,13 +2,15 @@ import os
 
 # Must precede all app imports so Settings() reads the test URL
 os.environ["DATABASE_URL"] = "sqlite:///./test_app.db"
-
+os.environ["SQLITE_DATABASE_URL"] = "sqlite:///./test_app.db"
+os.environ["DB_TYPE"] = "sqlite"
 import pytest
 from fastapi.testclient import TestClient
 
 from app.api.deps import get_db
 from app.core.base_class import Base
-from app.database import engine, SessionLocal
+from app.core.config import settings
+from app.database import SessionLocal, engine
 from app.init_db import init_db
 from app.main import app
 
@@ -54,7 +56,7 @@ def auth_headers(client):
     """Bearer token for the default user seeded by init_db."""
     r = client.post(
         "/api/v1/login/access-token",
-        data={"username": "default.user@dev.com", "password": "password"},
+        data={"username": settings.DEFAULT_USER, "password": settings.DEFAULT_USER_PASSWORD},
     )
     assert r.status_code == 200
     token = r.json()["access_token"]

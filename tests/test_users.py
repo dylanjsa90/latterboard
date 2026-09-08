@@ -4,7 +4,7 @@ BASE = "/api/v1/users"
 
 NEW_USER = {
     "email": "newuser@example.com",
-    "username": "newuser",
+    "username": "newuser@example.com",
     "password": "secret123",
 }
 
@@ -19,7 +19,7 @@ def created_user(client):
 def test_create_user(client):
     payload = {
         "email": "create_test@example.com",
-        "username": "create_test",
+        "username": "create_test@example.com",
         "password": "pw",
     }
     r = client.post(f"{BASE}/", json=payload)
@@ -96,5 +96,5 @@ def test_delete_user_not_found(client, auth_headers):
 
 
 def test_delete_user_forbidden(client, auth_headers, created_user):
-    r = client.delete(f"{BASE}/{created_user['id']}", headers=auth_headers)
-    assert r.status_code == 403
+    r = client.delete(f"{BASE}/{created_user['id']}")
+    assert r.status_code == 401

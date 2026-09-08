@@ -1,3 +1,4 @@
+import logging
 import os
 import warnings
 from typing import Annotated, Any, Literal
@@ -14,14 +15,20 @@ from pydantic import (
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing_extensions import Self
 
+logger = logging.getLogger("uvicorn")
+
 _here = os.path.dirname(os.path.abspath(__file__))
 _app_dir = os.path.normpath(os.path.join(_here, ".."))  # backend/app/
-_backend_dir = os.path.normpath(os.path.join(_here, "../.."))  # backend/
 
+logger.debug(f"app_dir: {_app_dir}")
 APP_ENV = os.environ.get("APP_ENV", "local")
-load_dotenv(os.path.join(_backend_dir, "config.env"))
-load_dotenv(os.path.join(_app_dir, ".env"), override=True)
 
+_envFile = ".env"
+if APP_ENV == "local":
+    _envFile = _envFile + ".local"
+load_dotenv(os.path.join(_app_dir, _envFile))
+
+logger.debug(f"os.environ: {os.environ}")
 
 def parse_cors(v: Any) -> list[str] | str:
     if isinstance(v, str) and not v.startswith("["):
@@ -33,12 +40,12 @@ def parse_cors(v: Any) -> list[str] | str:
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        # Use top level .env file (one level above ./backend/)
-        env_file="app/.env",
+        env_file="app/" + _envFile,
         env_ignore_empty=True,
         extra="ignore",
     )
     API_V1_STR: str = "/api/v1"
+    APP_ENV: Literal["local", "staging", "production"] = APP_ENV
     SECRET_KEY: str = os.environ.get("SECRET_KEY", "changethis")
     # 60 minutes * 24 hours * 8 days = 8 days
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
@@ -61,9 +68,27 @@ class Settings(BaseSettings):
             self.FRONTEND_HOST_BY_ENV,
         ]
 
-    PROJECT_NAME: str = os.environ.get("PROJECT_NAME", "games")
+    PROJECT_NAME: str = os.environ.get("PROJECT_NAME", "Latterboard API")
     SENTRY_DSN: HttpUrl | None = None
-    DATABASE_URL: str = "sqlite:///./sql_app.db"
+    SQLITE_DATABASE_URL: str = os.getenv("SQLITE_DATABASE_URL", "sqlite:///./sql_app.db")
+
+    DB_TYPE: str = os.environ.get("DB_TYPE", "sqlite")
+
+    # Fetch variables
+    DB_USER: str = os.getenv("user")
+    DB_PASSWORD: str = os.getenv("password")
+    DB_HOST: str = os.getenv("host")
+    DB_PORT: str = os.getenv("port")
+    DB_NAME: str = os.getenv("dbname")
+
+    @computed_field
+    @property
+    def DATABASE_URL(self) -> str:
+        # Construct the SQLAlchemy connection string
+        return self.SQLITE_DATABASE_URL if self.DB_TYPE == "sqlite" else  f"postgresql+psycopg2://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}?sslmode=require"
+
+
+    RAW_DATABASE_URL: str = os.getenv("DATABASE_URL", "")
 
     SMTP_TLS: bool = True
     SMTP_SSL: bool = False
@@ -91,9 +116,18 @@ class Settings(BaseSettings):
     FIRST_SUPERUSER: EmailStr = "super.user@root.com"
     FIRST_SUPERUSER_PASSWORD: str = "localroot"
 
+    DEFAULT_USER: str = "first.user@test.com"
+    DEFAULT_USER_PASSWORD: str = "password"
+    DEFAULT_USER_USERNAME: str = "first.user@test.com"
+
     REDIS_URL: str = os.environ.get("REDIS_URL", "redis://localhost:6379")
 
     MAX_DAILY_PLAYS_PER_GAME: int = 5
+
+    WS_HEARTBEAT_SECONDS: int = 30
+
+    MATCH_MAX_GUESSES: int = 6
+    MATCH_INVITE_EXPIRY_MINUTES: int = 15
 
     def _check_default_secret(self, var_name: str, value: str | None) -> None:
         if value == "changethis":
