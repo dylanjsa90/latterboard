@@ -46,7 +46,11 @@ class ConnectionManager:
 
     async def start(self) -> None:
         """Subscribe to the broadcast channel and start the heartbeat. Call from lifespan."""
-        self._redis = aioredis.from_url(settings.REDIS_URL, decode_responses=True)
+        # socket_timeout=None: redis-py 8 defaults to 5s, which makes the pubsub's
+        # blocking read time out whenever the channel is idle and kills _listen.
+        self._redis = aioredis.from_url(
+            settings.REDIS_URL, decode_responses=True, socket_timeout=None
+        )
         self._pubsub = self._redis.pubsub(ignore_subscribe_messages=True)
         await self._pubsub.subscribe(BROADCAST_CHANNEL)
         self._listener_task = asyncio.create_task(self._listen())
@@ -186,8 +190,9 @@ class ConnectionManager:
                     logger.exception("Discarding malformed broadcast payload")
         except asyncio.CancelledError:
             raise
-        except Exception as e:
-            logger.exception("Broadcast listener stopped", e)
+        except Exception:
+            logger.exception("Broadcast listener stopped")
+
     async def _heartbeat(self) -> None:
         """Send an app-level ping so clients (and we) can tell a live socket from a stale one."""
         try:
