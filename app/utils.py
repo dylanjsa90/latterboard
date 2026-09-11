@@ -22,6 +22,15 @@ class EmailData:
     subject: str
 
 
+def utcnow() -> datetime:
+    """Current UTC time as a naive datetime, matching the naive DateTime columns.
+
+    SQLite hands those columns back naive, so comparing them against an aware
+    datetime.now(timezone.utc) raises TypeError.
+    """
+    return datetime.now(timezone.utc).replace(tzinfo=None)
+
+
 def render_email_template(*, template_name: str, context: dict[str, Any]) -> str:
     template_str = (
         Path(__file__).parent / "email-templates" / "build" / template_name

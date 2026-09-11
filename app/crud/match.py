@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import timedelta
 
 from sqlalchemy import and_, func, or_
 from sqlalchemy.orm import Session
@@ -17,6 +17,7 @@ from app.schemas.match import (
     MatchPublic,
     PendingInvite,
 )
+from app.utils import utcnow
 
 OPEN_STATUSES = ("pending_invite", "in_progress")
 
@@ -38,7 +39,7 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             status="pending_invite",
             target_word=wordle.select_word(),
             max_guesses=max_guesses,
-            invite_expires_at=datetime.now(timezone.utc) + timedelta(minutes=expiry_minutes),
+            invite_expires_at=utcnow() + timedelta(minutes=expiry_minutes),
         )
         db.add(match)
         db.commit()
@@ -49,7 +50,7 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
         if (
             match.status == "pending_invite"
             and match.invite_expires_at is not None
-            and match.invite_expires_at < datetime.now(timezone.utc)
+            and match.invite_expires_at < utcnow()
         ):
             match.status = "expired"
             db.add(match)
@@ -89,7 +90,7 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
 
     def accept_invite(self, db: Session, match: Match) -> Match:
         match.status = "in_progress"
-        match.started_at = datetime.now(timezone.utc)
+        match.started_at = utcnow()
         match.current_turn_user_id = match.inviter_id
         db.add(match)
         db.commit()
@@ -136,12 +137,12 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
         if is_correct:
             match.status = "completed"
             match.winner_id = user.id
-            match.completed_at = datetime.now(timezone.utc)
+            match.completed_at = utcnow()
             match.current_turn_user_id = None
         elif turn_number >= match.max_guesses:
             match.status = "completed"
             match.winner_id = None
-            match.completed_at = datetime.now(timezone.utc)
+            match.completed_at = utcnow()
             match.current_turn_user_id = None
         else:
             match.current_turn_user_id = (

@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.core.base_class import Base
 from app.core.config import settings
+from app.crud import puzzle as crud_puzzle
 from app.crud import user as crud_user
 from app.database import engine
 from app.schemas.user import UserCreate
@@ -25,3 +26,5 @@ def init_db(db: Session):
             ),
         )
         logging.info(f"Created user {user}")
+
+    crud_puzzle.seed_defaults(db)

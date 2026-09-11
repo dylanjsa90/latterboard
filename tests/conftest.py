@@ -4,6 +4,8 @@ import os
 os.environ["DATABASE_URL"] = "sqlite:///./test_app.db"
 os.environ["SQLITE_DATABASE_URL"] = "sqlite:///./test_app.db"
 os.environ["DB_TYPE"] = "sqlite"
+# Keep heartbeat frames from interleaving with the frames websocket tests assert on
+os.environ["WS_HEARTBEAT_SECONDS"] = "3600"
 import pytest
 from fastapi.testclient import TestClient
 

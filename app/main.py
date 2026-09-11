@@ -14,7 +14,7 @@ from redis import asyncio as aioredis
 from app.api import deps
 from app.api.main import api_router
 from app.connection_manager import manager
-from app.core.config import APP_ENV, settings
+from app.core.config import settings
 from app.database import SessionLocal
 from app.init_db import init_db
 from app.models import Match, User
@@ -37,7 +37,7 @@ async def lifespan(_: FastAPI) -> AsyncGenerator[None]:
         db.commit()
     except Exception:
         db.rollback()
-        logger.error("Error initializing database. rolling back changes.")
+        logger.exception("Error initializing database. rolling back changes.")
     finally:
         logger.info("Closing DB session")
         db.close()
@@ -58,7 +58,7 @@ app = FastAPI(
     openapi_url="/openapi.json",
     generate_unique_id_function=custom_generate_unique_id,
     lifespan=lifespan,
-) 
+)
 
 # Set all CORS enabled origins
 if settings.all_cors_origins:
