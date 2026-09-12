@@ -98,3 +98,14 @@ def test_delete_user_not_found(client, auth_headers):
 def test_delete_user_forbidden(client, auth_headers, created_user):
     r = client.delete(f"{BASE}/{created_user['id']}")
     assert r.status_code == 401
+
+
+def test_responses_never_include_password_hash(client, auth_headers, created_user):
+    bodies = [
+        created_user,
+        client.get(f"{BASE}/{created_user['id']}", headers=auth_headers).json(),
+        *client.get(f"{BASE}/", headers=auth_headers).json(),
+        client.post("/api/v1/login/test-token", headers=auth_headers).json(),
+    ]
+    for body in bodies:
+        assert "hashed_password" not in body
