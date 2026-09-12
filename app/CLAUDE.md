@@ -1,8 +1,5 @@
 # CLAUDE.md
 
-Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
-
-**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
 
 ## 1. Think Before Coding
 
@@ -16,10 +13,6 @@ Before implementing:
 
 ## 2. Simplicity First
 
-**Minimum code that solves the problem. Nothing speculative.**
-
-- No features beyond what was asked.
-
 Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
 
 ## 3. Surgical Changes
@@ -28,8 +21,6 @@ Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, sim
 
 When your changes create orphans:
 - Remove imports/variables/functions that YOUR changes made unused.
-
-The test: Every changed line should trace directly to the user's request.
 
 ## 4. Goal-Driven Execution
 
@@ -41,13 +32,6 @@ Transform tasks into verifiable goals:
 - "Refactor X" → "Ensure tests pass before and after"
 
 For multi-step tasks, state a brief plan:
-```
-1. [Step] → verify: [check]
-2. [Step] → verify: [check]
-3. [Step] → verify: [check]
-```
-
-Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
 ---
 
