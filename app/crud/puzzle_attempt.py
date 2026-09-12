@@ -33,14 +33,19 @@ def _longest_run(days: set[date]) -> int:
 
 
 class CRUDPuzzleAttempt(CRUDBase[PuzzleAttempt, PuzzleAttemptCreate, PuzzleAttemptUpdate]):
-    def get_or_create(
-        self, db: Session, user_id: int, game: str, puzzle_id: str
-    ) -> PuzzleAttempt:
-        obj = (
+    def get_for_puzzle(
+        self, db: Session, user_id: int, puzzle_id: str
+    ) -> PuzzleAttempt | None:
+        return (
             db.query(PuzzleAttempt)
             .filter(PuzzleAttempt.user_id == user_id, PuzzleAttempt.puzzle_id == puzzle_id)
             .first()
         )
+
+    def get_or_create(
+        self, db: Session, user_id: int, game: str, puzzle_id: str
+    ) -> PuzzleAttempt:
+        obj = self.get_for_puzzle(db, user_id, puzzle_id)
         if obj is None:
             obj = PuzzleAttempt(user_id=user_id, game=game, puzzle_id=puzzle_id)
             db.add(obj)
@@ -57,9 +62,13 @@ class CRUDPuzzleAttempt(CRUDBase[PuzzleAttempt, PuzzleAttemptCreate, PuzzleAttem
         *,
         won: bool = False,
         completed: bool = False,
+        guess: str | None = None,
     ) -> PuzzleAttempt:
         obj = self.get_or_create(db, user_id, game, puzzle_id)
         obj.attempt_count += 1
+        if guess is not None:
+            # Reassign rather than append: JSON columns don't track in-place changes.
+            obj.guesses = [*obj.guesses, guess]
         obj.won = obj.won or won
         if completed and not obj.completed:
             obj.completed = True

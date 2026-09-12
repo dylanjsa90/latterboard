@@ -12,6 +12,7 @@ from collections import Counter
 from datetime import date, datetime, timezone
 
 from app.game import wordle
+from app.schemas.puzzle import Grade
 
 WORD_LENGTH = 5
 WORD_STARTER = "ADORE"
@@ -38,8 +39,8 @@ def puzzle_date(puzzle_id: str | None, prefix: str) -> date:
         return fallback
 
 
-def grade_word(guess: str, answer: str) -> list[str]:
-    return [status for _, status in wordle.evaluate_guess(answer, guess)]
+def grade_word(guess: str, answer: str) -> list[Grade]:
+    return wordle.evaluate_guess(answer, guess)
 
 
 def cipher_feedback(attempt: list[int], answer: list[int]) -> dict:

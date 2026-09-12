@@ -24,6 +24,7 @@ from app.schemas.puzzle import (
     SudokuMoveResult,
     SudokuPuzzlePublic,
     WordGuessCreate,
+    WordGuessPublic,
     WordGuessResult,
     WordHint,
     WordHintRequest,
@@ -57,7 +58,7 @@ def _get_or_generate_puzzle(db: Session, game: str, puzzle_id: str | None) -> Pu
 def my_puzzle_stats(
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
-):
+) -> PuzzleStats:
     return crud_puzzle_attempt.get_stats(db, current_user.id)
 
 
@@ -78,19 +79,35 @@ def my_puzzle_history(
 def get_word_puzzle(
     db: Session = Depends(deps.get_db),
     current_user: User | None = Depends(deps.get_optional_current_user),
-):
+) -> WordPuzzlePublic:
     # Today's word is reserved for signed-in players; anonymous visitors get yesterday's.
-    puzzle_id = None
+    requested_id = None
     if current_user is None:
-        puzzle_id = f"word-{(puzzle_logic.today() - timedelta(days=1)).isoformat()}"
-    row = _get_or_generate_puzzle(db, "word", puzzle_id)
+        requested_id = f"word-{(puzzle_logic.today() - timedelta(days=1)).isoformat()}"
+    row = _get_or_generate_puzzle(db, "word", requested_id)
     answer = row.data["answer"]
+    puzzle_id = f"word-{row.date.isoformat()}"
+
+    # Signed-in players resume where they left off, finished or not.
+    attempt = None
+    if current_user is not None:
+        attempt = crud_puzzle_attempt.get_for_puzzle(db, current_user.id, puzzle_id)
+    won = attempt is not None and attempt.won
+    lost = attempt is not None and attempt.completed and not attempt.won
+
     return WordPuzzlePublic(
-        puzzle_id=f"word-{row.date.isoformat()}",
+        puzzle_id=puzzle_id,
         word_length=puzzle_logic.WORD_LENGTH,
         max_attempts=WORD_MAX_ATTEMPTS,
         initial_guess=puzzle_logic.WORD_STARTER,
         initial_grade=puzzle_logic.grade_word(puzzle_logic.WORD_STARTER, answer),
+        guesses=[
+            WordGuessPublic(guess=guess, grades=puzzle_logic.grade_word(guess, answer))
+            for guess in (attempt.guesses if attempt else [])
+        ],
+        won=won,
+        lost=lost,
+        answer=answer if lost else None,
     )
 
 
@@ -99,7 +116,7 @@ def word_hint(
     body: WordHintRequest,
     db: Session = Depends(deps.get_db),
     current_user: User | None = Depends(deps.get_optional_current_user),
-):
+) -> WordHint:
     row = _get_or_generate_puzzle(db, "word", body.puzzle_id)
     answer = row.data["answer"]
 
@@ -114,7 +131,7 @@ def word_guess(
     body: WordGuessCreate,
     db: Session = Depends(deps.get_db),
     current_user: User | None = Depends(deps.get_optional_current_user),
-):
+) -> WordGuessResult:
     row = _get_or_generate_puzzle(db, "word", body.puzzle_id)
     answer = row.data["answer"]
 
@@ -130,6 +147,7 @@ def word_guess(
             body.puzzle_id,
             won=won,
             completed=won or lost,
+            guess=body.guess,
         )
 
     return WordGuessResult(grades=grades, won=won, lost=lost, answer=answer if lost else None)
@@ -139,7 +157,7 @@ def word_guess(
 
 
 @router.get("/sudoku", response_model=SudokuPuzzlePublic)
-def get_sudoku_puzzle(db: Session = Depends(deps.get_db)):
+def get_sudoku_puzzle(db: Session = Depends(deps.get_db)) -> SudokuPuzzlePublic:
     row = _get_or_generate_puzzle(db, "sudoku", None)
     return SudokuPuzzlePublic(puzzle_id=f"sudoku-{row.date.isoformat()}", puzzle=row.data["puzzle"])
 
@@ -149,7 +167,7 @@ def sudoku_move(
     body: SudokuMoveCreate,
     db: Session = Depends(deps.get_db),
     current_user: User | None = Depends(deps.get_optional_current_user),
-):
+) -> SudokuMoveResult:
     row = _get_or_generate_puzzle(db, "sudoku", body.puzzle_id)
     solution = row.data["solution"]
 
@@ -177,7 +195,7 @@ def sudoku_hint(
     body: SudokuHintCreate,
     db: Session = Depends(deps.get_db),
     current_user: User | None = Depends(deps.get_optional_current_user),
-):
+) -> SudokuHintResult:
     row = _get_or_generate_puzzle(db, "sudoku", body.puzzle_id)
     solution = row.data["solution"]
 
@@ -203,7 +221,7 @@ def sudoku_hint(
 
 
 @router.get("/memory", response_model=MemoryPuzzlePublic)
-def get_memory_puzzle(db: Session = Depends(deps.get_db)):
+def get_memory_puzzle(db: Session = Depends(deps.get_db)) -> MemoryPuzzlePublic | HTTPException:
     row = crud_puzzle.get_by_game_variant(db, "memory", 0)
     if row is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No memory puzzle seeded")
@@ -216,7 +234,7 @@ def memory_reveal(
     body: MemoryRevealCreate,
     db: Session = Depends(deps.get_db),
     current_user: User | None = Depends(deps.get_optional_current_user),
-):
+) -> MemoryRevealResult | HTTPException:
     if not body.puzzle_id.startswith("memory-"):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid memory puzzle id")
     row = crud_puzzle.get_by_game_variant(db, "memory", 0)
@@ -237,7 +255,7 @@ def memory_reveal(
 
 
 @router.get("/cipher", response_model=CipherPuzzlePublic)
-def get_cipher_puzzle(db: Session = Depends(deps.get_db)):
+def get_cipher_puzzle(db: Session = Depends(deps.get_db)) -> CipherPuzzlePublic:
     row = _get_or_generate_puzzle(db, "cipher", None)
     answer = row.data["digits"]
     return CipherPuzzlePublic(
@@ -256,7 +274,7 @@ def cipher_attempt(
     body: CipherAttemptCreate,
     db: Session = Depends(deps.get_db),
     current_user: User | None = Depends(deps.get_optional_current_user),
-):
+) -> CipherFeedback:
     row = _get_or_generate_puzzle(db, "cipher", body.puzzle_id)
     answer = row.data["digits"]
 

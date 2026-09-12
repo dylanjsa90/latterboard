@@ -120,8 +120,9 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             .scalar()
             or 0
         ) + 1
-        letter_results = wordle.evaluate_guess(match.target_word, word)
-        result_values = [status for _, status in letter_results]
+        result_values = wordle.evaluate_guess(match.target_word, word)
+        letter_results = list(zip(word, result_values, strict=True))
+
         is_correct = all(status == "correct" for status in result_values)
 
         guess = MatchGuess(
@@ -248,7 +249,7 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
                     word=g.word,
                     result=[
                         LetterResultOut(letter=letter, status=status)
-                        for letter, status in zip(g.word, g.result)
+                        for letter, status in zip(g.word, g.result, strict=True)
                     ],
                     correct=g.is_correct,
                     status=match.status,

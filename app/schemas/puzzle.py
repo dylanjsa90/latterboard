@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -10,11 +10,11 @@ class PuzzleCreate(BaseModel):
     game: str
     variant_index: int
     date: date
-    data: dict
+    data: dict[str, Any]
 
 
 class PuzzleUpdate(BaseModel):
-    data: dict | None = None
+    data: dict[str, Any] | None = None
 
 
 class PuzzleAttemptCreate(BaseModel):
@@ -67,12 +67,22 @@ class PuzzleHistory(BaseModel):
 # --- word ---------------------------------------------------------------
 
 
+class WordGuessPublic(BaseModel):
+    guess: str
+    grades: list[Grade]
+
+
 class WordPuzzlePublic(BaseModel):
     puzzle_id: str
     word_length: int
     max_attempts: int
     initial_guess: str
     initial_grade: list[Grade]
+    # The signed-in player's progress on this puzzle; empty for anonymous visitors.
+    guesses: list[WordGuessPublic] = Field(default_factory=list)
+    won: bool = False
+    lost: bool = False
+    answer: str | None = None
 
 
 class WordHintRequest(BaseModel):

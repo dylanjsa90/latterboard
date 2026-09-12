@@ -1,10 +1,12 @@
 from datetime import date, datetime, time, timedelta
 
+import pytest
+
 from app.core.config import settings
 from app.crud.puzzle import puzzle as crud_puzzle
 from app.crud.user import user as crud_user
 from app.database import SessionLocal
-from app.game.puzzles import seeded_memory_deck, today
+from app.game.puzzles import grade_word, seeded_memory_deck, today
 from app.models.puzzle import PuzzleAttempt
 
 BASE = "/api/v1/puzzles"
@@ -117,6 +119,51 @@ def test_word_guess_invalid_length_rejected(client):
         json={"puzzle_id": "word-0", "guess": "AB", "attempt_count": 1},
     )
     assert r.status_code == 422
+
+
+def _word_guess(client, headers, puzzle_id: str, guess: str, attempt_count: int):
+    r = client.post(
+        f"{BASE}/word/guess",
+        headers=headers,
+        json={"puzzle_id": puzzle_id, "guess": guess, "attempt_count": attempt_count},
+    )
+    assert r.status_code == 200
+
+
+def test_word_puzzle_resumes_signed_in_guesses(client, auth_headers):
+    puzzle = client.get(f"{BASE}/word", headers=auth_headers).json()
+    assert puzzle["guesses"] == []
+    answer = _puzzle_answer("word", puzzle["puzzle_id"], "answer")
+    wrong = "ZZZZZ" if answer != "ZZZZZ" else "YYYYY"
+    _word_guess(client, auth_headers, puzzle["puzzle_id"], wrong, 2)
+
+    data = client.get(f"{BASE}/word", headers=auth_headers).json()
+    assert data["guesses"] == [{"guess": wrong, "grades": grade_word(wrong, answer)}]
+    assert (data["won"], data["lost"], data["answer"]) == (False, False, None)
+
+
+@pytest.mark.parametrize("won", [True, False])
+def test_word_puzzle_reports_finished_game(client, auth_headers, won):
+    puzzle = client.get(f"{BASE}/word", headers=auth_headers).json()
+    answer = _puzzle_answer("word", puzzle["puzzle_id"], "answer")
+    guess = answer if won else ("ZZZZZ" if answer != "ZZZZZ" else "YYYYY")
+    _word_guess(client, auth_headers, puzzle["puzzle_id"], guess, 6)
+
+    data = client.get(f"{BASE}/word", headers=auth_headers).json()
+    assert [g["guess"] for g in data["guesses"]] == [guess.upper()]
+    assert data["won"] is won
+    assert data["lost"] is not won
+    assert data["answer"] == (None if won else answer)
+
+
+def test_anonymous_word_puzzle_has_no_saved_guesses(client, auth_headers):
+    # A signed-in player's progress on yesterday's word stays theirs.
+    yesterday_id = f"word-{(today() - timedelta(days=1)).isoformat()}"
+    _word_guess(client, auth_headers, yesterday_id, "ZZZZZ", 2)
+
+    data = client.get(f"{BASE}/word").json()
+    assert data["puzzle_id"] == yesterday_id
+    assert data["guesses"] == []
 
 
 # --- sudoku -------------------------------------------------------------
