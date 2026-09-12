@@ -78,17 +78,18 @@ class CRUDPuzzle(CRUDBase[Puzzle, PuzzleCreate, PuzzleUpdate]):
         """Idempotently populate the puzzle bank from the ported puzzle-box
         content. A no-op per game once rows already exist, so it's safe to
         call on every startup/init. Each variant is assigned its own
-        calendar date, starting today, so a puzzle is served on exactly one
-        day instead of cycling/repeating once the bank has been through once.
+        calendar date, starting yesterday (anonymous players are served the
+        prior day's word), so a puzzle is served on exactly one day instead of
+        cycling/repeating once the bank has been through once.
         """
-        today = utc_today()
+        start = utc_today() - timedelta(days=1)
         if self.count_by_game(db, "word") == 0:
             for index, word in enumerate(shuffled_words()):
                 db.add(
                     Puzzle(
                         game="word",
                         variant_index=index,
-                        date=today + timedelta(days=index),
+                        date=start + timedelta(days=index),
                         data={"answer": word},
                     )
                 )
@@ -98,7 +99,7 @@ class CRUDPuzzle(CRUDBase[Puzzle, PuzzleCreate, PuzzleUpdate]):
                     Puzzle(
                         game="sudoku",
                         variant_index=index,
-                        date=today + timedelta(days=index),
+                        date=start + timedelta(days=index),
                         data=variant,
                     )
                 )
@@ -108,12 +109,12 @@ class CRUDPuzzle(CRUDBase[Puzzle, PuzzleCreate, PuzzleUpdate]):
                     Puzzle(
                         game="cipher",
                         variant_index=index,
-                        date=today + timedelta(days=index),
+                        date=start + timedelta(days=index),
                         data={"digits": digits},
                     )
                 )
         if self.count_by_game(db, "memory") == 0:
-            db.add(Puzzle(game="memory", variant_index=0, date=today, data={"symbols": MEMORY_SYMBOLS}))
+            db.add(Puzzle(game="memory", variant_index=0, date=start, data={"symbols": MEMORY_SYMBOLS}))
         db.commit()
 
 

@@ -46,6 +46,31 @@ def test_get_word_puzzle(client):
     assert len(data["initial_grade"]) == 5
 
 
+def test_anonymous_word_puzzle_is_yesterdays(client):
+    yesterday = (today() - timedelta(days=1)).isoformat()
+    r = client.get(f"{BASE}/word")
+    assert r.status_code == 200
+    assert r.json()["puzzle_id"] == f"word-{yesterday}"
+
+
+def test_authenticated_word_puzzle_is_todays(client, auth_headers):
+    r = client.get(f"{BASE}/word", headers=auth_headers)
+    assert r.status_code == 200
+    assert r.json()["puzzle_id"] == f"word-{today().isoformat()}"
+
+
+def test_seeding_covers_yesterday():
+    yesterday = today() - timedelta(days=1)
+    db = SessionLocal()
+    try:
+        for game in ("word", "sudoku", "cipher"):
+            row = crud_puzzle.get_by_game_date(db, game, yesterday)
+            assert row is not None
+            assert row.variant_index == 0
+    finally:
+        db.close()
+
+
 def test_word_guess_correct(client):
     puzzle = client.get(f"{BASE}/word").json()
     answer = _puzzle_answer("word", puzzle["puzzle_id"], "answer")
@@ -237,7 +262,7 @@ def test_cipher_attempt_out_of_range_rejected(client):
 
 
 def test_cipher_generates_when_bank_exhausted(client):
-    # The seeded bank starts today, so an earlier date has no row yet and
+    # The seeded bank starts yesterday, so an earlier date has no row yet and
     # must be generated on the fly instead of 404ing.
     past = (today() - timedelta(days=30)).isoformat()
 
@@ -255,7 +280,7 @@ def test_cipher_generates_when_bank_exhausted(client):
 
 
 def test_sudoku_generates_when_bank_exhausted(client):
-    # The seeded bank starts today, so an earlier date has no row yet.
+    # The seeded bank starts yesterday, so an earlier date has no row yet.
     past = (today() - timedelta(days=30)).isoformat()
 
     r = client.post(

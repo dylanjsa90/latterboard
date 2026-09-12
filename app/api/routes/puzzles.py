@@ -1,4 +1,5 @@
 import uuid
+from datetime import timedelta
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
@@ -63,8 +64,15 @@ def my_puzzle_stats(
 
 
 @router.get("/word", response_model=WordPuzzlePublic)
-def get_word_puzzle(db: Session = Depends(deps.get_db)):
-    row = _get_or_generate_puzzle(db, "word", None)
+def get_word_puzzle(
+    db: Session = Depends(deps.get_db),
+    current_user: User | None = Depends(deps.get_optional_current_user),
+):
+    # Today's word is reserved for signed-in players; anonymous visitors get yesterday's.
+    puzzle_id = None
+    if current_user is None:
+        puzzle_id = f"word-{(puzzle_logic.today() - timedelta(days=1)).isoformat()}"
+    row = _get_or_generate_puzzle(db, "word", puzzle_id)
     answer = row.data["answer"]
     return WordPuzzlePublic(
         puzzle_id=f"word-{row.date.isoformat()}",
