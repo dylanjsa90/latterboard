@@ -1,7 +1,7 @@
 import uuid
 from datetime import timedelta
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
 from app.api import deps
@@ -16,6 +16,7 @@ from app.schemas.puzzle import (
     MemoryPuzzlePublic,
     MemoryRevealCreate,
     MemoryRevealResult,
+    PuzzleHistory,
     PuzzleStats,
     SudokuHintCreate,
     SudokuHintResult,
@@ -58,6 +59,16 @@ def my_puzzle_stats(
     current_user: User = Depends(deps.get_current_user),
 ):
     return crud_puzzle_attempt.get_stats(db, current_user.id)
+
+
+@router.get("/me/history", response_model=PuzzleHistory)
+def my_puzzle_history(
+    skip: int = Query(0, ge=0),
+    limit: int = Query(20, ge=1, le=100),
+    db: Session = Depends(deps.get_db),
+    current_user: User = Depends(deps.get_current_user),
+) -> PuzzleHistory:
+    return crud_puzzle_attempt.get_history(db, current_user.id, skip=skip, limit=limit)
 
 
 # --- word -------------------------------------------------------------

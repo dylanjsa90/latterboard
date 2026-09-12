@@ -36,11 +36,32 @@ class RecentPuzzleAttempt(BaseModel):
     result: int
 
 
+class GamePuzzleStats(BaseModel):
+    game: str
+    played: int
+    won: int
+
+
 class PuzzleStats(BaseModel):
     total_solved: int
     today_solved: int
     streak: int
+    best_streak: int
+    games: list[GamePuzzleStats]
     recent: list[RecentPuzzleAttempt]
+
+
+class PuzzleHistoryItem(BaseModel):
+    game: str
+    puzzle_id: str
+    won: bool
+    attempt_count: int
+    completed_at: datetime
+
+
+class PuzzleHistory(BaseModel):
+    items: list[PuzzleHistoryItem]
+    total: int
 
 
 # --- word ---------------------------------------------------------------

@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date, datetime, time, timedelta
 
 from app.core.config import settings
 from app.crud.puzzle import puzzle as crud_puzzle
@@ -337,6 +337,39 @@ def test_authenticated_play_records_attempt(client, auth_headers):
 
 # --- stats -----------------------------------------------------------------
 
+EMPTY_STATS = {
+    "total_solved": 0,
+    "today_solved": 0,
+    "streak": 0,
+    "best_streak": 0,
+    "games": [],
+    "recent": [],
+}
+
+
+def _completed_attempt(
+    user_email: str, game: str, days_ago: int, *, won: bool = True, attempt_count: int = 1
+) -> None:
+    """Store a finished attempt as if it were completed `days_ago` days back, at noon UTC."""
+    solved_on = today() - timedelta(days=days_ago)
+    db = SessionLocal()
+    try:
+        user = crud_user.get_user_by_email(db, user_email)
+        db.add(
+            PuzzleAttempt(
+                user_id=user.id,
+                game=game,
+                puzzle_id=f"{game}-{solved_on.isoformat()}",
+                attempt_count=attempt_count,
+                won=won,
+                completed=True,
+                completed_at=datetime.combine(solved_on, time(12)),
+            )
+        )
+        db.commit()
+    finally:
+        db.close()
+
 
 def test_stats_unauthenticated(client):
     r = client.get(f"{BASE}/me/stats")
@@ -347,7 +380,7 @@ def test_stats_empty_for_new_player(client, auth_headers):
     r = client.get(f"{BASE}/me/stats", headers=auth_headers)
     assert r.status_code == 200
     data = r.json()
-    assert data == {"total_solved": 0, "today_solved": 0, "streak": 0, "recent": []}
+    assert data == EMPTY_STATS
 
 
 def test_stats_after_solving_a_puzzle(client, auth_headers):
@@ -371,6 +404,8 @@ def test_stats_after_solving_a_puzzle(client, auth_headers):
     assert len(data["recent"]) == 1
     assert data["recent"][0]["game"] == "cipher"
     assert data["recent"][0]["result"] == 1
+    assert data["best_streak"] == 1
+    assert data["games"] == [{"game": "cipher", "played": 1, "won": 1}]
 
 
 def test_stats_only_count_completed_attempts(client, auth_headers):
@@ -383,4 +418,69 @@ def test_stats_only_count_completed_attempts(client, auth_headers):
 
     r = client.get(f"{BASE}/me/stats", headers=auth_headers)
     assert r.status_code == 200
-    assert r.json() == {"total_solved": 0, "today_solved": 0, "streak": 0, "recent": []}
+    assert r.json() == EMPTY_STATS
+
+
+def test_stats_best_streak_and_per_game_counts(client, auth_headers):
+    # Current run: today and yesterday. Longest run: three to five days ago.
+    for days_ago in (0, 1, 3, 4, 5):
+        _completed_attempt(settings.DEFAULT_USER, "sudoku", days_ago)
+    _completed_attempt(settings.DEFAULT_USER, "word", 0, won=False, attempt_count=6)
+
+    r = client.get(f"{BASE}/me/stats", headers=auth_headers)
+    assert r.status_code == 200
+    data = r.json()
+    assert data["streak"] == 2
+    assert data["best_streak"] == 3
+    assert data["games"] == [
+        {"game": "sudoku", "played": 5, "won": 5},
+        {"game": "word", "played": 1, "won": 0},
+    ]
+
+
+# --- history ---------------------------------------------------------------
+
+
+def test_history_unauthenticated(client):
+    r = client.get(f"{BASE}/me/history")
+    assert r.status_code == 401
+
+
+def test_history_lists_completed_attempts_newest_first(client, auth_headers):
+    _completed_attempt(settings.DEFAULT_USER, "cipher", 2, attempt_count=5)
+    _completed_attempt(settings.DEFAULT_USER, "word", 1, won=False, attempt_count=6)
+    _completed_attempt(settings.DEFAULT_USER, "sudoku", 0, attempt_count=48)
+    # A puzzle that's only been started isn't history yet.
+    puzzle = client.get(f"{BASE}/word", headers=auth_headers).json()
+    client.post(
+        f"{BASE}/word/hint", json={"puzzle_id": puzzle["puzzle_id"]}, headers=auth_headers
+    )
+
+    r = client.get(f"{BASE}/me/history", headers=auth_headers)
+    assert r.status_code == 200
+    data = r.json()
+    assert data["total"] == 3
+    assert [(i["game"], i["won"], i["attempt_count"]) for i in data["items"]] == [
+        ("sudoku", True, 48),
+        ("word", False, 6),
+        ("cipher", True, 5),
+    ]
+
+
+def test_history_pages(client, auth_headers):
+    for days_ago in range(3):
+        _completed_attempt(settings.DEFAULT_USER, "cipher", days_ago)
+
+    first = client.get(f"{BASE}/me/history?limit=2", headers=auth_headers).json()
+    rest = client.get(f"{BASE}/me/history?skip=2&limit=2", headers=auth_headers).json()
+
+    assert first["total"] == rest["total"] == 3
+    assert [i["puzzle_id"] for i in first["items"] + rest["items"]] == [
+        f"cipher-{(today() - timedelta(days=n)).isoformat()}" for n in range(3)
+    ]
+
+
+def test_history_rejects_out_of_range_limit(client, auth_headers):
+    for limit in (0, 101):
+        r = client.get(f"{BASE}/me/history?limit={limit}", headers=auth_headers)
+        assert r.status_code == 422
