@@ -5,7 +5,8 @@ from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
 from app.crud.game_score import game_score as crud_game_score
-from app.game import wordle
+from app.crud.match_puzzle import match_puzzle as crud_match_puzzle
+from app.game import match_modes, wordle
 from app.models.match import Match, MatchGuess
 from app.models.user import User
 from app.schemas.game_score import GameScoreCreate
@@ -37,11 +38,16 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             invitee_id=invitee_id,
             game=game,
             status="pending_invite",
-            target_word=wordle.select_word(),
+            # Race and co-op matches keep their puzzle in MatchPuzzle instead; the
+            # column is non-null, hence the empty string.
+            target_word=wordle.select_word() if game.startswith("word") else "",
             max_guesses=max_guesses,
             invite_expires_at=utcnow() + timedelta(minutes=expiry_minutes),
         )
         db.add(match)
+        if game in match_modes.PUZZLE_MATCH_GAMES:
+            db.flush()  # assigns match.id for the puzzle row
+            db.add(crud_match_puzzle.build(match))
         db.commit()
         db.refresh(match)
         return match
@@ -91,7 +97,8 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
     def accept_invite(self, db: Session, match: Match) -> Match:
         match.status = "in_progress"
         match.started_at = utcnow()
-        match.current_turn_user_id = match.inviter_id
+        # Races and co-op have no turns: both players move whenever they like.
+        match.current_turn_user_id = match.inviter_id if match.game == "wordle" else None
         db.add(match)
         db.commit()
         db.refresh(match)
@@ -230,7 +237,7 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             completed_at=match.completed_at,
         )
 
-    def to_detail(self, db: Session, match: Match) -> MatchDetail:
+    def to_detail(self, db: Session, match: Match, viewer_id: int) -> MatchDetail:
         public = self.to_public(db, match)
         guesses = (
             db.query(MatchGuess)
@@ -259,8 +266,22 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             )
         return MatchDetail(
             **public.model_dump(),
-            target_word=match.target_word if match.status == "completed" else None,
+            target_word=(
+                match.target_word
+                if match.game == "wordle" and match.status == "completed"
+                else None
+            ),
             guesses=guess_results,
+            race=(
+                crud_match_puzzle.race_detail(db, match, viewer_id)
+                if match.game in match_modes.RACE_GAMES
+                else None
+            ),
+            sudoku=(
+                crud_match_puzzle.sudoku_detail(db, match)
+                if match.game == match_modes.SUDOKU_COOP
+                else None
+            ),
         )
 
     def to_pending_invite(self, db: Session, match: Match) -> PendingInvite:

@@ -57,6 +57,35 @@ def sudoku_variant(offset: int) -> dict:
 # complete, ready-to-serve definition.
 SUDOKU_VARIANTS = [sudoku_variant(offset) for offset in range(9)]
 
+
+def generate_sudoku(rng: random.Random | None = None) -> dict[str, list[int]]:
+    """A fresh board made by shuffling the base puzzle in ways that keep it valid and
+    its solution unique: rows within each band, the bands themselves, the same for
+    columns, an optional transpose, and a relabel of the digits. Same difficulty as
+    the base, but far more distinct boards than sudoku_variant's nine.
+    """
+    chooser = rng or random
+
+    def line_order() -> list[int]:
+        bands = chooser.sample(range(3), 3)
+        return [band * 3 + line for band in bands for line in chooser.sample(range(3), 3)]
+
+    rows, cols = line_order(), line_order()
+    transpose = chooser.random() < 0.5
+    digits = [0, *chooser.sample(range(1, 10), 9)]  # blanks (0) stay blank
+
+    def shuffle(grid: list[int]) -> list[int]:
+        return [
+            digits[grid[col * 9 + row] if transpose else grid[row * 9 + col]]
+            for row in rows
+            for col in cols
+        ]
+
+    return {
+        "puzzle": shuffle(_SUDOKU_BASE_PUZZLE),
+        "solution": shuffle(_SUDOKU_BASE_SOLUTION),
+    }
+
 CIPHERS = [
     [2, 4, 0, 5],
     [5, 1, 3, 0],

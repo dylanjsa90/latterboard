@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Any
 
 from sqlalchemy import (
     JSON,
@@ -63,3 +64,28 @@ class MatchGuess(Base):
 
 
 Index("ix_matchguess_match_turn", MatchGuess.match_id, MatchGuess.turn_number)
+
+
+class MatchPuzzle(Base):
+    """The private puzzle and live state behind a race or co-op match.
+
+    A table beside `match` rather than new columns on it because there are no
+    migrations: create_all adds a missing table to an existing database, never a
+    missing column.
+    """
+
+    __tablename__: str = "match_puzzle"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    match_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("match.id"), nullable=False, unique=True, index=True
+    )
+    # The puzzle with its answer; only sent to clients once the match is over.
+    data: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False)
+    # Each player's guesses (races), or the shared board and mistake count (co-op).
+    state: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False)
+    # Optimistic lock, so a move based on stale state fails instead of overwriting
+    # the other player's (see CRUDMatchPuzzle._apply).
+    version: Mapped[int] = mapped_column(Integer, nullable=False)
+
+    __mapper_args__ = {"version_id_col": version}

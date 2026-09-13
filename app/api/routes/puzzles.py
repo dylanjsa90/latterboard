@@ -1,3 +1,4 @@
+import logging
 import uuid
 from datetime import timedelta
 
@@ -32,9 +33,6 @@ from app.schemas.puzzle import (
 )
 
 router = APIRouter(prefix="/puzzles", tags=["puzzles"])
-
-WORD_MAX_ATTEMPTS = 6
-CIPHER_MAX_ATTEMPTS = 8
 
 
 def _get_or_generate_puzzle(db: Session, game: str, puzzle_id: str | None) -> Puzzle:
@@ -98,7 +96,7 @@ def get_word_puzzle(
     return WordPuzzlePublic(
         puzzle_id=puzzle_id,
         word_length=puzzle_logic.WORD_LENGTH,
-        max_attempts=WORD_MAX_ATTEMPTS,
+        max_attempts=puzzle_logic.WORD_MAX_ATTEMPTS,
         initial_guess=puzzle_logic.WORD_STARTER,
         initial_grade=puzzle_logic.grade_word(puzzle_logic.WORD_STARTER, answer),
         guesses=[
@@ -134,10 +132,10 @@ def word_guess(
 ) -> WordGuessResult:
     row = _get_or_generate_puzzle(db, "word", body.puzzle_id)
     answer = row.data["answer"]
-
+    logging.getLogger("uvicorn").info(f"Word Guess Route: Answer={answer}")
     grades = puzzle_logic.grade_word(body.guess, answer)
     won = body.guess.casefold() == answer.casefold()
-    lost = not won and body.attempt_count >= WORD_MAX_ATTEMPTS
+    lost = not won and body.attempt_count >= puzzle_logic.WORD_MAX_ATTEMPTS
 
     if current_user is not None:
         crud_puzzle_attempt.record_attempt(
@@ -261,7 +259,7 @@ def get_cipher_puzzle(db: Session = Depends(deps.get_db)) -> CipherPuzzlePublic:
     return CipherPuzzlePublic(
         puzzle_id=f"cipher-{row.date.isoformat()}",
         slots=len(answer),
-        max_attempts=CIPHER_MAX_ATTEMPTS,
+        max_attempts=puzzle_logic.CIPHER_MAX_ATTEMPTS,
         initial_attempt=puzzle_logic.CIPHER_STARTER,
         initial_feedback=CipherFeedback(
             **puzzle_logic.cipher_feedback(puzzle_logic.CIPHER_STARTER, answer)
