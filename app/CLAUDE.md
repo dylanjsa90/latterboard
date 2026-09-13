@@ -52,6 +52,15 @@ Commands: `uv run pytest`, `uv run ruff check app/ tests/`, `uv run mypy app/`. 
 ## Database / schema
 - Tables come from `Base.metadata.create_all` (`app/init_db.py`). There are no Alembic migrations yet, so new columns and constraints won't reach existing databases. Call this out whenever you change a model.
 - `PuzzleAttempt.puzzle_id` is a string key like `"word-2026-09-11"`, not a foreign key to `Puzzle.id`.
+- Race and co-op matches keep their private puzzle and live state in `match_puzzle`, not on `match`. It's a new table so `create_all` can add it to existing databases without a migration. Their `match.target_word` is `""` (the column is non-null).
+
+## Matches
+- `match.game` is one of: `wordle` (turn-based, shared board, the original mode), `word_race` / `cipher_race` (same private puzzle, played at the same time on separate boards, fewest attempts wins), or `sudoku_coop` (one shared board, shared mistake limit). The rules live in `app/game/match_modes.py`.
+- Every move endpoint must call `_require_game`. Without it, a race match sent to `/guess` runs the turn-based logic against a `target_word` of `""`.
+- `match.max_guesses` holds attempts per player in races, and the team's mistake limit in `sudoku_coop`.
+- In races, never send a player's guess (letters/digits) to the opponent while the match is in progress. Send only grades, both in websocket frames and in `GET /matches/{id}`. The answer and guesses are revealed once `status == "completed"`.
+- Change `match_puzzle` state only through `CRUDMatchPuzzle._apply`, and have the change function re-check `match.status` itself. `version` is an optimistic lock: when both players move at once, the losing write is replayed on fresh state instead of overwriting the other move.
+- Match puzzles are freshly generated per match, not the daily `puzzle` rows. For sudoku use `generate_sudoku()`; `sudoku_variant()` only yields 9 distinct boards.
 
 ## Puzzles
 - Future-dated puzzle ids must return 404. Otherwise the endpoints leak upcoming answers and create rows for arbitrary dates.
@@ -65,3 +74,5 @@ Commands: `uv run pytest`, `uv run ruff check app/ tests/`, `uv run mypy app/`. 
 - `tests/conftest.py` sets env vars **before** any app import, because `Settings()` reads them at import time. Keep new overrides above the imports.
 - Each test drops the DB, recreates it, and re-seeds it with `init_db`. `WS_HEARTBEAT_SECONDS=3600` stops heartbeat frames from interleaving with the websocket frames tests assert on.
 - Tests use the same Redis as the dev server (default `REDIS_URL`), so test broadcasts and presence keys show up in dev Redis.
+- Two-player fixtures `inviter_headers` / `opponent_headers` (users `inviter` / `opponent`) live in `conftest.py`.
+- To simulate a stale concurrent write, keep a reference to the row you loaded. The SQLAlchemy identity map holds objects weakly, so an unreferenced row gets garbage-collected and the next query silently reads fresh state, and the test passes without exercising the conflict.
