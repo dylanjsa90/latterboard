@@ -63,3 +63,27 @@ def auth_headers(client):
     assert r.status_code == 200
     token = r.json()["access_token"]
     return {"Authorization": f"Bearer {token}"}
+
+
+def _signup_and_login(client, email: str, username: str, password: str = "secret123"):
+    r = client.post(
+        "/api/v1/users/",
+        json={"email": email, "username": username, "password": password},
+    )
+    assert r.status_code == 201
+    r = client.post(
+        "/api/v1/login/access-token",
+        data={"username": email, "password": password},
+    )
+    assert r.status_code == 200
+    return {"Authorization": f"Bearer {r.json()['access_token']}"}
+
+
+@pytest.fixture
+def inviter_headers(client):
+    return _signup_and_login(client, "inviter@example.com", "inviter")
+
+
+@pytest.fixture
+def opponent_headers(client):
+    return _signup_and_login(client, "opponent@example.com", "opponent")
