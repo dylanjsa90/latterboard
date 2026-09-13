@@ -33,7 +33,7 @@ MAX_GUESSES = {
 
 def new_puzzle(game: str) -> dict[str, Any]:
     """A fresh private puzzle, answer included, for one match."""
-    if game == WORD_RACE | game == "wordle":
+    if game == WORD_RACE or game == "wordle":
         return {"answer": wordle.select_word()}
     if game == CIPHER_RACE:
         return {"digits": generate_cipher_digits()}
