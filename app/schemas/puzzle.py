@@ -180,8 +180,7 @@ class CipherPuzzlePublic(BaseModel):
     initial_feedback: CipherFeedback
 
 
-class CipherAttemptCreate(BaseModel):
-    puzzle_id: str
+class CipherAttempt(BaseModel):
     attempt: list[int] = Field(min_length=4, max_length=4)
 
     @field_validator("attempt")
@@ -190,3 +189,7 @@ class CipherAttemptCreate(BaseModel):
         if any(v < 0 or v > 5 for v in value):
             raise ValueError("attempt values must be between 0 and 5")
         return value
+
+
+class CipherAttemptCreate(CipherAttempt):
+    puzzle_id: str
