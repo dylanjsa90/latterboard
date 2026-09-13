@@ -52,7 +52,8 @@ class Settings(BaseSettings):
     FRONTEND_HOST: str = "http://localhost:5173"
     FRONTEND_HOST_ALT: str = "http://localhost:5174"
     ENVIRONMENT: Literal["local", "staging", "production"] = "local"
-
+    LOGGER_NAME: str = "uvicorn"
+    DEBUG: bool = os.environ.get("DEBUG", "0") == "1"
     BACKEND_CORS_ORIGINS: Annotated[
         list[AnyUrl] | str, BeforeValidator(parse_cors)
     ] = []
