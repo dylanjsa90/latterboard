@@ -9,7 +9,6 @@ from collections import Counter
 from typing import cast
 
 from app.lib.word_list import word_list
-from app.schemas.puzzle import Grade
 
 WORD_LENGTH = 5
 
@@ -25,7 +24,7 @@ def is_valid_word(guess: str) -> bool:
     return len(guess) == WORD_LENGTH and guess.lower() in _WORD_SET
 
 
-def evaluate_guess(target: str, guess: str) -> list[Grade]:
+def evaluate_guess(target: str, guess: str) -> list[str]:
     """Classic two-pass Wordle scoring: exact matches first, then present/absent
     from the remaining letter counts, so duplicate letters are handled correctly.
     """
@@ -47,6 +46,6 @@ def evaluate_guess(target: str, guess: str) -> list[Grade]:
             remaining[letter] -= 1
         else:
             results[i] = "absent"
-    typed_result = [cast(Grade, r) for r in results]
+    typed_result = [cast(str, r) for r in results]
 
     return typed_result
