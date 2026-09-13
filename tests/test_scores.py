@@ -31,11 +31,11 @@ def second_user_and_headers(client):
 
 
 def test_submit_score(client, auth_headers):
-    r = client.post(f"{BASE}/", json={"game": GAME, "score": 42}, headers=auth_headers)
+    r = client.post(f"{BASE}/", json={"game": GAME, "score": 40}, headers=auth_headers)
     assert r.status_code == 201
     data = r.json()
     assert data["game"] == GAME
-    assert data["score"] == 42
+    assert data["score"] == 40
     assert "id" in data
     assert "created_at" in data
 
@@ -43,6 +43,33 @@ def test_submit_score(client, auth_headers):
 def test_submit_score_unauthenticated(client):
     r = client.post(f"{BASE}/", json={"game": GAME, "score": 10})
     assert r.status_code == 401
+
+
+def test_submit_score_rejects_unreachable_snake_scores(client, auth_headers):
+    # Negative, off the 10-point step, and past a full board.
+    for score in (-10, 42, 4000):
+        r = client.post(
+            f"{BASE}/", json={"game": GAME, "score": score}, headers=auth_headers
+        )
+        assert r.status_code == 422, score
+
+
+def test_submit_score_accepts_a_full_snake_board(client, auth_headers):
+    r = client.post(f"{BASE}/", json={"game": GAME, "score": 3990}, headers=auth_headers)
+    assert r.status_code == 201
+
+
+def test_submit_score_other_games_only_need_non_negative_scores(client, auth_headers):
+    r = client.post(f"{BASE}/", json={"game": "other", "score": 42}, headers=auth_headers)
+    assert r.status_code == 201
+    r = client.post(f"{BASE}/", json={"game": "other", "score": -1}, headers=auth_headers)
+    assert r.status_code == 422
+
+
+def test_rejected_scores_do_not_use_a_play(client, auth_headers):
+    client.post(f"{BASE}/", json={"game": GAME, "score": 42}, headers=auth_headers)
+    r = client.get(f"{BASE}/me/{GAME}/plays-today", headers=auth_headers)
+    assert r.json()["used"] == 0
 
 
 def test_daily_play_limit(client, auth_headers):
@@ -72,6 +99,24 @@ def test_my_scores_unauthenticated(client):
     assert r.status_code == 401
 
 
+@pytest.mark.usefixtures("submitted_score")
+def test_my_plays_today(client, auth_headers):
+    r = client.get(f"{BASE}/me/{GAME}/plays-today", headers=auth_headers)
+    assert r.status_code == 200
+    assert r.json() == {"used": 1, "limit": settings.MAX_DAILY_PLAYS_PER_GAME}
+
+
+@pytest.mark.usefixtures("submitted_score")
+def test_my_plays_today_counts_only_that_game(client, auth_headers):
+    r = client.get(f"{BASE}/me/other/plays-today", headers=auth_headers)
+    assert r.json()["used"] == 0
+
+
+def test_my_plays_today_unauthenticated(client):
+    r = client.get(f"{BASE}/me/{GAME}/plays-today")
+    assert r.status_code == 401
+
+
 def test_leaderboard_alltime_empty(client):
     r = client.get(f"{BASE}/leaderboard/nonexistent_game/all-time")
     assert r.status_code == 200
@@ -82,7 +127,7 @@ def test_leaderboard_alltime_populated(
     client, submitted_score, second_user_and_headers
 ):
     client.post(
-        f"{BASE}/", json={"game": GAME, "score": 999}, headers=second_user_and_headers
+        f"{BASE}/", json={"game": GAME, "score": 990}, headers=second_user_and_headers
     )
     r = client.get(f"{BASE}/leaderboard/{GAME}/all-time")
     assert r.status_code == 200

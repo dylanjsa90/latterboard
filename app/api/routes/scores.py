@@ -7,8 +7,14 @@ from sqlalchemy.orm import Session
 from app.api import deps
 from app.core.config import settings
 from app.crud.game_score import game_score as crud_score
+from app.game.puzzles import today
 from app.models import User
-from app.schemas.game_score import GameScoreCreate, GameScorePublic, LeaderboardEntry
+from app.schemas.game_score import (
+    GameScoreCreate,
+    GameScorePublic,
+    LeaderboardEntry,
+    PlaysToday,
+)
 
 router = APIRouter(prefix="/scores", tags=["scores"])
 
@@ -84,3 +90,14 @@ def my_scores(
     db: Session = Depends(deps.get_db),
 ):
     return crud_score.get_user_scores(db, current_user.id, game)
+
+
+@router.get("/me/{game}/plays-today", response_model=PlaysToday)
+def my_plays_today(
+    game: str,
+    current_user: User = Depends(deps.get_current_user),
+    db: Session = Depends(deps.get_db),
+) -> PlaysToday:
+    """Scores saved today (UTC) are plays; POST / answers 429 once `used` hits `limit`."""
+    used = crud_score.get_daily_play_count(db, current_user.id, game, today())
+    return PlaysToday(used=used, limit=settings.MAX_DAILY_PLAYS_PER_GAME)
