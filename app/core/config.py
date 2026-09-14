@@ -126,6 +126,7 @@ class Settings(BaseSettings):
 
     MATCH_MAX_GUESSES: int = 6
     MATCH_INVITE_EXPIRY_MINUTES: int = 15
+    MATCHMAKING_QUEUE_TTL_SECONDS: int = 60
 
     def _check_default_secret(self, var_name: str, value: str | None) -> None:
         if value == "changethis":
