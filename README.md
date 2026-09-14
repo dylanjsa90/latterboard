@@ -19,6 +19,34 @@ SECRET_KEY=<generate with: python -c "import secrets; print(secrets.token_hex(32
 REDIS_URL=redis://localhost:6379
 ```
 
+## Running with Docker
+
+Requires [Docker](https://docs.docker.com/get-docker/) and Docker Compose.
+
+**1. Create a `.env` file in the project root:**
+
+```
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=supersecret
+POSTGRES_DB=latterboard
+SECRET_KEY=<generate with: python -c "import secrets; print(secrets.token_hex(32))">
+```
+
+**2. Start all services:**
+
+```bash
+docker compose up --build
+```
+
+The API will be available at `http://localhost:8000`. Postgres and Redis are started automatically and the app waits for the database to be healthy before accepting connections.
+
+**3. Stop and remove containers:**
+
+```bash
+docker compose down          # stop containers
+docker compose down -v       # also delete database volume
+```
+
 ## Development server
 
 ```bash
