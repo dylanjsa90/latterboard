@@ -165,6 +165,7 @@ winner_username?, max_guesses, created_at, started_at?, completed_at?}`.
 | `POST /matches/{id}/decline` | — | `MatchPublic` (+ `invite_declined` to inviter) |
 | `POST /matches/{id}/cancel` | — | `MatchPublic` (+ `invite_cancelled` to invitee) |
 | `GET /matches/pending` | — | `[{id, game, from_username, created_at, expires_at}]` |
+| `GET /matches/me/history?skip&limit` | — | `{items: [{id, game, opponent_username, result, completed_at}], total, record: {won, lost, drawn}}`, completed matches newest first; `result` ∈ `won \| lost \| draw` (`sudoku_coop`: `solved \| failed`); `record` spans every completed competitive match |
 | `GET /matches/{id}` | — | `MatchDetail` (below); 403/404 if not a participant / missing |
 | `POST /matches/{id}/guess` | `{word}` (wordle, your turn only) | `{match_id, turn_number, username, word, result: [{letter, status}], correct, status, current_turn_username, winner_username}` |
 | `POST /matches/{id}/word/guess` | `{word}` | `RaceGuessResult {match_id, turn_number, guess, result, correct, status, winner_username, answer}` |

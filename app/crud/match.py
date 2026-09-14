@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from sqlalchemy import and_, func, or_
+from sqlalchemy import and_, case, func, or_
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
@@ -14,13 +14,18 @@ from app.schemas.match import (
     LetterResultOut,
     MatchDetail,
     MatchGuessResult,
+    MatchHistory,
+    MatchHistoryItem,
     MatchInviteCreate,
     MatchPublic,
+    MatchRecord,
     PendingInvite,
 )
 from app.utils import utcnow
 
 OPEN_STATUSES = ("pending_invite", "in_progress")
+# The one game both players win or lose together, so it has no winner.
+COOP_GAME = "sudoku_coop"
 
 
 class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
@@ -93,6 +98,54 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
         )
         fresh = [self.expire_if_needed(db, m) for m in matches]
         return [m for m in fresh if m.status == "pending_invite"]
+
+    def get_history(
+        self, db: Session, user_id: int, *, skip: int, limit: int
+    ) -> MatchHistory:
+        finished = db.query(Match).filter(
+            or_(Match.inviter_id == user_id, Match.invitee_id == user_id),
+            Match.status == "completed",
+        )
+        rows = (
+            # id breaks ties so pages stay stable when two matches share a timestamp.
+            finished.order_by(Match.completed_at.desc(), Match.id.desc())
+            .offset(skip)
+            .limit(limit)
+            .all()
+        )
+        # COUNT skips the NULLs a CASE without ELSE yields, so each counts its own rows.
+        won, lost, drawn = (
+            finished.filter(Match.game != COOP_GAME)
+            .with_entities(
+                func.count(case((Match.winner_id == user_id, 1))),
+                func.count(case((and_(Match.winner_id.isnot(None), Match.winner_id != user_id), 1))),
+                func.count(case((Match.winner_id.is_(None), 1))),
+            )
+            .one()
+        )
+        return MatchHistory(
+            items=[self._to_history_item(db, m, user_id) for m in rows],
+            total=finished.count(),
+            record=MatchRecord(won=won, lost=lost, drawn=drawn),
+        )
+
+    def _to_history_item(self, db: Session, match: Match, viewer_id: int) -> MatchHistoryItem:
+        opponent_id = match.invitee_id if viewer_id == match.inviter_id else match.inviter_id
+        if match.game == COOP_GAME:
+            # Co-op completes with no winner; the puzzle row says how it ended.
+            result = crud_match_puzzle.get_by_match(db, match.id).state["outcome"]
+        elif match.winner_id is None:
+            result = "draw"
+        else:
+            result = "won" if match.winner_id == viewer_id else "lost"
+        return MatchHistoryItem(
+            id=match.id,
+            game=match.game,
+            opponent_username=self._username_or_none(db, opponent_id) or "",
+            result=result,
+            # Completed matches always carry completed_at.
+            completed_at=match.completed_at or match.created_at,
+        )
 
     def accept_invite(self, db: Session, match: Match) -> Match:
         match.status = "in_progress"

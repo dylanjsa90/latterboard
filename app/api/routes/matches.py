@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
 from app.api import deps
@@ -14,6 +14,7 @@ from app.schemas.match import (
     MatchDetail,
     MatchGuessCreate,
     MatchGuessResult,
+    MatchHistory,
     MatchInviteCreate,
     MatchPublic,
     PendingInvite,
@@ -172,6 +173,17 @@ def pending_invites(
 ):
     invites = crud_match.get_pending_invites(db, current_user.id)
     return [crud_match.to_pending_invite(db, m) for m in invites]
+
+
+@router.get("/me/history", response_model=MatchHistory)
+def my_match_history(
+    skip: int = Query(0, ge=0),
+    limit: int = Query(20, ge=1, le=100),
+    db: Session = Depends(deps.get_db),
+    current_user: User = Depends(deps.get_current_user),
+) -> MatchHistory:
+    """Your finished matches, newest first, plus your win/loss/draw record."""
+    return crud_match.get_history(db, current_user.id, skip=skip, limit=limit)
 
 
 @router.get("/{match_id}", response_model=MatchDetail)

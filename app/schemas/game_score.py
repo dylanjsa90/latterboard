@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field, model_validator
 # (step, highest) for the games whose scoring the server knows. Snake scores 10 a food,
 # and its 20x20 board fits 399 foods beside the starting head; webcade's snake
 # constants must agree. Other games are only held to non-negative scores.
-SCORE_RULES: dict[str, tuple[int, int]] = {"snake": (0, 3990)}
+SCORE_RULES: dict[str, tuple[int, int]] = {"snake": (10, 3990)}
 
 
 class GameScoreCreate(BaseModel):

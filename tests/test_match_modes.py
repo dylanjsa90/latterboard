@@ -327,6 +327,11 @@ def test_sudoku_coop_shared_mistakes_lose_the_match(client, inviter_headers, opp
     assert sudoku["solution"] == solution
     assert _leaderboard(client, "sudoku_coop") == {"inviter": 0, "opponent": 0}
 
+    history = client.get(f"{BASE}/me/history", headers=inviter_headers).json()
+    assert history["items"][0]["result"] == "failed"
+    # Co-op has no winner, so it never counts toward the win/loss record.
+    assert history["record"] == {"won": 0, "lost": 0, "drawn": 0}
+
 
 def test_sudoku_coop_solved_together(client, inviter_headers, opponent_headers):
     match_id = _start_match(client, inviter_headers, opponent_headers, "sudoku_coop")
@@ -342,6 +347,9 @@ def test_sudoku_coop_solved_together(client, inviter_headers, opponent_headers):
     assert r.json()["outcome"] == "solved"
     score = match_modes.sudoku_coop_score(1, 3)
     assert _leaderboard(client, "sudoku_coop") == {"inviter": score, "opponent": score}
+
+    history = client.get(f"{BASE}/me/history", headers=opponent_headers).json()
+    assert history["items"][0]["result"] == "solved"
 
 
 def test_sudoku_coop_over_websocket(client, inviter_headers, opponent_headers):

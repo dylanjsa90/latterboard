@@ -127,3 +127,29 @@ class PendingInvite(BaseModel):
     from_username: str
     created_at: datetime
     expires_at: datetime
+
+
+# --- history ------------------------------------------------------------------
+
+
+class MatchHistoryItem(BaseModel):
+    id: int
+    game: str
+    opponent_username: str
+    # Competitive games are won/lost/draw from the viewer's side; co-op is solved/failed.
+    result: Literal["won", "lost", "draw", "solved", "failed"]
+    completed_at: datetime
+
+
+class MatchRecord(BaseModel):
+    """The viewer's competitive results over every finished match (co-op excluded)."""
+
+    won: int
+    lost: int
+    drawn: int
+
+
+class MatchHistory(BaseModel):
+    items: list[MatchHistoryItem]
+    total: int
+    record: MatchRecord
