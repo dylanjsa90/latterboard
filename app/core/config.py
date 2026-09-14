@@ -73,11 +73,11 @@ class Settings(BaseSettings):
     DB_TYPE: str = os.environ.get("DB_TYPE", "sqlite")
 
     # Fetch variables
-    DB_USER: str = os.getenv("user")
-    DB_PASSWORD: str = os.getenv("password")
-    DB_HOST: str = os.getenv("host")
-    DB_PORT: str = os.getenv("port")
-    DB_NAME: str = os.getenv("dbname")
+    DB_USER: str = os.getenv("user", "db_user")
+    DB_PASSWORD: str = os.getenv("password", "db_password")
+    DB_HOST: str = os.getenv("host", "http://localhost")
+    DB_PORT: str = os.getenv("port", "8000")
+    DB_NAME: str = os.getenv("dbname", "db_name")
 
     @computed_field
     @property
