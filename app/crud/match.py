@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from app.crud.base import CRUDBase
 from app.crud.game_score import game_score as crud_game_score
 from app.crud.match_puzzle import match_puzzle as crud_match_puzzle
+from app.crud.user import user as crud_user
 from app.game import match_modes, wordle
 from app.models.match import Match, MatchGuess, MatchPuzzle
 from app.models.user import User
@@ -115,8 +116,12 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             .all()
         )
         # COUNT skips the NULLs a CASE without ELSE yields, so each counts its own rows.
+        # Matches against the computer are left out: a solo game shouldn't pad, or
+        # dent, the record a player is judged on. They still appear in `items`.
+        bot_ids = crud_user.bot_ids(db)
         won, lost, drawn = (
             finished.filter(Match.game != COOP_GAME)
+            .filter(~Match.inviter_id.in_(bot_ids), ~Match.invitee_id.in_(bot_ids))
             .with_entities(
                 func.count(case((Match.winner_id == user_id, 1))),
                 func.count(case((and_(Match.winner_id.isnot(None), Match.winner_id != user_id), 1))),
@@ -132,6 +137,7 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
 
     def _to_history_item(self, db: Session, match: Match, viewer_id: int) -> MatchHistoryItem:
         opponent_id = match.invitee_id if viewer_id == match.inviter_id else match.inviter_id
+        opponent = db.get(User, opponent_id)
         if match.game == COOP_GAME:
             # Co-op completes with no winner; the puzzle row says how it ended.
             result = crud_match_puzzle.get_by_match(db, match.id).state["outcome"]
@@ -142,7 +148,8 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
         return MatchHistoryItem(
             id=match.id,
             game=match.game,
-            opponent_username=self._username_or_none(db, opponent_id) or "",
+            opponent_username=opponent.username if opponent else "",
+            opponent_is_bot=bool(opponent and opponent.is_bot),
             result=result,
             # Completed matches always carry completed_at.
             completed_at=match.completed_at or match.created_at,
@@ -237,6 +244,11 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
         )
 
     def _record_scores(self, db: Session, match: Match) -> None:
+        if crud_user.any_are_bots(db, match.inviter_id, match.invitee_id):
+            # Both players are written a row here, so without this the computer
+            # would climb the leaderboard — and so would anyone farming it. These
+            # writes bypass `POST /scores/`, so its daily cap wouldn't catch it.
+            return
         per_player_max = max(match.max_guesses // 2, 1)
         if match.winner_id is not None:
             winner_guess_count = (
@@ -283,6 +295,9 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             status=match.status,
             inviter_username=inviter.username if inviter else "",
             invitee_username=invitee.username if invitee else "",
+            # `is_bot` is nullable, so coerce: null means a human account.
+            inviter_is_bot=bool(inviter and inviter.is_bot),
+            invitee_is_bot=bool(invitee and invitee.is_bot),
             current_turn_username=self._username_or_none(db, match.current_turn_user_id),
             winner_username=self._username_or_none(db, match.winner_id),
             max_guesses=match.max_guesses,
@@ -362,16 +377,16 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
         opponent_ids = {
             m.invitee_id if user_id == m.inviter_id else m.inviter_id for m in matches
         }
-        usernames = (
-            {
-                row.id: row.username
-                for row in db.query(User.id, User.username)
-                .filter(User.id.in_(opponent_ids))
-                .all()
-            }
+        opponents = (
+            db.query(User.id, User.username, User.is_bot)
+            .filter(User.id.in_(opponent_ids))
+            .all()
             if opponent_ids
-            else {}
+            else []
         )
+        usernames = {row.id: row.username for row in opponents}
+        # Same query as the usernames, so naming the computer costs nothing extra.
+        bot_ids = {row.id for row in opponents if row.is_bot}
         puzzles = crud_match_puzzle.get_by_matches(
             db,
             [
@@ -380,7 +395,9 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
                 if m.status != "pending_invite" and m.game in match_modes.RACE_GAMES
             ],
         )
-        return [self.to_active_item(m, user_id, usernames, puzzles) for m in matches]
+        return [
+            self.to_active_item(m, user_id, usernames, puzzles, bot_ids) for m in matches
+        ]
 
     def to_active_item(
         self,
@@ -388,6 +405,7 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
         viewer_id: int,
         usernames: dict[int, str],
         puzzles: dict[int, MatchPuzzle],
+        bot_ids: set[int] | None = None,
     ) -> ActiveMatch:
         """One rail entry, built from the maps `get_active_items` preloaded."""
         is_inviter = viewer_id == match.inviter_id
@@ -408,6 +426,7 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             game=match.game,
             status="pending_invite" if pending else "in_progress",
             opponent_username=usernames.get(opponent_id, ""),
+            opponent_is_bot=opponent_id in (bot_ids or set()),
             role="inviter" if is_inviter else "invitee",
             your_move=your_move,
             created_at=match.created_at,

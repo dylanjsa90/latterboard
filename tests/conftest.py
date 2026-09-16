@@ -6,6 +6,11 @@ os.environ["SQLITE_DATABASE_URL"] = "sqlite:///./test_app.db"
 os.environ["DB_TYPE"] = "sqlite"
 # Keep heartbeat frames from interleaving with the frames websocket tests assert on
 os.environ["WS_HEARTBEAT_SECONDS"] = "3600"
+# The computer opponent moves in a background task, which the sync TestClient runs
+# to completion before returning. With no thinking pause its frames therefore land
+# in a deterministic order, and no test has to wait on a timer.
+os.environ["BOT_TURN_DELAY_SECONDS"] = "0"
+os.environ["BOT_TURN_DELAY_JITTER_SECONDS"] = "0"
 import pytest
 from fastapi.testclient import TestClient
 

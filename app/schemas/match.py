@@ -28,6 +28,10 @@ class MatchPublic(BaseModel):
     status: str
     inviter_username: str
     invitee_username: str
+    # Named per side rather than "opponent", because this model has no viewer:
+    # `crud_match.to_public` builds one object that both players receive.
+    inviter_is_bot: bool = False
+    invitee_is_bot: bool = False
     current_turn_username: str | None
     winner_username: str | None
     # Attempts per player in a race; the shared mistake limit in sudoku co-op.
@@ -128,6 +132,7 @@ class ActiveMatch(BaseModel):
     game: str
     status: Literal["pending_invite", "in_progress"]
     opponent_username: str
+    opponent_is_bot: bool = False
     # The viewer's side of the invite: an inviter waits on a pending one, an invitee answers.
     role: Literal["inviter", "invitee"]
     # True when the match is waiting on the viewer: their turn, a race they haven't
@@ -152,6 +157,8 @@ class MatchHistoryItem(BaseModel):
     id: int
     game: str
     opponent_username: str
+    # Solo games stay in the list but are left out of `MatchRecord`.
+    opponent_is_bot: bool = False
     # Competitive games are won/lost/draw from the viewer's side; co-op is solved/failed.
     result: Literal["won", "lost", "draw", "solved", "failed"]
     completed_at: datetime

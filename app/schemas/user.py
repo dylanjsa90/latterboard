@@ -2,9 +2,20 @@ import re
 from datetime import datetime, timezone
 from typing import Annotated
 
-from pydantic import AfterValidator, BaseModel, EmailStr, Field, computed_field
+from pydantic import (
+    AfterValidator,
+    BaseModel,
+    BeforeValidator,
+    EmailStr,
+    Field,
+    computed_field,
+)
 
 from app.core.config import settings
+
+# `User.is_bot` is nullable, so accounts predating the column read back as None.
+# Null means human, and the wire only ever carries a real boolean.
+BotFlag = Annotated[bool, BeforeValidator(lambda value: bool(value))]
 
 USERNAME_PATTERN = re.compile(r"[a-z0-9_]{3,20}")
 DISPLAY_NAME_MAX = 40
@@ -108,6 +119,7 @@ class AvatarFields(BaseModel):
 
 class UserPublic(UserBase, AvatarFields):
     is_active: bool
+    is_bot: BotFlag = False
     display_name: str | None = None
     location: str | None = None
     created_at: datetime
@@ -127,6 +139,7 @@ class PlayerPublic(AvatarFields):
 
     id: int = Field(exclude=True)
     username: str
+    is_bot: BotFlag = False
     display_name: str | None = None
     location: str | None = None
     created_at: datetime

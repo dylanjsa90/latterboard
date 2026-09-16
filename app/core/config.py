@@ -134,6 +134,22 @@ class Settings(BaseSettings):
     # Links one player can create per UTC day; also caps the invite email we send.
     MATCH_INVITE_LINK_DAILY_LIMIT: int = 20
     MATCHMAKING_QUEUE_TTL_SECONDS: int = 60
+    # How long a player waits in the queue before we offer them the computer.
+    # The client re-POSTs every TTL/3 (~20s), so this lands on their second poll.
+    MATCHMAKING_BOT_WAIT_SECONDS: int = 20
+
+    # The computer-controlled opponent. It never logs in: `init_db` gives it a
+    # random password, and it plays through `app/api/bot_turn.py`, not HTTP.
+    BOT_OPPONENT_ENABLED: bool = True
+    BOT_USER_EMAIL: str = "robo@latterboard.com"
+    BOT_USER_USERNAME: str = "robo"
+    BOT_DISPLAY_NAME: str = "Robo"
+    # Each bot move waits DELAY + random(0, JITTER) seconds, so it reads as
+    # thinking rather than as a machine. Tests set the delay to 0.
+    BOT_TURN_DELAY_SECONDS: float = 2.0
+    BOT_TURN_DELAY_JITTER_SECONDS: float = 3.0
+    # 0.0 = careless, 1.0 = plays the best candidate it knows every time.
+    BOT_SKILL: float = 0.75
 
     def _check_default_secret(self, var_name: str, value: str | None) -> None:
         if value == "changethis":

@@ -1,4 +1,5 @@
 import logging
+import secrets
 
 from sqlalchemy import inspect, text
 from sqlalchemy.engine import Engine
@@ -61,4 +62,39 @@ def init_db(db: Session) -> None:
         )
         logging.info(f"Created user {user}")
 
+    seed_bot_user(db)
+
     crud_puzzle.seed_defaults(db)
+
+
+def seed_bot_user(db: Session) -> User:
+    """The computer-controlled opponent players are matched with when no human is
+    available.
+
+    It is a perfectly ordinary user row, because `match.inviter_id`/`invitee_id`
+    are non-null foreign keys and nothing else in the match code needs to know the
+    difference. It never signs in: it plays through `app/api/bot_turn.py`, so its
+    password is random and thrown away rather than being a known value someone
+    could log in with.
+    """
+    bot = crud_user.get_user_by_email(db, settings.BOT_USER_EMAIL)
+    if bot is None:
+        bot = crud_user.create_user(
+            db=db,
+            user_in=UserCreate(
+                email=settings.BOT_USER_EMAIL,
+                username=settings.BOT_USER_USERNAME,
+                password=secrets.token_urlsafe(32),
+                display_name=settings.BOT_DISPLAY_NAME,
+                birth_year=2000,
+            ),
+        )
+        logging.info("Created bot user %s", bot.username)
+    if not bot.is_bot:
+        # Set separately because `create_user` builds the row from `UserCreate`,
+        # which has no `is_bot`. Also repairs a row seeded before the column existed.
+        bot.is_bot = True
+        db.add(bot)
+        db.commit()
+        db.refresh(bot)
+    return bot

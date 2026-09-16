@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import StaleDataError
 
 from app.crud.game_score import game_score as crud_game_score
+from app.crud.user import user as crud_user
 from app.game import match_modes
 from app.models.match import Match, MatchPuzzle
 from app.models.user import User
@@ -135,6 +136,10 @@ class CRUDMatchPuzzle:
         )
 
     def _record_race_scores(self, db: Session, match: Match, row: MatchPuzzle) -> None:
+        if crud_user.any_are_bots(db, match.inviter_id, match.invitee_id):
+            # Playing the computer doesn't score: it would put the bot itself on
+            # the leaderboard, and hand players an opponent they can farm.
+            return
         # The winner, or both players on a tied solve, score; everyone else gets 0.
         guesses_by_player = row.state["guesses"]
         for pid, guesses in guesses_by_player.items():

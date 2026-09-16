@@ -2,7 +2,8 @@ from sqlalchemy import create_engine, inspect, text
 
 from app.init_db import ensure_user_columns
 
-PROFILE_COLUMNS = {"display_name", "birth_year", "location", "avatar_version"}
+# Every nullable `user` column, which is what `ensure_user_columns` backfills.
+PROFILE_COLUMNS = {"display_name", "birth_year", "location", "avatar_version", "is_bot"}
 
 
 def test_ensure_user_columns_upgrades_a_legacy_user_table(tmp_path):

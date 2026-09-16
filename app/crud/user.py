@@ -41,6 +41,32 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
     def get_users(self, db: Session, skip: int = 0, limit: int = 100) -> list[User]:
         return db.query(self.model).offset(skip).limit(limit).all()
 
+    def get_bot(self, db: Session) -> User | None:
+        """The computer-controlled opponent, or None before `init_db` seeds it."""
+        return db.query(self.model).filter(self.model.is_bot.is_(True)).first()
+
+    def bot_ids(self, db: Session) -> set[int]:
+        """The single source of which accounts are bots.
+
+        Used to keep bot matches off the leaderboards and out of a player's
+        win/loss record. `is_bot` is nullable, so this matches on `is True` rather
+        than truthiness — every *other* read of the column should use
+        `bool(user.is_bot)`, since existing rows hold NULL.
+        """
+        rows = (
+            db.query(self.model.id).filter(self.model.is_bot.is_(True)).all()
+        )
+        return {row[0] for row in rows}
+
+    def any_are_bots(self, db: Session, *user_ids: int) -> bool:
+        """Whether any of these accounts is the computer."""
+        found = (
+            db.query(self.model.id)
+            .filter(self.model.id.in_(user_ids), self.model.is_bot.is_(True))
+            .first()
+        )
+        return found is not None
+
     def create_user(self, db: Session, user_in: UserCreate) -> User:
         user = User(  # type: ignore
             email=user_in.email,

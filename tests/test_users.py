@@ -230,6 +230,7 @@ def test_players_lookup(client, auth_headers, created_user):
     assert set(players) == {"newuser", "first_user"}
     assert players["newuser"] == {
         "username": "newuser",
+        "is_bot": False,
         "display_name": "New User",
         "location": "Portland, OR",
         "avatar_url": None,

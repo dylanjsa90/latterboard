@@ -1,7 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
 from app.api import deps
+from app.api.bot_turn import schedule_bot_turn
+from app.api.match_play import apply_race_guess, apply_wordle_guess, wordle_move_error
 from app.api.match_start import max_guesses_for, notify_match_started
 from app.connection_manager import manager
 from app.core.config import settings
@@ -64,6 +66,13 @@ async def create_invite(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Opponent not found")
     if opponent.id == current_user.id:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Cannot invite yourself")
+    if opponent.is_bot:
+        # Nothing would ever accept it — the bot plays matches that matchmaking
+        # hands it, and has no code path for answering an invite.
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Search for an opponent to play the computer",
+        )
 
     existing = crud_match.get_open_match_between(db, current_user.id, opponent.id, invite_in.game)
     if existing is not None:
@@ -192,56 +201,22 @@ def get_match(
 async def submit_guess(
     match_id: int,
     guess_in: MatchGuessCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
 ):
     obj = _get_match_or_404(db, match_id)
     _require_participant(obj, current_user)
     _require_game(obj, "wordle")
-    if obj.status != "in_progress":
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Match is not in progress")
-    if obj.current_turn_user_id != current_user.id:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Not your turn")
+    blocked = wordle_move_error(obj, current_user)
+    if blocked is not None:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=blocked)
     if not wordle.is_valid_word(guess_in.word):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Not a valid word")
 
-    result = crud_match.submit_guess(db, obj, current_user, guess_in.word)
-
-    await manager.broadcast(
-        {
-            "type": "opponent_guessed",
-            "match_id": result.match_id,
-            "username": result.username,
-            "turn_number": result.turn_number,
-            "word": result.word,
-            "result": [r.model_dump() for r in result.result],
-            "correct": result.correct,
-        },
-        topic=f"match:{match_id}",
-    )
-
-    if result.status == "completed":
-        refreshed = crud_match.get(db, match_id)
-        await manager.broadcast(
-            {
-                "type": "match_completed",
-                "match_id": match_id,
-                "winner_username": result.winner_username,
-                "target_word": refreshed.target_word,
-                "reason": "solved" if result.winner_username else "exhausted",
-            },
-            topic=f"match:{match_id}",
-        )
-    else:
-        await manager.broadcast(
-            {
-                "type": "your_turn",
-                "match_id": match_id,
-                "current_turn_username": result.current_turn_username,
-            },
-            topic=f"match:{match_id}",
-        )
-
+    result = await apply_wordle_guess(db, obj, current_user, guess_in.word)
+    if result.status != "completed":
+        schedule_bot_turn(background_tasks, db, obj)
     return result
 
 
@@ -249,37 +224,21 @@ async def submit_guess(
 
 
 async def _submit_race_guess(
-    db: Session, match: Match, user: User, guess: str | list[int]
+    db: Session,
+    match: Match,
+    user: User,
+    guess: str | list[int],
+    background_tasks: BackgroundTasks,
 ) -> RaceGuessResult:
+    """The move itself lives in `match_play`, shared with the bot. The 409 stays
+    here: it is an HTTP concern, and the bot has no response to put it in."""
     try:
-        result = crud_match_puzzle.submit_race_guess(db, match, user, guess)
+        result = await apply_race_guess(db, match, user, guess)
     except MoveRejected as exc:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc)) from exc
 
-    topic = f"match:{match.id}"
-    # Grades only: the guess itself would hand the opponent the letters/digits.
-    await manager.broadcast(
-        {
-            "type": "opponent_guessed",
-            "match_id": match.id,
-            "username": user.username,
-            "turn_number": result.turn_number,
-            "result": result.model_dump()["result"],
-            "correct": result.correct,
-        },
-        topic=topic,
-    )
-    if result.status == "completed":
-        await manager.broadcast(
-            {
-                "type": "match_completed",
-                "match_id": match.id,
-                "winner_username": result.winner_username,
-                "answer": result.answer,
-                "reason": "solved" if result.winner_username else "draw",
-            },
-            topic=topic,
-        )
+    if result.status != "completed":
+        schedule_bot_turn(background_tasks, db, match)
     return result
 
 
@@ -287,6 +246,7 @@ async def _submit_race_guess(
 async def submit_word_race_guess(
     match_id: int,
     guess_in: MatchGuessCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
 ) -> RaceGuessResult:
@@ -296,13 +256,14 @@ async def submit_word_race_guess(
     _require_game(obj, match_modes.WORD_RACE)
     if not wordle.is_valid_word(guess_in.word):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Not a valid word")
-    return await _submit_race_guess(db, obj, current_user, guess_in.word.lower())
+    return await _submit_race_guess(db, obj, current_user, guess_in.word.lower(), background_tasks)
 
 
 @router.post("/{match_id}/cipher/guess", response_model=RaceGuessResult)
 async def submit_cipher_race_guess(
     match_id: int,
     guess_in: CipherAttempt,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
 ) -> RaceGuessResult:
@@ -310,7 +271,7 @@ async def submit_cipher_race_guess(
     obj = _get_match_or_404(db, match_id)
     _require_participant(obj, current_user)
     _require_game(obj, match_modes.CIPHER_RACE)
-    return await _submit_race_guess(db, obj, current_user, guess_in.attempt)
+    return await _submit_race_guess(db, obj, current_user, guess_in.attempt, background_tasks)
 
 
 # --- sudoku co-op -----------------------------------------------------------

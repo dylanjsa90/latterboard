@@ -37,18 +37,22 @@ def start_match(db: Session, waiting: User, joining: User, game: str) -> Match:
 
 async def notify_match_started(obj: Match, public: MatchPublic) -> None:
     """Tell both players the match has started, each naming the other as opponent."""
-    for user_id in (obj.inviter_id, obj.invitee_id):
+    sides = (
+        (obj.inviter_id, public.inviter_is_bot, public.invitee_username, public.invitee_is_bot),
+        (obj.invitee_id, public.invitee_is_bot, public.inviter_username, public.inviter_is_bot),
+    )
+    for user_id, is_bot, opponent_username, opponent_is_bot in sides:
+        if is_bot:
+            # The computer holds no websocket, so there is nobody on its topic.
+            continue
         await manager.send_to_user(
             user_id,
             {
                 "type": "match_started",
                 "match_id": obj.id,
                 "game": obj.game,
-                "opponent_username": (
-                    public.invitee_username
-                    if user_id == obj.inviter_id
-                    else public.inviter_username
-                ),
+                "opponent_username": opponent_username,
+                "opponent_is_bot": opponent_is_bot,
                 "current_turn_username": public.current_turn_username,
                 "max_guesses": obj.max_guesses,
             },
