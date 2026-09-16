@@ -26,6 +26,7 @@ dependencies = [
     "passlib==1.7.4",
     "python-dotenv>=1.2.2",
     "psycopg2-binary>=2.9.12",
+    "pillow>=12.3.0",
 ]
 
 [dependency-groups]

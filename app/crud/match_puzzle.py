@@ -2,7 +2,7 @@
 live state live in MatchPuzzle. The rules themselves are in app/game/match_modes.py.
 """
 
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from typing import Any, TypeVar
 
 from sqlalchemy.orm import Session
@@ -143,6 +143,21 @@ class CRUDMatchPuzzle:
             crud_game_score.create_score(
                 db, int(pid), GameScoreCreate(game=match.game, score=score)
             )
+
+    def get_by_matches(self, db: Session, match_ids: Sequence[int]) -> dict[int, MatchPuzzle]:
+        """Every puzzle row for `match_ids`, keyed by match id, in one query."""
+        if not match_ids:
+            return {}
+        rows = db.query(MatchPuzzle).filter(MatchPuzzle.match_id.in_(match_ids)).all()
+        return {row.match_id: row for row in rows}
+
+    def race_finished_in(self, row: MatchPuzzle, match: Match, user_id: int) -> bool:
+        """`race_finished` against a row the caller already loaded."""
+        return _finished(row.state["guesses"][str(user_id)], match.max_guesses)
+
+    def race_finished(self, db: Session, match: Match, user_id: int) -> bool:
+        """Whether the player has used up or solved their side of the race."""
+        return self.race_finished_in(self.get_by_match(db, match.id), match, user_id)
 
     def race_detail(self, db: Session, match: Match, viewer_id: int) -> RaceDetail:
         row = self.get_by_match(db, match.id)

@@ -68,7 +68,13 @@ def auth_headers(client):
 def _signup_and_login(client, email: str, username: str, password: str = "secret123"):
     r = client.post(
         "/api/v1/users/",
-        json={"email": email, "username": username, "password": password},
+        json={
+            "email": email,
+            "username": username,
+            "password": password,
+            "display_name": username.title(),
+            "birth_year": 1990,
+        },
     )
     assert r.status_code == 201
     r = client.post(

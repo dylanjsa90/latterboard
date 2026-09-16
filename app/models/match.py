@@ -89,3 +89,33 @@ class MatchPuzzle(Base):
     version: Mapped[int] = mapped_column(Integer, nullable=False)
 
     __mapper_args__ = {"version_id_col": version}
+
+
+class MatchInviteLink(Base):
+    """A single-use link that starts a match with whoever opens it and signs in.
+
+    Friends may not have an account yet, so the invite can't name an invitee the way
+    `match` rows do; the match is created when the link is claimed.
+    """
+
+    __tablename__: str = "match_invite_link"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    token: Mapped[str] = mapped_column(String, nullable=False, unique=True, index=True)
+    inviter_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("user.id"), nullable=False, index=True
+    )
+    game: Mapped[str] = mapped_column(String, nullable=False)
+    message: Mapped[str | None] = mapped_column(String, nullable=True)
+    # "email" (latterboard sent it), "text" or "link" (the player shared it themselves).
+    channel: Mapped[str] = mapped_column(String, nullable=False)
+    recipient_email: Mapped[str | None] = mapped_column(String, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+    expires_at: Mapped[datetime] = mapped_column(DateTime, nullable=False)
+    claimed_by_id: Mapped[int | None] = mapped_column(
+        Integer, ForeignKey("user.id"), nullable=True
+    )
+    match_id: Mapped[int | None] = mapped_column(
+        Integer, ForeignKey("match.id"), nullable=True
+    )
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)

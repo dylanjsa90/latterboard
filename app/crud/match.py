@@ -7,10 +7,11 @@ from app.crud.base import CRUDBase
 from app.crud.game_score import game_score as crud_game_score
 from app.crud.match_puzzle import match_puzzle as crud_match_puzzle
 from app.game import match_modes, wordle
-from app.models.match import Match, MatchGuess
+from app.models.match import Match, MatchGuess, MatchPuzzle
 from app.models.user import User
 from app.schemas.game_score import GameScoreCreate
 from app.schemas.match import (
+    ActiveMatch,
     LetterResultOut,
     MatchDetail,
     MatchGuessResult,
@@ -335,6 +336,82 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
                 if match.game == match_modes.SUDOKU_COOP
                 else None
             ),
+        )
+
+    def get_active(self, db: Session, user_id: int) -> list[Match]:
+        """The player's pending and in-progress matches, newest first."""
+        rows = (
+            db.query(Match)
+            .filter(
+                or_(Match.inviter_id == user_id, Match.invitee_id == user_id),
+                Match.status.in_(OPEN_STATUSES),
+            )
+            .order_by(Match.created_at.desc(), Match.id.desc())
+            .all()
+        )
+        fresh = [self.expire_if_needed(db, m) for m in rows]
+        return [m for m in fresh if m.status in OPEN_STATUSES]
+
+    def get_active_items(self, db: Session, user_id: int) -> list[ActiveMatch]:
+        """`get_active` as `ActiveMatch`es, in a fixed number of queries.
+
+        The rail polls this on every match-list change, so opponents and race puzzles
+        are loaded in one query each rather than per match.
+        """
+        matches = self.get_active(db, user_id)
+        opponent_ids = {
+            m.invitee_id if user_id == m.inviter_id else m.inviter_id for m in matches
+        }
+        usernames = (
+            {
+                row.id: row.username
+                for row in db.query(User.id, User.username)
+                .filter(User.id.in_(opponent_ids))
+                .all()
+            }
+            if opponent_ids
+            else {}
+        )
+        puzzles = crud_match_puzzle.get_by_matches(
+            db,
+            [
+                m.id
+                for m in matches
+                if m.status != "pending_invite" and m.game in match_modes.RACE_GAMES
+            ],
+        )
+        return [self.to_active_item(m, user_id, usernames, puzzles) for m in matches]
+
+    def to_active_item(
+        self,
+        match: Match,
+        viewer_id: int,
+        usernames: dict[int, str],
+        puzzles: dict[int, MatchPuzzle],
+    ) -> ActiveMatch:
+        """One rail entry, built from the maps `get_active_items` preloaded."""
+        is_inviter = viewer_id == match.inviter_id
+        opponent_id = match.invitee_id if is_inviter else match.inviter_id
+        pending = match.status == "pending_invite"
+        row = puzzles.get(match.id)
+        if pending:
+            your_move = not is_inviter
+        elif match.game == "wordle":
+            your_move = match.current_turn_user_id == viewer_id
+        elif match.game in match_modes.RACE_GAMES and row is not None:
+            your_move = not crud_match_puzzle.race_finished_in(row, match, viewer_id)
+        else:
+            # Co-op has no turns: the shared board can always use another hand.
+            your_move = True
+        return ActiveMatch(
+            id=match.id,
+            game=match.game,
+            status="pending_invite" if pending else "in_progress",
+            opponent_username=usernames.get(opponent_id, ""),
+            role="inviter" if is_inviter else "invitee",
+            your_move=your_move,
+            created_at=match.created_at,
+            started_at=match.started_at,
         )
 
     def to_pending_invite(self, db: Session, match: Match) -> PendingInvite:

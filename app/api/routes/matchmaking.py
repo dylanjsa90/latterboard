@@ -13,14 +13,12 @@ from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
 
 from app.api import deps
+from app.api.match_start import notify_match_started, start_match
 from app.api.routes.matches import SUPPORTED_GAMES
-from app.connection_manager import manager
 from app.core.config import settings
 from app.crud.match import match as crud_match
-from app.game import match_modes
-from app.models import Match, User
+from app.models import User
 from app.redis import r as redis
-from app.schemas.match import MatchPublic
 from app.schemas.matchmaking import MatchmakingStatus
 
 router = APIRouter(prefix="/matchmaking", tags=["matchmaking"])
@@ -56,51 +54,6 @@ def _queued() -> MatchmakingStatus:
     return MatchmakingStatus(
         status="queued", queue_ttl_seconds=settings.MATCHMAKING_QUEUE_TTL_SECONDS
     )
-
-
-def _start_match(db: Session, waiting: User, joining: User, game: str) -> Match:
-    """Start a match between two paired players, reusing an open one they already share."""
-    existing = crud_match.get_open_match_between(db, waiting.id, joining.id, game)
-    if existing is not None:
-        existing = crud_match.expire_if_needed(db, existing)
-    if existing is not None and existing.status in ("pending_invite", "in_progress"):
-        obj = existing
-    else:
-        obj = crud_match.create_invite(
-            db,
-            inviter_id=waiting.id,
-            invitee_id=joining.id,
-            game=game,
-            max_guesses=(
-                settings.MATCH_MAX_GUESSES
-                if game == "wordle"
-                else match_modes.MAX_GUESSES[game]
-            ),
-            expiry_minutes=settings.MATCH_INVITE_EXPIRY_MINUTES,
-        )
-    if obj.status == "pending_invite":
-        obj = crud_match.accept_invite(db, obj)
-    return obj
-
-
-async def _notify_match_started(obj: Match, public: MatchPublic) -> None:
-    """The same frame an accepted invite sends, so clients handle both paths alike."""
-    for user_id in (obj.inviter_id, obj.invitee_id):
-        await manager.send_to_user(
-            user_id,
-            {
-                "type": "match_started",
-                "match_id": obj.id,
-                "game": obj.game,
-                "opponent_username": (
-                    public.invitee_username
-                    if user_id == obj.inviter_id
-                    else public.inviter_username
-                ),
-                "current_turn_username": public.current_turn_username,
-                "max_guesses": obj.max_guesses,
-            },
-        )
 
 
 @router.post("/{game}", response_model=MatchmakingStatus)
@@ -139,9 +92,9 @@ async def join_queue(
         await redis.zadd(queue_key(game), {str(current_user.id): now})
         return _queued()
 
-    obj = _start_match(db, waiting=opponent, joining=current_user, game=game)
+    obj = start_match(db, waiting=opponent, joining=current_user, game=game)
     public = crud_match.to_public(db, obj)
-    await _notify_match_started(obj, public)
+    await notify_match_started(obj, public)
     return MatchmakingStatus(
         status="matched",
         match=public,

@@ -1,6 +1,15 @@
 from fastapi import APIRouter
 
-from app.api.routes import login, matches, matchmaking, puzzles, scores, users, ws
+from app.api.routes import (
+    invite_links,
+    login,
+    matches,
+    matchmaking,
+    puzzles,
+    scores,
+    users,
+    ws,
+)
 from app.core.config import settings
 
 api_router = APIRouter()
@@ -9,6 +18,7 @@ api_router.include_router(users.router)
 api_router.include_router(scores.router)
 api_router.include_router(matches.router)
 api_router.include_router(matchmaking.router)
+api_router.include_router(invite_links.router)
 api_router.include_router(puzzles.router)
 api_router.include_router(ws.router)
 # api_router.include_router(utils.router)

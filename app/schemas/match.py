@@ -121,6 +121,22 @@ class MatchDetail(MatchPublic):
     sudoku: SudokuCoopDetail | None = None
 
 
+class ActiveMatch(BaseModel):
+    """One of the viewer's open matches, for switching between them."""
+
+    id: int
+    game: str
+    status: Literal["pending_invite", "in_progress"]
+    opponent_username: str
+    # The viewer's side of the invite: an inviter waits on a pending one, an invitee answers.
+    role: Literal["inviter", "invitee"]
+    # True when the match is waiting on the viewer: their turn, a race they haven't
+    # finished, any co-op board, or an invite they haven't answered.
+    your_move: bool
+    created_at: datetime
+    started_at: datetime | None
+
+
 class PendingInvite(BaseModel):
     id: int
     game: str

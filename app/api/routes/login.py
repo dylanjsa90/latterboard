@@ -10,7 +10,7 @@ from app.api import deps
 from app.core import security
 from app.core.config import settings
 from app.crud import user as crud_user  # noqa: F401
-from app.schemas.user import Message, NewPassword, Token, UserPublic, UserUpdate
+from app.schemas.user import Message, NewPassword, Token, UserPrivate, UserUpdate
 from app.utils import (
     generate_password_reset_token,
     generate_reset_password_email,
@@ -49,7 +49,7 @@ def login_access_token(
     )
 
 
-@router.post("/login/test-token", response_model=UserPublic)
+@router.post("/login/test-token", response_model=UserPrivate)
 def test_token(current_user=Depends(deps.get_current_user)) -> Any:
     """
     Test access token

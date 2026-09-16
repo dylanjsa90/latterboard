@@ -19,6 +19,8 @@ def second_user_and_headers(client):
         "email": "player2@example.com",
         "username": "player2",
         "password": "secret123",
+        "display_name": "Player Two",
+        "birth_year": 1990,
     }
     r = client.post("/api/v1/users/", json=payload)
     assert r.status_code == 201

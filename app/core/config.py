@@ -119,7 +119,7 @@ class Settings(BaseSettings):
 
     DEFAULT_USER: str = "first.user@test.com"
     DEFAULT_USER_PASSWORD: str = "password"
-    DEFAULT_USER_USERNAME: str = "first.user@test.com"
+    DEFAULT_USER_USERNAME: str = "first_user"
 
     REDIS_URL: str = os.environ.get("REDIS_URL", "redis://localhost:6379")
 
@@ -129,6 +129,10 @@ class Settings(BaseSettings):
 
     MATCH_MAX_GUESSES: int = 6
     MATCH_INVITE_EXPIRY_MINUTES: int = 15
+    # Friend invite links, sent by text or email, wait far longer than username invites.
+    MATCH_INVITE_LINK_EXPIRY_DAYS: int = 7
+    # Links one player can create per UTC day; also caps the invite email we send.
+    MATCH_INVITE_LINK_DAILY_LIMIT: int = 20
     MATCHMAKING_QUEUE_TTL_SECONDS: int = 60
 
     def _check_default_secret(self, var_name: str, value: str | None) -> None:

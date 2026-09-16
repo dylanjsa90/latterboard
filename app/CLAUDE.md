@@ -51,6 +51,12 @@ Commands: `make check` (mypy + pytest, errors/summary only), `uv run pytest`, `u
 
 ## Database / schema
 - Tables come from `Base.metadata.create_all` (`app/init_db.py`). There are no Alembic migrations yet, so new columns and constraints won't reach existing databases. Call this out whenever you change a model.
+- The one exception is `ensure_user_columns` (same file): at startup it adds any missing **nullable** `user` column. New `User` fields must therefore be nullable; anything else still needs that call-out.
+
+## Users
+- `username` is the public handle: `[a-z0-9_]{3,20}`, lowercased by `schemas/user.py`. Look it up case-insensitively (`crud_user.get_user_by_username`). Accounts made before handles still have their email there, so never validate `username` on output.
+- `birth_year` is private. Only `UserPrivate` (test-token, `POST /users/`, `PATCH /users/me`) carries it; `UserPublic` (returned to any signed-in user) and `PlayerPublic` must not.
+- Photos live in `user_avatar` (a separate table, so loading a user never loads the bytes). `app/lib/avatar.py` re-encodes every upload to a 256px WebP, which drops EXIF such as phone GPS. `user.avatar_version` versions the public URL, so it can be cached forever.
 - `PuzzleAttempt.puzzle_id` is a string key like `"word-2026-09-11"`, not a foreign key to `Puzzle.id`.
 - Race and co-op matches keep their private puzzle and live state in `match_puzzle`, not on `match`. It's a new table so `create_all` can add it to existing databases without a migration. Their `match.target_word` is `""` (the column is non-null).
 
@@ -61,7 +67,14 @@ Commands: `make check` (mypy + pytest, errors/summary only), `uv run pytest`, `u
 - In races, never send a player's guess (letters/digits) to the opponent while the match is in progress. Send only grades, both in websocket frames and in `GET /matches/{id}`. The answer and guesses are revealed once `status == "completed"`.
 - Change `match_puzzle` state only through `CRUDMatchPuzzle._apply`, and have the change function re-check `match.status` itself. `version` is an optimistic lock: when both players move at once, the losing write is replayed on fresh state instead of overwriting the other move.
 - Match puzzles are freshly generated per match, not the daily `puzzle` rows. For sudoku use `generate_sudoku()`; `sudoku_variant()` only yields 9 distinct boards.
+- Start a match between two known players only through `app/api/match_start.py`: `start_match` (reuses an open match the pair already shares, else creates and accepts one) and `notify_match_started` (the `match_started` frame to both). `/accept`, matchmaking, and invite-link claims all use it.
+- Invite links (`match_invite_link`, `app/api/routes/invite_links.py`) are single-use and name no invitee until claimed; claiming makes the link's sender the match's inviter. Claims use a conditional UPDATE so two people can't both win one link.
 - Matchmaking (`app/api/routes/matchmaking.py`) keeps one Redis sorted set per game (`mm:queue:{game}`), scored by each player's last join. `POST /matchmaking/{game}` atomically (Lua) pairs the caller with the longest-waiting other player or queues them; a pairing creates and accepts the match at once and sends the same `match_started` frame as `/accept`. Entries older than `MATCHMAKING_QUEUE_TTL_SECONDS` are skipped, so clients must re-POST to stay queued. That's how a closed tab leaves the queue. Its tests clear `mm:queue:*` themselves, since users are recreated with the same ids.
+
+## Email
+- `render_email_template` uses a plain jinja `Template`, which does **not** autoescape. Escape anything a player wrote (usernames, invite messages) with `markupsafe.escape`, as `generate_match_invite_email` does.
+- Templates: edit `app/email-templates/src/*.mjml` and keep `build/*.html` in step. There's no MJML toolchain in the repo, so `build/match_invite.html` is hand-written.
+- `send_email` asserts `settings.emails_enabled` (SMTP host and from-address set). Check it before sending; invite links report `emailed: false` instead when it's off.
 
 ## Puzzles
 - Future-dated puzzle ids must return 404. Otherwise the endpoints leak upcoming answers and create rows for arbitrary dates.
@@ -92,17 +105,25 @@ Commands: `make check` (mypy + pytest, errors/summary only), `uv run pytest`, `u
 | `app/main.py` | FastAPI app: lifespan (Redis, fastapi-cache, `manager.start/stop`), `/health`, mounts `api_router` at `/api/v1`, and **the websocket `/ws/{game_name}`** (join/leave_match handling) | `app` |
 | `app/api/main.py` | Router aggregation: login, users, scores, matches, matchmaking, puzzles, ws | `api_router` |
 | `app/api/deps.py` | Request dependencies | `get_db`, `get_current_user`, `get_optional_current_user`, `get_current_user_ws` (token query param), `get_current_active_superuser` |
-| `app/api/routes/matches.py` | `/matches/*`: invite/accept/decline/cancel/pending/detail + one move endpoint per mode; each move calls `_require_game`, then broadcasts to `match:{id}` | `router` |
+| `app/api/routes/matches.py` | `/matches/*`: invite/accept/decline/cancel/pending/detail, `/me/history`, `/me/active` + one move endpoint per mode; each move calls `_require_game`, then broadcasts to `match:{id}` | `router`, `SUPPORTED_GAMES` |
 | `app/api/routes/matchmaking.py` | `POST`/`DELETE /matchmaking/{game}`: Redis ZSET queue + Lua pairing | `router` |
+| `app/api/match_start.py` | Starting a match between two known players, shared by accept, matchmaking, and invite links | `start_match`, `notify_match_started`, `max_guesses_for` |
+| `app/api/routes/invite_links.py` | `/invite-links/*`: create (emails via `BackgroundTasks` when SMTP is on), list mine, public preview, claim, revoke | `router`, `GAME_TITLES` |
+| `app/crud/invite_link.py` | Invite link rows: create, daily count, open links, status, atomic claim, revoke | `invite_link`, `invite_url` |
+| `app/schemas/invite_link.py` | Invite link I/O models | `InviteLinkCreate`, `InviteLinkPublic`, `InviteLinkPreview`, `INVITE_MESSAGE_MAX` |
+| `app/api/routes/users.py` | `/users/*`: sign-up, `PATCH /me`, `/players` lookup, photo upload/remove/serve, admin-style list/get/update/delete. Literal paths sit above `/{user_id}` | `router` |
+| `app/schemas/user.py` | User I/O + the handle/name/city/birth-year rules | `UserCreate`, `ProfileUpdate`, `UserPublic`, `UserPrivate`, `PlayerPublic`, `avatar_url` |
+| `app/lib/avatar.py` | Validates and re-encodes profile photos | `process_avatar`, `InvalidImage`, `AVATAR_MAX_BYTES` |
+| `app/init_db.py` | `create_all`, `ensure_user_columns`, the seed user and puzzles | `init_db`, `ensure_user_columns` |
 | `app/api/routes/ws.py` | REST presence only (`/ws/{game}/connections`, `/ws/{game}/usernames`); the socket itself is in `app/main.py` | `router` |
 | `app/api/routes/puzzles.py` | Daily word/sudoku/memory/cipher puzzles + `/me/stats`, `/me/history` | `router` |
 | `app/connection_manager.py` | Topic membership, Redis presence, pub/sub delivery, heartbeat | `manager` (`connect`, `join`, `disconnect`, `disconnect_all`, `broadcast(msg, topic)`, `send_to_user(user_id, msg)`, `count`, `usernames`) |
-| `app/crud/match.py` | Match lifecycle + turn-based wordle | `match` (`create_invite`, `expire_if_needed`, `get_open_match_between`, `get_pending_invites`, `accept_invite`, `decline_invite`, `cancel_invite`, `submit_guess`, `to_public`, `to_detail`, `to_pending_invite`) |
+| `app/crud/match.py` | Match lifecycle + turn-based wordle | `match` (`create_invite`, `expire_if_needed`, `get_open_match_between`, `get_pending_invites`, `get_active`, `get_active_items`, `accept_invite`, `decline_invite`, `cancel_invite`, `submit_guess`, `to_public`, `to_detail`, `to_pending_invite`) |
 | `app/crud/match_puzzle.py` | Race/co-op state in `match_puzzle`, optimistic lock via `_apply` | `match_puzzle` (`build`, `submit_race_guess`, `race_detail`, `submit_sudoku_move`, `sudoku_detail`), `MoveRejected` |
 | `app/crud/puzzle_attempt.py` | Daily puzzle attempts, stats, streaks | `puzzle_attempt` (`get_for_puzzle`, `get_or_create`, `record_attempt`, `get_stats`, `get_history`) |
 | `app/schemas/match.py` | Match I/O models | `MatchInviteCreate`, `MatchPublic`, `MatchDetail`, `MatchGuessResult`, `RaceDetail`, `RacePlayer`, `RaceGuessOut`, `RaceGuessResult`, `SudokuCoopMoveCreate`, `SudokuCoopMoveResult`, `SudokuCoopDetail`, `PendingInvite` |
 | `app/schemas/puzzle.py` | Puzzle I/O models | `{Word,Sudoku,Memory,Cipher}PuzzlePublic`, `WordGuessCreate`/`WordGuessResult`, `SudokuMoveCreate`/`SudokuMoveResult`, `CipherAttemptCreate`/`CipherFeedback`, `PuzzleStats`, `PuzzleHistory` |
-| `app/core/config.py` | Env-driven settings | `settings` (`API_V1_STR`, `REDIS_URL`, `MATCH_MAX_GUESSES`, `MATCH_INVITE_EXPIRY_MINUTES`, `MATCHMAKING_QUEUE_TTL_SECONDS`, …) |
+| `app/core/config.py` | Env-driven settings | `settings` (`API_V1_STR`, `REDIS_URL`, `MATCH_MAX_GUESSES`, `MATCH_INVITE_EXPIRY_MINUTES`, `MATCH_INVITE_LINK_EXPIRY_DAYS`, `MATCH_INVITE_LINK_DAILY_LIMIT`, `MATCHMAKING_QUEUE_TTL_SECONDS`, `FRONTEND_HOST`, SMTP settings, …) |
 | `tests/conftest.py` | Env overrides before imports, per-test DB reset | fixtures incl. `inviter_headers`, `opponent_headers` |
 
 ## Cross-repo contract
@@ -122,8 +143,20 @@ client. Keep this section identical in both repos' CLAUDE.md and update both whe
 | Call | Request | Response |
 | ---- | ------- | -------- |
 | `POST /login/access-token` | form-urlencoded `username` (= email), `password` | `{access_token, token_type}` |
-| `POST /login/test-token` | bearer | `UserPublic {id, email, username, is_active, created_at, updated_at}`; 401 = dead token |
-| `POST /users/` | `{email, username, password}` (webcade sends email as username) | `UserPublic`; 409 if email taken |
+| `POST /login/test-token` | bearer | `UserPrivate`; 401 = dead token |
+| `POST /users/` | `{email, username, password, display_name, birth_year, location?}` | 201 `UserPrivate`; 409 if the email or the username is taken (`detail` says which); 422 for a bad handle or anyone under 13 |
+| `PATCH /users/me` (bearer) | any of `{display_name, username, birth_year, location}` (`""`/null clears `location`; null leaves the others) | `UserPrivate`; 409 if the username is taken |
+| `GET /users/players?usernames=a&usernames=b` (bearer, ≤ 50) | — | `PlayerPublic[]` for the handles that exist |
+| `PUT /users/me/avatar` (bearer) | multipart `file` (JPEG/PNG/WebP, ≤ 2 MB) | `UserPrivate`; 413 too big, 422 not an image. Re-encoded to a 256px WebP without EXIF |
+| `DELETE /users/me/avatar` (bearer) | — | 204 |
+| `GET /users/{id}/avatar` (public) | — | `image/webp`, cacheable forever (the URL is versioned); 404 without a photo |
+
+`UserPublic` = `{id, email, username, display_name?, location?, avatar_url?, is_active, created_at,
+updated_at}`; `UserPrivate` = `UserPublic` + `birth_year`, sent only to its owner; `PlayerPublic` =
+`{username, display_name?, location?, avatar_url?, created_at}`. `avatar_url` is a path under the API
+(`/api/v1/users/{id}/avatar?v=<hash>`) that webcade prefixes with `API_BASE_URL`. Handles are
+`[a-z0-9_]{3,20}`, lowercased, and unique regardless of case; accounts made before handles keep their
+email as `username` until they choose one. `birth_year` must make the player 13 or older this (UTC) year.
 
 ### Puzzles (`/puzzles`, bearer; `puzzle_id` like `"word-2026-09-11"`, future dates 404)
 | Call | Request | Response |
@@ -166,6 +199,7 @@ winner_username?, max_guesses, created_at, started_at?, completed_at?}`.
 | `POST /matches/{id}/cancel` | — | `MatchPublic` (+ `invite_cancelled` to invitee) |
 | `GET /matches/pending` | — | `[{id, game, from_username, created_at, expires_at}]` |
 | `GET /matches/me/history?skip&limit` | — | `{items: [{id, game, opponent_username, result, completed_at}], total, record: {won, lost, drawn}}`, completed matches newest first; `result` ∈ `won \| lost \| draw` (`sudoku_coop`: `solved \| failed`); `record` spans every completed competitive match |
+| `GET /matches/me/active` | — | `[{id, game, status: pending_invite \| in_progress, opponent_username, role: inviter \| invitee, your_move, created_at, started_at}]`, newest first; `your_move` = your turn (wordle), your side of a race unfinished, always (co-op), or an invite for you to answer |
 | `GET /matches/{id}` | — | `MatchDetail` (below); 403/404 if not a participant / missing |
 | `POST /matches/{id}/guess` | `{word}` (wordle, your turn only) | `{match_id, turn_number, username, word, result: [{letter, status}], correct, status, current_turn_username, winner_username}` |
 | `POST /matches/{id}/word/guess` | `{word}` | `RaceGuessResult {match_id, turn_number, guess, result, correct, status, winner_username, answer}` |
@@ -184,6 +218,19 @@ A queued player must re-POST `/matchmaking/{game}` within `queue_ttl_seconds` to
   {exact, close, won}, correct}], solved, finished}`. The opponent's `guess` and the `answer` are
   null until `status == "completed"`.
 - `sudoku` = `{puzzle, board, mistakes, max_mistakes, outcome: "solved"|"failed"|null, solution?}`.
+
+### Invite links (`/invite-links`)
+Single-use links a player sends a friend by text (webcade shares it from the device) or email
+(latterboard sends it when SMTP is configured). webcade serves them at `/invite/{token}`; they
+last `MATCH_INVITE_LINK_EXPIRY_DAYS` (7), and the link's sender becomes the match's inviter.
+
+| Call | Request | Response (+ frames sent) |
+| ---- | ------- | ------------------------ |
+| `POST /` (bearer) | `{game, channel: email \| text \| link, message? ≤ 280, email?}` (`email` iff `channel == "email"`) | 201 `InviteLink {token, url, game, message, channel, recipient_email, created_at, expires_at, emailed}`; 429 past `MATCH_INVITE_LINK_DAILY_LIMIT` (20 per UTC day) |
+| `GET /mine` (bearer) | — | `InviteLink[]` nobody has used, withdrawn, or let expire, newest first (`emailed` is false here) |
+| `GET /{token}` (public) | — | `{inviter_username, game, message, expires_at, status: open \| claimed \| expired \| revoked}`; 404 if unknown |
+| `POST /{token}/claim` (bearer) | — | `MatchPublic` (+ `match_started` to both), reusing an open match the pair already shares; the same match again for its claimer; 400 own link, 409 used by someone else, 410 expired or withdrawn |
+| `DELETE /{token}` (bearer, sender) | — | 204; 409 once used |
 
 ### WebSocket `/ws/{topic}?token=<access_token>`
 Browsers can't set headers on a websocket, so the token rides in the query string. A socket joins
