@@ -10,6 +10,7 @@ Ported from the original puzzle-box Next.js route (app/api/puzzles/route.ts).
 import re
 from collections import Counter
 from datetime import date, datetime, timezone
+from typing import Literal, TypedDict
 
 from app.game import wordle
 
@@ -40,11 +41,17 @@ def puzzle_date(puzzle_id: str | None, prefix: str) -> date:
         return fallback
 
 
-def grade_word(guess: str, answer: str) -> list[str]:
+def grade_word(guess: str, answer: str) -> list[Literal["correct", "present", "absent"]]:
     return wordle.evaluate_guess(answer, guess)
 
 
-def cipher_feedback(attempt: list[int], answer: list[int]) -> dict:
+class CipherFeedback(TypedDict):
+    exact: int
+    close: int
+    won: bool
+
+
+def cipher_feedback(attempt: list[int], answer: list[int]) -> CipherFeedback:
     exact = 0
     available: Counter[int] = Counter()
     for value, target in zip(attempt, answer, strict=True):

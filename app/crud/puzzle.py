@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+from typing import Any
 
 from sqlalchemy import func
 from sqlalchemy.exc import IntegrityError
@@ -39,7 +40,7 @@ class CRUDPuzzle(CRUDBase[Puzzle, PuzzleCreate, PuzzleUpdate]):
         max_index = db.query(func.max(Puzzle.variant_index)).filter(Puzzle.game == game).scalar()
         return 0 if max_index is None else max_index + 1
 
-    def _generate_data(self, game: str, variant_index: int) -> dict | None:
+    def _generate_data(self, game: str, variant_index: int) -> dict[str, Any] | None:
         if game == "word":
             return {"answer": choose_word()}
         if game == "cipher":

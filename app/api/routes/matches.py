@@ -33,14 +33,14 @@ router = APIRouter(prefix="/matches", tags=["matches"])
 SUPPORTED_GAMES = {"wordle", *match_modes.PUZZLE_MATCH_GAMES}
 
 
-def _get_match_or_404(db: Session, match_id: int):
+def _get_match_or_404(db: Session, match_id: int) -> Match:
     obj = crud_match.get(db, match_id)
     if obj is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Match not found")
     return crud_match.expire_if_needed(db, obj)
 
 
-def _require_participant(match, user: User) -> None:
+def _require_participant(match: Match, user: User) -> None:
     if user.id not in (match.inviter_id, match.invitee_id):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not a participant")
 
@@ -57,7 +57,7 @@ async def create_invite(
     invite_in: MatchInviteCreate,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
-):
+) -> MatchPublic:
     if invite_in.game not in SUPPORTED_GAMES:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Unsupported game")
 
@@ -108,7 +108,7 @@ async def accept_invite(
     match_id: int,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
-):
+) -> MatchPublic:
     obj = _get_match_or_404(db, match_id)
     if current_user.id != obj.invitee_id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not your invite")
@@ -128,7 +128,7 @@ async def decline_invite(
     match_id: int,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
-):
+) -> MatchPublic:
     obj = _get_match_or_404(db, match_id)
     if current_user.id != obj.invitee_id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not your invite")
@@ -145,7 +145,7 @@ async def cancel_invite(
     match_id: int,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
-):
+) -> MatchPublic:
     obj = _get_match_or_404(db, match_id)
     if current_user.id != obj.inviter_id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not your invite")
@@ -161,7 +161,7 @@ async def cancel_invite(
 def pending_invites(
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
-):
+) -> list[PendingInvite]:
     invites = crud_match.get_pending_invites(db, current_user.id)
     return [crud_match.to_pending_invite(db, m) for m in invites]
 
@@ -191,7 +191,7 @@ def get_match(
     match_id: int,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
-):
+) -> MatchDetail:
     obj = _get_match_or_404(db, match_id)
     _require_participant(obj, current_user)
     return crud_match.to_detail(db, obj, current_user.id)
@@ -204,7 +204,7 @@ async def submit_guess(
     background_tasks: BackgroundTasks,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
-):
+) -> MatchGuessResult:
     obj = _get_match_or_404(db, match_id)
     _require_participant(obj, current_user)
     _require_game(obj, "wordle")

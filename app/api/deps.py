@@ -5,7 +5,7 @@ from fastapi import Depends, HTTPException, Query, WebSocket, WebSocketException
 from fastapi.security import OAuth2PasswordBearer
 from jwt.exceptions import InvalidTokenError
 from pydantic import ValidationError
-from sqlalchemy.orm import Session  # type: ignore
+from sqlalchemy.orm import Session
 
 from app.core import security
 from app.core.config import settings
@@ -21,7 +21,7 @@ optional_oauth2 = OAuth2PasswordBearer(
 )
 
 
-def get_db() -> Generator:
+def get_db() -> Generator[Session, None, None]:
     try:
         db = SessionLocal()
         yield db
@@ -34,10 +34,10 @@ def get_db() -> Generator:
 
 
 def get_current_user(
-    db: Session = Depends(get_db), token=Depends(reusable_oauth2)
+    db: Session = Depends(get_db), token: str = Depends(reusable_oauth2)
 ) -> User:
     try:
-        payload = jwt.decode(  # type: ignore
+        payload = jwt.decode(
             token, settings.SECRET_KEY, algorithms=[security.ALGORITHM]
         )
         token_data = TokenPayload(**payload)
@@ -65,7 +65,7 @@ def get_optional_current_user(
     if not token:
         return None
     try:
-        payload = jwt.decode(  # type: ignore
+        payload = jwt.decode(
             token, settings.SECRET_KEY, algorithms=[security.ALGORITHM]
         )
         token_data = TokenPayload(**payload)
@@ -95,7 +95,7 @@ async def get_current_user_ws(
             code=status.WS_1008_POLICY_VIOLATION, reason="Missing token"
         )
     try:
-        payload = jwt.decode(  # type: ignore
+        payload = jwt.decode(
             token, settings.SECRET_KEY, algorithms=[security.ALGORITHM]
         )
         token_data = TokenPayload(**payload)

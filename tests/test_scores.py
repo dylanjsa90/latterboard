@@ -125,9 +125,8 @@ def test_leaderboard_alltime_empty(client):
     assert r.json() == []
 
 
-def test_leaderboard_alltime_populated(
-    client, submitted_score, second_user_and_headers
-):
+@pytest.mark.usefixtures("submitted_score")
+def test_leaderboard_alltime_populated(client, second_user_and_headers):
     client.post(
         f"{BASE}/", json={"game": GAME, "score": 990}, headers=second_user_and_headers
     )
@@ -142,7 +141,8 @@ def test_leaderboard_alltime_populated(
         assert "achieved_at" in entry
 
 
-def test_leaderboard_rank_order(client, submitted_score, second_user_and_headers):
+@pytest.mark.usefixtures("submitted_score", "second_user_and_headers")
+def test_leaderboard_rank_order(client):
     r = client.get(f"{BASE}/leaderboard/{GAME}/all-time")
     entries = r.json()
     scores = [e["score"] for e in entries]
@@ -151,19 +151,24 @@ def test_leaderboard_rank_order(client, submitted_score, second_user_and_headers
 
 
 def test_leaderboard_best_per_user(client, auth_headers):
+    client.post(f"{BASE}/", json={"game": GAME, "score": 100}, headers=auth_headers)
+    client.post(f"{BASE}/", json={"game": GAME, "score": 200}, headers=auth_headers)
     r = client.get(f"{BASE}/leaderboard/{GAME}/all-time")
     entries = r.json()
     usernames = [e["username"] for e in entries]
     assert len(usernames) == len(set(usernames)), "Each user should appear only once"
+    assert entries[0]["score"] == 200
 
 
-def test_leaderboard_alltime_limit(client, submitted_score):
+@pytest.mark.usefixtures("submitted_score")
+def test_leaderboard_alltime_limit(client):
     r = client.get(f"{BASE}/leaderboard/{GAME}/all-time?limit=1")
     assert r.status_code == 200
     assert len(r.json()) == 1
 
 
-def test_leaderboard_daily_defaults_today(client, submitted_score):
+@pytest.mark.usefixtures("submitted_score")
+def test_leaderboard_daily_defaults_today(client):
     r = client.get(f"{BASE}/leaderboard/{GAME}/daily")
     assert r.status_code == 200
     assert len(r.json()) >= 1
@@ -175,7 +180,8 @@ def test_leaderboard_daily_past_date(client):
     assert r.json() == []
 
 
-def test_leaderboard_monthly_defaults(client, submitted_score):
+@pytest.mark.usefixtures("submitted_score")
+def test_leaderboard_monthly_defaults(client):
     r = client.get(f"{BASE}/leaderboard/{GAME}/monthly")
     assert r.status_code == 200
     assert len(r.json()) >= 1

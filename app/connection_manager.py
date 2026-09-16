@@ -2,6 +2,7 @@ import asyncio
 import json
 import logging
 import re
+from typing import Any
 from uuid import uuid4
 
 from fastapi import WebSocket
@@ -36,9 +37,9 @@ class ConnectionManager:
     def __init__(self) -> None:
         self._topics: dict[str, dict[WebSocket, str]] = {}
         self._redis: aioredis.Redis | None = None
-        self._pubsub = None
-        self._listener_task: asyncio.Task | None = None
-        self._heartbeat_task: asyncio.Task | None = None
+        self._pubsub: aioredis.client.PubSub | None = None
+        self._listener_task: asyncio.Task[None] | None = None
+        self._heartbeat_task: asyncio.Task[None] | None = None
         self._worker_id = uuid4().hex
         # Topics we have a presence key for, so we know which ones to delete once we
         # no longer hold any connection on them.
@@ -68,7 +69,7 @@ class ConnectionManager:
         self._listener_task = None
         self._heartbeat_task = None
         if self._pubsub is not None:
-            await self._pubsub.aclose()
+            await self._pubsub.aclose()  # type: ignore[no-untyped-call]
             self._pubsub = None
         if self._redis is not None:
             # Retire our presence keys now rather than leaving them to expire, so a
@@ -126,7 +127,7 @@ class ConnectionManager:
         keys = [key async for key in self._redis.scan_iter(match=pattern)]
         if not keys:
             return []
-        return sorted(await self._redis.sunion(keys))
+        return sorted(str(username) for username in await self._redis.sunion(keys))
 
     def _presence_key(self, topic: str) -> str:
         return f"{PRESENCE_PREFIX}:{topic}:{self._worker_id}"
@@ -167,11 +168,11 @@ class ConnectionManager:
         for topic in [t for t, conns in self._topics.items() if websocket in conns]:
             await self.disconnect(websocket, topic)
 
-    async def send_to_user(self, user_id: int, message: dict) -> None:
+    async def send_to_user(self, user_id: int, message: dict[str, Any]) -> None:
         """Deliver a message only to the given user's connection(s)."""
         await self.broadcast(message, topic=f"user:{user_id}")
 
-    async def broadcast(self, message: dict, topic: str | None = None) -> None:
+    async def broadcast(self, message: dict[str, Any], topic: str | None = None) -> None:
         """Publish a message to one topic, or to every active connection when topic is None."""
         if self._redis is None:
             raise RuntimeError("ConnectionManager.start() has not been called")
@@ -181,6 +182,8 @@ class ConnectionManager:
 
     async def _listen(self) -> None:
         """Deliver messages published by any worker to this worker's connections."""
+        if self._pubsub is None:
+            raise RuntimeError("ConnectionManager.start() has not been called")
         try:
             async for event in self._pubsub.listen():
                 try:
@@ -207,12 +210,12 @@ class ConnectionManager:
         except Exception:
             logger.exception("Heartbeat stopped")
 
-    async def _deliver(self, message: dict, topic: str | None) -> None:
+    async def _deliver(self, message: dict[str, Any], topic: str | None) -> None:
         """Write to this worker's sockets, dropping any that fail."""
         if topic is None:
             targets = list(self._topics.items())
         else:
-            targets = [(topic, self._topics.get(topic, set()))]
+            targets = [(topic, self._topics.get(topic, {}))]
 
         for name, connections in targets:
             for websocket in list(connections):

@@ -12,7 +12,12 @@ from typing import Any
 
 from app.game import wordle
 from app.game.puzzle_seed_data import generate_cipher_digits, generate_sudoku
-from app.game.puzzles import CIPHER_MAX_ATTEMPTS, WORD_MAX_ATTEMPTS, cipher_feedback
+from app.game.puzzles import (
+    CIPHER_MAX_ATTEMPTS,
+    WORD_MAX_ATTEMPTS,
+    CipherFeedback,
+    cipher_feedback,
+)
 from app.schemas.puzzle import Grade
 
 WORD_RACE = "word_race"
@@ -53,7 +58,7 @@ def initial_state(
 
 def grade_race_guess(
     puzzle: dict[str, Any], guess: str | list[int]
-) -> tuple[list[Grade] | dict[str, Any], bool]:
+) -> tuple[list[Grade] | CipherFeedback, bool]:
     """Feedback for a race guess (word grades or cipher exact/close) and whether it
     solves the puzzle."""
     if isinstance(guess, str):

@@ -71,16 +71,16 @@ if settings.all_cors_origins:
     )
 
 
-app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(SecurityHeadersMiddleware)  # type: ignore[arg-type]
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 @app.get("/health")
-async def health():
+async def health() -> dict[str, str]:
     return {"status": "ok"}
 
 
 @app.get("/")
-async def root():
+async def root() -> str:
     return "Hello, World"
 
 
@@ -100,7 +100,7 @@ async def websocket_endpoint(
     websocket: WebSocket,
     game_name: str,
     current_user: User = Depends(deps.get_current_user_ws),
-):
+) -> None:
     await manager.connect(websocket, game_name, current_user.username)
     await manager.join(websocket, f"user:{current_user.id}", current_user.username)
     try:

@@ -10,6 +10,7 @@ from app.core.config import settings
 from app.crud.game_score import game_score as crud_score
 from app.game.puzzles import today
 from app.models import User
+from app.models.game_score import GameScore
 from app.schemas.game_score import (
     GameScoreCreate,
     GameScorePublic,
@@ -25,7 +26,7 @@ def submit_score(
     score_in: GameScoreCreate,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
-):
+) -> GameScore:
     pacific_today = datetime.now(ZoneInfo("America/Los_Angeles")).date()
     count = crud_score.get_daily_play_count(
         db, current_user.id, score_in.game, pacific_today
@@ -43,7 +44,7 @@ def leaderboard_alltime(
     game: str,
     limit: int = Query(default=10, ge=1, le=100),
     db: Session = Depends(deps.get_db),
-):
+) -> list[LeaderboardEntry]:
     rows = crud_score.get_leaderboard_alltime(db, game, limit)
     return [
         LeaderboardEntry(rank=i, username=u, score=s, achieved_at=a)
@@ -57,7 +58,7 @@ def leaderboard_daily(
     day: Optional[date] = Query(default=None),
     limit: int = Query(default=10, ge=1, le=100),
     db: Session = Depends(deps.get_db),
-):
+) -> list[LeaderboardEntry]:
     rows = crud_score.get_leaderboard_daily(
         db, game, day or datetime.now(timezone.utc).date(), limit
     )
@@ -74,7 +75,7 @@ def leaderboard_monthly(
     month: Optional[int] = Query(default=None, ge=1, le=12),
     limit: int = Query(default=10, ge=1, le=100),
     db: Session = Depends(deps.get_db),
-):
+) -> list[LeaderboardEntry]:
     today_utc = datetime.now(timezone.utc).date()
     rows = crud_score.get_leaderboard_monthly(
         db, game, year or today_utc.year, month or today_utc.month, limit
@@ -90,7 +91,7 @@ def my_daily_count(
     game: str,
     current_user: User = Depends(deps.get_current_user),
     db: Session = Depends(deps.get_db),
-):
+) -> dict[str, int]:
     pacific_today = datetime.now(ZoneInfo("America/Los_Angeles")).date()
     count = crud_score.get_daily_play_count(db, current_user.id, game, pacific_today)
     return {"count": count}
@@ -101,7 +102,7 @@ def my_scores(
     game: str,
     current_user: User = Depends(deps.get_current_user),
     db: Session = Depends(deps.get_db),
-):
+) -> list[GameScore]:
     return crud_score.get_user_scores(db, current_user.id, game)
 
 

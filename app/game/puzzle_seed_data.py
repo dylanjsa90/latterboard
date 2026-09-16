@@ -37,7 +37,7 @@ _SUDOKU_BASE_SOLUTION = [
 ]
 
 
-def sudoku_variant(offset: int) -> dict:
+def sudoku_variant(offset: int) -> dict[str, list[int]]:
     """Relabel the base puzzle's digits by `offset` (mod 9, so any offset is
     valid). Only 9 distinct boards exist this way, so offsets 9 apart are
     identical - fine for reuse across dates once the curated bank runs out.

@@ -1,5 +1,6 @@
 """Middleware for security."""
 from collections import OrderedDict
+from collections.abc import Sequence
 
 from fastapi import FastAPI, Request, Response
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
@@ -36,7 +37,7 @@ CSP = {
 }
 
 
-def parse_policy(policy) -> str:
+def parse_policy(policy: str | dict[str, Sequence[str]]) -> str:
     """Parse a given policy dict to string."""
     if isinstance(policy, str):
         # parse the string into a policy dict

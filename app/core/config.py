@@ -1,7 +1,7 @@
 import logging
 import os
 import warnings
-from typing import Annotated, Any, Literal
+from typing import Annotated, Any, Literal, cast
 
 from dotenv import load_dotenv
 from pydantic import (
@@ -45,11 +45,13 @@ class Settings(BaseSettings):
         extra="ignore",
     )
     API_V1_STR: str = "/api/v1"
-    APP_ENV: Literal["local", "staging", "production"] = APP_ENV
+    APP_ENV: Literal["local", "staging", "production"] = cast(
+        Literal["local", "staging", "production"], APP_ENV
+    )
     SECRET_KEY: str = os.environ.get("SECRET_KEY", "changethis")
     # 60 minutes * 24 hours * 8 days = 8 days
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
-    
+
     FRONTEND_HOST: str = "http://localhost:5173"
     FRONTEND_HOST_ALT: str = "http://localhost:5174"
     FRONTEND_HOST_BY_ENV: str = os.environ.get("FRONTEND_HOST", "http://localhost:4173")
@@ -82,7 +84,7 @@ class Settings(BaseSettings):
     DB_PORT: str = os.getenv("port", "8000")
     DB_NAME: str = os.getenv("dbname", "db_name")
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]
     @property
     def DATABASE_URL(self) -> str:
         # Construct the SQLAlchemy connection string
@@ -171,4 +173,4 @@ class Settings(BaseSettings):
         return self
 
 
-settings = Settings()  # type: ignore
+settings = Settings()

@@ -1,3 +1,5 @@
+import pytest
+
 from app.database import SessionLocal
 from app.models.match import Match
 
@@ -127,7 +129,8 @@ def test_decline_then_further_actions_rejected(client, inviter_headers, opponent
     assert r.status_code == 409
 
 
-def test_cancel_by_inviter(client, inviter_headers, opponent_headers):
+@pytest.mark.usefixtures("opponent_headers")
+def test_cancel_by_inviter(client, inviter_headers):
     r = client.post(
         f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
     )
@@ -215,7 +218,8 @@ def test_history_requires_sign_in(client):
     assert client.get(f"{BASE}/me/history").status_code == 401
 
 
-def test_duplicate_invite_conflicts(client, inviter_headers, opponent_headers):
+@pytest.mark.usefixtures("opponent_headers")
+def test_duplicate_invite_conflicts(client, inviter_headers):
     r = client.post(
         f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
     )

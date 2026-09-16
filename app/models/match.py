@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Any
+from typing import Any, Literal
 
 from sqlalchemy import (
     JSON,
@@ -58,7 +58,9 @@ class MatchGuess(Base):
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey("user.id"), nullable=False)
     turn_number: Mapped[int] = mapped_column(Integer, nullable=False)
     word: Mapped[str] = mapped_column(String, nullable=False)
-    result: Mapped[list] = mapped_column(JSON, nullable=False)
+    result: Mapped[list[Literal["correct", "present", "absent"]]] = mapped_column(
+        JSON, nullable=False
+    )
     is_correct: Mapped[bool] = mapped_column(Boolean, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
 

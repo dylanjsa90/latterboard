@@ -25,8 +25,7 @@ def ensure_user_columns(bind: Engine) -> list[str]:
     quote = bind.dialect.identifier_preparer.quote
     added: list[str] = []
     with bind.begin() as conn:
-        # Base is declared untyped (see the create_all call below).
-        for column in Base.metadata.tables[User.__tablename__].columns:  # type: ignore[attr-defined]
+        for column in Base.metadata.tables[User.__tablename__].columns:
             if column.name in present or not column.nullable:
                 continue
             column_type = column.type.compile(dialect=bind.dialect)
@@ -43,7 +42,7 @@ def ensure_user_columns(bind: Engine) -> list[str]:
 
 
 def init_db(db: Session) -> None:
-    Base.metadata.create_all(bind=engine)  # type: ignore
+    Base.metadata.create_all(bind=engine)
     ensure_user_columns(engine)
     logging.info("initializing db, bound engine")
 

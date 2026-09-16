@@ -98,7 +98,8 @@ def test_create_user_must_be_13(client):
     assert r.status_code == 201
 
 
-def test_create_user_duplicate_email(client, created_user):
+@pytest.mark.usefixtures("created_user")
+def test_create_user_duplicate_email(client):
     duplicate = {**NEW_USER, "username": "other_name"}
     r = client.post(f"{BASE}/", json=duplicate)
     assert r.status_code == 409
@@ -319,9 +320,14 @@ def test_delete_user_not_found(client, auth_headers):
     assert r.status_code == 404
 
 
-def test_delete_user_forbidden(client, auth_headers, created_user):
+def test_delete_user_unauthenticated(client, created_user):
     r = client.delete(f"{BASE}/{created_user['id']}")
     assert r.status_code == 401
+
+
+def test_delete_user_forbidden(client, auth_headers, created_user):
+    r = client.delete(f"{BASE}/{created_user['id']}", headers=auth_headers)
+    assert r.status_code == 403
 
 
 def test_responses_never_include_password_hash(client, auth_headers, created_user):

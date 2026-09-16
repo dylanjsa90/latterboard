@@ -39,12 +39,12 @@ def list_users(
     limit: int = 100,
     db: Session = Depends(deps.get_db),
     _: User = Depends(deps.get_current_user),
-):
+) -> list[User]:
     return crud_user.get_users(db, skip=skip, limit=limit)
 
 
 @router.post("/", response_model=UserPrivate, status_code=status.HTTP_201_CREATED)
-def create_user(user_in: UserCreate, db: Session = Depends(deps.get_db)):
+def create_user(user_in: UserCreate, db: Session = Depends(deps.get_db)) -> User:
     if crud_user.get_user_by_email(db, user_in.email):
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
@@ -134,7 +134,7 @@ def get_user(
     user_id: int,
     db: Session = Depends(deps.get_db),
     _: User = Depends(deps.get_current_user),
-):
+) -> User:
     user = crud_user.get_user(db, user_id)
     if not user:
         raise HTTPException(
@@ -149,7 +149,7 @@ def update_user(
     user_in: UserUpdate,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
-):
+) -> User:
     user = crud_user.get_user(db, user_id)
     if not user:
         raise HTTPException(
@@ -167,7 +167,7 @@ def delete_user(
     user_id: int,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
-):
+) -> None:
     user = crud_user.get_user(db, user_id)
     if not user:
         raise HTTPException(

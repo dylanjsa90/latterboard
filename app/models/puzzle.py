@@ -1,5 +1,6 @@
 from datetime import date as date_
 from datetime import datetime
+from typing import Any
 
 from sqlalchemy import (
     JSON,
@@ -28,7 +29,7 @@ class Puzzle(Base):
     game: Mapped[str] = mapped_column(String, nullable=False, index=True)
     variant_index: Mapped[int] = mapped_column(Integer, nullable=False)
     date: Mapped[date_] = mapped_column(Date, nullable=False, index=True)
-    data: Mapped[dict] = mapped_column(JSON, nullable=False)
+    data: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False)
 
 
 class PuzzleAttempt(Base):

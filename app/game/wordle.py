@@ -6,7 +6,7 @@ and reusable outside the request/response cycle.
 
 import random
 from collections import Counter
-from typing import cast
+from typing import Literal, cast
 
 from app.lib.word_list import word_list
 
@@ -24,13 +24,15 @@ def is_valid_word(guess: str) -> bool:
     return len(guess) == WORD_LENGTH and guess.lower() in _WORD_SET
 
 
-def evaluate_guess(target: str, guess: str) -> list[str]:
+def evaluate_guess(
+    target: str, guess: str
+) -> list[Literal["correct", "present", "absent"]]:
     """Classic two-pass Wordle scoring: exact matches first, then present/absent
     from the remaining letter counts, so duplicate letters are handled correctly.
     """
     target = target.lower()
     guess = guess.lower()
-    results: list[str | None] = [None] * len(guess)
+    results: list[Literal["correct", "present", "absent"] | None] = [None] * len(guess)
     remaining = Counter(target)
 
     for i, letter in enumerate(guess):
@@ -46,6 +48,6 @@ def evaluate_guess(target: str, guess: str) -> list[str]:
             remaining[letter] -= 1
         else:
             results[i] = "absent"
-    typed_result = [cast(str, r) for r in results]
+    typed_result = [cast(Literal["correct", "present", "absent"], r) for r in results]
 
     return typed_result

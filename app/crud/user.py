@@ -68,7 +68,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         return found is not None
 
     def create_user(self, db: Session, user_in: UserCreate) -> User:
-        user = User(  # type: ignore
+        user = User(
             email=user_in.email,
             username=user_in.username,
             hashed_password=get_password_hash(user_in.password),
@@ -120,7 +120,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         )
         if not updated:
             db.add(
-                UserAvatar(  # type: ignore[call-arg]
+                UserAvatar(
                     user_id=user.id, image=image, content_type=content_type
                 )
             )
