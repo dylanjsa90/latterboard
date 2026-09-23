@@ -3,7 +3,7 @@
 > FastAPI backend for webcade's browser games: daily puzzles, snake scores and leaderboards,
 > head-to-head matches with matchmaking and a computer opponent, and a websocket for live play.
 
-Last updated: 2026-09-16
+Last updated: 2026-09-22
 
 Python 3.10+ with uv, SQLAlchemy, Redis, JWT auth. SQLite locally; deploys to Render as a Docker
 container built from `Dockerfile`. Setup, Docker, and the production server are in `README.md`.
@@ -81,6 +81,8 @@ Paths are in backticks, not `@` imports, so they load only when read.
 ## Project Policies
 
 - Work on `dev`; open PRs into `main`. Never push to `main` directly.
+- `.github/workflows/ci.yml` runs lint, typecheck, test, and a Docker build check on PRs into
+  `main` and pushes to `dev`. It's a quality gate only — no deploy step.
 - Agents commit or push only when asked.
 - A change is done when `make check` is clean for the files you touched — plus `npm run check` in webcade when both repos changed.
 
