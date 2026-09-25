@@ -1,6 +1,6 @@
 import re
 from datetime import datetime, timezone
-from typing import Annotated
+from typing import Annotated, Literal
 
 from pydantic import (
     AfterValidator,
@@ -83,6 +83,39 @@ class UserCreate(UserBase):
     display_name: DisplayName
     birth_year: BirthYear
     location: Location = None
+
+
+class ProfileCreate(BaseModel):
+    """The profile every new account starts with, however the player signs in."""
+
+    username: Handle
+    display_name: DisplayName
+    birth_year: BirthYear
+    location: Location = None
+
+
+class GoogleCredential(BaseModel):
+    # The ID token Google's sign-in button handed the browser.
+    credential: str
+
+
+class GoogleSignUp(ProfileCreate, GoogleCredential):
+    """A new Google player's profile, sent with the same credential again.
+
+    Google's ID tokens last an hour, long enough to fill in the profile, so the
+    account isn't made (and no token of ours issued) until the profile is valid.
+    """
+
+
+class GoogleLogin(BaseModel):
+    """`signed_in` carries a token; `needs_profile` means sign up with `/users/google`."""
+
+    status: Literal["signed_in", "needs_profile"]
+    access_token: str | None = None
+    token_type: str | None = None
+    # Suggestions for the profile step when `needs_profile`.
+    email: str | None = None
+    name: str | None = None
 
 
 class UserUpdate(BaseModel):

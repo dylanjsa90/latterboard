@@ -1,4 +1,5 @@
 import hashlib
+import secrets
 from collections.abc import Sequence
 
 from sqlalchemy import func
@@ -7,8 +8,9 @@ from sqlalchemy.orm import Session
 from app.core.security import get_password_hash, verify_password
 from app.models.user import User
 from app.models.user_avatar import UserAvatar
+from app.models.user_identity import UserIdentity
 from app.schemas import UserCreate, UserUpdate
-from app.schemas.user import ProfileUpdate
+from app.schemas.user import ProfileCreate, ProfileUpdate
 
 from .base import CRUDBase
 
@@ -19,6 +21,32 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
 
     def get_user_by_email(self, db: Session, email: str) -> User | None:
         return db.query(self.model).filter(self.model.email == email).first()
+
+    def get_user_by_email_any_case(self, db: Session, email: str) -> User | None:
+        # Google may report "Maya@Gmail.com" for an account made as "maya@gmail.com".
+        return (
+            db.query(self.model)
+            .filter(func.lower(self.model.email) == email.lower())
+            .first()
+        )
+
+    def get_user_by_identity(
+        self, db: Session, provider: str, subject: str
+    ) -> User | None:
+        return (
+            db.query(self.model)
+            .join(UserIdentity, UserIdentity.user_id == self.model.id)
+            .filter(UserIdentity.provider == provider, UserIdentity.subject == subject)
+            .first()
+        )
+
+    def link_identity(
+        self, db: Session, user: User, provider: str, subject: str
+    ) -> User:
+        db.add(UserIdentity(user_id=user.id, provider=provider, subject=subject))
+        db.commit()
+        db.refresh(user)
+        return user
 
     def get_user_by_username(self, db: Session, username: str) -> User | None:
         # Case-insensitive, so "Maya" counts as taken once "maya" exists.
@@ -76,6 +104,28 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
             birth_year=user_in.birth_year,
             location=user_in.location,
         )
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+        return user
+
+    def create_user_with_identity(
+        self, db: Session, profile_in: ProfileCreate, email: str, provider: str, subject: str
+    ) -> User:
+        """An account that signs in through a provider, created with its link at once.
+
+        `hashed_password` can't be null, so it gets a random one nobody knows, like
+        the bot's. The player can still set a real one through password recovery.
+        """
+        user = User(
+            email=email,
+            username=profile_in.username,
+            hashed_password=get_password_hash(secrets.token_urlsafe(32)),
+            display_name=profile_in.display_name,
+            birth_year=profile_in.birth_year,
+            location=profile_in.location,
+        )
+        user.identities.append(UserIdentity(provider=provider, subject=subject))
         db.add(user)
         db.commit()
         db.refresh(user)

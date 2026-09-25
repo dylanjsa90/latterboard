@@ -8,6 +8,7 @@ from app.core.base_class import Base
 
 if TYPE_CHECKING:
     from app.models.user_avatar import UserAvatar
+    from app.models.user_identity import UserIdentity
 
 
 class User(Base):
@@ -42,3 +43,6 @@ class User(Base):
     avatar: Mapped["UserAvatar | None"] = relationship(
         cascade="all, delete-orphan", uselist=False
     )
+    # Outside sign-ins (Google). A relationship, like `avatar`, so deleting the user
+    # deletes these even where the database doesn't enforce ON DELETE CASCADE.
+    identities: Mapped[list["UserIdentity"]] = relationship(cascade="all, delete-orphan")

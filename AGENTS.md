@@ -55,6 +55,7 @@ Paths are in backticks, not `@` imports, so they load only when read.
 ### Users
 - `username` is the public handle: `[a-z0-9_]{3,20}`, lowercased by `schemas/user.py`. Look it up case-insensitively (`crud_user.get_user_by_username`). Accounts made before handles still have their email there, so never validate `username` on output.
 - `birth_year` is private. Only `UserPrivate` (test-token, `POST /users/`, `PATCH /users/me`) carries it; `UserPublic` (returned to any signed-in user) and `PlayerPublic` must not.
+- Google sign-in (`app/core/google.py` checks the ID token, `app/api/google_sign_in.py` holds what the two routes share) links accounts through `user_identity` (`provider`, `subject` = Google's `sub`, never the email). It is a table rather than `user` columns so `create_all` builds its unique constraint. `GOOGLE_CLIENT_ID` (the public web client ID, the same as webcade's `VITE_GOOGLE_CLIENT_ID`) turns it on; tests replace `google.verify_google_id_token`.
 - Photos live in `user_avatar` (a separate table, so loading a user never loads the bytes). `app/lib/avatar.py` re-encodes every upload to a 256px WebP, which drops EXIF such as phone GPS. `user.avatar_version` versions the public URL, so it can be cached forever.
 
 ### Email
@@ -127,6 +128,8 @@ client. Keep this section identical in both repos' CLAUDE.md and update both whe
 | ---- | ------- | -------- |
 | `POST /login/access-token` | form-urlencoded `username` (= email), `password` | `{access_token, token_type}` |
 | `POST /login/test-token` | bearer | `UserPrivate`; 401 = dead token |
+| `POST /login/google` | `{credential}` (the ID token from Google's sign-in button) | `{status: "signed_in", access_token, token_type}`, or `{status: "needs_profile", email, name?}` when no account has that Google account or its email; 401 bad or expired credential, 403 unverified Google email, 400 inactive, 404 when `GOOGLE_CLIENT_ID` is unset |
+| `POST /users/google` | `{credential, username, display_name, birth_year, location?}` | 201 `{access_token, token_type}`; 409 / 422 as `POST /users/`, and 401 / 403 / 404 as `/login/google` |
 | `POST /users/` | `{email, username, password, display_name, birth_year, location?}` | 201 `UserPrivate`; 409 if the email or the username is taken (`detail` says which); 422 for a bad handle or anyone under 13 |
 | `PATCH /users/me` (bearer) | any of `{display_name, username, birth_year, location}` (`""`/null clears `location`; null leaves the others) | `UserPrivate`; 409 if the username is taken |
 | `GET /users/players?usernames=a&usernames=b` (bearer, ≤ 50) | — | `PlayerPublic[]` for the handles that exist |
@@ -142,6 +145,12 @@ nullable. `avatar_url` is a path under the API
 (`/api/v1/users/{id}/avatar?v=<hash>`) that webcade prefixes with `API_BASE_URL`. Handles are
 `[a-z0-9_]{3,20}`, lowercased, and unique regardless of case; accounts made before handles keep their
 email as `username` until they choose one. `birth_year` must make the player 13 or older this (UTC) year.
+
+Google sign-in ends with the same `access_token` as a password. The first `/login/google` whose
+verified email matches an existing account (any case) links that Google account to it, and the
+password keeps working. A new Google player gets no account until `/users/google` sends a valid
+profile with the same credential, which Google keeps valid for an hour. Google-only accounts
+have a random password, which password recovery can replace.
 
 ### Puzzles (`/puzzles`, bearer; `puzzle_id` like `"word-2026-09-11"`, future dates 404)
 | Call | Request | Response |

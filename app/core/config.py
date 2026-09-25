@@ -51,6 +51,9 @@ class Settings(BaseSettings):
     SECRET_KEY: str = os.environ.get("SECRET_KEY", "changethis")
     # 60 minutes * 24 hours * 8 days = 8 days
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
+    # The web client ID from Google Cloud, the same one webcade uses. It's public, and
+    # only an ID token issued for it is accepted. Empty turns Google sign-in off (404).
+    GOOGLE_CLIENT_ID: str = os.getenv("GOOGLE_CLIENT_ID", "")
 
     FRONTEND_HOST: str = "http://localhost:5173"
     FRONTEND_HOST_ALT: str = "http://localhost:5174"

@@ -9,7 +9,7 @@ from fastapi import (
 )
 from sqlalchemy.orm import Session
 
-from app.api import deps
+from app.api import deps, google_sign_in
 from app.crud.user import user as crud_user
 from app.lib.avatar import (
     AVATAR_CONTENT_TYPE,
@@ -19,8 +19,10 @@ from app.lib.avatar import (
 )
 from app.models import User
 from app.schemas.user import (
+    GoogleSignUp,
     PlayerPublic,
     ProfileUpdate,
+    Token,
     UserCreate,
     UserPrivate,
     UserPublic,
@@ -31,6 +33,7 @@ router = APIRouter(prefix="/users", tags=["users"])
 
 PLAYERS_LOOKUP_MAX = 50
 USERNAME_TAKEN = "That username is taken."
+EMAIL_TAKEN = "A user with this email already exists."
 
 
 @router.get("/", response_model=list[UserPublic])
@@ -47,12 +50,31 @@ def list_users(
 def create_user(user_in: UserCreate, db: Session = Depends(deps.get_db)) -> User:
     if crud_user.get_user_by_email(db, user_in.email):
         raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail="A user with this email already exists.",
+            status_code=status.HTTP_409_CONFLICT, detail=EMAIL_TAKEN
         )
     if crud_user.get_user_by_username(db, user_in.username):
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=USERNAME_TAKEN)
     return crud_user.create_user(db, user_in)
+
+
+@router.post("/google", status_code=status.HTTP_201_CREATED)
+def create_google_user(body: GoogleSignUp, db: Session = Depends(deps.get_db)) -> Token:
+    """Create an account for a Google player after `/login/google` said `needs_profile`.
+
+    Returns a session token directly, since there's no password to sign in with.
+    """
+    identity = google_sign_in.verified_identity(body.credential)
+    # Either means `/login/google` would now sign them in (or link), e.g. a second tab.
+    if crud_user.get_user_by_identity(
+        db, google_sign_in.PROVIDER, identity.sub
+    ) or crud_user.get_user_by_email_any_case(db, identity.email):
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=EMAIL_TAKEN)
+    if crud_user.get_user_by_username(db, body.username):
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=USERNAME_TAKEN)
+    user = crud_user.create_user_with_identity(
+        db, body, identity.email, google_sign_in.PROVIDER, identity.sub
+    )
+    return Token(access_token=google_sign_in.access_token(user))
 
 
 # The literal paths below must stay above `/{user_id}`, which would otherwise claim
