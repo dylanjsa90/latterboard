@@ -4,6 +4,13 @@ import os
 os.environ["DATABASE_URL"] = "sqlite:///./test_app.db"
 os.environ["SQLITE_DATABASE_URL"] = "sqlite:///./test_app.db"
 os.environ["DB_TYPE"] = "sqlite"
+# Keep heartbeat frames from interleaving with the frames websocket tests assert on
+os.environ["WS_HEARTBEAT_SECONDS"] = "3600"
+# The computer opponent moves in a background task, which the sync TestClient runs
+# to completion before returning. With no thinking pause its frames therefore land
+# in a deterministic order, and no test has to wait on a timer.
+os.environ["BOT_TURN_DELAY_SECONDS"] = "0"
+os.environ["BOT_TURN_DELAY_JITTER_SECONDS"] = "0"
 import pytest
 from fastapi.testclient import TestClient
 
@@ -61,3 +68,33 @@ def auth_headers(client):
     assert r.status_code == 200
     token = r.json()["access_token"]
     return {"Authorization": f"Bearer {token}"}
+
+
+def _signup_and_login(client, email: str, username: str, password: str = "secret123"):
+    r = client.post(
+        "/api/v1/users/",
+        json={
+            "email": email,
+            "username": username,
+            "password": password,
+            "display_name": username.title(),
+            "birth_year": 1990,
+        },
+    )
+    assert r.status_code == 201
+    r = client.post(
+        "/api/v1/login/access-token",
+        data={"username": email, "password": password},
+    )
+    assert r.status_code == 200
+    return {"Authorization": f"Bearer {r.json()['access_token']}"}
+
+
+@pytest.fixture
+def inviter_headers(client):
+    return _signup_and_login(client, "inviter@example.com", "inviter")
+
+
+@pytest.fixture
+def opponent_headers(client):
+    return _signup_and_login(client, "opponent@example.com", "opponent")

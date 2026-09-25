@@ -1,6 +1,8 @@
-from datetime import date
+from collections.abc import Sequence
+from datetime import date, datetime
+from typing import Any, cast
 
-from sqlalchemy import extract, func
+from sqlalchemy import Row, extract, func
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
@@ -26,7 +28,7 @@ class CRUDGameScore(CRUDBase[GameScore, GameScoreCreate, GameScoreUpdate]):
     def create_score(
         self, db: Session, user_id: int, score_in: GameScoreCreate
     ) -> GameScore:
-        entry = GameScore(user_id=user_id, game=score_in.game, score=score_in.score)  # type: ignore
+        entry = GameScore(user_id=user_id, game=score_in.game, score=score_in.score)
         db.add(entry)
         db.commit()
         db.refresh(entry)
@@ -40,7 +42,9 @@ class CRUDGameScore(CRUDBase[GameScore, GameScoreCreate, GameScoreUpdate]):
             .all()
         )
 
-    def _leaderboard_query(self, db: Session, game: str, limit: int, time_filter=None):
+    def _leaderboard_query(
+        self, db: Session, game: str, limit: int, time_filter: Any = None
+    ) -> Sequence[Row[tuple[str, int, datetime]]]:
         q = db.query(
             GameScore.user_id,
             func.max(GameScore.score).label("best_score"),
@@ -50,18 +54,23 @@ class CRUDGameScore(CRUDBase[GameScore, GameScoreCreate, GameScoreUpdate]):
         if time_filter is not None:
             q = q.filter(time_filter)
         sq = q.group_by(GameScore.user_id).subquery()
-        return (
+        return cast(
+            Sequence[Row[tuple[str, int, datetime]]],
             db.query(User.username, sq.c.best_score, sq.c.first_achieved)
             .join(User, User.id == sq.c.user_id)
             .order_by(sq.c.best_score.desc())
             .limit(limit)
-            .all()
+            .all(),
         )
 
-    def get_leaderboard_alltime(self, db: Session, game: str, limit: int = 10):
+    def get_leaderboard_alltime(
+        self, db: Session, game: str, limit: int = 10
+    ) -> Sequence[Row[tuple[str, int, datetime]]]:
         return self._leaderboard_query(db, game, limit)
 
-    def get_leaderboard_daily(self, db: Session, game: str, day: date, limit: int = 10):
+    def get_leaderboard_daily(
+        self, db: Session, game: str, day: date, limit: int = 10
+    ) -> Sequence[Row[tuple[str, int, datetime]]]:
         return self._leaderboard_query(
             db,
             game,
@@ -71,7 +80,7 @@ class CRUDGameScore(CRUDBase[GameScore, GameScoreCreate, GameScoreUpdate]):
 
     def get_leaderboard_monthly(
         self, db: Session, game: str, year: int, month: int, limit: int = 10
-    ):
+    ) -> Sequence[Row[tuple[str, int, datetime]]]:
         return self._leaderboard_query(
             db,
             game,

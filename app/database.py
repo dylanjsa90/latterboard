@@ -3,7 +3,7 @@ import logging
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from app.core.config import APP_ENV, settings
+from app.core.config import settings
 
 _is_sqlite = settings.DATABASE_URL.startswith("sqlite")
 # SQLAlchemy requires postgresql+psycopg:// to use psycopg3; Render injects postgresql://
@@ -26,7 +26,7 @@ engine = create_engine(
     pool_recycle=3600,
     pool_timeout=30,
     connect_args={"check_same_thread": False} if _is_sqlite else {},
-    echo=APP_ENV == "local",
+    echo=settings.DEBUG
 )
 
 

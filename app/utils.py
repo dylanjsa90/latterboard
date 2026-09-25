@@ -7,6 +7,7 @@ from typing import Any
 import emails  # type: ignore[import-untyped]
 import jwt
 from jinja2 import Template
+from markupsafe import escape
 from passlib.exc import InvalidTokenError
 
 from app.core import security
@@ -20,6 +21,15 @@ logger = logging.getLogger(__name__)
 class EmailData:
     html_content: str
     subject: str
+
+
+def utcnow() -> datetime:
+    """Current UTC time as a naive datetime, matching the naive DateTime columns.
+
+    SQLite hands those columns back naive, so comparing them against an aware
+    datetime.now(timezone.utc) raises TypeError.
+    """
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
 def render_email_template(*, template_name: str, context: dict[str, Any]) -> str:
@@ -95,6 +105,33 @@ def generate_new_account_email(
             "password": password,
             "email": email_to,
             "link": settings.FRONTEND_HOST,
+        },
+    )
+    return EmailData(html_content=html_content, subject=subject)
+
+
+def generate_match_invite_email(
+    *,
+    inviter_username: str,
+    game_title: str,
+    message: str | None,
+    link: str,
+    expires_at: datetime,
+) -> EmailData:
+    # Collapsed to one line so a username can't add headers to the subject.
+    inviter = " ".join(inviter_username.split())
+    subject = f"{inviter} invited you to play {game_title}"
+    html_content = render_email_template(
+        template_name="match_invite.html",
+        # Players write the username and message, and render_email_template doesn't
+        # autoescape, so escape them here.
+        context={
+            "project_name": settings.PROJECT_NAME,
+            "inviter_username": escape(inviter),
+            "game_title": escape(game_title),
+            "message": escape(message) if message else None,
+            "link": link,
+            "expires_on": f"{expires_at:%B} {expires_at.day}",
         },
     )
     return EmailData(html_content=html_content, subject=subject)

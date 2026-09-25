@@ -6,11 +6,20 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
-from app.api import deps
+from app.api import deps, google_sign_in
 from app.core import security
 from app.core.config import settings
 from app.crud import user as crud_user  # noqa: F401
-from app.schemas.user import Message, NewPassword, Token, UserPublic, UserUpdate
+from app.models import User
+from app.schemas.user import (
+    GoogleCredential,
+    GoogleLogin,
+    Message,
+    NewPassword,
+    Token,
+    UserPrivate,
+    UserUpdate,
+)
 from app.utils import (
     generate_password_reset_token,
     generate_reset_password_email,
@@ -49,8 +58,39 @@ def login_access_token(
     )
 
 
-@router.post("/login/test-token", response_model=UserPublic)
-def test_token(current_user=Depends(deps.get_current_user)) -> Any:
+@router.post("/login/google", response_model_exclude_none=True)
+def login_google(body: GoogleCredential, db: Session = Depends(deps.get_db)) -> GoogleLogin:
+    """
+    Sign in with a Google ID token. An account with the same verified email is
+    linked on first use; with no account at all, the player signs up through
+    `POST /users/google` instead.
+    """
+    identity = google_sign_in.verified_identity(body.credential)
+    user = crud_user.get_user_by_identity(
+        db, google_sign_in.PROVIDER, identity.sub
+    )
+    linked = user is not None
+    if user is None:
+        user = crud_user.get_user_by_email_any_case(db, identity.email)
+    if user is None:
+        return GoogleLogin(
+            status="needs_profile", email=identity.email, name=identity.name
+        )
+    if not user.is_active:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Inactive user"
+        )
+    if not linked:
+        crud_user.link_identity(db, user, google_sign_in.PROVIDER, identity.sub)
+    return GoogleLogin(
+        status="signed_in",
+        access_token=google_sign_in.access_token(user),
+        token_type="bearer",
+    )
+
+
+@router.post("/login/test-token", response_model=UserPrivate)
+def test_token(current_user: User = Depends(deps.get_current_user)) -> User:
     """
     Test access token
     """

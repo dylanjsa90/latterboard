@@ -1,23 +1,34 @@
-# Latterboard  API
+# Latterboard API
 
-A FastAPI service for tracking game scores and leaderboards with JWT authentication.
+A FastAPI backend for browser games, with JWT authentication:
+
+- Daily word, sudoku, memory, and cipher puzzles, with stats and streaks
+- Game scores and all-time, daily, and monthly leaderboards
+- Head-to-head matches (turn-based, races, and co-op), matchmaking with a computer opponent
+  fallback, and single-use invite links
+- A websocket for invites, presence, and live match updates
+
+Its client is [webcade](https://github.com/dylanjsa90/webcade). Contributor and agent
+conventions are in `AGENTS.md`.
 
 ## Setup
 If uv has not yet been installed instructions can be found at https://docs.astral.sh/uv/getting-started/installation/
 
 ```bash
-uv sync                      # install dependencies
-source .venv/bin/activate    # activate environment
-cp app/.env.example app/.env # configure environment variables
+uv sync                           # install dependencies
+source .venv/bin/activate         # activate environment
+cp .env.example app/.env.local    # configure environment variables
 ```
 
-Edit `app/.env` and set at minimum:
+Settings are read from `app/.env.local` while `APP_ENV=local` (the default) and from `app/.env`
+otherwise. Edit the file and set at minimum:
 
 ```
-DATABASE_URL=sqlite:///./sql_app.db
 SECRET_KEY=<generate with: python -c "import secrets; print(secrets.token_hex(32))">
-REDIS_URL=redis://localhost:6379
 ```
+
+The defaults use SQLite at `./sql_app.db` (`DB_TYPE=sqlite`, `SQLITE_DATABASE_URL`) and Redis at
+`redis://localhost:6379` (`REDIS_URL`), so a local Redis must be running.
 
 ## Running with Docker
 
@@ -38,7 +49,9 @@ SECRET_KEY=<generate with: python -c "import secrets; print(secrets.token_hex(32
 docker compose up --build
 ```
 
-The API will be available at `http://localhost:8000`. Postgres and Redis are started automatically and the app waits for the database to be healthy before accepting connections.
+The API will be available at `http://localhost:8000`. Compose starts Redis and a Postgres
+container alongside the app, but the app waits only for Redis and, with the default
+`DB_TYPE=sqlite`, stores its data in a SQLite file inside the container.
 
 **3. Stop and remove containers:**
 
@@ -53,7 +66,7 @@ docker compose down -v       # also delete database volume
 fastapi dev app/main.py
 ```
 
-Runs on `http://localhost:8000`. Interactive docs at `/api/v1/openapi.json` (Swagger UI at `/docs`).
+Runs on `http://localhost:8000`. OpenAPI schema at `/openapi.json`, Swagger UI at `/docs`.
 
 ## Production server (Gunicorn)
 
@@ -76,7 +89,10 @@ Adjust `--workers` to `(2 × CPU cores) + 1`. For a single-core machine, use `--
 
 ## Running tests
 
+Tests need a local Redis.
+
 ```bash
+make check                   # mypy + pytest, errors and summary lines only
 uv run pytest                # run all tests
 uv run pytest -v             # verbose output
 uv run pytest tests/test_scores.py  # single file

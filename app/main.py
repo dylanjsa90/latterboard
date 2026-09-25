@@ -14,7 +14,7 @@ from redis import asyncio as aioredis
 from app.api import deps
 from app.api.main import api_router
 from app.connection_manager import manager
-from app.core.config import APP_ENV, settings
+from app.core.config import settings
 from app.database import SessionLocal
 from app.init_db import init_db
 from app.models import Match, User
@@ -37,7 +37,7 @@ async def lifespan(_: FastAPI) -> AsyncGenerator[None]:
         db.commit()
     except Exception:
         db.rollback()
-        logger.error("Error initializing database. rolling back changes.")
+        logger.exception("Error initializing database. rolling back changes.")
     finally:
         logger.info("Closing DB session")
         db.close()
@@ -58,7 +58,7 @@ app = FastAPI(
     openapi_url="/openapi.json",
     generate_unique_id_function=custom_generate_unique_id,
     lifespan=lifespan,
-) 
+)
 
 # Set all CORS enabled origins
 if settings.all_cors_origins:
@@ -71,16 +71,16 @@ if settings.all_cors_origins:
     )
 
 
-app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(SecurityHeadersMiddleware)  # type: ignore[arg-type]
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 @app.get("/health")
-async def health():
+async def health() -> dict[str, str]:
     return {"status": "ok"}
 
 
 @app.get("/")
-async def root():
+async def root() -> str:
     return "Hello, World"
 
 
@@ -100,7 +100,7 @@ async def websocket_endpoint(
     websocket: WebSocket,
     game_name: str,
     current_user: User = Depends(deps.get_current_user_ws),
-):
+) -> None:
     await manager.connect(websocket, game_name, current_user.username)
     await manager.join(websocket, f"user:{current_user.id}", current_user.username)
     try:

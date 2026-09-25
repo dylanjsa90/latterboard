@@ -1,7 +1,7 @@
 import logging
 import os
 import warnings
-from typing import Annotated, Any, Literal
+from typing import Annotated, Any, Literal, cast
 
 from dotenv import load_dotenv
 from pydantic import (
@@ -45,16 +45,22 @@ class Settings(BaseSettings):
         extra="ignore",
     )
     API_V1_STR: str = "/api/v1"
-    APP_ENV: Literal["local", "staging", "production"] = APP_ENV
+    APP_ENV: Literal["local", "staging", "production"] = cast(
+        Literal["local", "staging", "production"], APP_ENV
+    )
     SECRET_KEY: str = os.environ.get("SECRET_KEY", "changethis")
     # 60 minutes * 24 hours * 8 days = 8 days
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
-    
+    # The web client ID from Google Cloud, the same one webcade uses. It's public, and
+    # only an ID token issued for it is accepted. Empty turns Google sign-in off (404).
+    GOOGLE_CLIENT_ID: str = os.getenv("GOOGLE_CLIENT_ID", "")
+
     FRONTEND_HOST: str = "http://localhost:5173"
     FRONTEND_HOST_ALT: str = "http://localhost:5174"
     FRONTEND_HOST_BY_ENV: str = os.environ.get("FRONTEND_HOST", "http://localhost:4173")
     ENVIRONMENT: Literal["local", "staging", "production"] = "local"
-
+    LOGGER_NAME: str = "uvicorn"
+    DEBUG: bool = os.environ.get("DEBUG", "0") == "1"
     BACKEND_CORS_ORIGINS: Annotated[
         list[AnyUrl] | str, BeforeValidator(parse_cors)
     ] = []
@@ -75,13 +81,13 @@ class Settings(BaseSettings):
     DB_TYPE: str = os.environ.get("DB_TYPE", "sqlite")
 
     # Fetch variables
-    DB_USER: str = os.getenv("user")
-    DB_PASSWORD: str = os.getenv("password")
-    DB_HOST: str = os.getenv("host")
-    DB_PORT: str = os.getenv("port")
-    DB_NAME: str = os.getenv("dbname")
+    DB_USER: str = os.getenv("user", "db_user")
+    DB_PASSWORD: str = os.getenv("password", "db_password")
+    DB_HOST: str = os.getenv("host", "http://localhost")
+    DB_PORT: str = os.getenv("port", "8000")
+    DB_NAME: str = os.getenv("dbname", "db_name")
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]
     @property
     def DATABASE_URL(self) -> str:
         # Construct the SQLAlchemy connection string
@@ -118,7 +124,7 @@ class Settings(BaseSettings):
 
     DEFAULT_USER: str = "first.user@test.com"
     DEFAULT_USER_PASSWORD: str = "password"
-    DEFAULT_USER_USERNAME: str = "first.user@test.com"
+    DEFAULT_USER_USERNAME: str = "first_user"
 
     REDIS_URL: str = os.environ.get("REDIS_URL", "redis://localhost:6379")
 
@@ -128,6 +134,27 @@ class Settings(BaseSettings):
 
     MATCH_MAX_GUESSES: int = 6
     MATCH_INVITE_EXPIRY_MINUTES: int = 15
+    # Friend invite links, sent by text or email, wait far longer than username invites.
+    MATCH_INVITE_LINK_EXPIRY_DAYS: int = 7
+    # Links one player can create per UTC day; also caps the invite email we send.
+    MATCH_INVITE_LINK_DAILY_LIMIT: int = 20
+    MATCHMAKING_QUEUE_TTL_SECONDS: int = 60
+    # How long a player waits in the queue before we offer them the computer.
+    # The client re-POSTs every TTL/3 (~20s), so this lands on their second poll.
+    MATCHMAKING_BOT_WAIT_SECONDS: int = 20
+
+    # The computer-controlled opponent. It never logs in: `init_db` gives it a
+    # random password, and it plays through `app/api/bot_turn.py`, not HTTP.
+    BOT_OPPONENT_ENABLED: bool = True
+    BOT_USER_EMAIL: str = "robo@latterboard.com"
+    BOT_USER_USERNAME: str = "robo"
+    BOT_DISPLAY_NAME: str = "Robo"
+    # Each bot move waits DELAY + random(0, JITTER) seconds, so it reads as
+    # thinking rather than as a machine. Tests set the delay to 0.
+    BOT_TURN_DELAY_SECONDS: float = 2.0
+    BOT_TURN_DELAY_JITTER_SECONDS: float = 3.0
+    # 0.0 = careless, 1.0 = plays the best candidate it knows every time.
+    BOT_SKILL: float = 0.75
 
     def _check_default_secret(self, var_name: str, value: str | None) -> None:
         if value == "changethis":
@@ -149,4 +176,4 @@ class Settings(BaseSettings):
         return self
 
 
-settings = Settings()  # type: ignore
+settings = Settings()

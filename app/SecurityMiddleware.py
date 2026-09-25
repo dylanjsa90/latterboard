@@ -1,5 +1,6 @@
 """Middleware for security."""
 from collections import OrderedDict
+from collections.abc import Sequence
 
 from fastapi import FastAPI, Request, Response
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
@@ -8,6 +9,8 @@ from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoin
 # rather than as pinned file URLs, so the policy can't silently break the docs the next
 # time FastAPI bumps the bundle version (it has already moved swagger-ui-dist 4 -> 5).
 DOCS_CDN = "https://cdn.jsdelivr.net"
+POSTHOG = "https://*.posthog.com"
+
 CSP = {
     "default-src": "'self'",
     "img-src": [
@@ -15,8 +18,8 @@ CSP = {
         # For SWAGGER UI
         "data:",
     ],
-    "connect-src": "'self'",
-    "script-src": ["'self'", DOCS_CDN],
+    "connect-src": ["'self'", POSTHOG],
+    "script-src": ["'self'", DOCS_CDN, POSTHOG],
     "style-src": ["'self'", "'unsafe-inline'", DOCS_CDN],
     # script-src-elem / style-src-elem OVERRIDE script-src / style-src for markup
     # elements rather than adding to them, so each has to repeat the full list. Both
@@ -31,12 +34,12 @@ CSP = {
     ],
     "font-src": ["'self'", "https://fonts.gstatic.com"],
     # REDOC renders inside a web worker created from a blob URL.
-    "worker-src": ["'self'", "blob:"],
+    "worker-src": ["'self'", "blob:", "data:"],
     "frame-ancestors": "'none'",
 }
 
 
-def parse_policy(policy) -> str:
+def parse_policy(policy: str | dict[str, Sequence[str]]) -> str:
     """Parse a given policy dict to string."""
     if isinstance(policy, str):
         # parse the string into a policy dict

@@ -2,7 +2,7 @@ from typing import Any, Generic, Optional, TypeVar
 
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
-from sqlalchemy.orm import Session  # type: ignore
+from sqlalchemy.orm import Session
 
 from app.core.base_class import Base
 

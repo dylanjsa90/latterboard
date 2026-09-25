@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from tenacity import after_log, before_log, retry, stop_after_attempt, wait_fixed
 
 from app.database import engine
-from app.models.user import User  # type: ignore
+from app.models.user import User
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
