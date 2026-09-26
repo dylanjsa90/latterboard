@@ -58,6 +58,8 @@ class Settings(BaseSettings):
     FRONTEND_HOST: str = "http://localhost:5173"
     FRONTEND_HOST_ALT: str = "http://localhost:5174"
     FRONTEND_HOST_BY_ENV: str = os.environ.get("FRONTEND_HOST", "http://localhost:4173")
+    DEPLOYED_HOSTS: list[str] = ["https://preview.vocabchallenger.com", "https://vocabchallenger.com"]
+
     ENVIRONMENT: Literal["local", "staging", "production"] = "local"
     LOGGER_NAME: str = "uvicorn"
     DEBUG: bool = os.environ.get("DEBUG", "0") == "1"
@@ -72,7 +74,7 @@ class Settings(BaseSettings):
             self.FRONTEND_HOST,
             self.FRONTEND_HOST_ALT,
             self.FRONTEND_HOST_BY_ENV,
-        ]
+        ] + self.DEPLOYED_HOSTS
 
     PROJECT_NAME: str = os.environ.get("PROJECT_NAME", "Latterboard API")
     SENTRY_DSN: HttpUrl | None = None
