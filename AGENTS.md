@@ -3,7 +3,7 @@
 > FastAPI backend for webcade's browser games: daily puzzles, snake scores and leaderboards,
 > head-to-head matches with matchmaking and a computer opponent, and a websocket for live play.
 
-Last updated: 2026-09-22
+Last updated: 2026-09-30
 
 Python 3.10+ with uv, SQLAlchemy, Redis, JWT auth. SQLite locally; deploys to Render as a Docker
 container built from `Dockerfile`. Setup, Docker, and the production server are in `README.md`.
@@ -38,7 +38,7 @@ Paths are in backticks, not `@` imports, so they load only when read.
 ### Settings and database
 - `Settings` (`app/core/config.py`) reads `app/.env.local` while `APP_ENV=local` (the default) and `app/.env` otherwise.
 - The database URL is computed from `DB_TYPE`, not read from `DATABASE_URL`: `sqlite` (the default) uses `SQLITE_DATABASE_URL`; any other value builds `postgresql+psycopg2://` from the lowercase `user`, `password`, `host`, `port`, `dbname` env vars. A `DATABASE_URL` env var only fills the unused `RAW_DATABASE_URL`, so the psycopg3 rewrite in `app/database.py` never runs. Both `psycopg[binary]` and `psycopg2-binary` are installed; for driver import errors, check `DB_TYPE` and the URL scheme before touching dependencies.
-- Tables come from `Base.metadata.create_all` (`app/init_db.py`). There are no Alembic migrations yet, so new columns and constraints won't reach existing databases. Call this out whenever you change a model.
+- Tables come from `Base.metadata.create_all` (`app/init_db.py`). There are no Alembic migrations yet (`alembic/` is a scaffold with no `versions/`, and its `env.py` reads `DATABASE_URL`, which the app itself ignores), so new columns and constraints won't reach existing databases. Call this out whenever you change a model.
 - The one exception is `ensure_user_columns` (same file): at startup it adds any missing **nullable** `user` column. New `User` fields must therefore be nullable; anything else still needs that call-out.
 
 ### Dates and times
