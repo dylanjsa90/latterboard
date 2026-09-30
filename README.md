@@ -9,7 +9,8 @@ A FastAPI backend for browser games, with JWT authentication (password or Google
 - A websocket for invites, presence, and live match updates
 
 Its client is [webcade](https://github.com/dylanjsa90/webcade). Contributor and agent
-conventions are in `AGENTS.md`.
+conventions are in `AGENTS.md`; every REST call and websocket frame between the two is in
+[`docs/reference/cross-repo-contract.md`](docs/reference/cross-repo-contract.md).
 
 ## Setup
 If uv has not yet been installed instructions can be found at https://docs.astral.sh/uv/getting-started/installation/

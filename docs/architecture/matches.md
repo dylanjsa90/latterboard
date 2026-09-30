@@ -1,10 +1,10 @@
 # Matches, matchmaking, and the computer opponent
 
-Last updated: 2026-09-16
+Last updated: 2026-09-30
 
 Rules for two-player play: game modes, match state, starting matches, invite links, the
-matchmaking queue, and the bot. Endpoint and frame shapes are in the cross-repo contract in
-`AGENTS.md`; module exports are in `docs/architecture/backend.md`.
+matchmaking queue, and the bot. Endpoint and frame shapes are in the cross-repo contract,
+`docs/reference/cross-repo-contract.md`; module exports are in `docs/architecture/backend.md`.
 
 ## Modes and state
 

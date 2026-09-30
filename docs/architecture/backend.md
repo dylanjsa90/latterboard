@@ -4,7 +4,7 @@ Last updated: 2026-09-30
 
 Where things live in `app/` and what each module exports. Rules for matches, matchmaking, and
 the computer opponent are in `docs/architecture/matches.md`; wire shapes are in the cross-repo
-contract in `AGENTS.md`.
+contract, `docs/reference/cross-repo-contract.md`.
 
 | File | Purpose | Key exports |
 | ---- | ------- | ----------- |
