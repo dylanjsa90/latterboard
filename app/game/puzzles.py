@@ -25,20 +25,24 @@ def today() -> date:
     return datetime.now(timezone.utc).date()
 
 
+def dated_puzzle(puzzle_id: str | None, prefix: str) -> date | None:
+    """The calendar date in a `{prefix}-YYYY-MM-DD` puzzle_id, or None when it has none."""
+    if not puzzle_id:
+        return None
+    match = re.match(rf"^{re.escape(prefix)}-(\d{{4}}-\d{{2}}-\d{{2}})$", puzzle_id)
+    if not match:
+        return None
+    try:
+        return date.fromisoformat(match.group(1))
+    except ValueError:
+        return None
+
+
 def puzzle_date(puzzle_id: str | None, prefix: str) -> date:
     """The calendar date a puzzle_id refers to, falling back to today's date
     (UTC) when puzzle_id is missing or doesn't carry a recognizable date
     (e.g. an old index-based id)."""
-    fallback = today()
-    if not puzzle_id:
-        return fallback
-    match = re.match(rf"^{re.escape(prefix)}-(\d{{4}}-\d{{2}}-\d{{2}})$", puzzle_id)
-    if not match:
-        return fallback
-    try:
-        return date.fromisoformat(match.group(1))
-    except ValueError:
-        return fallback
+    return dated_puzzle(puzzle_id, prefix) or today()
 
 
 def grade_word(guess: str, answer: str) -> list[Literal["correct", "present", "absent"]]:
@@ -65,6 +69,15 @@ def cipher_feedback(attempt: list[int], answer: list[int]) -> CipherFeedback:
             close += 1
             available[value] -= 1
     return {"exact": exact, "close": close, "won": exact == len(answer)}
+
+
+def encode_cipher(attempt: list[int]) -> str:
+    """A cipher attempt as the digit string stored in PuzzleAttempt.guesses."""
+    return "".join(str(value) for value in attempt)
+
+
+def decode_cipher(code: str) -> list[int]:
+    return [int(char) for char in code]
 
 
 def seeded_memory_deck(puzzle_id: str, symbols: list[str]) -> list[str]:

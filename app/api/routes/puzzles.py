@@ -1,5 +1,4 @@
 import logging
-import uuid
 from datetime import timedelta
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
@@ -10,8 +9,11 @@ from app.crud.puzzle import puzzle as crud_puzzle
 from app.crud.puzzle_attempt import puzzle_attempt as crud_puzzle_attempt
 from app.game import puzzles as puzzle_logic
 from app.models import Puzzle, User
+from app.models.puzzle import PuzzleAttempt
 from app.schemas.puzzle import (
     CipherAttemptCreate,
+    CipherAttemptPublic,
+    CipherAttemptResult,
     CipherFeedback,
     CipherPuzzlePublic,
     MemoryPuzzlePublic,
@@ -47,6 +49,29 @@ def _get_or_generate_puzzle(db: Session, game: str, puzzle_id: str | None) -> Pu
             detail=f"No {game} puzzle for {target_date.isoformat()}",
         )
     return row
+
+
+def _open_attempt(db: Session, current_user: User | None, puzzle_id: str) -> PuzzleAttempt | None:
+    """A signed-in player's attempt so far, refusing further moves once it has an outcome."""
+    if current_user is None:
+        return None
+    attempt = crud_puzzle_attempt.get_for_puzzle(db, current_user.id, puzzle_id)
+    if attempt is not None and attempt.completed:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT, detail="You've already finished this puzzle"
+        )
+    return attempt
+
+
+def _rows_after_move(
+    current_user: User | None, attempt: PuzzleAttempt | None, sent_count: int | None
+) -> int:
+    """Rows on the board once this move lands, counting the fixed starter row. The server
+    counts a signed-in player's own moves; nothing is recorded for guests, so their count stands.
+    """
+    if current_user is None:
+        return sent_count or 0
+    return (len(attempt.guesses) if attempt else 0) + 2
 
 
 # --- stats -------------------------------------------------------------
@@ -133,9 +158,11 @@ def word_guess(
     row = _get_or_generate_puzzle(db, "word", body.puzzle_id)
     answer = row.data["answer"]
     logging.getLogger("uvicorn").info(f"Word Guess Route: Answer={answer}")
+    attempt = _open_attempt(db, current_user, body.puzzle_id)
     grades = puzzle_logic.grade_word(body.guess, answer)
     won = body.guess.casefold() == answer.casefold()
-    lost = not won and body.attempt_count >= puzzle_logic.WORD_MAX_ATTEMPTS
+    rows = _rows_after_move(current_user, attempt, body.attempt_count)
+    lost = not won and rows >= puzzle_logic.WORD_MAX_ATTEMPTS
 
     if current_user is not None:
         crud_puzzle_attempt.record_attempt(
@@ -155,9 +182,25 @@ def word_guess(
 
 
 @router.get("/sudoku", response_model=SudokuPuzzlePublic)
-def get_sudoku_puzzle(db: Session = Depends(deps.get_db)) -> SudokuPuzzlePublic:
+def get_sudoku_puzzle(
+    db: Session = Depends(deps.get_db),
+    current_user: User | None = Depends(deps.get_optional_current_user),
+) -> SudokuPuzzlePublic:
     row = _get_or_generate_puzzle(db, "sudoku", None)
-    return SudokuPuzzlePublic(puzzle_id=f"sudoku-{row.date.isoformat()}", puzzle=row.data["puzzle"])
+    puzzle_id = f"sudoku-{row.date.isoformat()}"
+
+    # Placements aren't stored, so only a won game resumes: its board is the solution.
+    attempt = None
+    if current_user is not None:
+        attempt = crud_puzzle_attempt.get_for_puzzle(db, current_user.id, puzzle_id)
+    won = attempt is not None and attempt.won
+
+    return SudokuPuzzlePublic(
+        puzzle_id=puzzle_id,
+        puzzle=row.data["puzzle"],
+        won=won,
+        board=row.data["solution"] if won else None,
+    )
 
 
 @router.post("/sudoku/move", response_model=SudokuMoveResult)
@@ -224,7 +267,10 @@ def get_memory_puzzle(db: Session = Depends(deps.get_db)) -> MemoryPuzzlePublic 
     if row is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No memory puzzle seeded")
     symbols = row.data["symbols"]
-    return MemoryPuzzlePublic(puzzle_id=f"memory-{uuid.uuid4()}", size=len(symbols) * 2)
+    # The deck is shuffled from the id, so one id per day deals everyone the same deck.
+    return MemoryPuzzlePublic(
+        puzzle_id=f"memory-{puzzle_logic.today().isoformat()}", size=len(symbols) * 2
+    )
 
 
 @router.post("/memory/reveal", response_model=MemoryRevealResult)
@@ -233,8 +279,14 @@ def memory_reveal(
     db: Session = Depends(deps.get_db),
     current_user: User | None = Depends(deps.get_optional_current_user),
 ) -> MemoryRevealResult | HTTPException:
-    if not body.puzzle_id.startswith("memory-"):
+    deal_date = puzzle_logic.dated_puzzle(body.puzzle_id, "memory")
+    if deal_date is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid memory puzzle id")
+    if deal_date > puzzle_logic.today():
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"No memory puzzle for {deal_date.isoformat()}",
+        )
     row = crud_puzzle.get_by_game_variant(db, "memory", 0)
     if row is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No memory puzzle seeded")
@@ -253,30 +305,57 @@ def memory_reveal(
 
 
 @router.get("/cipher", response_model=CipherPuzzlePublic)
-def get_cipher_puzzle(db: Session = Depends(deps.get_db)) -> CipherPuzzlePublic:
+def get_cipher_puzzle(
+    db: Session = Depends(deps.get_db),
+    current_user: User | None = Depends(deps.get_optional_current_user),
+) -> CipherPuzzlePublic:
     row = _get_or_generate_puzzle(db, "cipher", None)
     answer = row.data["digits"]
+    puzzle_id = f"cipher-{row.date.isoformat()}"
+
+    # Signed-in players resume where they left off, finished or not.
+    attempt = None
+    if current_user is not None:
+        attempt = crud_puzzle_attempt.get_for_puzzle(db, current_user.id, puzzle_id)
+    won = attempt is not None and attempt.won
+    lost = attempt is not None and attempt.completed and not attempt.won
+    attempts = []
+    for code in attempt.guesses if attempt else []:
+        values = puzzle_logic.decode_cipher(code)
+        feedback = puzzle_logic.cipher_feedback(values, answer)
+        attempts.append(
+            CipherAttemptPublic(attempt=values, exact=feedback["exact"], close=feedback["close"])
+        )
+
     return CipherPuzzlePublic(
-        puzzle_id=f"cipher-{row.date.isoformat()}",
+        puzzle_id=puzzle_id,
         slots=len(answer),
         max_attempts=puzzle_logic.CIPHER_MAX_ATTEMPTS,
         initial_attempt=puzzle_logic.CIPHER_STARTER,
         initial_feedback=CipherFeedback(
             **puzzle_logic.cipher_feedback(puzzle_logic.CIPHER_STARTER, answer)
         ),
+        attempts=attempts,
+        won=won,
+        lost=lost,
+        answer=answer if lost else None,
     )
 
 
-@router.post("/cipher/attempt", response_model=CipherFeedback)
+@router.post("/cipher/attempt", response_model=CipherAttemptResult)
 def cipher_attempt(
     body: CipherAttemptCreate,
     db: Session = Depends(deps.get_db),
     current_user: User | None = Depends(deps.get_optional_current_user),
-) -> CipherFeedback:
+) -> CipherAttemptResult:
     row = _get_or_generate_puzzle(db, "cipher", body.puzzle_id)
     answer = row.data["digits"]
+    attempt = _open_attempt(db, current_user, body.puzzle_id)
 
     feedback = puzzle_logic.cipher_feedback(body.attempt, answer)
+    won = feedback["won"]
+    rows = _rows_after_move(current_user, attempt, body.attempt_count)
+    lost = not won and rows >= puzzle_logic.CIPHER_MAX_ATTEMPTS
 
     if current_user is not None:
         crud_puzzle_attempt.record_attempt(
@@ -284,8 +363,9 @@ def cipher_attempt(
             current_user.id,
             "cipher",
             body.puzzle_id,
-            won=feedback["won"],
-            completed=feedback["won"],
+            won=won,
+            completed=won or lost,
+            guess=puzzle_logic.encode_cipher(body.attempt),
         )
 
-    return CipherFeedback(**feedback)
+    return CipherAttemptResult(**feedback, lost=lost, answer=answer if lost else None)

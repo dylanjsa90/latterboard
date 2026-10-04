@@ -1,6 +1,6 @@
 # Cross-repo contract
 
-Last updated: 2026-09-30
+Last updated: 2026-10-03
 
 webcade (`~/projects/webcade`, React) is latterboard's (`~/projects/latterboard`, FastAPI) only
 client. This file is `docs/reference/cross-repo-contract.md` in both repos: keep the two copies
@@ -50,16 +50,22 @@ have a random password, which password recovery can replace.
 | ---- | ------- | -------- |
 | `GET /word` | — | `{puzzle_id, word_length, max_attempts, initial_guess, initial_grade: Grade[], guesses: [{guess, grades}], won, lost, answer?}` |
 | `POST /word/hint` | `{puzzle_id}` | `{letter}` |
-| `POST /word/guess` | `{puzzle_id, guess (5 chars), attempt_count}` | `{grades, won, lost, answer?}` |
-| `GET /sudoku` | — | `{puzzle_id, puzzle: int[81]}` |
+| `POST /word/guess` | `{puzzle_id, guess (5 chars), attempt_count}` | `{grades, won, lost, answer?}`; 409 once the signed-in player's word has an outcome |
+| `GET /sudoku` | — | `{puzzle_id, puzzle: int[81], won, board: int[81]?}`; `board` (the solution) only when the signed-in player already won |
 | `POST /sudoku/move` | `{puzzle_id, index 0-80, value 1-9, board}` | `{correct, completed}` |
 | `POST /sudoku/hint` | `{puzzle_id, index, board}` | `{value, completed}` |
-| `GET /memory` | — | `{puzzle_id, size}` |
-| `POST /memory/reveal` | `{puzzle_id, index}` | `{symbol}` |
-| `GET /cipher` | — | `{puzzle_id, slots, max_attempts, initial_attempt: int[], initial_feedback}` |
-| `POST /cipher/attempt` | `{puzzle_id, attempt: int[4]}` | `CipherFeedback {exact, close, won}` |
+| `GET /memory` | — | `{puzzle_id, size}`; `puzzle_id` is `memory-{today}`, one deck per day |
+| `POST /memory/reveal` | `{puzzle_id, index}` | `{symbol}`; 400 for an undated id |
+| `GET /cipher` | — | `{puzzle_id, slots, max_attempts, initial_attempt: int[], initial_feedback, attempts: [{attempt, exact, close}], won, lost, answer?: int[]}` |
+| `POST /cipher/attempt` | `{puzzle_id, attempt: int[4], attempt_count?}` | `{exact, close, won, lost, answer?: int[]}`; 409 once the signed-in player's cipher has an outcome |
 | `GET /me/stats` | — | `{total_solved, today_solved, streak, best_streak, games: [{game, played, won}], recent: [{game, solved_on, solved_at, result}]}` |
 | `GET /me/history?skip&limit` | — | `{items: [{game, puzzle_id, won, attempt_count, completed_at}], total}` |
+
+The server decides word, sudoku, and cipher outcomes (webcade ADR 004). `attempt_count` counts
+board rows including the fixed starter and the move being sent (`max_attempts` rows in all), and
+is used only for guests: a signed-in player's moves are counted by the server, which also
+returns them on `GET` so word and cipher resume. Stats and history include lost puzzles
+(`won: false`). Memory's outcome stays on the client.
 
 ### Scores (`/scores`)
 | Call | Request | Response |

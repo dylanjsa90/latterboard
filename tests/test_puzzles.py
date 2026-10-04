@@ -121,13 +121,18 @@ def test_word_guess_invalid_length_rejected(client):
     assert r.status_code == 422
 
 
-def _word_guess(client, headers, puzzle_id: str, guess: str, attempt_count: int):
+def _word_guess(client, headers, puzzle_id: str, guess: str, attempt_count: int) -> dict:
     r = client.post(
         f"{BASE}/word/guess",
         headers=headers,
         json={"puzzle_id": puzzle_id, "guess": guess, "attempt_count": attempt_count},
     )
     assert r.status_code == 200
+    return r.json()
+
+
+def _wrong_word(answer: str) -> str:
+    return "ZZZZZ" if answer != "ZZZZZ" else "YYYYY"
 
 
 def test_word_puzzle_resumes_signed_in_guesses(client, auth_headers):
@@ -146,14 +151,43 @@ def test_word_puzzle_resumes_signed_in_guesses(client, auth_headers):
 def test_word_puzzle_reports_finished_game(client, auth_headers, won):
     puzzle = client.get(f"{BASE}/word", headers=auth_headers).json()
     answer = _puzzle_answer("word", puzzle["puzzle_id"], "answer")
-    guess = answer if won else ("ZZZZZ" if answer != "ZZZZZ" else "YYYYY")
-    _word_guess(client, auth_headers, puzzle["puzzle_id"], guess, 6)
+    # The starter fills the first of six rows, so losing takes five wrong guesses.
+    guesses = [answer] if won else [_wrong_word(answer)] * 5
+    for count, guess in enumerate(guesses, start=2):
+        _word_guess(client, auth_headers, puzzle["puzzle_id"], guess, count)
 
     data = client.get(f"{BASE}/word", headers=auth_headers).json()
-    assert [g["guess"] for g in data["guesses"]] == [guess.upper()]
+    assert [g["guess"] for g in data["guesses"]] == [g.upper() for g in guesses]
     assert data["won"] is won
     assert data["lost"] is not won
     assert data["answer"] == (None if won else answer)
+
+
+def test_signed_in_word_loss_uses_the_server_count(client, auth_headers):
+    puzzle = client.get(f"{BASE}/word", headers=auth_headers).json()
+    answer = _puzzle_answer("word", puzzle["puzzle_id"], "answer")
+
+    # A client claiming its last row can't end the game on the first guess.
+    results = [
+        _word_guess(client, auth_headers, puzzle["puzzle_id"], _wrong_word(answer), 6)
+        for _ in range(5)
+    ]
+    assert [r["lost"] for r in results] == [False] * 4 + [True]
+    assert results[-1]["answer"] == answer
+    assert results[0]["answer"] is None
+
+
+def test_finished_word_rejects_more_guesses(client, auth_headers):
+    puzzle = client.get(f"{BASE}/word", headers=auth_headers).json()
+    answer = _puzzle_answer("word", puzzle["puzzle_id"], "answer")
+    _word_guess(client, auth_headers, puzzle["puzzle_id"], answer, 2)
+
+    r = client.post(
+        f"{BASE}/word/guess",
+        headers=auth_headers,
+        json={"puzzle_id": puzzle["puzzle_id"], "guess": answer, "attempt_count": 3},
+    )
+    assert r.status_code == 409
 
 
 def test_anonymous_word_puzzle_has_no_saved_guesses(client, auth_headers):
@@ -241,6 +275,37 @@ def test_sudoku_hint(client):
     assert r.json()["value"] == solution[0]
 
 
+def _solve_sudoku(client, headers, puzzle_id: str) -> list[int]:
+    solution = _puzzle_answer("sudoku", puzzle_id, "solution")
+    almost_solved = list(solution)
+    almost_solved[80] = 0
+    r = client.post(
+        f"{BASE}/sudoku/move",
+        headers=headers,
+        json={"puzzle_id": puzzle_id, "index": 80, "value": solution[80], "board": almost_solved},
+    )
+    assert r.json()["completed"] is True
+    return solution
+
+
+def test_sudoku_puzzle_resumes_a_won_game(client, auth_headers):
+    puzzle = client.get(f"{BASE}/sudoku", headers=auth_headers).json()
+    assert (puzzle["won"], puzzle["board"]) == (False, None)
+    solution = _solve_sudoku(client, auth_headers, puzzle["puzzle_id"])
+
+    data = client.get(f"{BASE}/sudoku", headers=auth_headers).json()
+    assert data["won"] is True
+    assert data["board"] == solution
+
+
+def test_anonymous_sudoku_puzzle_is_never_resumed(client, auth_headers):
+    puzzle = client.get(f"{BASE}/sudoku").json()
+    _solve_sudoku(client, auth_headers, puzzle["puzzle_id"])
+
+    data = client.get(f"{BASE}/sudoku").json()
+    assert (data["won"], data["board"]) == (False, None)
+
+
 # --- memory -------------------------------------------------------------
 
 
@@ -248,8 +313,23 @@ def test_get_memory_puzzle(client):
     r = client.get(f"{BASE}/memory")
     assert r.status_code == 200
     data = r.json()
-    assert data["puzzle_id"].startswith("memory-")
+    assert data["puzzle_id"] == f"memory-{today().isoformat()}"
     assert data["size"] == 12
+
+
+def test_memory_deck_is_the_same_all_day(client):
+    first = client.get(f"{BASE}/memory").json()
+    second = client.get(f"{BASE}/memory").json()
+    assert first["puzzle_id"] == second["puzzle_id"]
+
+
+@pytest.mark.parametrize(
+    ("puzzle_id", "status"),
+    [(f"memory-{(today() + timedelta(days=1)).isoformat()}", 404), ("memory-not-a-date", 400)],
+)
+def test_memory_reveal_rejects_future_and_undated_ids(client, puzzle_id, status):
+    r = client.post(f"{BASE}/memory/reveal", json={"puzzle_id": puzzle_id, "index": 0})
+    assert r.status_code == status
 
 
 def test_memory_reveal_matches_seeded_deck(client):
@@ -303,6 +383,96 @@ def test_cipher_attempt_out_of_range_rejected(client):
         f"{BASE}/cipher/attempt", json={"puzzle_id": "cipher-0", "attempt": [0, 1, 2, 9]}
     )
     assert r.status_code == 422
+
+
+def _wrong_code(answer: list[int]) -> list[int]:
+    # A cipher's digits are distinct, so swapping two of them always misses.
+    return [answer[1], answer[0], *answer[2:]]
+
+
+def _cipher_attempt(client, headers, puzzle_id: str, attempt: list[int], **extra) -> dict:
+    r = client.post(
+        f"{BASE}/cipher/attempt",
+        headers=headers,
+        json={"puzzle_id": puzzle_id, "attempt": attempt, **extra},
+    )
+    assert r.status_code == 200
+    return r.json()
+
+
+def _lose_cipher(client, headers) -> tuple[str, list[int], list[dict]]:
+    puzzle = client.get(f"{BASE}/cipher", headers=headers).json()
+    answer = _puzzle_answer("cipher", puzzle["puzzle_id"], "digits")
+    # The starter fills the first of eight rows, so losing takes seven misses.
+    results = [
+        _cipher_attempt(client, headers, puzzle["puzzle_id"], _wrong_code(answer))
+        for _ in range(7)
+    ]
+    return puzzle["puzzle_id"], answer, results
+
+
+def test_signed_in_cipher_is_lost_at_the_limit(client, auth_headers):
+    puzzle_id, answer, results = _lose_cipher(client, auth_headers)
+    assert [r["lost"] for r in results] == [False] * 6 + [True]
+    assert results[-1]["answer"] == answer
+    assert results[0]["answer"] is None
+
+    r = client.post(
+        f"{BASE}/cipher/attempt",
+        headers=auth_headers,
+        json={"puzzle_id": puzzle_id, "attempt": answer},
+    )
+    assert r.status_code == 409
+
+
+def test_guest_cipher_loss_uses_the_sent_count(client):
+    puzzle = client.get(f"{BASE}/cipher").json()
+    answer = _puzzle_answer("cipher", puzzle["puzzle_id"], "digits")
+    wrong = _wrong_code(answer)
+
+    early = _cipher_attempt(client, {}, puzzle["puzzle_id"], wrong, attempt_count=7)
+    last = _cipher_attempt(client, {}, puzzle["puzzle_id"], wrong, attempt_count=8)
+    assert (early["lost"], early["answer"]) == (False, None)
+    assert (last["lost"], last["answer"]) == (True, answer)
+
+
+def test_cipher_puzzle_resumes_signed_in_attempts(client, auth_headers):
+    puzzle = client.get(f"{BASE}/cipher", headers=auth_headers).json()
+    assert puzzle["attempts"] == []
+    answer = _puzzle_answer("cipher", puzzle["puzzle_id"], "digits")
+    wrong = _wrong_code(answer)
+    feedback = _cipher_attempt(client, auth_headers, puzzle["puzzle_id"], wrong)
+
+    data = client.get(f"{BASE}/cipher", headers=auth_headers).json()
+    assert data["attempts"] == [
+        {"attempt": wrong, "exact": feedback["exact"], "close": feedback["close"]}
+    ]
+    assert (data["won"], data["lost"], data["answer"]) == (False, False, None)
+
+
+def test_cipher_puzzle_reports_a_lost_game(client, auth_headers):
+    _, answer, _ = _lose_cipher(client, auth_headers)
+
+    data = client.get(f"{BASE}/cipher", headers=auth_headers).json()
+    assert len(data["attempts"]) == 7
+    assert (data["won"], data["lost"], data["answer"]) == (False, True, answer)
+
+
+def test_anonymous_cipher_puzzle_has_no_saved_attempts(client, auth_headers):
+    _lose_cipher(client, auth_headers)
+
+    data = client.get(f"{BASE}/cipher").json()
+    assert (data["attempts"], data["lost"]) == ([], False)
+
+
+def test_generated_cipher_never_matches_the_starter(monkeypatch):
+    from app.game import puzzle_seed_data
+    from app.game.puzzles import CIPHER_STARTER
+
+    draws = iter([list(CIPHER_STARTER), [5, 4, 3, 2]])
+    monkeypatch.setattr(puzzle_seed_data.random, "sample", lambda *_: next(draws))
+    assert puzzle_seed_data.generate_cipher_digits() == [5, 4, 3, 2]
+    assert CIPHER_STARTER not in puzzle_seed_data.CIPHERS
 
 
 # --- generation past the seeded bank ---------------------------------------
@@ -531,3 +701,12 @@ def test_history_rejects_out_of_range_limit(client, auth_headers):
     for limit in (0, 101):
         r = client.get(f"{BASE}/me/history?limit={limit}", headers=auth_headers)
         assert r.status_code == 422
+
+
+def test_cipher_loss_counts_in_stats_and_history(client, auth_headers):
+    puzzle_id, _, _ = _lose_cipher(client, auth_headers)
+
+    stats = client.get(f"{BASE}/me/stats", headers=auth_headers).json()
+    assert stats["games"] == [{"game": "cipher", "played": 1, "won": 0}]
+    history = client.get(f"{BASE}/me/history", headers=auth_headers).json()
+    assert [(i["puzzle_id"], i["won"]) for i in history["items"]] == [(puzzle_id, False)]

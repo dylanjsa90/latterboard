@@ -3,7 +3,7 @@
 > FastAPI backend for webcade's browser games: daily puzzles, snake scores and leaderboards,
 > head-to-head matches with matchmaking and a computer opponent, and a websocket for live play.
 
-Last updated: 2026-09-30
+Last updated: 2026-10-03
 
 Python 3.10+ with uv, SQLAlchemy, Redis, JWT auth. SQLite locally; deploys to a VM as a Docker
 container built from `Dockerfile`. Setup, Docker, and the production server are in `README.md`.
@@ -66,9 +66,9 @@ Paths are in backticks, not `@` imports, so they load only when read.
 ### Puzzles
 - Future-dated puzzle ids must return 404. Otherwise the endpoints leak upcoming answers and create rows for arbitrary dates.
 - `PuzzleAttempt.puzzle_id` is a string key like `"word-2026-09-11"`, not a foreign key to `Puzzle.id`.
+- The server decides word, sudoku, and cipher outcomes and counts a signed-in player's moves itself; a client's `attempt_count` is trusted only for guests, who record nothing. `PuzzleAttempt.guesses` holds word guesses or cipher codes (`encode_cipher`). Why: webcade's `docs/decisions/004-daily-puzzle-outcomes.md`.
 - `app/game/puzzle_seed_data.py`: use `shuffled_words()`, which returns a copy. Don't shuffle or mutate the shared word list; `wordle.py` uses it too.
 - Known open issues (not fixed yet):
-  - `attempt_count` comes from the client, so anyone can send 6 and get today's word answer.
   - Word guesses aren't checked with `wordle.is_valid_word`.
   - `(user_id, puzzle_id)` has no unique constraint.
 

@@ -121,6 +121,9 @@ SUDOKU_CELLS = 81
 class SudokuPuzzlePublic(BaseModel):
     puzzle_id: str
     puzzle: list[int] = Field(min_length=SUDOKU_CELLS, max_length=SUDOKU_CELLS)
+    # A signed-in player's board when they resume; only a won (solved) board is kept today.
+    won: bool = False
+    board: list[int] | None = None
 
 
 class SudokuMoveCreate(BaseModel):
@@ -172,12 +175,29 @@ class CipherFeedback(BaseModel):
     won: bool
 
 
+class CipherAttemptResult(CipherFeedback):
+    # The daily puzzle's verdict; match races share CipherFeedback and have no limit.
+    lost: bool
+    answer: list[int] | None = None
+
+
+class CipherAttemptPublic(BaseModel):
+    attempt: list[int]
+    exact: int
+    close: int
+
+
 class CipherPuzzlePublic(BaseModel):
     puzzle_id: str
     slots: int
     max_attempts: int
     initial_attempt: list[int]
     initial_feedback: CipherFeedback
+    # A signed-in player's attempts so far, excluding the starter, so they resume.
+    attempts: list[CipherAttemptPublic] = []
+    won: bool = False
+    lost: bool = False
+    answer: list[int] | None = None
 
 
 class CipherAttempt(BaseModel):
@@ -193,3 +213,6 @@ class CipherAttempt(BaseModel):
 
 class CipherAttemptCreate(CipherAttempt):
     puzzle_id: str
+    # Rows on the board including the starter and this attempt, like WordGuessCreate's.
+    # Only a guest's count is used: the server counts a signed-in player's own attempts.
+    attempt_count: int | None = Field(default=None, ge=0)
