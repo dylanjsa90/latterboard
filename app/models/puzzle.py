@@ -46,7 +46,7 @@ class PuzzleAttempt(Base):
     completed: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
     completed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
-    # Word guesses in play order, excluding the fixed starter word.
+    # Moves in play order, excluding the fixed starter: word guesses, or cipher attempts as digit strings (app.game.puzzles.encode_cipher).
     guesses: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
 
 
