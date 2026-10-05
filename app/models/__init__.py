@@ -4,6 +4,7 @@ from .puzzle import Puzzle, PuzzleAttempt
 from .user import User
 from .user_avatar import UserAvatar
 from .user_identity import UserIdentity
+from .vocab import VocabRoom, VocabSavedWord
 
 __all__ = [
     "User",
@@ -16,4 +17,6 @@ __all__ = [
     "MatchPuzzle",
     "Puzzle",
     "PuzzleAttempt",
+    "VocabRoom",
+    "VocabSavedWord",
 ]
