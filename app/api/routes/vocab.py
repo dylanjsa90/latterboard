@@ -6,6 +6,8 @@ socket topic `vocab:{code}` tells its players to refetch `GET /vocab/rooms/{code
 Nothing here runs on a timer: clients refetch at a round's deadline themselves, and the
 frame goes out from the request's `BackgroundTasks`, never a detached task (see the
 `app/api/bot_turn.py` docstring for why).
+
+`GET /vocab/daily-word` is the one public call: the home page's word of the day.
 """
 
 from collections.abc import Callable, Iterator
@@ -18,10 +20,11 @@ from sqlalchemy.orm import Session
 from app.api import deps
 from app.connection_manager import manager
 from app.crud.vocab import crud_vocab
-from app.game import vocab
-from app.game.vocab_words import WORDS
+from app.game import puzzles, vocab
+from app.game.vocab_words import WORDS, daily_word
 from app.models import User
 from app.schemas.vocab import (
+    DailyWord,
     ReviewCreate,
     RoomAction,
     RoomCreate,
@@ -146,6 +149,25 @@ def room_action(
         )
 
     return _mutate(db, background_tasks, code.upper(), player_id, change)
+
+
+# --- word of the day -----------------------------------------------------
+
+
+@router.get("/daily-word", response_model=DailyWord)
+def get_daily_word() -> DailyWord:
+    """Today's word (UTC, the daily puzzles' day). Public: the vocab home is."""
+    day = puzzles.today()
+    w = daily_word(day)
+    return DailyWord(
+        id=w.id,
+        date=day.isoformat(),
+        word=w.word,
+        pronunciation=w.pronunciation,
+        pos=w.pos,
+        definition=w.definition,
+        example=w.example,
+    )
 
 
 # --- wordbook ------------------------------------------------------------

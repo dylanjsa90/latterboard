@@ -149,12 +149,14 @@ and creating a room deletes those a week past that (404).
 | `GET /words` | — | `{saved: SavedWord[] (soonest due first), word_count}` |
 | `PUT /words/{id}` / `DELETE /words/{id}` | — | 204; saving again changes nothing; 400 unknown word |
 | `POST /words/{id}/review` | `{known: bool}` | 204; known moves up the ladder (due in 1, 3, 7, 14, 30, 60 days), a miss resets to level 0 (due in 10 min); 404 not saved |
+| `GET /daily-word` (public) | — | `DailyWord`: the word of the day for today's UTC date, cycling through the curriculum by day |
 
 - `RoomSnapshot` = `{game: GameView, server_now}`.
 - `GameView` = `{code, mode, phase: lobby | question | feedback | results, round (0-4), generation, deadline, revision, rematch_requested, players: Seat[], question, mine?, history: [{question (revealed), answers: [{name, choice?, points?, correct?, ms?}]}]}`. `revision` only grows: drop a reply older than the one you have.
 - `Seat` = `{id: "me" | "opponent", name (username), ready, seen, answered, score}`. Scores count only resolved rounds.
 - `question` = `{id, word, pos, definition, difficulty: Foundation | Intermediate | Advanced, kind: usage | context, prompt, options, correct, reasons, example, synonyms, nuance}`. Until the round resolves (`phase` feedback or results) `correct` through `nuance` are null, and so are `id`, `word`, `pos`, `definition` for a `context` question, whose answer is the word.
 - `SavedWord` = `{id, word, pos, definition, difficulty, example, synonyms, nuance, due, level (0-6)}`. Word ids are stable: wordbooks store them.
+- `DailyWord` = `{id, date (YYYY-MM-DD, UTC), word, pronunciation (IPA), pos, definition, example}`.
 - A correct answer scores 100 plus `max(0, 5 - floor(ms / 8000))` speed points, `ms` counted from the round start; wrong or missing answers score 0.
 
 ### WebSocket `/ws/{topic}?token=<access_token>`

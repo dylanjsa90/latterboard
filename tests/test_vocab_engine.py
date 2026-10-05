@@ -1,11 +1,12 @@
 """Vocab Challenger's pure rules (app/game/vocab.py), ported from vocab-app's engine.test.ts."""
 
 import copy
+from datetime import date, timedelta
 
 import pytest
 
 from app.game import vocab
-from app.game.vocab_words import WORDS
+from app.game.vocab_words import WORDS, daily_word
 
 
 def player(player_id: str) -> vocab.Player:
@@ -40,6 +41,22 @@ def test_word_ids_are_stable_and_games_mix_difficulties():
     g = duel()
     assert len(set(g["ids"])) == vocab.ROUNDS
     assert len({WORDS[i].difficulty for i in g["ids"]}) == 3
+
+
+def test_daily_word_changes_each_day_and_cycles_through_every_word():
+    day = date(2026, 10, 5)
+    assert daily_word(day) == daily_word(date(2026, 10, 5))
+    assert daily_word(day + timedelta(days=1)) != daily_word(day)
+    cycle = [daily_word(day + timedelta(days=i)) for i in range(len(WORDS))]
+    assert {w.id for w in cycle} == {w.id for w in WORDS}
+    assert daily_word(day + timedelta(days=len(WORDS))) == daily_word(day)
+
+
+def test_every_word_has_a_pronunciation():
+    for word in WORDS:
+        assert len(word.pronunciation) > 2, word.word
+        assert word.pronunciation.startswith("/"), word.word
+        assert word.pronunciation.endswith("/"), word.word
 
 
 # One test rather than parametrized: conftest rebuilds the database before every test.

@@ -1,12 +1,13 @@
 """Vocab Challenger rooms and wordbooks over HTTP (app/api/routes/vocab.py)."""
 
 import time
-from datetime import timedelta
+from datetime import date, timedelta
 from typing import Any
 
 from app.crud.vocab import crud_vocab
 from app.database import SessionLocal
-from app.game import vocab
+from app.game import puzzles, vocab
+from app.game.vocab_words import daily_word
 from app.models import User, VocabRoom
 from app.utils import utcnow
 
@@ -389,3 +390,21 @@ def test_wordbook_rejects_unknown_words_and_guests(client, auth_headers):
     )
     assert client.put(f"{BASE}/words/-1", headers=auth_headers).status_code == 400
     assert client.get(f"{BASE}/words").status_code == 401
+
+
+def test_daily_word_is_public_and_hides_answers(client, monkeypatch):
+    day = date(2026, 10, 5)
+    monkeypatch.setattr(puzzles, "today", lambda: day)
+    r = client.get(f"{BASE}/daily-word")
+    assert r.status_code == 200
+    body = r.json()
+    expected = daily_word(day)
+    assert body == {
+        "id": expected.id,
+        "date": "2026-10-05",
+        "word": expected.word,
+        "pronunciation": expected.pronunciation,
+        "pos": expected.pos,
+        "definition": expected.definition,
+        "example": expected.example,
+    }

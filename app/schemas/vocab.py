@@ -119,3 +119,16 @@ class SavedWord(BaseModel):
 class Wordbook(BaseModel):
     saved: list[SavedWord]
     word_count: int
+
+
+class DailyWord(BaseModel):
+    """The word of the day: only what the home card shows, never a question's answer."""
+
+    id: int
+    # The UTC date it's the word for, YYYY-MM-DD.
+    date: str
+    word: str
+    pronunciation: str
+    pos: str
+    definition: str
+    example: str
