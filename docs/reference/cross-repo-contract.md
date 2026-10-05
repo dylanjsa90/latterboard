@@ -137,7 +137,8 @@ later), and nothing else moves a room. webcade refetches `GET /rooms/{code}` on 
 `room_changed` (see WebSocket below), just after each `deadline` (so whoever asks first moves
 the room for both), every 5 s in a duel as a heartbeat for `seen`, and every 1.2 s in a duel
 while the socket is down. Times are **epoch ms**; compare `deadline` and `seen` against
-`server_now`, not the device clock. Rooms expire 24 h after creation (410).
+`server_now`, not the device clock. Rooms expire 24 h after creation (410),
+and creating a room deletes those a week past that (404).
 
 | Call | Request | Response |
 | ---- | ------- | -------- |

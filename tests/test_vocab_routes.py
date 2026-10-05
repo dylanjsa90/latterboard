@@ -1,12 +1,14 @@
 """Vocab Challenger rooms and wordbooks over HTTP (app/api/routes/vocab.py)."""
 
 import time
+from datetime import timedelta
 from typing import Any
 
 from app.crud.vocab import crud_vocab
 from app.database import SessionLocal
 from app.game import vocab
 from app.models import User, VocabRoom
+from app.utils import utcnow
 
 BASE = "/api/v1/vocab"
 
@@ -311,6 +313,34 @@ def test_room_changed_reaches_players_only_for_news(
         _assert_no_frame_before_echo(host_ws)
         # The stranger was never subscribed, so only its own echoes ever arrived.
         _assert_no_frame_before_echo(stranger_ws)
+
+
+def _backdate(code: str, days: float) -> None:
+    """Make a room `days` old, in both its rules' clock and its row's created_at."""
+    _set_state(code, created=vocab.now_ms() - int(days * 24 * 60 * 60 * 1000))
+    db = SessionLocal()
+    try:
+        row = db.get(VocabRoom, code)
+        assert row is not None
+        row.created_at = utcnow() - timedelta(days=days)
+        db.commit()
+    finally:
+        db.close()
+
+
+def test_creating_a_room_deletes_rooms_a_week_past_expiry(client, inviter_headers):
+    stale = _create(client, inviter_headers)["code"]
+    recent = _create(client, inviter_headers)["code"]
+    _backdate(stale, 8.5)
+    _backdate(recent, 2)
+
+    _create(client, inviter_headers, "solo")
+
+    r = client.get(f"{BASE}/rooms/{stale}", headers=inviter_headers)
+    assert r.status_code == 404
+    # Expired, but recently enough that its link still says so.
+    r = client.get(f"{BASE}/rooms/{recent}", headers=inviter_headers)
+    assert r.status_code == 410
 
 
 def test_wordbook_save_review_remove(client, inviter_headers, opponent_headers):

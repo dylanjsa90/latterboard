@@ -3,12 +3,13 @@ module loads a room, runs a rule against it, and saves it without losing a concu
 """
 
 import copy
+import logging
 import secrets
 from collections.abc import Callable
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Any, cast
 
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import StaleDataError
 
@@ -23,6 +24,10 @@ from app.utils import utcnow
 # when it changes, so losing a race is routine; the Worker this replaced allowed 8 too.
 MAX_APPLY_ATTEMPTS = 8
 CODE_ATTEMPTS = 5
+# Expired rooms answer 410 for a week, so a late link still says why, then are deleted.
+EXPIRED_ROOM_KEPT = timedelta(days=7)
+
+logger = logging.getLogger(__name__)
 
 
 def _epoch_ms(value: datetime) -> int:
@@ -55,8 +60,24 @@ class CRUDVocab:
             except IntegrityError:
                 db.rollback()
                 continue
-            return _snapshot(g, row.version, player_id, now)
+            snapshot = _snapshot(g, row.version, player_id, now)
+            self._delete_old_rooms(db)
+            return snapshot
         raise VocabError("Could not create an invite. Please try again.", 503)
+
+    def _delete_old_rooms(self, db: Session) -> None:
+        """Delete rooms a week past expiry. Runs as part of creating a room, since
+        latterboard has no timers, and never fails the new room (it's already saved)."""
+        lifetime = timedelta(milliseconds=vocab.ROOM_LIFETIME_MS)
+        cutoff = utcnow() - lifetime - EXPIRED_ROOM_KEPT
+        try:
+            db.query(VocabRoom).filter(VocabRoom.created_at < cutoff).delete(
+                synchronize_session=False
+            )
+            db.commit()
+        except SQLAlchemyError:
+            db.rollback()
+            logger.exception("Could not delete old vocab rooms")
 
     def mutate(
         self,
