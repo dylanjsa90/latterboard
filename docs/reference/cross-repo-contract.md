@@ -129,6 +129,31 @@ last `MATCH_INVITE_LINK_EXPIRY_DAYS` (7), and the link's sender becomes the matc
 | `POST /{token}/claim` (bearer) | — | `MatchPublic` (+ `match_started` to both), reusing an open match the pair already shares; the same match again for its claimer; 400 own link, 409 used by someone else, 410 expired or withdrawn |
 | `DELETE /{token}` (bearer, sender) | — | 204; 409 once used |
 
+### Vocab Challenger (`/vocab`, bearer)
+Five-round solo sessions and two-player duels, addressed by a six-character hex invite `code`
+(case-insensitive in paths). Rooms aren't matches and have no socket: webcade polls `GET
+/rooms/{code}` every 1.2 s, and every room call applies any transition that's due (a round ends
+at its `deadline` or once everyone answered; duel feedback ends 16 s later). Times are **epoch
+ms**; compare `deadline` and `seen` against `server_now`, not the device clock. Rooms expire
+24 h after creation (410).
+
+| Call | Request | Response |
+| ---- | ------- | -------- |
+| `POST /rooms` | `{mode: solo \| duel}` | 201 `RoomSnapshot`; solo starts at round 0, a duel waits in `lobby` |
+| `GET /rooms/{code}` | — | `RoomSnapshot`; also records the caller's `seen`; 403 not a participant, 404, 410 |
+| `POST /rooms/{code}/join` | — | `RoomSnapshot`; rejoining a room you're in just reconnects; 403 solo, 409 full or started |
+| `POST /rooms/{code}/actions` | `{action: ready \| answer \| next \| rematch, generation, round?, choice?}` | `RoomSnapshot`; `ready` toggles; `answer` needs `round` and `choice` (409 stale round or generation, already answered, or past the deadline; 400 bad choice); `next` is solo feedback only; `rematch` restarts once every player asked |
+| `GET /words` | — | `{saved: SavedWord[] (soonest due first), word_count}` |
+| `PUT /words/{id}` / `DELETE /words/{id}` | — | 204; saving again changes nothing; 400 unknown word |
+| `POST /words/{id}/review` | `{known: bool}` | 204; known moves up the ladder (due in 1, 3, 7, 14, 30, 60 days), a miss resets to level 0 (due in 10 min); 404 not saved |
+
+- `RoomSnapshot` = `{game: GameView, server_now}`.
+- `GameView` = `{code, mode, phase: lobby | question | feedback | results, round (0-4), generation, deadline, revision, rematch_requested, players: Seat[], question, mine?, history: [{question (revealed), answers: [{name, choice?, points?, correct?, ms?}]}]}`. `revision` only grows: drop a reply older than the one you have.
+- `Seat` = `{id: "me" | "opponent", name (username), ready, seen, answered, score}`. Scores count only resolved rounds.
+- `question` = `{id, word, pos, definition, difficulty: Foundation | Intermediate | Advanced, kind: usage | context, prompt, options, correct, reasons, example, synonyms, nuance}`. Until the round resolves (`phase` feedback or results) `correct` through `nuance` are null, and so are `id`, `word`, `pos`, `definition` for a `context` question, whose answer is the word.
+- `SavedWord` = `{id, word, pos, definition, difficulty, example, synonyms, nuance, due, level (0-6)}`. Word ids are stable: wordbooks store them.
+- A correct answer scores 100 plus `max(0, 5 - floor(ms / 8000))` speed points, `ms` counted from the round start; wrong or missing answers score 0.
+
 ### WebSocket `/ws/{topic}?token=<access_token>`
 Browsers can't set headers on a websocket, so the token rides in the query string. A socket joins
 `{topic}` (webcade: `lobby`, or a game id while "available") plus the per-user topic `user:{id}`.

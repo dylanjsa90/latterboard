@@ -9,7 +9,7 @@ contract, `docs/reference/cross-repo-contract.md`.
 | File | Purpose | Key exports |
 | ---- | ------- | ----------- |
 | `app/main.py` | FastAPI app: lifespan (Redis, fastapi-cache, `manager.start/stop`), `/health`, mounts `api_router` at `/api/v1`, and **the websocket `/ws/{game_name}`** (join/leave_match handling) | `app` |
-| `app/api/main.py` | Router aggregation: login, users, scores, matches, matchmaking, invite_links, puzzles, ws | `api_router` |
+| `app/api/main.py` | Router aggregation: login, users, scores, matches, matchmaking, invite_links, puzzles, vocab, ws | `api_router` |
 | `app/api/deps.py` | Request dependencies | `get_db`, `get_current_user`, `get_optional_current_user`, `get_current_user_ws` (token query param), `get_current_active_superuser` |
 | `app/api/routes/login.py` | `/login/*`: password token, `/login/google`, test-token, password recovery/reset | `router` |
 | `app/api/google_sign_in.py` | What `/login/google` and `POST /users/google` share: verify the credential (mapping errors to 401/403/404), mint the token | `PROVIDER`, `verified_identity`, `access_token` |
@@ -42,5 +42,10 @@ contract, `docs/reference/cross-repo-contract.md`.
 | `app/crud/puzzle_attempt.py` | Daily puzzle attempts, stats, streaks | `puzzle_attempt` (`get_for_puzzle`, `get_or_create`, `record_attempt`, `get_stats`, `get_history`) |
 | `app/schemas/match.py` | Match I/O models | `MatchInviteCreate`, `MatchPublic`, `MatchDetail`, `MatchGuessResult`, `RaceDetail`, `RacePlayer`, `RaceGuessOut`, `RaceGuessResult`, `SudokuCoopMoveCreate`, `SudokuCoopMoveResult`, `SudokuCoopDetail`, `PendingInvite` |
 | `app/schemas/puzzle.py` | Puzzle I/O models | `{Word,Sudoku,Memory,Cipher}PuzzlePublic`, `WordGuessCreate`/`WordGuessResult`, `SudokuMoveCreate`/`SudokuMoveResult`, `CipherAttemptCreate`/`CipherFeedback`, `PuzzleStats`, `PuzzleHistory` |
+| `app/api/routes/vocab.py` | `/vocab/*`: Vocab Challenger rooms (create, poll, join, actions) and the wordbook. Rooms aren't matches; clients poll | `router` |
+| `app/game/vocab.py` | **Pure** Vocab Challenger rules, ported from vocab-app's `engine.ts`: rounds, deadlines (epoch ms), scoring, per-player views, review ladder | `make_game`, `join`, `touch`, `apply_action`, `visible`, `full_question`, `next_review`, `VocabError` |
+| `app/game/vocab_words.py` | The 46-word curriculum; a word's id is its index, so append only | `WORDS`, `VocabWord` |
+| `app/crud/vocab.py` | Loads a room, runs a rule, saves it with an optimistic lock (`VocabRoom.version`, replayed on `StaleDataError`); wordbook rows | `crud_vocab` (`create_room`, `mutate`, `wordbook`, `save`, `remove`, `review`) |
+| `app/schemas/vocab.py` | Vocab I/O models | `RoomCreate`, `RoomAction`, `RoomSnapshot`, `GameView`, `Question`, `Wordbook`, `SavedWord` |
 | `app/core/config.py` | Env-driven settings | `settings` (`API_V1_STR`, `REDIS_URL`, `MATCH_MAX_GUESSES`, `MATCH_INVITE_EXPIRY_MINUTES`, `MATCH_INVITE_LINK_EXPIRY_DAYS`, `MATCH_INVITE_LINK_DAILY_LIMIT`, `MATCHMAKING_QUEUE_TTL_SECONDS`, `MATCHMAKING_BOT_WAIT_SECONDS`, `BOT_OPPONENT_ENABLED`, `BOT_SKILL`, `BOT_TURN_DELAY_SECONDS`, `FRONTEND_HOST`, SMTP settings, …) |
 | `tests/conftest.py` | Env overrides before imports, per-test DB reset | fixtures incl. `inviter_headers`, `opponent_headers` |

@@ -1,7 +1,8 @@
 # Latterboard
 
 > FastAPI backend for webcade's browser games: daily puzzles, snake scores and leaderboards,
-> head-to-head matches with matchmaking and a computer opponent, and a websocket for live play.
+> head-to-head matches with matchmaking and a computer opponent, Vocab Challenger rooms and
+> wordbooks, and a websocket for live play.
 
 Last updated: 2026-10-03
 
