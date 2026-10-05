@@ -202,6 +202,16 @@ def advance(g: Game, now: int) -> None:
         next_round(g, now)
 
 
+def _without_seen(g: Game) -> dict[str, Any]:
+    return {**g, "players": [{**p, "seen": 0} for p in g["players"]]}
+
+
+def changed(before: Game, after: Game) -> bool:
+    """Whether the room changed beyond players' `seen`, which every request updates: only
+    that is news worth telling the other player to refetch for."""
+    return _without_seen(before) != _without_seen(after)
+
+
 def participant(g: Game, player_id: str) -> Player:
     for p in g["players"]:
         if p["id"] == player_id:

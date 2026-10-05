@@ -231,7 +231,7 @@ def test_simultaneous_answers_both_land(client, inviter_headers, opponent_header
         assert r.status_code == 200
         assert stale_row.state["players"][0]["answers"] == {}
         # ...so its write hits a stale version and must be replayed, not overwrite it.
-        snapshot = crud_vocab.mutate(
+        snapshot, _ = crud_vocab.mutate(
             db,
             code,
             str(opponent.id),
@@ -251,6 +251,66 @@ def test_simultaneous_answers_both_land(client, inviter_headers, opponent_header
     assert snapshot.game.phase == "feedback"
     players = _state(code)["players"]
     assert [p["answers"]["0"]["choice"] for p in players] == [0, 1]
+
+
+def _join_room_topic(ws, code: str) -> None:
+    assert ws.receive_json()["type"] == "connected"
+    ws.send_json({"type": "join_room", "code": code.lower()})
+    assert ws.receive_json() == {"type": "joined_room", "code": code}
+
+
+def _assert_no_frame_before_echo(ws) -> None:
+    """Frames reach sockets in the order they were published, so if a lobby echo sent
+    now comes back first, nothing was published for this socket before it."""
+    ws.send_text("echo")
+    assert ws.receive_json()["type"] == "message"
+
+
+def test_room_changed_reaches_players_only_for_news(
+    client, auth_headers, inviter_headers, opponent_headers
+):
+    game = _create(client, inviter_headers)
+    code = game["code"]
+    with (
+        client.websocket_connect("/ws/lobby", headers=inviter_headers) as host_ws,
+        client.websocket_connect("/ws/lobby", headers=auth_headers) as stranger_ws,
+    ):
+        _join_room_topic(host_ws, code)
+        assert stranger_ws.receive_json()["type"] == "connected"
+        stranger_ws.send_json({"type": "join_room", "code": code})
+        stranger_ws.send_json({"type": "join_room", "code": "nope"})
+        # The host's own GET only records `seen`: no news.
+        _get(client, inviter_headers, code)
+        _assert_no_frame_before_echo(host_ws)
+        assert stranger_ws.receive_json()["type"] == "message"
+
+        r = client.post(f"{BASE}/rooms/{code}/join", headers=opponent_headers)
+        assert host_ws.receive_json() == {
+            "type": "room_changed",
+            "code": code,
+            "revision": r.json()["game"]["revision"],
+        }
+        _act(client, inviter_headers, game, "ready")
+        assert host_ws.receive_json()["type"] == "room_changed"
+        game = _act(client, opponent_headers, game, "ready").json()["game"]
+        assert host_ws.receive_json()["revision"] == game["revision"]
+
+        r = _act(client, opponent_headers, game, "answer", round=0, choice=0)
+        game = r.json()["game"]
+        assert host_ws.receive_json()["revision"] == game["revision"]
+
+        # A GET after the deadline resolves the round, which is news.
+        _set_state(code, deadline=0)
+        view = _get(client, opponent_headers, code)
+        assert view["phase"] == "feedback"
+        assert host_ws.receive_json()["revision"] == view["revision"]
+
+        host_ws.send_json({"type": "leave_room", "code": code})
+        _act(client, opponent_headers, game, "ready")  # rejected: nothing changes
+        _get(client, opponent_headers, code)
+        _assert_no_frame_before_echo(host_ws)
+        # The stranger was never subscribed, so only its own echoes ever arrived.
+        _assert_no_frame_before_echo(stranger_ws)
 
 
 def test_wordbook_save_review_remove(client, inviter_headers, opponent_headers):

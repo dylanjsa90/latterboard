@@ -1,5 +1,7 @@
 """Vocab Challenger's pure rules (app/game/vocab.py), ported from vocab-app's engine.test.ts."""
 
+import copy
+
 import pytest
 
 from app.game import vocab
@@ -149,6 +151,26 @@ def test_unanswered_round_resolves_at_its_deadline():
     vocab.advance(g, 1000 + vocab.ROUND_MS)
     assert g["phase"] == "feedback"
     assert g["deadline"] == 1000 + vocab.ROUND_MS + vocab.FEEDBACK_MS
+
+
+def test_changed_ignores_seen_but_not_play():
+    g = duel()
+    before = copy.deepcopy(g)
+    vocab.touch(g, "Alice", 5000)
+    assert not vocab.changed(before, g)
+
+    vocab.apply_action(g, "Alice", "ready", 5000)
+    assert vocab.changed(before, g)
+
+    vocab.apply_action(g, "Bob", "ready", 5000)
+    before = copy.deepcopy(g)
+    answer(g, "Alice", 0, 6000)
+    assert vocab.changed(before, g)
+
+    before = copy.deepcopy(g)
+    vocab.advance(g, g["deadline"])
+    assert g["phase"] == "feedback"
+    assert vocab.changed(before, g)
 
 
 def test_solo_feedback_waits_and_next_only_advances_resolved_rounds():

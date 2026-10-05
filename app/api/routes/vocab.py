@@ -1,16 +1,22 @@
 """Vocab Challenger: solo sessions and duels addressed by invite code, plus each
-player's wordbook. Rooms aren't matches and have no socket; clients poll
-`GET /vocab/rooms/{code}`, and each request applies whatever transition is due.
+player's wordbook. Rooms aren't matches. Each request applies whatever transition is
+due, and when that or the request changes the room, a `room_changed` frame on the
+socket topic `vocab:{code}` tells its players to refetch `GET /vocab/rooms/{code}`.
+
+Nothing here runs on a timer: clients refetch at a round's deadline themselves, and the
+frame goes out from the request's `BackgroundTasks`, never a detached task (see the
+`app/api/bot_turn.py` docstring for why).
 """
 
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, Path, status
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Path, status
 from sqlalchemy.orm import Session
 
 from app.api import deps
+from app.connection_manager import manager
 from app.crud.vocab import crud_vocab
 from app.game import vocab
 from app.game.vocab_words import WORDS
@@ -41,6 +47,25 @@ def _player_id(user: User) -> str:
     return str(user.id)
 
 
+def _mutate(
+    db: Session,
+    background_tasks: BackgroundTasks,
+    code: str,
+    player_id: str,
+    change: Callable[[vocab.Game, int], None],
+) -> RoomSnapshot:
+    """Apply `change` to the room and, if that's news, tell everyone watching it."""
+    with _http_errors():
+        snapshot, news = crud_vocab.mutate(db, code, player_id, change)
+    if news:
+        background_tasks.add_task(
+            manager.broadcast,
+            {"type": "room_changed", "code": code, "revision": snapshot.game.revision},
+            topic=f"vocab:{code}",
+        )
+    return snapshot
+
+
 def _known_word(word_id: int) -> int:
     if not 0 <= word_id < len(WORDS):
         raise HTTPException(
@@ -67,21 +92,26 @@ def create_room(
 @router.get("/rooms/{code}", response_model=RoomSnapshot)
 def get_room(
     code: RoomCode,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
 ) -> RoomSnapshot:
     """The room as the player sees it. Also records that they're still here, and
     resolves a round whose deadline has passed."""
     player_id = _player_id(current_user)
-    with _http_errors():
-        return crud_vocab.mutate(
-            db, code.upper(), player_id, lambda g, now: vocab.touch(g, player_id, now)
-        )
+    return _mutate(
+        db,
+        background_tasks,
+        code.upper(),
+        player_id,
+        lambda g, now: vocab.touch(g, player_id, now),
+    )
 
 
 @router.post("/rooms/{code}/join", response_model=RoomSnapshot)
 def join_room(
     code: RoomCode,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
 ) -> RoomSnapshot:
@@ -91,14 +121,14 @@ def join_room(
     def change(g: vocab.Game, now: int) -> None:
         vocab.join(g, vocab.new_player(player_id, current_user.username, now), now)
 
-    with _http_errors():
-        return crud_vocab.mutate(db, code.upper(), player_id, change)
+    return _mutate(db, background_tasks, code.upper(), player_id, change)
 
 
 @router.post("/rooms/{code}/actions", response_model=RoomSnapshot)
 def room_action(
     code: RoomCode,
     body: RoomAction,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
 ) -> RoomSnapshot:
@@ -115,8 +145,7 @@ def room_action(
             generation=body.generation,
         )
 
-    with _http_errors():
-        return crud_vocab.mutate(db, code.upper(), player_id, change)
+    return _mutate(db, background_tasks, code.upper(), player_id, change)
 
 
 # --- wordbook ------------------------------------------------------------

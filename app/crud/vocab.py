@@ -19,8 +19,8 @@ from app.models.vocab import VocabRoom, VocabSavedWord
 from app.schemas.vocab import RoomSnapshot, SavedWord, Wordbook
 from app.utils import utcnow
 
-# Both players poll a room every 1.2 s and each poll saves it (to record `seen`), so
-# losing a race is routine; the Worker this replaced allowed the same 8 replays.
+# Every request saves the room (to record `seen`), and both players refetch together
+# when it changes, so losing a race is routine; the Worker this replaced allowed 8 too.
 MAX_APPLY_ATTEMPTS = 8
 CODE_ATTEMPTS = 5
 
@@ -64,9 +64,9 @@ class CRUDVocab:
         code: str,
         player_id: str,
         change: Callable[[vocab.Game, int], None],
-    ) -> RoomSnapshot:
+    ) -> tuple[RoomSnapshot, bool]:
         """Run `change(game, now)` against the room and save it, returning the
-        player's view.
+        player's view and whether the room changed beyond `seen` (see vocab.changed).
 
         If another request saves the room first, VocabRoom.version turns our write
         into a StaleDataError and we replay `change` on the fresh state instead of
@@ -82,14 +82,21 @@ class CRUDVocab:
             if vocab.expired(g, now):
                 raise VocabError("This room has expired. Create a new challenge.", 410)
             change(g, now)
+            news = vocab.changed(cast(vocab.Game, row.state), g)
             row.state = cast(dict[str, Any], g)
             try:
                 db.commit()
             except StaleDataError:
                 db.rollback()
                 continue
-            return _snapshot(g, row.version, player_id, now)
+            return _snapshot(g, row.version, player_id, now), news
         raise VocabError("The room is busy. Please try again.", 409)
+
+    def is_participant(self, db: Session, code: str, player_id: str) -> bool:
+        row = db.get(VocabRoom, code)
+        return row is not None and any(
+            p["id"] == player_id for p in row.state["players"]
+        )
 
     # --- wordbook ---------------------------------------------------------
 

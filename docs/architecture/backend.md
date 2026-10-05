@@ -1,6 +1,6 @@
 # Backend module map
 
-Last updated: 2026-10-03
+Last updated: 2026-10-05
 
 Where things live in `app/` and what each module exports. Rules for matches, matchmaking, and
 the computer opponent are in `docs/architecture/matches.md`; wire shapes are in the cross-repo
@@ -8,7 +8,7 @@ contract, `docs/reference/cross-repo-contract.md`.
 
 | File | Purpose | Key exports |
 | ---- | ------- | ----------- |
-| `app/main.py` | FastAPI app: lifespan (Redis, fastapi-cache, `manager.start/stop`), `/health`, mounts `api_router` at `/api/v1`, and **the websocket `/ws/{game_name}`** (join/leave_match handling) | `app` |
+| `app/main.py` | FastAPI app: lifespan (Redis, fastapi-cache, `manager.start/stop`), `/health`, mounts `api_router` at `/api/v1`, and **the websocket `/ws/{game_name}`** (join/leave_match, and join/leave_room for vocab rooms) | `app` |
 | `app/api/main.py` | Router aggregation: login, users, scores, matches, matchmaking, invite_links, puzzles, vocab, ws | `api_router` |
 | `app/api/deps.py` | Request dependencies | `get_db`, `get_current_user`, `get_optional_current_user`, `get_current_user_ws` (token query param), `get_current_active_superuser` |
 | `app/api/routes/login.py` | `/login/*`: password token, `/login/google`, test-token, password recovery/reset | `router` |
@@ -42,7 +42,7 @@ contract, `docs/reference/cross-repo-contract.md`.
 | `app/crud/puzzle_attempt.py` | Daily puzzle attempts, stats, streaks | `puzzle_attempt` (`get_for_puzzle`, `get_or_create`, `record_attempt`, `get_stats`, `get_history`) |
 | `app/schemas/match.py` | Match I/O models | `MatchInviteCreate`, `MatchPublic`, `MatchDetail`, `MatchGuessResult`, `RaceDetail`, `RacePlayer`, `RaceGuessOut`, `RaceGuessResult`, `SudokuCoopMoveCreate`, `SudokuCoopMoveResult`, `SudokuCoopDetail`, `PendingInvite` |
 | `app/schemas/puzzle.py` | Puzzle I/O models | `{Word,Sudoku,Memory,Cipher}PuzzlePublic`, `WordGuessCreate`/`WordGuessResult`, `SudokuMoveCreate`/`SudokuMoveResult`, `CipherAttemptCreate`/`CipherFeedback`, `PuzzleStats`, `PuzzleHistory` |
-| `app/api/routes/vocab.py` | `/vocab/*`: Vocab Challenger rooms (create, poll, join, actions) and the wordbook. Rooms aren't matches; clients poll | `router` |
+| `app/api/routes/vocab.py` | `/vocab/*`: Vocab Challenger rooms (create, poll, join, actions) and the wordbook. Rooms aren't matches; a change sends `room_changed` on `vocab:{CODE}` | `router` |
 | `app/game/vocab.py` | **Pure** Vocab Challenger rules, ported from vocab-app's `engine.ts`: rounds, deadlines (epoch ms), scoring, per-player views, review ladder | `make_game`, `join`, `touch`, `apply_action`, `visible`, `full_question`, `next_review`, `VocabError` |
 | `app/game/vocab_words.py` | The 46-word curriculum; a word's id is its index, so append only | `WORDS`, `VocabWord` |
 | `app/crud/vocab.py` | Loads a room, runs a rule, saves it with an optimistic lock (`VocabRoom.version`, replayed on `StaleDataError`); wordbook rows | `crud_vocab` (`create_room`, `mutate`, `wordbook`, `save`, `remove`, `review`) |

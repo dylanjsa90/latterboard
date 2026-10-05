@@ -1,6 +1,6 @@
 # Cross-repo contract
 
-Last updated: 2026-10-03
+Last updated: 2026-10-05
 
 webcade (`~/projects/webcade`, React) is latterboard's (`~/projects/latterboard`, FastAPI) only
 client. This file is `docs/reference/cross-repo-contract.md` in both repos: keep the two copies
@@ -131,11 +131,13 @@ last `MATCH_INVITE_LINK_EXPIRY_DAYS` (7), and the link's sender becomes the matc
 
 ### Vocab Challenger (`/vocab`, bearer)
 Five-round solo sessions and two-player duels, addressed by a six-character hex invite `code`
-(case-insensitive in paths). Rooms aren't matches and have no socket: webcade polls `GET
-/rooms/{code}` every 1.2 s, and every room call applies any transition that's due (a round ends
-at its `deadline` or once everyone answered; duel feedback ends 16 s later). Times are **epoch
-ms**; compare `deadline` and `seen` against `server_now`, not the device clock. Rooms expire
-24 h after creation (410).
+(case-insensitive in paths). Rooms aren't matches. Every room call applies any transition
+that's due (a round ends at its `deadline` or once everyone answered; duel feedback ends 16 s
+later), and nothing else moves a room. webcade refetches `GET /rooms/{code}` on the socket's
+`room_changed` (see WebSocket below), just after each `deadline` (so whoever asks first moves
+the room for both), every 5 s in a duel as a heartbeat for `seen`, and every 1.2 s in a duel
+while the socket is down. Times are **epoch ms**; compare `deadline` and `seen` against
+`server_now`, not the device clock. Rooms expire 24 h after creation (410).
 
 | Call | Request | Response |
 | ---- | ------- | -------- |
@@ -161,12 +163,15 @@ Browsers can't set headers on a websocket, so the token rides in the query strin
 | Direction | Frame |
 | --------- | ----- |
 | server → on connect | `connected {topic, username}` |
-| client → server | `join_match {match_id}` (participants only; answered `joined_match {match_id}`), `leave_match {match_id}`. Any other text is rebroadcast to the topic as `message {topic, username, data}` |
+| client → server | `join_match {match_id}` (participants only; answered `joined_match {match_id}`), `leave_match {match_id}`, `join_room {code}` (a vocab room's participants only; answered `joined_room {code}`, upper-case), `leave_room {code}`. Any other text is rebroadcast to the topic as `message {topic, username, data}` |
 | `user:{id}` | `invite_received {match_id, from_username, game, created_at, expires_at}`, `invite_declined {match_id}`, `invite_cancelled {match_id}`, `match_started {match_id, game, opponent_username, opponent_is_bot, current_turn_username, max_guesses, …}` |
 | `match:{id}` | `opponent_guessed {match_id, username, turn_number, result, correct, word?}` (`word` only in wordle; races send grades only), `your_turn {match_id, current_turn_username}`, `cell_filled {match_id, username, index, value}`, `mistake {match_id, username, index, value, mistakes, max_mistakes}`, `match_completed {match_id, …}` (wordle: `winner_username, target_word, reason`; races: `winner_username, answer, reason`; co-op: `outcome`) |
+| `vocab:{CODE}` | `room_changed {code, revision}` after a room call that changed the room beyond players' `seen` (a join, an action, or a due transition) |
 | everyone | `heartbeat` every `WS_HEARTBEAT_SECONDS` |
 
-webcade treats every `match:{id}` frame as "reload `GET /matches/{id}`". Fields beyond
-`type`/`match_id` are informational, so adding fields is safe but renaming a `type` is not.
+webcade treats every `match:{id}` frame as "reload `GET /matches/{id}`", and `joined_room` or a
+`room_changed` newer than its `revision` as "reload `GET /vocab/rooms/{code}`". Fields beyond
+`type`/`match_id`/`code`/`revision` are informational, so adding fields is safe but renaming a
+`type` is not.
 
 <!-- prettier-ignore-end -->
