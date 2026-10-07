@@ -8,6 +8,7 @@ from app.api.routes import (
     puzzles,
     scores,
     users,
+    vocab,
     ws,
 )
 from app.core.config import settings
@@ -20,6 +21,7 @@ api_router.include_router(matches.router)
 api_router.include_router(matchmaking.router)
 api_router.include_router(invite_links.router)
 api_router.include_router(puzzles.router)
+api_router.include_router(vocab.router)
 api_router.include_router(ws.router)
 # api_router.include_router(utils.router)
 # api_router.include_router(items.router)

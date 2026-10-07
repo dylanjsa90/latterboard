@@ -1,5 +1,6 @@
 import json
 import logging
+import re
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
@@ -15,6 +16,7 @@ from app.api import deps
 from app.api.main import api_router
 from app.connection_manager import manager
 from app.core.config import settings
+from app.crud.vocab import crud_vocab
 from app.database import SessionLocal
 from app.init_db import init_db
 from app.models import Match, User
@@ -95,6 +97,24 @@ async def _is_match_participant(user_id: int, match_id: int) -> bool:
         db.close()
 
 
+_ROOM_CODE = re.compile(r"[A-Fa-f0-9]{6}")
+
+
+def _room_topic(code: object) -> str | None:
+    """The socket topic for a vocab room code from a client frame, or None if malformed."""
+    if isinstance(code, str) and _ROOM_CODE.fullmatch(code):
+        return f"vocab:{code.upper()}"
+    return None
+
+
+async def _is_room_participant(user_id: int, topic: str) -> bool:
+    db = SessionLocal()
+    try:
+        return crud_vocab.is_participant(db, topic.removeprefix("vocab:"), str(user_id))
+    finally:
+        db.close()
+
+
 @app.websocket("/ws/{game_name}")
 async def websocket_endpoint(
     websocket: WebSocket,
@@ -130,6 +150,17 @@ async def websocket_endpoint(
                 match_id = frame.get("match_id")
                 if isinstance(match_id, int):
                     await manager.disconnect(websocket, f"match:{match_id}")
+            elif msg_type == "join_room":
+                topic = _room_topic(frame.get("code"))
+                if topic and await _is_room_participant(current_user.id, topic):
+                    await manager.join(websocket, topic, current_user.username)
+                    await websocket.send_json(
+                        {"type": "joined_room", "code": topic.removeprefix("vocab:")}
+                    )
+            elif msg_type == "leave_room":
+                topic = _room_topic(frame.get("code"))
+                if topic:
+                    await manager.disconnect(websocket, topic)
             else:
                 await manager.broadcast(
                     {

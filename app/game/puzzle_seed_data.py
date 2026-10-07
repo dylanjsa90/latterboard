@@ -6,6 +6,7 @@ directly.
 
 import random
 
+from app.game.puzzles import CIPHER_STARTER
 from app.lib.word_list import word_list
 
 
@@ -23,7 +24,10 @@ CIPHER_LENGTH = 4
 
 
 def generate_cipher_digits() -> list[int]:
-    return random.sample(range(CIPHER_DIGIT_RANGE), CIPHER_LENGTH)
+    # The starter attempt is graded on load, so it must never be the answer.
+    while (digits := random.sample(range(CIPHER_DIGIT_RANGE), CIPHER_LENGTH)) == CIPHER_STARTER:
+        pass
+    return digits
 
 _SUDOKU_BASE_PUZZLE = [
     5, 3, 0, 0, 7, 0, 0, 0, 0, 6, 0, 0, 1, 9, 5, 0, 0, 0, 0, 9, 8, 0, 0, 0, 0, 6, 0,

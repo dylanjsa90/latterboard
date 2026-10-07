@@ -1,6 +1,6 @@
 # Latterboard API
 
-A FastAPI backend for browser games, with JWT authentication:
+A FastAPI backend for browser games, with JWT authentication (password or Google sign-in):
 
 - Daily word, sudoku, memory, and cipher puzzles, with stats and streaks
 - Game scores and all-time, daily, and monthly leaderboards
@@ -9,7 +9,8 @@ A FastAPI backend for browser games, with JWT authentication:
 - A websocket for invites, presence, and live match updates
 
 Its client is [webcade](https://github.com/dylanjsa90/webcade). Contributor and agent
-conventions are in `AGENTS.md`.
+conventions are in `AGENTS.md`; every REST call and websocket frame between the two is in
+[`docs/reference/cross-repo-contract.md`](docs/reference/cross-repo-contract.md).
 
 ## Setup
 If uv has not yet been installed instructions can be found at https://docs.astral.sh/uv/getting-started/installation/
@@ -29,6 +30,9 @@ SECRET_KEY=<generate with: python -c "import secrets; print(secrets.token_hex(32
 
 The defaults use SQLite at `./sql_app.db` (`DB_TYPE=sqlite`, `SQLITE_DATABASE_URL`) and Redis at
 `redis://localhost:6379` (`REDIS_URL`), so a local Redis must be running.
+
+Google sign-in stays off (its routes return 404) until `GOOGLE_CLIENT_ID` is set to the public
+web client ID, the same value as webcade's `VITE_GOOGLE_CLIENT_ID`.
 
 ## Running with Docker
 
@@ -86,6 +90,13 @@ gunicorn app.main:app \
 ```
 
 Adjust `--workers` to `(2 × CPU cores) + 1`. For a single-core machine, use `--workers 2`.
+
+## Copying to a VM
+
+`scripts/upload-to-vm.sh user@host [remote_dir]` zips the tracked and untracked files (honouring
+`.gitignore`, so `.env` files, local databases and `.venv` stay out) and copies the archive over
+`scp`. Set `SSH_KEY` / `SSH_PORT` as needed, and `UNZIP=1` to unpack it into
+`<remote_dir>/latterboard`. Env files are deliberately not copied; create them on the VM.
 
 ## Running tests
 
