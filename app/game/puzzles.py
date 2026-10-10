@@ -1,5 +1,7 @@
 """Pure logic for the daily puzzle games (word/sudoku/memory/cipher): daily
-variant indexing, cipher feedback, and the seeded memory-deck shuffle. No
+variant indexing, cipher feedback, and the seeded memory-deck shuffle. Also the
+Pacific calendar day that every daily feature (puzzles, play caps, leaderboards,
+streaks, invite limits) rolls over on. No
 FastAPI/pydantic/SQLAlchemy imports here so this stays trivially unit-testable,
 mirroring app/game/wordle.py. Word grading reuses wordle.evaluate_guess since
 both games use the same two-pass scoring algorithm.
@@ -9,8 +11,9 @@ Ported from the original puzzle-box Next.js route (app/api/puzzles/route.ts).
 
 import re
 from collections import Counter
-from datetime import date, datetime, timezone
+from datetime import date, datetime, time, timezone
 from typing import Literal, TypedDict
+from zoneinfo import ZoneInfo
 
 from app.game import wordle
 
@@ -21,8 +24,27 @@ WORD_MAX_ATTEMPTS = 6
 CIPHER_MAX_ATTEMPTS = 8
 
 
+PACIFIC = ZoneInfo("America/Los_Angeles")
+
+
 def today() -> date:
-    return datetime.now(timezone.utc).date()
+    """Today's date in Los Angeles."""
+    return datetime.now(PACIFIC).date()
+
+
+def day_start(day: date) -> datetime:
+    """When `day` begins in Los Angeles, as naive UTC to compare with DateTime columns.
+
+    A day runs from its start up to the next day's: 23 hours when clocks spring
+    forward, 25 when they fall back.
+    """
+    start = datetime.combine(day, time(), tzinfo=PACIFIC)
+    return start.astimezone(timezone.utc).replace(tzinfo=None)
+
+
+def day_of(moment: datetime) -> date:
+    """The Los Angeles date of a naive UTC timestamp."""
+    return moment.replace(tzinfo=timezone.utc).astimezone(PACIFIC).date()
 
 
 def dated_puzzle(puzzle_id: str | None, prefix: str) -> date | None:
@@ -40,7 +62,7 @@ def dated_puzzle(puzzle_id: str | None, prefix: str) -> date | None:
 
 def puzzle_date(puzzle_id: str | None, prefix: str) -> date:
     """The calendar date a puzzle_id refers to, falling back to today's date
-    (UTC) when puzzle_id is missing or doesn't carry a recognizable date
+    (Pacific) when puzzle_id is missing or doesn't carry a recognizable date
     (e.g. an old index-based id)."""
     return dated_puzzle(puzzle_id, prefix) or today()
 

@@ -12,6 +12,7 @@ from passlib.exc import InvalidTokenError
 
 from app.core import security
 from app.core.config import settings
+from app.game.puzzles import day_of
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -121,6 +122,7 @@ def generate_match_invite_email(
     # Collapsed to one line so a username can't add headers to the subject.
     inviter = " ".join(inviter_username.split())
     subject = f"{inviter} invited you to play {game_title}"
+    expires_on = day_of(expires_at)
     html_content = render_email_template(
         template_name="match_invite.html",
         # Players write the username and message, and render_email_template doesn't
@@ -131,7 +133,7 @@ def generate_match_invite_email(
             "game_title": escape(game_title),
             "message": escape(message) if message else None,
             "link": link,
-            "expires_on": f"{expires_at:%B} {expires_at.day}",
+            "expires_on": f"{expires_on:%B} {expires_on.day}",
         },
     )
     return EmailData(html_content=html_content, subject=subject)

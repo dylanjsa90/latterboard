@@ -4,6 +4,7 @@ from datetime import timedelta
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
+from app.game.puzzles import day_start, today
 from app.models import MatchInviteLink, User
 from app.schemas.invite_link import (
     InviteLinkCreate,
@@ -35,12 +36,11 @@ class CRUDInviteLink:
         return link
 
     def count_created_today(self, db: Session, inviter_id: int) -> int:
-        midnight = utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
         return (
             db.query(MatchInviteLink)
             .filter(
                 MatchInviteLink.inviter_id == inviter_id,
-                MatchInviteLink.created_at >= midnight,
+                MatchInviteLink.created_at >= day_start(today()),
             )
             .count()
         )

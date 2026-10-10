@@ -6,7 +6,7 @@ from app.core.config import settings
 from app.crud.puzzle import puzzle as crud_puzzle
 from app.crud.user import user as crud_user
 from app.database import SessionLocal
-from app.game.puzzles import grade_word, seeded_memory_deck, today
+from app.game.puzzles import day_start, grade_word, seeded_memory_deck, today
 from app.models.puzzle import PuzzleAttempt
 
 BASE = "/api/v1/puzzles"
@@ -565,9 +565,16 @@ EMPTY_STATS = {
 
 
 def _completed_attempt(
-    user_email: str, game: str, days_ago: int, *, won: bool = True, attempt_count: int = 1
+    user_email: str,
+    game: str,
+    days_ago: int,
+    *,
+    won: bool = True,
+    attempt_count: int = 1,
+    completed_at: datetime | None = None,
 ) -> None:
-    """Store a finished attempt as if it were completed `days_ago` days back, at noon UTC."""
+    """Store a finished attempt as if it were completed `days_ago` days back, at noon UTC
+    unless `completed_at` (naive UTC) says otherwise."""
     solved_on = today() - timedelta(days=days_ago)
     db = SessionLocal()
     try:
@@ -580,7 +587,7 @@ def _completed_attempt(
                 attempt_count=attempt_count,
                 won=won,
                 completed=True,
-                completed_at=datetime.combine(solved_on, time(12)),
+                completed_at=completed_at or datetime.combine(solved_on, time(12)),
             )
         )
         db.commit()
@@ -653,6 +660,17 @@ def test_stats_best_streak_and_per_game_counts(client, auth_headers):
         {"game": "sudoku", "played": 5, "won": 5},
         {"game": "word", "played": 1, "won": 0},
     ]
+
+
+def test_stats_date_an_evening_solve_by_its_pacific_day(client, auth_headers):
+    # 6pm yesterday in Los Angeles is already today in UTC.
+    yesterday = today() - timedelta(days=1)
+    evening = day_start(yesterday) + timedelta(hours=18)
+    _completed_attempt(settings.DEFAULT_USER, "sudoku", 1, completed_at=evening)
+
+    data = client.get(f"{BASE}/me/stats", headers=auth_headers).json()
+    assert data["today_solved"] == 0
+    assert data["recent"][0]["solved_on"] == yesterday.isoformat()
 
 
 # --- history ---------------------------------------------------------------

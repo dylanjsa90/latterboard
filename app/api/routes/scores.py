@@ -1,6 +1,5 @@
-from datetime import date, datetime, timezone
+from datetime import date
 from typing import Optional
-from zoneinfo import ZoneInfo
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
@@ -27,9 +26,8 @@ def submit_score(
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
 ) -> GameScore:
-    pacific_today = datetime.now(ZoneInfo("America/Los_Angeles")).date()
     count = crud_score.get_daily_play_count(
-        db, current_user.id, score_in.game, pacific_today
+        db, current_user.id, score_in.game, today()
     )
     if count >= settings.MAX_DAILY_PLAYS_PER_GAME:
         raise HTTPException(
@@ -60,7 +58,7 @@ def leaderboard_daily(
     db: Session = Depends(deps.get_db),
 ) -> list[LeaderboardEntry]:
     rows = crud_score.get_leaderboard_daily(
-        db, game, day or datetime.now(timezone.utc).date(), limit
+        db, game, day or today(), limit
     )
     return [
         LeaderboardEntry(rank=i, username=u, score=s, achieved_at=a)
@@ -76,9 +74,9 @@ def leaderboard_monthly(
     limit: int = Query(default=10, ge=1, le=100),
     db: Session = Depends(deps.get_db),
 ) -> list[LeaderboardEntry]:
-    today_utc = datetime.now(timezone.utc).date()
+    this_month = today()
     rows = crud_score.get_leaderboard_monthly(
-        db, game, year or today_utc.year, month or today_utc.month, limit
+        db, game, year or this_month.year, month or this_month.month, limit
     )
     return [
         LeaderboardEntry(rank=i, username=u, score=s, achieved_at=a)
@@ -92,8 +90,7 @@ def my_daily_count(
     current_user: User = Depends(deps.get_current_user),
     db: Session = Depends(deps.get_db),
 ) -> dict[str, int]:
-    pacific_today = datetime.now(ZoneInfo("America/Los_Angeles")).date()
-    count = crud_score.get_daily_play_count(db, current_user.id, game, pacific_today)
+    count = crud_score.get_daily_play_count(db, current_user.id, game, today())
     return {"count": count}
 
 
@@ -112,6 +109,6 @@ def my_plays_today(
     current_user: User = Depends(deps.get_current_user),
     db: Session = Depends(deps.get_db),
 ) -> PlaysToday:
-    """Scores saved today (UTC) are plays; POST / answers 429 once `used` hits `limit`."""
+    """Scores saved today (Pacific) are plays; POST / answers 429 once `used` hits `limit`."""
     used = crud_score.get_daily_play_count(db, current_user.id, game, today())
     return PlaysToday(used=used, limit=settings.MAX_DAILY_PLAYS_PER_GAME)

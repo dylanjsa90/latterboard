@@ -1,9 +1,9 @@
-from datetime import datetime, timezone
 from io import BytesIO
 
 import pytest
 from PIL import Image
 
+from app.game.puzzles import today
 from app.lib.avatar import AVATAR_MAX_BYTES
 
 BASE = "/api/v1/users"
@@ -90,7 +90,7 @@ def test_create_user_requires_profile_fields(client, missing):
 
 
 def test_create_user_must_be_13(client):
-    this_year = datetime.now(timezone.utc).year
+    this_year = today().year
     r = client.post(f"{BASE}/", json={**NEW_USER, "birth_year": this_year - 12})
     assert r.status_code == 422
     assert "13 or older" in str(r.json()["detail"])
@@ -211,7 +211,7 @@ def test_update_me_username_taken(client, created_headers):
 
 
 def test_update_me_validates(client, created_headers):
-    this_year = datetime.now(timezone.utc).year
+    this_year = today().year
     for body in ({"username": "no spaces"}, {"birth_year": this_year - 5}):
         assert client.patch(f"{BASE}/me", json=body, headers=created_headers).status_code == 422
 
