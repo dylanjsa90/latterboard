@@ -3,6 +3,7 @@ from datetime import timedelta
 import app.api.routes.invite_links as invite_links_route
 from app.core.config import settings
 from app.database import SessionLocal
+from app.game.puzzles import day_start, today
 from app.models import MatchInviteLink
 from app.utils import utcnow
 from tests.conftest import _signup_and_login
@@ -107,6 +108,16 @@ def test_daily_limit(client, inviter_headers, monkeypatch):
     assert _create(client, inviter_headers).status_code == 201
     assert _create(client, inviter_headers).status_code == 201
     assert _create(client, inviter_headers).status_code == 429
+
+
+def test_daily_limit_resets_at_pacific_midnight(client, inviter_headers, monkeypatch):
+    monkeypatch.setattr(settings, "MATCH_INVITE_LINK_DAILY_LIMIT", 1)
+    token = _create(client, inviter_headers).json()["token"]
+    midnight = day_start(today())
+    _update_link(token, created_at=midnight + timedelta(minutes=1))
+    assert _create(client, inviter_headers).status_code == 429
+    _update_link(token, created_at=midnight - timedelta(minutes=1))
+    assert _create(client, inviter_headers).status_code == 201
 
 
 def test_preview_is_public(client, inviter_headers):

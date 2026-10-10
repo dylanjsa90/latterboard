@@ -4,6 +4,7 @@ from datetime import date, timedelta
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
+from app.game import puzzles
 from app.models.puzzle import PuzzleAttempt
 from app.schemas.puzzle import (
     GamePuzzleStats,
@@ -95,9 +96,9 @@ class CRUDPuzzleAttempt(CRUDBase[PuzzleAttempt, PuzzleAttemptCreate, PuzzleAttem
             for a in self.get_completed(db, user_id)
             if a.completed_at is not None
         ]
-        today = utcnow().date()
+        today = puzzles.today()
 
-        solved_dates = {completed_at.date() for _, completed_at in completed}
+        solved_dates = {puzzles.day_of(completed_at) for _, completed_at in completed}
         streak = 0
         cursor = today
         while cursor in solved_dates:
@@ -110,7 +111,7 @@ class CRUDPuzzleAttempt(CRUDBase[PuzzleAttempt, PuzzleAttemptCreate, PuzzleAttem
         return PuzzleStats(
             total_solved=len(completed),
             today_solved=sum(
-                1 for _, completed_at in completed if completed_at.date() == today
+                1 for _, completed_at in completed if puzzles.day_of(completed_at) == today
             ),
             streak=streak,
             best_streak=_longest_run(solved_dates),
@@ -121,7 +122,7 @@ class CRUDPuzzleAttempt(CRUDBase[PuzzleAttempt, PuzzleAttemptCreate, PuzzleAttem
             recent=[
                 RecentPuzzleAttempt(
                     game=a.game,
-                    solved_on=completed_at.date(),
+                    solved_on=puzzles.day_of(completed_at),
                     solved_at=completed_at,
                     result=a.attempt_count,
                 )

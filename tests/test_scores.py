@@ -1,6 +1,13 @@
+from datetime import date, datetime, timedelta
+
 import pytest
 
 from app.core.config import settings
+from app.crud.game_score import game_score as crud_score
+from app.crud.user import user as crud_user
+from app.database import SessionLocal
+from app.game.puzzles import day_start, today
+from app.models.game_score import GameScore
 
 BASE = "/api/v1/scores"
 GAME = "snake"
@@ -190,4 +197,54 @@ def test_leaderboard_monthly_defaults(client):
 def test_leaderboard_monthly_past(client):
     r = client.get(f"{BASE}/leaderboard/{GAME}/monthly?year=2020&month=1")
     assert r.status_code == 200
+    assert r.json() == []
+
+
+# --- Pacific days -------------------------------------------------------------
+
+# 03:00 UTC on Aug 1 is 8pm on Jul 31 in Los Angeles.
+JUL_31_EVENING = datetime(2026, 8, 1, 3)
+
+
+def _score_at(created_at: datetime) -> None:
+    """Store a score for the seeded user as if submitted at `created_at` (naive UTC)."""
+    db = SessionLocal()
+    try:
+        user = crud_user.get_user_by_email(db, settings.DEFAULT_USER)
+        db.add(GameScore(user_id=user.id, game=GAME, score=50, created_at=created_at))
+        db.commit()
+    finally:
+        db.close()
+
+
+def test_an_evening_score_counts_toward_its_pacific_day():
+    _score_at(JUL_31_EVENING)
+    db = SessionLocal()
+    try:
+        user_id = crud_user.get_user_by_email(db, settings.DEFAULT_USER).id
+        assert crud_score.get_daily_play_count(db, user_id, GAME, date(2026, 7, 31)) == 1
+        assert crud_score.get_daily_play_count(db, user_id, GAME, date(2026, 8, 1)) == 0
+    finally:
+        db.close()
+
+
+def test_both_play_counts_cover_the_whole_pacific_day(client, auth_headers):
+    _score_at(day_start(today()) + timedelta(hours=23))
+    r = client.get(f"{BASE}/me/{GAME}/plays-today", headers=auth_headers)
+    assert r.json()["used"] == 1
+    r = client.get(f"{BASE}/me/{GAME}/daily-count", headers=auth_headers)
+    assert r.json() == {"count": 1}
+
+
+def test_daily_leaderboard_uses_pacific_days(client):
+    _score_at(JUL_31_EVENING)
+    assert len(client.get(f"{BASE}/leaderboard/{GAME}/daily?day=2026-07-31").json()) == 1
+    assert client.get(f"{BASE}/leaderboard/{GAME}/daily?day=2026-08-01").json() == []
+
+
+def test_monthly_leaderboard_uses_pacific_months(client):
+    _score_at(JUL_31_EVENING)
+    r = client.get(f"{BASE}/leaderboard/{GAME}/monthly?year=2026&month=7")
+    assert len(r.json()) == 1
+    r = client.get(f"{BASE}/leaderboard/{GAME}/monthly?year=2026&month=8")
     assert r.json() == []

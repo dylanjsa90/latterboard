@@ -1,14 +1,22 @@
 from collections.abc import Sequence
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from typing import Any, cast
 
-from sqlalchemy import Row, extract, func
+from sqlalchemy import ColumnElement, Row, func
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
+from app.game.puzzles import day_start
 from app.models.game_score import GameScore
 from app.models.user import User
 from app.schemas.game_score import GameScoreCreate, GameScoreUpdate
+
+
+def _submitted_between(first_day: date, end_day: date) -> ColumnElement[bool]:
+    """Scores from the start of `first_day` up to the start of `end_day`, in Pacific days."""
+    return (GameScore.created_at >= day_start(first_day)) & (
+        GameScore.created_at < day_start(end_day)
+    )
 
 
 class CRUDGameScore(CRUDBase[GameScore, GameScoreCreate, GameScoreUpdate]):
@@ -20,7 +28,7 @@ class CRUDGameScore(CRUDBase[GameScore, GameScoreCreate, GameScoreUpdate]):
             .filter(
                 GameScore.user_id == user_id,
                 GameScore.game == game,
-                func.date(GameScore.created_at) == today.isoformat(),
+                _submitted_between(today, today + timedelta(days=1)),
             )
             .count()
         )
@@ -75,7 +83,7 @@ class CRUDGameScore(CRUDBase[GameScore, GameScoreCreate, GameScoreUpdate]):
             db,
             game,
             limit,
-            time_filter=func.date(GameScore.created_at) == day.isoformat(),
+            time_filter=_submitted_between(day, day + timedelta(days=1)),
         )
 
     def get_leaderboard_monthly(
@@ -85,9 +93,9 @@ class CRUDGameScore(CRUDBase[GameScore, GameScoreCreate, GameScoreUpdate]):
             db,
             game,
             limit,
-            time_filter=(
-                (extract("year", GameScore.created_at) == year)
-                & (extract("month", GameScore.created_at) == month)
+            time_filter=_submitted_between(
+                date(year, month, 1),
+                date(year + month // 12, month % 12 + 1, 1),
             ),
         )
 

@@ -1,6 +1,6 @@
 # Backend module map
 
-Last updated: 2026-10-05
+Last updated: 2026-10-09
 
 Where things live in `app/` and what each module exports. Rules for matches, matchmaking, and
 the computer opponent are in `docs/architecture/matches.md`; wire shapes are in the cross-repo
@@ -37,7 +37,7 @@ contract, `docs/reference/cross-repo-contract.md`.
 | `app/connection_manager.py` | Topic membership, Redis presence, pub/sub delivery, heartbeat | `manager` (`connect`, `join`, `disconnect`, `disconnect_all`, `broadcast(msg, topic)`, `send_to_user(user_id, msg)`, `count`, `usernames`) |
 | `app/crud/match.py` | Match lifecycle + turn-based wordle | `match` (`create_invite`, `expire_if_needed`, `get_open_match_between`, `get_pending_invites`, `get_active`, `get_active_items`, `accept_invite`, `decline_invite`, `cancel_invite`, `submit_guess`, `to_public`, `to_detail`, `to_pending_invite`) |
 | `app/crud/match_puzzle.py` | Race/co-op state in `match_puzzle`, optimistic lock via `_apply` | `match_puzzle` (`build`, `submit_race_guess`, `race_detail`, `submit_sudoku_move`, `sudoku_detail`), `MoveRejected` |
-| `app/game/puzzles.py` | Pure puzzle logic: UTC `today()`, puzzle-id dates, word grading, cipher feedback and stored codes, memory decks | `today`, `dated_puzzle`, `puzzle_date`, `grade_word`, `cipher_feedback`, `encode_cipher`, `decode_cipher`, `seeded_memory_deck` |
+| `app/game/puzzles.py` | Pure puzzle logic, and the Pacific day every daily feature uses: `today()`, `day_start` (a day's naive-UTC start, for `created_at` ranges), `day_of` (a timestamp's day), puzzle-id dates, word grading, cipher feedback and stored codes, memory decks | `PACIFIC`, `today`, `day_start`, `day_of`, `dated_puzzle`, `puzzle_date`, `grade_word`, `cipher_feedback`, `encode_cipher`, `decode_cipher`, `seeded_memory_deck` |
 | `app/utils.py` | `utcnow()` for naive-UTC columns, email rendering/sending, password-reset tokens | `utcnow`, `send_email`, `render_email_template`, `generate_*_email` |
 | `app/crud/puzzle_attempt.py` | Daily puzzle attempts, stats, streaks | `puzzle_attempt` (`get_for_puzzle`, `get_or_create`, `record_attempt`, `get_stats`, `get_history`) |
 | `app/schemas/match.py` | Match I/O models | `MatchInviteCreate`, `MatchPublic`, `MatchDetail`, `MatchGuessResult`, `RaceDetail`, `RacePlayer`, `RaceGuessOut`, `RaceGuessResult`, `SudokuCoopMoveCreate`, `SudokuCoopMoveResult`, `SudokuCoopDetail`, `PendingInvite` |

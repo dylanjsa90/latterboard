@@ -4,7 +4,7 @@
 > head-to-head matches with matchmaking and a computer opponent, Vocab Challenger rooms and
 > wordbooks, and a websocket for live play.
 
-Last updated: 2026-10-03
+Last updated: 2026-10-09
 
 Python 3.10+ with uv, SQLAlchemy, Redis, JWT auth. SQLite locally; deploys to a VM as a Docker
 container built from `Dockerfile`. Setup, Docker, and the production server are in `README.md`.
@@ -44,8 +44,8 @@ Paths are in backticks, not `@` imports, so they load only when read.
 
 ### Dates and times
 - DB `DateTime` columns are **naive UTC** (SQLite returns them naive). Use `app.utils.utcnow()` for anything compared to or stored in them. Comparing against `datetime.now(timezone.utc)` raises `TypeError`.
-- Calendar dates are UTC: routes, seeding, and tests. Use `app.game.puzzles.today()`, never `date.today()`, which is local time and runs a day off in US evenings.
-- The scores daily cap is the exception, and it is inconsistent: `POST /scores/` and `GET /scores/me/{game}/daily-count` count the US Pacific day, while `GET /scores/me/{game}/plays-today` and the cross-repo contract say UTC. Confirm which is intended before changing daily limits.
+- Calendar days are **Pacific** (`America/Los_Angeles`) everywhere: puzzles, the word of the day, score caps and leaderboards, streaks, invite-link limits, birth years. Use `app.game.puzzles.today()`, never `date.today()` (the host's zone) or `utcnow().date()` (UTC, a day ahead every evening).
+- To filter a timestamp column by day, use a range from `day_start(day)` to `day_start(next_day)`, not `func.date(column)`, which gives the UTC date. Use `day_of(ts)` for a stored timestamp's day. Days last 23 or 25 hours across DST changes, so never add 24 hours to a day start.
 
 ### Redis
 - Always use `settings.REDIS_URL`; never hardcode `localhost`. Docker compose sets `redis://redis:6379`.

@@ -1,5 +1,5 @@
 import re
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import Annotated, Literal
 
 from pydantic import (
@@ -12,6 +12,7 @@ from pydantic import (
 )
 
 from app.core.config import settings
+from app.game.puzzles import today
 
 # `User.is_bot` is nullable, so accounts predating the column read back as None.
 # Null means human, and the wire only ever carries a real boolean.
@@ -50,7 +51,7 @@ def _location(value: str | None) -> str | None:
 
 
 def _birth_year(value: int) -> int:
-    this_year = datetime.now(timezone.utc).year
+    this_year = today().year
     if not 1900 <= value <= this_year:
         raise ValueError("Enter the year you were born.")
     if this_year - value < MIN_AGE:

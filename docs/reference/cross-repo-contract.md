@@ -1,6 +1,6 @@
 # Cross-repo contract
 
-Last updated: 2026-10-05
+Last updated: 2026-10-09
 
 webcade (`~/projects/webcade`, React) is latterboard's (`~/projects/latterboard`, FastAPI) only
 client. This file is `docs/reference/cross-repo-contract.md` in both repos: keep the two copies
@@ -13,6 +13,9 @@ identical, and update both when a shape changes.
 - Authenticated calls send `Authorization: Bearer <access_token>` via webcade's `authFetch`; a 401
   ends the webcade session app-wide.
 - `Grade` = `"correct" | "present" | "absent"`. Sudoku boards are `int[81]`, `0` = empty.
+- A day is a **Pacific** calendar day (`America/Los_Angeles`, midnight to midnight, DST included):
+  daily puzzles, the word of the day, play and invite limits, leaderboards, and streaks all roll
+  over at midnight Los Angeles time. Timestamps on the wire are still naive UTC.
 
 <!-- prettier-ignore-start -->
 
@@ -37,7 +40,7 @@ marks the computer opponent and is always a real boolean on the wire, even thoug
 nullable. `avatar_url` is a path under the API
 (`/api/v1/users/{id}/avatar?v=<hash>`) that webcade prefixes with `API_BASE_URL`. Handles are
 `[a-z0-9_]{3,20}`, lowercased, and unique regardless of case; accounts made before handles keep their
-email as `username` until they choose one. `birth_year` must make the player 13 or older this (UTC) year.
+email as `username` until they choose one. `birth_year` must make the player 13 or older this (Pacific) year.
 
 Google sign-in ends with the same `access_token` as a password. The first `/login/google` whose
 verified email matches an existing account (any case) links that Google account to it, and the
@@ -70,7 +73,7 @@ returns them on `GET` so word and cipher resume. Stats and history include lost 
 ### Scores (`/scores`)
 | Call | Request | Response |
 | ---- | ------- | -------- |
-| `POST /` (bearer) | `{game, score ≥ 0}` | 201 `{id, game, score, created_at}`; 429 past `MAX_DAILY_PLAYS_PER_GAME` (5 per UTC day); 422 if `SCORE_RULES` rejects the score |
+| `POST /` (bearer) | `{game, score ≥ 0}` | 201 `{id, game, score, created_at}`; 429 past `MAX_DAILY_PLAYS_PER_GAME` (5 per Pacific day); 422 if `SCORE_RULES` rejects the score |
 | `GET /me/{game}` (bearer) | — | `[{id, game, score, created_at}]` |
 | `GET /me/{game}/plays-today` (bearer) | — | `{used, limit}` (webcade doesn't mirror the cap) |
 | `GET /leaderboard/{game}/{all-time\|daily\|monthly}?limit` | — | `[{rank, username, score, achieved_at}]` |
@@ -123,7 +126,7 @@ last `MATCH_INVITE_LINK_EXPIRY_DAYS` (7), and the link's sender becomes the matc
 
 | Call | Request | Response (+ frames sent) |
 | ---- | ------- | ------------------------ |
-| `POST /` (bearer) | `{game, channel: email \| text \| link, message? ≤ 280, email?}` (`email` iff `channel == "email"`) | 201 `InviteLink {token, url, game, message, channel, recipient_email, created_at, expires_at, emailed}`; 429 past `MATCH_INVITE_LINK_DAILY_LIMIT` (20 per UTC day) |
+| `POST /` (bearer) | `{game, channel: email \| text \| link, message? ≤ 280, email?}` (`email` iff `channel == "email"`) | 201 `InviteLink {token, url, game, message, channel, recipient_email, created_at, expires_at, emailed}`; 429 past `MATCH_INVITE_LINK_DAILY_LIMIT` (20 per Pacific day) |
 | `GET /mine` (bearer) | — | `InviteLink[]` nobody has used, withdrawn, or let expire, newest first (`emailed` is false here) |
 | `GET /{token}` (public) | — | `{inviter_username, game, message, expires_at, status: open \| claimed \| expired \| revoked}`; 404 if unknown |
 | `POST /{token}/claim` (bearer) | — | `MatchPublic` (+ `match_started` to both), reusing an open match the pair already shares; the same match again for its claimer; 400 own link, 409 used by someone else, 410 expired or withdrawn |
@@ -149,14 +152,14 @@ and creating a room deletes those a week past that (404).
 | `GET /words` | — | `{saved: SavedWord[] (soonest due first), word_count}` |
 | `PUT /words/{id}` / `DELETE /words/{id}` | — | 204; saving again changes nothing; 400 unknown word |
 | `POST /words/{id}/review` | `{known: bool}` | 204; known moves up the ladder (due in 1, 3, 7, 14, 30, 60 days), a miss resets to level 0 (due in 10 min); 404 not saved |
-| `GET /daily-word` (public) | — | `DailyWord`: the word of the day for today's UTC date, cycling through the curriculum by day |
+| `GET /daily-word` (public) | — | `DailyWord`: the word of the day for today's Pacific date, cycling through the curriculum by day |
 
 - `RoomSnapshot` = `{game: GameView, server_now}`.
 - `GameView` = `{code, mode, phase: lobby | question | feedback | results, round (0-4), generation, deadline, revision, rematch_requested, players: Seat[], question, mine?, history: [{question (revealed), answers: [{name, choice?, points?, correct?, ms?}]}]}`. `revision` only grows: drop a reply older than the one you have.
 - `Seat` = `{id: "me" | "opponent", name (username), ready, seen, answered, score}`. Scores count only resolved rounds.
 - `question` = `{id, word, pos, definition, difficulty: Foundation | Intermediate | Advanced, kind: usage | context, prompt, options, correct, reasons, example, synonyms, nuance}`. Until the round resolves (`phase` feedback or results) `correct` through `nuance` are null, and so are `id`, `word`, `pos`, `definition` for a `context` question, whose answer is the word.
 - `SavedWord` = `{id, word, pos, definition, difficulty, example, synonyms, nuance, due, level (0-6)}`. Word ids are stable: wordbooks store them.
-- `DailyWord` = `{id, date (YYYY-MM-DD, UTC), word, pronunciation (IPA), pos, definition, example}`.
+- `DailyWord` = `{id, date (YYYY-MM-DD, Pacific), word, pronunciation (IPA), pos, definition, example}`.
 - A correct answer scores 100 plus `max(0, 5 - floor(ms / 8000))` speed points, `ms` counted from the round start; wrong or missing answers score 0.
 
 ### WebSocket `/ws/{topic}?token=<access_token>`

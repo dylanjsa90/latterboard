@@ -15,7 +15,7 @@ from app.game.puzzle_seed_data import (
     shuffled_words,
     sudoku_variant,
 )
-from app.game.puzzles import today as utc_today
+from app.game.puzzles import today
 from app.models.puzzle import Puzzle
 from app.schemas.puzzle import PuzzleCreate, PuzzleUpdate
 
@@ -83,7 +83,7 @@ class CRUDPuzzle(CRUDBase[Puzzle, PuzzleCreate, PuzzleUpdate]):
         prior day's word), so a puzzle is served on exactly one day instead of
         cycling/repeating once the bank has been through once.
         """
-        start = utc_today() - timedelta(days=1)
+        start = today() - timedelta(days=1)
         if self.count_by_game(db, "word") == 0:
             for index, word in enumerate(shuffled_words()):
                 db.add(
