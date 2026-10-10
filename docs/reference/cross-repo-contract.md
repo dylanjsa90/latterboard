@@ -9,6 +9,12 @@ identical, and update both when a shape changes.
 - REST is under `/api/v1` (webcade: `API_V1_URL`). The websocket is at the app root, `/ws/{topic}`,
   **not** under `/api/v1`.
 - Wire JSON is snake_case; webcade converts to camelCase inside each `api.ts`.
+- REST response shapes are checked, not just written down: webcade keeps a snapshot of this
+  app's OpenAPI schema (`src/lib/api-schema.d.ts`) and reads each response as `Wire<'Schema'>`.
+  After changing a response model here, run `npm run api:schema` in webcade (it imports
+  `app.main` in-process, from the checkout at `../latterboard`) and fix what `tsc -b` reports.
+  A response model's fields are all sent, `null` when empty; give status-like strings a
+  `Literal` so the schema can carry their values. Websocket frames aren't in the schema.
 - Errors are FastAPI `{detail: string}`; webcade shows `detail` when it's a string.
 - Authenticated calls send `Authorization: Bearer <access_token>` via webcade's `authFetch`; a 401
   ends the webcade session app-wide.
