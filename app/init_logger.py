@@ -1,42 +1,54 @@
 import logging
-import os
-import pathlib
 import sys
 
-# create logs folder if needed
-pathlib.Path("logs").mkdir(parents=True, exist_ok=True)
-
-logger = logging.getLogger("uvicorn")
-logger.setLevel(logging.INFO)
+from loguru import logger
 
 
-def config_logging(logger_name: str ="uvicorn") -> None:
-    logger = logging.getLogger(logger_name)
-    # Create a custom logger
-    logger.setLevel(logging.INFO)
-    if os.getenv("DEBUG", "0") == "1":
-        logger.setLevel(logging.DEBUG)
+class InterceptHandler(logging.Handler):
+    def emit(self, record: logging.LogRecord):
+        try:
+            level = logger.level(record.levelname).name
+        except ValueError:
+            level = record.levelno
 
-    stdout_handler = logging.StreamHandler(sys.stdout)
+        frame, depth = logging.currentframe(), 2
+        while frame.f_code.co_filename == logging.__file__:
+            frame = frame.f_back
+            depth += 1
 
-    log_format = logging.Formatter(
-        fmt="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S"
+        logger.opt(depth=depth, exception=record.exc_info).log(
+            level, record.getMessage()
+        )
+
+
+def setup_loguru():
+    # Remove default handler
+    logger.remove()
+
+    # Add console sink with custom formatting and thread-safe queue
+    logger.add(
+        sys.stdout,
+        format="{time:YYYY-MM-DD HH:mm:ss.SSS} | {level: <8} | {name}:{function}:{line} - {message}",
+        level="INFO",
+        enqueue=True,
+        backtrace=True,
+        diagnose=True,
     )
-    stdout_handler.setFormatter(log_format)
-    logger.addHandler(stdout_handler)
 
-    # Create handlers
-    f_handler = logging.FileHandler("./logs/logs_error.log")
-    f_info_handler = logging.FileHandler("./logs/logs_info.log")
-    f_handler.setLevel(logging.ERROR)
-    f_info_handler.setLevel(logging.INFO)
+    # Optional: Add file output with rotation and retention
+    logger.add(
+        "app.log",
+        rotation="10 MB",
+        retention="20 days",
+        level="INFO",
+        enqueue=True,
+        serialize=False,  # Set to True if you want JSON logs
+    )
 
-    # Create formatters and add it to handlers
-    f_format = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-    f_handler.setFormatter(f_format)
-    f_info_handler.setFormatter(f_format)
+    # Intercept standard library logging
+    logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
 
-    # Add handlers to the logger
-    logger.addHandler(f_handler)
-    logger.addHandler(f_info_handler)
+    # Intercept Uvicorn loggers
+    for _logger in ("uvicorn", "uvicorn.access", "uvicorn.error", "fastapi"):
+        logging_logger = logging.getLogger(_logger)
+        logging_logger.handlers = [InterceptHandler()]

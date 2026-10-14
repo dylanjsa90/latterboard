@@ -1,5 +1,4 @@
 import json
-import logging
 import re
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
@@ -10,6 +9,7 @@ from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.routing import APIRoute
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
+from loguru import logger
 from redis import asyncio as aioredis
 
 from app.api import deps
@@ -19,20 +19,17 @@ from app.core.config import settings
 from app.crud.vocab import crud_vocab
 from app.database import SessionLocal
 from app.init_db import init_db
+from app.init_logger import setup_loguru
 from app.models import Match, User
 from app.SecurityMiddleware import SecurityHeadersMiddleware
-
-from .init_logger import config_logging
-
-logger = logging.getLogger("uvicorn")
-config_logging()
 
 
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncGenerator[None]:
+    setup_loguru()
     redis = aioredis.from_url(settings.REDIS_URL)
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
-    logging.info("Instantiating SessionLocal")
+    logger.info("Instantiating SessionLocal")
     db = SessionLocal()
     try:
         init_db(db)
@@ -43,8 +40,10 @@ async def lifespan(_: FastAPI) -> AsyncGenerator[None]:
     finally:
         logger.info("Closing DB session")
         db.close()
+    logger.info("Starting connnection manager")
     await manager.start()
     yield
+    logger.info("Stopping connnection manager")
     await manager.stop()
 
 
@@ -76,6 +75,7 @@ if settings.all_cors_origins:
 app.add_middleware(SecurityHeadersMiddleware)  # type: ignore[arg-type]
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
+
 @app.get("/health")
 async def health() -> dict[str, str]:
     return {"status": "ok"}
@@ -87,6 +87,7 @@ async def root() -> str:
 
 
 app.include_router(api_router, prefix=settings.API_V1_STR, tags=[])
+
 
 async def _is_match_participant(user_id: int, match_id: int) -> bool:
     db = SessionLocal()

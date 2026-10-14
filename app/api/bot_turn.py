@@ -20,11 +20,11 @@ detached by the time it runs.
 """
 
 import asyncio
-import logging
 import random
 from typing import Any
 
 from fastapi import BackgroundTasks
+from loguru import logger
 from sqlalchemy.orm import Session
 
 from app.api.match_play import apply_race_guess, apply_wordle_guess, wordle_move_error
@@ -35,8 +35,6 @@ from app.crud.match_puzzle import match_puzzle as crud_match_puzzle
 from app.database import SessionLocal
 from app.game import bot, match_modes
 from app.models import Match, MatchGuess, MatchPuzzle, User
-
-logger = logging.getLogger(__name__)
 
 BOT_GAMES = frozenset({"wordle", match_modes.WORD_RACE, match_modes.CIPHER_RACE})
 
@@ -50,7 +48,9 @@ def bot_participant(db: Session, match: Match) -> User | None:
     return None
 
 
-def schedule_bot_turn(background_tasks: BackgroundTasks, db: Session, match: Match) -> None:
+def schedule_bot_turn(
+    background_tasks: BackgroundTasks, db: Session, match: Match
+) -> None:
     """Queue the bot's reply, to run once the human's response has been sent.
 
     Checks for a bot here rather than inside the task: most matches are between two
@@ -131,7 +131,9 @@ def _race_history(row: MatchPuzzle, player_id: int) -> list[dict[str, Any]]:
     return guesses
 
 
-def _next_race_guess(match: Match, own_guesses: list[dict[str, Any]]) -> str | list[int]:
+def _next_race_guess(
+    match: Match, own_guesses: list[dict[str, Any]]
+) -> str | list[int]:
     """Only ever the bot's own history. Race boards are private, and the opponent's
     grades without their letters say nothing useful anyway."""
     if match.game == match_modes.WORD_RACE:
@@ -154,7 +156,9 @@ async def _play_race(db: Session, match: Match, player: User) -> None:
     will prompt the bot again, and `race_outcome` can't decide the match until the
     bot's side is settled. Then it plays itself out.
     """
-    opponent_id = match.invitee_id if player.id == match.inviter_id else match.inviter_id
+    opponent_id = (
+        match.invitee_id if player.id == match.inviter_id else match.inviter_id
+    )
 
     for move in range(match.max_guesses + 1):
         if match.status != "in_progress":

@@ -1,6 +1,6 @@
-import logging
 import secrets
 
+from loguru import logger
 from sqlalchemy import inspect, text
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session
@@ -20,7 +20,9 @@ def ensure_user_columns(bind: Engine) -> list[str]:
     `create_all` creates missing tables but never alters existing ones, and there are
     no migrations yet, so without this new profile columns never reach old databases.
     """
-    present = {column["name"] for column in inspect(bind).get_columns(User.__tablename__)}
+    present = {
+        column["name"] for column in inspect(bind).get_columns(User.__tablename__)
+    }
     # `user` is a reserved word in Postgres, so names go through the dialect's quoting.
     quote = bind.dialect.identifier_preparer.quote
     added: list[str] = []
@@ -37,14 +39,14 @@ def ensure_user_columns(bind: Engine) -> list[str]:
             )
             added.append(column.name)
     if added:
-        logging.info("Added user columns: %s", ", ".join(added))
+        logger.info("Added user columns: %s", ", ".join(added))
     return added
 
 
 def init_db(db: Session) -> None:
     Base.metadata.create_all(bind=engine)
     ensure_user_columns(engine)
-    logging.info("initializing db, bound engine")
+    logger.info("initializing db, bound engine")
 
     user = crud_user.get_user_by_email(db, settings.DEFAULT_USER)
 
@@ -59,7 +61,7 @@ def init_db(db: Session) -> None:
                 birth_year=2000,
             ),
         )
-        logging.info(f"Created user {user}")
+        logger.info(f"Created user {user}")
 
     seed_bot_user(db)
 
@@ -88,7 +90,7 @@ def seed_bot_user(db: Session) -> User:
                 birth_year=2000,
             ),
         )
-        logging.info("Created bot user %s", bot.username)
+        logger.info("Created bot user %s", bot.username)
     if not bot.is_bot:
         # Set separately because `create_user` builds the row from `UserCreate`,
         # which has no `is_bot`. Also repairs a row seeded before the column existed.

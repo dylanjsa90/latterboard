@@ -1,7 +1,7 @@
-import logging
 from datetime import timedelta
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
+from loguru import logger
 from sqlalchemy.orm import Session
 
 from app.api import deps
@@ -51,14 +51,17 @@ def _get_or_generate_puzzle(db: Session, game: str, puzzle_id: str | None) -> Pu
     return row
 
 
-def _open_attempt(db: Session, current_user: User | None, puzzle_id: str) -> PuzzleAttempt | None:
+def _open_attempt(
+    db: Session, current_user: User | None, puzzle_id: str
+) -> PuzzleAttempt | None:
     """A signed-in player's attempt so far, refusing further moves once it has an outcome."""
     if current_user is None:
         return None
     attempt = crud_puzzle_attempt.get_for_puzzle(db, current_user.id, puzzle_id)
     if attempt is not None and attempt.completed:
         raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT, detail="You've already finished this puzzle"
+            status_code=status.HTTP_409_CONFLICT,
+            detail="You've already finished this puzzle",
         )
     return attempt
 
@@ -157,7 +160,7 @@ def word_guess(
 ) -> WordGuessResult:
     row = _get_or_generate_puzzle(db, "word", body.puzzle_id)
     answer = row.data["answer"]
-    logging.getLogger("uvicorn").info(f"Word Guess Route: Answer={answer}")
+    logger.info(f"Word Guess Route: Answer={answer}")
     attempt = _open_attempt(db, current_user, body.puzzle_id)
     grades = puzzle_logic.grade_word(body.guess, answer)
     won = body.guess.casefold() == answer.casefold()
@@ -175,7 +178,9 @@ def word_guess(
             guess=body.guess,
         )
 
-    return WordGuessResult(grades=grades, won=won, lost=lost, answer=answer if lost else None)
+    return WordGuessResult(
+        grades=grades, won=won, lost=lost, answer=answer if lost else None
+    )
 
 
 # --- sudoku -------------------------------------------------------------
@@ -262,10 +267,14 @@ def sudoku_hint(
 
 
 @router.get("/memory", response_model=MemoryPuzzlePublic)
-def get_memory_puzzle(db: Session = Depends(deps.get_db)) -> MemoryPuzzlePublic | HTTPException:
+def get_memory_puzzle(
+    db: Session = Depends(deps.get_db),
+) -> MemoryPuzzlePublic | HTTPException:
     row = crud_puzzle.get_by_game_variant(db, "memory", 0)
     if row is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No memory puzzle seeded")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="No memory puzzle seeded"
+        )
     symbols = row.data["symbols"]
     # The deck is shuffled from the id, so one id per day deals everyone the same deck.
     return MemoryPuzzlePublic(
@@ -281,7 +290,9 @@ def memory_reveal(
 ) -> MemoryRevealResult | HTTPException:
     deal_date = puzzle_logic.dated_puzzle(body.puzzle_id, "memory")
     if deal_date is None:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid memory puzzle id")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid memory puzzle id"
+        )
     if deal_date > puzzle_logic.today():
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -289,14 +300,20 @@ def memory_reveal(
         )
     row = crud_puzzle.get_by_game_variant(db, "memory", 0)
     if row is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No memory puzzle seeded")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="No memory puzzle seeded"
+        )
 
     deck = puzzle_logic.seeded_memory_deck(body.puzzle_id, row.data["symbols"])
     if body.index >= len(deck):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid memory card index")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid memory card index"
+        )
 
     if current_user is not None:
-        crud_puzzle_attempt.record_attempt(db, current_user.id, "memory", body.puzzle_id)
+        crud_puzzle_attempt.record_attempt(
+            db, current_user.id, "memory", body.puzzle_id
+        )
 
     return MemoryRevealResult(symbol=deck[body.index])
 
@@ -324,7 +341,9 @@ def get_cipher_puzzle(
         values = puzzle_logic.decode_cipher(code)
         feedback = puzzle_logic.cipher_feedback(values, answer)
         attempts.append(
-            CipherAttemptPublic(attempt=values, exact=feedback["exact"], close=feedback["close"])
+            CipherAttemptPublic(
+                attempt=values, exact=feedback["exact"], close=feedback["close"]
+            )
         )
 
     return CipherPuzzlePublic(

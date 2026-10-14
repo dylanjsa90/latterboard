@@ -1,4 +1,3 @@
-import logging
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -7,15 +6,13 @@ from typing import Any
 import emails  # type: ignore[import-untyped]
 import jwt
 from jinja2 import Template
+from loguru import logger
 from markupsafe import escape
 from passlib.exc import InvalidTokenError
 
 from app.core import security
 from app.core.config import settings
 from app.game.puzzles import day_of
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 
 @dataclass

@@ -1,16 +1,14 @@
 import asyncio
 import json
-import logging
 import re
 from typing import Any
 from uuid import uuid4
 
 from fastapi import WebSocket
+from loguru import logger
 from redis import asyncio as aioredis
 
 from app.core.config import settings
-
-logger = logging.getLogger("uvicorn")
 
 # Every worker publishes to and subscribes from this one channel, so a broadcast
 # issued on any worker reaches clients held by all of them.
@@ -88,7 +86,9 @@ class ConnectionManager:
     async def join(self, websocket: WebSocket, topic: str, username: str) -> None:
         """Subscribe an already-accepted connection to an additional topic."""
         self._topics.setdefault(topic, {})[websocket] = username
-        logger.info("Websocket joined topic %s (%d on topic)", topic, len(self._topics[topic]))
+        logger.info(
+            "Websocket joined topic %s (%d on topic)", topic, len(self._topics[topic])
+        )
         await self._sync_presence()
 
     async def disconnect(self, websocket: WebSocket, topic: str) -> None:
@@ -172,7 +172,9 @@ class ConnectionManager:
         """Deliver a message only to the given user's connection(s)."""
         await self.broadcast(message, topic=f"user:{user_id}")
 
-    async def broadcast(self, message: dict[str, Any], topic: str | None = None) -> None:
+    async def broadcast(
+        self, message: dict[str, Any], topic: str | None = None
+    ) -> None:
         """Publish a message to one topic, or to every active connection when topic is None."""
         if self._redis is None:
             raise RuntimeError("ConnectionManager.start() has not been called")
