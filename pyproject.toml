@@ -28,6 +28,7 @@ dependencies = [
     "psycopg2-binary>=2.9.12",
     "pillow>=12.3.0",
     "tzdata>=2026.2",
+    "loguru>=0.7.3",
 ]
 
 [dependency-groups]
