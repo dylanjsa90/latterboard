@@ -56,4 +56,5 @@ contract, `docs/reference/cross-repo-contract.md`.
 | `app/crud/vocab.py` | Loads a room, runs a rule, saves it with an optimistic lock (`VocabRoom.version`, replayed on `StaleDataError`); `create_room` also deletes rooms a week past expiry; wordbook rows | `crud_vocab` (`create_room`, `mutate`, `wordbook`, `save`, `remove`, `review`) |
 | `app/schemas/vocab.py` | Vocab I/O models | `RoomCreate`, `RoomAction`, `RoomSnapshot`, `GameView`, `Question`, `Wordbook`, `SavedWord` |
 | `app/core/config.py` | Env-driven settings | `settings` (`API_V1_STR`, `REDIS_URL`, `MATCH_MAX_GUESSES`, `MATCH_INVITE_EXPIRY_MINUTES`, `MATCH_INVITE_LINK_EXPIRY_DAYS`, `MATCH_INVITE_LINK_DAILY_LIMIT`, `MATCHMAKING_QUEUE_TTL_SECONDS`, `MATCHMAKING_BOT_WAIT_SECONDS`, `BOT_OPPONENT_ENABLED`, `BOT_SKILL`, `BOT_TURN_DELAY_SECONDS`, `FRONTEND_HOST`, SMTP settings, …) |
-| `tests/conftest.py` | Env overrides before imports, per-test DB reset | fixtures incl. `inviter_headers`, `opponent_headers` |
+| `tests/conftest.py` | Env overrides before imports, per-test DB reset, shared fixtures | `client`, `auth_headers`, `superuser_headers`, `inviter_headers`, `opponent_headers`, `empty_queues` |
+| `tests/helpers.py` | Plain helpers test files import | `db_session`, `login`, `signup_and_login`, `start_match`, `match_detail` |

@@ -77,10 +77,10 @@ Paths are in backticks, not `@` imports, so they load only when read.
   - `(user_id, puzzle_id)` has no unique constraint. Adding one is a migration that must first remove duplicate rows.
 
 ### Tests
-- `tests/conftest.py` sets env vars **before** any app import, because `Settings()` reads them at import time. Keep new overrides above the imports.
-- Each test drops the DB, recreates it, and re-seeds it with `init_db`. `WS_HEARTBEAT_SECONDS=3600` stops heartbeat frames from interleaving with the websocket frames tests assert on.
-- Tests use the same Redis as the dev server (default `REDIS_URL`), so test broadcasts and presence keys show up in dev Redis.
-- Two-player fixtures `inviter_headers` / `opponent_headers` (users `inviter` / `opponent`) live in `conftest.py`.
+- `tests/conftest.py` sets env vars **before** any app import, because `Settings()` reads them at import time. Keep new overrides above the imports. `SKIP_ENV_FILE=1` keeps `app/.env.local` out, so tests see only what conftest sets (including their own `SECRET_KEY`).
+- Each run gets a fresh SQLite file in a temp dir; each test drops it, recreates it with `create_all`, and re-seeds it with `init_db`. SQLite skips fsync and passwords use a cheap argon2, both in tests only. `WS_HEARTBEAT_SECONDS=3600` stops heartbeat frames from interleaving with the websocket frames tests assert on.
+- Tests use the same Redis as the dev server (default `REDIS_URL`), so test broadcasts and presence keys show up in dev Redis. Anything touching matchmaking uses the `empty_queues` fixture.
+- Fixtures (`conftest.py`): `client`, `auth_headers` (the default user), `superuser_headers`, `inviter_headers` / `opponent_headers` (users `inviter` / `opponent`), `empty_queues`. Helpers (`tests/helpers.py`, never import from conftest): `db_session()`, `login`, `signup_and_login`, `start_match`, `match_detail`.
 - To simulate a stale concurrent write, keep a reference to the row you loaded. The SQLAlchemy identity map holds objects weakly, so an unreferenced row gets garbage-collected and the next query silently reads fresh state, and the test passes without exercising the conflict.
 
 ## Project Policies
