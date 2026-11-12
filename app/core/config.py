@@ -13,7 +13,9 @@ from pydantic import (
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing_extensions import Self
 
-_app_dir = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+_app_dir = os.path.normpath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+)
 
 # app/.env.local while APP_ENV=local (the default), app/.env otherwise. Real environment
 # variables win over the file. Loaded into os.environ (rather than pydantic's env_file)

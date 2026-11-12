@@ -38,17 +38,16 @@ def test_first_player_waits_in_queue(client, inviter_headers):
 def test_second_player_starts_a_match_and_both_are_notified(
     client, inviter_headers, opponent_headers
 ):
-    with client.websocket_connect(
-        "/ws/lobby", headers=inviter_headers
-    ) as waiting_ws, client.websocket_connect(
-        "/ws/lobby", headers=opponent_headers
-    ) as joining_ws:
+    with (
+        client.websocket_connect("/ws/lobby", headers=inviter_headers) as waiting_ws,
+        client.websocket_connect("/ws/lobby", headers=opponent_headers) as joining_ws,
+    ):
         assert waiting_ws.receive_json()["type"] == "connected"
         assert joining_ws.receive_json()["type"] == "connected"
 
-        assert client.post(f"{BASE}/wordle", headers=inviter_headers).json()["status"] == (
-            "queued"
-        )
+        assert client.post(f"{BASE}/wordle", headers=inviter_headers).json()[
+            "status"
+        ] == ("queued")
         r = client.post(f"{BASE}/wordle", headers=opponent_headers)
         assert r.status_code == 200
         body = r.json()
@@ -75,9 +74,9 @@ def test_second_player_starts_a_match_and_both_are_notified(
 
 def test_rejoining_never_matches_a_player_with_themselves(client, inviter_headers):
     for _ in range(2):
-        assert client.post(f"{BASE}/wordle", headers=inviter_headers).json()["status"] == (
-            "queued"
-        )
+        assert client.post(f"{BASE}/wordle", headers=inviter_headers).json()[
+            "status"
+        ] == ("queued")
 
 
 def test_leaving_the_queue(client, inviter_headers, opponent_headers):

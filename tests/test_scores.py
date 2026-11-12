@@ -64,14 +64,20 @@ def test_submit_score_rejects_unreachable_snake_scores(client, auth_headers):
 
 
 def test_submit_score_accepts_a_full_snake_board(client, auth_headers):
-    r = client.post(f"{BASE}/", json={"game": GAME, "score": 3990}, headers=auth_headers)
+    r = client.post(
+        f"{BASE}/", json={"game": GAME, "score": 3990}, headers=auth_headers
+    )
     assert r.status_code == 201
 
 
 def test_submit_score_other_games_only_need_non_negative_scores(client, auth_headers):
-    r = client.post(f"{BASE}/", json={"game": "other", "score": 42}, headers=auth_headers)
+    r = client.post(
+        f"{BASE}/", json={"game": "other", "score": 42}, headers=auth_headers
+    )
     assert r.status_code == 201
-    r = client.post(f"{BASE}/", json={"game": "other", "score": -1}, headers=auth_headers)
+    r = client.post(
+        f"{BASE}/", json={"game": "other", "score": -1}, headers=auth_headers
+    )
     assert r.status_code == 422
 
 
@@ -222,7 +228,9 @@ def test_an_evening_score_counts_toward_its_pacific_day():
     db = SessionLocal()
     try:
         user_id = crud_user.get_user_by_email(db, settings.DEFAULT_USER).id
-        assert crud_score.get_daily_play_count(db, user_id, GAME, date(2026, 7, 31)) == 1
+        assert (
+            crud_score.get_daily_play_count(db, user_id, GAME, date(2026, 7, 31)) == 1
+        )
         assert crud_score.get_daily_play_count(db, user_id, GAME, date(2026, 8, 1)) == 0
     finally:
         db.close()
@@ -236,7 +244,9 @@ def test_plays_today_covers_the_whole_pacific_day(client, auth_headers):
 
 def test_daily_leaderboard_uses_pacific_days(client):
     _score_at(JUL_31_EVENING)
-    assert len(client.get(f"{BASE}/leaderboard/{GAME}/daily?day=2026-07-31").json()) == 1
+    assert (
+        len(client.get(f"{BASE}/leaderboard/{GAME}/daily?day=2026-07-31").json()) == 1
+    )
     assert client.get(f"{BASE}/leaderboard/{GAME}/daily?day=2026-08-01").json() == []
 
 

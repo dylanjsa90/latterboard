@@ -124,7 +124,16 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             .filter(~Match.inviter_id.in_(bot_ids), ~Match.invitee_id.in_(bot_ids))
             .with_entities(
                 func.count(case((Match.winner_id == user_id, 1))),
-                func.count(case((and_(Match.winner_id.isnot(None), Match.winner_id != user_id), 1))),
+                func.count(
+                    case(
+                        (
+                            and_(
+                                Match.winner_id.isnot(None), Match.winner_id != user_id
+                            ),
+                            1,
+                        )
+                    )
+                ),
                 func.count(case((Match.winner_id.is_(None), 1))),
             )
             .one()
@@ -135,8 +144,12 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             record=MatchRecord(won=won, lost=lost, drawn=drawn),
         )
 
-    def _to_history_item(self, db: Session, match: Match, viewer_id: int) -> MatchHistoryItem:
-        opponent_id = match.invitee_id if viewer_id == match.inviter_id else match.inviter_id
+    def _to_history_item(
+        self, db: Session, match: Match, viewer_id: int
+    ) -> MatchHistoryItem:
+        opponent_id = (
+            match.invitee_id if viewer_id == match.inviter_id else match.inviter_id
+        )
         opponent = db.get(User, opponent_id)
         if match.game == COOP_GAME:
             # Co-op completes with no winner; the puzzle row says how it ended.
@@ -159,7 +172,9 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
         match.status = "in_progress"
         match.started_at = utcnow()
         # Races and co-op have no turns: both players move whenever they like.
-        match.current_turn_user_id = match.inviter_id if match.game == "wordle" else None
+        match.current_turn_user_id = (
+            match.inviter_id if match.game == "wordle" else None
+        )
         db.add(match)
         db.commit()
         db.refresh(match)
@@ -267,7 +282,9 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
                 else match.inviter_id
             )
             crud_game_score.create_score(
-                db, match.winner_id, GameScoreCreate(game="wordle_vs", score=winner_score)
+                db,
+                match.winner_id,
+                GameScoreCreate(game="wordle_vs", score=winner_score),
             )
             crud_game_score.create_score(
                 db, loser_id, GameScoreCreate(game="wordle_vs", score=0)
@@ -298,7 +315,9 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             # `is_bot` is nullable, so coerce: null means a human account.
             inviter_is_bot=bool(inviter and inviter.is_bot),
             invitee_is_bot=bool(invitee and invitee.is_bot),
-            current_turn_username=self._username_or_none(db, match.current_turn_user_id),
+            current_turn_username=self._username_or_none(
+                db, match.current_turn_user_id
+            ),
             winner_username=self._username_or_none(db, match.winner_id),
             max_guesses=match.max_guesses,
             created_at=match.created_at,
@@ -396,7 +415,8 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             ],
         )
         return [
-            self.to_active_item(m, user_id, usernames, puzzles, bot_ids) for m in matches
+            self.to_active_item(m, user_id, usernames, puzzles, bot_ids)
+            for m in matches
         ]
 
     def to_active_item(

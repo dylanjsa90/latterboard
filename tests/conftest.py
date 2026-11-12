@@ -66,7 +66,10 @@ def auth_headers(client):
     """Bearer token for the default user seeded by init_db."""
     r = client.post(
         "/api/v1/login/access-token",
-        data={"username": settings.DEFAULT_USER, "password": settings.DEFAULT_USER_PASSWORD},
+        data={
+            "username": settings.DEFAULT_USER,
+            "password": settings.DEFAULT_USER_PASSWORD,
+        },
     )
     assert r.status_code == 200
     token = r.json()["access_token"]

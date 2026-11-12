@@ -62,7 +62,6 @@ def send_email(
     logger.info(f"send email result: {response}")
 
 
-
 def generate_reset_password_email(email_to: str, email: str, token: str) -> EmailData:
     project_name = settings.PROJECT_NAME
     subject = f"{project_name} - Password recovery for user {email}"
@@ -78,7 +77,6 @@ def generate_reset_password_email(email_to: str, email: str, token: str) -> Emai
         },
     )
     return EmailData(html_content=html_content, subject=subject)
-
 
 
 def generate_match_invite_email(

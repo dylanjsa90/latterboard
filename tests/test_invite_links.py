@@ -121,7 +121,9 @@ def test_daily_limit_resets_at_pacific_midnight(client, inviter_headers, monkeyp
 
 
 def test_preview_is_public(client, inviter_headers):
-    token = _create(client, inviter_headers, game="word_race", message="Go").json()["token"]
+    token = _create(client, inviter_headers, game="word_race", message="Go").json()[
+        "token"
+    ]
     r = client.get(f"{BASE}/{token}")
     assert r.status_code == 200
     data = r.json()
@@ -165,14 +167,19 @@ def test_claim_by_second_player_conflicts(client, inviter_headers, opponent_head
 
 def test_claim_own_link(client, inviter_headers):
     token = _create(client, inviter_headers).json()["token"]
-    assert client.post(f"{BASE}/{token}/claim", headers=inviter_headers).status_code == 400
+    assert (
+        client.post(f"{BASE}/{token}/claim", headers=inviter_headers).status_code == 400
+    )
 
 
 def test_claim_expired(client, inviter_headers, opponent_headers):
     token = _create(client, inviter_headers).json()["token"]
     _update_link(token, expires_at=utcnow() - timedelta(minutes=1))
     assert client.get(f"{BASE}/{token}").json()["status"] == "expired"
-    assert client.post(f"{BASE}/{token}/claim", headers=opponent_headers).status_code == 410
+    assert (
+        client.post(f"{BASE}/{token}/claim", headers=opponent_headers).status_code
+        == 410
+    )
 
 
 def test_claim_reuses_open_match(client, inviter_headers, opponent_headers):
@@ -193,7 +200,10 @@ def test_revoke(client, inviter_headers, opponent_headers):
     assert client.delete(f"{BASE}/{token}", headers=opponent_headers).status_code == 403
     assert client.delete(f"{BASE}/{token}", headers=inviter_headers).status_code == 204
     assert client.get(f"{BASE}/{token}").json()["status"] == "revoked"
-    assert client.post(f"{BASE}/{token}/claim", headers=opponent_headers).status_code == 410
+    assert (
+        client.post(f"{BASE}/{token}/claim", headers=opponent_headers).status_code
+        == 410
+    )
 
 
 def test_revoke_used_link_conflicts(client, inviter_headers, opponent_headers):

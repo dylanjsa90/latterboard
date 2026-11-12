@@ -49,9 +49,7 @@ def list_users(
 @router.post("/", response_model=UserPrivate, status_code=status.HTTP_201_CREATED)
 def create_user(user_in: UserCreate, db: Session = Depends(deps.get_db)) -> User:
     if crud_user.get_user_by_email(db, user_in.email):
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT, detail=EMAIL_TAKEN
-        )
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=EMAIL_TAKEN)
     if crud_user.get_user_by_username(db, user_in.username):
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=USERNAME_TAKEN)
     return crud_user.create_user(db, user_in)

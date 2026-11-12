@@ -22,4 +22,3 @@ api_router.include_router(invite_links.router)
 api_router.include_router(puzzles.router)
 api_router.include_router(vocab.router)
 api_router.include_router(ws.router)
-

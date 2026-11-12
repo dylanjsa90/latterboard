@@ -124,7 +124,8 @@ def test_create_user_duplicate_email(client):
 @pytest.mark.usefixtures("created_user")
 def test_create_user_duplicate_username_any_case(client):
     r = client.post(
-        f"{BASE}/", json={**NEW_USER, "email": "else@example.com", "username": "NewUser"}
+        f"{BASE}/",
+        json={**NEW_USER, "email": "else@example.com", "username": "NewUser"},
     )
     assert r.status_code == 409
     assert r.json()["detail"] == "That username is taken."
@@ -133,12 +134,17 @@ def test_create_user_duplicate_username_any_case(client):
 def test_birth_year_is_only_visible_to_its_owner(
     client, superuser_headers, created_user
 ):
-    assert "birth_year" not in client.get(
-        f"{BASE}/{created_user['id']}", headers=superuser_headers
-    ).json()
+    assert (
+        "birth_year"
+        not in client.get(
+            f"{BASE}/{created_user['id']}", headers=superuser_headers
+        ).json()
+    )
     for listed in client.get(f"{BASE}/", headers=superuser_headers).json():
         assert "birth_year" not in listed
-    own = client.post("/api/v1/login/test-token", headers=_login(client, NEW_USER["email"]))
+    own = client.post(
+        "/api/v1/login/test-token", headers=_login(client, NEW_USER["email"])
+    )
     assert own.json()["birth_year"] == NEW_USER["birth_year"]
 
 
@@ -235,7 +241,9 @@ def test_update_me(client, created_headers):
 
 
 def test_update_me_keeping_own_username(client, created_headers):
-    r = client.patch(f"{BASE}/me", json={"username": "NEWUSER"}, headers=created_headers)
+    r = client.patch(
+        f"{BASE}/me", json={"username": "NEWUSER"}, headers=created_headers
+    )
     assert r.status_code == 200
 
 
@@ -250,7 +258,10 @@ def test_update_me_username_taken(client, created_headers):
 def test_update_me_validates(client, created_headers):
     this_year = today().year
     for body in ({"username": "no spaces"}, {"birth_year": this_year - 5}):
-        assert client.patch(f"{BASE}/me", json=body, headers=created_headers).status_code == 422
+        assert (
+            client.patch(f"{BASE}/me", json=body, headers=created_headers).status_code
+            == 422
+        )
 
 
 def test_update_me_unauthenticated(client):
@@ -280,7 +291,9 @@ def test_players_lookup_unauthenticated(client):
     assert client.get(f"{BASE}/players", params={"usernames": ["x"]}).status_code == 401
 
 
-def test_avatar_upload_is_reencoded_and_public(client, auth_headers, created_user, created_headers):
+def test_avatar_upload_is_reencoded_and_public(
+    client, auth_headers, created_user, created_headers
+):
     r = client.put(
         f"{BASE}/me/avatar",
         files={"file": ("me.jpg", _jpeg_with_exif(), "image/jpeg")},
@@ -328,7 +341,9 @@ def test_avatar_remove(client, created_headers):
         files={"file": ("me.jpg", _jpeg_with_exif(), "image/jpeg")},
         headers=created_headers,
     ).json()["avatar_url"]
-    assert client.delete(f"{BASE}/me/avatar", headers=created_headers).status_code == 204
+    assert (
+        client.delete(f"{BASE}/me/avatar", headers=created_headers).status_code == 204
+    )
     assert client.get(url).status_code == 404
     own = client.post("/api/v1/login/test-token", headers=created_headers).json()
     assert own["avatar_url"] is None
@@ -367,9 +382,7 @@ def test_delete_user_forbidden(client, auth_headers, created_user):
     assert r.status_code == 403
 
 
-def test_responses_never_include_password_hash(
-    client, superuser_headers, created_user
-):
+def test_responses_never_include_password_hash(client, superuser_headers, created_user):
     bodies = [
         created_user,
         client.get(f"{BASE}/{created_user['id']}", headers=superuser_headers).json(),

@@ -21,23 +21,33 @@ from app.schemas.puzzle import PuzzleCreate, PuzzleUpdate
 
 
 class CRUDPuzzle(CRUDBase[Puzzle, PuzzleCreate, PuzzleUpdate]):
-    def get_by_game_variant(self, db: Session, game: str, variant_index: int) -> Puzzle | None:
+    def get_by_game_variant(
+        self, db: Session, game: str, variant_index: int
+    ) -> Puzzle | None:
         return (
             db.query(Puzzle)
             .filter(Puzzle.game == game, Puzzle.variant_index == variant_index)
             .first()
         )
 
-    def get_by_game_date(self, db: Session, game: str, puzzle_date: date) -> Puzzle | None:
+    def get_by_game_date(
+        self, db: Session, game: str, puzzle_date: date
+    ) -> Puzzle | None:
         return (
-            db.query(Puzzle).filter(Puzzle.game == game, Puzzle.date == puzzle_date).first()
+            db.query(Puzzle)
+            .filter(Puzzle.game == game, Puzzle.date == puzzle_date)
+            .first()
         )
 
     def count_by_game(self, db: Session, game: str) -> int:
         return db.query(Puzzle).filter(Puzzle.game == game).count()
 
     def _next_variant_index(self, db: Session, game: str) -> int:
-        max_index = db.query(func.max(Puzzle.variant_index)).filter(Puzzle.game == game).scalar()
+        max_index = (
+            db.query(func.max(Puzzle.variant_index))
+            .filter(Puzzle.game == game)
+            .scalar()
+        )
         return 0 if max_index is None else max_index + 1
 
     def _generate_data(self, game: str, variant_index: int) -> dict[str, Any] | None:
@@ -49,7 +59,9 @@ class CRUDPuzzle(CRUDBase[Puzzle, PuzzleCreate, PuzzleUpdate]):
             return sudoku_variant(variant_index)
         return None
 
-    def get_or_generate(self, db: Session, game: str, puzzle_date: date) -> Puzzle | None:
+    def get_or_generate(
+        self, db: Session, game: str, puzzle_date: date
+    ) -> Puzzle | None:
         """Return the puzzle for this game/date, generating and persisting a
         fresh variant on the fly when the seeded bank doesn't cover it yet
         (e.g. the curated bank has been exhausted). Returns None only for
@@ -64,7 +76,9 @@ class CRUDPuzzle(CRUDBase[Puzzle, PuzzleCreate, PuzzleUpdate]):
         if data is None:
             return None
 
-        row = Puzzle(game=game, variant_index=variant_index, date=puzzle_date, data=data)
+        row = Puzzle(
+            game=game, variant_index=variant_index, date=puzzle_date, data=data
+        )
         db.add(row)
         try:
             db.commit()
@@ -115,7 +129,14 @@ class CRUDPuzzle(CRUDBase[Puzzle, PuzzleCreate, PuzzleUpdate]):
                     )
                 )
         if self.count_by_game(db, "memory") == 0:
-            db.add(Puzzle(game="memory", variant_index=0, date=start, data={"symbols": MEMORY_SYMBOLS}))
+            db.add(
+                Puzzle(
+                    game="memory",
+                    variant_index=0,
+                    date=start,
+                    data={"symbols": MEMORY_SYMBOLS},
+                )
+            )
         db.commit()
 
 

@@ -37,7 +37,12 @@ def process_avatar(data: bytes) -> bytes:
                 (AVATAR_SIZE, AVATAR_SIZE),
                 Image.Resampling.LANCZOS,
             )
-    except (UnidentifiedImageError, Image.DecompressionBombError, OSError, SyntaxError) as exc:
+    except (
+        UnidentifiedImageError,
+        Image.DecompressionBombError,
+        OSError,
+        SyntaxError,
+    ) as exc:
         raise InvalidImage(_NOT_AN_IMAGE) from exc
 
     out = BytesIO()

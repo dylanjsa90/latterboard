@@ -37,7 +37,9 @@ def _use_up_race(match_id: int, username: str) -> None:
 
 def test_pending_invite_waits_on_invitee(client, inviter_headers, opponent_headers):
     r = client.post(
-        f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
+        f"{BASE}/invite",
+        json={"opponent_username": "opponent"},
+        headers=inviter_headers,
     )
     match_id = r.json()["id"]
 
@@ -83,7 +85,9 @@ def test_concurrent_matches_all_listed(client, inviter_headers, opponent_headers
 
 def test_closed_matches_drop_out(client, inviter_headers, opponent_headers):
     r = client.post(
-        f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
+        f"{BASE}/invite",
+        json={"opponent_username": "opponent"},
+        headers=inviter_headers,
     )
     match_id = r.json()["id"]
     client.post(f"{BASE}/{match_id}/decline", headers=opponent_headers)

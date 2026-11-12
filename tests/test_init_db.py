@@ -20,7 +20,7 @@ def test_ensure_user_columns_upgrades_a_legacy_user_table(tmp_path):
         )
         conn.execute(
             text(
-                "INSERT INTO \"user\" (email, username, hashed_password) "
+                'INSERT INTO "user" (email, username, hashed_password) '
                 "VALUES ('old@example.com', 'old@example.com', 'x')"
             )
         )

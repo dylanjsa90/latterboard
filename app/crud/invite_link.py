@@ -20,7 +20,9 @@ def invite_url(token: str) -> str:
 
 
 class CRUDInviteLink:
-    def create(self, db: Session, inviter_id: int, link_in: InviteLinkCreate) -> MatchInviteLink:
+    def create(
+        self, db: Session, inviter_id: int, link_in: InviteLinkCreate
+    ) -> MatchInviteLink:
         link = MatchInviteLink(
             token=secrets.token_urlsafe(16),
             inviter_id=inviter_id,
@@ -28,7 +30,8 @@ class CRUDInviteLink:
             message=link_in.message,
             channel=link_in.channel,
             recipient_email=link_in.email,
-            expires_at=utcnow() + timedelta(days=settings.MATCH_INVITE_LINK_EXPIRY_DAYS),
+            expires_at=utcnow()
+            + timedelta(days=settings.MATCH_INVITE_LINK_EXPIRY_DAYS),
         )
         db.add(link)
         db.commit()
@@ -78,7 +81,9 @@ class CRUDInviteLink:
         """
         updated = (
             db.query(MatchInviteLink)
-            .filter(MatchInviteLink.id == link.id, MatchInviteLink.claimed_by_id.is_(None))
+            .filter(
+                MatchInviteLink.id == link.id, MatchInviteLink.claimed_by_id.is_(None)
+            )
             .update({MatchInviteLink.claimed_by_id: user_id}, synchronize_session=False)
         )
         db.commit()
@@ -95,7 +100,9 @@ class CRUDInviteLink:
         db.add(link)
         db.commit()
 
-    def to_public(self, link: MatchInviteLink, *, emailed: bool = False) -> InviteLinkPublic:
+    def to_public(
+        self, link: MatchInviteLink, *, emailed: bool = False
+    ) -> InviteLinkPublic:
         return InviteLinkPublic(
             token=link.token,
             url=invite_url(link.token),

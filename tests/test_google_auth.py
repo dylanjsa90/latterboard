@@ -16,7 +16,10 @@ TEST_TOKEN_URL = "/api/v1/login/test-token"
 CLIENT_ID = "test-client.apps.googleusercontent.com"
 
 MAYA = google.GoogleIdentity(
-    sub="google-sub-maya", email="maya@gmail.com", email_verified=True, name="Maya Ortiz"
+    sub="google-sub-maya",
+    email="maya@gmail.com",
+    email_verified=True,
+    name="Maya Ortiz",
 )
 
 
@@ -126,7 +129,10 @@ def test_existing_password_account_is_linked(client, fake_google):
     assert len(_identities(me["id"])) == 1
     r = client.post(
         "/api/v1/login/access-token",
-        data={"username": settings.DEFAULT_USER, "password": settings.DEFAULT_USER_PASSWORD},
+        data={
+            "username": settings.DEFAULT_USER,
+            "password": settings.DEFAULT_USER_PASSWORD,
+        },
     )
     assert r.status_code == 200
 
@@ -143,7 +149,9 @@ def test_unverified_email_is_refused(client, fake_google):
 @pytest.mark.usefixtures("fake_google")
 def test_bad_credential_is_401(client):
     assert client.post(LOGIN_URL, json={"credential": "forged"}).status_code == 401
-    assert client.post(SIGNUP_URL, json=_profile(credential="forged")).status_code == 401
+    assert (
+        client.post(SIGNUP_URL, json=_profile(credential="forged")).status_code == 401
+    )
 
 
 @pytest.mark.usefixtures("fake_google")
@@ -190,7 +198,8 @@ def test_sign_up_under_13_is_422(client):
 def test_google_only_user_has_no_usable_password(client):
     client.post(SIGNUP_URL, json=_profile())
     r = client.post(
-        "/api/v1/login/access-token", data={"username": "maya@gmail.com", "password": ""}
+        "/api/v1/login/access-token",
+        data={"username": "maya@gmail.com", "password": ""},
     )
     assert r.status_code in (401, 422)
 

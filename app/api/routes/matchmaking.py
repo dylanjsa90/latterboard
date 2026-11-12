@@ -90,7 +90,9 @@ async def _dequeue(game: str, user_id: int) -> None:
 
 def _require_supported(game: str) -> None:
     if game not in SUPPORTED_GAMES:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Unsupported game")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Unsupported game"
+        )
 
 
 def _bot_for(db: Session, game: str, waited: float) -> User | None:

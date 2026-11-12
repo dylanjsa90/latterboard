@@ -34,7 +34,9 @@ GAME_TITLES = {
 def _get_or_404(db: Session, token: str) -> MatchInviteLink:
     link = crud_invite_link.get_by_token(db, token)
     if link is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Invite not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Invite not found"
+        )
     return link
 
 
@@ -47,7 +49,9 @@ def create_invite_link(
 ) -> InviteLinkPublic:
     """Create a link to share. For `email`, also send it when SMTP is configured."""
     if link_in.game not in SUPPORTED_GAMES:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Unsupported game")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Unsupported game"
+        )
     if (
         crud_invite_link.count_created_today(db, current_user.id)
         >= settings.MATCH_INVITE_LINK_DAILY_LIMIT
@@ -88,7 +92,9 @@ def my_invite_links(
 
 
 @router.get("/{token}", response_model=InviteLinkPreview)
-def preview_invite_link(token: str, db: Session = Depends(deps.get_db)) -> InviteLinkPreview:
+def preview_invite_link(
+    token: str, db: Session = Depends(deps.get_db)
+) -> InviteLinkPreview:
     """Who sent the invite and what for. Public, so it can show before sign-in."""
     return crud_invite_link.to_preview(db, _get_or_404(db, token))
 
@@ -104,28 +110,36 @@ async def claim_invite_link(
     link = _get_or_404(db, token)
     if link.inviter_id == current_user.id:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="This is your own invite link"
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="This is your own invite link",
         )
     if link.claimed_by_id not in (None, current_user.id):
         raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT, detail="Someone else already used this invite"
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Someone else already used this invite",
         )
     if link.match_id is not None:
         claimed = crud_match.get(db, link.match_id)
         if claimed is not None:
             return crud_match.to_public(db, claimed)
     if link.revoked_at is not None:
-        raise HTTPException(status_code=status.HTTP_410_GONE, detail="This invite was withdrawn")
+        raise HTTPException(
+            status_code=status.HTTP_410_GONE, detail="This invite was withdrawn"
+        )
     if link.expires_at < utcnow():
-        raise HTTPException(status_code=status.HTTP_410_GONE, detail="This invite has expired")
+        raise HTTPException(
+            status_code=status.HTTP_410_GONE, detail="This invite has expired"
+        )
     inviter = db.get(User, link.inviter_id)
     if inviter is None or not inviter.is_active:
         raise HTTPException(
-            status_code=status.HTTP_410_GONE, detail="This invite is no longer available"
+            status_code=status.HTTP_410_GONE,
+            detail="This invite is no longer available",
         )
     if not crud_invite_link.claim(db, link, current_user.id):
         raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT, detail="Someone else already used this invite"
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Someone else already used this invite",
         )
 
     obj = start_match(db, waiting=inviter, joining=current_user, game=link.game)
@@ -144,7 +158,9 @@ def revoke_invite_link(
     """Withdraw a link nobody has used yet."""
     link = _get_or_404(db, token)
     if link.inviter_id != current_user.id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not your invite")
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail="Not your invite"
+        )
     if link.claimed_by_id is not None:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT, detail="This invite was already used"

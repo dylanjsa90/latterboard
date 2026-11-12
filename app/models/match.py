@@ -26,7 +26,9 @@ class Match(Base):
     invitee_id: Mapped[int] = mapped_column(
         Integer, ForeignKey("user.id"), nullable=False, index=True
     )
-    game: Mapped[str] = mapped_column(String, nullable=False, default="wordle", index=True)
+    game: Mapped[str] = mapped_column(
+        String, nullable=False, default="wordle", index=True
+    )
     # pending_invite -> in_progress -> completed | declined | cancelled | expired
     status: Mapped[str] = mapped_column(
         String, nullable=False, default="pending_invite", index=True

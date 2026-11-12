@@ -59,16 +59,16 @@ def login_access_token(
 
 
 @router.post("/login/google", response_model_exclude_none=True)
-def login_google(body: GoogleCredential, db: Session = Depends(deps.get_db)) -> GoogleLogin:
+def login_google(
+    body: GoogleCredential, db: Session = Depends(deps.get_db)
+) -> GoogleLogin:
     """
     Sign in with a Google ID token. An account with the same verified email is
     linked on first use; with no account at all, the player signs up through
     `POST /users/google` instead.
     """
     identity = google_sign_in.verified_identity(body.credential)
-    user = crud_user.get_user_by_identity(
-        db, google_sign_in.PROVIDER, identity.sub
-    )
+    user = crud_user.get_user_by_identity(db, google_sign_in.PROVIDER, identity.sub)
     linked = user is not None
     if user is None:
         user = crud_user.get_user_by_email_any_case(db, identity.email)
