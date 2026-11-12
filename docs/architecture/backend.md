@@ -32,7 +32,7 @@ table), so imports always name the module.
 | `app/backend_pre_start.py` | Waits for the database before the container migrates and serves (`python -m app.backend_pre_start`) | `init`, `main` |
 | `app/init_db.py` | Seed rows at startup: the local default user, the bot, puzzles. Never creates tables | `init_db`, `seed_bot_user` |
 | `app/schema_drift.py` | Read-only check that a database's schema matches the models (`python -m app.schema_drift`) | `schema_diff`, `describe` |
-| `app/init_logger.py` | Loguru to stdout, with stdlib logging routed through it | `setup_loguru` |
+| `app/init_logger.py` | Loguru to stdout at `LOG_LEVEL`, with stdlib logging (Uvicorn included) routed through it and `token=` query values redacted | `setup_loguru` |
 | `alembic/` | Migrations (`versions/`); `env.py` takes the URL from `Settings` | |
 
 ## `app/api/`
