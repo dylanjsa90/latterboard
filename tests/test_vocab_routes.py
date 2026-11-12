@@ -5,34 +5,28 @@ from datetime import date, timedelta
 from typing import Any
 
 from app.crud.vocab import crud_vocab
-from app.database import SessionLocal
 from app.game import puzzles, vocab
 from app.game.vocab_words import daily_word
 from app.models import User, VocabRoom
 from app.utils import utcnow
+from tests.helpers import db_session
 
 BASE = "/api/v1/vocab"
 
 
 def _state(code: str) -> vocab.Game:
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         row = db.get(VocabRoom, code)
         assert row is not None
         return row.state  # type: ignore[return-value]
-    finally:
-        db.close()
 
 
 def _set_state(code: str, **changes: Any) -> None:
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         row = db.get(VocabRoom, code)
         assert row is not None
         row.state = {**row.state, **changes}
         db.commit()
-    finally:
-        db.close()
 
 
 def _key(code: str) -> int:
@@ -224,8 +218,7 @@ def test_invalid_answers_are_rejected(client, auth_headers):
 def test_simultaneous_answers_both_land(client, inviter_headers, opponent_headers):
     game = _start_duel(client, inviter_headers, opponent_headers)
     code = game["code"]
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         opponent = db.query(User).filter(User.username == "opponent").one()
         # This session now holds the room as it was before the inviter's answer...
         stale_row = db.get(VocabRoom, code)
@@ -248,8 +241,6 @@ def test_simultaneous_answers_both_land(client, inviter_headers, opponent_header
                 generation=0,
             ),
         )
-    finally:
-        db.close()
 
     assert snapshot.game.phase == "feedback"
     players = _state(code)["players"]
@@ -319,14 +310,11 @@ def test_room_changed_reaches_players_only_for_news(
 def _backdate(code: str, days: float) -> None:
     """Make a room `days` old, in both its rules' clock and its row's created_at."""
     _set_state(code, created=vocab.now_ms() - int(days * 24 * 60 * 60 * 1000))
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         row = db.get(VocabRoom, code)
         assert row is not None
         row.created_at = utcnow() - timedelta(days=days)
         db.commit()
-    finally:
-        db.close()
 
 
 def test_creating_a_room_deletes_rooms_a_week_past_expiry(client, inviter_headers):

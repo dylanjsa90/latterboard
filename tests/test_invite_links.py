@@ -2,11 +2,10 @@ from datetime import timedelta
 
 import app.api.routes.invite_links as invite_links_route
 from app.core.config import settings
-from app.database import SessionLocal
 from app.game.puzzles import day_start, today
 from app.models import MatchInviteLink
 from app.utils import utcnow
-from tests.conftest import _signup_and_login
+from tests.helpers import db_session, signup_and_login
 
 BASE = "/api/v1/invite-links"
 
@@ -18,14 +17,11 @@ def _create(client, headers, **body):
 
 
 def _update_link(token: str, **fields) -> None:
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         link = db.query(MatchInviteLink).filter(MatchInviteLink.token == token).one()
         for name, value in fields.items():
             setattr(link, name, value)
         db.commit()
-    finally:
-        db.close()
 
 
 def _capture_email(monkeypatch, *, smtp: bool) -> list[dict]:
@@ -161,7 +157,7 @@ def test_claim_again_returns_same_match(client, inviter_headers, opponent_header
 def test_claim_by_second_player_conflicts(client, inviter_headers, opponent_headers):
     token = _create(client, inviter_headers).json()["token"]
     client.post(f"{BASE}/{token}/claim", headers=opponent_headers)
-    third = _signup_and_login(client, "third@example.com", "third")
+    third = signup_and_login(client, "third@example.com", "third")
     assert client.post(f"{BASE}/{token}/claim", headers=third).status_code == 409
 
 

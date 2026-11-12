@@ -20,8 +20,10 @@ _app_dir = os.path.normpath(
 # app/.env.local while APP_ENV=local (the default), app/.env otherwise. Real environment
 # variables win over the file. Loaded into os.environ (rather than pydantic's env_file)
 # because the lowercase database names below are read from there.
+# SKIP_ENV_FILE=1 (set by the tests) reads only real environment variables.
 APP_ENV = os.environ.get("APP_ENV", "local")
-load_dotenv(os.path.join(_app_dir, ".env.local" if APP_ENV == "local" else ".env"))
+if not os.environ.get("SKIP_ENV_FILE"):
+    load_dotenv(os.path.join(_app_dir, ".env.local" if APP_ENV == "local" else ".env"))
 
 
 def parse_cors(v: Any) -> list[str] | str:

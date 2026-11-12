@@ -7,8 +7,8 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 
 from app.core import google
 from app.core.config import settings
-from app.database import SessionLocal
 from app.models import User, UserIdentity
+from tests.helpers import db_session
 
 LOGIN_URL = "/api/v1/login/google"
 SIGNUP_URL = "/api/v1/users/google"
@@ -53,11 +53,8 @@ def _bearer(token: str) -> dict[str, str]:
 
 
 def _identities(user_id: int) -> list[UserIdentity]:
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         return db.query(UserIdentity).filter(UserIdentity.user_id == user_id).all()
-    finally:
-        db.close()
 
 
 @pytest.mark.usefixtures("fake_google")
@@ -164,12 +161,9 @@ def test_google_sign_in_off_without_client_id(client, monkeypatch):
 @pytest.mark.usefixtures("fake_google")
 def test_inactive_user_is_refused(client):
     client.post(SIGNUP_URL, json=_profile())
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         db.query(User).filter(User.username == "maya").update({"is_active": False})
         db.commit()
-    finally:
-        db.close()
     assert client.post(LOGIN_URL, json={"credential": "maya"}).status_code == 400
 
 
@@ -208,12 +202,9 @@ def test_google_only_user_has_no_usable_password(client):
 def test_deleting_user_deletes_identity(client):
     token = client.post(SIGNUP_URL, json=_profile()).json()["access_token"]
     user_id = client.post(TEST_TOKEN_URL, headers=_bearer(token)).json()["id"]
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         db.delete(db.get(User, user_id))
         db.commit()
-    finally:
-        db.close()
     assert _identities(user_id) == []
 
 

@@ -1,21 +1,18 @@
 import pytest
 
-from app.database import SessionLocal
 from app.models.match import Match
+from tests.helpers import db_session, start_match
 
 BASE = "/api/v1/matches"
 KNOWN_WORD = "aback"
 
 
 def _set_target_word(match_id: int, word: str) -> None:
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         m = db.get(Match, match_id)
         m.target_word = word
         db.add(m)
         db.commit()
-    finally:
-        db.close()
 
 
 def test_invite_visible_to_opponent(client, inviter_headers, opponent_headers):
@@ -66,13 +63,7 @@ def test_accept_starts_match_with_inviter_turn(
 
 
 def test_guess_out_of_turn_rejected(client, inviter_headers, opponent_headers):
-    r = client.post(
-        f"{BASE}/invite",
-        json={"opponent_username": "opponent"},
-        headers=inviter_headers,
-    )
-    match_id = r.json()["id"]
-    client.post(f"{BASE}/{match_id}/accept", headers=opponent_headers)
+    match_id = start_match(client, inviter_headers, opponent_headers)
 
     # opponent (invitee) tries to guess even though inviter goes first
     r = client.post(
@@ -82,13 +73,7 @@ def test_guess_out_of_turn_rejected(client, inviter_headers, opponent_headers):
 
 
 def test_invalid_word_rejected(client, inviter_headers, opponent_headers):
-    r = client.post(
-        f"{BASE}/invite",
-        json={"opponent_username": "opponent"},
-        headers=inviter_headers,
-    )
-    match_id = r.json()["id"]
-    client.post(f"{BASE}/{match_id}/accept", headers=opponent_headers)
+    match_id = start_match(client, inviter_headers, opponent_headers)
 
     r = client.post(
         f"{BASE}/{match_id}/guess", json={"word": "zzzzz"}, headers=inviter_headers
@@ -99,14 +84,8 @@ def test_invalid_word_rejected(client, inviter_headers, opponent_headers):
 def test_forced_win_completes_match_and_records_score(
     client, inviter_headers, opponent_headers
 ):
-    r = client.post(
-        f"{BASE}/invite",
-        json={"opponent_username": "opponent"},
-        headers=inviter_headers,
-    )
-    match_id = r.json()["id"]
-    inviter_username = r.json()["inviter_username"]
-    client.post(f"{BASE}/{match_id}/accept", headers=opponent_headers)
+    match_id = start_match(client, inviter_headers, opponent_headers)
+    inviter_username = "inviter"
 
     _set_target_word(match_id, KNOWN_WORD)
 
@@ -165,13 +144,7 @@ def test_cancel_by_inviter(client, inviter_headers):
 
 def _win_wordle(client, inviter_headers, opponent_headers) -> int:
     """Plays a wordle match the inviter wins on the first guess."""
-    r = client.post(
-        f"{BASE}/invite",
-        json={"opponent_username": "opponent"},
-        headers=inviter_headers,
-    )
-    match_id = r.json()["id"]
-    client.post(f"{BASE}/{match_id}/accept", headers=opponent_headers)
+    match_id = start_match(client, inviter_headers, opponent_headers)
     _set_target_word(match_id, KNOWN_WORD)
     r = client.post(
         f"{BASE}/{match_id}/guess", json={"word": KNOWN_WORD}, headers=inviter_headers

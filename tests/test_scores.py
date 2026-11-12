@@ -5,9 +5,9 @@ import pytest
 from app.core.config import settings
 from app.crud.game_score import game_score as crud_score
 from app.crud.user import user as crud_user
-from app.database import SessionLocal
 from app.game.puzzles import day_start, today
 from app.models.game_score import GameScore
+from tests.helpers import db_session, signup_and_login
 
 BASE = "/api/v1/scores"
 GAME = "snake"
@@ -22,21 +22,7 @@ def submitted_score(client, auth_headers):
 
 @pytest.fixture
 def second_user_and_headers(client):
-    payload = {
-        "email": "player2@example.com",
-        "username": "player2",
-        "password": "secret123",
-        "display_name": "Player Two",
-        "birth_year": 1990,
-    }
-    r = client.post("/api/v1/users/", json=payload)
-    assert r.status_code == 201
-    r = client.post(
-        "/api/v1/login/access-token",
-        data={"username": "player2@example.com", "password": "secret123"},
-    )
-    assert r.status_code == 200
-    return {"Authorization": f"Bearer {r.json()['access_token']}"}
+    return signup_and_login(client, "player2@example.com", "player2")
 
 
 def test_submit_score(client, auth_headers):
@@ -214,26 +200,20 @@ JUL_31_EVENING = datetime(2026, 8, 1, 3)
 
 def _score_at(created_at: datetime) -> None:
     """Store a score for the seeded user as if submitted at `created_at` (naive UTC)."""
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         user = crud_user.get_user_by_email(db, settings.DEFAULT_USER)
         db.add(GameScore(user_id=user.id, game=GAME, score=50, created_at=created_at))
         db.commit()
-    finally:
-        db.close()
 
 
 def test_an_evening_score_counts_toward_its_pacific_day():
     _score_at(JUL_31_EVENING)
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         user_id = crud_user.get_user_by_email(db, settings.DEFAULT_USER).id
         assert (
             crud_score.get_daily_play_count(db, user_id, GAME, date(2026, 7, 31)) == 1
         )
         assert crud_score.get_daily_play_count(db, user_id, GAME, date(2026, 8, 1)) == 0
-    finally:
-        db.close()
 
 
 def test_plays_today_covers_the_whole_pacific_day(client, auth_headers):

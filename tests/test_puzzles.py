@@ -5,25 +5,21 @@ import pytest
 from app.core.config import settings
 from app.crud.puzzle import puzzle as crud_puzzle
 from app.crud.user import user as crud_user
-from app.database import SessionLocal
 from app.game.puzzles import day_start, grade_word, seeded_memory_deck, today
 from app.models.puzzle import PuzzleAttempt
+from tests.helpers import db_session
 
 BASE = "/api/v1/puzzles"
 
 
 def _puzzle_answer(game: str, puzzle_id: str, key: str):
     puzzle_date = date.fromisoformat(puzzle_id.split("-", 1)[1])
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         return crud_puzzle.get_by_game_date(db, game, puzzle_date).data[key]
-    finally:
-        db.close()
 
 
 def _attempt_row(user_email: str, puzzle_id: str) -> PuzzleAttempt | None:
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         user = crud_user.get_user_by_email(db, user_email)
         return (
             db.query(PuzzleAttempt)
@@ -32,8 +28,6 @@ def _attempt_row(user_email: str, puzzle_id: str) -> PuzzleAttempt | None:
             )
             .first()
         )
-    finally:
-        db.close()
 
 
 # --- word -------------------------------------------------------------
@@ -65,14 +59,11 @@ def test_authenticated_word_puzzle_is_todays(client, auth_headers):
 
 def test_seeding_covers_yesterday():
     yesterday = today() - timedelta(days=1)
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         for game in ("word", "sudoku", "cipher"):
             row = crud_puzzle.get_by_game_date(db, game, yesterday)
             assert row is not None
             assert row.variant_index == 0
-    finally:
-        db.close()
 
 
 def test_word_guess_correct(client):
@@ -346,11 +337,8 @@ def test_memory_reveal_rejects_future_and_undated_ids(client, puzzle_id, status)
 
 def test_memory_reveal_matches_seeded_deck(client):
     puzzle = client.get(f"{BASE}/memory").json()
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         symbols = crud_puzzle.get_by_game_variant(db, "memory", 0).data["symbols"]
-    finally:
-        db.close()
     expected_deck = seeded_memory_deck(puzzle["puzzle_id"], symbols)
 
     r = client.post(
@@ -509,11 +497,8 @@ def test_cipher_generates_when_bank_exhausted(client):
     )
     assert r.status_code == 200
 
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         row = crud_puzzle.get_by_game_date(db, "cipher", date.fromisoformat(past))
-    finally:
-        db.close()
     assert row is not None
     assert sorted(row.data["digits"]) == sorted(set(row.data["digits"]))
     assert len(row.data["digits"]) == 4
@@ -529,11 +514,8 @@ def test_sudoku_generates_when_bank_exhausted(client):
     )
     assert r.status_code == 200
 
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         row = crud_puzzle.get_by_game_date(db, "sudoku", date.fromisoformat(past))
-    finally:
-        db.close()
     assert row is not None
     assert len(row.data["solution"]) == 81
 
@@ -599,8 +581,7 @@ def _completed_attempt(
     """Store a finished attempt as if it were completed `days_ago` days back, at noon UTC
     unless `completed_at` (naive UTC) says otherwise."""
     solved_on = today() - timedelta(days=days_ago)
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         user = crud_user.get_user_by_email(db, user_email)
         db.add(
             PuzzleAttempt(
@@ -614,8 +595,6 @@ def _completed_attempt(
             )
         )
         db.commit()
-    finally:
-        db.close()
 
 
 def test_stats_unauthenticated(client):

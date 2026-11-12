@@ -1,28 +1,15 @@
 import time
 
 import pytest
-import redis as sync_redis
 
-from app.api.routes.matchmaking import QUEUE_PREFIX, WAITING_SINCE_PREFIX, queue_key
+from app.api.routes.matchmaking import queue_key
 from app.core.config import settings
 
 BASE = "/api/v1/matchmaking"
 
 
-@pytest.fixture(autouse=True)
-def empty_queues():
-    """Tests share Redis and recreate users with the same ids, so a queue left over from
-    another test would pair with the wrong player.
-
-    The waiting-since hashes go too: a leftover entry makes the HSETNX a no-op, so
-    the next test's player looks like they have been waiting for hours and is handed
-    the computer on their first call."""
-    client = sync_redis.Redis.from_url(settings.REDIS_URL)
-    for prefix in (QUEUE_PREFIX, WAITING_SINCE_PREFIX):
-        for key in client.scan_iter(match=f"{prefix}:*"):
-            client.delete(key)
-    yield client
-    client.close()
+# Matchmaking state is shared through Redis, so every test starts from empty queues.
+pytestmark = pytest.mark.usefixtures("empty_queues")
 
 
 def test_first_player_waits_in_queue(client, inviter_headers):

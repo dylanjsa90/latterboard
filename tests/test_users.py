@@ -4,10 +4,10 @@ import pytest
 from PIL import Image
 
 from app.core.config import settings
-from app.database import SessionLocal
 from app.game.puzzles import today
 from app.models import User
 from app.services.avatar import AVATAR_MAX_BYTES
+from tests.helpers import db_session, login
 
 BASE = "/api/v1/users"
 
@@ -21,14 +21,6 @@ NEW_USER = {
 }
 
 
-def _login(client, email: str, password: str = "secret123") -> dict[str, str]:
-    r = client.post(
-        "/api/v1/login/access-token", data={"username": email, "password": password}
-    )
-    assert r.status_code == 200
-    return {"Authorization": f"Bearer {r.json()['access_token']}"}
-
-
 @pytest.fixture
 def created_user(client):
     r = client.post(f"{BASE}/", json=NEW_USER)
@@ -38,19 +30,16 @@ def created_user(client):
 
 @pytest.fixture
 def created_headers(client, created_user):
-    return _login(client, created_user["email"])
+    return login(client, created_user["email"])
 
 
 @pytest.fixture
 def superuser_headers(auth_headers):
     """The default user, promoted to superuser."""
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         user = db.query(User).filter(User.email == settings.DEFAULT_USER).one()
         user.is_superuser = True
         db.commit()
-    finally:
-        db.close()
     return auth_headers
 
 
@@ -143,7 +132,7 @@ def test_birth_year_is_only_visible_to_its_owner(
     for listed in client.get(f"{BASE}/", headers=superuser_headers).json():
         assert "birth_year" not in listed
     own = client.post(
-        "/api/v1/login/test-token", headers=_login(client, NEW_USER["email"])
+        "/api/v1/login/test-token", headers=login(client, NEW_USER["email"])
     )
     assert own.json()["birth_year"] == NEW_USER["birth_year"]
 
@@ -178,7 +167,7 @@ def test_email_is_only_visible_to_its_owner(client, superuser_headers, created_u
     for listed in client.get(f"{BASE}/", headers=superuser_headers).json():
         assert "email" not in listed
     own = client.post(
-        "/api/v1/login/test-token", headers=_login(client, NEW_USER["email"])
+        "/api/v1/login/test-token", headers=login(client, NEW_USER["email"])
     )
     assert own.json()["email"] == NEW_USER["email"]
 

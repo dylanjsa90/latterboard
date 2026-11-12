@@ -4,16 +4,15 @@ import random
 import statistics
 
 import pytest
-import redis as sync_redis
 
-from app.api.routes.matchmaking import (
-    QUEUE_PREFIX,
-    WAITING_SINCE_PREFIX,
-    waiting_since_key,
-)
+from app.api.routes.matchmaking import waiting_since_key
 from app.core.config import settings
 from app.game import bot, wordle
 from app.game.puzzles import cipher_feedback
+from tests.helpers import match_detail
+
+# Matchmaking state is shared through Redis, so every test starts from empty queues.
+pytestmark = pytest.mark.usefixtures("empty_queues")
 
 # --- the move engine ----------------------------------------------------------
 #
@@ -183,18 +182,6 @@ MATCHES = "/api/v1/matches"
 BOT = settings.BOT_USER_USERNAME
 
 
-@pytest.fixture(autouse=True)
-def empty_queues():
-    """Tests share Redis and recreate users with the same ids, so leftover queue or
-    waiting-since state would leak between them."""
-    redis_client = sync_redis.Redis.from_url(settings.REDIS_URL)
-    for prefix in (QUEUE_PREFIX, WAITING_SINCE_PREFIX):
-        for key in redis_client.scan_iter(match=f"{prefix}:*"):
-            redis_client.delete(key)
-    yield redis_client
-    redis_client.close()
-
-
 @pytest.fixture
 def instant_bot(monkeypatch):
     """Hand out the computer on the first call, so gameplay tests don't wait."""
@@ -278,16 +265,10 @@ def test_the_computer_cannot_be_invited_directly(client, inviter_headers):
 WORDS = ["crane", "stoic", "blimp", "pluck", "vodka", "jumpy", "ghost", "wedge"]
 
 
-def _detail(client, headers, match_id):
-    r = client.get(f"{MATCHES}/{match_id}", headers=headers)
-    assert r.status_code == 200, r.text
-    return r.json()
-
-
 def _play_out(client, headers, match, path, moves):
     """Take turns until the match ends or the player runs out of moves."""
     for move in moves:
-        detail = _detail(client, headers, match["id"])
+        detail = match_detail(client, headers, match["id"])
         if detail["status"] != "in_progress":
             return detail
         if match["game"] == "wordle" and detail["current_turn_username"] != "inviter":
@@ -296,7 +277,7 @@ def _play_out(client, headers, match, path, moves):
         if r.status_code == 409:  # our side of the race is done; nothing left to do
             break
         assert r.status_code == 200, r.text
-    return _detail(client, headers, match["id"])
+    return match_detail(client, headers, match["id"])
 
 
 @pytest.mark.usefixtures("instant_bot")
@@ -314,7 +295,7 @@ def test_the_computer_replies_before_the_guess_returns(client, inviter_headers):
     # Built before the bot moved, so it still hands the turn over.
     assert r.json()["current_turn_username"] == BOT
 
-    detail = _detail(client, inviter_headers, match["id"])
+    detail = match_detail(client, inviter_headers, match["id"])
     if detail["status"] == "in_progress":
         assert detail["current_turn_username"] == "inviter"
     # Two guesses on the shared board: the player's, then the computer's.
