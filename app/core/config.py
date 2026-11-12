@@ -43,6 +43,8 @@ class Settings(BaseSettings):
     APP_ENV: Literal["local", "staging", "production"] = cast(
         Literal["local", "staging", "production"], APP_ENV
     )
+    # Lowest level written to stdout. Uvicorn's own lines also need its --log-level.
+    LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
     SECRET_KEY: str = "changethis"
     # 60 minutes * 24 hours * 8 days = 8 days
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
