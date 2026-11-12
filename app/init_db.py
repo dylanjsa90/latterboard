@@ -39,7 +39,7 @@ def ensure_user_columns(bind: Engine) -> list[str]:
             )
             added.append(column.name)
     if added:
-        logger.info("Added user columns: %s", ", ".join(added))
+        logger.info("Added user columns: {}", ", ".join(added))
     return added
 
 
@@ -48,9 +48,10 @@ def init_db(db: Session) -> None:
     ensure_user_columns(engine)
     logger.info("initializing db, bound engine")
 
-    user = crud_user.get_user_by_email(db, settings.DEFAULT_USER)
-
-    if not user:
+    # A known sign-in for local development only; never seed it on a deployment.
+    if settings.APP_ENV == "local" and not crud_user.get_user_by_email(
+        db, settings.DEFAULT_USER
+    ):
         user = crud_user.create_user(
             db=db,
             user_in=UserCreate(
@@ -61,7 +62,7 @@ def init_db(db: Session) -> None:
                 birth_year=2000,
             ),
         )
-        logger.info(f"Created user {user}")
+        logger.info("Created default user {}", user.username)
 
     seed_bot_user(db)
 
@@ -90,7 +91,7 @@ def seed_bot_user(db: Session) -> User:
                 birth_year=2000,
             ),
         )
-        logger.info("Created bot user %s", bot.username)
+        logger.info("Created bot user {}", bot.username)
     if not bot.is_bot:
         # Set separately because `create_user` builds the row from `UserCreate`,
         # which has no `is_bot`. Also repairs a row seeded before the column existed.

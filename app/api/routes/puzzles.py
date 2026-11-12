@@ -1,7 +1,6 @@
 from datetime import timedelta
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
-from loguru import logger
 from sqlalchemy.orm import Session
 
 from app.api import deps
@@ -160,7 +159,6 @@ def word_guess(
 ) -> WordGuessResult:
     row = _get_or_generate_puzzle(db, "word", body.puzzle_id)
     answer = row.data["answer"]
-    logger.info(f"Word Guess Route: Answer={answer}")
     attempt = _open_attempt(db, current_user, body.puzzle_id)
     grades = puzzle_logic.grade_word(body.guess, answer)
     won = body.guess.casefold() == answer.casefold()

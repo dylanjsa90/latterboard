@@ -101,9 +101,9 @@ async def run_bot_turn(match_id: int) -> None:
     except MoveRejected as exc:
         # A legitimate outcome, not a failure: the human's move ended the match or
         # closed out the bot's side while it was thinking.
-        logger.info("Bot move declined in match %s: %s", match_id, exc)
+        logger.info("Bot move declined in match {}: {}", match_id, exc)
     except Exception:
-        logger.exception("Bot turn failed for match %s", match_id)
+        logger.exception("Bot turn failed for match {}", match_id)
     finally:
         db.close()
 

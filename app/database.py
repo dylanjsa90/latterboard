@@ -1,4 +1,3 @@
-from loguru import logger
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -12,11 +11,6 @@ if _db_url.startswith("postgresql://") or _db_url.startswith("postgres://"):
     _db_url = _db_url.replace("postgresql://", "postgresql+psycopg://", 1).replace(
         "postgres://", "postgresql+psycopg://", 1
     )
-
-
-logger.debug(
-    f"Creating engine with DATABASE_URL: {settings.DATABASE_URL}  APP_ENV: {settings.APP_ENV} DB_TYPE: {settings.DB_TYPE} is_sqlite: {_is_sqlite}"
-)
 
 engine = create_engine(
     url=_db_url,

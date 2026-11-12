@@ -40,3 +40,24 @@ def test_test_token_valid(client, auth_headers):
 def test_test_token_missing(client):
     r = client.post(TEST_TOKEN_URL)
     assert r.status_code == 401
+
+
+RECOVERY_URL = "/api/v1/password-recovery"
+RESET_URL = "/api/v1/reset-password/"
+
+
+def test_password_recovery_without_smtp_gives_the_usual_answer(client, monkeypatch):
+    # With SMTP off, a registered email must get the same 200 as an unknown one,
+    # not a 500 from `send_email`, or the response gives away who has an account.
+    monkeypatch.setattr(settings, "SMTP_HOST", None)
+    known = client.post(f"{RECOVERY_URL}/{DEFAULT_EMAIL}")
+    unknown = client.post(f"{RECOVERY_URL}/nobody@example.com")
+    assert known.status_code == unknown.status_code == 200
+    assert known.json() == unknown.json()
+
+
+def test_reset_password_rejects_a_malformed_token(client):
+    r = client.post(
+        RESET_URL, json={"token": "not-a-jwt", "new_password": "newpass123"}
+    )
+    assert r.status_code == 400

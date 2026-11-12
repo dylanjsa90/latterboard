@@ -224,7 +224,7 @@ class ConnectionManager:
                 try:
                     await websocket.send_json(message)
                 except Exception:
-                    logger.warning("Dropping unreachable websocket on topic %s", name)
+                    logger.warning("Dropping unreachable websocket on topic {}", name)
                     await self.disconnect(websocket, name)
 
 

@@ -4,7 +4,7 @@
 > head-to-head matches with matchmaking and a computer opponent, Vocab Challenger rooms and
 > wordbooks, and a websocket for live play.
 
-Last updated: 2026-10-09
+Last updated: 2026-11-12
 
 Python 3.10+ with uv, SQLAlchemy, Redis, JWT auth. SQLite locally; deploys to a VM as a Docker
 container built from `Dockerfile`. Setup, Docker, and the production server are in `README.md`.
@@ -13,15 +13,15 @@ container built from `Dockerfile`. Setup, Docker, and the production server are 
 
 | Command                         | Does                                                   |
 | ------------------------------- | ------------------------------------------------------ |
-| `make check`                    | mypy + pytest, printing only errors and summary lines  |
-| `uv run pytest`                 | Tests (~55s, needs the local Redis)                    |
+| `make check`                    | ruff + mypy + pytest, printing only errors and summary lines; fails if any step fails |
+| `uv run pytest`                 | Tests (several minutes, needs the local Redis)         |
 | `uv run ruff check app/ tests/` | Lint (logging instead of `print`: ruff enforces T201)  |
 | `uv run mypy app/`              | Type check, strict mode                                |
 | `fastapi dev app/main.py`       | Dev server; auto-reloads, so it picks up edits as you work |
 
-ruff and mypy already report many errors on `dev`, so compare only the files you touched. For
-demos, export `DB_TYPE=sqlite SQLITE_DATABASE_URL=sqlite:///<scratch file>` so seeding doesn't
-touch the real `sql_app.db`.
+`ruff check` and `mypy` are clean on `dev`; keep them that way. `ruff format` isn't applied
+repo-wide yet, so format only the files you touch. For demos, export `DB_TYPE=sqlite
+SQLITE_DATABASE_URL=sqlite:///<scratch file>` so seeding doesn't touch the real `sql_app.db`.
 
 ## Key Context Files
 
@@ -86,7 +86,7 @@ Paths are in backticks, not `@` imports, so they load only when read.
 - `.github/workflows/ci.yml` runs lint, typecheck, test, and a Docker build check on PRs into
   `main` and pushes to `dev`. It's a quality gate only — no deploy step.
 - Agents commit or push only when asked.
-- A change is done when `make check` is clean for the files you touched — plus `npm run check` in webcade when both repos changed.
+- A change is done when `make check` passes — plus `npm run check` in webcade when both repos changed.
 
 ### Working style
 - State your assumptions. When a request has more than one reading, or something is unclear, name it and ask rather than picking silently.

@@ -8,7 +8,6 @@ import jwt
 from jinja2 import Template
 from loguru import logger
 from markupsafe import escape
-from passlib.exc import InvalidTokenError
 
 from app.core import security
 from app.core.config import settings
@@ -155,5 +154,5 @@ def verify_password_reset_token(token: str) -> str | None:
             token, settings.SECRET_KEY, algorithms=[security.ALGORITHM]
         )
         return str(decoded_token["sub"])
-    except InvalidTokenError:
+    except jwt.InvalidTokenError:
         return None

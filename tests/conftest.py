@@ -1,6 +1,9 @@
 import os
 
 # Must precede all app imports so Settings() reads the test URL
+# Tests run as a local install whatever a developer's app/.env.local says: only
+# a local install seeds the default user the tests sign in as.
+os.environ["APP_ENV"] = "local"
 os.environ["DATABASE_URL"] = "sqlite:///./test_app.db"
 os.environ["SQLITE_DATABASE_URL"] = "sqlite:///./test_app.db"
 os.environ["DB_TYPE"] = "sqlite"

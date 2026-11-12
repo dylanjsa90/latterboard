@@ -106,7 +106,8 @@ def recover_password(email: str, db: Session = Depends(deps.get_db)) -> Any:
 
     # Always return the same response to prevent email enumeration attacks
     # Only send email if user actually exists
-    if user:
+    # With email off there is nothing to send, so skip it and still give the same answer.
+    if user and settings.emails_enabled:
         password_reset_token = generate_password_reset_token(email=email)
         email_data = generate_reset_password_email(
             email_to=user.email, email=email, token=password_reset_token
@@ -168,5 +169,5 @@ def recover_password_html_content(
     )
 
     return HTMLResponse(
-        content=email_data.html_content, headers={"subject:": email_data.subject}
+        content=email_data.html_content, headers={"subject": email_data.subject}
     )

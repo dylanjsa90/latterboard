@@ -173,6 +173,6 @@ async def websocket_endpoint(
                     topic=game_name,
                 )
     except WebSocketDisconnect:
-        logger.info("Websocket left topic %s (%s)", game_name, current_user.username)
+        logger.info("Websocket left topic {} ({})", game_name, current_user.username)
     finally:
         await manager.disconnect_all(websocket)

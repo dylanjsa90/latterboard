@@ -3,7 +3,6 @@ import warnings
 from typing import Annotated, Any, Literal, cast
 
 from dotenv import load_dotenv
-from loguru import logger
 from pydantic import (
     AnyUrl,
     BeforeValidator,
@@ -18,15 +17,12 @@ from typing_extensions import Self
 _here = os.path.dirname(os.path.abspath(__file__))
 _app_dir = os.path.normpath(os.path.join(_here, ".."))  # backend/app/
 
-logger.debug(f"app_dir: {_app_dir}")
 APP_ENV = os.environ.get("APP_ENV", "local")
 
 _envFile = ".env"
 if APP_ENV == "local":
     _envFile = _envFile + ".local"
 load_dotenv(os.path.join(_app_dir, _envFile))
-
-logger.debug(f"os.environ: {os.environ}")
 
 
 def parse_cors(v: Any) -> list[str] | str:
@@ -47,12 +43,12 @@ class Settings(BaseSettings):
     APP_ENV: Literal["local", "staging", "production"] = cast(
         Literal["local", "staging", "production"], APP_ENV
     )
-    SECRET_KEY: str = os.environ.get("SECRET_KEY", "changethis")
+    SECRET_KEY: str = "changethis"
     # 60 minutes * 24 hours * 8 days = 8 days
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
     # The web client ID from Google Cloud, the same one webcade uses. It's public, and
     # only an ID token issued for it is accepted. Empty turns Google sign-in off (404).
-    GOOGLE_CLIENT_ID: str = os.getenv("GOOGLE_CLIENT_ID", "")
+    GOOGLE_CLIENT_ID: str = ""
 
     FRONTEND_HOST: str = "http://localhost:5173"
     FRONTEND_HOST_ALT: str = "http://localhost:5174"
@@ -62,9 +58,8 @@ class Settings(BaseSettings):
         "https://vocabchallenger.com",
     ]
 
-    ENVIRONMENT: Literal["local", "staging", "production"] = "local"
     LOGGER_NAME: str = "uvicorn"
-    DEBUG: bool = os.environ.get("DEBUG", "0") == "1"
+    DEBUG: bool = False
     BACKEND_CORS_ORIGINS: Annotated[
         list[AnyUrl] | str, BeforeValidator(parse_cors)
     ] = []
@@ -82,13 +77,11 @@ class Settings(BaseSettings):
             + self.DEPLOYED_HOSTS
         )
 
-    PROJECT_NAME: str = os.environ.get("PROJECT_NAME", "Latterboard API")
+    PROJECT_NAME: str = "Latterboard API"
     SENTRY_DSN: HttpUrl | None = None
-    SQLITE_DATABASE_URL: str = os.getenv(
-        "SQLITE_DATABASE_URL", "sqlite:///./sql_app.db"
-    )
+    SQLITE_DATABASE_URL: str = "sqlite:///./sql_app.db"
 
-    DB_TYPE: str = os.environ.get("DB_TYPE", "sqlite")
+    DB_TYPE: str = "sqlite"
 
     # Fetch variables
     DB_USER: str = os.getenv("user", "db_user")
@@ -139,7 +132,7 @@ class Settings(BaseSettings):
     DEFAULT_USER_PASSWORD: str = "password"
     DEFAULT_USER_USERNAME: str = "first_user"
 
-    REDIS_URL: str = os.environ.get("REDIS_URL", "redis://localhost:6379")
+    REDIS_URL: str = "redis://localhost:6379"
 
     MAX_DAILY_PLAYS_PER_GAME: int = 5
 
@@ -170,12 +163,12 @@ class Settings(BaseSettings):
     BOT_SKILL: float = 0.75
 
     def _check_default_secret(self, var_name: str, value: str | None) -> None:
-        if value == "changethis":
+        if value in (None, "", "changethis"):
             message = (
-                f'The value of {var_name} is "changethis", '
-                "for security, please change it, at least for deployments."
+                f'{var_name} is empty or "changethis". Set a real value; '
+                "it is required everywhere except APP_ENV=local."
             )
-            if self.ENVIRONMENT == "local":
+            if self.APP_ENV == "local":
                 warnings.warn(message, stacklevel=1)
             else:
                 raise ValueError(message)
@@ -183,9 +176,6 @@ class Settings(BaseSettings):
     @model_validator(mode="after")
     def _enforce_non_default_secrets(self) -> Self:
         self._check_default_secret("SECRET_KEY", self.SECRET_KEY)
-        self._check_default_secret(
-            "FIRST_SUPERUSER_PASSWORD", self.FIRST_SUPERUSER_PASSWORD
-        )
         return self
 
 
