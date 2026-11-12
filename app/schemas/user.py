@@ -73,12 +73,12 @@ def avatar_url(user_id: int, version: str | None) -> str | None:
 
 
 class UserBase(BaseModel):
-    email: EmailStr
     # Unvalidated on the way out: accounts made before handles have their email here.
     username: str
 
 
 class UserCreate(UserBase):
+    email: EmailStr
     username: Handle
     password: str
     display_name: DisplayName
@@ -152,6 +152,8 @@ class AvatarFields(BaseModel):
 
 
 class UserPublic(UserBase, AvatarFields):
+    """Any signed-in user may see this, so it carries no email or birth year."""
+
     is_active: bool
     is_bot: BotFlag = False
     display_name: str | None = None
@@ -165,6 +167,7 @@ class UserPublic(UserBase, AvatarFields):
 class UserPrivate(UserPublic):
     """The signed-in player's own account, including what nobody else sees."""
 
+    email: EmailStr
     birth_year: int | None = None
 
 

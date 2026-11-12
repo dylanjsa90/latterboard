@@ -41,7 +41,7 @@ def list_users(
     skip: int = 0,
     limit: int = 100,
     db: Session = Depends(deps.get_db),
-    _: User = Depends(deps.get_current_user),
+    _: User = Depends(deps.get_current_active_superuser),
 ) -> list[User]:
     return crud_user.get_users(db, skip=skip, limit=limit)
 
@@ -165,7 +165,7 @@ def get_user(
     return user
 
 
-@router.put("/{user_id}", response_model=UserPublic)
+@router.put("/{user_id}", response_model=UserPrivate)
 def update_user(
     user_id: int,
     user_in: UserUpdate,

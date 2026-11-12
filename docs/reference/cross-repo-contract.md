@@ -1,6 +1,6 @@
 # Cross-repo contract
 
-Last updated: 2026-10-09
+Last updated: 2026-11-12
 
 webcade (`~/projects/webcade`, React) is latterboard's (`~/projects/latterboard`, FastAPI) only
 client. This file is `docs/reference/cross-repo-contract.md` in both repos: keep the two copies
@@ -38,9 +38,13 @@ identical, and update both when a shape changes.
 | `PUT /users/me/avatar` (bearer) | multipart `file` (JPEG/PNG/WebP, ≤ 2 MB) | `UserPrivate`; 413 too big, 422 not an image. Re-encoded to a 256px WebP without EXIF |
 | `DELETE /users/me/avatar` (bearer) | — | 204 |
 | `GET /users/{id}/avatar` (public) | — | `image/webp`, cacheable forever (the URL is versioned); 404 without a photo |
+| `GET /users/{id}` (bearer) | — | `UserPublic`; 404. webcade doesn't call it |
+| `GET /users/?skip&limit` (bearer, superuser) | — | `UserPublic[]`; 403 for anyone else. Admin only |
+| `PUT /users/{id}` / `DELETE /users/{id}` (bearer, owner or superuser) | `{email?, username?, password?, is_active?}` / — | `UserPrivate` / 204; 403 for anyone else. Admin only |
 
-`UserPublic` = `{id, email, username, display_name?, location?, avatar_url?, is_active, is_bot,
-created_at, updated_at}`; `UserPrivate` = `UserPublic` + `birth_year`, sent only to its owner;
+`UserPublic` = `{id, username, display_name?, location?, avatar_url?, is_active, is_bot,
+created_at, updated_at}`; `UserPrivate` = `UserPublic` + `email` + `birth_year`, sent only to its
+owner (or a superuser);
 `PlayerPublic` = `{username, is_bot, display_name?, location?, avatar_url?, created_at}`. `is_bot`
 marks the computer opponent and is always a real boolean on the wire, even though the column is
 nullable. `avatar_url` is a path under the API
