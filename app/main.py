@@ -7,10 +7,7 @@ from fastapi import Depends, FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.routing import APIRoute
-from fastapi_cache import FastAPICache
-from fastapi_cache.backends.redis import RedisBackend
 from loguru import logger
-from redis import asyncio as aioredis
 
 from app.api import deps
 from app.api.main import api_router
@@ -27,8 +24,6 @@ from app.SecurityMiddleware import SecurityHeadersMiddleware
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncGenerator[None]:
     setup_loguru()
-    redis = aioredis.from_url(settings.REDIS_URL)
-    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
     logger.info("Instantiating SessionLocal")
     db = SessionLocal()
     try:
@@ -79,11 +74,6 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 @app.get("/health")
 async def health() -> dict[str, str]:
     return {"status": "ok"}
-
-
-@app.get("/")
-async def root() -> str:
-    return "Hello, World"
 
 
 app.include_router(api_router, prefix=settings.API_V1_STR, tags=[])

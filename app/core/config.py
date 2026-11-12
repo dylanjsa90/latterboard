@@ -7,22 +7,19 @@ from pydantic import (
     AnyUrl,
     BeforeValidator,
     EmailStr,
-    HttpUrl,
     computed_field,
     model_validator,
 )
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing_extensions import Self
 
-_here = os.path.dirname(os.path.abspath(__file__))
-_app_dir = os.path.normpath(os.path.join(_here, ".."))  # backend/app/
+_app_dir = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
+# app/.env.local while APP_ENV=local (the default), app/.env otherwise. Real environment
+# variables win over the file. Loaded into os.environ (rather than pydantic's env_file)
+# because the lowercase database names below are read from there.
 APP_ENV = os.environ.get("APP_ENV", "local")
-
-_envFile = ".env"
-if APP_ENV == "local":
-    _envFile = _envFile + ".local"
-load_dotenv(os.path.join(_app_dir, _envFile))
+load_dotenv(os.path.join(_app_dir, ".env.local" if APP_ENV == "local" else ".env"))
 
 
 def parse_cors(v: Any) -> list[str] | str:
@@ -35,7 +32,6 @@ def parse_cors(v: Any) -> list[str] | str:
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file="app/" + _envFile,
         env_ignore_empty=True,
         extra="ignore",
     )
@@ -52,13 +48,13 @@ class Settings(BaseSettings):
 
     FRONTEND_HOST: str = "http://localhost:5173"
     FRONTEND_HOST_ALT: str = "http://localhost:5174"
-    FRONTEND_HOST_BY_ENV: str = os.environ.get("FRONTEND_HOST", "http://localhost:4173")
+    # `vite preview`, for checking a production build locally.
+    FRONTEND_HOST_PREVIEW: str = "http://localhost:4173"
     DEPLOYED_HOSTS: list[str] = [
         "https://preview.vocabchallenger.com",
         "https://vocabchallenger.com",
     ]
 
-    LOGGER_NAME: str = "uvicorn"
     DEBUG: bool = False
     BACKEND_CORS_ORIGINS: Annotated[
         list[AnyUrl] | str, BeforeValidator(parse_cors)
@@ -72,35 +68,32 @@ class Settings(BaseSettings):
             + [
                 self.FRONTEND_HOST,
                 self.FRONTEND_HOST_ALT,
-                self.FRONTEND_HOST_BY_ENV,
+                self.FRONTEND_HOST_PREVIEW,
             ]
             + self.DEPLOYED_HOSTS
         )
 
     PROJECT_NAME: str = "Latterboard API"
-    SENTRY_DSN: HttpUrl | None = None
     SQLITE_DATABASE_URL: str = "sqlite:///./sql_app.db"
 
     DB_TYPE: str = "sqlite"
 
-    # Fetch variables
-    DB_USER: str = os.getenv("user", "db_user")
-    DB_PASSWORD: str = os.getenv("password", "db_password")
-    DB_HOST: str = os.getenv("host", "http://localhost")
-    DB_PORT: str = os.getenv("port", "8000")
-    DB_NAME: str = os.getenv("dbname", "db_name")
+    # Postgres, used when DB_TYPE isn't "sqlite". Set DB_USER, DB_PASSWORD, ... or, as
+    # older deployments do, the lowercase user, password, host, port, and dbname.
+    DB_USER: str = os.getenv("user", "postgres")
+    DB_PASSWORD: str = os.getenv("password", "")
+    DB_HOST: str = os.getenv("host", "localhost")
+    DB_PORT: str = os.getenv("port", "5432")
+    DB_NAME: str = os.getenv("dbname", "postgres")
 
     @computed_field  # type: ignore[prop-decorator]
     @property
     def DATABASE_URL(self) -> str:
-        # Construct the SQLAlchemy connection string
         return (
             self.SQLITE_DATABASE_URL
             if self.DB_TYPE == "sqlite"
             else f"postgresql+psycopg2://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}?sslmode=require"
         )
-
-    RAW_DATABASE_URL: str = os.getenv("DATABASE_URL", "")
 
     SMTP_TLS: bool = True
     SMTP_SSL: bool = False
@@ -124,10 +117,7 @@ class Settings(BaseSettings):
     def emails_enabled(self) -> bool:
         return bool(self.SMTP_HOST and self.EMAILS_FROM_EMAIL)
 
-    EMAIL_TEST_USER: EmailStr = "test@example.com"
-    FIRST_SUPERUSER: EmailStr = "super.user@root.com"
-    FIRST_SUPERUSER_PASSWORD: str = "localroot"
-
+    # Seeded only when APP_ENV=local, for signing in during development.
     DEFAULT_USER: str = "first.user@test.com"
     DEFAULT_USER_PASSWORD: str = "password"
     DEFAULT_USER_USERNAME: str = "first_user"

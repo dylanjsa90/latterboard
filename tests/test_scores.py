@@ -228,12 +228,10 @@ def test_an_evening_score_counts_toward_its_pacific_day():
         db.close()
 
 
-def test_both_play_counts_cover_the_whole_pacific_day(client, auth_headers):
+def test_plays_today_covers_the_whole_pacific_day(client, auth_headers):
     _score_at(day_start(today()) + timedelta(hours=23))
     r = client.get(f"{BASE}/me/{GAME}/plays-today", headers=auth_headers)
     assert r.json()["used"] == 1
-    r = client.get(f"{BASE}/me/{GAME}/daily-count", headers=auth_headers)
-    assert r.json() == {"count": 1}
 
 
 def test_daily_leaderboard_uses_pacific_days(client):

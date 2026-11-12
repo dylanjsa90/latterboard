@@ -4,16 +4,9 @@ from sqlalchemy.orm import sessionmaker
 from app.core.config import settings
 
 _is_sqlite = settings.DATABASE_URL.startswith("sqlite")
-# SQLAlchemy requires postgresql+psycopg:// to use psycopg3; Render injects postgresql://
-
-_db_url = settings.DATABASE_URL
-if _db_url.startswith("postgresql://") or _db_url.startswith("postgres://"):
-    _db_url = _db_url.replace("postgresql://", "postgresql+psycopg://", 1).replace(
-        "postgres://", "postgresql+psycopg://", 1
-    )
 
 engine = create_engine(
-    url=_db_url,
+    url=settings.DATABASE_URL,
     pool_pre_ping=True,
     pool_size=10,
     max_overflow=20,

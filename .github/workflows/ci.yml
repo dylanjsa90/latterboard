@@ -63,6 +63,25 @@ jobs:
   docker-build:
     name: docker-build
     runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
     steps:
       - uses: actions/checkout@v4
-      - run: docker build .
+      - run: docker build -t latterboard .
+      # Start the image the way a deploy does (CMD and all), so a crash before Uvicorn
+      # serves fails CI rather than the deploy.
+      - name: start-up check
+        run: |
+          docker run -d --name app --network host \
+            -e APP_ENV=production -e SECRET_KEY=ci-only-secret \
+            -e DB_TYPE=sqlite -e SQLITE_DATABASE_URL=sqlite:////app/ci.db \
+            -e REDIS_URL=redis://localhost:6379 latterboard
+          for i in $(seq 1 30); do
+            if curl -sf localhost:8000/health; then exit 0; fi
+            sleep 1
+          done
+          docker logs app
+          exit 1

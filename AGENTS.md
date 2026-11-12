@@ -38,7 +38,8 @@ Paths are in backticks, not `@` imports, so they load only when read.
 
 ### Settings and database
 - `Settings` (`app/core/config.py`) reads `app/.env.local` while `APP_ENV=local` (the default) and `app/.env` otherwise.
-- The database URL is computed from `DB_TYPE`, not read from `DATABASE_URL`: `sqlite` (the default) uses `SQLITE_DATABASE_URL`; any other value builds `postgresql+psycopg2://` from the lowercase `user`, `password`, `host`, `port`, `dbname` env vars. A `DATABASE_URL` env var only fills the unused `RAW_DATABASE_URL`, so the psycopg3 rewrite in `app/database.py` never runs. Both `psycopg[binary]` and `psycopg2-binary` are installed; for driver import errors, check `DB_TYPE` and the URL scheme before touching dependencies.
+- The database URL is computed from `DB_TYPE`; a `DATABASE_URL` env var is ignored. `sqlite` (the default) uses `SQLITE_DATABASE_URL`; any other value builds `postgresql+psycopg2://…?sslmode=require` from `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`, `DB_NAME`, falling back to the lowercase `user`, `password`, `host`, `port`, `dbname` that older deployments set. Only `psycopg2-binary` is installed.
+- `APP_ENV` (`local`, the default, / `staging` / `production`) is the one environment flag. Outside `local`, a missing or `changethis` `SECRET_KEY` stops startup and the `first.user@test.com` sign-in isn't seeded. The Docker image carries no env files: compose passes the root `.env`.
 - Tables come from `Base.metadata.create_all` (`app/init_db.py`). There are no Alembic migrations yet (`alembic/` is a scaffold with no `versions/`, and its `env.py` reads `DATABASE_URL`, which the app itself ignores), so new columns and constraints won't reach existing databases. Call this out whenever you change a model.
 - The one exception is `ensure_user_columns` (same file): at startup it adds any missing **nullable** `user` column. New `User` fields must therefore be nullable; anything else still needs that call-out.
 
@@ -51,7 +52,6 @@ Paths are in backticks, not `@` imports, so they load only when read.
 - Always use `settings.REDIS_URL`; never hardcode `localhost`. Docker compose sets `redis://redis:6379`.
 - The pub/sub client in `ConnectionManager` needs `socket_timeout=None`. redis-py 8 defaults to 5s, so an idle channel times out, `_listen` exits, and broadcasts stop without any error. The `redis>=7.4.0` pin allows 8.x.
 - `ConnectionManager` creates its Redis client in `start()` because `stop()` closes it. Don't share one client across restarts.
-- fastapi-cache `@cache` doesn't work on endpoints that depend on `db`/`current_user`. The default key includes their reprs, which change every request, so it never hits and only piles up keys.
 
 ### Users
 - `username` is the public handle: `[a-z0-9_]{3,20}`, lowercased by `schemas/user.py`. Look it up case-insensitively (`crud_user.get_user_by_username`). Accounts made before handles still have their email there, so never validate `username` on output.

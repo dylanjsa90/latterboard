@@ -16,6 +16,12 @@ COPY . .
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
+# Run unprivileged. The code and .venv stay root-owned, so the app can't modify them;
+# only /app itself is writable, for the SQLite file when DB_TYPE=sqlite.
+RUN useradd --system --uid 1001 --no-create-home latterboard \
+    && chown latterboard /app
+USER latterboard
+
 ENV PATH="/app/.venv/bin:$PATH"
 
 EXPOSE 8000

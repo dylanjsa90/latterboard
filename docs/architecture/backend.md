@@ -1,6 +1,6 @@
 # Backend module map
 
-Last updated: 2026-10-09
+Last updated: 2026-11-12
 
 Where things live in `app/` and what each module exports. Rules for matches, matchmaking, and
 the computer opponent are in `docs/architecture/matches.md`; wire shapes are in the cross-repo
@@ -8,13 +8,13 @@ contract, `docs/reference/cross-repo-contract.md`.
 
 | File | Purpose | Key exports |
 | ---- | ------- | ----------- |
-| `app/main.py` | FastAPI app: lifespan (Redis, fastapi-cache, `manager.start/stop`), `/health`, mounts `api_router` at `/api/v1`, and **the websocket `/ws/{game_name}`** (join/leave_match, and join/leave_room for vocab rooms) | `app` |
+| `app/main.py` | FastAPI app: lifespan (`init_db`, `manager.start/stop`), `/health`, mounts `api_router` at `/api/v1`, and **the websocket `/ws/{game_name}`** (join/leave_match, and join/leave_room for vocab rooms) | `app` |
 | `app/api/main.py` | Router aggregation: login, users, scores, matches, matchmaking, invite_links, puzzles, vocab, ws | `api_router` |
 | `app/api/deps.py` | Request dependencies | `get_db`, `get_current_user`, `get_optional_current_user`, `get_current_user_ws` (token query param), `get_current_active_superuser` |
 | `app/api/routes/login.py` | `/login/*`: password token, `/login/google`, test-token, password recovery/reset | `router` |
 | `app/api/google_sign_in.py` | What `/login/google` and `POST /users/google` share: verify the credential (mapping errors to 401/403/404), mint the token | `PROVIDER`, `verified_identity`, `access_token` |
 | `app/core/google.py` | Checks a Google ID token against Google's certs and `GOOGLE_CLIENT_ID`; tests replace `verify_google_id_token` | `verify_google_id_token`, `GoogleIdentity`, `InvalidGoogleToken` |
-| `app/api/routes/scores.py` | `/scores/*`: submit (daily cap), my scores, plays-today/daily-count, leaderboards | `router` |
+| `app/api/routes/scores.py` | `/scores/*`: submit (daily cap), my scores, plays-today, leaderboards | `router` |
 | `app/crud/game_score.py` | Score rows, daily play count, all-time/daily/monthly leaderboards | `game_score` |
 | `app/schemas/game_score.py` | Score I/O models + per-game validity rules | `SCORE_RULES` |
 | `app/api/routes/matches.py` | `/matches/*`: invite/accept/decline/cancel/pending/detail, `/me/history`, `/me/active` + one move endpoint per mode; each move calls `_require_game`, then broadcasts to `match:{id}` | `router`, `SUPPORTED_GAMES` |

@@ -84,16 +84,6 @@ def leaderboard_monthly(
     ]
 
 
-@router.get("/me/{game}/daily-count")
-def my_daily_count(
-    game: str,
-    current_user: User = Depends(deps.get_current_user),
-    db: Session = Depends(deps.get_db),
-) -> dict[str, int]:
-    count = crud_score.get_daily_play_count(db, current_user.id, game, today())
-    return {"count": count}
-
-
 @router.get("/me/{game}", response_model=list[GameScorePublic])
 def my_scores(
     game: str,
