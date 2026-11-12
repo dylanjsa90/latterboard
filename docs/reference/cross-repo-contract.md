@@ -10,7 +10,7 @@ identical, and update both when a shape changes.
   **not** under `/api/v1`.
 - Wire JSON is snake_case; webcade converts to camelCase inside each `api.ts`.
 - REST response shapes are checked, not just written down: webcade keeps a snapshot of this
-  app's OpenAPI schema (`src/lib/api-schema.d.ts`) and reads each response as `Wire<'Schema'>`.
+  app's OpenAPI schema (`src/lib/api/schema.d.ts`) and reads each response as `Wire<'Schema'>`.
   After changing a response model here, run `npm run api:schema` in webcade (it imports
   `app.main` in-process, from the checkout at `../latterboard`) and fix what `tsc -b` reports.
   A response model's fields are all sent, `null` when empty; give status-like strings a
@@ -88,7 +88,7 @@ returns them on `GET` so word and cipher resume. Stats and history include lost 
 | `GET /me/{game}/plays-today` (bearer) | — | `{used, limit}` (webcade doesn't mirror the cap) |
 | `GET /leaderboard/{game}/{all-time\|daily\|monthly}?limit` | — | `[{rank, username, score, achieved_at}]` |
 
-`SCORE_RULES` (`app/schemas/game_score.py`) must match webcade's `src/components/snake/constants.ts`
+`SCORE_RULES` (`app/schemas/game_score.py`) must match webcade's `src/features/snake/constants.ts`
 (snake: multiples of 10, up to 3990).
 
 ### Matches (`/matches`, bearer) and matchmaking
