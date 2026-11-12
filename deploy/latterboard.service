@@ -1,6 +1,6 @@
 # systemd unit for the production VM. Install it with:
-#   sudo cp deploy/fastapi.service /etc/systemd/system/
-#   sudo systemctl daemon-reload && sudo systemctl enable --now fastapi
+#   sudo cp deploy/latterboard.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now latterboard
 # Edit User and the paths first. Settings come from app/.env (APP_ENV=production reads
 # that file, not app/.env.local); set SQLITE_DATABASE_URL there to an absolute path.
 
