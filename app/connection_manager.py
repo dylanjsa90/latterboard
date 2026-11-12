@@ -87,7 +87,7 @@ class ConnectionManager:
         """Subscribe an already-accepted connection to an additional topic."""
         self._topics.setdefault(topic, {})[websocket] = username
         logger.info(
-            "Websocket joined topic %s (%d on topic)", topic, len(self._topics[topic])
+            "Websocket joined topic {} ({} on topic)", topic, len(self._topics[topic])
         )
         await self._sync_presence()
 
