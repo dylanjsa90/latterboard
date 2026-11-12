@@ -220,9 +220,14 @@ def test_deleting_user_deletes_identity(client):
 # The real check, against tokens signed by a throwaway key standing in for Google's.
 
 
+@pytest.fixture(scope="module")
+def rsa_key():
+    return rsa.generate_private_key(public_exponent=65537, key_size=2048)
+
+
 @pytest.fixture
-def google_key(monkeypatch):
-    key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+def google_key(monkeypatch, rsa_key):
+    key = rsa_key
     monkeypatch.setattr(settings, "GOOGLE_CLIENT_ID", CLIENT_ID)
     monkeypatch.setattr(
         google._jwks,

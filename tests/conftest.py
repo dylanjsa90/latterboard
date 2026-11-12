@@ -16,13 +16,33 @@ os.environ["BOT_TURN_DELAY_SECONDS"] = "0"
 os.environ["BOT_TURN_DELAY_JITTER_SECONDS"] = "0"
 import pytest
 from fastapi.testclient import TestClient
+from pwdlib import PasswordHash
+from pwdlib.hashers.argon2 import Argon2Hasher
+from sqlalchemy import event
 
 from app.api.deps import get_db
+from app.core import security
 from app.core.base_class import Base
 from app.core.config import settings
 from app.database import SessionLocal, engine
 from app.init_db import init_db
 from app.main import app
+
+# Production argon2 settings cost ~0.1 s per hash or check, and every test seeds two
+# users and most sign in. Hashes stay argon2, just cheap ones.
+security.password_hash = PasswordHash(
+    (Argon2Hasher(time_cost=1, memory_cost=1024, parallelism=1),)
+)
+
+
+@event.listens_for(engine, "connect")
+def _skip_fsync(dbapi_connection, _record):
+    """The test database is rebuilt for every test, so durability buys nothing. With
+    it, each DDL commit in the reset waited on the disk: seconds per test on WSL."""
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA synchronous=OFF")
+    cursor.execute("PRAGMA journal_mode=MEMORY")
+    cursor.close()
 
 
 def override_get_db():

@@ -14,7 +14,7 @@ container built from `Dockerfile`. Setup, Docker, and the production server are 
 | Command                         | Does                                                   |
 | ------------------------------- | ------------------------------------------------------ |
 | `make check`                    | ruff check + ruff format --check + mypy + pytest, printing only errors and summary lines; fails if any step fails |
-| `uv run pytest`                 | Tests (several minutes, needs the local Redis)         |
+| `uv run pytest`                 | Tests (under a minute, needs the local Redis)          |
 | `uv run ruff check app/ tests/` | Lint (logging instead of `print`: ruff enforces T201)  |
 | `uv run mypy app/`              | Type check, strict mode                                |
 | `fastapi dev app/main.py`       | Dev server; auto-reloads, so it picks up edits as you work |
