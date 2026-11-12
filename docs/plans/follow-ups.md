@@ -7,20 +7,6 @@ Alembic, the `app/` restructure, tests, docs) found but deliberately left alone.
 small enough to be its own change. Delete an item when it ships; delete this file when it's
 empty.
 
-## Needs a person, not code
-
-- **Adopt migrations on production** before the first start of anything from `7bead82` on:
-  drift check, create `ix_user_is_bot`, `alembic stamp 0001`
-  (`docs/guides/database-migrations.md`). The app no longer creates tables, and the
-  systemd unit's `alembic upgrade head` fails on an unstamped database.
-- **Run production as `APP_ENV=production` under `deploy/latterboard.service`.** The VM has
-  been running with `APP_ENV` unset, which is `local`: it reads `app/.env.local`, seeds
-  `first.user@test.com`, puts variable values in tracebacks and only warns about a weak
-  `SECRET_KEY`. Move the VM's `app/.env.local` to `app/.env`, set `SQLITE_DATABASE_URL` to an
-  absolute path in it, and install the unit (adjusting `User` and paths).
-- **Remove `first.user@test.com` from production** after that switch. It's in the
-  production database with the password `password`; `local` re-seeds it on every start.
-
 ## Security
 
 - **Reset tokens are reusable.** A password-reset token works for its whole 48 hours, even

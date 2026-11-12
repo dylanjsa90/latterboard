@@ -102,9 +102,6 @@ To deploy:
    journalctl -u latterboard -n 50       # check it started
    ```
 
-A database from before migrations existed must be stamped once before the unit's first start;
-see [`docs/guides/database-migrations.md`](docs/guides/database-migrations.md).
-
 ## Tests and checks
 
 Tests need a local Redis.

@@ -50,10 +50,11 @@ there are any.
 A database built by the old `create_all` startup has the tables but no `alembic_version`,
 so `alembic upgrade head` would try to create them again and fail. Mark it as already at
 the baseline instead (`alembic stamp`), but only once its schema matches the baseline
-exactly. Do this **before** the first start of code that runs `alembic upgrade head`
-(the systemd unit's `ExecStartPre`).
+exactly. Do this **before** the first `alembic upgrade head` against it.
 
-On the production VM, in the app directory, after uploading the new code:
+Production has been adopted (November 2026: it lacked only `ix_user_is_bot`, which was
+added before stamping `0001`), so this is only needed for another old database, such as a
+local `sql_app.db` from before migrations. On a VM, in the app directory:
 
 1. `uv sync --frozen --no-dev`, then stop the service and back up the database:
    `sudo systemctl stop latterboard && cp sql_app.db sql_app.db.pre-alembic`.
@@ -78,9 +79,6 @@ On the production VM, in the app directory, after uploading the new code:
 6. Install or update the unit if needed (`deploy/latterboard.service`), then
    `sudo systemctl start latterboard`. `alembic upgrade head` is now a no-op until the
    next migration.
-
-A copy of the production database from October 2026 reported only the missing
-`ix_user_is_bot`; with the index added it stamped, ran `upgrade head` and started cleanly.
 
 For a local `sql_app.db`, run the same steps without `APP_ENV=production`. In Docker, use
 `docker compose exec app …` against the running container, which sees the `app_data`
