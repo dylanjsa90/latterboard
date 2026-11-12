@@ -1,6 +1,6 @@
 # systemd unit for the production VM. Install it with:
-#   sudo cp deploy/latterboard.service /etc/systemd/system/
-#   sudo systemctl daemon-reload && sudo systemctl enable --now latterboard
+#   sudo cp deploy/fastapi.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now fastapi
 # Edit User and the paths first. Settings come from app/.env (APP_ENV=production reads
 # that file, not app/.env.local); set SQLITE_DATABASE_URL there to an absolute path.
 
@@ -11,16 +11,16 @@ Wants=network-online.target
 
 [Service]
 Type=exec
-User=latterboard
-WorkingDirectory=/home/latterboard/latterboard
+User=dylan
+WorkingDirectory=/home/dylan/latterboard
 # Picks app/.env and turns on the production checks. It has to be set here, not in
 # the file, because it decides which file is read.
 Environment=APP_ENV=production
 # Bring the schema up to date first. A failed migration leaves the service stopped
 # rather than serving against the wrong schema.
-ExecStartPre=/home/latterboard/latterboard/.venv/bin/alembic upgrade head
+ExecStartPre=/home/dylan/latterboard/.venv/bin/alembic upgrade head
 # One worker: SQLite takes one writer at a time, so more workers mostly add lock waits.
-ExecStart=/home/latterboard/latterboard/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000
+ExecStart=/home/dylan/latterboard/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000
 Restart=on-failure
 RestartSec=5
 

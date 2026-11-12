@@ -60,10 +60,16 @@ On the production VM, in the app directory, after uploading the new code:
 2. Check for drift: `APP_ENV=production uv run python -m app.schema_drift`.
 3. Reconcile anything it reports. Databases from before migrations commonly lack
    `ix_user_is_bot`, because the startup column patch added `user.is_bot` without its
-   index. For an `add_index` line, create the index (`sudo apt install sqlite3` if needed):
+   index. For an `add_index` line, create the index through the app's own settings, so it
+   lands in the same file (no `sqlite3` CLI needed):
 
    ```bash
-   sqlite3 sql_app.db 'CREATE INDEX IF NOT EXISTS ix_user_is_bot ON "user" (is_bot);'
+   APP_ENV=production .venv/bin/python -c "
+   from sqlalchemy import text
+   from app.database import engine
+   with engine.begin() as conn:
+       conn.execute(text('CREATE INDEX IF NOT EXISTS ix_user_is_bot ON \"user\" (is_bot)'))
+   "
    ```
 
    Anything other than missing indexes needs a closer look before going further.
