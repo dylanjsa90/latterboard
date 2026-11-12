@@ -8,7 +8,8 @@ contract, `docs/reference/cross-repo-contract.md`.
 
 | File | Purpose | Key exports |
 | ---- | ------- | ----------- |
-| `app/main.py` | FastAPI app: lifespan (`init_db`, `manager.start/stop`), `/health`, mounts `api_router` at `/api/v1`, and **the websocket `/ws/{game_name}`** (join/leave_match, and join/leave_room for vocab rooms) | `app` |
+| `app/main.py` | FastAPI app: lifespan (`init_db`, `manager.start/stop`), middleware, `/health`; mounts `api_router` at `/api/v1` and `ws.socket_router` at the root | `app` |
+| `app/core/middleware.py` | Security headers (CSP etc.) on every response | `SecurityHeadersMiddleware` |
 | `app/api/main.py` | Router aggregation: login, users, scores, matches, matchmaking, invite_links, puzzles, vocab, ws | `api_router` |
 | `app/api/deps.py` | Request dependencies | `get_db`, `get_current_user`, `get_optional_current_user`, `get_current_user_ws` (token query param), `get_current_active_superuser` |
 | `app/api/routes/login.py` | `/login/*`: password token, `/login/google`, test-token, password recovery/reset | `router` |
@@ -19,6 +20,7 @@ contract, `docs/reference/cross-repo-contract.md`.
 | `app/schemas/game_score.py` | Score I/O models + per-game validity rules | `SCORE_RULES` |
 | `app/api/routes/matches.py` | `/matches/*`: invite/accept/decline/cancel/pending/detail, `/me/history`, `/me/active` + one move endpoint per mode; each move calls `_require_game`, then broadcasts to `match:{id}` | `router`, `SUPPORTED_GAMES` |
 | `app/api/routes/matchmaking.py` | `POST`/`DELETE /matchmaking/{game}`: Redis ZSET queue + Lua pairing | `router` |
+| `app/core/redis_client.py` | Shared async Redis client for one-off commands (the `ConnectionManager` keeps its own for pub/sub) | `redis_client` |
 | `app/services/match_start.py` | Starting a match between two known players, shared by accept, matchmaking, and invite links | `start_match`, `notify_match_started`, `max_guesses_for` |
 | `app/services/match_play.py` | Applying a move and broadcasting it, shared by the move routes and the bot. Raises `MoveRejected`, never `HTTPException` | `apply_wordle_guess`, `apply_race_guess`, `wordle_move_error` |
 | `app/services/bot_turn.py` | When the computer moves and driving it, via `BackgroundTasks` | `schedule_bot_turn`, `run_bot_turn`, `bot_participant`, `BOT_GAMES` |
@@ -34,18 +36,22 @@ contract, `docs/reference/cross-repo-contract.md`.
 | `app/init_db.py` | Seed rows at startup: the local default user, the bot, puzzles | `init_db`, `seed_bot_user` |
 | `app/schema_drift.py` | Read-only check that a database's schema matches the models (`python -m app.schema_drift`) | `schema_diff`, `describe` |
 | `alembic/` | Migrations (`versions/`); `env.py` takes the URL from `Settings` | |
-| `app/api/routes/ws.py` | REST presence only (`/ws/{game}/connections`, `/ws/{game}/usernames`); the socket itself is in `app/main.py` | `router` |
+| `app/api/routes/ws.py` | **The websocket `/ws/{game_name}`** (join/leave_match, and join/leave_room for vocab rooms) and REST presence (`/ws/{game}/connections`, `/ws/{game}/usernames`) | `socket_router` (mounted at the root), `router` (under `/api/v1`) |
 | `app/api/routes/puzzles.py` | Daily word/sudoku/memory/cipher puzzles + `/me/stats`, `/me/history` | `router` |
 | `app/connection_manager.py` | Topic membership, Redis presence, pub/sub delivery, heartbeat | `manager` (`connect`, `join`, `disconnect`, `disconnect_all`, `broadcast(msg, topic)`, `send_to_user(user_id, msg)`, `count`, `usernames`) |
 | `app/crud/match.py` | Match lifecycle + turn-based wordle | `match` (`create_invite`, `expire_if_needed`, `get_open_match_between`, `get_pending_invites`, `get_active`, `get_active_items`, `accept_invite`, `decline_invite`, `cancel_invite`, `submit_guess`, `to_public`, `to_detail`, `to_pending_invite`) |
-| `app/crud/match_puzzle.py` | Race/co-op state in `match_puzzle`, optimistic lock via `_apply` | `match_puzzle` (`build`, `submit_race_guess`, `race_detail`, `submit_sudoku_move`, `sudoku_detail`), `MoveRejected` |
+| `app/crud/match_puzzle.py` | Race/co-op state in `match_puzzle`, optimistic lock via `_apply` | `match_puzzle` (`build`, `submit_race_guess`, `race_detail`, `submit_sudoku_move`, `sudoku_detail`) |
+| `app/game/errors.py` | The error a refused move raises, shared by crud, services and routes (routes map it to 409) | `MoveRejected` |
 | `app/game/puzzles.py` | Pure puzzle logic, and the Pacific day every daily feature uses: `today()`, `day_start` (a day's naive-UTC start, for `created_at` ranges), `day_of` (a timestamp's day), puzzle-id dates, word grading, cipher feedback and stored codes, memory decks | `PACIFIC`, `today`, `day_start`, `day_of`, `dated_puzzle`, `puzzle_date`, `grade_word`, `cipher_feedback`, `encode_cipher`, `decode_cipher`, `seeded_memory_deck` |
-| `app/utils.py` | `utcnow()` for naive-UTC columns, email rendering/sending, password-reset tokens | `utcnow`, `send_email`, `render_email_template`, `generate_*_email` |
+| `app/utils.py` | `utcnow()` for naive-UTC columns | `utcnow` |
+| `app/core/email.py` | Email rendering (`app/email-templates/build/`) and SMTP sending | `send_email`, `render_email_template`, `generate_reset_password_email`, `generate_match_invite_email` |
+| `app/core/security.py` | Password hashing, access tokens, password-reset tokens | `get_password_hash`, `verify_password`, `create_access_token`, `generate_password_reset_token`, `verify_password_reset_token` |
 | `app/crud/puzzle_attempt.py` | Daily puzzle attempts, stats, streaks | `puzzle_attempt` (`get_for_puzzle`, `get_or_create`, `record_attempt`, `get_stats`, `get_history`) |
 | `app/schemas/match.py` | Match I/O models | `MatchInviteCreate`, `MatchPublic`, `MatchDetail`, `MatchGuessResult`, `RaceDetail`, `RacePlayer`, `RaceGuessOut`, `RaceGuessResult`, `SudokuCoopMoveCreate`, `SudokuCoopMoveResult`, `SudokuCoopDetail`, `PendingInvite` |
 | `app/schemas/puzzle.py` | Puzzle I/O models | `{Word,Sudoku,Memory,Cipher}PuzzlePublic`, `WordGuessCreate`/`WordGuessResult`, `SudokuMoveCreate`/`SudokuMoveResult`, `CipherAttemptCreate`/`CipherFeedback`, `PuzzleStats`, `PuzzleHistory` |
 | `app/api/routes/vocab.py` | `/vocab/*`: Vocab Challenger rooms (create, poll, join, actions) and the wordbook. Rooms aren't matches; a change sends `room_changed` on `vocab:{CODE}` | `router` |
 | `app/game/vocab.py` | **Pure** Vocab Challenger rules, ported from vocab-app's `engine.ts`: rounds, deadlines (epoch ms), scoring, per-player views, review ladder | `make_game`, `join`, `touch`, `apply_action`, `visible`, `full_question`, `next_review`, `VocabError` |
+| `app/game/word_list.py` | The five-letter word list: daily words, match targets, the bot's dictionary | `word_list` |
 | `app/game/vocab_words.py` | The 46-word curriculum; a word's id is its index, so append only | `WORDS`, `VocabWord` |
 | `app/crud/vocab.py` | Loads a room, runs a rule, saves it with an optimistic lock (`VocabRoom.version`, replayed on `StaleDataError`); `create_room` also deletes rooms a week past expiry; wordbook rows | `crud_vocab` (`create_room`, `mutate`, `wordbook`, `save`, `remove`, `review`) |
 | `app/schemas/vocab.py` | Vocab I/O models | `RoomCreate`, `RoomAction`, `RoomSnapshot`, `GameView`, `Question`, `Wordbook`, `SavedWord` |
