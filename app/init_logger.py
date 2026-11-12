@@ -1,9 +1,13 @@
 import logging
+import re
 import sys
 
 from loguru import logger
 
 from app.core.config import settings
+
+# The websocket sends its JWT as ?token=..., and Uvicorn logs paths with the query string.
+_URL_TOKEN = re.compile(r"(token=)[^&\s\"]+")
 
 
 class InterceptHandler(logging.Handler):
@@ -16,23 +20,23 @@ class InterceptHandler(logging.Handler):
         except ValueError:
             level = record.levelno
 
-        frame, depth = logging.currentframe(), 2
-        while frame is not None and frame.f_code.co_filename == logging.__file__:
-            frame = frame.f_back  # type: ignore[assignment]
+        # Skip this frame and logging's own, so loguru names the code that logged.
+        frame, depth = sys._getframe(1), 1
+        while frame.f_code.co_filename == logging.__file__ and frame.f_back:
+            frame = frame.f_back
             depth += 1
 
-        logger.opt(depth=depth, exception=record.exc_info).log(
-            level, record.getMessage()
-        )
+        message = _URL_TOKEN.sub(r"\1[redacted]", record.getMessage())
+        logger.opt(depth=depth, exception=record.exc_info).log(level, message)
 
 
 def setup_loguru() -> None:
     logger.remove()
-    # stdout only: Docker collects it, so a log file would just fill the container.
+    # stdout only: journald (systemd) or Docker collects it and handles rotation.
     logger.add(
         sys.stdout,
         format="{time:YYYY-MM-DD HH:mm:ss.SSS} | {level: <8} | {name}:{function}:{line} - {message}",
-        level="INFO",
+        level=settings.LOG_LEVEL,
         enqueue=True,
         backtrace=True,
         # Prints local variables in tracebacks, which can include secrets and tokens.
@@ -40,5 +44,8 @@ def setup_loguru() -> None:
     )
 
     logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
+    # Uvicorn's loggers have their own handlers, and uvicorn.error also propagates to
+    # uvicorn, so each line was written twice. Hand everything to the root handler.
     for name in ("uvicorn", "uvicorn.access", "uvicorn.error", "fastapi"):
-        logging.getLogger(name).handlers = [InterceptHandler()]
+        logging.getLogger(name).handlers = []
+        logging.getLogger(name).propagate = True
