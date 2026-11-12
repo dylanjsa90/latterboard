@@ -9,14 +9,8 @@ from fastapi import (
 )
 from sqlalchemy.orm import Session
 
-from app.api import deps, google_sign_in
+from app.api import deps
 from app.crud.user import user as crud_user
-from app.lib.avatar import (
-    AVATAR_CONTENT_TYPE,
-    AVATAR_MAX_BYTES,
-    InvalidImage,
-    process_avatar,
-)
 from app.models import User
 from app.schemas.user import (
     GoogleSignUp,
@@ -27,6 +21,13 @@ from app.schemas.user import (
     UserPrivate,
     UserPublic,
     UserUpdate,
+)
+from app.services import google_sign_in
+from app.services.avatar import (
+    AVATAR_CONTENT_TYPE,
+    AVATAR_MAX_BYTES,
+    InvalidImage,
+    process_avatar,
 )
 
 router = APIRouter(prefix="/users", tags=["users"])

@@ -6,7 +6,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
-from app.api import deps, google_sign_in
+from app.api import deps
 from app.core import security
 from app.core.config import settings
 from app.crud import user as crud_user  # noqa: F401
@@ -20,6 +20,7 @@ from app.schemas.user import (
     UserPrivate,
     UserUpdate,
 )
+from app.services import google_sign_in
 from app.utils import (
     generate_password_reset_token,
     generate_reset_password_email,

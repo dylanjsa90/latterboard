@@ -11,6 +11,7 @@ from sqlalchemy.orm.exc import StaleDataError
 from app.crud.game_score import game_score as crud_game_score
 from app.crud.user import user as crud_user
 from app.game import match_modes
+from app.game.errors import MoveRejected
 from app.models.match import Match, MatchPuzzle
 from app.models.user import User
 from app.schemas.game_score import GameScoreCreate
@@ -28,10 +29,6 @@ T = TypeVar("T")
 
 # How many times to replay a move that keeps losing out to the other player's.
 MAX_APPLY_ATTEMPTS = 3
-
-
-class MoveRejected(Exception):
-    """The move isn't allowed in the match's current state; the message says why."""
 
 
 def _solved(guesses: list[dict[str, Any]]) -> bool:

@@ -12,23 +12,23 @@ contract, `docs/reference/cross-repo-contract.md`.
 | `app/api/main.py` | Router aggregation: login, users, scores, matches, matchmaking, invite_links, puzzles, vocab, ws | `api_router` |
 | `app/api/deps.py` | Request dependencies | `get_db`, `get_current_user`, `get_optional_current_user`, `get_current_user_ws` (token query param), `get_current_active_superuser` |
 | `app/api/routes/login.py` | `/login/*`: password token, `/login/google`, test-token, password recovery/reset | `router` |
-| `app/api/google_sign_in.py` | What `/login/google` and `POST /users/google` share: verify the credential (mapping errors to 401/403/404), mint the token | `PROVIDER`, `verified_identity`, `access_token` |
+| `app/services/google_sign_in.py` | What `/login/google` and `POST /users/google` share: verify the credential (mapping errors to 401/403/404), mint the token | `PROVIDER`, `verified_identity`, `access_token` |
 | `app/core/google.py` | Checks a Google ID token against Google's certs and `GOOGLE_CLIENT_ID`; tests replace `verify_google_id_token` | `verify_google_id_token`, `GoogleIdentity`, `InvalidGoogleToken` |
 | `app/api/routes/scores.py` | `/scores/*`: submit (daily cap), my scores, plays-today, leaderboards | `router` |
 | `app/crud/game_score.py` | Score rows, daily play count, all-time/daily/monthly leaderboards | `game_score` |
 | `app/schemas/game_score.py` | Score I/O models + per-game validity rules | `SCORE_RULES` |
 | `app/api/routes/matches.py` | `/matches/*`: invite/accept/decline/cancel/pending/detail, `/me/history`, `/me/active` + one move endpoint per mode; each move calls `_require_game`, then broadcasts to `match:{id}` | `router`, `SUPPORTED_GAMES` |
 | `app/api/routes/matchmaking.py` | `POST`/`DELETE /matchmaking/{game}`: Redis ZSET queue + Lua pairing | `router` |
-| `app/api/match_start.py` | Starting a match between two known players, shared by accept, matchmaking, and invite links | `start_match`, `notify_match_started`, `max_guesses_for` |
-| `app/api/match_play.py` | Applying a move and broadcasting it, shared by the move routes and the bot. Raises `MoveRejected`, never `HTTPException` | `apply_wordle_guess`, `apply_race_guess`, `wordle_move_error` |
-| `app/api/bot_turn.py` | When the computer moves and driving it, via `BackgroundTasks` | `schedule_bot_turn`, `run_bot_turn`, `bot_participant`, `BOT_GAMES` |
+| `app/services/match_start.py` | Starting a match between two known players, shared by accept, matchmaking, and invite links | `start_match`, `notify_match_started`, `max_guesses_for` |
+| `app/services/match_play.py` | Applying a move and broadcasting it, shared by the move routes and the bot. Raises `MoveRejected`, never `HTTPException` | `apply_wordle_guess`, `apply_race_guess`, `wordle_move_error` |
+| `app/services/bot_turn.py` | When the computer moves and driving it, via `BackgroundTasks` | `schedule_bot_turn`, `run_bot_turn`, `bot_participant`, `BOT_GAMES` |
 | `app/game/bot.py` | **Pure** move selection for the computer: filter to still-possible answers, rank, then pick, handicapped by `skill` | `choose_word`, `choose_cipher`, `word_candidates`, `cipher_candidates`, `DEFAULT_SKILL` |
 | `app/api/routes/invite_links.py` | `/invite-links/*`: create (emails via `BackgroundTasks` when SMTP is on), list mine, public preview, claim, revoke | `router`, `GAME_TITLES` |
 | `app/crud/invite_link.py` | Invite link rows: create, daily count, open links, status, atomic claim, revoke | `invite_link`, `invite_url` |
 | `app/schemas/invite_link.py` | Invite link I/O models | `InviteLinkCreate`, `InviteLinkPublic`, `InviteLinkPreview`, `INVITE_MESSAGE_MAX` |
 | `app/api/routes/users.py` | `/users/*`: sign-up (password, and `/google` after `needs_profile`), `PATCH /me`, `/players` lookup, photo upload/remove/serve, admin-style list/get/update/delete. Literal paths sit above `/{user_id}` | `router` |
 | `app/schemas/user.py` | User I/O + the handle/name/city/birth-year rules | `UserCreate`, `ProfileUpdate`, `UserPublic`, `UserPrivate`, `PlayerPublic`, `avatar_url` |
-| `app/lib/avatar.py` | Validates and re-encodes profile photos | `process_avatar`, `InvalidImage`, `AVATAR_MAX_BYTES` |
+| `app/services/avatar.py` | Validates and re-encodes profile photos | `process_avatar`, `InvalidImage`, `AVATAR_MAX_BYTES` |
 | `app/crud/user.py` | Users, identities (Google links), handles, avatars, and the one answer to "is this a bot?" | `user` (`get_user_by_username`, `get_user_by_email_any_case`, `get_user_by_identity`, `link_identity`, `create_user_with_identity`, `get_players`, `bot_ids`, `any_are_bots`, `set_avatar`, `authenticate`, …) |
 | `app/models/user_identity.py` | External sign-in links (`provider`, `subject`) with a unique constraint | `UserIdentity` |
 | `app/init_db.py` | Seed rows at startup: the local default user, the bot, puzzles | `init_db`, `seed_bot_user` |

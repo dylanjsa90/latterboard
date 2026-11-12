@@ -6,8 +6,8 @@ from PIL import Image
 from app.core.config import settings
 from app.database import SessionLocal
 from app.game.puzzles import today
-from app.lib.avatar import AVATAR_MAX_BYTES
 from app.models import User
+from app.services.avatar import AVATAR_MAX_BYTES
 
 BASE = "/api/v1/users"
 

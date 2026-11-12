@@ -27,14 +27,18 @@ from fastapi import BackgroundTasks
 from loguru import logger
 from sqlalchemy.orm import Session
 
-from app.api.match_play import apply_race_guess, apply_wordle_guess, wordle_move_error
 from app.core.config import settings
 from app.crud.match import match as crud_match
-from app.crud.match_puzzle import MoveRejected
 from app.crud.match_puzzle import match_puzzle as crud_match_puzzle
 from app.database import SessionLocal
 from app.game import bot, match_modes
+from app.game.errors import MoveRejected
 from app.models import Match, MatchGuess, MatchPuzzle, User
+from app.services.match_play import (
+    apply_race_guess,
+    apply_wordle_guess,
+    wordle_move_error,
+)
 
 BOT_GAMES = frozenset({"wordle", match_modes.WORD_RACE, match_modes.CIPHER_RACE})
 

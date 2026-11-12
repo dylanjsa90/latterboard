@@ -40,7 +40,7 @@ def seed_bot_user(db: Session) -> User:
 
     It is a perfectly ordinary user row, because `match.inviter_id`/`invitee_id`
     are non-null foreign keys and nothing else in the match code needs to know the
-    difference. It never signs in: it plays through `app/api/bot_turn.py`, so its
+    difference. It never signs in: it plays through `app/services/bot_turn.py`, so its
     password is random and thrown away rather than being a known value someone
     could log in with.
     """

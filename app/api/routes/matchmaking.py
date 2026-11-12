@@ -20,7 +20,6 @@ from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
 
 from app.api import deps
-from app.api.match_start import notify_match_started, start_match
 from app.api.routes.matches import SUPPORTED_GAMES
 from app.core.config import settings
 from app.crud.match import match as crud_match
@@ -29,6 +28,7 @@ from app.game import match_modes
 from app.models import User
 from app.redis import r as redis
 from app.schemas.matchmaking import MatchmakingStatus
+from app.services.match_start import notify_match_started, start_match
 
 router = APIRouter(prefix="/matchmaking", tags=["matchmaking"])
 

@@ -2,16 +2,13 @@ from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, s
 from sqlalchemy.orm import Session
 
 from app.api import deps
-from app.api.bot_turn import schedule_bot_turn
-from app.api.match_play import apply_race_guess, apply_wordle_guess, wordle_move_error
-from app.api.match_start import max_guesses_for, notify_match_started
 from app.connection_manager import manager
 from app.core.config import settings
 from app.crud.match import match as crud_match
-from app.crud.match_puzzle import MoveRejected
 from app.crud.match_puzzle import match_puzzle as crud_match_puzzle
 from app.crud.user import user as crud_user
 from app.game import match_modes, wordle
+from app.game.errors import MoveRejected
 from app.models import Match, User
 from app.schemas.match import (
     ActiveMatch,
@@ -27,6 +24,13 @@ from app.schemas.match import (
     SudokuCoopMoveResult,
 )
 from app.schemas.puzzle import CipherAttempt
+from app.services.bot_turn import schedule_bot_turn
+from app.services.match_play import (
+    apply_race_guess,
+    apply_wordle_guess,
+    wordle_move_error,
+)
+from app.services.match_start import max_guesses_for, notify_match_started
 
 router = APIRouter(prefix="/matches", tags=["matches"])
 

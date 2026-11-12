@@ -1,8 +1,8 @@
 """Applying a move and telling both players about it.
 
-Sits alongside `app/api/match_start.py` and exists for the same reason: the move
+Sits alongside `app/services/match_start.py` and exists for the same reason: the move
 endpoints are no longer the only caller. The computer opponent
-(`app/api/bot_turn.py`) plays through here too, so its websocket frames are
+(`app/services/bot_turn.py`) plays through here too, so its websocket frames are
 identical to a human's rather than a second copy that can drift.
 
 Nothing here raises `HTTPException`. The bot runs inside a background task, where

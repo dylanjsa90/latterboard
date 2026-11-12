@@ -5,7 +5,6 @@ from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 
 from app.api import deps
-from app.api.match_start import notify_match_started, start_match
 from app.api.routes.matches import SUPPORTED_GAMES
 from app.core.config import settings
 from app.crud.invite_link import invite_link as crud_invite_link
@@ -18,6 +17,7 @@ from app.schemas.invite_link import (
     InviteLinkPublic,
 )
 from app.schemas.match import MatchPublic
+from app.services.match_start import notify_match_started, start_match
 from app.utils import generate_match_invite_email, send_email, utcnow
 
 router = APIRouter(prefix="/invite-links", tags=["invite-links"])

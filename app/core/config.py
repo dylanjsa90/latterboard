@@ -142,7 +142,7 @@ class Settings(BaseSettings):
     MATCHMAKING_BOT_WAIT_SECONDS: int = 20
 
     # The computer-controlled opponent. It never logs in: `init_db` gives it a
-    # random password, and it plays through `app/api/bot_turn.py`, not HTTP.
+    # random password, and it plays through `app/services/bot_turn.py`, not HTTP.
     BOT_OPPONENT_ENABLED: bool = True
     BOT_USER_EMAIL: str = "robo@latterboard.com"
     BOT_USER_USERNAME: str = "robo"
