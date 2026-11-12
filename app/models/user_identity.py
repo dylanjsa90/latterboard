@@ -7,12 +7,7 @@ from app.core.base_class import Base
 
 
 class UserIdentity(Base):
-    """An outside account (today only Google) that signs in as a user.
-
-    A table rather than columns on `user`: `create_all` builds a new table with its
-    unique constraint, while `init_db.ensure_user_columns` can only add bare nullable
-    columns to `user`.
-    """
+    """An outside account (today only Google) that signs in as a user."""
 
     __tablename__: str = "user_identity"
     __table_args__ = (UniqueConstraint("provider", "subject"),)

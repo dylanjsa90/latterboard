@@ -71,12 +71,7 @@ Index("ix_matchguess_match_turn", MatchGuess.match_id, MatchGuess.turn_number)
 
 
 class MatchPuzzle(Base):
-    """The private puzzle and live state behind a race or co-op match.
-
-    A table beside `match` rather than new columns on it because there are no
-    migrations: create_all adds a missing table to an existing database, never a
-    missing column.
-    """
+    """The private puzzle and live state behind a race or co-op match."""
 
     __tablename__: str = "match_puzzle"
 

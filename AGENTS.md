@@ -34,6 +34,7 @@ Paths are in backticks, not `@` imports, so they load only when read.
 | Finding a file, what a module exports                         | `docs/architecture/backend.md`                    |
 | Matches, race/co-op modes, matchmaking, the computer opponent | `docs/architecture/matches.md`                    |
 | Any REST call, websocket frame, or new endpoint               | `docs/reference/cross-repo-contract.md`           |
+| Changing a model, writing or running a migration              | `docs/guides/database-migrations.md`              |
 | webcade, the React client                                     | `~/projects/webcade/AGENTS.md`                    |
 
 ## Conventions
@@ -42,8 +43,8 @@ Paths are in backticks, not `@` imports, so they load only when read.
 - `Settings` (`app/core/config.py`) reads `app/.env.local` while `APP_ENV=local` (the default) and `app/.env` otherwise.
 - The database URL is computed from `DB_TYPE`; a `DATABASE_URL` env var is ignored. `sqlite` (the default) uses `SQLITE_DATABASE_URL`; any other value builds `postgresql+psycopg2://…?sslmode=require` from `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`, `DB_NAME`, falling back to the lowercase `user`, `password`, `host`, `port`, `dbname` that older deployments set. Only `psycopg2-binary` is installed.
 - `APP_ENV` (`local`, the default, / `staging` / `production`) is the one environment flag. Outside `local`, a missing or `changethis` `SECRET_KEY` stops startup and the `first.user@test.com` sign-in isn't seeded. The Docker image carries no env files: compose passes the root `.env`.
-- Tables come from `Base.metadata.create_all` (`app/init_db.py`). There are no Alembic migrations yet (`alembic/` is a scaffold with no `versions/`, and its `env.py` reads `DATABASE_URL`, which the app itself ignores), so new columns and constraints won't reach existing databases. Call this out whenever you change a model.
-- The one exception is `ensure_user_columns` (same file): at startup it adds any missing **nullable** `user` column. New `User` fields must therefore be nullable; anything else still needs that call-out.
+- Alembic owns the schema; the app never creates or alters tables (`init_db` only seeds rows). Every model change ships with a migration from `uv run alembic revision --autogenerate`, read and fixed by hand; `tests/test_migrations.py` fails until models and migrations agree. Deploys run `alembic upgrade head` from the Docker `CMD`. How-to and pitfalls: `docs/guides/database-migrations.md`.
+- Locally, run `uv run alembic upgrade head` after setup and after pulling a migration. Tests use `create_all`, not migrations.
 
 ### Dates and times
 - DB `DateTime` columns are **naive UTC** (SQLite returns them naive). Use `app.utils.utcnow()` for anything compared to or stored in them. Comparing against `datetime.now(timezone.utc)` raises `TypeError`.
@@ -58,7 +59,7 @@ Paths are in backticks, not `@` imports, so they load only when read.
 ### Users
 - `username` is the public handle: `[a-z0-9_]{3,20}`, lowercased by `schemas/user.py`. Look it up case-insensitively (`crud_user.get_user_by_username`). Accounts made before handles still have their email there, so never validate `username` on output.
 - `email` and `birth_year` are private. Only `UserPrivate` (test-token, `POST /users/`, `PATCH /users/me`, the owner-or-superuser `PUT /users/{id}`) carries them; `UserPublic` (returned to any signed-in user) and `PlayerPublic` must not. `GET /users/` is superuser-only.
-- Google sign-in (`app/core/google.py` checks the ID token, `app/api/google_sign_in.py` holds what the two routes share) links accounts through `user_identity` (`provider`, `subject` = Google's `sub`, never the email). It is a table rather than `user` columns so `create_all` builds its unique constraint. `GOOGLE_CLIENT_ID` (the public web client ID, the same as webcade's `VITE_GOOGLE_CLIENT_ID`) turns it on; tests replace `google.verify_google_id_token`.
+- Google sign-in (`app/core/google.py` checks the ID token, `app/api/google_sign_in.py` holds what the two routes share) links accounts through `user_identity` (`provider`, `subject` = Google's `sub`, never the email). `GOOGLE_CLIENT_ID` (the public web client ID, the same as webcade's `VITE_GOOGLE_CLIENT_ID`) turns it on; tests replace `google.verify_google_id_token`.
 - Photos live in `user_avatar` (a separate table, so loading a user never loads the bytes). `app/lib/avatar.py` re-encodes every upload to a 256px WebP, which drops EXIF such as phone GPS. `user.avatar_version` versions the public URL, so it can be cached forever.
 
 ### Email
@@ -73,7 +74,7 @@ Paths are in backticks, not `@` imports, so they load only when read.
 - `app/game/puzzle_seed_data.py`: use `shuffled_words()`, which returns a copy. Don't shuffle or mutate the shared word list; `wordle.py` uses it too.
 - Known open issues (not fixed yet):
   - Word guesses aren't checked with `wordle.is_valid_word`.
-  - `(user_id, puzzle_id)` has no unique constraint.
+  - `(user_id, puzzle_id)` has no unique constraint. Adding one is a migration that must first remove duplicate rows.
 
 ### Tests
 - `tests/conftest.py` sets env vars **before** any app import, because `Settings()` reads them at import time. Keep new overrides above the imports.

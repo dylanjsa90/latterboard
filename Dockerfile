@@ -26,4 +26,6 @@ ENV PATH="/app/.venv/bin:$PATH"
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "python -m app.backend_pre_start && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+# Wait for the database, bring its schema up to date, then serve. A failed migration
+# stops the container rather than serving against the wrong schema.
+CMD ["sh", "-c", "python -m app.backend_pre_start && alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"]

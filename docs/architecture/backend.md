@@ -31,7 +31,9 @@ contract, `docs/reference/cross-repo-contract.md`.
 | `app/lib/avatar.py` | Validates and re-encodes profile photos | `process_avatar`, `InvalidImage`, `AVATAR_MAX_BYTES` |
 | `app/crud/user.py` | Users, identities (Google links), handles, avatars, and the one answer to "is this a bot?" | `user` (`get_user_by_username`, `get_user_by_email_any_case`, `get_user_by_identity`, `link_identity`, `create_user_with_identity`, `get_players`, `bot_ids`, `any_are_bots`, `set_avatar`, `authenticate`, …) |
 | `app/models/user_identity.py` | External sign-in links (`provider`, `subject`) with a unique constraint | `UserIdentity` |
-| `app/init_db.py` | `create_all`, `ensure_user_columns`, the seed user and puzzles | `init_db`, `ensure_user_columns` |
+| `app/init_db.py` | Seed rows at startup: the local default user, the bot, puzzles | `init_db`, `seed_bot_user` |
+| `app/schema_drift.py` | Read-only check that a database's schema matches the models (`python -m app.schema_drift`) | `schema_diff`, `describe` |
+| `alembic/` | Migrations (`versions/`); `env.py` takes the URL from `Settings` | |
 | `app/api/routes/ws.py` | REST presence only (`/ws/{game}/connections`, `/ws/{game}/usernames`); the socket itself is in `app/main.py` | `router` |
 | `app/api/routes/puzzles.py` | Daily word/sudoku/memory/cipher puzzles + `/me/stats`, `/me/history` | `router` |
 | `app/connection_manager.py` | Topic membership, Redis presence, pub/sub delivery, heartbeat | `manager` (`connect`, `join`, `disconnect`, `disconnect_all`, `broadcast(msg, topic)`, `send_to_user(user_id, msg)`, `count`, `usernames`) |

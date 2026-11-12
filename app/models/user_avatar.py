@@ -9,8 +9,7 @@ from app.core.base_class import Base
 class UserAvatar(Base):
     """A player's profile photo, already re-encoded to a 256px WebP.
 
-    Kept out of `user` so loading a user never drags the image bytes along, and so
-    `create_all` can add it to existing databases (it never alters existing tables).
+    Kept out of `user` so loading a user never drags the image bytes along.
     """
 
     __tablename__: str = "user_avatar"

@@ -26,8 +26,13 @@ Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and run a 
 ```bash
 uv sync                           # install dependencies
 cp .env.example app/.env.local    # configure; at minimum set SECRET_KEY
+uv run alembic upgrade head       # create the database schema
 uv run prek install               # optional: run ruff on each commit
 ```
+
+Run `uv run alembic upgrade head` again whenever you pull a new migration. Writing
+migrations, and adopting them on a database made before they existed, is covered in
+[`docs/guides/database-migrations.md`](docs/guides/database-migrations.md).
 
 Settings are read from `app/.env.local` while `APP_ENV=local` (the default) and from `app/.env`
 otherwise; real environment variables win over either file. `.env.example` lists every setting.
@@ -62,7 +67,7 @@ Requires [Docker](https://docs.docker.com/get-docker/) and Docker Compose.
    ```
 
    The API is at `http://localhost:8000`. The container waits for the database
-   (`app/backend_pre_start.py`), then starts Uvicorn.
+   (`app/backend_pre_start.py`), runs `alembic upgrade head`, then starts Uvicorn.
 3. Stop it with `docker compose down` (`-v` also deletes the volumes).
 
 To try the Postgres path without a hosted database, set `DB_HOST=db` and `POSTGRES_PASSWORD` in
@@ -74,6 +79,7 @@ The Docker image runs a single Uvicorn process. To run without Docker:
 
 ```bash
 uv sync --no-dev
+APP_ENV=production uv run alembic upgrade head
 APP_ENV=production uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 2
 ```
 
