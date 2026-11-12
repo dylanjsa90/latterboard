@@ -1,4 +1,4 @@
-"""Middleware for security."""
+"""Security headers (CSP and friends) added to every response."""
 
 from collections import OrderedDict
 from collections.abc import Sequence

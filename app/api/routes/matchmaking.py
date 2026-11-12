@@ -22,11 +22,11 @@ from sqlalchemy.orm import Session
 from app.api import deps
 from app.api.routes.matches import SUPPORTED_GAMES
 from app.core.config import settings
+from app.core.redis_client import redis_client as redis
 from app.crud.match import match as crud_match
 from app.crud.user import user as crud_user
 from app.game import match_modes
 from app.models import User
-from app.redis import r as redis
 from app.schemas.matchmaking import MatchmakingStatus
 from app.services.match_start import notify_match_started, start_match
 
