@@ -25,6 +25,7 @@ jobs:
           enable-cache: true
       - run: uv sync --frozen
       - run: uv run ruff check app/ tests/
+      - run: uv run ruff format --check app/ tests/
 
   typecheck:
     name: typecheck

@@ -13,15 +13,17 @@ container built from `Dockerfile`. Setup, Docker, and the production server are 
 
 | Command                         | Does                                                   |
 | ------------------------------- | ------------------------------------------------------ |
-| `make check`                    | ruff + mypy + pytest, printing only errors and summary lines; fails if any step fails |
+| `make check`                    | ruff check + ruff format --check + mypy + pytest, printing only errors and summary lines; fails if any step fails |
 | `uv run pytest`                 | Tests (several minutes, needs the local Redis)         |
 | `uv run ruff check app/ tests/` | Lint (logging instead of `print`: ruff enforces T201)  |
 | `uv run mypy app/`              | Type check, strict mode                                |
 | `fastapi dev app/main.py`       | Dev server; auto-reloads, so it picks up edits as you work |
 
-`ruff check` and `mypy` are clean on `dev`; keep them that way. `ruff format` isn't applied
-repo-wide yet, so format only the files you touch. For demos, export `DB_TYPE=sqlite
-SQLITE_DATABASE_URL=sqlite:///<scratch file>` so seeding doesn't touch the real `sql_app.db`.
+`ruff check`, `ruff format`, and `mypy` are clean on `dev`; keep them that way (`uv run ruff
+format app/ tests/` fixes formatting; the prek hook does it on commit). Run `git config
+blame.ignoreRevsFile .git-blame-ignore-revs` once so blame skips the bulk-format commit.
+For demos, export `DB_TYPE=sqlite SQLITE_DATABASE_URL=sqlite:///<scratch file>` so seeding
+doesn't touch the real `sql_app.db`.
 
 ## Key Context Files
 
