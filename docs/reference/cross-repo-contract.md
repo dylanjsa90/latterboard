@@ -7,7 +7,8 @@ client. This file is `docs/reference/cross-repo-contract.md` in both repos: keep
 identical, and update both when a shape changes.
 
 - REST is under `/api/v1` (webcade: `API_V1_URL`). The websocket is at the app root, `/ws/{topic}`,
-  **not** under `/api/v1`.
+  **not** under `/api/v1`, and so is `GET /health` → `{status: "ok"}` (for uptime checks; webcade
+  doesn't call it).
 - Wire JSON is snake_case; webcade converts to camelCase inside each `api.ts`.
 - REST response shapes are checked, not just written down: webcade keeps a snapshot of this
   app's OpenAPI schema (`src/lib/api/schema.d.ts`) and reads each response as `Wire<'Schema'>`.
@@ -30,6 +31,9 @@ identical, and update both when a shape changes.
 | ---- | ------- | -------- |
 | `POST /login/access-token` | form-urlencoded `username` (= email), `password` | `{access_token, token_type}` |
 | `POST /login/test-token` | bearer | `UserPrivate`; 401 = dead token |
+| `POST /password-recovery/{email}` | — | `{message}`, the same whether or not the email is registered. When it is and SMTP is on, emails a link to `{FRONTEND_HOST}/reset-password?token=…`, valid 48 hours. webcade has no reset page yet |
+| `POST /reset-password/` | `{token, new_password}` (8–128 chars) | `{message}`; 400 `Invalid token` (malformed, expired, or no such account) or `Inactive user` |
+| `POST /password-recovery-html-content/{email}` (bearer, superuser) | — | The recovery email's HTML, its subject in a `subject` header; 404 unknown email. Admin only |
 | `POST /login/google` | `{credential}` (the ID token from Google's sign-in button) | `{status: "signed_in", access_token, token_type}`, or `{status: "needs_profile", email, name?}` when no account has that Google account or its email; 401 bad or expired credential, 403 unverified Google email, 400 inactive, 404 when `GOOGLE_CLIENT_ID` is unset |
 | `POST /users/google` | `{credential, username, display_name, birth_year, location?}` | 201 `{access_token, token_type}`; 409 / 422 as `POST /users/`, and 401 / 403 / 404 as `/login/google` |
 | `POST /users/` | `{email, username, password, display_name, birth_year, location?}` | 201 `UserPrivate`; 409 if the email or the username is taken (`detail` says which); 422 for a bad handle or anyone under 13 |
