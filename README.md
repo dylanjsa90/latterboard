@@ -72,18 +72,18 @@ fastapi dev app/main.py
 
 Runs on `http://localhost:8000`. OpenAPI schema at `/openapi.json`, Swagger UI at `/docs`.
 
-## Production server (Gunicorn)
+## Production server (Uvicorn)
 
 Gunicorn is not in the default dependencies. Install it first:
 
 ```bash
-uv add gunicorn
+uv add uvicorn
 ```
 
 Then run with Uvicorn workers:
 
 ```bash
-gunicorn app.main:app \
+uvicorn app.main:app \
   --workers 4 \
   --worker-class uvicorn.workers.UvicornWorker \
   --bind 0.0.0.0:8000
