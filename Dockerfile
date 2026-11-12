@@ -17,12 +17,13 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
 # Run unprivileged. The code and .venv stay root-owned, so the app can't modify them;
-# only /app itself is writable, for the SQLite file when DB_TYPE=sqlite.
+# only /data is writable, for the SQLite file (compose mounts a volume there).
 RUN useradd --system --uid 1001 --no-create-home latterboard \
-    && chown latterboard /app
+    && mkdir /data && chown latterboard /data
 USER latterboard
 
 ENV PATH="/app/.venv/bin:$PATH"
+ENV SQLITE_DATABASE_URL="sqlite:////data/sql_app.db"
 
 EXPOSE 8000
 

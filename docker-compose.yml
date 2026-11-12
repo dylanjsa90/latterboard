@@ -7,9 +7,12 @@ services:
     env_file: .env
     environment:
       APP_ENV: ${APP_ENV:-production}
-      DB_TYPE: ${DB_TYPE:-postgres}
+      DB_TYPE: ${DB_TYPE:-sqlite}
       SECRET_KEY: ${SECRET_KEY:?set SECRET_KEY in .env}
       REDIS_URL: redis://redis:6379
+    # The SQLite file (the image sets SQLITE_DATABASE_URL to /data/sql_app.db).
+    volumes:
+      - app_data:/data
     depends_on:
       redis:
         condition: service_started
@@ -19,8 +22,9 @@ services:
     volumes:
       - redis_data:/data
 
-  # A local Postgres for trying the postgres path without Supabase. Start it with
-  # `docker compose --profile local-db up` and point the app at it with DB_HOST=db.
+  # An optional Postgres for trying the postgres path. Start it with
+  # `docker compose --profile local-db up` and point the app at it with DB_TYPE=postgres
+  # and DB_HOST=db.
   db:
     image: postgres:16-alpine
     profiles: ["local-db"]
@@ -37,5 +41,6 @@ services:
       retries: 10
 
 volumes:
+  app_data:
   postgres_data:
   redis_data:
