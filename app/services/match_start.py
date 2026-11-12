@@ -12,7 +12,11 @@ from app.schemas.match import MatchPublic
 
 
 def max_guesses_for(game: str) -> int:
-    return settings.MATCH_MAX_GUESSES if game == "wordle" else match_modes.MAX_GUESSES[game]
+    return (
+        settings.MATCH_MAX_GUESSES
+        if game == "wordle"
+        else match_modes.MAX_GUESSES[game]
+    )
 
 
 def start_match(db: Session, waiting: User, joining: User, game: str) -> Match:
@@ -38,8 +42,18 @@ def start_match(db: Session, waiting: User, joining: User, game: str) -> Match:
 async def notify_match_started(obj: Match, public: MatchPublic) -> None:
     """Tell both players the match has started, each naming the other as opponent."""
     sides = (
-        (obj.inviter_id, public.inviter_is_bot, public.invitee_username, public.invitee_is_bot),
-        (obj.invitee_id, public.invitee_is_bot, public.inviter_username, public.inviter_is_bot),
+        (
+            obj.inviter_id,
+            public.inviter_is_bot,
+            public.invitee_username,
+            public.invitee_is_bot,
+        ),
+        (
+            obj.invitee_id,
+            public.invitee_is_bot,
+            public.inviter_username,
+            public.inviter_is_bot,
+        ),
     )
     for user_id, is_bot, opponent_username, opponent_is_bot in sides:
         if is_bot:

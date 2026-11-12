@@ -9,14 +9,8 @@ from fastapi import (
 )
 from sqlalchemy.orm import Session
 
-from app.api import deps, google_sign_in
+from app.api import deps
 from app.crud.user import user as crud_user
-from app.lib.avatar import (
-    AVATAR_CONTENT_TYPE,
-    AVATAR_MAX_BYTES,
-    InvalidImage,
-    process_avatar,
-)
 from app.models import User
 from app.schemas.user import (
     GoogleSignUp,
@@ -27,6 +21,13 @@ from app.schemas.user import (
     UserPrivate,
     UserPublic,
     UserUpdate,
+)
+from app.services import google_sign_in
+from app.services.avatar import (
+    AVATAR_CONTENT_TYPE,
+    AVATAR_MAX_BYTES,
+    InvalidImage,
+    process_avatar,
 )
 
 router = APIRouter(prefix="/users", tags=["users"])
@@ -41,7 +42,7 @@ def list_users(
     skip: int = 0,
     limit: int = 100,
     db: Session = Depends(deps.get_db),
-    _: User = Depends(deps.get_current_user),
+    _: User = Depends(deps.get_current_active_superuser),
 ) -> list[User]:
     return crud_user.get_users(db, skip=skip, limit=limit)
 
@@ -49,9 +50,7 @@ def list_users(
 @router.post("/", response_model=UserPrivate, status_code=status.HTTP_201_CREATED)
 def create_user(user_in: UserCreate, db: Session = Depends(deps.get_db)) -> User:
     if crud_user.get_user_by_email(db, user_in.email):
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT, detail=EMAIL_TAKEN
-        )
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=EMAIL_TAKEN)
     if crud_user.get_user_by_username(db, user_in.username):
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=USERNAME_TAKEN)
     return crud_user.create_user(db, user_in)
@@ -165,7 +164,7 @@ def get_user(
     return user
 
 
-@router.put("/{user_id}", response_model=UserPublic)
+@router.put("/{user_id}", response_model=UserPrivate)
 def update_user(
     user_id: int,
     user_in: UserUpdate,

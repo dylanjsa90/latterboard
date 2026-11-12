@@ -1,112 +1,118 @@
 # Latterboard API
 
+[![CI](https://github.com/dylanjsa90/latterboard/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/dylanjsa90/latterboard/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 A FastAPI backend for browser games, with JWT authentication (password or Google sign-in):
 
 - Daily word, sudoku, memory, and cipher puzzles, with stats and streaks
 - Game scores and all-time, daily, and monthly leaderboards
 - Head-to-head matches (turn-based, races, and co-op), matchmaking with a computer opponent
   fallback, and single-use invite links
+- Vocab Challenger rooms and wordbooks
 - A websocket for invites, presence, and live match updates
 
 Its client is [webcade](https://github.com/dylanjsa90/webcade). Contributor and agent
-conventions are in `AGENTS.md`; every REST call and websocket frame between the two is in
-[`docs/reference/cross-repo-contract.md`](docs/reference/cross-repo-contract.md).
+conventions are in [`AGENTS.md`](AGENTS.md); every REST call and websocket frame between the two
+is in [`docs/reference/cross-repo-contract.md`](docs/reference/cross-repo-contract.md), and the
+module map is in [`docs/architecture/backend.md`](docs/architecture/backend.md).
+
+Stack: Python 3.12, FastAPI, SQLAlchemy 2, Redis, SQLite. Production runs under systemd on a VM
+(see [Production server](#production-server)); Postgres is supported but unused.
 
 ## Setup
-If uv has not yet been installed instructions can be found at https://docs.astral.sh/uv/getting-started/installation/
+
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and run a local Redis, then:
 
 ```bash
 uv sync                           # install dependencies
-source .venv/bin/activate         # activate environment
-cp .env.example app/.env.local    # configure environment variables
+cp .env.example app/.env.local    # configure; at minimum set SECRET_KEY
+uv run alembic upgrade head       # create the database schema
+uv run prek install               # optional: run ruff on each commit
 ```
+
+Run `uv run alembic upgrade head` again whenever you pull a new migration. Writing
+migrations, and adopting them on a database made before they existed, is covered in
+[`docs/guides/database-migrations.md`](docs/guides/database-migrations.md).
 
 Settings are read from `app/.env.local` while `APP_ENV=local` (the default) and from `app/.env`
-otherwise. Edit the file and set at minimum:
+otherwise; real environment variables win over either file. `.env.example` lists every setting.
+The defaults use SQLite at `./sql_app.db` and Redis at `redis://localhost:6379`.
 
-```
-SECRET_KEY=<generate with: python -c "import secrets; print(secrets.token_hex(32))">
-```
-
-The defaults use SQLite at `./sql_app.db` (`DB_TYPE=sqlite`, `SQLITE_DATABASE_URL`) and Redis at
-`redis://localhost:6379` (`REDIS_URL`), so a local Redis must be running.
+A local install seeds a sign-in, `first.user@test.com` / `password`. Any other `APP_ENV` skips it
+and refuses to start without a real `SECRET_KEY`.
 
 Google sign-in stays off (its routes return 404) until `GOOGLE_CLIENT_ID` is set to the public
 web client ID, the same value as webcade's `VITE_GOOGLE_CLIENT_ID`.
+
+## Development server
+
+```bash
+uv run fastapi dev app/main.py
+```
+
+Runs on `http://localhost:8000` and reloads on edits. OpenAPI schema at `/openapi.json`, Swagger
+UI at `/docs`, health check at `/health`.
 
 ## Running with Docker
 
 Requires [Docker](https://docs.docker.com/get-docker/) and Docker Compose.
 
-**1. Create a `.env` file in the project root:**
+1. Copy `.env.example` to `.env` in the project root and fill it in; at minimum set
+   `SECRET_KEY`. Compose defaults to `APP_ENV=production` and SQLite in the `app_data` volume.
+   The image contains no env files; everything comes from this `.env`.
+2. Start the app and Redis:
 
-```
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=supersecret
-POSTGRES_DB=latterboard
-SECRET_KEY=<generate with: python -c "import secrets; print(secrets.token_hex(32))">
-```
+   ```bash
+   docker compose up --build
+   ```
 
-**2. Start all services:**
+   The API is at `http://localhost:8000`. The container waits for the database
+   (`app/backend_pre_start.py`), runs `alembic upgrade head`, then starts Uvicorn. Docker is an
+   option, not how production runs.
+3. Stop it with `docker compose down` (`-v` also deletes the volumes).
 
-```bash
-docker compose up --build
-```
+To try Postgres, set `DB_TYPE=postgres`, `DB_HOST=db` and `POSTGRES_PASSWORD` in `.env` and run
+`docker compose --profile local-db up --build`. The app connects with `sslmode=require`, which
+this container doesn't offer yet (see `docs/plans/follow-ups.md`).
 
-The API will be available at `http://localhost:8000`. Compose starts Redis and a Postgres
-container alongside the app, but the app waits only for Redis and, with the default
-`DB_TYPE=sqlite`, stores its data in a SQLite file inside the container.
+## Production server
 
-**3. Stop and remove containers:**
+Production is a Linux VM running Uvicorn under systemd, with SQLite and a local Redis.
+[`deploy/latterboard.service`](deploy/latterboard.service) is the unit: it sets
+`APP_ENV=production`, runs `alembic upgrade head` before starting, and serves one Uvicorn
+worker (SQLite takes one writer at a time).
 
-```bash
-docker compose down          # stop containers
-docker compose down -v       # also delete database volume
-```
+On the VM, settings come from `app/.env` (`APP_ENV=production` reads that file, not
+`app/.env.local`). Set a real `SECRET_KEY`, `DB_TYPE=sqlite`, and `SQLITE_DATABASE_URL` as an
+absolute path, e.g. `sqlite:////home/latterboard/latterboard/sql_app.db`.
 
-## Development server
+To deploy:
 
-```bash
-fastapi dev app/main.py
-```
+1. From your machine, `UNZIP=1 scripts/upload-to-vm.sh user@host [remote_dir]`. It zips the
+   tracked and untracked files (honouring `.gitignore`, so env files, databases and `.venv`
+   stay out), copies the archive over `scp` and unpacks it over `<remote_dir>/latterboard`.
+   Set `SSH_KEY` / `SSH_PORT` as needed. Files deleted from the repo stay on the VM.
+2. On the VM, in that directory:
 
-Runs on `http://localhost:8000`. OpenAPI schema at `/openapi.json`, Swagger UI at `/docs`.
+   ```bash
+   uv sync --frozen --no-dev
+   cp sql_app.db sql_app.db.bak          # if this deploy brings a migration
+   sudo systemctl restart latterboard    # runs alembic upgrade head, then Uvicorn
+   journalctl -u latterboard -n 50       # check it started
+   ```
 
-## Production server (Gunicorn)
+A database from before migrations existed must be stamped once before the unit's first start;
+see [`docs/guides/database-migrations.md`](docs/guides/database-migrations.md).
 
-Gunicorn is not in the default dependencies. Install it first:
-
-```bash
-uv add gunicorn
-```
-
-Then run with Uvicorn workers:
-
-```bash
-gunicorn app.main:app \
-  --workers 4 \
-  --worker-class uvicorn.workers.UvicornWorker \
-  --bind 0.0.0.0:8000
-```
-
-Adjust `--workers` to `(2 × CPU cores) + 1`. For a single-core machine, use `--workers 2`.
-
-## Copying to a VM
-
-`scripts/upload-to-vm.sh user@host [remote_dir]` zips the tracked and untracked files (honouring
-`.gitignore`, so `.env` files, local databases and `.venv` stay out) and copies the archive over
-`scp`. Set `SSH_KEY` / `SSH_PORT` as needed, and `UNZIP=1` to unpack it into
-`<remote_dir>/latterboard`. Env files are deliberately not copied; create them on the VM.
-
-## Running tests
+## Tests and checks
 
 Tests need a local Redis.
 
 ```bash
-make check                   # mypy + pytest, errors and summary lines only
-uv run pytest                # run all tests
-uv run pytest -v             # verbose output
-uv run pytest tests/test_scores.py  # single file
+make check                          # ruff + mypy + pytest; fails if any of them fails
+uv run pytest tests/test_scores.py  # one file
+uv run ruff format app/ tests/      # format
 ```
 
 With coverage:
@@ -114,13 +120,12 @@ With coverage:
 ```bash
 uv run coverage run -m pytest
 uv run coverage report
-uv run coverage html         # generates htmlcov/index.html
+uv run coverage html                # generates htmlcov/index.html
 ```
 
-## Linting and type checking
+CI (`.github/workflows/ci.yml`) runs lint, format, type check, tests, and a Docker build and
+start-up check on pushes to `dev` and pull requests into `main`. It doesn't deploy.
 
-```bash
-uv run ruff check app/ tests/    # lint
-uv run ruff format app/ tests/   # format
-uv run mypy app/                 # type check
-```
+## License
+
+[MIT](LICENSE)

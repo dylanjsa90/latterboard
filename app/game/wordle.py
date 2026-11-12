@@ -8,7 +8,7 @@ import random
 from collections import Counter
 from typing import Literal, cast
 
-from app.lib.word_list import word_list
+from app.game.word_list import word_list
 
 WORD_LENGTH = 5
 

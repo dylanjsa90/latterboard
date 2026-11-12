@@ -7,7 +7,7 @@ directly.
 import random
 
 from app.game.puzzles import CIPHER_STARTER
-from app.lib.word_list import word_list
+from app.game.word_list import word_list
 
 
 def shuffled_words() -> list[str]:
@@ -25,19 +25,178 @@ CIPHER_LENGTH = 4
 
 def generate_cipher_digits() -> list[int]:
     # The starter attempt is graded on load, so it must never be the answer.
-    while (digits := random.sample(range(CIPHER_DIGIT_RANGE), CIPHER_LENGTH)) == CIPHER_STARTER:
+    while (
+        digits := random.sample(range(CIPHER_DIGIT_RANGE), CIPHER_LENGTH)
+    ) == CIPHER_STARTER:
         pass
     return digits
 
+
 _SUDOKU_BASE_PUZZLE = [
-    5, 3, 0, 0, 7, 0, 0, 0, 0, 6, 0, 0, 1, 9, 5, 0, 0, 0, 0, 9, 8, 0, 0, 0, 0, 6, 0,
-    8, 0, 0, 0, 6, 0, 0, 0, 3, 4, 0, 0, 8, 0, 3, 0, 0, 1, 7, 0, 0, 0, 2, 0, 0, 0, 6,
-    0, 6, 0, 0, 0, 0, 2, 8, 0, 0, 0, 0, 4, 1, 9, 0, 0, 5, 0, 0, 0, 0, 8, 0, 0, 7, 9,
+    5,
+    3,
+    0,
+    0,
+    7,
+    0,
+    0,
+    0,
+    0,
+    6,
+    0,
+    0,
+    1,
+    9,
+    5,
+    0,
+    0,
+    0,
+    0,
+    9,
+    8,
+    0,
+    0,
+    0,
+    0,
+    6,
+    0,
+    8,
+    0,
+    0,
+    0,
+    6,
+    0,
+    0,
+    0,
+    3,
+    4,
+    0,
+    0,
+    8,
+    0,
+    3,
+    0,
+    0,
+    1,
+    7,
+    0,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    6,
+    0,
+    6,
+    0,
+    0,
+    0,
+    0,
+    2,
+    8,
+    0,
+    0,
+    0,
+    0,
+    4,
+    1,
+    9,
+    0,
+    0,
+    5,
+    0,
+    0,
+    0,
+    0,
+    8,
+    0,
+    0,
+    7,
+    9,
 ]
 _SUDOKU_BASE_SOLUTION = [
-    5, 3, 4, 6, 7, 8, 9, 1, 2, 6, 7, 2, 1, 9, 5, 3, 4, 8, 1, 9, 8, 3, 4, 2, 5, 6, 7,
-    8, 5, 9, 7, 6, 1, 4, 2, 3, 4, 2, 6, 8, 5, 3, 7, 9, 1, 7, 1, 3, 9, 2, 4, 8, 5, 6,
-    9, 6, 1, 5, 3, 7, 2, 8, 4, 2, 8, 7, 4, 1, 9, 6, 3, 5, 3, 4, 5, 2, 8, 6, 1, 7, 9,
+    5,
+    3,
+    4,
+    6,
+    7,
+    8,
+    9,
+    1,
+    2,
+    6,
+    7,
+    2,
+    1,
+    9,
+    5,
+    3,
+    4,
+    8,
+    1,
+    9,
+    8,
+    3,
+    4,
+    2,
+    5,
+    6,
+    7,
+    8,
+    5,
+    9,
+    7,
+    6,
+    1,
+    4,
+    2,
+    3,
+    4,
+    2,
+    6,
+    8,
+    5,
+    3,
+    7,
+    9,
+    1,
+    7,
+    1,
+    3,
+    9,
+    2,
+    4,
+    8,
+    5,
+    6,
+    9,
+    6,
+    1,
+    5,
+    3,
+    7,
+    2,
+    8,
+    4,
+    2,
+    8,
+    7,
+    4,
+    1,
+    9,
+    6,
+    3,
+    5,
+    3,
+    4,
+    5,
+    2,
+    8,
+    6,
+    1,
+    7,
+    9,
 ]
 
 
@@ -72,7 +231,9 @@ def generate_sudoku(rng: random.Random | None = None) -> dict[str, list[int]]:
 
     def line_order() -> list[int]:
         bands = chooser.sample(range(3), 3)
-        return [band * 3 + line for band in bands for line in chooser.sample(range(3), 3)]
+        return [
+            band * 3 + line for band in bands for line in chooser.sample(range(3), 3)
+        ]
 
     rows, cols = line_order(), line_order()
     transpose = chooser.random() < 0.5
@@ -89,6 +250,7 @@ def generate_sudoku(rng: random.Random | None = None) -> dict[str, list[int]]:
         "puzzle": shuffle(_SUDOKU_BASE_PUZZLE),
         "solution": shuffle(_SUDOKU_BASE_SOLUTION),
     }
+
 
 CIPHERS = [
     [2, 4, 0, 5],

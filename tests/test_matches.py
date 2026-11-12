@@ -1,26 +1,25 @@
 import pytest
 
-from app.database import SessionLocal
 from app.models.match import Match
+from tests.helpers import db_session, start_match
 
 BASE = "/api/v1/matches"
 KNOWN_WORD = "aback"
 
 
 def _set_target_word(match_id: int, word: str) -> None:
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         m = db.get(Match, match_id)
         m.target_word = word
         db.add(m)
         db.commit()
-    finally:
-        db.close()
 
 
 def test_invite_visible_to_opponent(client, inviter_headers, opponent_headers):
     r = client.post(
-        f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
+        f"{BASE}/invite",
+        json={"opponent_username": "opponent"},
+        headers=inviter_headers,
     )
     assert r.status_code == 201
     match_id = r.json()["id"]
@@ -45,9 +44,13 @@ def test_invite_self(client, inviter_headers):
     assert r.status_code == 400
 
 
-def test_accept_starts_match_with_inviter_turn(client, inviter_headers, opponent_headers):
+def test_accept_starts_match_with_inviter_turn(
+    client, inviter_headers, opponent_headers
+):
     r = client.post(
-        f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
+        f"{BASE}/invite",
+        json={"opponent_username": "opponent"},
+        headers=inviter_headers,
     )
     match_id = r.json()["id"]
     inviter_username = r.json()["inviter_username"]
@@ -60,37 +63,29 @@ def test_accept_starts_match_with_inviter_turn(client, inviter_headers, opponent
 
 
 def test_guess_out_of_turn_rejected(client, inviter_headers, opponent_headers):
-    r = client.post(
-        f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
-    )
-    match_id = r.json()["id"]
-    client.post(f"{BASE}/{match_id}/accept", headers=opponent_headers)
+    match_id = start_match(client, inviter_headers, opponent_headers)
 
     # opponent (invitee) tries to guess even though inviter goes first
-    r = client.post(f"{BASE}/{match_id}/guess", json={"word": "abbey"}, headers=opponent_headers)
+    r = client.post(
+        f"{BASE}/{match_id}/guess", json={"word": "abbey"}, headers=opponent_headers
+    )
     assert r.status_code == 409
 
 
 def test_invalid_word_rejected(client, inviter_headers, opponent_headers):
-    r = client.post(
-        f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
-    )
-    match_id = r.json()["id"]
-    client.post(f"{BASE}/{match_id}/accept", headers=opponent_headers)
+    match_id = start_match(client, inviter_headers, opponent_headers)
 
-    r = client.post(f"{BASE}/{match_id}/guess", json={"word": "zzzzz"}, headers=inviter_headers)
+    r = client.post(
+        f"{BASE}/{match_id}/guess", json={"word": "zzzzz"}, headers=inviter_headers
+    )
     assert r.status_code == 400
 
 
 def test_forced_win_completes_match_and_records_score(
     client, inviter_headers, opponent_headers
 ):
-    r = client.post(
-        f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
-    )
-    match_id = r.json()["id"]
-    inviter_username = r.json()["inviter_username"]
-    client.post(f"{BASE}/{match_id}/accept", headers=opponent_headers)
+    match_id = start_match(client, inviter_headers, opponent_headers)
+    inviter_username = "inviter"
 
     _set_target_word(match_id, KNOWN_WORD)
 
@@ -115,9 +110,13 @@ def test_forced_win_completes_match_and_records_score(
     assert inviter_username in usernames
 
 
-def test_decline_then_further_actions_rejected(client, inviter_headers, opponent_headers):
+def test_decline_then_further_actions_rejected(
+    client, inviter_headers, opponent_headers
+):
     r = client.post(
-        f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
+        f"{BASE}/invite",
+        json={"opponent_username": "opponent"},
+        headers=inviter_headers,
     )
     match_id = r.json()["id"]
 
@@ -132,7 +131,9 @@ def test_decline_then_further_actions_rejected(client, inviter_headers, opponent
 @pytest.mark.usefixtures("opponent_headers")
 def test_cancel_by_inviter(client, inviter_headers):
     r = client.post(
-        f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
+        f"{BASE}/invite",
+        json={"opponent_username": "opponent"},
+        headers=inviter_headers,
     )
     match_id = r.json()["id"]
 
@@ -143,11 +144,7 @@ def test_cancel_by_inviter(client, inviter_headers):
 
 def _win_wordle(client, inviter_headers, opponent_headers) -> int:
     """Plays a wordle match the inviter wins on the first guess."""
-    r = client.post(
-        f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
-    )
-    match_id = r.json()["id"]
-    client.post(f"{BASE}/{match_id}/accept", headers=opponent_headers)
+    match_id = start_match(client, inviter_headers, opponent_headers)
     _set_target_word(match_id, KNOWN_WORD)
     r = client.post(
         f"{BASE}/{match_id}/guess", json={"word": KNOWN_WORD}, headers=inviter_headers
@@ -162,7 +159,9 @@ def _history(client, headers, **params) -> dict:
     return r.json()
 
 
-def test_history_shows_each_player_their_side(client, inviter_headers, opponent_headers):
+def test_history_shows_each_player_their_side(
+    client, inviter_headers, opponent_headers
+):
     match_id = _win_wordle(client, inviter_headers, opponent_headers)
 
     mine = _history(client, inviter_headers)
@@ -181,7 +180,9 @@ def test_history_shows_each_player_their_side(client, inviter_headers, opponent_
     assert theirs["items"][0]["result"] == "lost"
 
 
-def test_history_leaves_out_unfinished_matches(client, inviter_headers, opponent_headers):
+def test_history_leaves_out_unfinished_matches(
+    client, inviter_headers, opponent_headers
+):
     invite = {"opponent_username": "opponent"}
     client.post(f"{BASE}/invite", json=invite, headers=inviter_headers)
     r = client.post(
@@ -189,7 +190,9 @@ def test_history_leaves_out_unfinished_matches(client, inviter_headers, opponent
     )
     client.post(f"{BASE}/{r.json()['id']}/decline", headers=opponent_headers)
     r = client.post(
-        f"{BASE}/invite", json={**invite, "game": "cipher_race"}, headers=inviter_headers
+        f"{BASE}/invite",
+        json={**invite, "game": "cipher_race"},
+        headers=inviter_headers,
     )
     client.post(f"{BASE}/{r.json()['id']}/accept", headers=opponent_headers)
 
@@ -209,9 +212,9 @@ def test_history_pages_newest_first(client, inviter_headers, opponent_headers):
     assert [item["id"] for item in page["items"]] == [second]
     # The record covers every match, not just the page.
     assert page["record"]["won"] == 2
-    assert [i["id"] for i in _history(client, inviter_headers, skip=1, limit=1)["items"]] == [
-        first
-    ]
+    assert [
+        i["id"] for i in _history(client, inviter_headers, skip=1, limit=1)["items"]
+    ] == [first]
 
 
 def test_history_requires_sign_in(client):
@@ -221,27 +224,32 @@ def test_history_requires_sign_in(client):
 @pytest.mark.usefixtures("opponent_headers")
 def test_duplicate_invite_conflicts(client, inviter_headers):
     r = client.post(
-        f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
+        f"{BASE}/invite",
+        json={"opponent_username": "opponent"},
+        headers=inviter_headers,
     )
     assert r.status_code == 201
 
     r = client.post(
-        f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
+        f"{BASE}/invite",
+        json={"opponent_username": "opponent"},
+        headers=inviter_headers,
     )
     assert r.status_code == 409
 
 
 def test_invite_and_gameplay_over_websocket(client, inviter_headers, opponent_headers):
-    with client.websocket_connect(
-        "/ws/wordle", headers=inviter_headers
-    ) as inviter_ws, client.websocket_connect(
-        "/ws/wordle", headers=opponent_headers
-    ) as invitee_ws:
+    with (
+        client.websocket_connect("/ws/wordle", headers=inviter_headers) as inviter_ws,
+        client.websocket_connect("/ws/wordle", headers=opponent_headers) as invitee_ws,
+    ):
         assert inviter_ws.receive_json()["type"] == "connected"
         assert invitee_ws.receive_json()["type"] == "connected"
 
         r = client.post(
-            f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
+            f"{BASE}/invite",
+            json={"opponent_username": "opponent"},
+            headers=inviter_headers,
         )
         assert r.status_code == 201
         match_id = r.json()["id"]
@@ -265,7 +273,9 @@ def test_invite_and_gameplay_over_websocket(client, inviter_headers, opponent_he
         _set_target_word(match_id, KNOWN_WORD)
 
         r = client.post(
-            f"{BASE}/{match_id}/guess", json={"word": KNOWN_WORD}, headers=inviter_headers
+            f"{BASE}/{match_id}/guess",
+            json={"word": KNOWN_WORD},
+            headers=inviter_headers,
         )
         assert r.status_code == 200
 

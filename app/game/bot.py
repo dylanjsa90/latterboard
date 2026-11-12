@@ -19,7 +19,7 @@ from itertools import permutations
 
 from app.game import wordle
 from app.game.puzzles import cipher_feedback
-from app.lib.word_list import word_list
+from app.game.word_list import word_list
 
 # 0.0 = careless, 1.0 = always plays the best candidate it knows.
 DEFAULT_SKILL = 0.75
@@ -77,7 +77,9 @@ def word_candidates(history: WordHistory) -> list[str]:
     return [
         word
         for word in _WORDS
-        if all(wordle.evaluate_guess(word, guess) == grades for guess, grades in history)
+        if all(
+            wordle.evaluate_guess(word, guess) == grades for guess, grades in history
+        )
     ]
 
 
@@ -85,9 +87,7 @@ def _rank_words(candidates: list[str]) -> list[str]:
     """Most informative first: how common each letter is *at that position* among
     the words still in play. Repeats are discounted because a second `e` confirms
     much less than a new letter does."""
-    columns: list[Counter[str]] = [
-        Counter() for _ in range(wordle.WORD_LENGTH)
-    ]
+    columns: list[Counter[str]] = [Counter() for _ in range(wordle.WORD_LENGTH)]
     for word in candidates:
         for position, letter in enumerate(word):
             columns[position][letter] += 1

@@ -4,16 +4,15 @@ import random
 import statistics
 
 import pytest
-import redis as sync_redis
 
-from app.api.routes.matchmaking import (
-    QUEUE_PREFIX,
-    WAITING_SINCE_PREFIX,
-    waiting_since_key,
-)
+from app.api.routes.matchmaking import waiting_since_key
 from app.core.config import settings
 from app.game import bot, wordle
 from app.game.puzzles import cipher_feedback
+from tests.helpers import match_detail
+
+# Matchmaking state is shared through Redis, so every test starts from empty queues.
+pytestmark = pytest.mark.usefixtures("empty_queues")
 
 # --- the move engine ----------------------------------------------------------
 #
@@ -33,7 +32,9 @@ def _play_word(answer: str, *, skill: float, rng: random.Random, budget: int = 6
     return None
 
 
-def _play_cipher(answer: list[int], *, skill: float, rng: random.Random, budget: int = 8):
+def _play_cipher(
+    answer: list[int], *, skill: float, rng: random.Random, budget: int = 8
+):
     history: bot.CipherHistory = []
     for attempt in range(1, budget + 1):
         guess = bot.choose_cipher(history, skill=skill, rng=rng)
@@ -122,7 +123,11 @@ def test_word_play_lands_in_a_human_band():
     solved = [
         result
         for _ in range(60)
-        if (result := _play_word(answers.choice(bot._WORDS), skill=bot.DEFAULT_SKILL, rng=rng))
+        if (
+            result := _play_word(
+                answers.choice(bot._WORDS), skill=bot.DEFAULT_SKILL, rng=rng
+            )
+        )
     ]
     assert len(solved) >= 54  # solves at least 90% of the time within 6
     assert 3.0 <= statistics.mean(solved) <= 4.6
@@ -136,7 +141,9 @@ def test_cipher_play_lands_in_a_human_band():
         for _ in range(60)
         if (
             result := _play_cipher(
-                list(answers.choice(bot._CIPHER_CODES)), skill=bot.DEFAULT_SKILL, rng=rng
+                list(answers.choice(bot._CIPHER_CODES)),
+                skill=bot.DEFAULT_SKILL,
+                rng=rng,
             )
         )
     ]
@@ -175,18 +182,6 @@ MATCHES = "/api/v1/matches"
 BOT = settings.BOT_USER_USERNAME
 
 
-@pytest.fixture(autouse=True)
-def empty_queues():
-    """Tests share Redis and recreate users with the same ids, so leftover queue or
-    waiting-since state would leak between them."""
-    redis_client = sync_redis.Redis.from_url(settings.REDIS_URL)
-    for prefix in (QUEUE_PREFIX, WAITING_SINCE_PREFIX):
-        for key in redis_client.scan_iter(match=f"{prefix}:*"):
-            redis_client.delete(key)
-    yield redis_client
-    redis_client.close()
-
-
 @pytest.fixture
 def instant_bot(monkeypatch):
     """Hand out the computer on the first call, so gameplay tests don't wait."""
@@ -199,7 +194,9 @@ def _start_against_bot(client, headers, game):
     return body["match"]
 
 
-def test_a_fresh_player_waits_before_being_offered_the_computer(client, inviter_headers):
+def test_a_fresh_player_waits_before_being_offered_the_computer(
+    client, inviter_headers
+):
     body = client.post(f"{MATCHMAKING}/wordle", headers=inviter_headers).json()
     assert body["status"] == "queued"
 
@@ -207,9 +204,9 @@ def test_a_fresh_player_waits_before_being_offered_the_computer(client, inviter_
 def test_the_computer_arrives_once_the_player_has_waited(
     client, inviter_headers, empty_queues
 ):
-    assert client.post(f"{MATCHMAKING}/wordle", headers=inviter_headers).json()["status"] == (
-        "queued"
-    )
+    assert client.post(f"{MATCHMAKING}/wordle", headers=inviter_headers).json()[
+        "status"
+    ] == ("queued")
     # Backdate the first-join time rather than sleeping, so this exercises the real
     # comparison against MATCHMAKING_BOT_WAIT_SECONDS.
     key = waiting_since_key("wordle")
@@ -268,16 +265,10 @@ def test_the_computer_cannot_be_invited_directly(client, inviter_headers):
 WORDS = ["crane", "stoic", "blimp", "pluck", "vodka", "jumpy", "ghost", "wedge"]
 
 
-def _detail(client, headers, match_id):
-    r = client.get(f"{MATCHES}/{match_id}", headers=headers)
-    assert r.status_code == 200, r.text
-    return r.json()
-
-
 def _play_out(client, headers, match, path, moves):
     """Take turns until the match ends or the player runs out of moves."""
     for move in moves:
-        detail = _detail(client, headers, match["id"])
+        detail = match_detail(client, headers, match["id"])
         if detail["status"] != "in_progress":
             return detail
         if match["game"] == "wordle" and detail["current_turn_username"] != "inviter":
@@ -286,7 +277,7 @@ def _play_out(client, headers, match, path, moves):
         if r.status_code == 409:  # our side of the race is done; nothing left to do
             break
         assert r.status_code == 200, r.text
-    return _detail(client, headers, match["id"])
+    return match_detail(client, headers, match["id"])
 
 
 @pytest.mark.usefixtures("instant_bot")
@@ -296,13 +287,15 @@ def test_the_computer_replies_before_the_guess_returns(client, inviter_headers):
     match = _start_against_bot(client, inviter_headers, "wordle")
 
     r = client.post(
-        f"{MATCHES}/{match['id']}/guess", json={"word": "crane"}, headers=inviter_headers
+        f"{MATCHES}/{match['id']}/guess",
+        json={"word": "crane"},
+        headers=inviter_headers,
     )
     assert r.status_code == 200
     # Built before the bot moved, so it still hands the turn over.
     assert r.json()["current_turn_username"] == BOT
 
-    detail = _detail(client, inviter_headers, match["id"])
+    detail = match_detail(client, inviter_headers, match["id"])
     if detail["status"] == "in_progress":
         assert detail["current_turn_username"] == "inviter"
     # Two guesses on the shared board: the player's, then the computer's.
@@ -338,8 +331,16 @@ def test_a_cipher_race_against_the_computer_finishes(client, inviter_headers):
     match = _start_against_bot(client, inviter_headers, "cipher_race")
     attempts = [
         {"attempt": list(code)}
-        for code in ([0, 1, 2, 3], [1, 0, 3, 2], [2, 3, 0, 1], [3, 2, 1, 0],
-                     [4, 5, 0, 1], [5, 4, 1, 0], [0, 2, 4, 5], [1, 3, 5, 4])
+        for code in (
+            [0, 1, 2, 3],
+            [1, 0, 3, 2],
+            [2, 3, 0, 1],
+            [3, 2, 1, 0],
+            [4, 5, 0, 1],
+            [5, 4, 1, 0],
+            [0, 2, 4, 5],
+            [1, 3, 5, 4],
+        )
     ]
     detail = _play_out(client, inviter_headers, match, "cipher/guess", attempts)
     assert detail["status"] == "completed"
@@ -399,7 +400,9 @@ def test_the_computers_move_reaches_the_websocket(client, inviter_headers):
         assert ws.receive_json()["type"] == "joined_match"
 
         client.post(
-            f"{MATCHES}/{match['id']}/guess", json={"word": "crane"}, headers=inviter_headers
+            f"{MATCHES}/{match['id']}/guess",
+            json={"word": "crane"},
+            headers=inviter_headers,
         )
 
         # Each move sends an `opponent_guessed` then a `your_turn`, so a move and
@@ -414,7 +417,12 @@ def test_the_computers_move_reaches_the_websocket(client, inviter_headers):
     assert kinds[0] == "opponent_guessed"
     assert frames[0]["username"] == "inviter"
     if kinds[-1] != "match_completed":
-        assert kinds == ["opponent_guessed", "your_turn", "opponent_guessed", "your_turn"]
+        assert kinds == [
+            "opponent_guessed",
+            "your_turn",
+            "opponent_guessed",
+            "your_turn",
+        ]
         # The turn goes to the computer and comes straight back, with no client
         # action in between.
         assert frames[1]["current_turn_username"] == BOT

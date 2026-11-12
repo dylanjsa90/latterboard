@@ -7,6 +7,7 @@ from app.schemas.puzzle import SUDOKU_CELLS, CipherFeedback, Grade
 
 multiplayer: Literal["wordle", "word_race", "cipher_race", "sudoku_coop"]
 
+
 class MatchInviteCreate(BaseModel):
     opponent_username: str
     # "wordle" (turn-based), "word_race", "cipher_race" or "sudoku_coop".

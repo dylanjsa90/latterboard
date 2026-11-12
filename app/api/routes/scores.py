@@ -26,9 +26,7 @@ def submit_score(
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
 ) -> GameScore:
-    count = crud_score.get_daily_play_count(
-        db, current_user.id, score_in.game, today()
-    )
+    count = crud_score.get_daily_play_count(db, current_user.id, score_in.game, today())
     if count >= settings.MAX_DAILY_PLAYS_PER_GAME:
         raise HTTPException(
             status_code=status.HTTP_429_TOO_MANY_REQUESTS,
@@ -57,9 +55,7 @@ def leaderboard_daily(
     limit: int = Query(default=10, ge=1, le=100),
     db: Session = Depends(deps.get_db),
 ) -> list[LeaderboardEntry]:
-    rows = crud_score.get_leaderboard_daily(
-        db, game, day or today(), limit
-    )
+    rows = crud_score.get_leaderboard_daily(db, game, day or today(), limit)
     return [
         LeaderboardEntry(rank=i, username=u, score=s, achieved_at=a)
         for i, (u, s, a) in enumerate(rows, 1)
@@ -82,16 +78,6 @@ def leaderboard_monthly(
         LeaderboardEntry(rank=i, username=u, score=s, achieved_at=a)
         for i, (u, s, a) in enumerate(rows, 1)
     ]
-
-
-@router.get("/me/{game}/daily-count")
-def my_daily_count(
-    game: str,
-    current_user: User = Depends(deps.get_current_user),
-    db: Session = Depends(deps.get_db),
-) -> dict[str, int]:
-    count = crud_score.get_daily_play_count(db, current_user.id, game, today())
-    return {"count": count}
 
 
 @router.get("/me/{game}", response_model=list[GameScorePublic])

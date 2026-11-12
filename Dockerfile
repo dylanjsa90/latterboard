@@ -16,8 +16,17 @@ COPY . .
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
+# Run unprivileged. The code and .venv stay root-owned, so the app can't modify them;
+# only /data is writable, for the SQLite file (compose mounts a volume there).
+RUN useradd --system --uid 1001 --no-create-home latterboard \
+    && mkdir /data && chown latterboard /data
+USER latterboard
+
 ENV PATH="/app/.venv/bin:$PATH"
+ENV SQLITE_DATABASE_URL="sqlite:////data/sql_app.db"
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "python -m app.backend_pre_start && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+# Wait for the database, bring its schema up to date, then serve. A failed migration
+# stops the container rather than serving against the wrong schema.
+CMD ["sh", "-c", "python -m app.backend_pre_start && alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"]

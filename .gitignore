@@ -1,23 +1,26 @@
-.env
+# Python and tooling
 .venv/
 __pycache__/
-*.pyc
-*.pyo
+*.py[co]
 .pytest_cache/
-logs/*
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local state: env files, databases, logs
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+*.db
+*.db-journal
+logs/
+*.log
+
+# Editors and agents
 .vscode/
 .claude/
-.env.local
-test_app.db
-sql_app.db
-**/.env.local
-**/.env
-**/test_app.db
-**/sql_app.db
-.env.production
-.env.staging
-logs/**
-*.log
-.DS_STORE
-**/.DS_STORE
-.worktrees
+.worktrees/
+.DS_Store

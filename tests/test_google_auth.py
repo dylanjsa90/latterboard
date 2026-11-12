@@ -7,8 +7,8 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 
 from app.core import google
 from app.core.config import settings
-from app.database import SessionLocal
 from app.models import User, UserIdentity
+from tests.helpers import db_session
 
 LOGIN_URL = "/api/v1/login/google"
 SIGNUP_URL = "/api/v1/users/google"
@@ -16,7 +16,10 @@ TEST_TOKEN_URL = "/api/v1/login/test-token"
 CLIENT_ID = "test-client.apps.googleusercontent.com"
 
 MAYA = google.GoogleIdentity(
-    sub="google-sub-maya", email="maya@gmail.com", email_verified=True, name="Maya Ortiz"
+    sub="google-sub-maya",
+    email="maya@gmail.com",
+    email_verified=True,
+    name="Maya Ortiz",
 )
 
 
@@ -50,11 +53,8 @@ def _bearer(token: str) -> dict[str, str]:
 
 
 def _identities(user_id: int) -> list[UserIdentity]:
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         return db.query(UserIdentity).filter(UserIdentity.user_id == user_id).all()
-    finally:
-        db.close()
 
 
 @pytest.mark.usefixtures("fake_google")
@@ -126,7 +126,10 @@ def test_existing_password_account_is_linked(client, fake_google):
     assert len(_identities(me["id"])) == 1
     r = client.post(
         "/api/v1/login/access-token",
-        data={"username": settings.DEFAULT_USER, "password": settings.DEFAULT_USER_PASSWORD},
+        data={
+            "username": settings.DEFAULT_USER,
+            "password": settings.DEFAULT_USER_PASSWORD,
+        },
     )
     assert r.status_code == 200
 
@@ -143,7 +146,9 @@ def test_unverified_email_is_refused(client, fake_google):
 @pytest.mark.usefixtures("fake_google")
 def test_bad_credential_is_401(client):
     assert client.post(LOGIN_URL, json={"credential": "forged"}).status_code == 401
-    assert client.post(SIGNUP_URL, json=_profile(credential="forged")).status_code == 401
+    assert (
+        client.post(SIGNUP_URL, json=_profile(credential="forged")).status_code == 401
+    )
 
 
 @pytest.mark.usefixtures("fake_google")
@@ -156,12 +161,9 @@ def test_google_sign_in_off_without_client_id(client, monkeypatch):
 @pytest.mark.usefixtures("fake_google")
 def test_inactive_user_is_refused(client):
     client.post(SIGNUP_URL, json=_profile())
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         db.query(User).filter(User.username == "maya").update({"is_active": False})
         db.commit()
-    finally:
-        db.close()
     assert client.post(LOGIN_URL, json={"credential": "maya"}).status_code == 400
 
 
@@ -190,7 +192,8 @@ def test_sign_up_under_13_is_422(client):
 def test_google_only_user_has_no_usable_password(client):
     client.post(SIGNUP_URL, json=_profile())
     r = client.post(
-        "/api/v1/login/access-token", data={"username": "maya@gmail.com", "password": ""}
+        "/api/v1/login/access-token",
+        data={"username": "maya@gmail.com", "password": ""},
     )
     assert r.status_code in (401, 422)
 
@@ -199,21 +202,23 @@ def test_google_only_user_has_no_usable_password(client):
 def test_deleting_user_deletes_identity(client):
     token = client.post(SIGNUP_URL, json=_profile()).json()["access_token"]
     user_id = client.post(TEST_TOKEN_URL, headers=_bearer(token)).json()["id"]
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         db.delete(db.get(User, user_id))
         db.commit()
-    finally:
-        db.close()
     assert _identities(user_id) == []
 
 
 # The real check, against tokens signed by a throwaway key standing in for Google's.
 
 
+@pytest.fixture(scope="module")
+def rsa_key():
+    return rsa.generate_private_key(public_exponent=65537, key_size=2048)
+
+
 @pytest.fixture
-def google_key(monkeypatch):
-    key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+def google_key(monkeypatch, rsa_key):
+    key = rsa_key
     monkeypatch.setattr(settings, "GOOGLE_CLIENT_ID", CLIENT_ID)
     monkeypatch.setattr(
         google._jwks,

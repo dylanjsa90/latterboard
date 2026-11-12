@@ -21,9 +21,7 @@ from app.core.base_class import Base
 
 class Puzzle(Base):
     __tablename__: str = "puzzle"
-    __table_args__ = (
-        UniqueConstraint("game", "date", name="uq_puzzle_game_date"),
-    )
+    __table_args__ = (UniqueConstraint("game", "date", name="uq_puzzle_game_date"),)
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     game: Mapped[str] = mapped_column(String, nullable=False, index=True)

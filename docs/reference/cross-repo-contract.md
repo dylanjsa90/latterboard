@@ -1,16 +1,17 @@
 # Cross-repo contract
 
-Last updated: 2026-10-09
+Last updated: 2026-11-12
 
 webcade (`~/projects/webcade`, React) is latterboard's (`~/projects/latterboard`, FastAPI) only
 client. This file is `docs/reference/cross-repo-contract.md` in both repos: keep the two copies
 identical, and update both when a shape changes.
 
 - REST is under `/api/v1` (webcade: `API_V1_URL`). The websocket is at the app root, `/ws/{topic}`,
-  **not** under `/api/v1`.
+  **not** under `/api/v1`, and so is `GET /health` → `{status: "ok"}` (for uptime checks; webcade
+  doesn't call it).
 - Wire JSON is snake_case; webcade converts to camelCase inside each `api.ts`.
 - REST response shapes are checked, not just written down: webcade keeps a snapshot of this
-  app's OpenAPI schema (`src/lib/api-schema.d.ts`) and reads each response as `Wire<'Schema'>`.
+  app's OpenAPI schema (`src/lib/api/schema.d.ts`) and reads each response as `Wire<'Schema'>`.
   After changing a response model here, run `npm run api:schema` in webcade (it imports
   `app.main` in-process, from the checkout at `../latterboard`) and fix what `tsc -b` reports.
   A response model's fields are all sent, `null` when empty; give status-like strings a
@@ -30,6 +31,9 @@ identical, and update both when a shape changes.
 | ---- | ------- | -------- |
 | `POST /login/access-token` | form-urlencoded `username` (= email), `password` | `{access_token, token_type}` |
 | `POST /login/test-token` | bearer | `UserPrivate`; 401 = dead token |
+| `POST /password-recovery/{email}` | — | `{message}`, the same whether or not the email is registered. When it is and SMTP is on, emails a link to `{FRONTEND_HOST}/reset-password?token=…`, valid 48 hours. webcade has no reset page yet |
+| `POST /reset-password/` | `{token, new_password}` (8–128 chars) | `{message}`; 400 `Invalid token` (malformed, expired, or no such account) or `Inactive user` |
+| `POST /password-recovery-html-content/{email}` (bearer, superuser) | — | The recovery email's HTML, its subject in a `subject` header; 404 unknown email. Admin only |
 | `POST /login/google` | `{credential}` (the ID token from Google's sign-in button) | `{status: "signed_in", access_token, token_type}`, or `{status: "needs_profile", email, name?}` when no account has that Google account or its email; 401 bad or expired credential, 403 unverified Google email, 400 inactive, 404 when `GOOGLE_CLIENT_ID` is unset |
 | `POST /users/google` | `{credential, username, display_name, birth_year, location?}` | 201 `{access_token, token_type}`; 409 / 422 as `POST /users/`, and 401 / 403 / 404 as `/login/google` |
 | `POST /users/` | `{email, username, password, display_name, birth_year, location?}` | 201 `UserPrivate`; 409 if the email or the username is taken (`detail` says which); 422 for a bad handle or anyone under 13 |
@@ -38,9 +42,13 @@ identical, and update both when a shape changes.
 | `PUT /users/me/avatar` (bearer) | multipart `file` (JPEG/PNG/WebP, ≤ 2 MB) | `UserPrivate`; 413 too big, 422 not an image. Re-encoded to a 256px WebP without EXIF |
 | `DELETE /users/me/avatar` (bearer) | — | 204 |
 | `GET /users/{id}/avatar` (public) | — | `image/webp`, cacheable forever (the URL is versioned); 404 without a photo |
+| `GET /users/{id}` (bearer) | — | `UserPublic`; 404. webcade doesn't call it |
+| `GET /users/?skip&limit` (bearer, superuser) | — | `UserPublic[]`; 403 for anyone else. Admin only |
+| `PUT /users/{id}` / `DELETE /users/{id}` (bearer, owner or superuser) | `{email?, username?, password?, is_active?}` / — | `UserPrivate` / 204; 403 for anyone else. Admin only |
 
-`UserPublic` = `{id, email, username, display_name?, location?, avatar_url?, is_active, is_bot,
-created_at, updated_at}`; `UserPrivate` = `UserPublic` + `birth_year`, sent only to its owner;
+`UserPublic` = `{id, username, display_name?, location?, avatar_url?, is_active, is_bot,
+created_at, updated_at}`; `UserPrivate` = `UserPublic` + `email` + `birth_year`, sent only to its
+owner (or a superuser);
 `PlayerPublic` = `{username, is_bot, display_name?, location?, avatar_url?, created_at}`. `is_bot`
 marks the computer opponent and is always a real boolean on the wire, even though the column is
 nullable. `avatar_url` is a path under the API
@@ -84,7 +92,7 @@ returns them on `GET` so word and cipher resume. Stats and history include lost 
 | `GET /me/{game}/plays-today` (bearer) | — | `{used, limit}` (webcade doesn't mirror the cap) |
 | `GET /leaderboard/{game}/{all-time\|daily\|monthly}?limit` | — | `[{rank, username, score, achieved_at}]` |
 
-`SCORE_RULES` (`app/schemas/game_score.py`) must match webcade's `src/components/snake/constants.ts`
+`SCORE_RULES` (`app/schemas/game_score.py`) must match webcade's `src/features/snake/constants.ts`
 (snake: multiples of 10, up to 3990).
 
 ### Matches (`/matches`, bearer) and matchmaking

@@ -1,18 +1,7 @@
-from app.database import SessionLocal
 from app.models import MatchPuzzle, User
+from tests.helpers import db_session, signup_and_login, start_match
 
 BASE = "/api/v1/matches"
-
-
-def _start(client, inviter_headers, opponent_headers, game: str) -> int:
-    r = client.post(
-        f"{BASE}/invite",
-        json={"opponent_username": "opponent", "game": game},
-        headers=inviter_headers,
-    )
-    match_id = r.json()["id"]
-    client.post(f"{BASE}/{match_id}/accept", headers=opponent_headers)
-    return match_id
 
 
 def _active(client, headers) -> dict[int, dict]:
@@ -23,21 +12,20 @@ def _active(client, headers) -> dict[int, dict]:
 
 def _use_up_race(match_id: int, username: str) -> None:
     """Fill the player's side of a race with misses, as if they'd run out of attempts."""
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         user_id = db.query(User).filter(User.username == username).one().id
         row = db.query(MatchPuzzle).filter(MatchPuzzle.match_id == match_id).one()
         miss = {"guess": "xxxxx", "result": ["absent"] * 5, "correct": False}
         guesses = {**row.state["guesses"], str(user_id): [miss] * 6}
         row.state = {**row.state, "guesses": guesses}
         db.commit()
-    finally:
-        db.close()
 
 
 def test_pending_invite_waits_on_invitee(client, inviter_headers, opponent_headers):
     r = client.post(
-        f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
+        f"{BASE}/invite",
+        json={"opponent_username": "opponent"},
+        headers=inviter_headers,
     )
     match_id = r.json()["id"]
 
@@ -53,13 +41,13 @@ def test_pending_invite_waits_on_invitee(client, inviter_headers, opponent_heade
 
 
 def test_word_duel_follows_the_turn(client, inviter_headers, opponent_headers):
-    match_id = _start(client, inviter_headers, opponent_headers, "wordle")
+    match_id = start_match(client, inviter_headers, opponent_headers, "wordle")
     assert _active(client, inviter_headers)[match_id]["your_move"] is True
     assert _active(client, opponent_headers)[match_id]["your_move"] is False
 
 
 def test_race_waits_until_you_finish(client, inviter_headers, opponent_headers):
-    match_id = _start(client, inviter_headers, opponent_headers, "word_race")
+    match_id = start_match(client, inviter_headers, opponent_headers, "word_race")
     assert _active(client, inviter_headers)[match_id]["your_move"] is True
 
     _use_up_race(match_id, "inviter")
@@ -68,14 +56,14 @@ def test_race_waits_until_you_finish(client, inviter_headers, opponent_headers):
 
 
 def test_coop_always_wants_a_move(client, inviter_headers, opponent_headers):
-    match_id = _start(client, inviter_headers, opponent_headers, "sudoku_coop")
+    match_id = start_match(client, inviter_headers, opponent_headers, "sudoku_coop")
     assert _active(client, inviter_headers)[match_id]["your_move"] is True
     assert _active(client, opponent_headers)[match_id]["your_move"] is True
 
 
 def test_concurrent_matches_all_listed(client, inviter_headers, opponent_headers):
     ids = {
-        _start(client, inviter_headers, opponent_headers, game)
+        start_match(client, inviter_headers, opponent_headers, game)
         for game in ("wordle", "word_race", "cipher_race")
     }
     assert set(_active(client, inviter_headers)) == ids
@@ -83,7 +71,9 @@ def test_concurrent_matches_all_listed(client, inviter_headers, opponent_headers
 
 def test_closed_matches_drop_out(client, inviter_headers, opponent_headers):
     r = client.post(
-        f"{BASE}/invite", json={"opponent_username": "opponent"}, headers=inviter_headers
+        f"{BASE}/invite",
+        json={"opponent_username": "opponent"},
+        headers=inviter_headers,
     )
     match_id = r.json()["id"]
     client.post(f"{BASE}/{match_id}/decline", headers=opponent_headers)
@@ -101,7 +91,6 @@ def test_listing_active_matches_does_not_scale_with_their_number(
     from sqlalchemy import event
 
     from app.database import engine
-    from tests.conftest import _signup_and_login
 
     def count_queries() -> int:
         queries = 0
@@ -131,7 +120,7 @@ def test_listing_active_matches_does_not_scale_with_their_number(
     start_with("opponent", opponent_headers)
     three_matches = count_queries()
 
-    third_headers = _signup_and_login(client, "third@example.com", "third")
+    third_headers = signup_and_login(client, "third@example.com", "third")
     start_with("third", third_headers)
     six_matches = count_queries()
 

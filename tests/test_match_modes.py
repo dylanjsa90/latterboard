@@ -5,54 +5,29 @@ import random
 import pytest
 
 from app.crud.match_puzzle import match_puzzle as crud_match_puzzle
-from app.database import SessionLocal
 from app.game import match_modes
 from app.game.puzzle_seed_data import SUDOKU_VARIANTS, generate_sudoku
 from app.models.match import Match, MatchPuzzle
+from tests.helpers import db_session, match_detail, start_match
 
 BASE = "/api/v1/matches"
 ANSWER = "aback"
 WRONG = ["abase", "abate", "abbey"]
 
 
-def _start_match(client, inviter_headers, opponent_headers, game: str) -> int:
-    r = client.post(
-        f"{BASE}/invite",
-        json={"opponent_username": "opponent", "game": game},
-        headers=inviter_headers,
-    )
-    assert r.status_code == 201
-    match_id = r.json()["id"]
-    r = client.post(f"{BASE}/{match_id}/accept", headers=opponent_headers)
-    assert r.status_code == 200
-    return match_id
-
-
 def _puzzle(match_id: int) -> tuple[dict, dict]:
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         row = db.query(MatchPuzzle).filter(MatchPuzzle.match_id == match_id).one()
         return row.data, row.state
-    finally:
-        db.close()
 
 
 def _set_puzzle(match_id: int, data: dict, state: dict | None = None) -> None:
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         row = db.query(MatchPuzzle).filter(MatchPuzzle.match_id == match_id).one()
         row.data = data
         if state is not None:
             row.state = state
         db.commit()
-    finally:
-        db.close()
-
-
-def _detail(client, headers, match_id: int) -> dict:
-    r = client.get(f"{BASE}/{match_id}", headers=headers)
-    assert r.status_code == 200
-    return r.json()
 
 
 def _leaderboard(client, game: str) -> dict[str, int]:
@@ -61,12 +36,16 @@ def _leaderboard(client, game: str) -> dict[str, int]:
 
 
 def _word_guess(client, headers, match_id: int, word: str):
-    return client.post(f"{BASE}/{match_id}/word/guess", json={"word": word}, headers=headers)
+    return client.post(
+        f"{BASE}/{match_id}/word/guess", json={"word": word}, headers=headers
+    )
 
 
 def _sudoku_move(client, headers, match_id: int, index: int, value: int):
     return client.post(
-        f"{BASE}/{match_id}/sudoku/move", json={"index": index, "value": value}, headers=headers
+        f"{BASE}/{match_id}/sudoku/move",
+        json={"index": index, "value": value},
+        headers=headers,
     )
 
 
@@ -106,7 +85,9 @@ def test_generated_sudoku_is_valid_and_new():
     ]
     for group in rows + cols + boxes:
         assert sorted(group) == list(range(1, 10))
-    assert all(given in (0, answer) for given, answer in zip(puzzle, solution, strict=True))
+    assert all(
+        given in (0, answer) for given, answer in zip(puzzle, solution, strict=True)
+    )
     assert puzzle.count(0) == SUDOKU_VARIANTS[0]["puzzle"].count(0)
     assert puzzle not in [variant["puzzle"] for variant in SUDOKU_VARIANTS]
 
@@ -120,8 +101,8 @@ def test_generated_sudoku_is_valid_and_new():
 def test_puzzle_matches_start_without_turns(
     client, inviter_headers, opponent_headers, game, max_guesses
 ):
-    match_id = _start_match(client, inviter_headers, opponent_headers, game)
-    detail = _detail(client, inviter_headers, match_id)
+    match_id = start_match(client, inviter_headers, opponent_headers, game)
+    detail = match_detail(client, inviter_headers, match_id)
     assert detail["status"] == "in_progress"
     assert detail["current_turn_username"] is None
     assert detail["max_guesses"] == max_guesses
@@ -140,12 +121,16 @@ def test_unsupported_game_rejected(client, inviter_headers):
 def test_moves_only_accepted_on_their_own_game(
     client, inviter_headers, opponent_headers, auth_headers
 ):
-    match_id = _start_match(client, inviter_headers, opponent_headers, "word_race")
+    match_id = start_match(client, inviter_headers, opponent_headers, "word_race")
 
-    r = client.post(f"{BASE}/{match_id}/guess", json={"word": WRONG[0]}, headers=inviter_headers)
+    r = client.post(
+        f"{BASE}/{match_id}/guess", json={"word": WRONG[0]}, headers=inviter_headers
+    )
     assert r.status_code == 400
     r = client.post(
-        f"{BASE}/{match_id}/cipher/guess", json={"attempt": [0, 1, 2, 3]}, headers=inviter_headers
+        f"{BASE}/{match_id}/cipher/guess",
+        json={"attempt": [0, 1, 2, 3]},
+        headers=inviter_headers,
     )
     assert r.status_code == 400
     assert _sudoku_move(client, inviter_headers, match_id, 0, 1).status_code == 400
@@ -157,11 +142,14 @@ def test_moves_only_accepted_on_their_own_game(
 
 
 def test_word_race_fewer_guesses_wins(client, inviter_headers, opponent_headers):
-    match_id = _start_match(client, inviter_headers, opponent_headers, "word_race")
+    match_id = start_match(client, inviter_headers, opponent_headers, "word_race")
     _set_puzzle(match_id, {"answer": ANSWER})
 
     # Guessing order doesn't matter: the opponent goes first here.
-    assert _word_guess(client, opponent_headers, match_id, WRONG[0]).json()["correct"] is False
+    assert (
+        _word_guess(client, opponent_headers, match_id, WRONG[0]).json()["correct"]
+        is False
+    )
     assert _word_guess(client, inviter_headers, match_id, WRONG[1]).status_code == 200
     r = _word_guess(client, inviter_headers, match_id, ANSWER)
     assert r.json()["correct"] is True
@@ -180,10 +168,13 @@ def test_word_race_fewer_guesses_wins(client, inviter_headers, opponent_headers)
 
 
 def test_word_race_equal_guesses_is_a_draw(client, inviter_headers, opponent_headers):
-    match_id = _start_match(client, inviter_headers, opponent_headers, "word_race")
+    match_id = start_match(client, inviter_headers, opponent_headers, "word_race")
     _set_puzzle(match_id, {"answer": ANSWER})
 
-    assert _word_guess(client, inviter_headers, match_id, ANSWER).json()["status"] == "in_progress"
+    assert (
+        _word_guess(client, inviter_headers, match_id, ANSWER).json()["status"]
+        == "in_progress"
+    )
     data = _word_guess(client, opponent_headers, match_id, ANSWER).json()
     assert data["status"] == "completed"
     assert data["winner_username"] is None
@@ -192,30 +183,39 @@ def test_word_race_equal_guesses_is_a_draw(client, inviter_headers, opponent_hea
 
 
 def test_finished_racer_cannot_keep_guessing(client, inviter_headers, opponent_headers):
-    match_id = _start_match(client, inviter_headers, opponent_headers, "word_race")
+    match_id = start_match(client, inviter_headers, opponent_headers, "word_race")
     _set_puzzle(match_id, {"answer": ANSWER})
     _word_guess(client, inviter_headers, match_id, ANSWER)
 
     assert _word_guess(client, inviter_headers, match_id, WRONG[0]).status_code == 409
 
 
-def test_race_hides_opponent_guesses_until_over(client, inviter_headers, opponent_headers):
-    match_id = _start_match(client, inviter_headers, opponent_headers, "word_race")
+def test_race_hides_opponent_guesses_until_over(
+    client, inviter_headers, opponent_headers
+):
+    match_id = start_match(client, inviter_headers, opponent_headers, "word_race")
     _set_puzzle(match_id, {"answer": ANSWER})
     graded = _word_guess(client, inviter_headers, match_id, WRONG[0]).json()["result"]
 
-    race = _detail(client, opponent_headers, match_id)["race"]
+    race = match_detail(client, opponent_headers, match_id)["race"]
     assert race["you"]["guesses"] == []
     assert race["opponent"]["username"] == "inviter"
-    assert race["opponent"]["guesses"] == [{"guess": None, "result": graded, "correct": False}]
+    assert race["opponent"]["guesses"] == [
+        {"guess": None, "result": graded, "correct": False}
+    ]
     assert race["answer"] is None
-    assert _detail(client, inviter_headers, match_id)["race"]["you"]["guesses"][0]["guess"] == WRONG[0]
+    assert (
+        match_detail(client, inviter_headers, match_id)["race"]["you"]["guesses"][0][
+            "guess"
+        ]
+        == WRONG[0]
+    )
 
     _word_guess(client, inviter_headers, match_id, ANSWER)
     _word_guess(client, opponent_headers, match_id, WRONG[1])
     _word_guess(client, opponent_headers, match_id, WRONG[2])
 
-    race = _detail(client, opponent_headers, match_id)["race"]
+    race = match_detail(client, opponent_headers, match_id)["race"]
     assert [g["guess"] for g in race["opponent"]["guesses"]] == [WRONG[0], ANSWER]
     assert race["opponent"]["solved"] is True
     assert race["you"]["finished"] is False
@@ -223,15 +223,19 @@ def test_race_hides_opponent_guesses_until_over(client, inviter_headers, opponen
 
 
 def test_cipher_race(client, inviter_headers, opponent_headers):
-    match_id = _start_match(client, inviter_headers, opponent_headers, "cipher_race")
+    match_id = start_match(client, inviter_headers, opponent_headers, "cipher_race")
     _set_puzzle(match_id, {"digits": [0, 1, 2, 3]})
 
     r = client.post(
-        f"{BASE}/{match_id}/cipher/guess", json={"attempt": [3, 2, 1, 0]}, headers=opponent_headers
+        f"{BASE}/{match_id}/cipher/guess",
+        json={"attempt": [3, 2, 1, 0]},
+        headers=opponent_headers,
     )
     assert r.json()["result"] == {"exact": 0, "close": 4, "won": False}
     r = client.post(
-        f"{BASE}/{match_id}/cipher/guess", json={"attempt": [0, 1, 2, 3]}, headers=inviter_headers
+        f"{BASE}/{match_id}/cipher/guess",
+        json={"attempt": [0, 1, 2, 3]},
+        headers=inviter_headers,
     )
     data = r.json()
     assert data["correct"] is True
@@ -240,16 +244,21 @@ def test_cipher_race(client, inviter_headers, opponent_headers):
     assert data["answer"] == [0, 1, 2, 3]
 
 
-def test_race_over_websocket_shares_grades_not_letters(client, inviter_headers, opponent_headers):
-    with client.websocket_connect(
-        "/ws/word_race", headers=inviter_headers
-    ) as inviter_ws, client.websocket_connect(
-        "/ws/word_race", headers=opponent_headers
-    ) as opponent_ws:
+def test_race_over_websocket_shares_grades_not_letters(
+    client, inviter_headers, opponent_headers
+):
+    with (
+        client.websocket_connect(
+            "/ws/word_race", headers=inviter_headers
+        ) as inviter_ws,
+        client.websocket_connect(
+            "/ws/word_race", headers=opponent_headers
+        ) as opponent_ws,
+    ):
         assert inviter_ws.receive_json()["type"] == "connected"
         assert opponent_ws.receive_json()["type"] == "connected"
 
-        match_id = _start_match(client, inviter_headers, opponent_headers, "word_race")
+        match_id = start_match(client, inviter_headers, opponent_headers, "word_race")
         assert opponent_ws.receive_json()["type"] == "invite_received"
         assert inviter_ws.receive_json()["game"] == "word_race"
         assert opponent_ws.receive_json()["type"] == "match_started"
@@ -258,7 +267,9 @@ def test_race_over_websocket_shares_grades_not_letters(client, inviter_headers, 
             assert ws.receive_json()["type"] == "joined_match"
         _set_puzzle(match_id, {"answer": ANSWER})
 
-        graded = _word_guess(client, inviter_headers, match_id, WRONG[0]).json()["result"]
+        graded = _word_guess(client, inviter_headers, match_id, WRONG[0]).json()[
+            "result"
+        ]
         frame = opponent_ws.receive_json()
         assert frame == {
             "type": "opponent_guessed",
@@ -286,10 +297,10 @@ def test_race_over_websocket_shares_grades_not_letters(client, inviter_headers, 
 
 
 def test_sudoku_coop_players_share_one_board(client, inviter_headers, opponent_headers):
-    match_id = _start_match(client, inviter_headers, opponent_headers, "sudoku_coop")
+    match_id = start_match(client, inviter_headers, opponent_headers, "sudoku_coop")
     data, _ = _puzzle(match_id)
     solution = data["solution"]
-    sudoku = _detail(client, inviter_headers, match_id)["sudoku"]
+    sudoku = match_detail(client, inviter_headers, match_id)["sudoku"]
     assert sudoku["board"] == sudoku["puzzle"] == data["puzzle"]
     assert sudoku["solution"] is None
     empty = sudoku["puzzle"].index(0)
@@ -299,14 +310,29 @@ def test_sudoku_coop_players_share_one_board(client, inviter_headers, opponent_h
     assert r.status_code == 200
     assert r.json()["correct"] is True
     assert r.json()["status"] == "in_progress"
-    assert _detail(client, inviter_headers, match_id)["sudoku"]["board"][empty] == solution[empty]
+    assert (
+        match_detail(client, inviter_headers, match_id)["sudoku"]["board"][empty]
+        == solution[empty]
+    )
 
-    assert _sudoku_move(client, inviter_headers, match_id, empty, solution[empty]).status_code == 409
-    assert _sudoku_move(client, inviter_headers, match_id, given, solution[given]).status_code == 409
+    assert (
+        _sudoku_move(
+            client, inviter_headers, match_id, empty, solution[empty]
+        ).status_code
+        == 409
+    )
+    assert (
+        _sudoku_move(
+            client, inviter_headers, match_id, given, solution[given]
+        ).status_code
+        == 409
+    )
 
 
-def test_sudoku_coop_shared_mistakes_lose_the_match(client, inviter_headers, opponent_headers):
-    match_id = _start_match(client, inviter_headers, opponent_headers, "sudoku_coop")
+def test_sudoku_coop_shared_mistakes_lose_the_match(
+    client, inviter_headers, opponent_headers
+):
+    match_id = start_match(client, inviter_headers, opponent_headers, "sudoku_coop")
     data, _ = _puzzle(match_id)
     solution = data["solution"]
     empty = data["puzzle"].index(0)
@@ -321,8 +347,13 @@ def test_sudoku_coop_shared_mistakes_lose_the_match(client, inviter_headers, opp
     assert r.json()["status"] == "completed"
     assert r.json()["outcome"] == "failed"
 
-    assert _sudoku_move(client, opponent_headers, match_id, empty, solution[empty]).status_code == 409
-    sudoku = _detail(client, opponent_headers, match_id)["sudoku"]
+    assert (
+        _sudoku_move(
+            client, opponent_headers, match_id, empty, solution[empty]
+        ).status_code
+        == 409
+    )
+    sudoku = match_detail(client, opponent_headers, match_id)["sudoku"]
     assert sudoku["outcome"] == "failed"
     assert sudoku["solution"] == solution
     assert _leaderboard(client, "sudoku_coop") == {"inviter": 0, "opponent": 0}
@@ -334,14 +365,17 @@ def test_sudoku_coop_shared_mistakes_lose_the_match(client, inviter_headers, opp
 
 
 def test_sudoku_coop_solved_together(client, inviter_headers, opponent_headers):
-    match_id = _start_match(client, inviter_headers, opponent_headers, "sudoku_coop")
+    match_id = start_match(client, inviter_headers, opponent_headers, "sudoku_coop")
     data, _ = _puzzle(match_id)
     solution = data["solution"]
     board = list(solution)
     board[0] = board[80] = 0
     _set_puzzle(match_id, data, {"board": board, "mistakes": 1, "outcome": None})
 
-    assert _sudoku_move(client, inviter_headers, match_id, 0, solution[0]).json()["status"] == "in_progress"
+    assert (
+        _sudoku_move(client, inviter_headers, match_id, 0, solution[0]).json()["status"]
+        == "in_progress"
+    )
     r = _sudoku_move(client, opponent_headers, match_id, 80, solution[80])
     assert r.json()["status"] == "completed"
     assert r.json()["outcome"] == "solved"
@@ -353,22 +387,27 @@ def test_sudoku_coop_solved_together(client, inviter_headers, opponent_headers):
 
 
 def test_sudoku_coop_over_websocket(client, inviter_headers, opponent_headers):
-    match_id = _start_match(client, inviter_headers, opponent_headers, "sudoku_coop")
+    match_id = start_match(client, inviter_headers, opponent_headers, "sudoku_coop")
     data, _ = _puzzle(match_id)
     solution = data["solution"]
     empty = data["puzzle"].index(0)
 
-    with client.websocket_connect(
-        "/ws/sudoku_coop", headers=inviter_headers
-    ) as inviter_ws, client.websocket_connect(
-        "/ws/sudoku_coop", headers=opponent_headers
-    ) as opponent_ws:
+    with (
+        client.websocket_connect(
+            "/ws/sudoku_coop", headers=inviter_headers
+        ) as inviter_ws,
+        client.websocket_connect(
+            "/ws/sudoku_coop", headers=opponent_headers
+        ) as opponent_ws,
+    ):
         for ws in (inviter_ws, opponent_ws):
             assert ws.receive_json()["type"] == "connected"
             ws.send_json({"type": "join_match", "match_id": match_id})
             assert ws.receive_json()["type"] == "joined_match"
 
-        _sudoku_move(client, inviter_headers, match_id, empty, _wrong_value(solution, empty))
+        _sudoku_move(
+            client, inviter_headers, match_id, empty, _wrong_value(solution, empty)
+        )
         assert opponent_ws.receive_json() == {
             "type": "mistake",
             "match_id": match_id,
@@ -391,13 +430,12 @@ def test_sudoku_coop_over_websocket(client, inviter_headers, opponent_headers):
 
 
 def test_simultaneous_sudoku_moves_both_land(client, inviter_headers, opponent_headers):
-    match_id = _start_match(client, inviter_headers, opponent_headers, "sudoku_coop")
+    match_id = start_match(client, inviter_headers, opponent_headers, "sudoku_coop")
     data, _ = _puzzle(match_id)
     solution = data["solution"]
     first, second = [i for i, v in enumerate(data["puzzle"]) if v == 0][:2]
 
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         match = db.get(Match, match_id)
         # This session now holds the board as it was before the opponent's move...
         stale_row = crud_match_puzzle.get_by_match(db, match_id)
@@ -405,9 +443,9 @@ def test_simultaneous_sudoku_moves_both_land(client, inviter_headers, opponent_h
         assert r.status_code == 200
         assert stale_row.state["board"][first] == 0
         # ...so its write hits a stale version and must be replayed, not overwrite it.
-        result = crud_match_puzzle.submit_sudoku_move(db, match, second, solution[second])
-    finally:
-        db.close()
+        result = crud_match_puzzle.submit_sudoku_move(
+            db, match, second, solution[second]
+        )
 
     assert result.correct is True
     board = _puzzle(match_id)[1]["board"]

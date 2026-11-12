@@ -1,4 +1,5 @@
-"""Middleware for security."""
+"""Security headers (CSP and friends) added to every response."""
+
 from collections import OrderedDict
 from collections.abc import Sequence
 
@@ -77,7 +78,9 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         self.csp = csp
         self.policy = parse_policy(CSP)
 
-    async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
+    async def dispatch(
+        self, request: Request, call_next: RequestResponseEndpoint
+    ) -> Response:
         """Dispatch of the middleware.
 
         :param request: Incoming request

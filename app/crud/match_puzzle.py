@@ -11,6 +11,7 @@ from sqlalchemy.orm.exc import StaleDataError
 from app.crud.game_score import game_score as crud_game_score
 from app.crud.user import user as crud_user
 from app.game import match_modes
+from app.game.errors import MoveRejected
 from app.models.match import Match, MatchPuzzle
 from app.models.user import User
 from app.schemas.game_score import GameScoreCreate
@@ -30,10 +31,6 @@ T = TypeVar("T")
 MAX_APPLY_ATTEMPTS = 3
 
 
-class MoveRejected(Exception):
-    """The move isn't allowed in the match's current state; the message says why."""
-
-
 def _solved(guesses: list[dict[str, Any]]) -> bool:
     return bool(guesses and guesses[-1]["correct"])
 
@@ -43,7 +40,9 @@ def _finished(guesses: list[dict[str, Any]], max_attempts: int) -> bool:
 
 
 def _answer(row: MatchPuzzle) -> str | list[int]:
-    answer: str | list[int] = row.data["answer"] if "answer" in row.data else row.data["digits"]
+    answer: str | list[int] = (
+        row.data["answer"] if "answer" in row.data else row.data["digits"]
+    )
     return answer
 
 
@@ -67,7 +66,9 @@ class CRUDMatchPuzzle:
     def get_by_match(self, db: Session, match_id: int) -> MatchPuzzle:
         return db.query(MatchPuzzle).filter(MatchPuzzle.match_id == match_id).one()
 
-    def _apply(self, db: Session, match: Match, change: Callable[[MatchPuzzle], T]) -> T:
+    def _apply(
+        self, db: Session, match: Match, change: Callable[[MatchPuzzle], T]
+    ) -> T:
         """Run `change` against the match's puzzle row and commit.
 
         Both players can move at once, so `change` must re-check everything it relies
@@ -101,12 +102,17 @@ class CRUDMatchPuzzle:
             guesses = row.state["guesses"]
             mine = guesses[str(user.id)]
             if _finished(mine, match.max_guesses):
-                raise MoveRejected("You've finished this race; waiting on your opponent")
+                raise MoveRejected(
+                    "You've finished this race; waiting on your opponent"
+                )
 
             result, correct = match_modes.grade_race_guess(row.data, guess)
             guesses = {
                 **guesses,
-                str(user.id): [*mine, {"guess": guess, "result": result, "correct": correct}],
+                str(user.id): [
+                    *mine,
+                    {"guess": guess, "result": result, "correct": correct},
+                ],
             }
             # Reassign rather than mutate: JSON columns don't track in-place changes.
             row.state = {**row.state, "guesses": guesses}
@@ -144,12 +150,16 @@ class CRUDMatchPuzzle:
         guesses_by_player = row.state["guesses"]
         for pid, guesses in guesses_by_player.items():
             scored = _solved(guesses) and match.winner_id in (None, int(pid))
-            score = match_modes.race_score(len(guesses), match.max_guesses) if scored else 0
+            score = (
+                match_modes.race_score(len(guesses), match.max_guesses) if scored else 0
+            )
             crud_game_score.create_score(
                 db, int(pid), GameScoreCreate(game=match.game, score=score)
             )
 
-    def get_by_matches(self, db: Session, match_ids: Sequence[int]) -> dict[int, MatchPuzzle]:
+    def get_by_matches(
+        self, db: Session, match_ids: Sequence[int]
+    ) -> dict[int, MatchPuzzle]:
         """Every puzzle row for `match_ids`, keyed by match id, in one query."""
         if not match_ids:
             return {}
@@ -167,7 +177,9 @@ class CRUDMatchPuzzle:
     def race_detail(self, db: Session, match: Match, viewer_id: int) -> RaceDetail:
         row = self.get_by_match(db, match.id)
         over = match.status == "completed"
-        opponent_id = match.invitee_id if viewer_id == match.inviter_id else match.inviter_id
+        opponent_id = (
+            match.invitee_id if viewer_id == match.inviter_id else match.inviter_id
+        )
 
         def player(user_id: int, show_guesses: bool) -> RacePlayer:
             guesses = row.state["guesses"][str(user_id)]
@@ -238,14 +250,18 @@ class CRUDMatchPuzzle:
             outcome=state["outcome"],
         )
 
-    def _record_sudoku_scores(self, db: Session, match: Match, state: dict[str, Any]) -> None:
+    def _record_sudoku_scores(
+        self, db: Session, match: Match, state: dict[str, Any]
+    ) -> None:
         score = (
             match_modes.sudoku_coop_score(state["mistakes"], match.max_guesses)
             if state["outcome"] == "solved"
             else 0
         )
         for user_id in (match.inviter_id, match.invitee_id):
-            crud_game_score.create_score(db, user_id, GameScoreCreate(game=match.game, score=score))
+            crud_game_score.create_score(
+                db, user_id, GameScoreCreate(game=match.game, score=score)
+            )
 
     def sudoku_detail(self, db: Session, match: Match) -> SudokuCoopDetail:
         row = self.get_by_match(db, match.id)

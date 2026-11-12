@@ -5,33 +5,29 @@ import pytest
 from app.core.config import settings
 from app.crud.puzzle import puzzle as crud_puzzle
 from app.crud.user import user as crud_user
-from app.database import SessionLocal
 from app.game.puzzles import day_start, grade_word, seeded_memory_deck, today
 from app.models.puzzle import PuzzleAttempt
+from tests.helpers import db_session
 
 BASE = "/api/v1/puzzles"
 
 
 def _puzzle_answer(game: str, puzzle_id: str, key: str):
     puzzle_date = date.fromisoformat(puzzle_id.split("-", 1)[1])
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         return crud_puzzle.get_by_game_date(db, game, puzzle_date).data[key]
-    finally:
-        db.close()
 
 
 def _attempt_row(user_email: str, puzzle_id: str) -> PuzzleAttempt | None:
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         user = crud_user.get_user_by_email(db, user_email)
         return (
             db.query(PuzzleAttempt)
-            .filter(PuzzleAttempt.user_id == user.id, PuzzleAttempt.puzzle_id == puzzle_id)
+            .filter(
+                PuzzleAttempt.user_id == user.id, PuzzleAttempt.puzzle_id == puzzle_id
+            )
             .first()
         )
-    finally:
-        db.close()
 
 
 # --- word -------------------------------------------------------------
@@ -63,14 +59,11 @@ def test_authenticated_word_puzzle_is_todays(client, auth_headers):
 
 def test_seeding_covers_yesterday():
     yesterday = today() - timedelta(days=1)
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         for game in ("word", "sudoku", "cipher"):
             row = crud_puzzle.get_by_game_date(db, game, yesterday)
             assert row is not None
             assert row.variant_index == 0
-    finally:
-        db.close()
 
 
 def test_word_guess_correct(client):
@@ -121,7 +114,9 @@ def test_word_guess_invalid_length_rejected(client):
     assert r.status_code == 422
 
 
-def _word_guess(client, headers, puzzle_id: str, guess: str, attempt_count: int) -> dict:
+def _word_guess(
+    client, headers, puzzle_id: str, guess: str, attempt_count: int
+) -> dict:
     r = client.post(
         f"{BASE}/word/guess",
         headers=headers,
@@ -282,7 +277,12 @@ def _solve_sudoku(client, headers, puzzle_id: str) -> list[int]:
     r = client.post(
         f"{BASE}/sudoku/move",
         headers=headers,
-        json={"puzzle_id": puzzle_id, "index": 80, "value": solution[80], "board": almost_solved},
+        json={
+            "puzzle_id": puzzle_id,
+            "index": 80,
+            "value": solution[80],
+            "board": almost_solved,
+        },
     )
     assert r.json()["completed"] is True
     return solution
@@ -325,7 +325,10 @@ def test_memory_deck_is_the_same_all_day(client):
 
 @pytest.mark.parametrize(
     ("puzzle_id", "status"),
-    [(f"memory-{(today() + timedelta(days=1)).isoformat()}", 404), ("memory-not-a-date", 400)],
+    [
+        (f"memory-{(today() + timedelta(days=1)).isoformat()}", 404),
+        ("memory-not-a-date", 400),
+    ],
 )
 def test_memory_reveal_rejects_future_and_undated_ids(client, puzzle_id, status):
     r = client.post(f"{BASE}/memory/reveal", json={"puzzle_id": puzzle_id, "index": 0})
@@ -334,21 +337,22 @@ def test_memory_reveal_rejects_future_and_undated_ids(client, puzzle_id, status)
 
 def test_memory_reveal_matches_seeded_deck(client):
     puzzle = client.get(f"{BASE}/memory").json()
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         symbols = crud_puzzle.get_by_game_variant(db, "memory", 0).data["symbols"]
-    finally:
-        db.close()
     expected_deck = seeded_memory_deck(puzzle["puzzle_id"], symbols)
 
-    r = client.post(f"{BASE}/memory/reveal", json={"puzzle_id": puzzle["puzzle_id"], "index": 0})
+    r = client.post(
+        f"{BASE}/memory/reveal", json={"puzzle_id": puzzle["puzzle_id"], "index": 0}
+    )
     assert r.status_code == 200
     assert r.json()["symbol"] == expected_deck[0]
 
 
 def test_memory_reveal_out_of_range_rejected(client):
     puzzle = client.get(f"{BASE}/memory").json()
-    r = client.post(f"{BASE}/memory/reveal", json={"puzzle_id": puzzle["puzzle_id"], "index": 99})
+    r = client.post(
+        f"{BASE}/memory/reveal", json={"puzzle_id": puzzle["puzzle_id"], "index": 99}
+    )
     assert r.status_code == 400
 
 
@@ -370,7 +374,8 @@ def test_cipher_attempt_win(client):
     digits = _puzzle_answer("cipher", puzzle["puzzle_id"], "digits")
 
     r = client.post(
-        f"{BASE}/cipher/attempt", json={"puzzle_id": puzzle["puzzle_id"], "attempt": digits}
+        f"{BASE}/cipher/attempt",
+        json={"puzzle_id": puzzle["puzzle_id"], "attempt": digits},
     )
     assert r.status_code == 200
     data = r.json()
@@ -380,7 +385,8 @@ def test_cipher_attempt_win(client):
 
 def test_cipher_attempt_out_of_range_rejected(client):
     r = client.post(
-        f"{BASE}/cipher/attempt", json={"puzzle_id": "cipher-0", "attempt": [0, 1, 2, 9]}
+        f"{BASE}/cipher/attempt",
+        json={"puzzle_id": "cipher-0", "attempt": [0, 1, 2, 9]},
     )
     assert r.status_code == 422
 
@@ -390,7 +396,9 @@ def _wrong_code(answer: list[int]) -> list[int]:
     return [answer[1], answer[0], *answer[2:]]
 
 
-def _cipher_attempt(client, headers, puzzle_id: str, attempt: list[int], **extra) -> dict:
+def _cipher_attempt(
+    client, headers, puzzle_id: str, attempt: list[int], **extra
+) -> dict:
     r = client.post(
         f"{BASE}/cipher/attempt",
         headers=headers,
@@ -483,14 +491,14 @@ def test_cipher_generates_when_bank_exhausted(client):
     # must be generated on the fly instead of 404ing.
     past = (today() - timedelta(days=30)).isoformat()
 
-    r = client.post(f"{BASE}/cipher/attempt", json={"puzzle_id": f"cipher-{past}", "attempt": [0, 1, 2, 3]})
+    r = client.post(
+        f"{BASE}/cipher/attempt",
+        json={"puzzle_id": f"cipher-{past}", "attempt": [0, 1, 2, 3]},
+    )
     assert r.status_code == 200
 
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         row = crud_puzzle.get_by_game_date(db, "cipher", date.fromisoformat(past))
-    finally:
-        db.close()
     assert row is not None
     assert sorted(row.data["digits"]) == sorted(set(row.data["digits"]))
     assert len(row.data["digits"]) == 4
@@ -506,11 +514,8 @@ def test_sudoku_generates_when_bank_exhausted(client):
     )
     assert r.status_code == 200
 
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         row = crud_puzzle.get_by_game_date(db, "sudoku", date.fromisoformat(past))
-    finally:
-        db.close()
     assert row is not None
     assert len(row.data["solution"]) == 81
 
@@ -576,8 +581,7 @@ def _completed_attempt(
     """Store a finished attempt as if it were completed `days_ago` days back, at noon UTC
     unless `completed_at` (naive UTC) says otherwise."""
     solved_on = today() - timedelta(days=days_ago)
-    db = SessionLocal()
-    try:
+    with db_session() as db:
         user = crud_user.get_user_by_email(db, user_email)
         db.add(
             PuzzleAttempt(
@@ -591,8 +595,6 @@ def _completed_attempt(
             )
         )
         db.commit()
-    finally:
-        db.close()
 
 
 def test_stats_unauthenticated(client):
@@ -688,7 +690,9 @@ def test_history_lists_completed_attempts_newest_first(client, auth_headers):
     # A puzzle that's only been started isn't history yet.
     puzzle = client.get(f"{BASE}/word", headers=auth_headers).json()
     client.post(
-        f"{BASE}/word/hint", json={"puzzle_id": puzzle["puzzle_id"]}, headers=auth_headers
+        f"{BASE}/word/hint",
+        json={"puzzle_id": puzzle["puzzle_id"]},
+        headers=auth_headers,
     )
 
     r = client.get(f"{BASE}/me/history", headers=auth_headers)
@@ -727,4 +731,6 @@ def test_cipher_loss_counts_in_stats_and_history(client, auth_headers):
     stats = client.get(f"{BASE}/me/stats", headers=auth_headers).json()
     assert stats["games"] == [{"game": "cipher", "played": 1, "won": 0}]
     history = client.get(f"{BASE}/me/history", headers=auth_headers).json()
-    assert [(i["puzzle_id"], i["won"]) for i in history["items"]] == [(puzzle_id, False)]
+    assert [(i["puzzle_id"], i["won"]) for i in history["items"]] == [
+        (puzzle_id, False)
+    ]

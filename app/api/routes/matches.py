@@ -2,16 +2,13 @@ from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, s
 from sqlalchemy.orm import Session
 
 from app.api import deps
-from app.api.bot_turn import schedule_bot_turn
-from app.api.match_play import apply_race_guess, apply_wordle_guess, wordle_move_error
-from app.api.match_start import max_guesses_for, notify_match_started
 from app.connection_manager import manager
 from app.core.config import settings
 from app.crud.match import match as crud_match
-from app.crud.match_puzzle import MoveRejected
 from app.crud.match_puzzle import match_puzzle as crud_match_puzzle
 from app.crud.user import user as crud_user
 from app.game import match_modes, wordle
+from app.game.errors import MoveRejected
 from app.models import Match, User
 from app.schemas.match import (
     ActiveMatch,
@@ -27,6 +24,13 @@ from app.schemas.match import (
     SudokuCoopMoveResult,
 )
 from app.schemas.puzzle import CipherAttempt
+from app.services.bot_turn import schedule_bot_turn
+from app.services.match_play import (
+    apply_race_guess,
+    apply_wordle_guess,
+    wordle_move_error,
+)
+from app.services.match_start import max_guesses_for, notify_match_started
 
 router = APIRouter(prefix="/matches", tags=["matches"])
 
@@ -36,13 +40,17 @@ SUPPORTED_GAMES = {"wordle", *match_modes.PUZZLE_MATCH_GAMES}
 def _get_match_or_404(db: Session, match_id: int) -> Match:
     obj = crud_match.get(db, match_id)
     if obj is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Match not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Match not found"
+        )
     return crud_match.expire_if_needed(db, obj)
 
 
 def _require_participant(match: Match, user: User) -> None:
     if user.id not in (match.inviter_id, match.invitee_id):
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not a participant")
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail="Not a participant"
+        )
 
 
 def _require_game(match: Match, game: str) -> None:
@@ -59,13 +67,19 @@ async def create_invite(
     current_user: User = Depends(deps.get_current_user),
 ) -> MatchPublic:
     if invite_in.game not in SUPPORTED_GAMES:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Unsupported game")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Unsupported game"
+        )
 
     opponent = crud_user.get_user_by_username(db, invite_in.opponent_username)
     if opponent is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Opponent not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Opponent not found"
+        )
     if opponent.id == current_user.id:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Cannot invite yourself")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Cannot invite yourself"
+        )
     if opponent.is_bot:
         # Nothing would ever accept it — the bot plays matches that matchmaking
         # hands it, and has no code path for answering an invite.
@@ -74,7 +88,9 @@ async def create_invite(
             detail="Search for an opponent to play the computer",
         )
 
-    existing = crud_match.get_open_match_between(db, current_user.id, opponent.id, invite_in.game)
+    existing = crud_match.get_open_match_between(
+        db, current_user.id, opponent.id, invite_in.game
+    )
     if existing is not None:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT, detail="An open match already exists"
@@ -111,11 +127,15 @@ async def accept_invite(
 ) -> MatchPublic:
     obj = _get_match_or_404(db, match_id)
     if current_user.id != obj.invitee_id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not your invite")
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail="Not your invite"
+        )
     if obj.status == "expired":
         raise HTTPException(status_code=status.HTTP_410_GONE, detail="Invite expired")
     if obj.status != "pending_invite":
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Invite is not pending")
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT, detail="Invite is not pending"
+        )
 
     obj = crud_match.accept_invite(db, obj)
     public = crud_match.to_public(db, obj)
@@ -131,12 +151,18 @@ async def decline_invite(
 ) -> MatchPublic:
     obj = _get_match_or_404(db, match_id)
     if current_user.id != obj.invitee_id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not your invite")
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail="Not your invite"
+        )
     if obj.status != "pending_invite":
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Invite is not pending")
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT, detail="Invite is not pending"
+        )
 
     obj = crud_match.decline_invite(db, obj)
-    await manager.send_to_user(obj.inviter_id, {"type": "invite_declined", "match_id": obj.id})
+    await manager.send_to_user(
+        obj.inviter_id, {"type": "invite_declined", "match_id": obj.id}
+    )
     return crud_match.to_public(db, obj)
 
 
@@ -148,12 +174,18 @@ async def cancel_invite(
 ) -> MatchPublic:
     obj = _get_match_or_404(db, match_id)
     if current_user.id != obj.inviter_id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not your invite")
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail="Not your invite"
+        )
     if obj.status != "pending_invite":
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Invite is not pending")
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT, detail="Invite is not pending"
+        )
 
     obj = crud_match.cancel_invite(db, obj)
-    await manager.send_to_user(obj.invitee_id, {"type": "invite_cancelled", "match_id": obj.id})
+    await manager.send_to_user(
+        obj.invitee_id, {"type": "invite_cancelled", "match_id": obj.id}
+    )
     return crud_match.to_public(db, obj)
 
 
@@ -212,7 +244,9 @@ async def submit_guess(
     if blocked is not None:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=blocked)
     if not wordle.is_valid_word(guess_in.word):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Not a valid word")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Not a valid word"
+        )
 
     result = await apply_wordle_guess(db, obj, current_user, guess_in.word)
     if result.status != "completed":
@@ -235,7 +269,9 @@ async def _submit_race_guess(
     try:
         result = await apply_race_guess(db, match, user, guess)
     except MoveRejected as exc:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc)) from exc
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT, detail=str(exc)
+        ) from exc
 
     if result.status != "completed":
         schedule_bot_turn(background_tasks, db, match)
@@ -255,8 +291,12 @@ async def submit_word_race_guess(
     _require_participant(obj, current_user)
     _require_game(obj, match_modes.WORD_RACE)
     if not wordle.is_valid_word(guess_in.word):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Not a valid word")
-    return await _submit_race_guess(db, obj, current_user, guess_in.word.lower(), background_tasks)
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Not a valid word"
+        )
+    return await _submit_race_guess(
+        db, obj, current_user, guess_in.word.lower(), background_tasks
+    )
 
 
 @router.post("/{match_id}/cipher/guess", response_model=RaceGuessResult)
@@ -271,7 +311,9 @@ async def submit_cipher_race_guess(
     obj = _get_match_or_404(db, match_id)
     _require_participant(obj, current_user)
     _require_game(obj, match_modes.CIPHER_RACE)
-    return await _submit_race_guess(db, obj, current_user, guess_in.attempt, background_tasks)
+    return await _submit_race_guess(
+        db, obj, current_user, guess_in.attempt, background_tasks
+    )
 
 
 # --- sudoku co-op -----------------------------------------------------------
@@ -290,9 +332,13 @@ async def submit_sudoku_move(
     _require_participant(obj, current_user)
     _require_game(obj, match_modes.SUDOKU_COOP)
     try:
-        result = crud_match_puzzle.submit_sudoku_move(db, obj, move_in.index, move_in.value)
+        result = crud_match_puzzle.submit_sudoku_move(
+            db, obj, move_in.index, move_in.value
+        )
     except MoveRejected as exc:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc)) from exc
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT, detail=str(exc)
+        ) from exc
 
     topic = f"match:{match_id}"
     move = {
@@ -315,7 +361,11 @@ async def submit_sudoku_move(
         )
     if result.status == "completed":
         await manager.broadcast(
-            {"type": "match_completed", "match_id": match_id, "outcome": result.outcome},
+            {
+                "type": "match_completed",
+                "match_id": match_id,
+                "outcome": result.outcome,
+            },
             topic=topic,
         )
     return result

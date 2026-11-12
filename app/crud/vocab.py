@@ -3,12 +3,12 @@ module loads a room, runs a rule against it, and saves it without losing a concu
 """
 
 import copy
-import logging
 import secrets
 from collections.abc import Callable
 from datetime import datetime, timedelta, timezone
 from typing import Any, cast
 
+from loguru import logger
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import StaleDataError
@@ -26,8 +26,6 @@ MAX_APPLY_ATTEMPTS = 8
 CODE_ATTEMPTS = 5
 # Expired rooms answer 410 for a week, so a late link still says why, then are deleted.
 EXPIRED_ROOM_KEPT = timedelta(days=7)
-
-logger = logging.getLogger(__name__)
 
 
 def _epoch_ms(value: datetime) -> int:
@@ -186,4 +184,6 @@ class CRUDVocab:
         db.commit()
 
 
+# Not `vocab` like the other crud instances: this module already imports the game
+# rules as `vocab`.
 crud_vocab = CRUDVocab()

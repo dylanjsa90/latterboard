@@ -5,7 +5,7 @@ socket topic `vocab:{code}` tells its players to refetch `GET /vocab/rooms/{code
 
 Nothing here runs on a timer: clients refetch at a round's deadline themselves, and the
 frame goes out from the request's `BackgroundTasks`, never a detached task (see the
-`app/api/bot_turn.py` docstring for why).
+`app/services/bot_turn.py` docstring for why).
 
 `GET /vocab/daily-word` is the one public call: the home page's word of the day.
 """

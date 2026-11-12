@@ -1,39 +1,27 @@
-import logging
-
-from sqlalchemy import Engine
-from sqlalchemy.orm import Session
-from tenacity import after_log, before_log, retry, stop_after_attempt, wait_fixed
+from loguru import logger
+from sqlalchemy import Engine, text
+from tenacity import retry, stop_after_attempt, wait_fixed
 
 from app.database import engine
-from app.models.user import User
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 max_tries = 60 * 5  # 5 minutes
 wait_seconds = 1
 
 
-@retry(
-    stop=stop_after_attempt(max_tries),
-    wait=wait_fixed(wait_seconds),
-    before=before_log(logger, logging.INFO),
-    after=after_log(logger, logging.WARN),
-)
+@retry(stop=stop_after_attempt(max_tries), wait=wait_fixed(wait_seconds))
 def init(db_engine: Engine) -> None:
     try:
-        with Session(db_engine) as session:
-            # Try to create session to check if DB is awake
-            session.query(User)
+        with db_engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
     except Exception as e:
-        logger.error(e)
-        raise e
+        logger.warning("Database not ready yet: {}", e)
+        raise
 
 
 def main() -> None:
-    logger.info("Initializing service")
+    logger.info("Waiting for the database")
     init(engine)
-    logger.info("Service finished initializing")
+    logger.info("Database is ready")
 
 
 if __name__ == "__main__":

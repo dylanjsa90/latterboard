@@ -20,15 +20,15 @@ from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
 
 from app.api import deps
-from app.api.match_start import notify_match_started, start_match
 from app.api.routes.matches import SUPPORTED_GAMES
 from app.core.config import settings
+from app.core.redis_client import redis_client as redis
 from app.crud.match import match as crud_match
 from app.crud.user import user as crud_user
 from app.game import match_modes
 from app.models import User
-from app.redis import r as redis
 from app.schemas.matchmaking import MatchmakingStatus
+from app.services.match_start import notify_match_started, start_match
 
 router = APIRouter(prefix="/matchmaking", tags=["matchmaking"])
 
@@ -90,7 +90,9 @@ async def _dequeue(game: str, user_id: int) -> None:
 
 def _require_supported(game: str) -> None:
     if game not in SUPPORTED_GAMES:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Unsupported game")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Unsupported game"
+        )
 
 
 def _bot_for(db: Session, game: str, waited: float) -> User | None:

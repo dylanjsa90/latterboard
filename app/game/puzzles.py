@@ -67,7 +67,9 @@ def puzzle_date(puzzle_id: str | None, prefix: str) -> date:
     return dated_puzzle(puzzle_id, prefix) or today()
 
 
-def grade_word(guess: str, answer: str) -> list[Literal["correct", "present", "absent"]]:
+def grade_word(
+    guess: str, answer: str
+) -> list[Literal["correct", "present", "absent"]]:
     return wordle.evaluate_guess(answer, guess)
 
 

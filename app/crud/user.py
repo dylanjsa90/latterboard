@@ -9,8 +9,7 @@ from app.core.security import get_password_hash, verify_password
 from app.models.user import User
 from app.models.user_avatar import UserAvatar
 from app.models.user_identity import UserIdentity
-from app.schemas import UserCreate, UserUpdate
-from app.schemas.user import ProfileCreate, ProfileUpdate
+from app.schemas.user import ProfileCreate, ProfileUpdate, UserCreate, UserUpdate
 
 from .base import CRUDBase
 
@@ -81,9 +80,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         than truthiness — every *other* read of the column should use
         `bool(user.is_bot)`, since existing rows hold NULL.
         """
-        rows = (
-            db.query(self.model.id).filter(self.model.is_bot.is_(True)).all()
-        )
+        rows = db.query(self.model.id).filter(self.model.is_bot.is_(True)).all()
         return {row[0] for row in rows}
 
     def any_are_bots(self, db: Session, *user_ids: int) -> bool:
@@ -110,7 +107,12 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         return user
 
     def create_user_with_identity(
-        self, db: Session, profile_in: ProfileCreate, email: str, provider: str, subject: str
+        self,
+        db: Session,
+        profile_in: ProfileCreate,
+        email: str,
+        provider: str,
+        subject: str,
     ) -> User:
         """An account that signs in through a provider, created with its link at once.
 
@@ -143,7 +145,9 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         db.refresh(user)
         return user
 
-    def update_profile(self, db: Session, user: User, profile_in: ProfileUpdate) -> User:
+    def update_profile(
+        self, db: Session, user: User, profile_in: ProfileUpdate
+    ) -> User:
         for field, value in profile_in.model_dump(exclude_unset=True).items():
             # Name, handle, and birth year can change but never be cleared; location can.
             if value is None and field != "location":
@@ -156,7 +160,9 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
     def get_avatar(self, db: Session, user_id: int) -> UserAvatar | None:
         return db.get(UserAvatar, user_id)
 
-    def set_avatar(self, db: Session, user: User, image: bytes, content_type: str) -> User:
+    def set_avatar(
+        self, db: Session, user: User, image: bytes, content_type: str
+    ) -> User:
         # Written through the table, not `user.avatar`: touching the relationship would
         # SELECT the old image bytes we're about to replace, which is what keeping
         # photos out of `user` was meant to avoid.
@@ -169,11 +175,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
             )
         )
         if not updated:
-            db.add(
-                UserAvatar(
-                    user_id=user.id, image=image, content_type=content_type
-                )
-            )
+            db.add(UserAvatar(user_id=user.id, image=image, content_type=content_type))
         user.avatar_version = hashlib.sha256(image).hexdigest()[:12]
         db.commit()
         db.refresh(user)

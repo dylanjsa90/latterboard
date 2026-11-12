@@ -33,13 +33,17 @@ def _longest_run(days: set[date]) -> int:
     return best
 
 
-class CRUDPuzzleAttempt(CRUDBase[PuzzleAttempt, PuzzleAttemptCreate, PuzzleAttemptUpdate]):
+class CRUDPuzzleAttempt(
+    CRUDBase[PuzzleAttempt, PuzzleAttemptCreate, PuzzleAttemptUpdate]
+):
     def get_for_puzzle(
         self, db: Session, user_id: int, puzzle_id: str
     ) -> PuzzleAttempt | None:
         return (
             db.query(PuzzleAttempt)
-            .filter(PuzzleAttempt.user_id == user_id, PuzzleAttempt.puzzle_id == puzzle_id)
+            .filter(
+                PuzzleAttempt.user_id == user_id, PuzzleAttempt.puzzle_id == puzzle_id
+            )
             .first()
         )
 
@@ -111,7 +115,9 @@ class CRUDPuzzleAttempt(CRUDBase[PuzzleAttempt, PuzzleAttemptCreate, PuzzleAttem
         return PuzzleStats(
             total_solved=len(completed),
             today_solved=sum(
-                1 for _, completed_at in completed if puzzles.day_of(completed_at) == today
+                1
+                for _, completed_at in completed
+                if puzzles.day_of(completed_at) == today
             ),
             streak=streak,
             best_streak=_longest_run(solved_dates),

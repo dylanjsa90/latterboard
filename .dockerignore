@@ -1,16 +1,24 @@
-.venv/
-__pycache__/
-*.pyc
-*.pyo
-.pytest_cache/
 .git/
 .gitignore
-logs/
-.env
-.env.local
-*.db
-htmlcov/
+.github/
+.venv/
+__pycache__/
+*.py[co]
+.pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.coverage
+htmlcov/
+.vscode/
 .claude/
-test_app.db
+.worktrees/
+tests/
+docs/
+
+# Secrets and local state stay out of the image at any depth; the deployment
+# supplies its environment.
+**/.env
+**/.env.*
+**/*.db
+logs/
+**/*.log

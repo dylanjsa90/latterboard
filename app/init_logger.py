@@ -1,42 +1,44 @@
 import logging
-import os
-import pathlib
 import sys
 
-# create logs folder if needed
-pathlib.Path("logs").mkdir(parents=True, exist_ok=True)
+from loguru import logger
 
-logger = logging.getLogger("uvicorn")
-logger.setLevel(logging.INFO)
+from app.core.config import settings
 
 
-def config_logging(logger_name: str ="uvicorn") -> None:
-    logger = logging.getLogger(logger_name)
-    # Create a custom logger
-    logger.setLevel(logging.INFO)
-    if os.getenv("DEBUG", "0") == "1":
-        logger.setLevel(logging.DEBUG)
+class InterceptHandler(logging.Handler):
+    """Sends stdlib `logging` records (uvicorn, SQLAlchemy, ...) through loguru."""
 
-    stdout_handler = logging.StreamHandler(sys.stdout)
+    def emit(self, record: logging.LogRecord) -> None:
+        level: str | int
+        try:
+            level = logger.level(record.levelname).name
+        except ValueError:
+            level = record.levelno
 
-    log_format = logging.Formatter(
-        fmt="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S"
+        frame, depth = logging.currentframe(), 2
+        while frame is not None and frame.f_code.co_filename == logging.__file__:
+            frame = frame.f_back  # type: ignore[assignment]
+            depth += 1
+
+        logger.opt(depth=depth, exception=record.exc_info).log(
+            level, record.getMessage()
+        )
+
+
+def setup_loguru() -> None:
+    logger.remove()
+    # stdout only: Docker collects it, so a log file would just fill the container.
+    logger.add(
+        sys.stdout,
+        format="{time:YYYY-MM-DD HH:mm:ss.SSS} | {level: <8} | {name}:{function}:{line} - {message}",
+        level="INFO",
+        enqueue=True,
+        backtrace=True,
+        # Prints local variables in tracebacks, which can include secrets and tokens.
+        diagnose=settings.APP_ENV == "local",
     )
-    stdout_handler.setFormatter(log_format)
-    logger.addHandler(stdout_handler)
 
-    # Create handlers
-    f_handler = logging.FileHandler("./logs/logs_error.log")
-    f_info_handler = logging.FileHandler("./logs/logs_info.log")
-    f_handler.setLevel(logging.ERROR)
-    f_info_handler.setLevel(logging.INFO)
-
-    # Create formatters and add it to handlers
-    f_format = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-    f_handler.setFormatter(f_format)
-    f_info_handler.setFormatter(f_format)
-
-    # Add handlers to the logger
-    logger.addHandler(f_handler)
-    logger.addHandler(f_info_handler)
+    logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
+    for name in ("uvicorn", "uvicorn.access", "uvicorn.error", "fastapi"):
+        logging.getLogger(name).handlers = [InterceptHandler()]

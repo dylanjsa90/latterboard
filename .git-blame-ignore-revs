@@ -1,0 +1,5 @@
+# Bulk formatting commits, skipped by `git blame`.
+# Enable locally with: git config blame.ignoreRevsFile .git-blame-ignore-revs
+
+# Apply ruff format repo-wide
+eacd7e25450ce616b083477e35a54cb80b3b14c8

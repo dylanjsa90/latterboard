@@ -1,7 +1,7 @@
 from datetime import date, datetime, timedelta
 
+from app.core.email import generate_match_invite_email
 from app.game.puzzles import day_of, day_start
-from app.utils import generate_match_invite_email
 
 
 def test_a_summer_day_starts_at_7am_utc():
@@ -13,11 +13,15 @@ def test_a_winter_day_starts_at_8am_utc():
 
 
 def test_the_day_clocks_spring_forward_has_23_hours():
-    assert day_start(date(2026, 3, 9)) - day_start(date(2026, 3, 8)) == timedelta(hours=23)
+    assert day_start(date(2026, 3, 9)) - day_start(date(2026, 3, 8)) == timedelta(
+        hours=23
+    )
 
 
 def test_the_day_clocks_fall_back_has_25_hours():
-    assert day_start(date(2026, 11, 2)) - day_start(date(2026, 11, 1)) == timedelta(hours=25)
+    assert day_start(date(2026, 11, 2)) - day_start(date(2026, 11, 1)) == timedelta(
+        hours=25
+    )
 
 
 def test_a_pacific_evening_belongs_to_that_day():
