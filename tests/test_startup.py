@@ -24,6 +24,18 @@ def test_deployed_settings_refuse_a_default_secret(secret):
         Settings(APP_ENV="production", SECRET_KEY=secret)
 
 
+def test_deployed_settings_refuse_a_short_secret():
+    # HS256 wants a key at least as long as its 32-byte digest.
+    with pytest.raises(ValidationError, match="32 bytes"):
+        Settings(APP_ENV="production", SECRET_KEY="x" * 31)
+    Settings(APP_ENV="production", SECRET_KEY="x" * 32)
+
+
+def test_local_settings_warn_about_a_short_secret():
+    with pytest.warns(UserWarning, match="32 bytes"):
+        Settings(APP_ENV="local", SECRET_KEY="short-but-real")
+
+
 def test_local_settings_allow_the_default_secret():
     with pytest.warns(UserWarning, match="SECRET_KEY"):
         Settings(APP_ENV="local", SECRET_KEY="changethis")

@@ -192,7 +192,11 @@ class Token(BaseModel):
 
 # Contents of JWT token
 class TokenPayload(BaseModel):
-    sub: str | None = None
+    """An access token's claims. `sub` is a user id; `purpose` is missing from
+    tokens issued before it existed."""
+
+    sub: int
+    purpose: str | None = None
 
 
 class NewPassword(BaseModel):

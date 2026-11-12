@@ -9,19 +9,10 @@ empty.
 
 ## Security
 
-- **Reset tokens are reusable.** A password-reset token works for its whole 48 hours, even
-  after it has been used and even after a later password change. Fix: put a hash of the
-  current password (or a `password_changed_at`) in the token and check it on reset.
-- **A non-numeric token subject probably 500s on Postgres.** `deps.get_current_user` passes the
-  token's `sub` straight to `db.get(User, …)`. A reset token used as a bearer token (its
-  `sub` is an email) gives 404 on SQLite but most likely a `DataError` (500) on Postgres. Make
-  `TokenPayload.sub` an `int`, or reject non-digits, so it's a 401. Separately, give reset and
-  access tokens a `purpose` claim.
-- **No minimum `SECRET_KEY` length.** Outside `local`, only empty and `changethis` are refused;
-  HS256 wants at least 32 bytes (pyjwt warns below that).
-- **Legacy usernames are emails.** Accounts made before handles still have their email in
-  `username`, which `UserPublic` and `PlayerPublic` send to other players. Migrate them to a
-  generated handle (and prompt for a real one), or mask them on output.
+- **Require the `purpose` claim on access tokens.** Access tokens issued before it existed
+  have none, and `deps._access_token_user_id` still accepts that so nobody was signed out.
+  Once they have all expired (`ACCESS_TOKEN_EXPIRE_MINUTES`, 8 days after the deploy that
+  added it), reject a missing `purpose` too.
 
 ## Bugs and gaps
 

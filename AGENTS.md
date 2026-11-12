@@ -63,7 +63,7 @@ Paths are in backticks, not `@` imports, so they load only when read.
 - `ConnectionManager` creates its Redis client in `start()` because `stop()` closes it. Don't share one client across restarts.
 
 ### Users
-- `username` is the public handle: `[a-z0-9_]{3,20}`, lowercased by `schemas/user.py`. Look it up case-insensitively (`crud_user.get_user_by_username`). Accounts made before handles still have their email there (which other players can see; see `docs/plans/follow-ups.md`), so never validate `username` on output.
+- `username` is the public handle: `[a-z0-9_]{3,20}`, lowercased by `schemas/user.py`. Look it up case-insensitively (`crud_user.get_user_by_username`).
 - `email` and `birth_year` are private. Only `UserPrivate` (test-token, `POST /users/`, `PATCH /users/me`, the owner-or-superuser `PUT /users/{id}`) carries them; `UserPublic` (returned to any signed-in user) and `PlayerPublic` must not. `GET /users/` is superuser-only.
 - Google sign-in (`app/core/google.py` checks the ID token, `app/services/google_sign_in.py` holds what the two routes share) links accounts through `user_identity` (`provider`, `subject` = Google's `sub`, never the email). `GOOGLE_CLIENT_ID` (the public web client ID, the same as webcade's `VITE_GOOGLE_CLIENT_ID`) turns it on; tests replace `google.verify_google_id_token`.
 - Photos live in `user_avatar` (a separate table, so loading a user never loads the bytes). `app/services/avatar.py` re-encodes every upload to a 256px WebP, which drops EXIF such as phone GPS. `user.avatar_version` versions the public URL, so it can be cached forever.

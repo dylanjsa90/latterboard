@@ -31,8 +31,8 @@ identical, and update both when a shape changes.
 | ---- | ------- | -------- |
 | `POST /login/access-token` | form-urlencoded `username` (= email), `password` | `{access_token, token_type}` |
 | `POST /login/test-token` | bearer | `UserPrivate`; 401 = dead token |
-| `POST /password-recovery/{email}` | — | `{message}`, the same whether or not the email is registered. When it is and SMTP is on, emails a link to `{FRONTEND_HOST}/reset-password?token=…`, valid 48 hours. webcade has no reset page yet |
-| `POST /reset-password/` | `{token, new_password}` (8–128 chars) | `{message}`; 400 `Invalid token` (malformed, expired, or no such account) or `Inactive user` |
+| `POST /password-recovery/{email}` | — | `{message}`, the same whether or not the email is registered. When it is and SMTP is on, emails a link to `{FRONTEND_HOST}/reset-password?token=…`, valid 48 hours and only until the password next changes (so once). webcade has no reset page yet |
+| `POST /reset-password/` | `{token, new_password}` (8–128 chars) | `{message}`; 400 `Invalid token` (malformed, expired, already used, outdated by a later password change, or no such account) or `Inactive user` |
 | `POST /password-recovery-html-content/{email}` (bearer, superuser) | — | The recovery email's HTML, its subject in a `subject` header; 404 unknown email. Admin only |
 | `POST /login/google` | `{credential}` (the ID token from Google's sign-in button) | `{status: "signed_in", access_token, token_type}`, or `{status: "needs_profile", email, name?}` when no account has that Google account or its email; 401 bad or expired credential, 403 unverified Google email, 400 inactive, 404 when `GOOGLE_CLIENT_ID` is unset |
 | `POST /users/google` | `{credential, username, display_name, birth_year, location?}` | 201 `{access_token, token_type}`; 409 / 422 as `POST /users/`, and 401 / 403 / 404 as `/login/google` |

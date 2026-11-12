@@ -33,21 +33,36 @@ def get_db() -> Generator[Session, None, None]:
         db.close()
 
 
-def get_current_user(
-    db: Session = Depends(get_db), token: str = Depends(reusable_oauth2)
-) -> User:
+def _access_token_user_id(token: str) -> int | None:
+    """The user id a valid access token names, or None for anything else.
+
+    A reset token, or any token whose subject isn't a number, is None here, so it
+    can't reach `db.get` (where a non-numeric id fails on Postgres).
+    """
     try:
         payload = jwt.decode(
             token, settings.SECRET_KEY, algorithms=[security.ALGORITHM]
         )
         token_data = TokenPayload(**payload)
     except (InvalidTokenError, ValidationError):
+        return None
+    # Tokens issued before the purpose claim have none; they are access tokens.
+    if token_data.purpose not in (None, security.ACCESS_PURPOSE):
+        return None
+    return token_data.sub
+
+
+def get_current_user(
+    db: Session = Depends(get_db), token: str = Depends(reusable_oauth2)
+) -> User:
+    user_id = _access_token_user_id(token)
+    if user_id is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Could not validate credentials",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    user = db.get(User, token_data.sub)
+    user = db.get(User, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     if not user.is_active:
@@ -64,14 +79,10 @@ def get_optional_current_user(
     """
     if not token:
         return None
-    try:
-        payload = jwt.decode(
-            token, settings.SECRET_KEY, algorithms=[security.ALGORITHM]
-        )
-        token_data = TokenPayload(**payload)
-    except (InvalidTokenError, ValidationError):
+    user_id = _access_token_user_id(token)
+    if user_id is None:
         return None
-    user = db.get(User, token_data.sub)
+    user = db.get(User, user_id)
     if not user or not user.is_active:
         return None
     return user
@@ -94,12 +105,8 @@ async def get_current_user_ws(
         raise WebSocketException(
             code=status.WS_1008_POLICY_VIOLATION, reason="Missing token"
         )
-    try:
-        payload = jwt.decode(
-            token, settings.SECRET_KEY, algorithms=[security.ALGORITHM]
-        )
-        token_data = TokenPayload(**payload)
-    except (InvalidTokenError, ValidationError):
+    user_id = _access_token_user_id(token)
+    if user_id is None:
         raise WebSocketException(
             code=status.WS_1008_POLICY_VIOLATION,
             reason="Could not validate credentials",
@@ -108,7 +115,7 @@ async def get_current_user_ws(
     # checked out of the pool for the whole life of the connection.
     db = SessionLocal()
     try:
-        user = db.get(User, token_data.sub)
+        user = db.get(User, user_id)
         if not user or not user.is_active:
             raise WebSocketException(
                 code=status.WS_1008_POLICY_VIOLATION,

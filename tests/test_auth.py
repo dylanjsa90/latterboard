@@ -7,7 +7,9 @@ import pytest
 from app.api.routes import login as login_route
 from app.core import security
 from app.core.config import settings
+from app.crud.user import user as crud_user
 from app.models import User
+from app.schemas.user import UserUpdate
 from tests.helpers import db_session, login
 
 LOGIN_URL = "/api/v1/login/access-token"
@@ -50,6 +52,54 @@ def test_test_token_valid(client, auth_headers):
 def test_test_token_missing(client):
     r = client.post(TEST_TOKEN_URL)
     assert r.status_code == 401
+
+
+def _signed(claims: dict) -> str:
+    exp = datetime.now(timezone.utc) + timedelta(hours=1)
+    return jwt.encode(
+        {"exp": exp, **claims}, settings.SECRET_KEY, algorithm=security.ALGORITHM
+    )
+
+
+def _default_user_id() -> int:
+    with db_session() as db:
+        return db.query(User).filter(User.email == DEFAULT_EMAIL).one().id
+
+
+def test_a_reset_token_is_not_a_sign_in(client):
+    token = security.generate_password_reset_token(DEFAULT_EMAIL, "any-hash")
+    r = client.post(TEST_TOKEN_URL, headers={"Authorization": f"Bearer {token}"})
+    assert r.status_code == 401
+
+
+@pytest.mark.parametrize(
+    "claims",
+    [
+        # Before purpose claims, a reset token was just an email subject. On Postgres
+        # that subject reached `db.get(User, ...)` and failed as a 500.
+        {"sub": DEFAULT_EMAIL},
+        {"sub": "12abc", "purpose": "access"},
+    ],
+    ids=["email-subject", "non-numeric-subject"],
+)
+def test_a_non_numeric_subject_is_a_401(client, claims):
+    r = client.post(
+        TEST_TOKEN_URL, headers={"Authorization": f"Bearer {_signed(claims)}"}
+    )
+    assert r.status_code == 401
+
+
+def test_a_token_for_another_purpose_is_a_401(client):
+    token = _signed({"sub": str(_default_user_id()), "purpose": "password_reset"})
+    r = client.post(TEST_TOKEN_URL, headers={"Authorization": f"Bearer {token}"})
+    assert r.status_code == 401
+
+
+def test_an_access_token_from_before_purpose_claims_still_signs_in(client):
+    # Tokens issued before the purpose claim last 8 days; don't sign everyone out.
+    token = _signed({"sub": str(_default_user_id())})
+    r = client.post(TEST_TOKEN_URL, headers={"Authorization": f"Bearer {token}"})
+    assert r.status_code == 200
 
 
 RECOVERY_URL = "/api/v1/password-recovery"
@@ -106,6 +156,31 @@ def test_password_recovery_emails_a_link_that_resets_the_password(client, sent_e
     login(client, DEFAULT_EMAIL, "brand-new-pw")
 
 
+def test_a_reset_link_works_once(client, sent_emails):
+    client.post(f"{RECOVERY_URL}/{DEFAULT_EMAIL}")
+    token = _reset_token(sent_emails[0])
+    first = client.post(
+        RESET_URL, json={"token": token, "new_password": "first-new-pw"}
+    )
+    assert first.status_code == 200
+
+    again = client.post(RESET_URL, json={"token": token, "new_password": "second-pw"})
+    assert again.status_code == 400
+    login(client, DEFAULT_EMAIL, "first-new-pw")
+
+
+def test_a_reset_link_dies_when_the_password_changes(client, sent_emails):
+    client.post(f"{RECOVERY_URL}/{DEFAULT_EMAIL}")
+    token = _reset_token(sent_emails[0])
+    with db_session() as db:
+        user = db.query(User).filter(User.email == DEFAULT_EMAIL).one()
+        crud_user.update_user(db, user, UserUpdate(password="changed-elsewhere"))
+
+    r = client.post(RESET_URL, json={"token": token, "new_password": "brand-new-pw"})
+    assert r.status_code == 400
+    login(client, DEFAULT_EMAIL, "changed-elsewhere")
+
+
 def test_password_recovery_for_an_unknown_email_sends_nothing(client, sent_emails):
     known = client.post(f"{RECOVERY_URL}/{DEFAULT_EMAIL}")
     unknown = client.post(f"{RECOVERY_URL}/nobody@example.com")
@@ -130,7 +205,9 @@ def _access_token(client) -> str:
     "make_token",
     [
         lambda _client: _expired_token(DEFAULT_EMAIL),
-        lambda _client: security.generate_password_reset_token("nobody@example.com"),
+        lambda _client: security.generate_password_reset_token(
+            "nobody@example.com", "any-hash"
+        ),
         # A sign-in token names a user id, not an email, so it can't reset anything.
         _access_token,
     ],
@@ -149,7 +226,9 @@ def test_reset_password_refuses_an_inactive_account(client):
         user = db.query(User).filter(User.email == DEFAULT_EMAIL).one()
         user.is_active = False
         db.commit()
-    token = security.generate_password_reset_token(DEFAULT_EMAIL)
+        token = security.generate_password_reset_token(
+            DEFAULT_EMAIL, user.hashed_password
+        )
     r = client.post(RESET_URL, json={"token": token, "new_password": "brand-new-pw"})
     assert r.status_code == 400
     assert r.json()["detail"] == "Inactive user"

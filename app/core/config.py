@@ -34,6 +34,10 @@ def parse_cors(v: Any) -> list[str] | str:
     raise ValueError(v)
 
 
+# HS256 signs with a 32-byte digest; a shorter key is easier to brute-force.
+MIN_SECRET_BYTES = 32
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_ignore_empty=True,
@@ -159,11 +163,19 @@ class Settings(BaseSettings):
     BOT_SKILL: float = 0.75
 
     def _check_default_secret(self, var_name: str, value: str | None) -> None:
+        message = None
         if value in (None, "", "changethis"):
             message = (
                 f'{var_name} is empty or "changethis". Set a real value; '
                 "it is required everywhere except APP_ENV=local."
             )
+        elif value is not None and len(value.encode()) < MIN_SECRET_BYTES:
+            message = (
+                f"{var_name} is shorter than {MIN_SECRET_BYTES} bytes. Use a longer "
+                "one (`python -c 'import secrets; print(secrets.token_hex(32))'`); "
+                "it is required everywhere except APP_ENV=local."
+            )
+        if message:
             if self.APP_ENV == "local":
                 warnings.warn(message, stacklevel=1)
             else:
