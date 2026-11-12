@@ -36,6 +36,7 @@ from app.core.config import settings
 from app.database import engine
 from app.init_db import init_db
 from app.main import app
+from app.models import User
 from tests.helpers import db_session, signup_and_login
 
 atexit.register(shutil.rmtree, os.environ["TEST_DB_DIR"], ignore_errors=True)
@@ -89,6 +90,16 @@ def auth_headers(client):
     assert r.status_code == 200
     token = r.json()["access_token"]
     return {"Authorization": f"Bearer {token}"}
+
+
+@pytest.fixture
+def superuser_headers(auth_headers):
+    """The default user, promoted to superuser."""
+    with db_session() as db:
+        user = db.query(User).filter(User.email == settings.DEFAULT_USER).one()
+        user.is_superuser = True
+        db.commit()
+    return auth_headers
 
 
 @pytest.fixture

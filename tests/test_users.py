@@ -5,9 +5,8 @@ from PIL import Image
 
 from app.core.config import settings
 from app.game.puzzles import today
-from app.models import User
 from app.services.avatar import AVATAR_MAX_BYTES
-from tests.helpers import db_session, login
+from tests.helpers import login
 
 BASE = "/api/v1/users"
 
@@ -31,16 +30,6 @@ def created_user(client):
 @pytest.fixture
 def created_headers(client, created_user):
     return login(client, created_user["email"])
-
-
-@pytest.fixture
-def superuser_headers(auth_headers):
-    """The default user, promoted to superuser."""
-    with db_session() as db:
-        user = db.query(User).filter(User.email == settings.DEFAULT_USER).one()
-        user.is_superuser = True
-        db.commit()
-    return auth_headers
 
 
 def _jpeg_with_exif(size=(400, 300)) -> bytes:
@@ -203,6 +192,24 @@ def test_update_user_forbidden(client, auth_headers, created_user):
     assert r.status_code == 403
 
 
+def test_superuser_can_update_another_user(client, superuser_headers, created_user):
+    r = client.put(
+        f"{BASE}/{created_user['id']}",
+        json={"username": "renamed"},
+        headers=superuser_headers,
+    )
+    assert r.status_code == 200
+    assert r.json()["username"] == "renamed"
+    assert r.json()["email"] == created_user["email"]
+
+
+def test_update_user_not_found(client, superuser_headers):
+    r = client.put(
+        f"{BASE}/99999", json={"username": "ghost"}, headers=superuser_headers
+    )
+    assert r.status_code == 404
+
+
 def test_update_me(client, created_headers):
     r = client.patch(
         f"{BASE}/me",
@@ -354,6 +361,13 @@ def test_delete_user(client, auth_headers):
     user_id = r.json()["id"]
     r = client.delete(f"{BASE}/{user_id}", headers=auth_headers)
     assert r.status_code == 204
+
+
+def test_superuser_can_delete_another_user(client, superuser_headers, created_user):
+    r = client.delete(f"{BASE}/{created_user['id']}", headers=superuser_headers)
+    assert r.status_code == 204
+    r = client.get(f"{BASE}/{created_user['id']}", headers=superuser_headers)
+    assert r.status_code == 404
 
 
 def test_delete_user_not_found(client, auth_headers):
