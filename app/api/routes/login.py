@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 from app.api import deps
 from app.core import security
 from app.core.config import settings
+from app.core.email import generate_reset_password_email, send_email
 from app.crud import user as crud_user  # noqa: F401
 from app.models import User
 from app.schemas.user import (
@@ -21,12 +22,6 @@ from app.schemas.user import (
     UserUpdate,
 )
 from app.services import google_sign_in
-from app.utils import (
-    generate_password_reset_token,
-    generate_reset_password_email,
-    send_email,
-    verify_password_reset_token,
-)
 
 router = APIRouter(tags=["login"])
 
@@ -109,7 +104,7 @@ def recover_password(email: str, db: Session = Depends(deps.get_db)) -> Any:
     # Only send email if user actually exists
     # With email off there is nothing to send, so skip it and still give the same answer.
     if user and settings.emails_enabled:
-        password_reset_token = generate_password_reset_token(email=email)
+        password_reset_token = security.generate_password_reset_token(email=email)
         email_data = generate_reset_password_email(
             email_to=user.email, email=email, token=password_reset_token
         )
@@ -128,7 +123,7 @@ def reset_password(body: NewPassword, db: Session = Depends(deps.get_db)) -> Mes
     """
     Reset password
     """
-    email = verify_password_reset_token(token=body.token)
+    email = security.verify_password_reset_token(token=body.token)
     if not email:
         raise HTTPException(status_code=400, detail="Invalid token")
     user = crud_user.get_user_by_email(db=db, email=email)
@@ -164,7 +159,7 @@ def recover_password_html_content(
             status_code=404,
             detail="The user with this username does not exist in the system.",
         )
-    password_reset_token = generate_password_reset_token(email=email)
+    password_reset_token = security.generate_password_reset_token(email=email)
     email_data = generate_reset_password_email(
         email_to=user.email, email=email, token=password_reset_token
     )

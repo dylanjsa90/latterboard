@@ -1,7 +1,7 @@
 from datetime import date, datetime, timedelta
 
+from app.core.email import generate_match_invite_email
 from app.game.puzzles import day_of, day_start
-from app.utils import generate_match_invite_email
 
 
 def test_a_summer_day_starts_at_7am_utc():

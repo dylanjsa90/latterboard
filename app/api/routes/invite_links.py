@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.api import deps
 from app.api.routes.matches import SUPPORTED_GAMES
 from app.core.config import settings
+from app.core.email import generate_match_invite_email, send_email
 from app.crud.invite_link import invite_link as crud_invite_link
 from app.crud.invite_link import invite_url
 from app.crud.match import match as crud_match
@@ -18,7 +19,7 @@ from app.schemas.invite_link import (
 )
 from app.schemas.match import MatchPublic
 from app.services.match_start import notify_match_started, start_match
-from app.utils import generate_match_invite_email, send_email, utcnow
+from app.utils import utcnow
 
 router = APIRouter(prefix="/invite-links", tags=["invite-links"])
 
