@@ -9,14 +9,17 @@ empty.
 
 ## Needs a person, not code
 
-- **Adopt migrations on production** before deploying anything from `7bead82` on: drift
-  check, create `ix_user_is_bot`, `alembic stamp 0001`
-  (`docs/guides/database-migrations.md`). Until then the new container exits at
-  `alembic upgrade head`.
-- **The deploy's environment moved.** The image no longer contains `app/.env`; the VM needs
-  the root `.env` that `docker-compose.yml` reads (`SECRET_KEY`, `DB_*`, …).
-- **Remove `first.user@test.com` from production.** Older startups seeded it everywhere with
-  the password `password`; deployments no longer do, but an existing row stays.
+- **Adopt migrations on production** before the first start of anything from `7bead82` on:
+  drift check, create `ix_user_is_bot`, `alembic stamp 0001`
+  (`docs/guides/database-migrations.md`). The app no longer creates tables, and the
+  systemd unit's `alembic upgrade head` fails on an unstamped database.
+- **Run production as `APP_ENV=production` under `deploy/latterboard.service`.** The VM has
+  been running with `APP_ENV` unset, which is `local`: it reads `app/.env.local`, seeds
+  `first.user@test.com`, puts variable values in tracebacks and only warns about a weak
+  `SECRET_KEY`. Move the VM's `app/.env.local` to `app/.env`, set `SQLITE_DATABASE_URL` to an
+  absolute path in it, and install the unit (adjusting `User` and paths).
+- **Remove `first.user@test.com` from production** after that switch. It's in the
+  production database with the password `password`; `local` re-seeds it on every start.
 
 ## Security
 
@@ -42,6 +45,10 @@ empty.
 - **`POST /puzzles/sudoku/move` trusts the client's board.** It writes the cell into the
   board the request sends and calls the puzzle solved when that board matches the solution.
   Keep the board server-side, like word and cipher attempts.
+- **The optional compose Postgres can't be reached.** `DATABASE_URL` always adds
+  `sslmode=require`, and `postgres:16-alpine` has no SSL, so `--profile local-db` fails to
+  connect. Add a `DB_SSLMODE` setting (default `require`). Production uses SQLite, so this
+  only affects trying Postgres.
 - **Word guesses aren't checked with `wordle.is_valid_word`**, and `puzzle_attempt` has no
   unique `(user_id, puzzle_id)`. Both are also listed under Puzzles in `AGENTS.md`. The
   constraint is the first real migration: remove duplicate rows first.

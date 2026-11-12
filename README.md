@@ -17,7 +17,8 @@ conventions are in [`AGENTS.md`](AGENTS.md); every REST call and websocket frame
 is in [`docs/reference/cross-repo-contract.md`](docs/reference/cross-repo-contract.md), and the
 module map is in [`docs/architecture/backend.md`](docs/architecture/backend.md).
 
-Stack: Python 3.12, FastAPI, SQLAlchemy 2, Redis, SQLite locally and Postgres in production.
+Stack: Python 3.12, FastAPI, SQLAlchemy 2, Redis, SQLite. Production runs under systemd on a VM
+(see [Production server](#production-server)); Postgres is supported but unused.
 
 ## Setup
 
@@ -57,9 +58,9 @@ UI at `/docs`, health check at `/health`.
 
 Requires [Docker](https://docs.docker.com/get-docker/) and Docker Compose.
 
-1. Copy `.env.example` to `.env` in the project root and fill it in. Compose defaults to
-   `APP_ENV=production` and `DB_TYPE=postgres`, so set `SECRET_KEY` and the `DB_*` connection
-   settings. The image contains no env files; everything comes from this `.env`.
+1. Copy `.env.example` to `.env` in the project root and fill it in; at minimum set
+   `SECRET_KEY`. Compose defaults to `APP_ENV=production` and SQLite in the `app_data` volume.
+   The image contains no env files; everything comes from this `.env`.
 2. Start the app and Redis:
 
    ```bash
@@ -67,31 +68,42 @@ Requires [Docker](https://docs.docker.com/get-docker/) and Docker Compose.
    ```
 
    The API is at `http://localhost:8000`. The container waits for the database
-   (`app/backend_pre_start.py`), runs `alembic upgrade head`, then starts Uvicorn.
+   (`app/backend_pre_start.py`), runs `alembic upgrade head`, then starts Uvicorn. Docker is an
+   option, not how production runs.
 3. Stop it with `docker compose down` (`-v` also deletes the volumes).
 
-To try the Postgres path without a hosted database, set `DB_HOST=db` and `POSTGRES_PASSWORD` in
-`.env` and run `docker compose --profile local-db up --build`.
+To try Postgres, set `DB_TYPE=postgres`, `DB_HOST=db` and `POSTGRES_PASSWORD` in `.env` and run
+`docker compose --profile local-db up --build`. The app connects with `sslmode=require`, which
+this container doesn't offer yet (see `docs/plans/follow-ups.md`).
 
 ## Production server
 
-The Docker image runs a single Uvicorn process. To run without Docker:
+Production is a Linux VM running Uvicorn under systemd, with SQLite and a local Redis.
+[`deploy/latterboard.service`](deploy/latterboard.service) is the unit: it sets
+`APP_ENV=production`, runs `alembic upgrade head` before starting, and serves one Uvicorn
+worker (SQLite takes one writer at a time).
 
-```bash
-uv sync --no-dev
-APP_ENV=production uv run alembic upgrade head
-APP_ENV=production uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 2
-```
+On the VM, settings come from `app/.env` (`APP_ENV=production` reads that file, not
+`app/.env.local`). Set a real `SECRET_KEY`, `DB_TYPE=sqlite`, and `SQLITE_DATABASE_URL` as an
+absolute path, e.g. `sqlite:////home/latterboard/latterboard/sql_app.db`.
 
-Live updates go through Redis pub/sub, so more than one worker is fine.
+To deploy:
 
-## Copying to a VM
+1. From your machine, `UNZIP=1 scripts/upload-to-vm.sh user@host [remote_dir]`. It zips the
+   tracked and untracked files (honouring `.gitignore`, so env files, databases and `.venv`
+   stay out), copies the archive over `scp` and unpacks it over `<remote_dir>/latterboard`.
+   Set `SSH_KEY` / `SSH_PORT` as needed. Files deleted from the repo stay on the VM.
+2. On the VM, in that directory:
 
-`scripts/upload-to-vm.sh user@host [remote_dir]` zips the tracked and untracked files (honouring
-`.gitignore`, so `.env` files, local databases and `.venv` stay out) and copies the archive over
-`scp`. Set `SSH_KEY` / `SSH_PORT` as needed, and `UNZIP=1` to unpack it into
-`<remote_dir>/latterboard`. Env files are deliberately not copied; create the root `.env` on the
-VM.
+   ```bash
+   uv sync --frozen --no-dev
+   cp sql_app.db sql_app.db.bak          # if this deploy brings a migration
+   sudo systemctl restart latterboard    # runs alembic upgrade head, then Uvicorn
+   journalctl -u latterboard -n 50       # check it started
+   ```
+
+A database from before migrations existed must be stamped once before the unit's first start;
+see [`docs/guides/database-migrations.md`](docs/guides/database-migrations.md).
 
 ## Tests and checks
 
@@ -112,7 +124,7 @@ uv run coverage html                # generates htmlcov/index.html
 ```
 
 CI (`.github/workflows/ci.yml`) runs lint, format, type check, tests, and a Docker build and
-start-up check on pushes to `dev` and pull requests into `main`.
+start-up check on pushes to `dev` and pull requests into `main`. It doesn't deploy.
 
 ## License
 

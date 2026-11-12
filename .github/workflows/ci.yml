@@ -78,7 +78,6 @@ jobs:
         run: |
           docker run -d --name app --network host \
             -e APP_ENV=production -e SECRET_KEY=ci-only-secret \
-            -e DB_TYPE=sqlite -e SQLITE_DATABASE_URL=sqlite:////app/ci.db \
             -e REDIS_URL=redis://localhost:6379 latterboard
           for i in $(seq 1 30); do
             if curl -sf localhost:8000/health; then exit 0; fi

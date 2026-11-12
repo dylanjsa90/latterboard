@@ -6,8 +6,9 @@
 
 Last updated: 2026-11-12
 
-Python 3.10+ with uv, SQLAlchemy, Redis, JWT auth. SQLite locally; deploys to a VM as a Docker
-container built from `Dockerfile`. Setup, Docker, and the production server are in `README.md`.
+Python 3.10+ with uv, SQLAlchemy, Redis, JWT auth. SQLite everywhere. Production is a Linux VM
+running Uvicorn under systemd (`deploy/latterboard.service`), not Docker; the `Dockerfile` and
+compose file are an optional way to run it. Setup, Docker, and deploying are in `README.md`.
 
 ## Commands
 
@@ -47,8 +48,8 @@ Paths are in backticks, not `@` imports, so they load only when read.
 ### Settings and database
 - `Settings` (`app/core/config.py`) reads `app/.env.local` while `APP_ENV=local` (the default) and `app/.env` otherwise, unless `SKIP_ENV_FILE` is set (the tests set it).
 - The database URL is computed from `DB_TYPE`; a `DATABASE_URL` env var is ignored. `sqlite` (the default) uses `SQLITE_DATABASE_URL`; any other value builds `postgresql+psycopg2://…?sslmode=require` from `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`, `DB_NAME`, falling back to the lowercase `user`, `password`, `host`, `port`, `dbname` that older deployments set. Only `psycopg2-binary` is installed.
-- `APP_ENV` (`local`, the default, / `staging` / `production`) is the one environment flag. Outside `local`, a missing or `changethis` `SECRET_KEY` stops startup and the `first.user@test.com` sign-in isn't seeded. The Docker image carries no env files: compose passes the root `.env`.
-- Alembic owns the schema; the app never creates or alters tables (`init_db` only seeds rows). Every model change ships with a migration from `uv run alembic revision --autogenerate`, read and fixed by hand; `tests/test_migrations.py` fails until models and migrations agree. Deploys run `alembic upgrade head` from the Docker `CMD`. How-to and pitfalls: `docs/guides/database-migrations.md`.
+- `APP_ENV` (`local`, the default, / `staging` / `production`) is the one environment flag. Outside `local`, a missing or `changethis` `SECRET_KEY` stops startup and the `first.user@test.com` sign-in isn't seeded. `APP_ENV` picks the env file, so it must come from the real environment: the systemd unit sets `APP_ENV=production`, which reads `app/.env` on the VM. The Docker image carries no env files: compose passes the root `.env`.
+- Alembic owns the schema; the app never creates or alters tables (`init_db` only seeds rows). Every model change ships with a migration from `uv run alembic revision --autogenerate`, read and fixed by hand; `tests/test_migrations.py` fails until models and migrations agree. Deploys run `alembic upgrade head` before Uvicorn starts (the systemd unit's `ExecStartPre`; the Docker `CMD` does the same). How-to and pitfalls: `docs/guides/database-migrations.md`.
 - Locally, run `uv run alembic upgrade head` after setup and after pulling a migration. Tests use `create_all`, not migrations.
 
 ### Dates and times
