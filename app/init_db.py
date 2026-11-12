@@ -4,8 +4,8 @@ from loguru import logger
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
-from app.crud import puzzle as crud_puzzle
-from app.crud import user as crud_user
+from app.crud.puzzle import puzzle as crud_puzzle
+from app.crud.user import user as crud_user
 from app.models.user import User
 from app.schemas.user import UserCreate
 

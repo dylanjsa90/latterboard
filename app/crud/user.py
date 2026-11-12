@@ -9,8 +9,7 @@ from app.core.security import get_password_hash, verify_password
 from app.models.user import User
 from app.models.user_avatar import UserAvatar
 from app.models.user_identity import UserIdentity
-from app.schemas import UserCreate, UserUpdate
-from app.schemas.user import ProfileCreate, ProfileUpdate
+from app.schemas.user import ProfileCreate, ProfileUpdate, UserCreate, UserUpdate
 
 from .base import CRUDBase
 

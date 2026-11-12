@@ -19,7 +19,7 @@ from itertools import permutations
 
 from app.game import wordle
 from app.game.puzzles import cipher_feedback
-from app.lib.word_list import word_list
+from app.game.word_list import word_list
 
 # 0.0 = careless, 1.0 = always plays the best candidate it knows.
 DEFAULT_SKILL = 0.75

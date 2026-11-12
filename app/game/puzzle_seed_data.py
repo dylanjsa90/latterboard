@@ -7,7 +7,7 @@ directly.
 import random
 
 from app.game.puzzles import CIPHER_STARTER
-from app.lib.word_list import word_list
+from app.game.word_list import word_list
 
 
 def shuffled_words() -> list[str]:

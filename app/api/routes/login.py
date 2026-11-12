@@ -10,7 +10,7 @@ from app.api import deps
 from app.core import security
 from app.core.config import settings
 from app.core.email import generate_reset_password_email, send_email
-from app.crud import user as crud_user  # noqa: F401
+from app.crud.user import user as crud_user
 from app.models import User
 from app.schemas.user import (
     GoogleCredential,

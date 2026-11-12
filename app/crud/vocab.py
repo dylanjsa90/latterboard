@@ -184,4 +184,6 @@ class CRUDVocab:
         db.commit()
 
 
+# Not `vocab` like the other crud instances: this module already imports the game
+# rules as `vocab`.
 crud_vocab = CRUDVocab()
