@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from datetime import timedelta
 
 from sqlalchemy import and_, case, func, or_
@@ -138,22 +139,35 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             )
             .one()
         )
+        opponents = _users_by_id(
+            db,
+            (m.invitee_id if user_id == m.inviter_id else m.inviter_id for m in rows),
+        )
+        coop_puzzles = crud_match_puzzle.get_by_matches(
+            db, [m.id for m in rows if m.game == COOP_GAME]
+        )
         return MatchHistory(
-            items=[self._to_history_item(db, m, user_id) for m in rows],
+            items=[
+                self._to_history_item(m, user_id, opponents, coop_puzzles) for m in rows
+            ],
             total=finished.count(),
             record=MatchRecord(won=won, lost=lost, drawn=drawn),
         )
 
     def _to_history_item(
-        self, db: Session, match: Match, viewer_id: int
+        self,
+        match: Match,
+        viewer_id: int,
+        opponents: dict[int, User],
+        coop_puzzles: dict[int, MatchPuzzle],
     ) -> MatchHistoryItem:
         opponent_id = (
             match.invitee_id if viewer_id == match.inviter_id else match.inviter_id
         )
-        opponent = db.get(User, opponent_id)
+        opponent = opponents.get(opponent_id)
         if match.game == COOP_GAME:
             # Co-op completes with no winner; the puzzle row says how it ended.
-            result = crud_match_puzzle.get_by_match(db, match.id).state["outcome"]
+            result = coop_puzzles[match.id].state["outcome"]
         elif match.winner_id is None:
             result = "draw"
         else:
@@ -240,8 +254,9 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
         if match.status == "completed":
             self._record_scores(db, match)
 
-        current_turn_username = self._username_or_none(db, match.current_turn_user_id)
-        winner_username = self._username_or_none(db, match.winner_id)
+        users = _with_players(db, match, {user.id: user})
+        current_turn_username = _username_or_none(users, match.current_turn_user_id)
+        winner_username = _username_or_none(users, match.winner_id)
 
         return MatchGuessResult(
             match_id=match.id,
@@ -297,15 +312,13 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
                 db, match.invitee_id, GameScoreCreate(game="wordle_vs", score=0)
             )
 
-    def _username_or_none(self, db: Session, user_id: int | None) -> str | None:
-        if user_id is None:
-            return None
-        found = db.get(User, user_id)
-        return found.username if found else None
-
-    def to_public(self, db: Session, match: Match) -> MatchPublic:
-        inviter = db.get(User, match.inviter_id)
-        invitee = db.get(User, match.invitee_id)
+    def to_public(
+        self, db: Session, match: Match, users: dict[int, User] | None = None
+    ) -> MatchPublic:
+        """`users` may hold players the caller already loaded; the rest are fetched."""
+        users = _with_players(db, match, users or {})
+        inviter = users.get(match.inviter_id)
+        invitee = users.get(match.invitee_id)
         return MatchPublic(
             id=match.id,
             game=match.game,
@@ -315,10 +328,8 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             # `is_bot` is nullable, so coerce: null means a human account.
             inviter_is_bot=bool(inviter and inviter.is_bot),
             invitee_is_bot=bool(invitee and invitee.is_bot),
-            current_turn_username=self._username_or_none(
-                db, match.current_turn_user_id
-            ),
-            winner_username=self._username_or_none(db, match.winner_id),
+            current_turn_username=_username_or_none(users, match.current_turn_user_id),
+            winner_username=_username_or_none(users, match.winner_id),
             max_guesses=match.max_guesses,
             created_at=match.created_at,
             started_at=match.started_at,
@@ -326,16 +337,27 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
         )
 
     def to_detail(self, db: Session, match: Match, viewer_id: int) -> MatchDetail:
-        public = self.to_public(db, match)
         guesses = (
             db.query(MatchGuess)
             .filter(MatchGuess.match_id == match.id)
             .order_by(MatchGuess.turn_number)
             .all()
         )
+        # Guessers are always players, so one query covers the match and its guesses.
+        users = _users_by_id(
+            db,
+            [
+                match.inviter_id,
+                match.invitee_id,
+                match.current_turn_user_id,
+                match.winner_id,
+                *(g.user_id for g in guesses),
+            ],
+        )
+        public = self.to_public(db, match, users)
         guess_results = []
         for g in guesses:
-            guesser = db.get(User, g.user_id)
+            guesser = users.get(g.user_id)
             guess_results.append(
                 MatchGuessResult(
                     match_id=match.id,
@@ -453,15 +475,50 @@ class CRUDMatch(CRUDBase[Match, MatchInviteCreate, MatchInviteCreate]):
             started_at=match.started_at,
         )
 
-    def to_pending_invite(self, db: Session, match: Match) -> PendingInvite:
-        inviter = db.get(User, match.inviter_id)
-        return PendingInvite(
-            id=match.id,
-            game=match.game,
-            from_username=inviter.username if inviter else "",
-            created_at=match.created_at,
-            expires_at=match.invite_expires_at,
-        )
+    def to_pending_invites(
+        self, db: Session, matches: list[Match]
+    ) -> list[PendingInvite]:
+        inviters = _users_by_id(db, (m.inviter_id for m in matches))
+        return [
+            PendingInvite(
+                id=m.id,
+                game=m.game,
+                from_username=(
+                    inviters[m.inviter_id].username if m.inviter_id in inviters else ""
+                ),
+                created_at=m.created_at,
+                expires_at=m.invite_expires_at,
+            )
+            for m in matches
+        ]
+
+
+def _users_by_id(db: Session, ids: Iterable[int | None]) -> dict[int, User]:
+    """The users with these ids, in one query.
+
+    The dict also keeps them alive: the session's identity map holds rows weakly, so
+    without a reference a later `db.get` for the same user queries again.
+    """
+    wanted = {i for i in ids if i is not None}
+    if not wanted:
+        return {}
+    return {u.id: u for u in db.query(User).filter(User.id.in_(wanted)).all()}
+
+
+def _with_players(db: Session, match: Match, users: dict[int, User]) -> dict[int, User]:
+    """`users` plus whichever of the match's people it lacks, loaded in one query."""
+    missing = {
+        match.inviter_id,
+        match.invitee_id,
+        match.current_turn_user_id,
+        match.winner_id,
+    } - users.keys()
+    return {**users, **_users_by_id(db, missing)}
+
+
+def _username_or_none(users: dict[int, User], user_id: int | None) -> str | None:
+    found = users.get(user_id) if user_id is not None else None
+    return found.username if found else None
 
 
 match = CRUDMatch(Match)

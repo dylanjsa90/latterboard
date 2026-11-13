@@ -195,7 +195,7 @@ def pending_invites(
     current_user: User = Depends(deps.get_current_user),
 ) -> list[PendingInvite]:
     invites = crud_match.get_pending_invites(db, current_user.id)
-    return [crud_match.to_pending_invite(db, m) for m in invites]
+    return crud_match.to_pending_invites(db, invites)
 
 
 @router.get("/me/history", response_model=MatchHistory)

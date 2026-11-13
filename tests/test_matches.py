@@ -1,7 +1,7 @@
 import pytest
 
 from app.models.match import Match
-from tests.helpers import db_session, start_match
+from tests.helpers import db_session, recorded_queries, start_match
 
 BASE = "/api/v1/matches"
 KNOWN_WORD = "aback"
@@ -286,3 +286,67 @@ def test_invite_and_gameplay_over_websocket(client, inviter_headers, opponent_he
         completed = invitee_ws.receive_json()
         assert completed["type"] == "match_completed"
         assert completed["winner_username"] == inviter_username
+
+
+# --- presenters load players in bulk -----------------------------------------
+# Each pair of counts differs only in how many rows the response lists, so equal
+# counts mean the route isn't querying per row.
+
+
+def _query_count(client, headers, url: str) -> int:
+    with recorded_queries() as statements:
+        r = client.get(url, headers=headers)
+        assert r.status_code == 200, r.text
+    return len(statements)
+
+
+def test_history_does_not_query_per_match(client, inviter_headers, opponent_headers):
+    for _ in range(2):
+        _win_wordle(client, inviter_headers, opponent_headers)
+    two = _query_count(client, inviter_headers, f"{BASE}/me/history")
+    for _ in range(2):
+        _win_wordle(client, inviter_headers, opponent_headers)
+    four = _query_count(client, inviter_headers, f"{BASE}/me/history")
+    assert len(_history(client, inviter_headers)["items"]) == 4
+    assert four == two
+
+
+def test_pending_invites_do_not_query_per_invite(
+    client, inviter_headers, opponent_headers
+):
+    def invite(game: str) -> None:
+        r = client.post(
+            f"{BASE}/invite",
+            json={"opponent_username": "opponent", "game": game},
+            headers=inviter_headers,
+        )
+        assert r.status_code == 201, r.text
+
+    invite("wordle")
+    one = _query_count(client, opponent_headers, f"{BASE}/pending")
+    for game in ("word_race", "cipher_race"):
+        invite(game)
+    three = _query_count(client, opponent_headers, f"{BASE}/pending")
+    r = client.get(f"{BASE}/pending", headers=opponent_headers)
+    assert len(r.json()) == 3
+    assert three == one
+
+
+def test_match_detail_does_not_query_per_guess(
+    client, inviter_headers, opponent_headers
+):
+    match_id = start_match(client, inviter_headers, opponent_headers)
+    _set_target_word(match_id, KNOWN_WORD)
+
+    def guess(headers, word: str) -> None:
+        r = client.post(
+            f"{BASE}/{match_id}/guess", json={"word": word}, headers=headers
+        )
+        assert r.status_code == 200, r.text
+
+    guess(inviter_headers, "abbey")
+    one = _query_count(client, inviter_headers, f"{BASE}/{match_id}")
+    guess(opponent_headers, "abode")
+    guess(inviter_headers, "about")
+    three = _query_count(client, inviter_headers, f"{BASE}/{match_id}")
+    assert three == one
