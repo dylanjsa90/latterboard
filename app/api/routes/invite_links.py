@@ -101,7 +101,7 @@ def preview_invite_link(
 
 
 @router.post("/{token}/claim", response_model=MatchPublic)
-async def claim_invite_link(
+def claim_invite_link(
     token: str,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
@@ -146,7 +146,7 @@ async def claim_invite_link(
     obj = start_match(db, waiting=inviter, joining=current_user, game=link.game)
     crud_invite_link.set_match(db, link, obj.id)
     public = crud_match.to_public(db, obj)
-    await notify_match_started(obj, public)
+    notify_match_started(obj, public)
     return public
 
 

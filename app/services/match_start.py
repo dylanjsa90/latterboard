@@ -39,8 +39,10 @@ def start_match(db: Session, waiting: User, joining: User, game: str) -> Match:
     return obj
 
 
-async def notify_match_started(obj: Match, public: MatchPublic) -> None:
-    """Tell both players the match has started, each naming the other as opponent."""
+def notify_match_started(obj: Match, public: MatchPublic) -> None:
+    """Tell both players the match has started, each naming the other as opponent.
+
+    Call from a worker thread, as `app/services/match_play.py` explains."""
     sides = (
         (
             obj.inviter_id,
@@ -59,7 +61,7 @@ async def notify_match_started(obj: Match, public: MatchPublic) -> None:
         if is_bot:
             # The computer holds no websocket, so there is nobody on its topic.
             continue
-        await manager.send_to_user(
+        manager.send_to_user_from_thread(
             user_id,
             {
                 "type": "match_started",

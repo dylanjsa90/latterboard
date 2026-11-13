@@ -37,10 +37,6 @@ empty.
   guess; `/me/active` was
   already fixed to load in bulk (`tests/test_active_matches.py` guards it). Do the same here.
   While there, move the presenters out of `crud/` (into `services/`).
-- **`async def` routes on a sync `Session`.** Most of `routes/matches.py`, `matchmaking.py`'s
-  `join_queue` and `invite_links.py`'s `claim_invite_link` are `async def` for the broadcast,
-  so their database calls block the event loop. Either make them plain `def` and broadcast
-  through a sync hook, or run the database work in `run_in_threadpool`.
 
 ## Code health
 

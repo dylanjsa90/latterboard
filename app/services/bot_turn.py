@@ -24,6 +24,7 @@ import random
 from typing import Any
 
 from fastapi import BackgroundTasks
+from fastapi.concurrency import run_in_threadpool
 from loguru import logger
 from sqlalchemy.orm import Session
 
@@ -83,36 +84,49 @@ async def _think(pace: float = 1.0) -> None:
 
 
 async def run_bot_turn(match_id: int) -> None:
-    """Play one bot move in `match_id`, if one is owed.
+    """Play the bot's move in `match_id`, if one is owed, and any catch-up moves after it.
+
+    The pauses happen here, on the event loop; each move runs in the threadpool with a
+    session of its own, so no thread or pooled connection is held while sleeping.
 
     Never raises. An exception escaping a background task reaches no handler, and
     a bot that fails must not take the match down with it.
     """
     await _think()
-    # Opened after the pause, so a pooled connection isn't held while sleeping.
-    db = SessionLocal()
     try:
-        match = crud_match.get(db, match_id)
-        if match is None or match.game not in BOT_GAMES:
-            return
-        player = bot_participant(db, match)
-        if player is None:
-            return
-        if match.game == "wordle":
-            await _play_wordle(db, match, player)
-        else:
-            await _play_race(db, match, player)
+        move = 0
+        while await run_in_threadpool(_play_move, match_id, move):
+            # Only reached while playing out against a finished opponent, so keep
+            # it brisk: they are waiting on this to learn the result.
+            await _think(CATCH_UP_PACE)
+            move += 1
     except MoveRejected as exc:
         # A legitimate outcome, not a failure: the human's move ended the match or
         # closed out the bot's side while it was thinking.
         logger.info("Bot move declined in match {}: {}", match_id, exc)
     except Exception:
         logger.exception("Bot turn failed for match {}", match_id)
+
+
+def _play_move(match_id: int, move: int) -> bool:
+    """Play one bot move. True if the bot owes another straight away."""
+    db = SessionLocal()
+    try:
+        match = crud_match.get(db, match_id)
+        if match is None or match.game not in BOT_GAMES:
+            return False
+        player = bot_participant(db, match)
+        if player is None:
+            return False
+        if match.game == "wordle":
+            _play_wordle(db, match, player)
+            return False
+        return _play_race(db, match, player, move)
     finally:
         db.close()
 
 
-async def _play_wordle(db: Session, match: Match, player: User) -> None:
+def _play_wordle(db: Session, match: Match, player: User) -> None:
     # Re-checked rather than assumed: the state may have moved while we paused.
     if wordle_move_error(match, player) is not None:
         return
@@ -126,7 +140,7 @@ async def _play_wordle(db: Session, match: Match, player: User) -> None:
     # The board is shared, so the human's guesses are information the bot is
     # entitled to — exactly as the human can see the bot's.
     word = bot.choose_word(history, skill=settings.BOT_SKILL)
-    await apply_wordle_guess(db, match, player, word)
+    apply_wordle_guess(db, match, player, word)
 
 
 def _race_history(row: MatchPuzzle, player_id: int) -> list[dict[str, Any]]:
@@ -151,32 +165,32 @@ def _next_race_guess(
     return bot.choose_cipher(cipher_history, skill=settings.BOT_SKILL)
 
 
-async def _play_race(db: Session, match: Match, player: User) -> None:
+def _play_race(db: Session, match: Match, player: User, move: int) -> bool:
     """One guess per human guess, so both sides' attempt counts stay level — which
     is what makes "fewest attempts wins" a fair contest. A bot racing ahead on its
     own clock would end the match out from under a still-thinking human.
 
     The exception is when the human has finished and the bot hasn't: nothing else
     will prompt the bot again, and `race_outcome` can't decide the match until the
-    bot's side is settled. Then it plays itself out.
+    bot's side is settled. Then it plays itself out: this returns True, and
+    `run_bot_turn` calls again with the next `move`.
     """
+    if match.status != "in_progress":
+        return False
+    row = crud_match_puzzle.get_by_match(db, match.id)
+    if crud_match_puzzle.race_finished_in(row, match, player.id):
+        return False
+
+    guess = _next_race_guess(match, _race_history(row, player.id))
+    apply_race_guess(db, match, player, guess)
+
     opponent_id = (
         match.invitee_id if player.id == match.inviter_id else match.inviter_id
     )
-
-    for move in range(match.max_guesses + 1):
-        if match.status != "in_progress":
-            return
-        row = crud_match_puzzle.get_by_match(db, match.id)
-        if crud_match_puzzle.race_finished_in(row, match, player.id):
-            return
-        if move > 0:
-            # Only reached while playing out against a finished opponent, so keep
-            # it brisk: they are waiting on this to learn the result.
-            await _think(CATCH_UP_PACE)
-
-        guess = _next_race_guess(match, _race_history(row, player.id))
-        await apply_race_guess(db, match, player, guess)
-
-        if not crud_match_puzzle.race_finished(db, match, opponent_id):
-            return
+    # The match ends once both sides finish, so still in progress with the opponent
+    # done means the bot isn't. `move` bounds the playout, as a backstop.
+    return (
+        move < match.max_guesses
+        and match.status == "in_progress"
+        and crud_match_puzzle.race_finished(db, match, opponent_id)
+    )

@@ -43,6 +43,7 @@ Paths are in backticks, not `@` imports, so they load only when read.
 
 ### Code layout
 - Routes stay thin. Logic shared by routes (or by a route and the bot) goes in `app/services/`, row access in `app/crud/`, rules with no database or I/O in `app/game/`. Imports flow `api` → `services` → `crud` → `game`, never back up; the layer map is in `docs/architecture/backend.md`.
+- The database session is synchronous, so it never runs on the event loop: routes and services that touch it are plain `def` (FastAPI runs them in its threadpool) and broadcast with `manager.broadcast_from_thread` / `send_to_user_from_thread`. An `async def` that awaits Redis hands its database work to `run_in_threadpool`. Every test fails if a query runs on the loop (the guard in `tests/conftest.py`).
 - Import the module you need (`from app.crud.user import user as crud_user`, `from app.schemas.user import UserPublic`); packages don't re-export from `__init__`, except `app.models`.
 
 ### Settings and database

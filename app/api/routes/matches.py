@@ -61,7 +61,7 @@ def _require_game(match: Match, game: str) -> None:
 
 
 @router.post("/invite", response_model=MatchPublic, status_code=status.HTTP_201_CREATED)
-async def create_invite(
+def create_invite(
     invite_in: MatchInviteCreate,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
@@ -105,7 +105,7 @@ async def create_invite(
         expiry_minutes=settings.MATCH_INVITE_EXPIRY_MINUTES,
     )
 
-    await manager.send_to_user(
+    manager.send_to_user_from_thread(
         opponent.id,
         {
             "type": "invite_received",
@@ -120,7 +120,7 @@ async def create_invite(
 
 
 @router.post("/{match_id}/accept", response_model=MatchPublic)
-async def accept_invite(
+def accept_invite(
     match_id: int,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
@@ -139,12 +139,12 @@ async def accept_invite(
 
     obj = crud_match.accept_invite(db, obj)
     public = crud_match.to_public(db, obj)
-    await notify_match_started(obj, public)
+    notify_match_started(obj, public)
     return public
 
 
 @router.post("/{match_id}/decline", response_model=MatchPublic)
-async def decline_invite(
+def decline_invite(
     match_id: int,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
@@ -160,14 +160,14 @@ async def decline_invite(
         )
 
     obj = crud_match.decline_invite(db, obj)
-    await manager.send_to_user(
+    manager.send_to_user_from_thread(
         obj.inviter_id, {"type": "invite_declined", "match_id": obj.id}
     )
     return crud_match.to_public(db, obj)
 
 
 @router.post("/{match_id}/cancel", response_model=MatchPublic)
-async def cancel_invite(
+def cancel_invite(
     match_id: int,
     db: Session = Depends(deps.get_db),
     current_user: User = Depends(deps.get_current_user),
@@ -183,7 +183,7 @@ async def cancel_invite(
         )
 
     obj = crud_match.cancel_invite(db, obj)
-    await manager.send_to_user(
+    manager.send_to_user_from_thread(
         obj.invitee_id, {"type": "invite_cancelled", "match_id": obj.id}
     )
     return crud_match.to_public(db, obj)
@@ -230,7 +230,7 @@ def get_match(
 
 
 @router.post("/{match_id}/guess", response_model=MatchGuessResult)
-async def submit_guess(
+def submit_guess(
     match_id: int,
     guess_in: MatchGuessCreate,
     background_tasks: BackgroundTasks,
@@ -248,7 +248,7 @@ async def submit_guess(
             status_code=status.HTTP_400_BAD_REQUEST, detail="Not a valid word"
         )
 
-    result = await apply_wordle_guess(db, obj, current_user, guess_in.word)
+    result = apply_wordle_guess(db, obj, current_user, guess_in.word)
     if result.status != "completed":
         schedule_bot_turn(background_tasks, db, obj)
     return result
@@ -257,7 +257,7 @@ async def submit_guess(
 # --- races (word_race, cipher_race) ------------------------------------------
 
 
-async def _submit_race_guess(
+def _submit_race_guess(
     db: Session,
     match: Match,
     user: User,
@@ -267,7 +267,7 @@ async def _submit_race_guess(
     """The move itself lives in `match_play`, shared with the bot. The 409 stays
     here: it is an HTTP concern, and the bot has no response to put it in."""
     try:
-        result = await apply_race_guess(db, match, user, guess)
+        result = apply_race_guess(db, match, user, guess)
     except MoveRejected as exc:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT, detail=str(exc)
@@ -279,7 +279,7 @@ async def _submit_race_guess(
 
 
 @router.post("/{match_id}/word/guess", response_model=RaceGuessResult)
-async def submit_word_race_guess(
+def submit_word_race_guess(
     match_id: int,
     guess_in: MatchGuessCreate,
     background_tasks: BackgroundTasks,
@@ -294,13 +294,13 @@ async def submit_word_race_guess(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="Not a valid word"
         )
-    return await _submit_race_guess(
+    return _submit_race_guess(
         db, obj, current_user, guess_in.word.lower(), background_tasks
     )
 
 
 @router.post("/{match_id}/cipher/guess", response_model=RaceGuessResult)
-async def submit_cipher_race_guess(
+def submit_cipher_race_guess(
     match_id: int,
     guess_in: CipherAttempt,
     background_tasks: BackgroundTasks,
@@ -311,16 +311,14 @@ async def submit_cipher_race_guess(
     obj = _get_match_or_404(db, match_id)
     _require_participant(obj, current_user)
     _require_game(obj, match_modes.CIPHER_RACE)
-    return await _submit_race_guess(
-        db, obj, current_user, guess_in.attempt, background_tasks
-    )
+    return _submit_race_guess(db, obj, current_user, guess_in.attempt, background_tasks)
 
 
 # --- sudoku co-op -----------------------------------------------------------
 
 
 @router.post("/{match_id}/sudoku/move", response_model=SudokuCoopMoveResult)
-async def submit_sudoku_move(
+def submit_sudoku_move(
     match_id: int,
     move_in: SudokuCoopMoveCreate,
     db: Session = Depends(deps.get_db),
@@ -348,9 +346,9 @@ async def submit_sudoku_move(
         "value": result.value,
     }
     if result.correct:
-        await manager.broadcast({"type": "cell_filled", **move}, topic=topic)
+        manager.broadcast_from_thread({"type": "cell_filled", **move}, topic=topic)
     else:
-        await manager.broadcast(
+        manager.broadcast_from_thread(
             {
                 "type": "mistake",
                 **move,
@@ -360,7 +358,7 @@ async def submit_sudoku_move(
             topic=topic,
         )
     if result.status == "completed":
-        await manager.broadcast(
+        manager.broadcast_from_thread(
             {
                 "type": "match_completed",
                 "match_id": match_id,

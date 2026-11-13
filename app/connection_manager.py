@@ -4,6 +4,7 @@ import re
 from typing import Any
 from uuid import uuid4
 
+import anyio.from_thread
 from fastapi import WebSocket
 from loguru import logger
 from redis import asyncio as aioredis
@@ -181,6 +182,22 @@ class ConnectionManager:
         await self._redis.publish(
             BROADCAST_CHANNEL, json.dumps({"topic": topic, "message": message})
         )
+
+    # Sync code reaches the loop through these. The database session is synchronous,
+    # so routes and services that touch it are plain `def` and run in FastAPI's
+    # threadpool; `from_thread.run` hands the publish back to the event loop and waits
+    # for it. It raises if called on the loop's own thread, so async code must await
+    # `broadcast` / `send_to_user` instead.
+
+    def broadcast_from_thread(
+        self, message: dict[str, Any], topic: str | None = None
+    ) -> None:
+        """`broadcast`, for sync code running in a worker thread."""
+        anyio.from_thread.run(self.broadcast, message, topic)
+
+    def send_to_user_from_thread(self, user_id: int, message: dict[str, Any]) -> None:
+        """`send_to_user`, for sync code running in a worker thread."""
+        anyio.from_thread.run(self.send_to_user, user_id, message)
 
     async def _listen(self) -> None:
         """Deliver messages published by any worker to this worker's connections."""

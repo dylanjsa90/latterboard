@@ -88,7 +88,7 @@ def get_optional_current_user(
     return user
 
 
-async def get_current_user_ws(
+def get_current_user_ws(
     websocket: WebSocket, token: str | None = Query(default=None)
 ) -> User:
     """Authenticate a websocket handshake, rejecting it if the token doesn't check out.

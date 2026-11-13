@@ -1,7 +1,9 @@
+import asyncio
 import atexit
 import os
 import shutil
 import tempfile
+import traceback
 
 # Settings() reads the environment at import, so these must precede every app import.
 # Only real env vars count: a developer's app/.env.local (SMTP, Google, a Postgres
@@ -56,6 +58,38 @@ def _skip_fsync(dbapi_connection, _record):
     cursor.execute("PRAGMA synchronous=OFF")
     cursor.execute("PRAGMA journal_mode=MEMORY")
     cursor.close()
+
+
+_queries_on_the_loop: list[str] = []
+
+
+@event.listens_for(engine, "before_cursor_execute")
+def _record_queries_on_the_loop(_conn, _cursor, statement, *_args):
+    """The session is synchronous, so a query on the event loop's thread freezes every
+    request and websocket until the database answers. Sync routes and dependencies run
+    in FastAPI's threadpool; async code must hand database work to `run_in_threadpool`."""
+    try:
+        asyncio.get_running_loop()
+    except RuntimeError:
+        return
+    caller = [
+        f for f in traceback.extract_stack() if f"{os.sep}app{os.sep}" in f.filename
+    ]
+    _queries_on_the_loop.append(
+        f"{statement.split()[0]} from "
+        + " <- ".join(f"{f.name} ({f.filename}:{f.lineno})" for f in reversed(caller))
+    )
+
+
+@pytest.fixture(autouse=True)
+def no_queries_on_the_event_loop():
+    # Cleared here, not at import: the app's startup seeds the database on the loop
+    # before it serves anything, which is harmless.
+    _queries_on_the_loop.clear()
+    yield
+    assert not _queries_on_the_loop, "Database queries ran on the event loop:\n" + (
+        "\n".join(dict.fromkeys(_queries_on_the_loop))
+    )
 
 
 @pytest.fixture(scope="session")

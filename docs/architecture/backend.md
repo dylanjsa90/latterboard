@@ -116,7 +116,7 @@ table), so imports always name the module.
 | `core/redis_client.py` | Shared async Redis client for one-off commands (the `ConnectionManager` keeps its own for pub/sub) | `redis_client` |
 | `core/base_class.py` | Declarative base; a model without `__tablename__` gets its lowercased class name | `Base` |
 | `app/database.py` | Engine and session factory from `settings.DATABASE_URL` | `engine`, `SessionLocal` |
-| `app/connection_manager.py` | Topic membership, Redis presence, pub/sub delivery, heartbeat | `manager` (`connect`, `join`, `disconnect`, `disconnect_all`, `broadcast(msg, topic)`, `send_to_user(user_id, msg)`, `count`, `usernames`) |
+| `app/connection_manager.py` | Topic membership, Redis presence, pub/sub delivery, heartbeat | `manager` (`connect`, `join`, `disconnect`, `disconnect_all`, `broadcast(msg, topic)`, `send_to_user(user_id, msg)`, their `*_from_thread` twins for sync code in a worker thread, `count`, `usernames`) |
 | `app/utils.py` | `utcnow()` for the naive-UTC columns | `utcnow` |
 
 ## `tests/`

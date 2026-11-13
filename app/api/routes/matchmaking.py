@@ -17,6 +17,7 @@ HSETNX and cleared everywhere the player leaves the queue.
 import time
 
 from fastapi import APIRouter, Depends, HTTPException, Response, status
+from fastapi.concurrency import run_in_threadpool
 from sqlalchemy.orm import Session
 
 from app.api import deps
@@ -27,6 +28,7 @@ from app.crud.match import match as crud_match
 from app.crud.user import user as crud_user
 from app.game import match_modes
 from app.models import User
+from app.schemas.match import MatchPublic
 from app.schemas.matchmaking import MatchmakingStatus
 from app.services.match_start import notify_match_started, start_match
 
@@ -104,6 +106,17 @@ def _bot_for(db: Session, game: str, waited: float) -> User | None:
     return crud_user.get_bot(db)
 
 
+def _start_and_notify(
+    db: Session, waiting: User, joining: User, game: str
+) -> MatchPublic:
+    """The database half of a pairing, run in the threadpool: the route itself stays
+    async for its Redis calls."""
+    obj = start_match(db, waiting=waiting, joining=joining, game=game)
+    public = crud_match.to_public(db, obj)
+    notify_match_started(obj, public)
+    return public
+
+
 def _queued() -> MatchmakingStatus:
     return MatchmakingStatus(
         status="queued", queue_ttl_seconds=settings.MATCHMAKING_QUEUE_TTL_SECONDS
@@ -145,7 +158,8 @@ async def join_queue(
     # `start_match` makes the waiting player the inviter, who takes the first turn
     # in wordle — so which side waited decides who opens.
     if not opponent_id:
-        opponent = _bot_for(db, game, waited=now - float(waiting_since or now))
+        waited = now - float(waiting_since or now)
+        opponent = await run_in_threadpool(_bot_for, db, game, waited)
         if opponent is None:
             return _queued()
         # The bot is in no queue, so only the caller needs removing.
@@ -154,7 +168,7 @@ async def join_queue(
         # computer.
         waiting, joining = current_user, opponent
     else:
-        opponent = db.get(User, int(opponent_id))
+        opponent = await run_in_threadpool(db.get, User, int(opponent_id))
         if opponent is None or not opponent.is_active:
             # The waiting account went away while queued; wait for someone else.
             await redis.zadd(queue_key(game), {str(current_user.id): now})
@@ -162,9 +176,7 @@ async def join_queue(
         # The player already in the queue waited; the caller has just joined.
         waiting, joining = opponent, current_user
 
-    obj = start_match(db, waiting=waiting, joining=joining, game=game)
-    public = crud_match.to_public(db, obj)
-    await notify_match_started(obj, public)
+    public = await run_in_threadpool(_start_and_notify, db, waiting, joining, game)
     return MatchmakingStatus(
         status="matched",
         match=public,

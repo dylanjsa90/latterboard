@@ -9,6 +9,10 @@ Nothing here raises `HTTPException`. The bot runs inside a background task, wher
 an `HTTPException` reaches no handler and is simply a traceback — so the guards
 return plain values and `MoveRejected` propagates, leaving each caller to decide
 what a rejection means. The routes turn it into a 409; the bot shrugs and stops.
+
+These are plain `def` and must run in a worker thread (FastAPI's threadpool for the
+routes, `run_in_threadpool` for the bot): the session is synchronous, and
+`broadcast_from_thread` raises on the event loop's own thread.
 """
 
 from sqlalchemy.orm import Session
@@ -29,14 +33,14 @@ def wordle_move_error(match: Match, user: User) -> str | None:
     return None
 
 
-async def apply_wordle_guess(
+def apply_wordle_guess(
     db: Session, match: Match, user: User, word: str
 ) -> MatchGuessResult:
     """Record a turn-based guess and broadcast it to the match topic."""
     match_id = match.id
     result = crud_match.submit_guess(db, match, user, word)
 
-    await manager.broadcast(
+    manager.broadcast_from_thread(
         {
             "type": "opponent_guessed",
             "match_id": result.match_id,
@@ -50,7 +54,7 @@ async def apply_wordle_guess(
     )
 
     if result.status == "completed":
-        await manager.broadcast(
+        manager.broadcast_from_thread(
             {
                 "type": "match_completed",
                 "match_id": match_id,
@@ -63,7 +67,7 @@ async def apply_wordle_guess(
             topic=f"match:{match_id}",
         )
     else:
-        await manager.broadcast(
+        manager.broadcast_from_thread(
             {
                 "type": "your_turn",
                 "match_id": match_id,
@@ -75,7 +79,7 @@ async def apply_wordle_guess(
     return result
 
 
-async def apply_race_guess(
+def apply_race_guess(
     db: Session, match: Match, user: User, guess: str | list[int]
 ) -> RaceGuessResult:
     """Record a race guess and broadcast it. Raises `MoveRejected` if the match is
@@ -84,7 +88,7 @@ async def apply_race_guess(
 
     topic = f"match:{match.id}"
     # Grades only: the guess itself would hand the opponent the letters/digits.
-    await manager.broadcast(
+    manager.broadcast_from_thread(
         {
             "type": "opponent_guessed",
             "match_id": match.id,
@@ -96,7 +100,7 @@ async def apply_race_guess(
         topic=topic,
     )
     if result.status == "completed":
-        await manager.broadcast(
+        manager.broadcast_from_thread(
             {
                 "type": "match_completed",
                 "match_id": match.id,
