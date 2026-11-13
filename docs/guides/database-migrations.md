@@ -57,7 +57,7 @@ added before stamping `0001`), so this is only needed for another old database, 
 local `sql_app.db` from before migrations. On a VM, in the app directory:
 
 1. `uv sync --frozen --no-dev`, then stop the service and back up the database:
-   `sudo systemctl stop latterboard && cp sql_app.db sql_app.db.pre-alembic`.
+   `sudo systemctl stop latterboard && APP_ENV=production .venv/bin/python -m app.backup_db sql_app.db.pre-alembic`.
 2. Check for drift: `APP_ENV=production uv run python -m app.schema_drift`.
 3. Reconcile anything it reports. Databases from before migrations commonly lack
    `ix_user_is_bot`, because the startup column patch added `user.is_bot` without its

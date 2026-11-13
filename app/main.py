@@ -15,7 +15,7 @@ from app.connection_manager import manager
 from app.core.config import settings
 from app.core.loop_lag import watch_loop_lag
 from app.core.middleware import SecurityHeadersMiddleware
-from app.database import SessionLocal
+from app.database import SessionLocal, engine
 from app.init_db import init_db
 from app.init_logger import setup_loguru
 
@@ -43,6 +43,9 @@ async def lifespan(_: FastAPI) -> AsyncGenerator[None]:
         await lag_watch
     logger.info("Stopping connnection manager")
     await manager.stop()
+    # Closing every pooled connection lets SQLite fold its -wal file back into the
+    # database, so a stopped service leaves one self-contained file.
+    engine.dispose()
 
 
 def custom_generate_unique_id(route: APIRoute) -> str:

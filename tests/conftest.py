@@ -53,10 +53,10 @@ security.password_hash = PasswordHash(
 @event.listens_for(engine, "connect")
 def _skip_fsync(dbapi_connection, _record):
     """The test database is rebuilt for every test, so durability buys nothing. With
-    it, each DDL commit in the reset waited on the disk: seconds per test on WSL."""
+    it, each DDL commit in the reset waited on the disk: seconds per test on WSL.
+    Runs after the app's own `sqlite_pragmas`, so it keeps production's WAL mode."""
     cursor = dbapi_connection.cursor()
     cursor.execute("PRAGMA synchronous=OFF")
-    cursor.execute("PRAGMA journal_mode=MEMORY")
     cursor.close()
 
 

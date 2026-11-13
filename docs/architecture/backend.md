@@ -31,6 +31,7 @@ table), so imports always name the module.
 | `app/main.py` | FastAPI app: lifespan (`init_db`, `manager.start/stop`), middleware, `/health`; mounts `api_router` at `/api/v1` and `ws.socket_router` at the root | `app` |
 | `app/backend_pre_start.py` | Waits for the database before the container migrates and serves (`python -m app.backend_pre_start`) | `init`, `main` |
 | `app/init_db.py` | Seed rows at startup: the local default user, the bot, puzzles. Never creates tables | `init_db`, `seed_bot_user` |
+| `app/backup_db.py` | Safe copy of the SQLite database, even while it's serving: the backup API, so commits still in `-wal` come too (`python -m app.backup_db [dest]`); restoring is in README.md | `backup`, `main` |
 | `app/schema_drift.py` | Read-only check that a database's schema matches the models (`python -m app.schema_drift`) | `schema_diff`, `describe` |
 | `app/init_logger.py` | Loguru to stdout at `LOG_LEVEL`, with stdlib logging (Uvicorn included) routed through it and `token=` query values redacted | `setup_loguru` |
 | `alembic/` | Migrations (`versions/`); `env.py` takes the URL from `Settings` | |
@@ -115,7 +116,7 @@ table), so imports always name the module.
 | `core/loop_lag.py` | Logs a warning when the event loop stalls by more than 100 ms; started in the lifespan | `watch_loop_lag` |
 | `core/redis_client.py` | Shared async Redis client for one-off commands (the `ConnectionManager` keeps its own for pub/sub) | `redis_client` |
 | `core/base_class.py` | Declarative base; a model without `__tablename__` gets its lowercased class name | `Base` |
-| `app/database.py` | Engine and session factory from `settings.DATABASE_URL` | `engine`, `SessionLocal` |
+| `app/database.py` | Engine and session factory from `settings.DATABASE_URL`; SQLite runs in WAL mode with `synchronous=NORMAL` | `engine`, `SessionLocal`, `sqlite_pragmas` |
 | `app/connection_manager.py` | Topic membership, Redis presence, pub/sub delivery, heartbeat | `manager` (`connect`, `join`, `disconnect`, `disconnect_all`, `broadcast(msg, topic)`, `send_to_user(user_id, msg)`, their `*_from_thread` twins for sync code in a worker thread, `count`, `usernames`) |
 | `app/utils.py` | `utcnow()` for the naive-UTC columns | `utcnow` |
 
