@@ -112,6 +112,7 @@ table), so imports always name the module.
 | `core/google.py` | Checks a Google ID token against Google's certs and `GOOGLE_CLIENT_ID`; tests replace `verify_google_id_token` | `verify_google_id_token`, `GoogleIdentity`, `InvalidGoogleToken` |
 | `core/email.py` | Email rendering (`app/email-templates/build/`, not autoescaped) and SMTP sending | `send_email`, `render_email_template`, `generate_reset_password_email`, `generate_match_invite_email` |
 | `core/middleware.py` | Security headers (CSP etc.) on every response | `SecurityHeadersMiddleware` |
+| `core/loop_lag.py` | Logs a warning when the event loop stalls by more than 100 ms; started in the lifespan | `watch_loop_lag` |
 | `core/redis_client.py` | Shared async Redis client for one-off commands (the `ConnectionManager` keeps its own for pub/sub) | `redis_client` |
 | `core/base_class.py` | Declarative base; a model without `__tablename__` gets its lowercased class name | `Base` |
 | `app/database.py` | Engine and session factory from `settings.DATABASE_URL` | `engine`, `SessionLocal` |

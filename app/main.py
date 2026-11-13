@@ -1,3 +1,5 @@
+import asyncio
+import contextlib
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
@@ -11,6 +13,7 @@ from app.api.main import api_router
 from app.api.routes import ws
 from app.connection_manager import manager
 from app.core.config import settings
+from app.core.loop_lag import watch_loop_lag
 from app.core.middleware import SecurityHeadersMiddleware
 from app.database import SessionLocal
 from app.init_db import init_db
@@ -33,7 +36,11 @@ async def lifespan(_: FastAPI) -> AsyncGenerator[None]:
         db.close()
     logger.info("Starting connnection manager")
     await manager.start()
+    lag_watch = asyncio.create_task(watch_loop_lag())
     yield
+    lag_watch.cancel()
+    with contextlib.suppress(asyncio.CancelledError):
+        await lag_watch
     logger.info("Stopping connnection manager")
     await manager.stop()
 
