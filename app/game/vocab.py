@@ -252,59 +252,81 @@ def apply_action(
     p["seen"] = now
     advance(g, now)
     if action == "ready":
-        if g["phase"] != "lobby":
-            raise VocabError("The match has already started.", 409)
-        p["ready"] = not p["ready"]
-        if len(g["players"]) == 2 and all(x["ready"] for x in g["players"]):
-            g["phase"] = "question"
-            g["started"] = now
-            g["deadline"] = now + ROUND_MS
+        _ready(g, p, now)
     elif action == "answer":
-        if (
-            g["phase"] != "question"
-            or g["round"] != round_index
-            or g["generation"] != generation
-            or now >= g["deadline"]
-        ):
-            raise VocabError("This round has ended. Your game will refresh.", 409)
-        key = str(g["round"])
-        if key in p["answers"]:
-            raise VocabError("Your answer is already locked in.", 409)
-        q = full_question(g)
-        if choice is None or not 0 <= choice < len(q["options"]):
-            raise VocabError("Choose one of the available answers.")
-        correct = choice == q["correct"]
-        ms = max(0, now - g["started"])
-        p["answers"][key] = {
-            "choice": choice,
-            "correct": correct,
-            "ms": ms,
-            # Accuracy first: speed adds at most 5 points.
-            "points": 100 + max(0, 5 - ms // 8000) if correct else 0,
-        }
-        advance(g, now)
+        _answer(g, p, now, choice, round_index, generation)
     elif action == "next":
         if g["mode"] != "solo" or g["phase"] != "feedback":
             raise VocabError("Wait for this round to finish.", 409)
         next_round(g, now)
     elif action == "rematch":
-        if g["phase"] != "results":
-            raise VocabError("Finish this match first.", 409)
-        if player_id not in g["rematch_ready"]:
-            g["rematch_ready"].append(player_id)
-        if all(x["id"] in g["rematch_ready"] for x in g["players"]):
-            g["ids"] = _pick_words()
-            g["round"] = 0
-            g["generation"] += 1
-            g["rematch_ready"] = []
-            for x in g["players"]:
-                x["ready"] = False
-                x["answers"] = {}
-            g["phase"] = "question" if g["mode"] == "solo" else "lobby"
-            g["started"] = now
-            g["deadline"] = now + ROUND_MS
+        _rematch(g, player_id, now)
     else:
         raise VocabError("Unknown game action.")
+
+
+def _ready(g: Game, p: Player, now: int) -> None:
+    """Toggle `p`'s ready flag; the duel starts once both players are ready."""
+    if g["phase"] != "lobby":
+        raise VocabError("The match has already started.", 409)
+    p["ready"] = not p["ready"]
+    if len(g["players"]) == 2 and all(x["ready"] for x in g["players"]):
+        g["phase"] = "question"
+        g["started"] = now
+        g["deadline"] = now + ROUND_MS
+
+
+def _answer(
+    g: Game,
+    p: Player,
+    now: int,
+    choice: int | None,
+    round_index: int | None,
+    generation: int | None,
+) -> None:
+    """Lock in `p`'s answer to the current round, if it's still open."""
+    if (
+        g["phase"] != "question"
+        or g["round"] != round_index
+        or g["generation"] != generation
+        or now >= g["deadline"]
+    ):
+        raise VocabError("This round has ended. Your game will refresh.", 409)
+    key = str(g["round"])
+    if key in p["answers"]:
+        raise VocabError("Your answer is already locked in.", 409)
+    q = full_question(g)
+    if choice is None or not 0 <= choice < len(q["options"]):
+        raise VocabError("Choose one of the available answers.")
+    correct = choice == q["correct"]
+    ms = max(0, now - g["started"])
+    p["answers"][key] = {
+        "choice": choice,
+        "correct": correct,
+        "ms": ms,
+        # Accuracy first: speed adds at most 5 points.
+        "points": 100 + max(0, 5 - ms // 8000) if correct else 0,
+    }
+    advance(g, now)
+
+
+def _rematch(g: Game, player_id: str, now: int) -> None:
+    """Ask for a rematch; once everyone has, deal new words and start over."""
+    if g["phase"] != "results":
+        raise VocabError("Finish this match first.", 409)
+    if player_id not in g["rematch_ready"]:
+        g["rematch_ready"].append(player_id)
+    if all(x["id"] in g["rematch_ready"] for x in g["players"]):
+        g["ids"] = _pick_words()
+        g["round"] = 0
+        g["generation"] += 1
+        g["rematch_ready"] = []
+        for x in g["players"]:
+            x["ready"] = False
+            x["answers"] = {}
+        g["phase"] = "question" if g["mode"] == "solo" else "lobby"
+        g["started"] = now
+        g["deadline"] = now + ROUND_MS
 
 
 _PRIVATE = ("correct", "reasons", "example", "synonyms", "nuance")
