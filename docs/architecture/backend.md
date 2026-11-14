@@ -83,8 +83,9 @@ table), so imports always name the module.
 | ---- | ------- | ----------- |
 | `game/puzzles.py` | Daily puzzle logic, and the Pacific day every daily feature uses: `today()`, `day_start` (a day's naive-UTC start, for `created_at` ranges), `day_of` (a timestamp's day), puzzle-id dates, word grading, cipher feedback and stored codes, memory decks | `PACIFIC`, `today`, `day_start`, `day_of`, `dated_puzzle`, `puzzle_date`, `grade_word`, `cipher_feedback`, `encode_cipher`, `decode_cipher`, `seeded_memory_deck` |
 | `game/puzzle_seed_data.py` | Content and generators for the daily puzzles: word order, sudoku variants and generation, cipher digits, memory symbols | `shuffled_words` (a copy; never mutate `word_list`), `SUDOKU_VARIANTS`, `generate_sudoku`, `generate_cipher_digits`, `MEMORY_SYMBOLS` |
-| `game/wordle.py` | Wordle word selection, validation, and guess grading | `select_word`, `is_valid_word`, `evaluate_guess` |
+| `game/wordle.py` | Wordle word selection, validation (answers or `GUESS_WORDS`), and guess grading | `select_word`, `is_valid_word`, `evaluate_guess` |
 | `game/word_list.py` | The 2,309 five-letter answer words, shared by puzzles, matches, and the bot | `word_list` |
+| `game/guess_words.py` | The 8,636 five-letter ENABLE words (public domain) a player may also guess, so plurals and everyday words that are never answers pass `is_valid_word` | `GUESS_WORDS` |
 | `game/match_modes.py` | Rules for the puzzle match modes (`word_race`, `cipher_race`, `sudoku_coop`): new puzzles, grading, outcomes, scores | `RACE_GAMES`, `PUZZLE_MATCH_GAMES`, `new_puzzle`, `initial_state`, `grade_race_guess`, `race_outcome`, `race_score`, `sudoku_coop_score` |
 | `game/bot.py` | Move selection for the computer: filter to still-possible answers, rank, then pick, handicapped by `skill` | `choose_word`, `choose_cipher`, `word_candidates`, `cipher_candidates`, `DEFAULT_SKILL` |
 | `game/vocab.py` | Vocab Challenger rules, ported from vocab-app's `engine.ts`: rounds, deadlines (epoch ms), scoring, per-player views, review ladder | `make_game`, `join`, `touch`, `apply_action`, `visible`, `full_question`, `next_review`, `VocabError` |

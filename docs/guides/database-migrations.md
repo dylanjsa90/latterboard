@@ -1,6 +1,6 @@
 # Database migrations
 
-Last updated: 2026-11-12
+Last updated: 2026-11-13
 
 The schema is owned by Alembic (`alembic/versions/`). `alembic/env.py` takes the database
 URL from the app's `Settings`, so `DB_TYPE`, `DB_*`, `APP_ENV` and the env files pick the
@@ -31,8 +31,13 @@ database exactly as they do for the app. The app itself never creates or alters 
 5. `uv run pytest tests/test_migrations.py` fails until the models and migrations agree.
 
 Postgres needs a `NOT NULL` column added to a table with rows to have a
-`server_default` (or a backfill before the constraint). Unique constraints should be
-named, so a later migration can drop them on SQLite.
+`server_default` (or a backfill before the constraint).
+
+`Base.metadata` has a naming convention (`app/core/base_class.py`), so every constraint
+gets a predictable name (`uq_<table>_<columns>`, `fk_…`, `pk_<table>`) and a later
+migration can drop it on SQLite. Production's foreign keys and primary keys predate it and
+are unnamed; to drop one, pass `naming_convention=` to `op.batch_alter_table`, which names
+the reflected constraint by the same rule (as `0002` does for unique constraints).
 
 ## Checking a database: `app.schema_drift`
 

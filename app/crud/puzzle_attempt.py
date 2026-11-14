@@ -1,6 +1,7 @@
 from collections import Counter
 from datetime import date, timedelta
 
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
@@ -51,11 +52,20 @@ class CRUDPuzzleAttempt(
         self, db: Session, user_id: int, game: str, puzzle_id: str
     ) -> PuzzleAttempt:
         obj = self.get_for_puzzle(db, user_id, puzzle_id)
-        if obj is None:
+        if obj is not None:
+            return obj
+        try:
             obj = PuzzleAttempt(user_id=user_id, game=game, puzzle_id=puzzle_id)
             db.add(obj)
             db.commit()
-            db.refresh(obj)
+        except IntegrityError:
+            # A concurrent first move inserted the row first (one per player per puzzle).
+            db.rollback()
+            existing = self.get_for_puzzle(db, user_id, puzzle_id)
+            if existing is None:
+                raise
+            return existing
+        db.refresh(obj)
         return obj
 
     def record_attempt(

@@ -1,11 +1,15 @@
 from datetime import date, datetime, time, timedelta
 
 import pytest
+from sqlalchemy.exc import IntegrityError
 
 from app.core.config import settings
 from app.crud.puzzle import puzzle as crud_puzzle
+from app.crud.puzzle_attempt import puzzle_attempt as crud_puzzle_attempt
 from app.crud.user import user as crud_user
+from app.game import wordle
 from app.game.puzzles import day_start, grade_word, seeded_memory_deck, today
+from app.game.word_list import word_list
 from app.models.puzzle import PuzzleAttempt
 from tests.helpers import db_session
 
@@ -84,7 +88,7 @@ def test_word_guess_correct(client):
 def test_word_guess_lost_reveals_answer(client):
     puzzle = client.get(f"{BASE}/word").json()
     answer = _puzzle_answer("word", puzzle["puzzle_id"], "answer")
-    wrong = "ZZZZZ" if answer != "ZZZZZ" else "YYYYY"
+    wrong = _wrong_word(answer)
 
     r = client.post(
         f"{BASE}/word/guess",
@@ -127,14 +131,44 @@ def _word_guess(
 
 
 def _wrong_word(answer: str) -> str:
-    return "ZZZZZ" if answer != "ZZZZZ" else "YYYYY"
+    """A real word that isn't the answer."""
+    return "CRANE" if answer.upper() != "CRANE" else "ADORE"
+
+
+@pytest.mark.parametrize("signed_in", [True, False])
+def test_word_guess_must_be_a_real_word(client, auth_headers, signed_in):
+    headers = auth_headers if signed_in else {}
+    puzzle = client.get(f"{BASE}/word", headers=headers).json()
+    r = client.post(
+        f"{BASE}/word/guess",
+        headers=headers,
+        json={"puzzle_id": puzzle["puzzle_id"], "guess": "ZZZZZ", "attempt_count": 2},
+    )
+    assert r.status_code == 400
+    assert r.json()["detail"] == "Not a valid word"
+    assert _attempt_row(settings.DEFAULT_USER, puzzle["puzzle_id"]) is None
+
+
+# Plurals and everyday words that are no puzzle's answer, but that players guess.
+@pytest.mark.parametrize("word", ["books", "GAMES", "years", "tests", "boxes", "plays"])
+def test_ordinary_words_are_valid_guesses(word):
+    assert wordle.is_valid_word(word)
+
+
+def test_every_answer_is_a_valid_guess():
+    assert all(wordle.is_valid_word(word) for word in word_list)
+
+
+@pytest.mark.parametrize("word", ["zzzzz", "abcde", "book", "bookss", "b00ks"])
+def test_non_words_are_not_valid_guesses(word):
+    assert not wordle.is_valid_word(word)
 
 
 def test_word_puzzle_resumes_signed_in_guesses(client, auth_headers):
     puzzle = client.get(f"{BASE}/word", headers=auth_headers).json()
     assert puzzle["guesses"] == []
     answer = _puzzle_answer("word", puzzle["puzzle_id"], "answer")
-    wrong = "ZZZZZ" if answer != "ZZZZZ" else "YYYYY"
+    wrong = _wrong_word(answer)
     _word_guess(client, auth_headers, puzzle["puzzle_id"], wrong, 2)
 
     data = client.get(f"{BASE}/word", headers=auth_headers).json()
@@ -188,7 +222,8 @@ def test_finished_word_rejects_more_guesses(client, auth_headers):
 def test_anonymous_word_puzzle_has_no_saved_guesses(client, auth_headers):
     # A signed-in player's progress on yesterday's word stays theirs.
     yesterday_id = f"word-{(today() - timedelta(days=1)).isoformat()}"
-    _word_guess(client, auth_headers, yesterday_id, "ZZZZZ", 2)
+    wrong = _wrong_word(_puzzle_answer("word", yesterday_id, "answer"))
+    _word_guess(client, auth_headers, yesterday_id, wrong, 2)
 
     data = client.get(f"{BASE}/word").json()
     assert data["puzzle_id"] == yesterday_id
@@ -270,22 +305,80 @@ def test_sudoku_hint(client):
     assert r.json()["value"] == solution[0]
 
 
-def _solve_sudoku(client, headers, puzzle_id: str) -> list[int]:
-    solution = _puzzle_answer("sudoku", puzzle_id, "solution")
-    almost_solved = list(solution)
-    almost_solved[80] = 0
-    r = client.post(
+def _sudoku_move(client, headers, puzzle_id: str, index: int, value: int, board):
+    return client.post(
         f"{BASE}/sudoku/move",
         headers=headers,
-        json={
-            "puzzle_id": puzzle_id,
-            "index": 80,
-            "value": solution[80],
-            "board": almost_solved,
-        },
-    )
-    assert r.json()["completed"] is True
+        json={"puzzle_id": puzzle_id, "index": index, "value": value, "board": board},
+    ).json()
+
+
+def _solve_sudoku(client, headers, puzzle_id: str) -> list[int]:
+    """Fill every blank cell correctly, one move at a time."""
+    puzzle = _puzzle_answer("sudoku", puzzle_id, "puzzle")
+    solution = _puzzle_answer("sudoku", puzzle_id, "solution")
+    blanks = [i for i, value in enumerate(puzzle) if value == 0]
+    for i in blanks:
+        result = _sudoku_move(client, headers, puzzle_id, i, solution[i], puzzle)
+        assert result == {"correct": True, "completed": i == blanks[-1]}
     return solution
+
+
+def test_signed_in_sudoku_ignores_the_sent_board(client, auth_headers):
+    """A signed-in win must come from filling the cells, not from sending a finished board."""
+    puzzle = client.get(f"{BASE}/sudoku", headers=auth_headers).json()
+    solution = _puzzle_answer("sudoku", puzzle["puzzle_id"], "solution")
+    blank = puzzle["puzzle"].index(0)
+    almost_solved = list(solution)
+    almost_solved[blank] = 0
+
+    result = _sudoku_move(
+        client, auth_headers, puzzle["puzzle_id"], blank, solution[blank], almost_solved
+    )
+    assert result == {"correct": True, "completed": False}
+    hint = client.post(
+        f"{BASE}/sudoku/hint",
+        headers=auth_headers,
+        json={"puzzle_id": puzzle["puzzle_id"], "index": blank, "board": solution},
+    ).json()
+    assert hint["completed"] is False
+    row = _attempt_row(settings.DEFAULT_USER, puzzle["puzzle_id"])
+    assert (row.won, row.completed, row.guesses) == (False, False, [str(blank)])
+
+
+def test_signed_in_sudoku_completes_with_moves_and_hints(client, auth_headers):
+    puzzle = client.get(f"{BASE}/sudoku", headers=auth_headers).json()
+    puzzle_id = puzzle["puzzle_id"]
+    solution = _puzzle_answer("sudoku", puzzle_id, "solution")
+    blanks = [i for i, value in enumerate(puzzle["puzzle"]) if value == 0]
+    wrong = 1 if solution[blanks[0]] != 1 else 2
+
+    assert (
+        _sudoku_move(
+            client, auth_headers, puzzle_id, blanks[0], wrong, puzzle["puzzle"]
+        )["correct"]
+        is False
+    )
+    for i in blanks[:-1]:
+        _sudoku_move(client, auth_headers, puzzle_id, i, solution[i], puzzle["puzzle"])
+    # Filling a cell twice doesn't count it twice.
+    _sudoku_move(
+        client,
+        auth_headers,
+        puzzle_id,
+        blanks[0],
+        solution[blanks[0]],
+        puzzle["puzzle"],
+    )
+    hint = client.post(
+        f"{BASE}/sudoku/hint",
+        headers=auth_headers,
+        json={"puzzle_id": puzzle_id, "index": blanks[-1], "board": puzzle["puzzle"]},
+    ).json()
+    assert hint == {"value": solution[blanks[-1]], "completed": True}
+    row = _attempt_row(settings.DEFAULT_USER, puzzle_id)
+    assert (row.won, row.completed) == (True, True)
+    assert sorted(int(cell) for cell in row.guesses) == blanks
 
 
 def test_sudoku_puzzle_resumes_a_won_game(client, auth_headers):
@@ -530,6 +623,41 @@ def test_future_puzzle_rejected(client):
     assert r.status_code == 404
 
 
+def _move_bodies(puzzle_id: str) -> list[tuple[str, dict]]:
+    return [
+        ("word/guess", {"puzzle_id": puzzle_id, "guess": "CRANE", "attempt_count": 2}),
+        ("word/hint", {"puzzle_id": puzzle_id}),
+        (
+            "sudoku/move",
+            {"puzzle_id": puzzle_id, "index": 0, "value": 1, "board": [0] * 81},
+        ),
+        ("sudoku/hint", {"puzzle_id": puzzle_id, "index": 0, "board": [0] * 81}),
+        ("cipher/attempt", {"puzzle_id": puzzle_id, "attempt": [0, 1, 2, 3]}),
+    ]
+
+
+@pytest.mark.parametrize(
+    "path,body",
+    [
+        *_move_bodies("not-a-date"),
+        *_move_bodies(f"memory-{today().isoformat()}"),  # another game's id
+        (
+            "word/guess",
+            {"puzzle_id": "word-2026-02-30", "guess": "CRANE", "attempt_count": 2},
+        ),
+    ],
+)
+def test_moves_reject_ids_that_name_no_puzzle_of_that_game(
+    client, auth_headers, path, body
+):
+    """An unrecognized id used to fall back to today's puzzle while the attempt was saved
+    under the made-up id, so each new id replayed today's puzzle and padded the stats."""
+    r = client.post(f"{BASE}/{path}", json=body, headers=auth_headers)
+    assert r.status_code == 400
+    with db_session() as db:
+        assert db.query(PuzzleAttempt).count() == 0
+
+
 # --- attempt tracking -----------------------------------------------------
 
 
@@ -555,6 +683,42 @@ def test_authenticated_play_records_attempt(client, auth_headers):
     assert row.attempt_count == 1
     assert row.won is True
     assert row.completed is True
+
+
+def _add_attempt(user_email: str, puzzle_id: str) -> None:
+    with db_session() as db:
+        user = crud_user.get_user_by_email(db, user_email)
+        db.add(PuzzleAttempt(user_id=user.id, game="word", puzzle_id=puzzle_id))
+        db.commit()
+
+
+def test_a_player_has_one_attempt_per_puzzle():
+    puzzle_id = f"word-{today().isoformat()}"
+    _add_attempt(settings.DEFAULT_USER, puzzle_id)
+    with pytest.raises(IntegrityError):
+        _add_attempt(settings.DEFAULT_USER, puzzle_id)
+
+
+def test_racing_first_moves_share_one_attempt(monkeypatch):
+    """Two first moves both find no attempt; the one that loses the insert uses the
+    winner's row instead of failing."""
+    puzzle_id = f"word-{today().isoformat()}"
+    _add_attempt(settings.DEFAULT_USER, puzzle_id)  # the other request's insert
+    lookup = crud_puzzle_attempt.get_for_puzzle
+    calls = []
+
+    def missed_first_time(db, user_id, puzzle_id):
+        calls.append(puzzle_id)
+        return None if len(calls) == 1 else lookup(db, user_id, puzzle_id)
+
+    monkeypatch.setattr(crud_puzzle_attempt, "get_for_puzzle", missed_first_time)
+    with db_session() as db:
+        user = crud_user.get_user_by_email(db, settings.DEFAULT_USER)
+        row = crud_puzzle_attempt.record_attempt(
+            db, user.id, "word", puzzle_id, guess="crane"
+        )
+        assert row.guesses == ["crane"]
+        assert db.query(PuzzleAttempt).filter_by(user_id=user.id).count() == 1
 
 
 # --- stats -----------------------------------------------------------------

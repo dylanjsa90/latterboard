@@ -4,7 +4,7 @@
 > head-to-head matches with matchmaking and a computer opponent, Vocab Challenger rooms and
 > wordbooks, and a websocket for live play.
 
-Last updated: 2026-11-12
+Last updated: 2026-11-13
 
 Python 3.10+ with uv, SQLAlchemy, Redis, JWT auth. SQLite everywhere. Production is a Linux VM
 running Uvicorn under systemd (`deploy/latterboard.service`), not Docker; the `Dockerfile` and
@@ -76,14 +76,10 @@ Paths are in backticks, not `@` imports, so they load only when read.
 - `send_email` asserts `settings.emails_enabled` (SMTP host and from-address set). Check it before sending; invite links report `emailed: false` instead when it's off.
 
 ### Puzzles
-- Future-dated puzzle ids must return 404. Otherwise the endpoints leak upcoming answers and create rows for arbitrary dates.
-- `PuzzleAttempt.puzzle_id` is a string key like `"word-2026-09-11"`, not a foreign key to `Puzzle.id`.
-- The server decides word, sudoku, and cipher outcomes and counts a signed-in player's moves itself; a client's `attempt_count` is trusted only for guests, who record nothing. `PuzzleAttempt.guesses` holds word guesses or cipher codes (`encode_cipher`). Why: webcade's `docs/decisions/004-daily-puzzle-outcomes.md`.
+- Future-dated puzzle ids must return 404. Otherwise the endpoints leak upcoming answers and create rows for arbitrary dates. A move's id must be `{game}-YYYY-MM-DD` (400 otherwise): attempts are saved under the id as sent, so any other id would replay a puzzle under a fresh attempt.
+- `PuzzleAttempt.puzzle_id` is a string key like `"word-2026-09-11"`, not a foreign key to `Puzzle.id`. `(user_id, puzzle_id)` is unique; `get_or_create` handles two first moves racing to insert it.
+- The server decides word, sudoku, and cipher outcomes and counts a signed-in player's moves itself; a client's `attempt_count` is trusted only for guests, who record nothing. `PuzzleAttempt.guesses` holds word guesses, cipher codes (`encode_cipher`), or the sudoku cells filled, from which the server rebuilds a signed-in player's board; the board a client sends is used only for guests. Word guesses must pass `wordle.is_valid_word`. Why: webcade's `docs/decisions/004-daily-puzzle-outcomes.md`.
 - `app/game/puzzle_seed_data.py`: use `shuffled_words()`, which returns a copy. Don't shuffle or mutate the shared word list; `wordle.py` uses it too.
-- Known open issues (not fixed yet; more in `docs/plans/follow-ups.md`):
-  - Word guesses aren't checked with `wordle.is_valid_word`.
-  - `(user_id, puzzle_id)` has no unique constraint. Adding one is a migration that must first remove duplicate rows.
-  - `POST /puzzles/sudoku/move` trusts the board the client sends.
 
 ### Tests
 - `tests/conftest.py` sets env vars **before** any app import, because `Settings()` reads them at import time. Keep new overrides above the imports. `SKIP_ENV_FILE=1` keeps `app/.env.local` out, so tests see only what conftest sets (including their own `SECRET_KEY`).
