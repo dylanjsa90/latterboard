@@ -24,6 +24,7 @@ from app.schemas.match import (
     SudokuCoopMoveResult,
 )
 from app.schemas.puzzle import CipherAttempt
+from app.services import match_views
 from app.services.bot_turn import schedule_bot_turn
 from app.services.match_play import (
     apply_race_guess,
@@ -116,7 +117,7 @@ def create_invite(
             "expires_at": new_match.invite_expires_at.isoformat(),
         },
     )
-    return crud_match.to_public(db, new_match)
+    return match_views.to_public(db, new_match)
 
 
 @router.post("/{match_id}/accept", response_model=MatchPublic)
@@ -138,7 +139,7 @@ def accept_invite(
         )
 
     obj = crud_match.accept_invite(db, obj)
-    public = crud_match.to_public(db, obj)
+    public = match_views.to_public(db, obj)
     notify_match_started(obj, public)
     return public
 
@@ -163,7 +164,7 @@ def decline_invite(
     manager.send_to_user_from_thread(
         obj.inviter_id, {"type": "invite_declined", "match_id": obj.id}
     )
-    return crud_match.to_public(db, obj)
+    return match_views.to_public(db, obj)
 
 
 @router.post("/{match_id}/cancel", response_model=MatchPublic)
@@ -186,7 +187,7 @@ def cancel_invite(
     manager.send_to_user_from_thread(
         obj.invitee_id, {"type": "invite_cancelled", "match_id": obj.id}
     )
-    return crud_match.to_public(db, obj)
+    return match_views.to_public(db, obj)
 
 
 @router.get("/pending", response_model=list[PendingInvite])
@@ -195,7 +196,7 @@ def pending_invites(
     current_user: User = Depends(deps.get_current_user),
 ) -> list[PendingInvite]:
     invites = crud_match.get_pending_invites(db, current_user.id)
-    return crud_match.to_pending_invites(db, invites)
+    return match_views.pending_invites(db, invites)
 
 
 @router.get("/me/history", response_model=MatchHistory)
@@ -206,7 +207,7 @@ def my_match_history(
     current_user: User = Depends(deps.get_current_user),
 ) -> MatchHistory:
     """Your finished matches, newest first, plus your win/loss/draw record."""
-    return crud_match.get_history(db, current_user.id, skip=skip, limit=limit)
+    return match_views.history(db, current_user.id, skip=skip, limit=limit)
 
 
 @router.get("/me/active", response_model=list[ActiveMatch])
@@ -215,7 +216,7 @@ def my_active_matches(
     current_user: User = Depends(deps.get_current_user),
 ) -> list[ActiveMatch]:
     """Your pending and in-progress matches, newest first, flagged when they wait on you."""
-    return crud_match.get_active_items(db, current_user.id)
+    return match_views.active_items(db, current_user.id)
 
 
 @router.get("/{match_id}", response_model=MatchDetail)
@@ -226,7 +227,7 @@ def get_match(
 ) -> MatchDetail:
     obj = _get_match_or_404(db, match_id)
     _require_participant(obj, current_user)
-    return crud_match.to_detail(db, obj, current_user.id)
+    return match_views.to_detail(db, obj, current_user.id)
 
 
 @router.post("/{match_id}/guess", response_model=MatchGuessResult)

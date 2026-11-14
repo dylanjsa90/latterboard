@@ -24,12 +24,12 @@ from app.api import deps
 from app.api.routes.matches import SUPPORTED_GAMES
 from app.core.config import settings
 from app.core.redis_client import redis_client as redis
-from app.crud.match import match as crud_match
 from app.crud.user import user as crud_user
 from app.game import match_modes
 from app.models import User
 from app.schemas.match import MatchPublic
 from app.schemas.matchmaking import MatchmakingStatus
+from app.services import match_views
 from app.services.match_start import notify_match_started, start_match
 
 router = APIRouter(prefix="/matchmaking", tags=["matchmaking"])
@@ -112,7 +112,7 @@ def _start_and_notify(
     """The database half of a pairing, run in the threadpool: the route itself stays
     async for its Redis calls."""
     obj = start_match(db, waiting=waiting, joining=joining, game=game)
-    public = crud_match.to_public(db, obj)
+    public = match_views.to_public(db, obj)
     notify_match_started(obj, public)
     return public
 

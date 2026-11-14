@@ -1,6 +1,6 @@
 # Backend module map
 
-Last updated: 2026-11-12
+Last updated: 2026-11-13
 
 Where things live in `app/` and what each module exports. Rules for matches, matchmaking, and
 the computer opponent are in `docs/architecture/matches.md`; wire shapes are in the cross-repo
@@ -57,6 +57,7 @@ table), so imports always name the module.
 | File | Purpose | Key exports |
 | ---- | ------- | ----------- |
 | `services/match_start.py` | Starting a match between two known players, shared by accept, matchmaking, and invite links | `start_match`, `notify_match_started`, `max_guesses_for` |
+| `services/match_views.py` | Matches as response schemas, loading the players they name in one query | `to_public`, `to_detail`, `guess_result`, `history`, `active_items`, `pending_invites` |
 | `services/match_play.py` | Applying a move and broadcasting it, shared by the move routes and the bot. Raises `MoveRejected`, never `HTTPException` | `apply_wordle_guess`, `apply_race_guess`, `wordle_move_error` |
 | `services/bot_turn.py` | When the computer moves and driving it, via `BackgroundTasks` | `schedule_bot_turn`, `run_bot_turn`, `bot_participant`, `BOT_GAMES` |
 | `services/google_sign_in.py` | What `/login/google` and `POST /users/google` share: verify the credential (mapping errors to 401/403/404), mint the token | `PROVIDER`, `verified_identity`, `access_token` |
@@ -67,11 +68,11 @@ table), so imports always name the module.
 | File | Purpose | Key exports |
 | ---- | ------- | ----------- |
 | `crud/base.py` | Generic get/create/update/remove | `CRUDBase` |
-| `crud/user.py` | Users, identities (Google links), handles, avatars, and the one answer to "is this a bot?" | `user` (`get_user_by_username`, `get_user_by_email_any_case`, `get_user_by_identity`, `link_identity`, `create_user_with_identity`, `get_players`, `bot_ids`, `any_are_bots`, `set_avatar`, `authenticate`, …) |
+| `crud/user.py` | Users, identities (Google links), handles, avatars, and the one answer to "is this a bot?" | `user` (`get_by_ids`, `get_user_by_username`, `get_user_by_email_any_case`, `get_user_by_identity`, `link_identity`, `create_user_with_identity`, `get_players`, `bot_ids`, `any_are_bots`, `set_avatar`, `authenticate`, …) |
 | `crud/game_score.py` | Score rows, daily play count, all-time/daily/monthly leaderboards | `game_score` |
 | `crud/puzzle.py` | The dated puzzle bank: seeding, lookup by game and date, generating a sudoku once the bank runs out | `puzzle` (`seed_defaults`, `get_by_game_date`, `get_or_generate`, `count_by_game`) |
 | `crud/puzzle_attempt.py` | Daily puzzle attempts, stats, streaks | `puzzle_attempt` (`get_for_puzzle`, `get_or_create`, `record_attempt`, `get_stats`, `get_history`) |
-| `crud/match.py` | Match lifecycle + turn-based wordle, and the match presenters | `match` (`create_invite`, `expire_if_needed`, `get_open_match_between`, `get_pending_invites`, `get_active`, `get_active_items`, `accept_invite`, `decline_invite`, `cancel_invite`, `submit_guess`, `to_public`, `to_detail`, `to_pending_invite`) |
+| `crud/match.py` | Match lifecycle + turn-based wordle rows | `match` (`create_invite`, `expire_if_needed`, `get_open_match_between`, `get_pending_invites`, `get_active`, `get_finished`, `get_record`, `get_guesses`, `accept_invite`, `decline_invite`, `cancel_invite`, `record_guess`) |
 | `crud/match_puzzle.py` | Race/co-op state in `match_puzzle`, optimistic lock via `_apply` | `match_puzzle` (`build`, `submit_race_guess`, `race_detail`, `submit_sudoku_move`, `sudoku_detail`) |
 | `crud/invite_link.py` | Invite link rows: create, daily count, open links, status, atomic claim, revoke | `invite_link`, `invite_url` |
 | `crud/vocab.py` | Loads a room, runs a rule, saves it with an optimistic lock (`VocabRoom.version`, replayed on `StaleDataError`); `create_room` also deletes rooms a week past expiry; wordbook rows | `crud_vocab` (`create_room`, `mutate`, `wordbook`, `save`, `remove`, `review`); not `vocab`, which the module uses for the game rules |

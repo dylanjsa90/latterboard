@@ -18,6 +18,7 @@ from app.schemas.invite_link import (
     InviteLinkPublic,
 )
 from app.schemas.match import MatchPublic
+from app.services import match_views
 from app.services.match_start import notify_match_started, start_match
 from app.utils import utcnow
 
@@ -122,7 +123,7 @@ def claim_invite_link(
     if link.match_id is not None:
         claimed = crud_match.get(db, link.match_id)
         if claimed is not None:
-            return crud_match.to_public(db, claimed)
+            return match_views.to_public(db, claimed)
     if link.revoked_at is not None:
         raise HTTPException(
             status_code=status.HTTP_410_GONE, detail="This invite was withdrawn"
@@ -145,7 +146,7 @@ def claim_invite_link(
 
     obj = start_match(db, waiting=inviter, joining=current_user, game=link.game)
     crud_invite_link.set_match(db, link, obj.id)
-    public = crud_match.to_public(db, obj)
+    public = match_views.to_public(db, obj)
     notify_match_started(obj, public)
     return public
 

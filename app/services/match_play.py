@@ -22,6 +22,7 @@ from app.crud.match import match as crud_match
 from app.crud.match_puzzle import match_puzzle as crud_match_puzzle
 from app.models import Match, User
 from app.schemas.match import MatchGuessResult, RaceGuessResult
+from app.services import match_views
 
 
 def wordle_move_error(match: Match, user: User) -> str | None:
@@ -38,7 +39,8 @@ def apply_wordle_guess(
 ) -> MatchGuessResult:
     """Record a turn-based guess and broadcast it to the match topic."""
     match_id = match.id
-    result = crud_match.submit_guess(db, match, user, word)
+    guess = crud_match.record_guess(db, match, user, word)
+    result = match_views.guess_result(db, match, user, guess, word)
 
     manager.broadcast_from_thread(
         {
@@ -59,7 +61,7 @@ def apply_wordle_guess(
                 "type": "match_completed",
                 "match_id": match_id,
                 "winner_username": result.winner_username,
-                # `submit_guess` refreshes the row, so this is current; the route
+                # `record_guess` refreshes the row, so this is current; the route
                 # used to re-fetch the match here for the same value.
                 "target_word": match.target_word,
                 "reason": "solved" if result.winner_username else "exhausted",
