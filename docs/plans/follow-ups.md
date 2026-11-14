@@ -16,9 +16,6 @@ empty.
 
 ## Bugs and gaps
 
-- **The recovery email links to a page webcade doesn't have.** It points at
-  `{FRONTEND_HOST}/reset-password?token=…`, which webcade serves as a 404. Either build the
-  page in webcade (`POST /reset-password/` is ready) or hide recovery until it exists.
 - **The optional compose Postgres can't be reached.** `DATABASE_URL` always adds
   `sslmode=require`, and `postgres:16-alpine` has no SSL, so `--profile local-db` fails to
   connect. Add a `DB_SSLMODE` setting (default `require`). Production uses SQLite, so this
