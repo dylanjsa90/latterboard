@@ -167,7 +167,7 @@ and creating a room deletes those a week past that (404).
 | `GET /words` | — | `{saved: SavedWord[] (soonest due first), word_count}` |
 | `PUT /words/{id}` / `DELETE /words/{id}` | — | 204; saving again changes nothing; 400 unknown word |
 | `POST /words/{id}/review` | `{known: bool}` | 204; known moves up the ladder (due in 1, 3, 7, 14, 30, 60 days), a miss resets to level 0 (due in 10 min); 404 not saved |
-| `GET /daily-word` (public) | — | `DailyWord`: the word of the day for today's Pacific date, cycling through the curriculum by day |
+| `GET /daily-word` (public) | — | `DailyWord`: the word of the day for today's Pacific date. From 2026-12-06 word ids show one per day in order, continuing the original 46-word rotation, so adding words never changes a past day while the list stays ahead of the calendar |
 
 - `RoomSnapshot` = `{game: GameView, server_now}`.
 - `GameView` = `{code, mode, phase: lobby | question | feedback | results, round (0-4), generation, deadline, revision, rematch_requested, players: Seat[], question, mine?, history: [{question (revealed), answers: [{name, choice?, points?, correct?, ms?}]}]}`. `revision` only grows: drop a reply older than the one you have.

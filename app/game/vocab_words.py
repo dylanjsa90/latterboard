@@ -186,7 +186,24 @@ WORDS: tuple[VocabWord, ...] = load_words()
 BY_SLUG: Mapping[str, VocabWord] = MappingProxyType({w.slug: w for w in WORDS})
 
 
+LEGACY_DAILY_COUNT = 46
+DAILY_ANCHOR = date(2026, 12, 6)  # toordinal() % 46 == 0
+
+
+def daily_id(day: date, count: int) -> int:
+    """The word id for a day. Before the anchor the original 46-word rotation holds; from
+    the anchor on, ids go one per day in order, so appending words never moves a past day."""
+    n = (day - DAILY_ANCHOR).days
+    if n < 0:
+        return day.toordinal() % LEGACY_DAILY_COUNT
+    return n % count
+
+
+def daily_runway(today: date, count: int) -> int:
+    """Days left before the schedule wraps to id 0 again; negative once it has."""
+    return (DAILY_ANCHOR - today).days + count - 1
+
+
 def daily_word(day: date) -> VocabWord:
-    """The word of the day for a UTC calendar date. Consecutive days get consecutive words
-    and the list repeats every len(WORDS) days; appending a word shifts the cycle once."""
-    return WORDS[day.toordinal() % len(WORDS)]
+    """The word of the day for a calendar date (callers pass the Pacific day)."""
+    return WORDS[daily_id(day, len(WORDS))]

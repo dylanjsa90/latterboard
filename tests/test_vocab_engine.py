@@ -6,7 +6,14 @@ from datetime import date, timedelta
 import pytest
 
 from app.game import vocab
-from app.game.vocab_words import WORDS, daily_word
+from app.game.vocab_words import (
+    DAILY_ANCHOR,
+    LEGACY_DAILY_COUNT,
+    WORDS,
+    daily_id,
+    daily_runway,
+    daily_word,
+)
 
 
 def player(player_id: str) -> vocab.Player:
@@ -43,13 +50,25 @@ def test_word_ids_are_stable_and_games_mix_difficulties():
     assert len({WORDS[i].difficulty for i in g["ids"]}) == 3
 
 
-def test_daily_word_changes_each_day_and_cycles_through_every_word():
-    day = date(2026, 10, 5)
-    assert daily_word(day) == daily_word(date(2026, 10, 5))
-    assert daily_word(day + timedelta(days=1)) != daily_word(day)
-    cycle = [daily_word(day + timedelta(days=i)) for i in range(len(WORDS))]
-    assert {w.id for w in cycle} == {w.id for w in WORDS}
-    assert daily_word(day + timedelta(days=len(WORDS))) == daily_word(day)
+def test_daily_word_matches_the_original_rotation_while_the_list_has_46_words():
+    assert DAILY_ANCHOR.toordinal() % LEGACY_DAILY_COUNT == 0
+    for offset in range(-400, 400):
+        day = DAILY_ANCHOR + timedelta(days=offset)
+        assert daily_id(day, 46) == day.toordinal() % 46, day
+
+
+def test_appending_words_never_changes_a_day_already_scheduled():
+    for count in (46, 47, 146):
+        days = [DAILY_ANCHOR + timedelta(days=o) for o in range(-200, count)]
+        assert [daily_id(d, count) for d in days] == [daily_id(d, 5000) for d in days]
+    assert daily_id(DAILY_ANCHOR + timedelta(days=46), 47) == 46
+    week = [daily_id(DAILY_ANCHOR + timedelta(days=o), 146) for o in range(40, 47)]
+    assert week == [40, 41, 42, 43, 44, 45, 46]
+    assert daily_runway(DAILY_ANCHOR, 46) == 45
+    assert daily_runway(DAILY_ANCHOR + timedelta(days=46), 46) == -1
+    assert daily_runway(DAILY_ANCHOR + timedelta(days=46), 146) == 99
+    # Literal, from the original formula: date(2026, 10, 5).toordinal() % 46 == 30.
+    assert daily_word(date(2026, 10, 5)) == WORDS[30]
 
 
 def test_every_word_has_a_pronunciation():
