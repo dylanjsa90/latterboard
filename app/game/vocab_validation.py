@@ -31,9 +31,13 @@ _SLUG = re.compile(r"^[a-z]+(?:-[a-z]+)*$")
 _PARTS = re.compile(r"[ '\-]")
 
 
+def _exact_count(sentence: str, word: str) -> int:
+    return len(re.findall(rf"\b{re.escape(word)}\b", sentence, re.I))
+
+
 def has_exact_word(sentence: str, word: str) -> bool:
     """The word appears whole, which is what the room's blank substitution needs."""
-    return bool(re.search(rf"\b{re.escape(word)}\b", sentence, re.I))
+    return _exact_count(sentence, word) > 0
 
 
 def uses_word(sentence: str, word: str) -> bool:
@@ -132,10 +136,7 @@ def entry_errors(w: VocabWord, *, strict: bool = False) -> list[str]:
     if len(w.options) != expected:
         errors.append(f"{s}: options: expected {OPTION_COUNT}, got {len(w.options)}")
     errors += _usage_options(s, "", w.word, w.options, w.reasons)
-    if (
-        w.options
-        and len(re.findall(rf"\b{re.escape(w.word)}\b", w.options[0], re.I)) != 1
-    ):
+    if w.options and _exact_count(w.options[0], w.word) != 1:
         errors.append(f'{s}: options[0] must contain "{w.word}" exactly once')
     if not uses_word(w.example, w.word):
         errors.append(f"{s}: example does not use {w.word}")
