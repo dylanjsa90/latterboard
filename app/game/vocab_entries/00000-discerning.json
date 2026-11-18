@@ -1,0 +1,30 @@
+{
+  "id": 0,
+  "slug": "discerning",
+  "word": "discerning",
+  "pos": "adjective",
+  "pronunciation": "/dɪˈsɜːr.nɪŋ/",
+  "definition": "Showing good judgment and an ability to notice subtle differences.",
+  "difficulty": "Foundation",
+  "example": "A discerning listener hears the tension beneath a polite reply.",
+  "synonyms": [
+    "perceptive",
+    "judicious"
+  ],
+  "nuance": "Discernment implies judgment, not merely sharp eyesight.",
+  "alternatives": [],
+  "prompt": "An editor is choosing which essays to publish.",
+  "options": [
+    "The discerning editor distinguished an original argument from a merely fashionable one.",
+    "The discerning editor accepted every essay without reading it.",
+    "The discerning editor could not tell an argument from an anecdote.",
+    "The discerning editor printed the essays in alphabetical order."
+  ],
+  "reasons": [
+    "Careful discrimination between quality and appearance shows good judgment.",
+    "Accepting everything without examination shows no discrimination.",
+    "Failing to notice an important distinction is the opposite of discernment.",
+    "Alphabetical organization says nothing about judgment."
+  ],
+  "practice": null
+}

@@ -1,0 +1,30 @@
+{
+  "id": 10,
+  "slug": "lucid",
+  "word": "lucid",
+  "pos": "adjective",
+  "pronunciation": "/ˈluː.sɪd/",
+  "definition": "Clear and easy to understand; also mentally clear.",
+  "difficulty": "Foundation",
+  "example": "During a lucid interval, he recognized the visitors.",
+  "synonyms": [
+    "clear",
+    "intelligible"
+  ],
+  "nuance": "Lucid can describe expression or a state of mental clarity.",
+  "alternatives": [],
+  "prompt": "A lecturer explains a complex model.",
+  "options": [
+    "Her lucid explanation made the unfamiliar model easy to follow.",
+    "Her lucid explanation was impossible to understand.",
+    "Her lucid explanation used contradictions to obscure the point.",
+    "Her explanation was lucid because the room was brightly lit."
+  ],
+  "reasons": [
+    "Clarity and intelligibility illustrate lucid expression.",
+    "Incomprehensibility contradicts lucidity.",
+    "Obscurity is the opposite of clarity.",
+    "Room lighting does not establish clarity of thought."
+  ],
+  "practice": null
+}

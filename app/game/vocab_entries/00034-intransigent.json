@@ -1,0 +1,32 @@
+{
+  "id": 34,
+  "slug": "intransigent",
+  "word": "intransigent",
+  "pos": "adjective",
+  "pronunciation": "/ɪnˈtræn.zɪ.dʒənt/",
+  "definition": "Unwilling to change a position or compromise.",
+  "difficulty": "Advanced",
+  "example": "The board's intransigent stance left little room for negotiation.",
+  "synonyms": [
+    "unyielding",
+    "uncompromising",
+    "obstinate"
+  ],
+  "nuance": "Intransigent is stronger than firm and usually implies a refusal that blocks agreement.",
+  "alternatives": [
+    "pragmatic",
+    "esoteric"
+  ],
+  "prompt": "A negotiator refuses every compromise despite mounting costs.",
+  "options": [
+    "The intransigent negotiator rejected every concession and refused to revise her demands.",
+    "The intransigent negotiator readily revised her demands to reach a compromise.",
+    "His intransigent argument was difficult to understand because it used unfamiliar terminology."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: unwilling to change a position or compromise.",
+    "Readiness to compromise conflicts with intransigence.",
+    "Unfamiliar terminology makes language difficult, not a person uncompromising."
+  ],
+  "practice": null
+}

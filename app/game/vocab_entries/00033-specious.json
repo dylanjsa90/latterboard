@@ -1,0 +1,32 @@
+{
+  "id": 33,
+  "slug": "specious",
+  "word": "specious",
+  "pos": "adjective",
+  "pronunciation": "/ˈspiː.ʃəs/",
+  "definition": "Appearing sound or plausible but actually misleading or false.",
+  "difficulty": "Advanced",
+  "example": "The advertisement made a specious comparison between two unrelated statistics.",
+  "synonyms": [
+    "misleading",
+    "fallacious",
+    "deceptive"
+  ],
+  "nuance": "Specious criticizes apparent validity; it does not merely mean speculative.",
+  "alternatives": [
+    "cogent",
+    "tenuous"
+  ],
+  "prompt": "An argument initially looks convincing, but scrutiny exposes its flawed premise.",
+  "options": [
+    "The specious argument looked persuasive until its false premise was exposed.",
+    "Her specious argument survived every challenge because its premises and reasoning were sound.",
+    "The specious argument was obviously absurd to everyone from the first sentence."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: appearing sound or plausible but actually misleading or false.",
+    "Sound premises and valid reasoning do not support calling an argument specious.",
+    "Specious implies a misleading appearance of plausibility, not obvious absurdity."
+  ],
+  "practice": null
+}

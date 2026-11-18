@@ -1,0 +1,32 @@
+{
+  "id": 19,
+  "slug": "ostensible",
+  "word": "ostensible",
+  "pos": "adjective",
+  "pronunciation": "/ɑːˈsten.sə.bəl/",
+  "definition": "Stated or appearing to be true, though possibly concealing something else.",
+  "difficulty": "Advanced",
+  "example": "His ostensible concern was cost, but he kept returning to questions of control.",
+  "synonyms": [
+    "apparent",
+    "professed",
+    "purported"
+  ],
+  "nuance": "Ostensible leaves room for a different underlying reality; it does not prove deception.",
+  "alternatives": [
+    "latent",
+    "unequivocal"
+  ],
+  "prompt": "A visit is officially for research, but its real purpose may be political.",
+  "options": [
+    "The ostensible purpose of the visit was research, though the private meetings suggested otherwise.",
+    "The ostensible purpose was the proven motive revealed after a full investigation.",
+    "The ostensible purpose was impossible to determine because none had been stated or appeared."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: stated or appearing to be true, though possibly concealing something else.",
+    "Ostensible refers to the apparent or professed purpose, not necessarily the proven real one.",
+    "There must be an apparent or professed basis for describing something as ostensible."
+  ],
+  "practice": null
+}

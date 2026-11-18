@@ -1,0 +1,30 @@
+{
+  "id": 13,
+  "slug": "obviate",
+  "word": "obviate",
+  "pos": "verb",
+  "pronunciation": "/ˈɑːb.vi.eɪt/",
+  "definition": "Remove a need or prevent a difficulty from arising.",
+  "difficulty": "Advanced",
+  "example": "A clear agreement obviated further debate.",
+  "synonyms": [
+    "preclude",
+    "forestall"
+  ],
+  "nuance": "Often use “obviate the need for,” rather than “obviate against.”",
+  "alternatives": [],
+  "prompt": "A team automates a repetitive check.",
+  "options": [
+    "Automation can obviate the need for daily manual checks.",
+    "Automation obviated the need by making manual checks mandatory.",
+    "The new process obviated work by doubling the required effort.",
+    "Obviate meant to describe the check in more detail."
+  ],
+  "reasons": [
+    "Removing the need for manual work illustrates obviate.",
+    "Making checks mandatory creates a need.",
+    "Doubling required work does not remove it.",
+    "Description is not prevention or removal of a need."
+  ],
+  "practice": null
+}

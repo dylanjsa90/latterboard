@@ -1,0 +1,32 @@
+{
+  "id": 32,
+  "slug": "alacrity",
+  "word": "alacrity",
+  "pos": "noun",
+  "pronunciation": "/əˈlækrəti/ (uh-LAK-ruh-tee)/",
+  "definition": "Cheerful readiness or eagerness.",
+  "difficulty": "Advanced",
+  "example": "The team responded with alacrity to the chance to test its idea.",
+  "synonyms": [
+    "eagerness",
+    "enthusiasm",
+    "readiness"
+  ],
+  "nuance": "Alacrity often describes willingness to act; speed without willingness is insufficient.",
+  "alternatives": [
+    "reticence",
+    "precision"
+  ],
+  "prompt": "A volunteer eagerly accepts an unexpected assignment.",
+  "options": [
+    "She accepted the assignment with alacrity and immediately offered to help further.",
+    "He accepted with alacrity only after repeated pressure, visibly reluctant.",
+    "The work showed alacrity because every measurement was exact."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: cheerful readiness or eagerness.",
+    "Visible reluctance contradicts eager willingness.",
+    "Exactness is precision, not cheerful readiness."
+  ],
+  "practice": null
+}

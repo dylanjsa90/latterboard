@@ -1,0 +1,32 @@
+{
+  "id": 37,
+  "slug": "exacerbate",
+  "word": "exacerbate",
+  "pos": "verb",
+  "pronunciation": "/ɪɡˈzæs.ər.beɪt/",
+  "definition": "Make a problem or negative condition worse.",
+  "difficulty": "Intermediate",
+  "example": "The dry wind exacerbated the risk of fire.",
+  "synonyms": [
+    "aggravate",
+    "worsen",
+    "intensify"
+  ],
+  "nuance": "Exacerbate normally refers to adverse conditions, not improvements.",
+  "alternatives": [
+    "mitigate",
+    "elucidate"
+  ],
+  "prompt": "A hasty response increases existing tension.",
+  "options": [
+    "An accusatory email can exacerbate the tension between the departments.",
+    "The careful apology exacerbated the tension by reducing it.",
+    "The analyst exacerbated the tension by describing it accurately, without affecting it."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: make a problem or negative condition worse.",
+    "Reducing a problem alleviates or mitigates it.",
+    "Describing a condition does not necessarily worsen it."
+  ],
+  "practice": null
+}

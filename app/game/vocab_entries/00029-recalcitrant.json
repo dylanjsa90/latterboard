@@ -1,0 +1,30 @@
+{
+  "id": 29,
+  "slug": "recalcitrant",
+  "word": "recalcitrant",
+  "pos": "adjective",
+  "pronunciation": "/rɪˈkæl.sɪ.trənt/",
+  "definition": "Stubbornly resisting authority, guidance, or control.",
+  "difficulty": "Advanced",
+  "example": "The trainer struggled with a recalcitrant horse.",
+  "synonyms": [
+    "defiant",
+    "obstinate"
+  ],
+  "nuance": "Recalcitrant often involves resistance to authority, not any disagreement.",
+  "alternatives": [],
+  "prompt": "A committee refuses an agreed procedure.",
+  "options": [
+    "The recalcitrant members repeatedly refused to follow the agreed rules.",
+    "The recalcitrant members complied readily with every instruction.",
+    "Recalcitrant meant the members had never received instructions.",
+    "The members were recalcitrant because they were very quiet."
+  ],
+  "reasons": [
+    "Persistent refusal illustrates resistance to control.",
+    "Ready compliance is the opposite of resistance.",
+    "Lack of instructions does not establish defiance.",
+    "Quietness alone says nothing about resistance."
+  ],
+  "practice": null
+}

@@ -1,0 +1,32 @@
+{
+  "id": 31,
+  "slug": "nuanced",
+  "word": "nuanced",
+  "pos": "adjective",
+  "pronunciation": "/ˈnuː.ɑːnst/",
+  "definition": "Showing or recognizing subtle distinctions.",
+  "difficulty": "Foundation",
+  "example": "The review offered a nuanced account of the character's loyalty and resentment.",
+  "synonyms": [
+    "subtle",
+    "discriminating",
+    "fine-grained"
+  ],
+  "nuance": "Nuanced concerns meaningful distinctions, not vagueness or unnecessary complexity.",
+  "alternatives": [
+    "dogmatic",
+    "equivocal"
+  ],
+  "prompt": "A critique distinguishes several shades of meaning instead of making a blanket judgment.",
+  "options": [
+    "Her nuanced critique separated the policy's intentions from its uneven results.",
+    "His nuanced verdict declared every aspect either perfect or worthless.",
+    "The nuanced report used complicated words but ignored all distinctions."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: showing or recognizing subtle distinctions.",
+    "A rigid either-or verdict suppresses subtle distinctions.",
+    "Complex language does not by itself demonstrate subtle understanding."
+  ],
+  "practice": null
+}

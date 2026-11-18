@@ -139,7 +139,7 @@ class CRUDVocab:
                     definition=w.definition,
                     difficulty=w.difficulty,
                     example=w.example,
-                    synonyms=w.synonyms,
+                    synonyms=", ".join(w.synonyms),
                     nuance=w.nuance,
                     due=_epoch_ms(row.due),
                     level=row.level,

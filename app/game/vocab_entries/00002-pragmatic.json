@@ -1,0 +1,32 @@
+{
+  "id": 2,
+  "slug": "pragmatic",
+  "word": "pragmatic",
+  "pos": "adjective",
+  "pronunciation": "/præɡˈmæt.ɪk/",
+  "definition": "Concerned with practical outcomes rather than abstract ideals.",
+  "difficulty": "Foundation",
+  "example": "A pragmatic timetable allowed for delays rather than assuming perfect conditions.",
+  "synonyms": [
+    "practical",
+    "realistic",
+    "workable"
+  ],
+  "nuance": "A pragmatic choice can be principled; the emphasis is on what works in the situation.",
+  "alternatives": [
+    "dogmatic",
+    "lucid"
+  ],
+  "prompt": "A team adopts a workable compromise instead of pursuing a perfect but impossible plan.",
+  "options": [
+    "She took a pragmatic approach, choosing the repair they could afford today.",
+    "He was pragmatic because he followed his principles regardless of the consequences.",
+    "The proposal was pragmatic because it was explained in exceptionally clear prose."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: concerned with practical outcomes rather than abstract ideals.",
+    "Following ideals regardless of results is not evidence of practical judgment.",
+    "Clear expression is lucid; it does not establish practicality."
+  ],
+  "practice": null
+}

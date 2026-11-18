@@ -1,0 +1,32 @@
+{
+  "id": 5,
+  "slug": "mitigate",
+  "word": "mitigate",
+  "pos": "verb",
+  "pronunciation": "/ˈmɪt.ɪ.ɡeɪt/",
+  "definition": "Make something harmful, severe, or painful less serious.",
+  "difficulty": "Foundation",
+  "example": "Additional ventilation can mitigate the effects of indoor heat.",
+  "synonyms": [
+    "lessen",
+    "alleviate",
+    "moderate"
+  ],
+  "nuance": "Mitigate usually takes a harm, risk, or adverse effect as its object.",
+  "alternatives": [
+    "elucidate",
+    "exacerbate"
+  ],
+  "prompt": "A town cannot stop a flood but can reduce the damage it causes.",
+  "options": [
+    "The new barriers helped mitigate the damage from seasonal flooding.",
+    "The barriers mitigated the river, making it vanish completely.",
+    "The committee mitigated the report by explaining every technical term."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: make something harmful, severe, or painful less serious.",
+    "Mitigate means lessen severity, not eliminate a thing entirely.",
+    "Clarifying language elucidates a report; it does not necessarily reduce harm."
+  ],
+  "practice": null
+}

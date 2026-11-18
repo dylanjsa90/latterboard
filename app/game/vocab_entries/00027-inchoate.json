@@ -1,0 +1,30 @@
+{
+  "id": 27,
+  "slug": "inchoate",
+  "word": "inchoate",
+  "pos": "adjective",
+  "pronunciation": "/ɪnˈkoʊ.ət/",
+  "definition": "Just beginning and not yet fully formed or organized.",
+  "difficulty": "Advanced",
+  "example": "An inchoate sense of unease gradually became a specific concern.",
+  "synonyms": [
+    "nascent",
+    "embryonic"
+  ],
+  "nuance": "Inchoate emphasizes lack of formation, not merely novelty.",
+  "alternatives": [],
+  "prompt": "An idea is taking shape.",
+  "options": [
+    "Her inchoate proposal contained a promising instinct but no clear plan yet.",
+    "Her inchoate proposal was complete and fully polished.",
+    "Inchoate meant that the project was finished years ago.",
+    "The proposal was inchoate because its final design was precise."
+  ],
+  "reasons": [
+    "An emerging but unformed proposal is inchoate.",
+    "A fully formed proposal is no longer inchoate.",
+    "Completion contradicts the beginning stage.",
+    "A precise final design is developed rather than unformed."
+  ],
+  "practice": null
+}

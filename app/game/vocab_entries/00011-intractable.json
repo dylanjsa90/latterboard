@@ -1,0 +1,30 @@
+{
+  "id": 11,
+  "slug": "intractable",
+  "word": "intractable",
+  "pos": "adjective",
+  "pronunciation": "/ɪnˈtræk.tə.bəl/",
+  "definition": "Difficult to control, manage, or solve.",
+  "difficulty": "Advanced",
+  "example": "The team confronted an intractable software defect.",
+  "synonyms": [
+    "stubborn",
+    "unmanageable"
+  ],
+  "nuance": "Intractable can describe people, conditions, or problems.",
+  "alternatives": [],
+  "prompt": "Negotiators face a persistent dispute.",
+  "options": [
+    "The intractable dispute resisted every proposed compromise.",
+    "The intractable dispute was easily settled in seconds.",
+    "The problem was intractable because everyone readily agreed.",
+    "Intractable meant the dispute had never begun."
+  ],
+  "reasons": [
+    "Resistance to resolution illustrates an intractable problem.",
+    "Easy resolution contradicts difficulty.",
+    "Ready agreement does not illustrate resistance.",
+    "Intractability concerns manageability, not existence."
+  ],
+  "practice": null
+}

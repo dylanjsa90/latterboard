@@ -1,0 +1,32 @@
+{
+  "id": 1,
+  "slug": "equivocal",
+  "word": "equivocal",
+  "pos": "adjective",
+  "pronunciation": "/ɪˈkwɪv.ə.kəl/",
+  "definition": "Ambiguous or open to more than one interpretation.",
+  "difficulty": "Intermediate",
+  "example": "The test produced equivocal evidence, so the investigators collected another sample.",
+  "synonyms": [
+    "ambiguous",
+    "inconclusive",
+    "unclear"
+  ],
+  "nuance": "Equivocal describes ambiguity; ambivalent describes mixed feelings.",
+  "alternatives": [
+    "ambivalent",
+    "unequivocal"
+  ],
+  "prompt": "The statement leaves it unclear whether the committee supports the proposal.",
+  "options": [
+    "The committee offered an equivocal response that could be read as approval or refusal.",
+    "The committee gave an equivocal refusal, making its opposition unmistakable.",
+    "Both candidates earned an equivocal number of votes: exactly 200 each."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: ambiguous or open to more than one interpretation.",
+    "An unmistakable refusal is unambiguous, the opposite of equivocal.",
+    "Equal quantities are equivalent or equal, not equivocal."
+  ],
+  "practice": null
+}

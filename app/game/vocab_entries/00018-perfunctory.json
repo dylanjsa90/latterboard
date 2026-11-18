@@ -1,0 +1,30 @@
+{
+  "id": 18,
+  "slug": "perfunctory",
+  "word": "perfunctory",
+  "pos": "adjective",
+  "pronunciation": "/pərˈfʌŋk.tər.i/",
+  "definition": "Done routinely with little care or interest.",
+  "difficulty": "Advanced",
+  "example": "She offered a perfunctory greeting and returned to work.",
+  "synonyms": [
+    "cursory",
+    "mechanical"
+  ],
+  "nuance": "Perfunctory suggests going through the motions, not simply being efficient.",
+  "alternatives": [],
+  "prompt": "A supervisor signs off on a report.",
+  "options": [
+    "His perfunctory review consisted of a quick glance before signing.",
+    "His perfunctory review involved weeks of meticulous scrutiny.",
+    "He gave the report a perfunctory review with intense curiosity and care.",
+    "The review was perfunctory because it reached the right conclusion."
+  ],
+  "reasons": [
+    "A token glance shows little investment in the task.",
+    "Meticulous scrutiny is not cursory.",
+    "Intense care contradicts perfunctory performance.",
+    "Correctness alone does not indicate care or its absence."
+  ],
+  "practice": null
+}

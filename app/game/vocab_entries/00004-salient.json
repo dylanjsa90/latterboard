@@ -1,0 +1,32 @@
+{
+  "id": 4,
+  "slug": "salient",
+  "word": "salient",
+  "pos": "adjective",
+  "pronunciation": "/ˈseɪ.li.ənt/",
+  "definition": "Most noticeable or important in a particular context.",
+  "difficulty": "Intermediate",
+  "example": "The most salient difference between the plans was their ongoing cost.",
+  "synonyms": [
+    "prominent",
+    "notable",
+    "key"
+  ],
+  "nuance": "Salient is context-dependent: a fact can be salient for one decision and irrelevant to another.",
+  "alternatives": [
+    "incidental",
+    "latent"
+  ],
+  "prompt": "A briefing highlights the facts that matter most to the decision.",
+  "options": [
+    "She summarized the salient findings before discussing minor details.",
+    "Every incidental detail was equally salient, with nothing standing out.",
+    "The findings were salient because they had remained hidden for years."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: most noticeable or important in a particular context.",
+    "Salience distinguishes what stands out from incidental details.",
+    "Being hidden is not being noticeable or prominent."
+  ],
+  "practice": null
+}

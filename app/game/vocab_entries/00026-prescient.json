@@ -1,0 +1,30 @@
+{
+  "id": 26,
+  "slug": "prescient",
+  "word": "prescient",
+  "pos": "adjective",
+  "pronunciation": "/ˈpreʃ.ənt/",
+  "definition": "Showing apparent knowledge of events before they happen.",
+  "difficulty": "Advanced",
+  "example": "The novel's prescient depiction of surveillance now feels familiar.",
+  "synonyms": [
+    "farseeing",
+    "prophetic"
+  ],
+  "nuance": "Prescient describes foresight; it does not require supernatural prediction.",
+  "alternatives": [],
+  "prompt": "An economist anticipates a change.",
+  "options": [
+    "Her prescient warning described the crisis months before it unfolded.",
+    "Her prescient warning merely recounted the crisis years afterward.",
+    "Prescient meant she could explain only past events.",
+    "Her warning was prescient because it was beautifully printed."
+  ],
+  "reasons": [
+    "Accurate anticipation of a future event illustrates prescience.",
+    "Retrospective reporting is not foreknowledge.",
+    "Explaining only the past does not show anticipation.",
+    "Presentation quality does not establish foresight."
+  ],
+  "practice": null
+}

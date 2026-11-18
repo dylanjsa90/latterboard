@@ -1,0 +1,30 @@
+{
+  "id": 22,
+  "slug": "veracity",
+  "word": "veracity",
+  "pos": "noun",
+  "pronunciation": "/vəˈræs.ə.ti/",
+  "definition": "Truthfulness or accuracy.",
+  "difficulty": "Advanced",
+  "example": "The contradictory dates cast doubt on his veracity.",
+  "synonyms": [
+    "truthfulness",
+    "accuracy"
+  ],
+  "nuance": "Do not confuse veracity with voracity, an intense appetite.",
+  "alternatives": [],
+  "prompt": "A journalist verifies a source's account.",
+  "options": [
+    "She checked independent records to establish the account's veracity.",
+    "She established its veracity by showing every claim was false.",
+    "The account's veracity referred to how hungry the source was.",
+    "Veracity meant the story was entertaining regardless of truth."
+  ],
+  "reasons": [
+    "Records help test whether an account is true.",
+    "Falsehood contradicts veracity.",
+    "Hunger is associated with voracity, not veracity.",
+    "Entertainment value is separate from truth."
+  ],
+  "practice": null
+}

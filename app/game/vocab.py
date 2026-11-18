@@ -14,7 +14,7 @@ import time
 from datetime import timedelta
 from typing import Any, Literal, TypedDict
 
-from app.game.vocab_words import WORDS, VocabWord
+from app.game.vocab_words import BY_SLUG, WORDS, VocabWord
 
 ROUNDS = 5
 ROUND_MS = 40_000
@@ -130,7 +130,7 @@ def _base(w: VocabWord) -> dict[str, Any]:
         "definition": w.definition,
         "difficulty": w.difficulty,
         "example": w.example,
-        "synonyms": w.synonyms,
+        "synonyms": ", ".join(w.synonyms),
         "nuance": w.nuance,
     }
 
@@ -150,8 +150,7 @@ def full_question(g: Game, r: int | None = None) -> dict[str, Any]:
             "reasons": [w.reasons[i] for i in order],
             "correct": order.index(0),
         }
-    by_word = {x.word: x for x in WORDS}
-    distractors = [by_word[a] for a in w.alternatives if a in by_word]
+    distractors = [BY_SLUG[a] for a in w.alternatives if a in BY_SLUG]
     for candidate in WORDS:
         if len(distractors) >= 2:
             break

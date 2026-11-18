@@ -1,0 +1,32 @@
+{
+  "id": 23,
+  "slug": "sanguine",
+  "word": "sanguine",
+  "pos": "adjective",
+  "pronunciation": "/ˈsæŋ.ɡwɪn/",
+  "definition": "Optimistic or hopeful, especially despite difficulty.",
+  "difficulty": "Advanced",
+  "example": "The analysts were sanguine about recovery despite the weak quarter.",
+  "synonyms": [
+    "optimistic",
+    "hopeful",
+    "confident"
+  ],
+  "nuance": "In its common figurative sense, sanguine describes outlook, not calmness or certainty of success.",
+  "alternatives": [
+    "ambivalent",
+    "reticent"
+  ],
+  "prompt": "A founder remains hopeful even after an early setback.",
+  "options": [
+    "Despite the failed trial, she remained sanguine about the next attempt.",
+    "He was sanguine about the project, expecting disaster at every stage.",
+    "The sanguine director became furious and shouted at the whole team."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: optimistic or hopeful, especially despite difficulty.",
+    "Expecting disaster is pessimistic, not optimistic.",
+    "Anger does not establish the hopeful outlook intended in this sense."
+  ],
+  "practice": null
+}

@@ -1,0 +1,32 @@
+{
+  "id": 21,
+  "slug": "tenuous",
+  "word": "tenuous",
+  "pos": "adjective",
+  "pronunciation": "/ˈten.ju.əs/",
+  "definition": "Weak, slight, or lacking a solid basis.",
+  "difficulty": "Intermediate",
+  "example": "Her claim to ownership rested on a tenuous interpretation of an unsigned note.",
+  "synonyms": [
+    "weak",
+    "slight",
+    "flimsy"
+  ],
+  "nuance": "Tenuous often describes connections, claims, or positions that may not hold up.",
+  "alternatives": [
+    "cogent",
+    "protracted"
+  ],
+  "prompt": "A theory rests on evidence with only a weak connection to the conclusion.",
+  "options": [
+    "The connection between the two events was tenuous and supported by little evidence.",
+    "The tenuous evidence conclusively settled the question.",
+    "The discussion was tenuous because it continued for three hours."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: weak, slight, or lacking a solid basis.",
+    "Conclusive evidence is strong, not tenuous.",
+    "Duration does not establish weakness or lack of substance."
+  ],
+  "practice": null
+}

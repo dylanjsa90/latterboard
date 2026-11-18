@@ -1,0 +1,32 @@
+{
+  "id": 7,
+  "slug": "cogent",
+  "word": "cogent",
+  "pos": "adjective",
+  "pronunciation": "/ˈkoʊ.dʒənt/",
+  "definition": "Clear, logical, and convincing.",
+  "difficulty": "Intermediate",
+  "example": "The lawyer gave a cogent explanation of how the records contradicted the claim.",
+  "synonyms": [
+    "convincing",
+    "compelling",
+    "sound"
+  ],
+  "nuance": "Cogent is strongest for arguments, reasons, and explanations with persuasive logic.",
+  "alternatives": [
+    "specious",
+    "laconic"
+  ],
+  "prompt": "A researcher makes a persuasive case using evidence and sound reasoning.",
+  "options": [
+    "She offered a cogent argument supported by relevant evidence and a clear chain of reasoning.",
+    "His cogent speech relied on emotional appeals that concealed contradictions.",
+    "The cogent summary was short, though its reasoning was difficult to follow."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: clear, logical, and convincing.",
+    "Emotional force cannot substitute for the logical clarity implied by cogent.",
+    "Brevity alone does not make reasoning clear and convincing."
+  ],
+  "practice": null
+}

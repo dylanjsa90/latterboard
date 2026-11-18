@@ -1,0 +1,32 @@
+{
+  "id": 39,
+  "slug": "analogous",
+  "word": "analogous",
+  "pos": "adjective",
+  "pronunciation": "/əˈnæl.ə.ɡəs/",
+  "definition": "Comparable in certain respects, often to help explain something.",
+  "difficulty": "Intermediate",
+  "example": "The court considered an analogous case with a similar contractual dispute.",
+  "synonyms": [
+    "comparable",
+    "similar",
+    "parallel"
+  ],
+  "nuance": "Analogous does not mean identical; an analogy can illuminate while still having limits.",
+  "alternatives": [
+    "disparate",
+    "equivocal"
+  ],
+  "prompt": "A writer compares two systems because they share a useful structural similarity.",
+  "options": [
+    "She described an analogous process in biology to explain the feedback loop in economics.",
+    "The systems were analogous because they had nothing relevant in common.",
+    "The two words were analogous simply because they rhymed."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: comparable in certain respects, often to help explain something.",
+    "Analogy requires a meaningful similarity.",
+    "A shared sound alone does not establish a useful comparison of meaning or structure."
+  ],
+  "practice": null
+}
