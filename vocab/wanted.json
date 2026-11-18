@@ -1,0 +1,76 @@
+{
+  "dogmatic": {
+    "word": "dogmatic",
+    "referrers": [
+      "nuanced",
+      "pragmatic"
+    ]
+  },
+  "eloquent": {
+    "word": "eloquent",
+    "referrers": [
+      "laconic",
+      "perspicacious"
+    ]
+  },
+  "enduring": {
+    "word": "enduring",
+    "referrers": [
+      "ephemeral"
+    ]
+  },
+  "expeditious": {
+    "word": "expeditious",
+    "referrers": [
+      "fastidious"
+    ]
+  },
+  "incidental": {
+    "word": "incidental",
+    "referrers": [
+      "salient"
+    ]
+  },
+  "indifferent": {
+    "word": "indifferent",
+    "referrers": [
+      "ambivalent"
+    ]
+  },
+  "meticulous": {
+    "word": "meticulous",
+    "referrers": [
+      "perspicacious"
+    ]
+  },
+  "novel": {
+    "word": "novel",
+    "referrers": [
+      "prosaic"
+    ]
+  },
+  "precision": {
+    "word": "precision",
+    "referrers": [
+      "alacrity"
+    ]
+  },
+  "protracted": {
+    "word": "protracted",
+    "referrers": [
+      "tenuous"
+    ]
+  },
+  "reticence": {
+    "word": "reticence",
+    "referrers": [
+      "alacrity"
+    ]
+  },
+  "scarce": {
+    "word": "scarce",
+    "referrers": [
+      "ubiquitous"
+    ]
+  }
+}

@@ -18,7 +18,7 @@ def entry(word_id: int, word: str, **overrides: Any) -> dict[str, Any]:
         "pronunciation": f"/{word}/",
         "definition": f"Having the quality of being {word}.",
         "difficulty": "Foundation",
-        "example": f"A {word} remark settled the matter.",
+        "example": f"Nobody doubted the {word} verdict after the vote.",
         "synonyms": [f"{word}ish", f"{word}like"],
         "nuance": f"{word.capitalize()} describes a plain quality, not a degree.",
         "alternatives": [],
@@ -38,10 +38,10 @@ def entry(word_id: int, word: str, **overrides: Any) -> dict[str, Any]:
         "practice": {
             "prompt": f"Which sentence uses {word} correctly?",
             "options": [
-                f"She made a {word} choice.",
-                f"He {word} the door.",
-                f"The {word} ran home.",
-                f"They arrived {word}.",
+                f"She made a {word} choice at lunch today.",
+                f"He {word} the heavy door slowly.",
+                f"The {word} ran home before dark.",
+                f"They arrived {word} at the station.",
             ],
             "answer": 0,
             "reasons": [
