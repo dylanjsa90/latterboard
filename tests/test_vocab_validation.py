@@ -27,6 +27,18 @@ def test_entry_errors_name_each_problem():
             'options[0] must contain "alpha" exactly once',
         ),
         (
+            {"options": [room[0] + " Alpha again.", *room[1:]]},
+            'options[0] must contain "alpha" exactly once',
+        ),
+        (
+            {"options": [*room[:3], "The remark was plainly about nothing."]},
+            "options[3] does not use alpha",
+        ),
+        (
+            {"options": ["The alpha clerk praised alphas.", *room[1:]]},
+            "options[0] still shows a form of alpha after blanking",
+        ),
+        (
             {"options": [*room[:2], "alpha " + "x" * 115, room[3]]},
             "options[2]: 121 characters (max 120)",
         ),

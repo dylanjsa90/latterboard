@@ -77,8 +77,17 @@ class VocabWord:
     practice: Practice | None
 
 
+_UNSPLIT = str.maketrans(
+    {
+        "œ": "oe", "Œ": "OE", "æ": "ae", "Æ": "AE", "ø": "o", "Ø": "O",
+        "ß": "ss", "ẞ": "SS", "ð": "d", "Ð": "D", "þ": "th", "Þ": "TH",
+        "ł": "l", "Ł": "L",
+    }
+)  # fmt: skip
+
+
 def slugify(word: str) -> str:
-    folded = unicodedata.normalize("NFKD", word)
+    folded = unicodedata.normalize("NFKD", word.translate(_UNSPLIT))
     letters = "".join(c for c in folded if not unicodedata.combining(c))
     return re.sub(r"[^a-z]+", "-", letters.lower()).strip("-")
 
@@ -161,21 +170,22 @@ def dump_entry(data: Mapping[str, Any]) -> str:
 
 def load_words(directory: Path = ENTRIES_DIR) -> tuple[VocabWord, ...]:
     """Every entry in `directory`, ordered by id. Raises ValueError on a malformed file,
-    a file name that isn't entry_filename(id, slug), a duplicate id or an id gap."""
+    a file name that isn't entry_filename(id, slug), a duplicate id or slug or an id gap."""
     by_id: dict[int, tuple[str, VocabWord]] = {}
+    by_slug: dict[str, str] = {}
     for path in sorted(directory.glob("*.json")):
-        data = json.loads(path.read_text(encoding="utf-8"))
         try:
-            w = word_from_json(data)
-        except ValueError as e:
-            raise ValueError(f"{path.name}: {e}") from None
-        if path.name != entry_filename(w.id, w.slug):
-            raise ValueError(
-                f"{path.name}: should be named {entry_filename(w.id, w.slug)}"
-            )
+            w = word_from_json(json.loads(path.read_text(encoding="utf-8")))
+            if path.name != entry_filename(w.id, w.slug):
+                raise ValueError(f"should be named {entry_filename(w.id, w.slug)}")
+        except (ValueError, TypeError, KeyError) as e:
+            raise ValueError(f"{path.name}: {e}") from e
         if w.id in by_id:
             raise ValueError(f"duplicate id {w.id}: {by_id[w.id][0]}, {path.name}")
+        if w.slug in by_slug:
+            raise ValueError(f"duplicate slug {w.slug}: {by_slug[w.slug]}, {path.name}")
         by_id[w.id] = (path.name, w)
+        by_slug[w.slug] = path.name
     for i in range(len(by_id)):
         if i not in by_id:
             raise ValueError(f"ids must run from 0 without gaps; missing {i}")

@@ -37,6 +37,9 @@ def test_slugify():
     assert [
         slugify(w) for w in ("Equivocal", "naïve", "ad hoc", "laissez-faire", "o'clock")
     ] == ["equivocal", "naive", "ad-hoc", "laissez-faire", "o-clock"]
+    assert [slugify(w) for w in ("œuvre", "æsthete", "smørgåsbord", "straße", "Łódź")] == [
+        "oeuvre", "aesthete", "smorgasbord", "strasse", "lodz",
+    ]  # fmt: skip
 
 
 def test_loader_rejects_bad_directories(tmp_path):
@@ -59,3 +62,24 @@ def test_loader_rejects_bad_directories(tmp_path):
     write_entries(tmp_path / "keys", [{**entry(0, "alpha"), "status": "pending"}])
     with pytest.raises(ValueError, match="unexpected keys: status"):
         load_words(tmp_path / "keys")
+    write_entries(
+        tmp_path / "slug", [entry(0, "alpha"), entry(1, "beta", slug="alpha")]
+    )
+    with pytest.raises(
+        ValueError, match="duplicate slug alpha: 00000-alpha.json, 00001-alpha.json"
+    ):
+        load_words(tmp_path / "slug")
+    bad = tmp_path / "bad"
+    bad.mkdir()
+    cases = {
+        "00000-alpha.json": "<<<<<<< HEAD\n",
+        "00001-beta.json": dump_entry(entry("1", "beta")),
+        "00002-gamma.json": dump_entry(entry(2, "gamma", synonyms=None)),
+        "00003-delta.json": dump_entry({"id": 3}),
+    }
+    for name, text in cases.items():
+        for old in bad.glob("*.json"):
+            old.unlink()
+        (bad / name).write_text(text)
+        with pytest.raises(ValueError, match=name):
+            load_words(bad)

@@ -6,6 +6,7 @@ import re
 from collections.abc import Sequence
 from difflib import SequenceMatcher
 
+from app.game.vocab import with_blank
 from app.game.vocab_words import DIFFICULTIES, POS, VocabWord
 
 OPTION_COUNT = 4
@@ -138,6 +139,12 @@ def entry_errors(w: VocabWord, *, strict: bool = False) -> list[str]:
     errors += _usage_options(s, "", w.word, w.options, w.reasons)
     if w.options and _exact_count(w.options[0], w.word) != 1:
         errors.append(f'{s}: options[0] must contain "{w.word}" exactly once')
+    if (
+        w.options
+        and _exact_count(w.options[0], w.word) == 1
+        and uses_word(with_blank(w.options[0], w.word), w.word)
+    ):
+        errors.append(f"{s}: options[0] still shows a form of {w.word} after blanking")
     if not uses_word(w.example, w.word):
         errors.append(f"{s}: example does not use {w.word}")
     if any(too_close(w.example, o) for o in w.options):

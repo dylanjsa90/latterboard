@@ -116,7 +116,7 @@ def _order(g: Game, r: int, length: int) -> list[int]:
     return rng.sample(range(length), length)
 
 
-def _with_blank(sentence: str, word: str) -> str:
+def with_blank(sentence: str, word: str) -> str:
     return re.sub(
         rf"\b{re.escape(word)}\b", "_____", sentence, count=1, flags=re.IGNORECASE
     )
@@ -165,7 +165,7 @@ def full_question(g: Game, r: int | None = None) -> dict[str, Any]:
     return {
         **_base(w),
         "kind": "context",
-        "prompt": _with_blank(w.options[0], w.word),
+        "prompt": with_blank(w.options[0], w.word),
         "options": [words[i].word for i in order],
         "reasons": [
             w.reasons[0]
