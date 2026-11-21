@@ -16,6 +16,9 @@ os.environ["SECRET_KEY"] = "tests-only-secret-key-at-least-32-bytes"
 # A private database per run, so concurrent runs (or a dev server) can't collide.
 os.environ["TEST_DB_DIR"] = tempfile.mkdtemp(prefix="latterboard-tests-")
 os.environ["DB_TYPE"] = "sqlite"
+# A developer's exported DSN would send test errors to sentry.io; sentry_sdk.init()
+# with no dsn falls back to this variable.
+os.environ.pop("SENTRY_DSN", None)
 os.environ["SQLITE_DATABASE_URL"] = f"sqlite:///{os.environ['TEST_DB_DIR']}/test.db"
 # Keep heartbeat frames from interleaving with the frames websocket tests assert on
 os.environ["WS_HEARTBEAT_SECONDS"] = "3600"

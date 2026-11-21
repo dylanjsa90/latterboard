@@ -17,6 +17,9 @@ engine = create_engine(
     pool_timeout=30,
     connect_args={"check_same_thread": False} if _is_sqlite else {},
     echo=settings.DEBUG,
+    # A failed statement's message would otherwise quote its bound values (emails,
+    # birth years, password hashes) into logs and Sentry.
+    hide_parameters=True,
 )
 
 

@@ -1,6 +1,7 @@
 from collections.abc import Generator
 
 import jwt
+import sentry_sdk
 from fastapi import Depends, HTTPException, Query, WebSocket, WebSocketException, status
 from fastapi.security import OAuth2PasswordBearer
 from jwt.exceptions import InvalidTokenError
@@ -52,6 +53,11 @@ def _access_token_user_id(token: str) -> int | None:
     return token_data.sub
 
 
+def _tag_error_reports(user: User) -> None:
+    # The id only: email and birth year are private (a no-op while Sentry is off).
+    sentry_sdk.set_user({"id": user.id})
+
+
 def get_current_user(
     db: Session = Depends(get_db), token: str = Depends(reusable_oauth2)
 ) -> User:
@@ -67,6 +73,7 @@ def get_current_user(
         raise HTTPException(status_code=404, detail="User not found")
     if not user.is_active:
         raise HTTPException(status_code=400, detail="Inactive user")
+    _tag_error_reports(user)
     return user
 
 
@@ -85,6 +92,7 @@ def get_optional_current_user(
     user = db.get(User, user_id)
     if not user or not user.is_active:
         return None
+    _tag_error_reports(user)
     return user
 
 
@@ -121,6 +129,7 @@ def get_current_user_ws(
                 code=status.WS_1008_POLICY_VIOLATION,
                 reason="Could not validate credentials",
             )
+        _tag_error_reports(user)
         return user
     finally:
         db.close()

@@ -24,5 +24,3 @@ empty.
 ## Code health
 
 - **The tests' `TestClient` warns** that Starlette wants `httpx2` instead of `httpx`.
-- **No error reporting.** `sentry-sdk` was removed as unused (it's still installed through
-  `fastapi[standard]`); nothing reports exceptions beyond the container log.

@@ -33,7 +33,8 @@ table), so imports always name the module.
 | `app/init_db.py` | Seed rows at startup: the local default user, the bot, puzzles. Never creates tables | `init_db`, `seed_bot_user` |
 | `app/backup_db.py` | Safe copy of the SQLite database, even while it's serving: the backup API, so commits still in `-wal` come too (`python -m app.backup_db [dest]`); restoring is in README.md | `backup`, `main` |
 | `app/schema_drift.py` | Read-only check that a database's schema matches the models (`python -m app.schema_drift`) | `schema_diff`, `describe` |
-| `app/init_logger.py` | Loguru to stdout at `LOG_LEVEL`, with stdlib logging (Uvicorn included) routed through it and `token=` query values redacted | `setup_loguru` |
+| `app/init_logger.py` | Loguru to stdout at `LOG_LEVEL`, with stdlib logging (Uvicorn included) routed through it and `token=` query values redacted | `setup_loguru`, `redact_tokens` |
+| `app/init_sentry.py` | Sentry error reporting when `SENTRY_DSN` is set, started in the lifespan after `setup_loguru`: 5xx route and websocket errors plus `logger.error`, user id only, no frame locals, `token=` and emails in URLs redacted | `setup_sentry`, `scrub_event` |
 | `alembic/` | Migrations (`versions/`); `env.py` takes the URL from `Settings` | |
 
 ## `app/api/`
@@ -110,7 +111,7 @@ table), so imports always name the module.
 
 | File | Purpose | Key exports |
 | ---- | ------- | ----------- |
-| `core/config.py` | Env-driven settings (`app/.env.local` or `app/.env`, unless `SKIP_ENV_FILE`) | `settings` (`APP_ENV`, `DATABASE_URL`, `REDIS_URL`, `MATCH_*`, `MATCHMAKING_*`, `BOT_*`, `FRONTEND_HOST`, SMTP settings, …) |
+| `core/config.py` | Env-driven settings (`app/.env.local` or `app/.env`, unless `SKIP_ENV_FILE`) | `settings` (`APP_ENV`, `DATABASE_URL`, `REDIS_URL`, `MATCH_*`, `MATCHMAKING_*`, `BOT_*`, `FRONTEND_HOST`, `SENTRY_DSN`, SMTP settings, …) |
 | `core/security.py` | Password hashing (argon2), access tokens, password-reset tokens | `get_password_hash`, `verify_password`, `create_access_token`, `generate_password_reset_token`, `verify_password_reset_token` |
 | `core/google.py` | Checks a Google ID token against Google's certs and `GOOGLE_CLIENT_ID`; tests replace `verify_google_id_token` | `verify_google_id_token`, `GoogleIdentity`, `InvalidGoogleToken` |
 | `core/email.py` | Email rendering (`app/email-templates/build/`, not autoescaped) and SMTP sending | `send_email`, `render_email_template`, `generate_reset_password_email`, `generate_match_invite_email` |

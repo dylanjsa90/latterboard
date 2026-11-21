@@ -87,6 +87,11 @@ On the VM, settings come from `app/.env` (`APP_ENV=production` reads that file, 
 `app/.env.local`). Set a real `SECRET_KEY`, `DB_TYPE=sqlite`, and `SQLITE_DATABASE_URL` as an
 absolute path, e.g. `sqlite:////home/latterboard/latterboard/sql_app.db`.
 
+To report errors to Sentry, set `SENTRY_DSN` in `app/.env` to the sentry.io project's DSN
+(Settings → Client Keys). Unhandled 5xx errors and `logger.error` / `logger.exception` lines
+are sent, tagged with `APP_ENV`, the route, and the signed-in user's id. Empty leaves reporting
+off.
+
 To deploy:
 
 1. From your machine, `UNZIP=1 scripts/upload-to-vm.sh user@host [remote_dir]`. It zips the

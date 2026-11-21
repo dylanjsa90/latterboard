@@ -7,6 +7,7 @@ import pytest
 from loguru import logger
 from pydantic import ValidationError
 
+from app import init_logger
 from app.core.config import Settings, settings
 from app.init_logger import setup_loguru
 
@@ -37,6 +38,20 @@ def _uvicorn_websocket_line(path: str) -> None:
     logging.getLogger("uvicorn.error").info(
         '%s - "WebSocket %s" [accepted]', "203.0.113.7:51234", path
     )
+
+
+def test_setup_loguru_keeps_other_sinks():
+    """Sentry's loguru handlers are added once per process, so a later setup_loguru
+    (every lifespan, or `configured_logging`) must not remove them."""
+    seen: list[str] = []
+    sink_id = logger.add(seen.append, format="{message}")
+    try:
+        setup_loguru()
+        setup_loguru()
+        logger.error("still here")
+    finally:
+        logger.remove(sink_id)
+    assert seen == ["still here\n"]
 
 
 def test_url_token_is_not_logged(configured_logging):
@@ -77,8 +92,9 @@ def test_log_level_setting_filters_stdout(monkeypatch, capsys):
         logger.complete()
         out = capsys.readouterr().out
     finally:
-        # The sink holds pytest's capture stream; don't leave it for later tests.
-        logger.remove()
+        # The sink holds pytest's capture stream; don't leave it for later tests. Only
+        # that sink: Sentry's loguru handlers are added once per process.
+        logger.remove(init_logger._sink_id)
 
     assert "loud line" in out
     assert "quiet line" not in out

@@ -18,11 +18,14 @@ from app.core.middleware import SecurityHeadersMiddleware
 from app.database import SessionLocal, engine
 from app.init_db import init_db
 from app.init_logger import setup_loguru
+from app.init_sentry import setup_sentry
 
 
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncGenerator[None]:
     setup_loguru()
+    # After setup_loguru, so the stdout sink exists when Sentry logs that it's on.
+    setup_sentry()
     logger.info("Instantiating SessionLocal")
     db = SessionLocal()
     try:

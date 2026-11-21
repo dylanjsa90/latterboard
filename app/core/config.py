@@ -55,6 +55,8 @@ class Settings(BaseSettings):
     # The web client ID from Google Cloud, the same one webcade uses. It's public, and
     # only an ID token issued for it is accepted. Empty turns Google sign-in off (404).
     GOOGLE_CLIENT_ID: str = ""
+    # The sentry.io project's DSN (Client Keys). Empty turns error reporting off.
+    SENTRY_DSN: str = ""
 
     FRONTEND_HOST: str = "http://localhost:5173"
     FRONTEND_HOST_ALT: str = "http://localhost:5174"

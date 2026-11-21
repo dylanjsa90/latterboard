@@ -1,3 +1,4 @@
+import contextlib
 import logging
 import re
 import sys
@@ -8,6 +9,14 @@ from app.core.config import settings
 
 # The websocket sends its JWT as ?token=..., and Uvicorn logs paths with the query string.
 _URL_TOKEN = re.compile(r"(token=)[^&\s\"]+")
+
+# The stdout sink setup_loguru added last, so a second call replaces only that one.
+_sink_id: int | None = None
+
+
+def redact_tokens(text: str) -> str:
+    """`text` with every `token=` query value replaced by `[redacted]`."""
+    return _URL_TOKEN.sub(r"\1[redacted]", text)
 
 
 class InterceptHandler(logging.Handler):
@@ -26,14 +35,18 @@ class InterceptHandler(logging.Handler):
             frame = frame.f_back
             depth += 1
 
-        message = _URL_TOKEN.sub(r"\1[redacted]", record.getMessage())
+        message = redact_tokens(record.getMessage())
         logger.opt(depth=depth, exception=record.exc_info).log(level, message)
 
 
 def setup_loguru() -> None:
-    logger.remove()
+    global _sink_id
+    # Remove only our own sink (or, the first time, loguru's default stderr one).
+    # Sentry adds its loguru handlers once per process, so they must survive this.
+    with contextlib.suppress(ValueError):
+        logger.remove(_sink_id if _sink_id is not None else 0)
     # stdout only: journald (systemd) or Docker collects it and handles rotation.
-    logger.add(
+    _sink_id = logger.add(
         sys.stdout,
         format="{time:YYYY-MM-DD HH:mm:ss.SSS} | {level: <8} | {name}:{function}:{line} - {message}",
         level=settings.LOG_LEVEL,
