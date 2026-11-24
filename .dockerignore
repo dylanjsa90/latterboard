@@ -24,3 +24,6 @@ docs/
 **/*.db-shm
 logs/
 **/*.log
+
+# Word-list pipeline state; never loaded by the app.
+vocab/

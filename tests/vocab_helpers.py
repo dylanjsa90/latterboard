@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from app.game.vocab_words import dump_entry, entry_filename
+from app.vocab_pipeline.store import Draft, Store
 
 
 def entry(word_id: int, word: str, **overrides: Any) -> dict[str, Any]:
@@ -61,3 +62,27 @@ def write_entries(directory: Path, entries: Iterable[dict[str, Any]]) -> None:
     for data in entries:
         path = directory / entry_filename(data["id"], data["slug"])
         path.write_text(dump_entry(data), encoding="utf-8")
+
+
+def pending_draft(word: str, **entry_overrides: Any) -> Draft:
+    """A pending, generated draft whose entry is entry(0, word, ...) without its id."""
+    proposed = entry(0, word, **entry_overrides)
+    del proposed["id"]
+    return {
+        "slug": word,
+        "word": word,
+        "pos": "adjective",
+        "difficulty": "Foundation",
+        "source": "generated",
+        "status": "pending",
+        "attempts": 1,
+        "batch_id": None,
+        "errors": [],
+        "note": "",
+        "entry": proposed,
+    }
+
+
+def make_store(tmp_path: Path, shipped: list[dict[str, Any]]) -> Store:
+    write_entries(tmp_path / "entries", shipped)
+    return Store(tmp_path / "entries", tmp_path / "vocab")
