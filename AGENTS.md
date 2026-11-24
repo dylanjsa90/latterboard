@@ -4,7 +4,7 @@
 > head-to-head matches with matchmaking and a computer opponent, Vocab Challenger rooms and
 > wordbooks, and a websocket for live play.
 
-Last updated: 2026-11-13
+Last updated: 2026-11-23
 
 Python 3.10+ with uv, SQLAlchemy, Redis, JWT auth. SQLite everywhere. Production is a Linux VM
 running Uvicorn under systemd (`deploy/latterboard.service`), not Docker; the `Dockerfile` and
@@ -64,6 +64,7 @@ Paths are in backticks, not `@` imports, so they load only when read.
 - Always use `settings.REDIS_URL`; never hardcode `localhost`. Docker compose sets `redis://redis:6379`.
 - The pub/sub client in `ConnectionManager` needs `socket_timeout=None`. redis-py 8 defaults to 5s, so an idle channel times out, `_listen` exits, and broadcasts stop without any error. The `redis>=7.4.0` pin allows 8.x.
 - `ConnectionManager` creates its Redis client in `start()` because `stop()` closes it. Don't share one client across restarts.
+- Rate limits (`app/core/rate_limit.py`) are fixed windows under `rl:*`, counted per network (`network_of`: an IPv4 address or an IPv6 /64), and fail open on a Redis error.
 
 ### Users
 - `username` is the public handle: `[a-z0-9_]{3,20}`, lowercased by `schemas/user.py`. Look it up case-insensitively (`crud_user.get_user_by_username`).
