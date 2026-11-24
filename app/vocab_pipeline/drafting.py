@@ -70,7 +70,6 @@ def select_candidates(
                 "source": "generated",
                 "status": "queued",
                 "attempts": 0,
-                "batch_id": None,
                 "errors": [],
                 "note": "",
                 "entry": None,

@@ -43,7 +43,7 @@ def test_model_output_and_prompt_example_make_valid_entries():
         ("candid", model_output("candid")),
         ("discerning", DRAFT_EXAMPLE),
     ):
-        draft = {**pending_draft(word), "entry": None, "status": "submitted"}
+        draft = {**pending_draft(word), "entry": None, "status": "queued"}
         built = entry_from_output(draft, output)
         assert entry_errors(word_from_json({**built, "id": 46})) == [], word
 

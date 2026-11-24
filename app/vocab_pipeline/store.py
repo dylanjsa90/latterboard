@@ -1,9 +1,8 @@
-"""Draft files, wanted words and batch records, and approving a draft into a shipped word.
+"""Draft files and wanted words, and approving a draft into a shipped word.
 
 `vocab/drafts/<slug>.json` holds one draft each, with a status. `vocab/wanted.json` maps a
 word that shipped entries want as an alternative to those entries, so approving it links
-it back. `vocab/batches.json` records every Message Batch submitted. Every file is written
-with `dump_entry`, so diffs stay small and stable.
+it back. Every file is written with `dump_entry`, so diffs stay small and stable.
 """
 
 import json
@@ -24,20 +23,19 @@ from app.game.vocab_words import (
 )
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-DraftStatus = Literal["queued", "submitted", "pending", "invalid", "rejected"]
+DraftStatus = Literal["queued", "pending", "invalid", "rejected"]
 Source = Literal["generated", "wanted", "backfill"]
 
 
 class Draft(TypedDict):
     slug: str
     word: str
-    # None until collected for "wanted" drafts.
+    # None until drafted for "wanted" drafts.
     pos: str | None
     difficulty: str | None
     source: Source
     status: DraftStatus
     attempts: int
-    batch_id: str | None
     errors: list[str]
     # Why the reviewer rejected it.
     note: str
@@ -49,16 +47,6 @@ class WantedWord(TypedDict):
     word: str
     # Shipped slugs that want this word as an alternative.
     referrers: list[str]
-
-
-class BatchRecord(TypedDict):
-    id: str
-    kind: Literal["draft", "backfill"]
-    slugs: list[str]
-    # ISO 8601 UTC.
-    submitted: str
-    collected: bool
-    cost_usd: float | None
 
 
 class ApprovalError(Exception):
@@ -122,12 +110,6 @@ class Store:
                 for slug, w in sorted(wanted.items())
             },
         )
-
-    def batches(self) -> list[BatchRecord]:
-        return cast(list[BatchRecord], _read_json(self.root / "batches.json", []))
-
-    def save_batches(self, batches: Sequence[BatchRecord]) -> None:
-        _write(self.root / "batches.json", list(batches))
 
     def _word(self, d: Draft, shipped: Sequence[VocabWord]) -> VocabWord:
         """The draft's entry as the word it would ship as. A backfill keeps its stored
@@ -226,7 +208,6 @@ class Store:
                 **self.draft(slug),
                 "status": "queued",
                 "attempts": 0,
-                "batch_id": None,
                 "entry": None,
                 "errors": [],
             }
