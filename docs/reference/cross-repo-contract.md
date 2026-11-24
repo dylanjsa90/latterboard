@@ -1,6 +1,6 @@
 # Cross-repo contract
 
-Last updated: 2026-11-13
+Last updated: 2026-11-23
 
 webcade (`~/projects/webcade`, React) is latterboard's (`~/projects/latterboard`, FastAPI) only
 client. This file is `docs/reference/cross-repo-contract.md` in both repos: keep the two copies
@@ -147,7 +147,7 @@ last `MATCH_INVITE_LINK_EXPIRY_DAYS` (7), and the link's sender becomes the matc
 | `POST /{token}/claim` (bearer) | — | `MatchPublic` (+ `match_started` to both), reusing an open match the pair already shares; the same match again for its claimer; 400 own link, 409 used by someone else, 410 expired or withdrawn |
 | `DELETE /{token}` (bearer, sender) | — | 204; 409 once used |
 
-### Vocab Challenger (`/vocab`, bearer)
+### Vocab Challenger (`/vocab`, bearer; a guest room's own calls take `X-Guest-Token`)
 Five-round solo sessions and two-player duels, addressed by a six-character hex invite `code`
 (case-insensitive in paths). Rooms aren't matches. Every room call applies any transition
 that's due (a round ends at its `deadline` or once everyone answered; duel feedback ends 16 s
@@ -158,18 +158,30 @@ while the socket is down. Times are **epoch ms**; compare `deadline` and `seen` 
 `server_now`, not the device clock. Rooms expire 24 h after creation (410),
 and creating a room deletes those a week past that (404).
 
+A **guest room** is a solo room started signed out. `POST /guest-rooms` returns its
+`guest_token` once, and the room stores only a hash of it. Send it as `X-Guest-Token` (32–64
+characters, 422 otherwise) on that room's `GET` and `actions`; it wins over a bearer sent
+alongside. The guest's seat is named `Guest`. A guest has no socket, so webcade moves the room by
+its deadline refetch and each action's reply. Creating guest rooms is limited, per hour, to 60
+per network (an IPv4 address or an IPv6 /64) and 2,000 overall (429 with a readable `detail`);
+play inside a room isn't limited. `POST /rooms/{code}/claim` hands the seat to the signed-in
+caller.
+
 | Call | Request | Response |
 | ---- | ------- | -------- |
-| `POST /rooms` | `{mode: solo \| duel}` | 201 `RoomSnapshot`; solo starts at round 0, a duel waits in `lobby` |
-| `GET /rooms/{code}` | — | `RoomSnapshot`; also records the caller's `seen`; 403 not a participant, 404, 410 |
-| `POST /rooms/{code}/join` | — | `RoomSnapshot`; rejoining a room you're in just reconnects; 403 solo, 409 full or started |
-| `POST /rooms/{code}/actions` | `{action: ready \| answer \| next \| rematch, generation, round?, choice?}` | `RoomSnapshot`; `ready` toggles; `answer` needs `round` and `choice` (409 stale round or generation, already answered, or past the deadline; 400 bad choice); `next` is solo feedback only; `rematch` restarts once every player asked |
+| `POST /rooms` (bearer only) | `{mode: solo \| duel}` | 201 `RoomSnapshot`; solo starts at round 0, a duel waits in `lobby` |
+| `POST /guest-rooms` (public) | — | 201 `GuestRoomSnapshot`: a solo room at round 0 with one `Guest` seat; 429 past either guest limit |
+| `POST /rooms/{code}/claim` (bearer and `X-Guest-Token`) | — | `RoomSnapshot` as the caller: the guest's seat takes their id and username, answers and score kept; 401 without a bearer; 403 the token isn't this room's guest (or was already claimed); 404; 410 |
+| `GET /rooms/{code}` (bearer or `X-Guest-Token`) | — | `RoomSnapshot`; also records the caller's `seen`; 401 with neither; 403 not a participant, 404, 410 |
+| `POST /rooms/{code}/join` (bearer only) | — | `RoomSnapshot`; rejoining a room you're in just reconnects; 403 solo, 409 full or started |
+| `POST /rooms/{code}/actions` (bearer or `X-Guest-Token`) | `{action: ready \| answer \| next \| rematch, generation, round?, choice?}` | `RoomSnapshot`; `ready` toggles; `answer` needs `round` and `choice` (409 stale round or generation, already answered, or past the deadline; 400 bad choice); `next` is solo feedback only; `rematch` restarts once every player asked |
 | `GET /words` | — | `{saved: SavedWord[] (soonest due first), word_count}` |
 | `PUT /words/{id}` / `DELETE /words/{id}` | — | 204; saving again changes nothing; 400 unknown word |
 | `POST /words/{id}/review` | `{known: bool}` | 204; known moves up the ladder (due in 1, 3, 7, 14, 30, 60 days), a miss resets to level 0 (due in 10 min); 404 not saved |
 | `GET /daily-word` (public) | — | `DailyWord`: the word of the day for today's Pacific date. From 2026-12-06 word ids show one per day in order, continuing the original 46-word rotation, so adding words never changes a past day while the list stays ahead of the calendar |
 
-- `RoomSnapshot` = `{game: GameView, server_now}`.
+- `RoomSnapshot` = `{game: GameView, server_now}`. `GuestRoomSnapshot` = `RoomSnapshot` +
+  `guest_token`, sent only by `POST /guest-rooms`.
 - `GameView` = `{code, mode, phase: lobby | question | feedback | results, round (0-4), generation, deadline, revision, rematch_requested, players: Seat[], question, mine?, history: [{question (revealed), answers: [{name, choice?, points?, correct?, ms?}]}]}`. `revision` only grows: drop a reply older than the one you have.
 - `Seat` = `{id: "me" | "opponent", name (username), ready, seen, answered, score}`. Scores count only resolved rounds.
 - `question` = `{id, word, pos, definition, difficulty: Foundation | Intermediate | Advanced, kind: usage | context, prompt, options, correct, reasons, example, synonyms, nuance}`. Until the round resolves (`phase` feedback or results) `correct` through `nuance` are null, and so are `id`, `word`, `pos`, `definition` for a `context` question, whose answer is the word.
