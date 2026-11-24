@@ -258,3 +258,61 @@ def generate(
             f"or the usage limit resets, run generate --count {queued} to carry on.\n"
         )
     return drafted
+
+
+def backfill(
+    run: Runner, store: Store, out: TextIO, confirm: Callable[[str], bool]
+) -> int:
+    """Draft a practice question, and a 4th room option where one is missing, for every
+    shipped word that lacks them, in id order. Returns how many were drafted. A word
+    with a backfill draft already (even a rejected one) isn't drafted again; requeue it."""
+    shipped = store.shipped()
+    new = [
+        w
+        for w in shipped
+        if (w.practice is None or len(w.options) < 4)
+        and not store.draft_path(w.slug).exists()
+    ]
+    queued = [
+        d["slug"]
+        for d in store.drafts()
+        if d["source"] == "backfill" and d["status"] == "queued"
+    ]
+    n = len(new) + len(queued)
+    if n == 0:
+        out.write("nothing to backfill\n")
+        return 0
+    if not confirm(
+        f"Backfill {n} words with {MODEL} on your Claude subscription, "
+        f"about {n * EST_TOKENS_PER_WORD:,} tokens of usage?"
+    ):
+        return 0
+    for w in new:
+        store.save_draft(
+            {
+                "slug": w.slug,
+                "word": w.word,
+                "pos": w.pos,
+                "difficulty": w.difficulty,
+                "source": "backfill",
+                "status": "queued",
+                "attempts": 0,
+                "errors": [],
+                "note": "",
+                "entry": None,
+            }
+        )
+    ids = {w.slug: w.id for w in shipped}
+    slugs = sorted([*queued, *(w.slug for w in new)], key=ids.__getitem__)
+    drafted = 0
+    try:
+        for slug in slugs:
+            d = draft_one(run, store, store.draft(slug))
+            drafted += 1
+            out.write(f"{slug}: {d['status']}\n")
+    except RunError as e:
+        out.write(
+            f"stopped: {e}. {drafted} drafted, {len(slugs) - drafted} still queued; "
+            "once it is fixed or the usage limit resets, run backfill to carry on.\n"
+        )
+    return drafted

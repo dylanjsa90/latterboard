@@ -13,12 +13,14 @@ import pytest
 from app.vocab_pipeline import claude
 from app.vocab_pipeline.claude import (
     RunError,
+    backfill,
     claude_command,
     generate,
     parse_result,
     run_claude,
 )
 from app.vocab_pipeline.prompts import (
+    BACKFILL_SCHEMA,
     DRAFT_SCHEMA,
     DRAFT_SYSTEM,
     PROPOSE_SCHEMA,
@@ -205,3 +207,55 @@ def test_parse_result_and_cli_failures(monkeypatch):
     monkeypatch.setattr(claude.subprocess, "run", failed("", "Usage limit reached\n"))
     with pytest.raises(RunError, match="Usage limit reached"):
         run_claude("SYSTEM", "message", {"type": "object"})
+
+
+def backfill_run(tmp_path):
+    """Alpha is complete, beta has 3 options and no practice, gamma has 4 options and no
+    practice."""
+    base = entry(1, "beta")
+    legacy_beta = {
+        **base,
+        "options": base["options"][:3],
+        "reasons": base["reasons"][:3],
+        "practice": None,
+    }
+    store = make_store(
+        tmp_path,
+        [entry(0, "alpha"), legacy_beta, {**entry(2, "gamma"), "practice": None}],
+    )
+    extra = {"sentence": base["options"][3], "reason": base["reasons"][3]}
+    fake = FakeRunner(
+        proposal=[],
+        outputs={
+            "beta": {
+                "practice": model_output("beta")["practice"],
+                "extra_option": extra,
+            },
+            "gamma": {
+                "practice": model_output("gamma")["practice"],
+                "extra_option": None,
+            },
+        },
+    )
+    assert backfill(fake, store, io.StringIO(), confirm=lambda _: True) == 2
+    return fake, store
+
+
+def test_backfill_drafts_only_words_missing_practice_or_an_option(tmp_path):
+    fake, store = backfill_run(tmp_path)
+    assert [schema for _, _, schema in fake.calls] == [BACKFILL_SCHEMA] * 2
+    beta_msg, gamma_msg = (m for _, m, _ in fake.calls)
+    assert '"beta"' in beta_msg and "three options" in beta_msg
+    assert '"gamma"' in gamma_msg and "Set extra_option to null." in gamma_msg
+    # Already drafted: nothing to do, and no prompt.
+    assert backfill(fake, store, io.StringIO(), confirm=lambda _: False) == 0
+    assert len(fake.calls) == 2
+
+
+def test_backfilled_word_is_approved_in_place(tmp_path):
+    _, store = backfill_run(tmp_path)
+    assert store.draft("beta")["status"] == "pending"
+    store.approve("beta")
+    beta = store.shipped()[1]
+    assert beta.id == 1 and len(beta.options) == 4 and beta.practice is not None
+    assert len(store.shipped()) == 3

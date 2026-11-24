@@ -214,6 +214,12 @@ def _parser() -> argparse.ArgumentParser:
     requeue = commands.add_parser("requeue", help="put drafts back in the queue")
     requeue.add_argument("slugs", nargs="+")
     commands.add_parser("fmt", help="rewrite shipped files in the canonical format")
+    fill = commands.add_parser(
+        "backfill", help="draft practice questions and 4th options for shipped words"
+    )
+    fill.add_argument(
+        "--yes", action="store_true", help="skip the usage prompt (owner agreed)"
+    )
     return parser
 
 
@@ -225,17 +231,17 @@ def main(
 ) -> int:
     args = _parser().parse_args(argv)
     store = store or Store()
+
+    def confirm(prompt: str) -> bool:
+        return bool(args.yes) or input(f"{prompt} [y/N] ").strip().lower() == "y"
+
     try:
         if args.command == "status":
             status(store, today(), out)
         elif args.command == "generate":
-
-            def confirm(prompt: str) -> bool:
-                return (
-                    bool(args.yes) or input(f"{prompt} [y/N] ").strip().lower() == "y"
-                )
-
             claude.generate(claude.run_claude, store, args.count, out, confirm)
+        elif args.command == "backfill":
+            claude.backfill(claude.run_claude, store, out, confirm)
         elif args.command == "review":
             review(store, out)
         elif args.command == "approve":
