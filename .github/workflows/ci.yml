@@ -77,7 +77,7 @@ jobs:
       - name: start-up check
         run: |
           docker run -d --name app --network host \
-            -e APP_ENV=production -e SECRET_KEY=ci-only-secret \
+            -e APP_ENV=production -e SECRET_KEY="$(openssl rand -hex 32)" \
             -e REDIS_URL=redis://localhost:6379 latterboard
           for i in $(seq 1 30); do
             if curl -sf localhost:8000/health; then exit 0; fi
