@@ -132,19 +132,3 @@ def entry_from_output(d: Draft, output: Mapping[str, Any]) -> dict[str, Any]:
         "reasons": [o["reason"] for o in room],
         "practice": _practice(slug, out["practice"]),
     }
-
-
-def backfill_entry(
-    current: Mapping[str, Any], output: Mapping[str, Any]
-) -> dict[str, Any]:
-    """`current` with the practice question from a BACKFILL_SCHEMA output, plus its
-    fourth room option when it has only three. Nothing else changes."""
-    out = _strip(output)
-    built = {**current, "practice": _practice(current["slug"], out["practice"])}
-    if len(current["options"]) == 3:
-        extra = out["extra_option"]
-        if extra is None:
-            raise ValueError("needs a fourth room option")
-        built["options"] = [*current["options"], extra["sentence"]]
-        built["reasons"] = [*current["reasons"], extra["reason"]]
-    return built

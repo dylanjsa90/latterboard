@@ -73,8 +73,8 @@ class VocabWord:
     options: tuple[str, ...]
     # Why each option is right or wrong, aligned with options.
     reasons: tuple[str, ...]
-    # Page-only practice question; None only for ids 0-45.
-    practice: Practice | None
+    # Page-only practice question; never used in a room.
+    practice: Practice
 
 
 _UNSPLIT = str.maketrans(
@@ -108,15 +108,15 @@ def _check_keys(where: str, data: Mapping[str, Any], expected: tuple[str, ...]) 
 def word_from_json(data: Mapping[str, Any]) -> VocabWord:
     _check_keys("entry", data, FIELDS)
     raw = data["practice"]
-    practice = None
-    if raw is not None:
-        _check_keys("practice", raw, PRACTICE_FIELDS)
-        practice = Practice(
-            prompt=raw["prompt"],
-            options=tuple(raw["options"]),
-            answer=raw["answer"],
-            reasons=tuple(raw["reasons"]),
-        )
+    if raw is None:
+        raise ValueError("practice is required")
+    _check_keys("practice", raw, PRACTICE_FIELDS)
+    practice = Practice(
+        prompt=raw["prompt"],
+        options=tuple(raw["options"]),
+        answer=raw["answer"],
+        reasons=tuple(raw["reasons"]),
+    )
     return VocabWord(
         id=data["id"],
         slug=data["slug"],
@@ -153,9 +153,7 @@ def word_to_json(w: VocabWord) -> dict[str, Any]:
         "prompt": w.prompt,
         "options": list(w.options),
         "reasons": list(w.reasons),
-        "practice": None
-        if p is None
-        else {
+        "practice": {
             "prompt": p.prompt,
             "options": list(p.options),
             "answer": p.answer,

@@ -4,6 +4,7 @@ from app.game.vocab_words import (
     BY_SLUG,
     ENTRIES_DIR,
     WORDS,
+    Practice,
     dump_entry,
     entry_filename,
     load_words,
@@ -30,7 +31,14 @@ def test_original_words_keep_their_ids_and_text():
     assert WORDS[0].pronunciation == "/dɪˈsɜːr.nɪŋ/"
     assert WORDS[1].options[0].startswith("The committee offered an equivocal response")
     assert all(w.slug == w.word for w in WORDS[:46])
-    assert all(w.practice is None for w in WORDS[:46])
+
+
+def test_every_shipped_word_has_four_options_and_a_practice_question(tmp_path):
+    assert all(len(w.options) == 4 for w in WORDS)
+    assert all(isinstance(w.practice, Practice) for w in WORDS)
+    write_entries(tmp_path, [{**entry(0, "alpha"), "practice": None}])
+    with pytest.raises(ValueError, match="00000-alpha.json: practice is required"):
+        load_words(tmp_path)
 
 
 def test_slugify():

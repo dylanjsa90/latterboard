@@ -32,28 +32,19 @@ class ReviewTally(TypedDict):
 
 
 def _options(
-    sentences: Sequence[str], reasons: Sequence[str], answer: int, new: int | None
+    sentences: Sequence[str], reasons: Sequence[str], answer: int
 ) -> list[str]:
     lines = []
     for i, (sentence, reason) in enumerate(zip(sentences, reasons, strict=False)):
         mark = "✓" if i == answer else " "
-        tag = " (new)" if i == new else ""
-        lines += [f"  {LETTERS[i]} {mark} {sentence}{tag}", f"      {reason}"]
+        lines += [f"  {LETTERS[i]} {mark} {sentence}", f"      {reason}"]
     return lines
 
 
-def render(
-    d: Draft,
-    shipped_slugs: Collection[str],
-    errors: Sequence[str],
-    *,
-    new_room_option: bool = False,
-) -> str:
-    """A draft as the reviewer sees it. `new_room_option` marks a backfill's 4th room
-    option as new, for a shipped word that had only three."""
+def render(d: Draft, shipped_slugs: Collection[str], errors: Sequence[str]) -> str:
+    """A draft as the reviewer sees it."""
     e = d["entry"]
     assert e is not None
-    backfill = d["source"] == "backfill"
     alternatives = ", ".join(
         f"{a} (shipped)"
         if a in shipped_slugs
@@ -70,9 +61,9 @@ def render(
         f"Nuance: {e['nuance']}",
         f"Alternatives: {alternatives or 'none'}",
         f"Room question: {e['prompt']}",
-        *_options(e["options"], e["reasons"], 0, 3 if new_room_option else None),
-        f"Practice question: {p['prompt']}{' (new)' if backfill else ''}",
-        *_options(p["options"], p["reasons"], p["answer"], None),
+        *_options(e["options"], e["reasons"], 0),
+        f"Practice question: {p['prompt']}",
+        *_options(p["options"], p["reasons"], p["answer"]),
     ]
     if errors:
         lines += ["Problems:", *(f"  - {error}" for error in errors)]
@@ -80,15 +71,9 @@ def render(
 
 
 def review_order(drafts: Iterable[Draft]) -> list[Draft]:
-    """Backfills by id, then the rest in hashed order, so the ids approval hands out
-    interleave difficulties in the daily walk."""
-
-    def key(d: Draft) -> tuple[int, int, str]:
-        if d["source"] == "backfill" and d["entry"] is not None:
-            return (0, d["entry"]["id"], "")
-        return (1, 0, hashlib.sha256(d["slug"].encode()).hexdigest())
-
-    return sorted(drafts, key=key)
+    """Hashed order, so the ids approval hands out interleave difficulties in the
+    daily walk."""
+    return sorted(drafts, key=lambda d: hashlib.sha256(d["slug"].encode()).hexdigest())
 
 
 def open_in_editor(path: Path) -> None:
@@ -110,14 +95,8 @@ def _review_one(
     while True:
         if show:
             d = store.draft(slug)
-            shipped = {w.slug: w for w in store.shipped()}
-            new_option = (
-                d["source"] == "backfill"
-                and slug in shipped
-                and len(shipped[slug].options) == 3
-            )
-            errors = store.draft_errors(d)
-            out.write(render(d, shipped.keys(), errors, new_room_option=new_option))
+            shipped_slugs = {w.slug for w in store.shipped()}
+            out.write(render(d, shipped_slugs, store.draft_errors(d)))
             show = False
         choice = ask(f"{slug}: [a]pprove [e]dit [r]eject [s]kip [q]uit > ")
         choice = choice.strip().lower()[:1]
@@ -214,12 +193,6 @@ def _parser() -> argparse.ArgumentParser:
     requeue = commands.add_parser("requeue", help="put drafts back in the queue")
     requeue.add_argument("slugs", nargs="+")
     commands.add_parser("fmt", help="rewrite shipped files in the canonical format")
-    fill = commands.add_parser(
-        "backfill", help="draft practice questions and 4th options for shipped words"
-    )
-    fill.add_argument(
-        "--yes", action="store_true", help="skip the usage prompt (owner agreed)"
-    )
     return parser
 
 
@@ -240,8 +213,6 @@ def main(
             status(store, today(), out)
         elif args.command == "generate":
             claude.generate(claude.run_claude, store, args.count, out, confirm)
-        elif args.command == "backfill":
-            claude.backfill(claude.run_claude, store, out, confirm)
         elif args.command == "review":
             review(store, out)
         elif args.command == "approve":

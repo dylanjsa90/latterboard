@@ -8,7 +8,7 @@ import json
 from collections.abc import Iterable, Mapping, Sequence
 from typing import Any
 
-from app.game.vocab_words import DIFFICULTIES, POS, Difficulty, dump_entry
+from app.game.vocab_words import DIFFICULTIES, POS, Difficulty
 from app.vocab_pipeline.store import Draft
 
 
@@ -48,9 +48,6 @@ DRAFT_SCHEMA = _object(
     alternatives=_array(_STRING),
     room=QUESTION,
     practice=QUESTION,
-)
-BACKFILL_SCHEMA = _object(
-    practice=QUESTION, extra_option={"anyOf": [OPTION, {"type": "null"}]}
 )
 
 PROPOSE_SYSTEM = """\
@@ -165,21 +162,4 @@ def draft_message(d: Draft) -> str:
     return (
         f'Write the entry for "{d["word"]}" ({d["pos"]}). '
         f"Target difficulty: {d['difficulty']}."
-    )
-
-
-def backfill_message(entry: Mapping[str, Any]) -> str:
-    if len(entry["options"]) == 3:
-        last = (
-            "Its room question has three options. Also write extra_option: a fourth "
-            "wrong sentence, with its reason, that misuses the word in a way the "
-            "existing wrong sentences do not."
-        )
-    else:
-        last = "Set extra_option to null."
-    return (
-        "This word already ships in the game. Do not change it; write only what is "
-        f"missing.\n\n{dump_entry(entry)}\n"
-        "Write a practice question for it, following the rules for practice.\n"
-        f"{last}"
     )

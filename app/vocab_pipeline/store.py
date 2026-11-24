@@ -24,7 +24,7 @@ from app.game.vocab_words import (
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DraftStatus = Literal["queued", "pending", "invalid", "rejected"]
-Source = Literal["generated", "wanted", "backfill"]
+Source = Literal["generated", "wanted"]
 
 
 class Draft(TypedDict):
@@ -39,7 +39,7 @@ class Draft(TypedDict):
     errors: list[str]
     # Why the reviewer rejected it.
     note: str
-    # The proposed shipped entry; it has "id" only for a backfill.
+    # The proposed shipped entry, without its id (approval assigns the next one).
     entry: dict[str, Any] | None
 
 
@@ -112,12 +112,10 @@ class Store:
         )
 
     def _word(self, d: Draft, shipped: Sequence[VocabWord]) -> VocabWord:
-        """The draft's entry as the word it would ship as. A backfill keeps its stored
-        id; anything else takes the next one."""
+        """The draft's entry as the word it would ship as, with the next id."""
         data = d["entry"]
         assert data is not None
-        word_id = data.get("id") if d["source"] == "backfill" else len(shipped)
-        return word_from_json({**data, "id": word_id})
+        return word_from_json({**data, "id": len(shipped)})
 
     def draft_errors(self, d: Draft) -> list[str]:
         if d["entry"] is None:
@@ -128,21 +126,13 @@ class Store:
             w = self._word(d, shipped)
         except (ValueError, TypeError, KeyError) as e:
             return [f"{s}: {e}"]
-        errors = entry_errors(w, strict=True)
+        errors = entry_errors(w)
         if w.slug != s:
             errors.append(f"{s}: entry slug is {w.slug}")
-        if d["source"] == "backfill":
-            if not (
-                isinstance(w.id, int)
-                and 0 <= w.id < len(shipped)
-                and shipped[w.id].slug == s
-            ):
-                errors.append(f"{s}: backfill id {w.id} is not the shipped {s}")
-        else:
-            if any(x.slug == w.slug for x in shipped):
-                errors.append(f"{s}: already shipped")
-            if any(x.word.casefold() == w.word.casefold() for x in shipped):
-                errors.append(f"{s}: duplicate word {w.word}")
+        if any(x.slug == w.slug for x in shipped):
+            errors.append(f"{s}: already shipped")
+        if any(x.word.casefold() == w.word.casefold() for x in shipped):
+            errors.append(f"{s}: duplicate word {w.word}")
         return errors
 
     def approve(self, slug: str) -> list[Path]:
@@ -181,9 +171,7 @@ class Store:
             ):
                 changed[w.id] = replace(w, alternatives=(*w.alternatives, slug))
 
-        final = [changed.get(w.id, w) for w in shipped]
-        if new.id == len(shipped):
-            final.append(changed[new.id])
+        final = [*(changed.get(w.id, w) for w in shipped), changed[new.id]]
         errors = list_errors(final)
         if errors:
             raise ApprovalError("\n".join(errors))

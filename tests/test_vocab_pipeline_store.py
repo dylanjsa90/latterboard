@@ -46,16 +46,6 @@ def test_unshipped_alternatives_wait_as_wanted_words_and_link_back_when_they_shi
     assert store.wanted() == {}
 
 
-def test_backfill_approval_replaces_the_word_in_place(tmp_path):
-    legacy = {**entry(0, "alpha"), "practice": None}
-    store = make_store(tmp_path, [legacy, entry(1, "beta")])
-    store.save_draft(
-        {**pending_draft("alpha"), "source": "backfill", "entry": entry(0, "alpha")}
-    )
-    assert [p.name for p in store.approve("alpha")] == ["00000-alpha.json"]
-    assert len(store.shipped()) == 2 and store.shipped()[0].practice is not None
-
-
 def test_reject_keeps_the_slug_known_and_requeue_resets_it(tmp_path):
     store = make_store(tmp_path, [entry(0, "alpha")])
     store.save_draft(pending_draft("gamma"))

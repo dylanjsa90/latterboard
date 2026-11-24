@@ -11,20 +11,18 @@ from app.game.vocab_validation import entry_errors
 from app.game.vocab_words import word_from_json
 from app.vocab_pipeline.drafting import (
     allocate,
-    backfill_entry,
     entry_from_output,
     practice_slot,
     select_candidates,
 )
 from app.vocab_pipeline.prompts import (
-    BACKFILL_SCHEMA,
     DRAFT_EXAMPLE,
     DRAFT_SCHEMA,
     DRAFT_SYSTEM,
     PROPOSE_SCHEMA,
     draft_message,
 )
-from tests.vocab_helpers import entry, model_output, pending_draft
+from tests.vocab_helpers import model_output, pending_draft
 
 
 def walk(node: Any) -> Iterator[dict[str, Any]]:
@@ -63,31 +61,6 @@ def test_entry_from_output_flattens_rotates_and_checks_the_word():
     assert built["alternatives"] == ["frank", "candid"]
     with pytest.raises(ValueError, match="model wrote candour, not candid"):
         entry_from_output(draft, {**out, "word": "candour"})
-
-
-def test_backfill_entry_adds_practice_and_a_fourth_option():
-    base = entry(3, "alpha")
-    legacy = {
-        **base,
-        "options": base["options"][:3],
-        "reasons": base["reasons"][:3],
-        "practice": None,
-    }
-    out = {
-        "practice": model_output("alpha")["practice"],
-        "extra_option": {"sentence": base["options"][3], "reason": base["reasons"][3]},
-    }
-    built = backfill_entry(legacy, out)
-    assert built["options"] == base["options"] and built["reasons"] == base["reasons"]
-    assert built["practice"]["answer"] == practice_slot("alpha")
-    untouched = ("options", "reasons", "practice")
-    assert {k: v for k, v in built.items() if k not in untouched} == {
-        k: v for k, v in legacy.items() if k not in untouched
-    }
-    four = backfill_entry({**base, "practice": None}, {**out, "extra_option": None})
-    assert four["options"] == base["options"]
-    with pytest.raises(ValueError, match="needs a fourth room option"):
-        backfill_entry(legacy, {**out, "extra_option": None})
 
 
 def test_allocate_moves_the_list_toward_the_target_mix():
@@ -147,7 +120,7 @@ def test_schemas_follow_structured_output_rules():
         "minimum",
         "maximum",
     }
-    for schema in (PROPOSE_SCHEMA, DRAFT_SCHEMA, BACKFILL_SCHEMA):
+    for schema in (PROPOSE_SCHEMA, DRAFT_SCHEMA):
         for node in walk(schema):
             assert not unsupported & node.keys()
             if node.get("type") == "object":
