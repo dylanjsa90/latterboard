@@ -83,6 +83,45 @@ def pending_draft(word: str, **entry_overrides: Any) -> Draft:
     }
 
 
+def model_output(word: str, **overrides: Any) -> dict[str, Any]:
+    """A DRAFT_SCHEMA-shaped model output for `word`, built from entry(), correct
+    options first."""
+    e = entry(0, word)
+    p = e["practice"]
+    out: dict[str, Any] = {
+        "word": word,
+        **{
+            k: e[k]
+            for k in (
+                "pos",
+                "pronunciation",
+                "definition",
+                "difficulty",
+                "example",
+                "synonyms",
+                "nuance",
+                "alternatives",
+            )
+        },
+        "room": {
+            "prompt": e["prompt"],
+            "options": [
+                {"sentence": s, "reason": r}
+                for s, r in zip(e["options"], e["reasons"], strict=True)
+            ],
+        },
+        "practice": {
+            "prompt": p["prompt"],
+            "options": [
+                {"sentence": s, "reason": r}
+                for s, r in zip(p["options"], p["reasons"], strict=True)
+            ],
+        },
+    }
+    out.update(overrides)
+    return out
+
+
 def make_store(tmp_path: Path, shipped: list[dict[str, Any]]) -> Store:
     write_entries(tmp_path / "entries", shipped)
     return Store(tmp_path / "entries", tmp_path / "vocab")
