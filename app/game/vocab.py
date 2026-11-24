@@ -8,6 +8,7 @@ the client does its countdowns in ms against `server_now`.
 No FastAPI/pydantic/SQLAlchemy imports here, mirroring app/game/match_modes.py.
 """
 
+import hashlib
 import random
 import re
 import time
@@ -22,6 +23,8 @@ FEEDBACK_MS = 16_000
 ROOM_LIFETIME_MS = 24 * 60 * 60 * 1000
 # Days until a saved word is due again, by review level; level 0 is a miss (10 minutes).
 REVIEW_DAYS = (10 / 1440, 1, 3, 7, 14, 30, 60)
+GUEST_NAME = "Guest"
+GUEST_PREFIX = "guest:"
 
 Mode = Literal["solo", "duel"]
 Phase = Literal["lobby", "question", "feedback", "results"]
@@ -72,6 +75,11 @@ def now_ms() -> int:
 
 def new_player(player_id: str, name: str, now: int) -> Player:
     return {"id": player_id, "name": name, "ready": False, "answers": {}, "seen": now}
+
+
+def guest_player_id(token: str) -> str:
+    """A guest's seat id: a hash of their token, so the stored room never holds the token."""
+    return GUEST_PREFIX + hashlib.sha256(token.encode()).hexdigest()
 
 
 def _pick_words() -> list[int]:
@@ -234,6 +242,14 @@ def join(g: Game, player: Player, now: int) -> None:
 def touch(g: Game, player_id: str, now: int) -> None:
     """Record that a participant is still polling, and catch up on due transitions."""
     participant(g, player_id)["seen"] = now
+    advance(g, now)
+
+
+def claim(g: Game, guest_id: str, player_id: str, name: str, now: int) -> None:
+    """Hand a guest's seat to an account; the seat's answers and score stay with it."""
+    p = participant(g, guest_id)
+    p["id"], p["name"], p["seen"] = player_id, name, now
+    g["rematch_ready"] = [player_id if x == guest_id else x for x in g["rematch_ready"]]
     advance(g, now)
 
 
