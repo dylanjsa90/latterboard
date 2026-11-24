@@ -1,0 +1,32 @@
+{
+  "id": 36,
+  "slug": "obfuscate",
+  "word": "obfuscate",
+  "pos": "verb",
+  "pronunciation": "/ˈɑːb.fə.skeɪt/",
+  "definition": "Make something obscure or difficult to understand.",
+  "difficulty": "Advanced",
+  "example": "The unnecessary acronyms obfuscated an otherwise straightforward policy.",
+  "synonyms": [
+    "obscure",
+    "confuse",
+    "cloud"
+  ],
+  "nuance": "Obfuscate often implies deliberate obscuring, though intent depends on context.",
+  "alternatives": [
+    "elucidate",
+    "mitigate"
+  ],
+  "prompt": "A spokesperson hides a simple issue beneath confusing jargon.",
+  "options": [
+    "The spokesperson used technical jargon to obfuscate the simple question.",
+    "The guide obfuscated the issue by explaining it clearly in plain language.",
+    "The contractor obfuscated the leak by repairing the broken pipe."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: make something obscure or difficult to understand.",
+    "Plain explanation clarifies, the opposite of obfuscation.",
+    "Repairing a physical problem is not making its meaning obscure."
+  ],
+  "practice": null
+}

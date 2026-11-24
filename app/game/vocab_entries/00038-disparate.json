@@ -1,0 +1,32 @@
+{
+  "id": 38,
+  "slug": "disparate",
+  "word": "disparate",
+  "pos": "adjective",
+  "pronunciation": "/ˈdɪs.pər.ət/",
+  "definition": "Essentially different in kind or difficult to compare.",
+  "difficulty": "Intermediate",
+  "example": "The festival brought together disparate musical traditions.",
+  "synonyms": [
+    "dissimilar",
+    "divergent",
+    "distinct"
+  ],
+  "nuance": "Disparate emphasizes difference in character, not merely distance or separation.",
+  "alternatives": [
+    "analogous",
+    "ubiquitous"
+  ],
+  "prompt": "A study tries to compare groups with very different backgrounds.",
+  "options": [
+    "The report combined data from disparate populations with markedly different circumstances.",
+    "The disparate populations were identical in every relevant respect.",
+    "The populations were disparate only because they were separated by a locked door."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: essentially different in kind or difficult to compare.",
+    "Identical groups are not essentially different.",
+    "Physical separation alone does not establish a difference in kind."
+  ],
+  "practice": null
+}

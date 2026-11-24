@@ -1,6 +1,6 @@
 import hashlib
 import secrets
-from collections.abc import Sequence
+from collections.abc import Iterable, Sequence
 
 from sqlalchemy import func
 from sqlalchemy.orm import Session
@@ -17,6 +17,18 @@ from .base import CRUDBase
 class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
     def get_user(self, db: Session, user_id: int) -> User | None:
         return db.get(self.model, user_id)
+
+    def get_by_ids(self, db: Session, ids: Iterable[int | None]) -> dict[int, User]:
+        """The users with these ids (Nones skipped), in one query.
+
+        The dict also keeps them alive: the session's identity map holds rows weakly, so
+        without a reference a later `db.get` for the same user queries again.
+        """
+        wanted = {i for i in ids if i is not None}
+        if not wanted:
+            return {}
+        rows = db.query(self.model).filter(self.model.id.in_(wanted)).all()
+        return {u.id: u for u in rows}
 
     def get_user_by_email(self, db: Session, email: str) -> User | None:
         return db.query(self.model).filter(self.model.email == email).first()

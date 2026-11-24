@@ -1,0 +1,31 @@
+{
+  "id": 12,
+  "slug": "ubiquitous",
+  "word": "ubiquitous",
+  "pos": "adjective",
+  "pronunciation": "/juːˈbɪk.wɪ.təs/",
+  "definition": "Present or found everywhere, or very widely.",
+  "difficulty": "Foundation",
+  "example": "Contactless payment terminals are now ubiquitous in the city.",
+  "synonyms": [
+    "omnipresent",
+    "pervasive",
+    "widespread"
+  ],
+  "nuance": "Ubiquitous is often used comparatively; it need not mean literally every place.",
+  "alternatives": [
+    "esoteric"
+  ],
+  "prompt": "A device has become a familiar sight across nearly every workplace.",
+  "options": [
+    "Smartphones have become ubiquitous in everyday life.",
+    "The ubiquitous manuscript survives in just one private collection.",
+    "The ubiquitous device was unusually expensive."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: present or found everywhere, or very widely.",
+    "A single rare instance is not widespread.",
+    "Price does not establish how widely something is found."
+  ],
+  "practice": null
+}

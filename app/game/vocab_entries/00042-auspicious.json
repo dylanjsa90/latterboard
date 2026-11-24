@@ -1,0 +1,32 @@
+{
+  "id": 42,
+  "slug": "auspicious",
+  "word": "auspicious",
+  "pos": "adjective",
+  "pronunciation": "/ɔːˈspɪʃ.əs/",
+  "definition": "Suggesting favorable prospects or a promising outcome.",
+  "difficulty": "Advanced",
+  "example": "Clear weather made an auspicious start to the expedition.",
+  "synonyms": [
+    "promising",
+    "favorable",
+    "propitious"
+  ],
+  "nuance": "Auspicious signals favorable indications, not a guarantee of success.",
+  "alternatives": [
+    "tenuous",
+    "equivocal"
+  ],
+  "prompt": "An early success suggests that a new collaboration may go well.",
+  "options": [
+    "The successful first trial was an auspicious beginning for the collaboration.",
+    "The auspicious beginning provided compelling evidence that failure was inevitable.",
+    "The beginning was auspicious because its exact date was unknown."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: suggesting favorable prospects or a promising outcome.",
+    "Evidence of inevitable failure is unfavorable, not promising.",
+    "An unknown date says nothing about favorable prospects."
+  ],
+  "practice": null
+}

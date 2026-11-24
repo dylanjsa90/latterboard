@@ -1,6 +1,6 @@
 # Cross-repo contract
 
-Last updated: 2026-11-12
+Last updated: 2026-11-13
 
 webcade (`~/projects/webcade`, React) is latterboard's (`~/projects/latterboard`, FastAPI) only
 client. This file is `docs/reference/cross-repo-contract.md` in both repos: keep the two copies
@@ -31,8 +31,8 @@ identical, and update both when a shape changes.
 | ---- | ------- | -------- |
 | `POST /login/access-token` | form-urlencoded `username` (= email), `password` | `{access_token, token_type}` |
 | `POST /login/test-token` | bearer | `UserPrivate`; 401 = dead token |
-| `POST /password-recovery/{email}` | — | `{message}`, the same whether or not the email is registered. When it is and SMTP is on, emails a link to `{FRONTEND_HOST}/reset-password?token=…`, valid 48 hours. webcade has no reset page yet |
-| `POST /reset-password/` | `{token, new_password}` (8–128 chars) | `{message}`; 400 `Invalid token` (malformed, expired, or no such account) or `Inactive user` |
+| `POST /password-recovery/{email}` | — | `{message}`, the same whether or not the email is registered. When it is and SMTP is on, emails a link to `{FRONTEND_HOST}/reset-password?token=…`, valid 48 hours and only until the password next changes (so once). webcade's `/reset-password` page reads it and calls the next row |
+| `POST /reset-password/` | `{token, new_password}` (8–128 chars) | `{message}`; 400 `Invalid token` (malformed, expired, already used, outdated by a later password change, or no such account) or `Inactive user` |
 | `POST /password-recovery-html-content/{email}` (bearer, superuser) | — | The recovery email's HTML, its subject in a `subject` header; 404 unknown email. Admin only |
 | `POST /login/google` | `{credential}` (the ID token from Google's sign-in button) | `{status: "signed_in", access_token, token_type}`, or `{status: "needs_profile", email, name?}` when no account has that Google account or its email; 401 bad or expired credential, 403 unverified Google email, 400 inactive, 404 when `GOOGLE_CLIENT_ID` is unset |
 | `POST /users/google` | `{credential, username, display_name, birth_year, location?}` | 201 `{access_token, token_type}`; 409 / 422 as `POST /users/`, and 401 / 403 / 404 as `/login/google` |
@@ -62,17 +62,17 @@ password keeps working. A new Google player gets no account until `/users/google
 profile with the same credential, which Google keeps valid for an hour. Google-only accounts
 have a random password, which password recovery can replace.
 
-### Puzzles (`/puzzles`, bearer; `puzzle_id` like `"word-2026-09-11"`, future dates 404)
+### Puzzles (`/puzzles`, bearer; `puzzle_id` like `"word-2026-09-11"`, future dates 404; a move whose id isn't `{game}-YYYY-MM-DD` gets 400)
 | Call | Request | Response |
 | ---- | ------- | -------- |
 | `GET /word` | — | `{puzzle_id, word_length, max_attempts, initial_guess, initial_grade: Grade[], guesses: [{guess, grades}], won, lost, answer?}` |
 | `POST /word/hint` | `{puzzle_id}` | `{letter}` |
-| `POST /word/guess` | `{puzzle_id, guess (5 chars), attempt_count}` | `{grades, won, lost, answer?}`; 409 once the signed-in player's word has an outcome |
+| `POST /word/guess` | `{puzzle_id, guess (5 chars), attempt_count}` | `{grades, won, lost, answer?}`; 409 once the signed-in player's word has an outcome; 400 `Not a valid word` for a guess outside the word list (nothing recorded) |
 | `GET /sudoku` | — | `{puzzle_id, puzzle: int[81], won, board: int[81]?}`; `board` (the solution) only when the signed-in player already won |
 | `POST /sudoku/move` | `{puzzle_id, index 0-80, value 1-9, board}` | `{correct, completed}` |
 | `POST /sudoku/hint` | `{puzzle_id, index, board}` | `{value, completed}` |
 | `GET /memory` | — | `{puzzle_id, size}`; `puzzle_id` is `memory-{today}`, one deck per day |
-| `POST /memory/reveal` | `{puzzle_id, index}` | `{symbol}`; 400 for an undated id |
+| `POST /memory/reveal` | `{puzzle_id, index}` | `{symbol}` |
 | `GET /cipher` | — | `{puzzle_id, slots, max_attempts, initial_attempt: int[], initial_feedback, attempts: [{attempt, exact, close}], won, lost, answer?: int[]}` |
 | `POST /cipher/attempt` | `{puzzle_id, attempt: int[4], attempt_count?}` | `{exact, close, won, lost, answer?: int[]}`; 409 once the signed-in player's cipher has an outcome |
 | `GET /me/stats` | — | `{total_solved, today_solved, streak, best_streak, games: [{game, played, won}], recent: [{game, solved_on, solved_at, result}]}` |
@@ -81,7 +81,8 @@ have a random password, which password recovery can replace.
 The server decides word, sudoku, and cipher outcomes (webcade ADR 004). `attempt_count` counts
 board rows including the fixed starter and the move being sent (`max_attempts` rows in all), and
 is used only for guests: a signed-in player's moves are counted by the server, which also
-returns them on `GET` so word and cipher resume. Stats and history include lost puzzles
+returns them on `GET` so word and cipher resume. Likewise sudoku's `board` is used only for
+guests: a signed-in player's board is the puzzle plus the cells the server saw them fill. Stats and history include lost puzzles
 (`won: false`). Memory's outcome stays on the client.
 
 ### Scores (`/scores`)
@@ -98,7 +99,7 @@ returns them on `GET` so word and cipher resume. Stats and history include lost 
 ### Matches (`/matches`, bearer) and matchmaking
 `MatchPublic` = `{id, game, status, inviter_username, invitee_username, inviter_is_bot,
 invitee_is_bot, current_turn_username?, winner_username?, max_guesses, created_at, started_at?,
-completed_at?}`. The bot flags are per side, not "opponent", because `to_public` builds one object
+completed_at?}`. The bot flags are per side, not "opponent", because `match_views.to_public` builds one object
 both players receive; the viewer-relative shapes (`/me/active`, `/me/history`, `match_started`) carry
 `opponent_is_bot` instead.
 `game` ∈ `wordle | word_race | cipher_race | sudoku_coop`; `status` ∈
@@ -166,7 +167,7 @@ and creating a room deletes those a week past that (404).
 | `GET /words` | — | `{saved: SavedWord[] (soonest due first), word_count}` |
 | `PUT /words/{id}` / `DELETE /words/{id}` | — | 204; saving again changes nothing; 400 unknown word |
 | `POST /words/{id}/review` | `{known: bool}` | 204; known moves up the ladder (due in 1, 3, 7, 14, 30, 60 days), a miss resets to level 0 (due in 10 min); 404 not saved |
-| `GET /daily-word` (public) | — | `DailyWord`: the word of the day for today's Pacific date, cycling through the curriculum by day |
+| `GET /daily-word` (public) | — | `DailyWord`: the word of the day for today's Pacific date. From 2026-12-06 word ids show one per day in order, continuing the original 46-word rotation, so adding words never changes a past day while the list stays ahead of the calendar |
 
 - `RoomSnapshot` = `{game: GameView, server_now}`.
 - `GameView` = `{code, mode, phase: lobby | question | feedback | results, round (0-4), generation, deadline, revision, rematch_requested, players: Seat[], question, mine?, history: [{question (revealed), answers: [{name, choice?, points?, correct?, ms?}]}]}`. `revision` only grows: drop a reply older than the one you have.

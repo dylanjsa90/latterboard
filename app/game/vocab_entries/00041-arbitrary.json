@@ -1,0 +1,32 @@
+{
+  "id": 41,
+  "slug": "arbitrary",
+  "word": "arbitrary",
+  "pos": "adjective",
+  "pronunciation": "/ˈɑːr.bə.trer.i/",
+  "definition": "Based on whim or an insufficiently justified choice rather than a clear reason.",
+  "difficulty": "Intermediate",
+  "example": "The policy imposed an arbitrary fee unrelated to the cost of the service.",
+  "synonyms": [
+    "capricious",
+    "unreasoned",
+    "random"
+  ],
+  "nuance": "Arbitrary need not mean statistically random; a deliberate decision can still lack justification.",
+  "alternatives": [
+    "judicious",
+    "pragmatic"
+  ],
+  "prompt": "A rule sets different limits without explaining why the difference matters.",
+  "options": [
+    "The arbitrary cutoff excluded similar cases without a relevant justification.",
+    "The arbitrary cutoff followed directly from a carefully validated safety threshold.",
+    "The cutoff was arbitrary because everyone agreed on its well-supported rationale."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: based on whim or an insufficiently justified choice rather than a clear reason.",
+    "A validated relevant reason makes the cutoff justified rather than arbitrary.",
+    "Agreement alone is not enough, but a well-supported rationale contradicts the intended meaning."
+  ],
+  "practice": null
+}

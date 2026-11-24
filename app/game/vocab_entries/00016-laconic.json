@@ -1,0 +1,31 @@
+{
+  "id": 16,
+  "slug": "laconic",
+  "word": "laconic",
+  "pos": "adjective",
+  "pronunciation": "/ləˈkɑː.nɪk/",
+  "definition": "Using very few words.",
+  "difficulty": "Intermediate",
+  "example": "His laconic review consisted of two words: “Worth reading.”",
+  "synonyms": [
+    "terse",
+    "concise",
+    "brief"
+  ],
+  "nuance": "Laconic suggests a noticeably sparing manner of speech, sometimes dry or blunt.",
+  "alternatives": [
+    "equivocal"
+  ],
+  "prompt": "A witness replies briefly, with no elaboration.",
+  "options": [
+    "Asked to describe the evening, the laconic witness replied, “Uneventful.”",
+    "The laconic witness spoke for an hour but used simple vocabulary.",
+    "Her laconic answer carefully avoided revealing her real opinion."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: using very few words.",
+    "Simple words do not make a lengthy answer laconic.",
+    "Avoiding commitment is evasive or equivocal; the answer may still be long."
+  ],
+  "practice": null
+}

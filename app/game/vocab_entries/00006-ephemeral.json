@@ -1,0 +1,31 @@
+{
+  "id": 6,
+  "slug": "ephemeral",
+  "word": "ephemeral",
+  "pos": "adjective",
+  "pronunciation": "/ɪˈfem.ər.əl/",
+  "definition": "Lasting for a very short time.",
+  "difficulty": "Foundation",
+  "example": "The frost formed an ephemeral pattern that disappeared in the morning sun.",
+  "synonyms": [
+    "fleeting",
+    "transient",
+    "short-lived"
+  ],
+  "nuance": "Ephemeral describes short duration, not low importance or poor quality.",
+  "alternatives": [
+    "esoteric"
+  ],
+  "prompt": "A brief burst of attention disappears almost as soon as it arrives.",
+  "options": [
+    "The campaign enjoyed ephemeral fame before the public moved on a week later.",
+    "Her ephemeral influence persisted steadily across several generations.",
+    "The ephemeral painting was difficult to interpret because its symbols were obscure."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: lasting for a very short time.",
+    "Influence lasting generations is enduring, not ephemeral.",
+    "Obscurity concerns understanding, not duration."
+  ],
+  "practice": null
+}

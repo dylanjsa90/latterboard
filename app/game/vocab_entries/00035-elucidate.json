@@ -1,0 +1,32 @@
+{
+  "id": 35,
+  "slug": "elucidate",
+  "word": "elucidate",
+  "pos": "verb",
+  "pronunciation": "/iˈluː.sɪ.deɪt/",
+  "definition": "Make something clear by explaining it.",
+  "difficulty": "Intermediate",
+  "example": "The appendix elucidates the assumptions behind the model.",
+  "synonyms": [
+    "clarify",
+    "explain",
+    "illuminate"
+  ],
+  "nuance": "Elucidate concerns understanding; it does not mean approve or resolve every problem.",
+  "alternatives": [
+    "mitigate",
+    "obfuscate"
+  ],
+  "prompt": "A tutor explains a difficult argument step by step.",
+  "options": [
+    "The tutor used a diagram to elucidate the relationship between the variables.",
+    "The tutor elucidated the confusion by making it more severe.",
+    "She elucidated the passage by deleting it without explanation."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: make something clear by explaining it.",
+    "Increasing confusion obscures rather than clarifies.",
+    "Removing a passage does not explain its meaning."
+  ],
+  "practice": null
+}

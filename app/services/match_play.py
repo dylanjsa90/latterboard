@@ -9,6 +9,10 @@ Nothing here raises `HTTPException`. The bot runs inside a background task, wher
 an `HTTPException` reaches no handler and is simply a traceback — so the guards
 return plain values and `MoveRejected` propagates, leaving each caller to decide
 what a rejection means. The routes turn it into a 409; the bot shrugs and stops.
+
+These are plain `def` and must run in a worker thread (FastAPI's threadpool for the
+routes, `run_in_threadpool` for the bot): the session is synchronous, and
+`broadcast_from_thread` raises on the event loop's own thread.
 """
 
 from sqlalchemy.orm import Session
@@ -18,6 +22,7 @@ from app.crud.match import match as crud_match
 from app.crud.match_puzzle import match_puzzle as crud_match_puzzle
 from app.models import Match, User
 from app.schemas.match import MatchGuessResult, RaceGuessResult
+from app.services import match_views
 
 
 def wordle_move_error(match: Match, user: User) -> str | None:
@@ -29,14 +34,15 @@ def wordle_move_error(match: Match, user: User) -> str | None:
     return None
 
 
-async def apply_wordle_guess(
+def apply_wordle_guess(
     db: Session, match: Match, user: User, word: str
 ) -> MatchGuessResult:
     """Record a turn-based guess and broadcast it to the match topic."""
     match_id = match.id
-    result = crud_match.submit_guess(db, match, user, word)
+    guess = crud_match.record_guess(db, match, user, word)
+    result = match_views.guess_result(db, match, user, guess, word)
 
-    await manager.broadcast(
+    manager.broadcast_from_thread(
         {
             "type": "opponent_guessed",
             "match_id": result.match_id,
@@ -50,12 +56,12 @@ async def apply_wordle_guess(
     )
 
     if result.status == "completed":
-        await manager.broadcast(
+        manager.broadcast_from_thread(
             {
                 "type": "match_completed",
                 "match_id": match_id,
                 "winner_username": result.winner_username,
-                # `submit_guess` refreshes the row, so this is current; the route
+                # `record_guess` refreshes the row, so this is current; the route
                 # used to re-fetch the match here for the same value.
                 "target_word": match.target_word,
                 "reason": "solved" if result.winner_username else "exhausted",
@@ -63,7 +69,7 @@ async def apply_wordle_guess(
             topic=f"match:{match_id}",
         )
     else:
-        await manager.broadcast(
+        manager.broadcast_from_thread(
             {
                 "type": "your_turn",
                 "match_id": match_id,
@@ -75,7 +81,7 @@ async def apply_wordle_guess(
     return result
 
 
-async def apply_race_guess(
+def apply_race_guess(
     db: Session, match: Match, user: User, guess: str | list[int]
 ) -> RaceGuessResult:
     """Record a race guess and broadcast it. Raises `MoveRejected` if the match is
@@ -84,7 +90,7 @@ async def apply_race_guess(
 
     topic = f"match:{match.id}"
     # Grades only: the guess itself would hand the opponent the letters/digits.
-    await manager.broadcast(
+    manager.broadcast_from_thread(
         {
             "type": "opponent_guessed",
             "match_id": match.id,
@@ -96,7 +102,7 @@ async def apply_race_guess(
         topic=topic,
     )
     if result.status == "completed":
-        await manager.broadcast(
+        manager.broadcast_from_thread(
             {
                 "type": "match_completed",
                 "match_id": match.id,

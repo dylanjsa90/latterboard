@@ -1,6 +1,6 @@
 # Backend module map
 
-Last updated: 2026-11-12
+Last updated: 2026-11-13
 
 Where things live in `app/` and what each module exports. Rules for matches, matchmaking, and
 the computer opponent are in `docs/architecture/matches.md`; wire shapes are in the cross-repo
@@ -31,8 +31,10 @@ table), so imports always name the module.
 | `app/main.py` | FastAPI app: lifespan (`init_db`, `manager.start/stop`), middleware, `/health`; mounts `api_router` at `/api/v1` and `ws.socket_router` at the root | `app` |
 | `app/backend_pre_start.py` | Waits for the database before the container migrates and serves (`python -m app.backend_pre_start`) | `init`, `main` |
 | `app/init_db.py` | Seed rows at startup: the local default user, the bot, puzzles. Never creates tables | `init_db`, `seed_bot_user` |
+| `app/backup_db.py` | Safe copy of the SQLite database, even while it's serving: the backup API, so commits still in `-wal` come too (`python -m app.backup_db [dest]`); restoring is in README.md | `backup`, `main` |
 | `app/schema_drift.py` | Read-only check that a database's schema matches the models (`python -m app.schema_drift`) | `schema_diff`, `describe` |
-| `app/init_logger.py` | Loguru to stdout, with stdlib logging routed through it | `setup_loguru` |
+| `app/init_logger.py` | Loguru to stdout at `LOG_LEVEL`, with stdlib logging (Uvicorn included) routed through it and `token=` query values redacted | `setup_loguru`, `redact_tokens` |
+| `app/init_sentry.py` | Sentry error reporting when `SENTRY_DSN` is set, started in the lifespan after `setup_loguru`: 5xx route and websocket errors plus `logger.error`, user id only, no frame locals, `token=` and emails in URLs redacted | `setup_sentry`, `scrub_event` |
 | `alembic/` | Migrations (`versions/`); `env.py` takes the URL from `Settings` | |
 
 ## `app/api/`
@@ -56,6 +58,7 @@ table), so imports always name the module.
 | File | Purpose | Key exports |
 | ---- | ------- | ----------- |
 | `services/match_start.py` | Starting a match between two known players, shared by accept, matchmaking, and invite links | `start_match`, `notify_match_started`, `max_guesses_for` |
+| `services/match_views.py` | Matches as response schemas, loading the players they name in one query | `to_public`, `to_detail`, `guess_result`, `history`, `active_items`, `pending_invites` |
 | `services/match_play.py` | Applying a move and broadcasting it, shared by the move routes and the bot. Raises `MoveRejected`, never `HTTPException` | `apply_wordle_guess`, `apply_race_guess`, `wordle_move_error` |
 | `services/bot_turn.py` | When the computer moves and driving it, via `BackgroundTasks` | `schedule_bot_turn`, `run_bot_turn`, `bot_participant`, `BOT_GAMES` |
 | `services/google_sign_in.py` | What `/login/google` and `POST /users/google` share: verify the credential (mapping errors to 401/403/404), mint the token | `PROVIDER`, `verified_identity`, `access_token` |
@@ -66,11 +69,11 @@ table), so imports always name the module.
 | File | Purpose | Key exports |
 | ---- | ------- | ----------- |
 | `crud/base.py` | Generic get/create/update/remove | `CRUDBase` |
-| `crud/user.py` | Users, identities (Google links), handles, avatars, and the one answer to "is this a bot?" | `user` (`get_user_by_username`, `get_user_by_email_any_case`, `get_user_by_identity`, `link_identity`, `create_user_with_identity`, `get_players`, `bot_ids`, `any_are_bots`, `set_avatar`, `authenticate`, …) |
+| `crud/user.py` | Users, identities (Google links), handles, avatars, and the one answer to "is this a bot?" | `user` (`get_by_ids`, `get_user_by_username`, `get_user_by_email_any_case`, `get_user_by_identity`, `link_identity`, `create_user_with_identity`, `get_players`, `bot_ids`, `any_are_bots`, `set_avatar`, `authenticate`, …) |
 | `crud/game_score.py` | Score rows, daily play count, all-time/daily/monthly leaderboards | `game_score` |
 | `crud/puzzle.py` | The dated puzzle bank: seeding, lookup by game and date, generating a sudoku once the bank runs out | `puzzle` (`seed_defaults`, `get_by_game_date`, `get_or_generate`, `count_by_game`) |
 | `crud/puzzle_attempt.py` | Daily puzzle attempts, stats, streaks | `puzzle_attempt` (`get_for_puzzle`, `get_or_create`, `record_attempt`, `get_stats`, `get_history`) |
-| `crud/match.py` | Match lifecycle + turn-based wordle, and the match presenters | `match` (`create_invite`, `expire_if_needed`, `get_open_match_between`, `get_pending_invites`, `get_active`, `get_active_items`, `accept_invite`, `decline_invite`, `cancel_invite`, `submit_guess`, `to_public`, `to_detail`, `to_pending_invite`) |
+| `crud/match.py` | Match lifecycle + turn-based wordle rows | `match` (`create_invite`, `expire_if_needed`, `get_open_match_between`, `get_pending_invites`, `get_active`, `get_finished`, `get_record`, `get_guesses`, `accept_invite`, `decline_invite`, `cancel_invite`, `record_guess`) |
 | `crud/match_puzzle.py` | Race/co-op state in `match_puzzle`, optimistic lock via `_apply` | `match_puzzle` (`build`, `submit_race_guess`, `race_detail`, `submit_sudoku_move`, `sudoku_detail`) |
 | `crud/invite_link.py` | Invite link rows: create, daily count, open links, status, atomic claim, revoke | `invite_link`, `invite_url` |
 | `crud/vocab.py` | Loads a room, runs a rule, saves it with an optimistic lock (`VocabRoom.version`, replayed on `StaleDataError`); `create_room` also deletes rooms a week past expiry; wordbook rows | `crud_vocab` (`create_room`, `mutate`, `wordbook`, `save`, `remove`, `review`); not `vocab`, which the module uses for the game rules |
@@ -81,8 +84,9 @@ table), so imports always name the module.
 | ---- | ------- | ----------- |
 | `game/puzzles.py` | Daily puzzle logic, and the Pacific day every daily feature uses: `today()`, `day_start` (a day's naive-UTC start, for `created_at` ranges), `day_of` (a timestamp's day), puzzle-id dates, word grading, cipher feedback and stored codes, memory decks | `PACIFIC`, `today`, `day_start`, `day_of`, `dated_puzzle`, `puzzle_date`, `grade_word`, `cipher_feedback`, `encode_cipher`, `decode_cipher`, `seeded_memory_deck` |
 | `game/puzzle_seed_data.py` | Content and generators for the daily puzzles: word order, sudoku variants and generation, cipher digits, memory symbols | `shuffled_words` (a copy; never mutate `word_list`), `SUDOKU_VARIANTS`, `generate_sudoku`, `generate_cipher_digits`, `MEMORY_SYMBOLS` |
-| `game/wordle.py` | Wordle word selection, validation, and guess grading | `select_word`, `is_valid_word`, `evaluate_guess` |
+| `game/wordle.py` | Wordle word selection, validation (answers or `GUESS_WORDS`), and guess grading | `select_word`, `is_valid_word`, `evaluate_guess` |
 | `game/word_list.py` | The 2,309 five-letter answer words, shared by puzzles, matches, and the bot | `word_list` |
+| `game/guess_words.py` | The 8,636 five-letter ENABLE words (public domain) a player may also guess, so plurals and everyday words that are never answers pass `is_valid_word` | `GUESS_WORDS` |
 | `game/match_modes.py` | Rules for the puzzle match modes (`word_race`, `cipher_race`, `sudoku_coop`): new puzzles, grading, outcomes, scores | `RACE_GAMES`, `PUZZLE_MATCH_GAMES`, `new_puzzle`, `initial_state`, `grade_race_guess`, `race_outcome`, `race_score`, `sudoku_coop_score` |
 | `game/bot.py` | Move selection for the computer: filter to still-possible answers, rank, then pick, handicapped by `skill` | `choose_word`, `choose_cipher`, `word_candidates`, `cipher_candidates`, `DEFAULT_SKILL` |
 | `game/vocab.py` | Vocab Challenger rules, ported from vocab-app's `engine.ts`: rounds, deadlines (epoch ms), scoring, per-player views, review ladder | `make_game`, `join`, `touch`, `apply_action`, `visible`, `full_question`, `next_review`, `VocabError` |
@@ -107,15 +111,16 @@ table), so imports always name the module.
 
 | File | Purpose | Key exports |
 | ---- | ------- | ----------- |
-| `core/config.py` | Env-driven settings (`app/.env.local` or `app/.env`, unless `SKIP_ENV_FILE`) | `settings` (`APP_ENV`, `DATABASE_URL`, `REDIS_URL`, `MATCH_*`, `MATCHMAKING_*`, `BOT_*`, `FRONTEND_HOST`, SMTP settings, …) |
+| `core/config.py` | Env-driven settings (`app/.env.local` or `app/.env`, unless `SKIP_ENV_FILE`) | `settings` (`APP_ENV`, `DATABASE_URL`, `REDIS_URL`, `MATCH_*`, `MATCHMAKING_*`, `BOT_*`, `FRONTEND_HOST`, `SENTRY_DSN`, SMTP settings, …) |
 | `core/security.py` | Password hashing (argon2), access tokens, password-reset tokens | `get_password_hash`, `verify_password`, `create_access_token`, `generate_password_reset_token`, `verify_password_reset_token` |
 | `core/google.py` | Checks a Google ID token against Google's certs and `GOOGLE_CLIENT_ID`; tests replace `verify_google_id_token` | `verify_google_id_token`, `GoogleIdentity`, `InvalidGoogleToken` |
 | `core/email.py` | Email rendering (`app/email-templates/build/`, not autoescaped) and SMTP sending | `send_email`, `render_email_template`, `generate_reset_password_email`, `generate_match_invite_email` |
 | `core/middleware.py` | Security headers (CSP etc.) on every response | `SecurityHeadersMiddleware` |
+| `core/loop_lag.py` | Logs a warning when the event loop stalls by more than 100 ms; started in the lifespan | `watch_loop_lag` |
 | `core/redis_client.py` | Shared async Redis client for one-off commands (the `ConnectionManager` keeps its own for pub/sub) | `redis_client` |
 | `core/base_class.py` | Declarative base; a model without `__tablename__` gets its lowercased class name | `Base` |
-| `app/database.py` | Engine and session factory from `settings.DATABASE_URL` | `engine`, `SessionLocal` |
-| `app/connection_manager.py` | Topic membership, Redis presence, pub/sub delivery, heartbeat | `manager` (`connect`, `join`, `disconnect`, `disconnect_all`, `broadcast(msg, topic)`, `send_to_user(user_id, msg)`, `count`, `usernames`) |
+| `app/database.py` | Engine and session factory from `settings.DATABASE_URL`; SQLite runs in WAL mode with `synchronous=NORMAL` | `engine`, `SessionLocal`, `sqlite_pragmas` |
+| `app/connection_manager.py` | Topic membership, Redis presence, pub/sub delivery, heartbeat | `manager` (`connect`, `join`, `disconnect`, `disconnect_all`, `broadcast(msg, topic)`, `send_to_user(user_id, msg)`, their `*_from_thread` twins for sync code in a worker thread, `count`, `usernames`) |
 | `app/utils.py` | `utcnow()` for the naive-UTC columns | `utcnow` |
 
 ## `tests/`

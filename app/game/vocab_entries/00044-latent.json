@@ -1,0 +1,32 @@
+{
+  "id": 44,
+  "slug": "latent",
+  "word": "latent",
+  "pos": "adjective",
+  "pronunciation": "/ˈleɪ.tənt/",
+  "definition": "Present but not yet visible, active, or developed.",
+  "difficulty": "Intermediate",
+  "example": "The dispute exposed latent tensions within the organization.",
+  "synonyms": [
+    "dormant",
+    "hidden",
+    "undeveloped"
+  ],
+  "nuance": "Latent is about potential or inactivity, rather than deliberate concealment alone.",
+  "alternatives": [
+    "salient",
+    "ostensible"
+  ],
+  "prompt": "An ability exists but has not yet had a chance to emerge.",
+  "options": [
+    "The workshop revealed her latent talent for composition.",
+    "Her latent talent was already openly displayed in every performance.",
+    "The latent talent did not exist in any form until it was created from nothing."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: present but not yet visible, active, or developed.",
+    "Something openly manifested is no longer latent in that respect.",
+    "Latent implies a present potential, not complete absence."
+  ],
+  "practice": null
+}

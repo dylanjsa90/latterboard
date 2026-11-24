@@ -11,6 +11,7 @@ Ported from the original puzzle-box Next.js route (app/api/puzzles/route.ts).
 
 import re
 from collections import Counter
+from collections.abc import Collection
 from datetime import date, datetime, time, timezone
 from typing import Literal, TypedDict
 from zoneinfo import ZoneInfo
@@ -60,17 +61,22 @@ def dated_puzzle(puzzle_id: str | None, prefix: str) -> date | None:
         return None
 
 
-def puzzle_date(puzzle_id: str | None, prefix: str) -> date:
-    """The calendar date a puzzle_id refers to, falling back to today's date
-    (Pacific) when puzzle_id is missing or doesn't carry a recognizable date
-    (e.g. an old index-based id)."""
-    return dated_puzzle(puzzle_id, prefix) or today()
+def puzzle_id(game: str, day: date) -> str:
+    """The id of `game`'s puzzle for `day`, which `dated_puzzle` reads back."""
+    return f"{game}-{day.isoformat()}"
 
 
 def grade_word(
     guess: str, answer: str
 ) -> list[Literal["correct", "present", "absent"]]:
     return wordle.evaluate_guess(answer, guess)
+
+
+def sudoku_board(
+    puzzle: list[int], solution: list[int], filled: Collection[int]
+) -> list[int]:
+    """The puzzle with the cells at `filled` set to their solution."""
+    return [solution[i] if i in filled else value for i, value in enumerate(puzzle)]
 
 
 class CipherFeedback(TypedDict):

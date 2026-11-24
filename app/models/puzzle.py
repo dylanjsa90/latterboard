@@ -8,7 +8,6 @@ from sqlalchemy import (
     Date,
     DateTime,
     ForeignKey,
-    Index,
     Integer,
     String,
     UniqueConstraint,
@@ -32,6 +31,8 @@ class Puzzle(Base):
 
 class PuzzleAttempt(Base):
     __tablename__: str = "puzzle_attempt"
+    # One row per player per puzzle, which also indexes lookups by the pair.
+    __table_args__ = (UniqueConstraint("user_id", "puzzle_id"),)
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     user_id: Mapped[int] = mapped_column(
@@ -44,8 +45,7 @@ class PuzzleAttempt(Base):
     completed: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
     completed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
-    # Moves in play order, excluding the fixed starter: word guesses, or cipher attempts as digit strings (app.game.puzzles.encode_cipher).
+    # Moves in play order, excluding the fixed starter: word guesses, cipher attempts as
+    # digit strings (app.game.puzzles.encode_cipher), or the sudoku cells filled, as
+    # indices ("40"); the server rebuilds the board from them.
     guesses: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
-
-
-Index("ix_puzzle_attempt_user_puzzle", PuzzleAttempt.user_id, PuzzleAttempt.puzzle_id)

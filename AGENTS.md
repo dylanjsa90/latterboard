@@ -4,7 +4,7 @@
 > head-to-head matches with matchmaking and a computer opponent, Vocab Challenger rooms and
 > wordbooks, and a websocket for live play.
 
-Last updated: 2026-11-12
+Last updated: 2026-11-13
 
 Python 3.10+ with uv, SQLAlchemy, Redis, JWT auth. SQLite everywhere. Production is a Linux VM
 running Uvicorn under systemd (`deploy/latterboard.service`), not Docker; the `Dockerfile` and
@@ -43,12 +43,15 @@ Paths are in backticks, not `@` imports, so they load only when read.
 
 ### Code layout
 - Routes stay thin. Logic shared by routes (or by a route and the bot) goes in `app/services/`, row access in `app/crud/`, rules with no database or I/O in `app/game/`. Imports flow `api` → `services` → `crud` → `game`, never back up; the layer map is in `docs/architecture/backend.md`.
+- The database session is synchronous, so it never runs on the event loop: routes and services that touch it are plain `def` (FastAPI runs them in its threadpool) and broadcast with `manager.broadcast_from_thread` / `send_to_user_from_thread`. An `async def` that awaits Redis hands its database work to `run_in_threadpool`. Every test fails if a query runs on the loop (the guard in `tests/conftest.py`).
 - Import the module you need (`from app.crud.user import user as crud_user`, `from app.schemas.user import UserPublic`); packages don't re-export from `__init__`, except `app.models`.
 
 ### Settings and database
 - `Settings` (`app/core/config.py`) reads `app/.env.local` while `APP_ENV=local` (the default) and `app/.env` otherwise, unless `SKIP_ENV_FILE` is set (the tests set it).
 - The database URL is computed from `DB_TYPE`; a `DATABASE_URL` env var is ignored. `sqlite` (the default) uses `SQLITE_DATABASE_URL`; any other value builds `postgresql+psycopg2://…?sslmode=require` from `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`, `DB_NAME`, falling back to the lowercase `user`, `password`, `host`, `port`, `dbname` that older deployments set. Only `psycopg2-binary` is installed.
 - `APP_ENV` (`local`, the default, / `staging` / `production`) is the one environment flag. Outside `local`, a missing or `changethis` `SECRET_KEY` stops startup and the `first.user@test.com` sign-in isn't seeded. `APP_ENV` picks the env file, so it must come from the real environment: the systemd unit sets `APP_ENV=production`, which reads `app/.env` on the VM. The Docker image carries no env files: compose passes the root `.env`.
+- `SENTRY_DSN` turns on error reporting (`app/init_sentry.py`). Events carry only the user id (set in `app/api/deps.py`), never frame locals (they hold the raw request, JWT included); `scrub_event` redacts `token=` and emails in URLs, and the engine sets `hide_parameters=True` so DB errors never quote bound values. `setup_loguru` removes only its own sink, because Sentry's loguru handlers are added once per process. Tests drop `SENTRY_DSN` from the environment.
+- SQLite runs in WAL mode (`app/database.py`), so recent commits live in a `-wal` file beside the database. Copy it with `python -m app.backup_db`, never `cp`, and restore as README.md's "Backing up and restoring" says; `.gitignore` keeps the `-wal` and `-shm` files out of uploads.
 - Alembic owns the schema; the app never creates or alters tables (`init_db` only seeds rows). Every model change ships with a migration from `uv run alembic revision --autogenerate`, read and fixed by hand; `tests/test_migrations.py` fails until models and migrations agree. Deploys run `alembic upgrade head` before Uvicorn starts (the systemd unit's `ExecStartPre`; the Docker `CMD` does the same). How-to and pitfalls: `docs/guides/database-migrations.md`.
 - Locally, run `uv run alembic upgrade head` after setup and after pulling a migration. Tests use `create_all`, not migrations.
 
@@ -63,7 +66,7 @@ Paths are in backticks, not `@` imports, so they load only when read.
 - `ConnectionManager` creates its Redis client in `start()` because `stop()` closes it. Don't share one client across restarts.
 
 ### Users
-- `username` is the public handle: `[a-z0-9_]{3,20}`, lowercased by `schemas/user.py`. Look it up case-insensitively (`crud_user.get_user_by_username`). Accounts made before handles still have their email there (which other players can see; see `docs/plans/follow-ups.md`), so never validate `username` on output.
+- `username` is the public handle: `[a-z0-9_]{3,20}`, lowercased by `schemas/user.py`. Look it up case-insensitively (`crud_user.get_user_by_username`).
 - `email` and `birth_year` are private. Only `UserPrivate` (test-token, `POST /users/`, `PATCH /users/me`, the owner-or-superuser `PUT /users/{id}`) carries them; `UserPublic` (returned to any signed-in user) and `PlayerPublic` must not. `GET /users/` is superuser-only.
 - Google sign-in (`app/core/google.py` checks the ID token, `app/services/google_sign_in.py` holds what the two routes share) links accounts through `user_identity` (`provider`, `subject` = Google's `sub`, never the email). `GOOGLE_CLIENT_ID` (the public web client ID, the same as webcade's `VITE_GOOGLE_CLIENT_ID`) turns it on; tests replace `google.verify_google_id_token`.
 - Photos live in `user_avatar` (a separate table, so loading a user never loads the bytes). `app/services/avatar.py` re-encodes every upload to a 256px WebP, which drops EXIF such as phone GPS. `user.avatar_version` versions the public URL, so it can be cached forever.
@@ -74,14 +77,10 @@ Paths are in backticks, not `@` imports, so they load only when read.
 - `send_email` asserts `settings.emails_enabled` (SMTP host and from-address set). Check it before sending; invite links report `emailed: false` instead when it's off.
 
 ### Puzzles
-- Future-dated puzzle ids must return 404. Otherwise the endpoints leak upcoming answers and create rows for arbitrary dates.
-- `PuzzleAttempt.puzzle_id` is a string key like `"word-2026-09-11"`, not a foreign key to `Puzzle.id`.
-- The server decides word, sudoku, and cipher outcomes and counts a signed-in player's moves itself; a client's `attempt_count` is trusted only for guests, who record nothing. `PuzzleAttempt.guesses` holds word guesses or cipher codes (`encode_cipher`). Why: webcade's `docs/decisions/004-daily-puzzle-outcomes.md`.
+- Future-dated puzzle ids must return 404. Otherwise the endpoints leak upcoming answers and create rows for arbitrary dates. A move's id must be `{game}-YYYY-MM-DD` (400 otherwise): attempts are saved under the id as sent, so any other id would replay a puzzle under a fresh attempt.
+- `PuzzleAttempt.puzzle_id` is a string key like `"word-2026-09-11"`, not a foreign key to `Puzzle.id`. `(user_id, puzzle_id)` is unique; `get_or_create` handles two first moves racing to insert it.
+- The server decides word, sudoku, and cipher outcomes and counts a signed-in player's moves itself; a client's `attempt_count` is trusted only for guests, who record nothing. `PuzzleAttempt.guesses` holds word guesses, cipher codes (`encode_cipher`), or the sudoku cells filled, from which the server rebuilds a signed-in player's board; the board a client sends is used only for guests. Word guesses must pass `wordle.is_valid_word`. Why: webcade's `docs/decisions/004-daily-puzzle-outcomes.md`.
 - `app/game/puzzle_seed_data.py`: use `shuffled_words()`, which returns a copy. Don't shuffle or mutate the shared word list; `wordle.py` uses it too.
-- Known open issues (not fixed yet; more in `docs/plans/follow-ups.md`):
-  - Word guesses aren't checked with `wordle.is_valid_word`.
-  - `(user_id, puzzle_id)` has no unique constraint. Adding one is a migration that must first remove duplicate rows.
-  - `POST /puzzles/sudoku/move` trusts the board the client sends.
 
 ### Tests
 - `tests/conftest.py` sets env vars **before** any app import, because `Settings()` reads them at import time. Keep new overrides above the imports. `SKIP_ENV_FILE=1` keeps `app/.env.local` out, so tests see only what conftest sets (including their own `SECRET_KEY`).

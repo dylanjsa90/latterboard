@@ -1,9 +1,22 @@
+import contextlib
 import logging
+import re
 import sys
 
 from loguru import logger
 
 from app.core.config import settings
+
+# The websocket sends its JWT as ?token=..., and Uvicorn logs paths with the query string.
+_URL_TOKEN = re.compile(r"(token=)[^&\s\"]+")
+
+# The stdout sink setup_loguru added last, so a second call replaces only that one.
+_sink_id: int | None = None
+
+
+def redact_tokens(text: str) -> str:
+    """`text` with every `token=` query value replaced by `[redacted]`."""
+    return _URL_TOKEN.sub(r"\1[redacted]", text)
 
 
 class InterceptHandler(logging.Handler):
@@ -16,23 +29,27 @@ class InterceptHandler(logging.Handler):
         except ValueError:
             level = record.levelno
 
-        frame, depth = logging.currentframe(), 2
-        while frame is not None and frame.f_code.co_filename == logging.__file__:
-            frame = frame.f_back  # type: ignore[assignment]
+        # Skip this frame and logging's own, so loguru names the code that logged.
+        frame, depth = sys._getframe(1), 1
+        while frame.f_code.co_filename == logging.__file__ and frame.f_back:
+            frame = frame.f_back
             depth += 1
 
-        logger.opt(depth=depth, exception=record.exc_info).log(
-            level, record.getMessage()
-        )
+        message = redact_tokens(record.getMessage())
+        logger.opt(depth=depth, exception=record.exc_info).log(level, message)
 
 
 def setup_loguru() -> None:
-    logger.remove()
-    # stdout only: Docker collects it, so a log file would just fill the container.
-    logger.add(
+    global _sink_id
+    # Remove only our own sink (or, the first time, loguru's default stderr one).
+    # Sentry adds its loguru handlers once per process, so they must survive this.
+    with contextlib.suppress(ValueError):
+        logger.remove(_sink_id if _sink_id is not None else 0)
+    # stdout only: journald (systemd) or Docker collects it and handles rotation.
+    _sink_id = logger.add(
         sys.stdout,
         format="{time:YYYY-MM-DD HH:mm:ss.SSS} | {level: <8} | {name}:{function}:{line} - {message}",
-        level="INFO",
+        level=settings.LOG_LEVEL,
         enqueue=True,
         backtrace=True,
         # Prints local variables in tracebacks, which can include secrets and tokens.
@@ -40,5 +57,8 @@ def setup_loguru() -> None:
     )
 
     logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
+    # Uvicorn's loggers have their own handlers, and uvicorn.error also propagates to
+    # uvicorn, so each line was written twice. Hand everything to the root handler.
     for name in ("uvicorn", "uvicorn.access", "uvicorn.error", "fastapi"):
-        logging.getLogger(name).handlers = [InterceptHandler()]
+        logging.getLogger(name).handlers = []
+        logging.getLogger(name).propagate = True

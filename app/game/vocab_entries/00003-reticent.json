@@ -1,0 +1,32 @@
+{
+  "id": 3,
+  "slug": "reticent",
+  "word": "reticent",
+  "pos": "adjective",
+  "pronunciation": "/ˈret.ɪ.sənt/",
+  "definition": "Reluctant to speak or reveal one's thoughts.",
+  "difficulty": "Intermediate",
+  "example": "The author was reticent about the experiences behind the novel.",
+  "synonyms": [
+    "reserved",
+    "uncommunicative",
+    "restrained"
+  ],
+  "nuance": "Prefer reluctant for unwillingness to act; reticent precisely describes restraint in disclosure.",
+  "alternatives": [
+    "laconic",
+    "ambivalent"
+  ],
+  "prompt": "A colleague remains quiet about a sensitive personal subject.",
+  "options": [
+    "Usually talkative, he became reticent when asked about his family.",
+    "She was reticent about the plan, explaining her reservations at great length.",
+    "The reticent runner hesitated to enter the race but freely discussed all his thoughts."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: reluctant to speak or reveal one's thoughts.",
+    "Openly explaining reservations at length is not being reserved in speech.",
+    "Reluctance to act alone is not reticence; the core meaning concerns speaking."
+  ],
+  "practice": null
+}

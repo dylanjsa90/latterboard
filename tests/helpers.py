@@ -4,9 +4,10 @@ from collections.abc import Generator
 from contextlib import contextmanager
 
 from fastapi.testclient import TestClient
+from sqlalchemy import event
 from sqlalchemy.orm import Session
 
-from app.database import SessionLocal
+from app.database import SessionLocal, engine
 
 MATCHES = "/api/v1/matches"
 Headers = dict[str, str]
@@ -20,6 +21,21 @@ def db_session() -> Generator[Session, None, None]:
         yield db
     finally:
         db.close()
+
+
+@contextmanager
+def recorded_queries() -> Generator[list[str], None, None]:
+    """The SQL statements run while the block runs, for checking a route's query count."""
+    statements: list[str] = []
+
+    def record(_conn: object, _cursor: object, statement: str, *_args: object) -> None:
+        statements.append(statement)
+
+    event.listen(engine, "before_cursor_execute", record)
+    try:
+        yield statements
+    finally:
+        event.remove(engine, "before_cursor_execute", record)
 
 
 def login(client: TestClient, email: str, password: str = "secret123") -> Headers:

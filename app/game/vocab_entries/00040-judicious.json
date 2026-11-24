@@ -1,0 +1,32 @@
+{
+  "id": 40,
+  "slug": "judicious",
+  "word": "judicious",
+  "pos": "adjective",
+  "pronunciation": "/dʒuːˈdɪʃ.əs/",
+  "definition": "Showing sound judgment and careful consideration.",
+  "difficulty": "Intermediate",
+  "example": "Judicious pruning improved the essay without losing its central argument.",
+  "synonyms": [
+    "wise",
+    "considered",
+    "prudent"
+  ],
+  "nuance": "Judicious describes thoughtful choice, often in how something is used or allocated.",
+  "alternatives": [
+    "arbitrary",
+    "intransigent"
+  ],
+  "prompt": "A manager weighs the trade-offs before deciding how to spend a limited budget.",
+  "options": [
+    "Her judicious allocation balanced urgent repairs against long-term needs.",
+    "His judicious decision ignored all the evidence and followed a sudden impulse.",
+    "The allocation was judicious because it was made by a judge, regardless of its wisdom."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: showing sound judgment and careful consideration.",
+    "Ignoring evidence and acting impulsively does not show careful judgment.",
+    "Judicious concerns wisdom, not the profession of the decision-maker."
+  ],
+  "practice": null
+}

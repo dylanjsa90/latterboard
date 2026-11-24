@@ -1,0 +1,31 @@
+{
+  "id": 15,
+  "slug": "fastidious",
+  "word": "fastidious",
+  "pos": "adjective",
+  "pronunciation": "/fæˈstɪd.i.əs/",
+  "definition": "Very attentive to detail and hard to please about standards.",
+  "difficulty": "Intermediate",
+  "example": "A fastidious host polished every glass before the guests arrived.",
+  "synonyms": [
+    "meticulous",
+    "exacting",
+    "particular"
+  ],
+  "nuance": "Fastidious can imply demanding standards, especially of cleanliness, taste, or accuracy.",
+  "alternatives": [
+    "pragmatic"
+  ],
+  "prompt": "An editor insists that every citation follow the style guide exactly.",
+  "options": [
+    "The fastidious editor checked every reference and rejected even minor inconsistencies.",
+    "The fastidious editor finished quickly by ignoring small inconsistencies.",
+    "His fastidious response arrived sooner than anyone expected."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: very attentive to detail and hard to please about standards.",
+    "Ignoring details conflicts with exacting standards.",
+    "Fastidious is not related to being fast."
+  ],
+  "practice": null
+}

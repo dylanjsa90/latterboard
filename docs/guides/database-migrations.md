@@ -1,6 +1,6 @@
 # Database migrations
 
-Last updated: 2026-11-12
+Last updated: 2026-11-13
 
 The schema is owned by Alembic (`alembic/versions/`). `alembic/env.py` takes the database
 URL from the app's `Settings`, so `DB_TYPE`, `DB_*`, `APP_ENV` and the env files pick the
@@ -31,8 +31,13 @@ database exactly as they do for the app. The app itself never creates or alters 
 5. `uv run pytest tests/test_migrations.py` fails until the models and migrations agree.
 
 Postgres needs a `NOT NULL` column added to a table with rows to have a
-`server_default` (or a backfill before the constraint). Unique constraints should be
-named, so a later migration can drop them on SQLite.
+`server_default` (or a backfill before the constraint).
+
+`Base.metadata` has a naming convention (`app/core/base_class.py`), so every constraint
+gets a predictable name (`uq_<table>_<columns>`, `fk_…`, `pk_<table>`) and a later
+migration can drop it on SQLite. Production's foreign keys and primary keys predate it and
+are unnamed; to drop one, pass `naming_convention=` to `op.batch_alter_table`, which names
+the reflected constraint by the same rule (as `0002` does for unique constraints).
 
 ## Checking a database: `app.schema_drift`
 
@@ -50,20 +55,27 @@ there are any.
 A database built by the old `create_all` startup has the tables but no `alembic_version`,
 so `alembic upgrade head` would try to create them again and fail. Mark it as already at
 the baseline instead (`alembic stamp`), but only once its schema matches the baseline
-exactly. Do this **before** the first start of code that runs `alembic upgrade head`
-(the systemd unit's `ExecStartPre`).
+exactly. Do this **before** the first `alembic upgrade head` against it.
 
-On the production VM, in the app directory, after uploading the new code:
+Production has been adopted (November 2026: it lacked only `ix_user_is_bot`, which was
+added before stamping `0001`), so this is only needed for another old database, such as a
+local `sql_app.db` from before migrations. On a VM, in the app directory:
 
 1. `uv sync --frozen --no-dev`, then stop the service and back up the database:
-   `sudo systemctl stop latterboard && cp sql_app.db sql_app.db.pre-alembic`.
+   `sudo systemctl stop latterboard && APP_ENV=production .venv/bin/python -m app.backup_db sql_app.db.pre-alembic`.
 2. Check for drift: `APP_ENV=production uv run python -m app.schema_drift`.
 3. Reconcile anything it reports. Databases from before migrations commonly lack
    `ix_user_is_bot`, because the startup column patch added `user.is_bot` without its
-   index. For an `add_index` line, create the index (`sudo apt install sqlite3` if needed):
+   index. For an `add_index` line, create the index through the app's own settings, so it
+   lands in the same file (no `sqlite3` CLI needed):
 
    ```bash
-   sqlite3 sql_app.db 'CREATE INDEX IF NOT EXISTS ix_user_is_bot ON "user" (is_bot);'
+   APP_ENV=production .venv/bin/python -c "
+   from sqlalchemy import text
+   from app.database import engine
+   with engine.begin() as conn:
+       conn.execute(text('CREATE INDEX IF NOT EXISTS ix_user_is_bot ON \"user\" (is_bot)'))
+   "
    ```
 
    Anything other than missing indexes needs a closer look before going further.
@@ -72,9 +84,6 @@ On the production VM, in the app directory, after uploading the new code:
 6. Install or update the unit if needed (`deploy/latterboard.service`), then
    `sudo systemctl start latterboard`. `alembic upgrade head` is now a no-op until the
    next migration.
-
-A copy of the production database from October 2026 reported only the missing
-`ix_user_is_bot`; with the index added it stamped, ran `upgrade head` and started cleanly.
 
 For a local `sql_app.db`, run the same steps without `APP_ENV=production`. In Docker, use
 `docker compose exec app …` against the running container, which sees the `app_data`

@@ -1,3 +1,5 @@
+import asyncio
+import contextlib
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
@@ -11,15 +13,19 @@ from app.api.main import api_router
 from app.api.routes import ws
 from app.connection_manager import manager
 from app.core.config import settings
+from app.core.loop_lag import watch_loop_lag
 from app.core.middleware import SecurityHeadersMiddleware
-from app.database import SessionLocal
+from app.database import SessionLocal, engine
 from app.init_db import init_db
 from app.init_logger import setup_loguru
+from app.init_sentry import setup_sentry
 
 
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncGenerator[None]:
     setup_loguru()
+    # After setup_loguru, so the stdout sink exists when Sentry logs that it's on.
+    setup_sentry()
     logger.info("Instantiating SessionLocal")
     db = SessionLocal()
     try:
@@ -33,9 +39,16 @@ async def lifespan(_: FastAPI) -> AsyncGenerator[None]:
         db.close()
     logger.info("Starting connnection manager")
     await manager.start()
+    lag_watch = asyncio.create_task(watch_loop_lag())
     yield
+    lag_watch.cancel()
+    with contextlib.suppress(asyncio.CancelledError):
+        await lag_watch
     logger.info("Stopping connnection manager")
     await manager.stop()
+    # Closing every pooled connection lets SQLite fold its -wal file back into the
+    # database, so a stopped service leaves one self-contained file.
+    engine.dispose()
 
 
 def custom_generate_unique_id(route: APIRoute) -> str:

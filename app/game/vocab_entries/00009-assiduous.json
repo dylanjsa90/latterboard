@@ -1,0 +1,30 @@
+{
+  "id": 9,
+  "slug": "assiduous",
+  "word": "assiduous",
+  "pos": "adjective",
+  "pronunciation": "/əˈsɪdʒ.u.əs/",
+  "definition": "Showing sustained care, effort, and diligence.",
+  "difficulty": "Advanced",
+  "example": "Assiduous preparation made the complex hearing manageable.",
+  "synonyms": [
+    "diligent",
+    "painstaking"
+  ],
+  "nuance": "Assiduous emphasizes sustained application rather than innate talent.",
+  "alternatives": [],
+  "prompt": "An archivist reconstructs a damaged record.",
+  "options": [
+    "Her assiduous research involved months of careful cross-checking.",
+    "Her assiduous research consisted of a careless guess.",
+    "The assiduous archivist abandoned the task at the first difficulty.",
+    "Assiduous research meant that the subject was easy."
+  ],
+  "reasons": [
+    "Sustained, careful effort shows diligence.",
+    "A careless guess lacks effort and care.",
+    "Immediate abandonment does not show persistence.",
+    "Assiduous describes effort, not task difficulty."
+  ],
+  "practice": null
+}

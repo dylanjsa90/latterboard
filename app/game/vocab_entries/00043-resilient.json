@@ -1,0 +1,32 @@
+{
+  "id": 43,
+  "slug": "resilient",
+  "word": "resilient",
+  "pos": "adjective",
+  "pronunciation": "/rɪˈzɪl.jənt/",
+  "definition": "Able to recover or adapt after difficulty or strain.",
+  "difficulty": "Foundation",
+  "example": "The resilient team learned from the failed launch and tried a revised approach.",
+  "synonyms": [
+    "adaptable",
+    "robust",
+    "hardy"
+  ],
+  "nuance": "Resilience means recovering or adapting; it does not require being untouched by harm.",
+  "alternatives": [
+    "intransigent",
+    "sanguine"
+  ],
+  "prompt": "A community rebuilds and adapts after a damaging setback.",
+  "options": [
+    "The resilient community rebuilt its services after the storm.",
+    "The resilient community never encountered any challenge, so its capacity to recover was demonstrated.",
+    "The resilient plan resisted every change even when conditions demanded adaptation."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: able to recover or adapt after difficulty or strain.",
+    "Without a challenge, this sentence does not demonstrate recovery capacity.",
+    "Rigid resistance to necessary adaptation is not resilience."
+  ],
+  "practice": null
+}

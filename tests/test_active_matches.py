@@ -1,5 +1,10 @@
 from app.models import MatchPuzzle, User
-from tests.helpers import db_session, signup_and_login, start_match
+from tests.helpers import (
+    db_session,
+    recorded_queries,
+    signup_and_login,
+    start_match,
+)
 
 BASE = "/api/v1/matches"
 
@@ -88,24 +93,12 @@ def test_listing_active_matches_does_not_scale_with_their_number(
     Guards against a regression to a query per match, which `to_active_item` used to do.
     Both rounds use the same mix of games, so only the match count differs.
     """
-    from sqlalchemy import event
-
-    from app.database import engine
 
     def count_queries() -> int:
-        queries = 0
-
-        def counter(*_args, **_kwargs):
-            nonlocal queries
-            queries += 1
-
-        event.listen(engine, "before_cursor_execute", counter)
-        try:
+        with recorded_queries() as statements:
             r = client.get(f"{BASE}/me/active", headers=inviter_headers)
             assert r.status_code == 200
-        finally:
-            event.remove(engine, "before_cursor_execute", counter)
-        return queries
+        return len(statements)
 
     def start_with(opponent_username: str, headers) -> None:
         for game in ("wordle", "word_race", "cipher_race"):

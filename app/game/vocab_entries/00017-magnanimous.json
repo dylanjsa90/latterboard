@@ -1,0 +1,30 @@
+{
+  "id": 17,
+  "slug": "magnanimous",
+  "word": "magnanimous",
+  "pos": "adjective",
+  "pronunciation": "/mæɡˈnæn.ɪ.məs/",
+  "definition": "Generous and forgiving, especially toward a rival or weaker person.",
+  "difficulty": "Advanced",
+  "example": "He made a magnanimous offer to forgive the debt.",
+  "synonyms": [
+    "generous",
+    "gracious"
+  ],
+  "nuance": "Magnanimous emphasizes nobility of spirit, not physical size.",
+  "alternatives": [],
+  "prompt": "A winner responds to a rival's criticism.",
+  "options": [
+    "Magnanimous in victory, she praised her rival and dismissed the insult.",
+    "Magnanimous in victory, she humiliated her rival repeatedly.",
+    "Her magnanimous gesture was an act of petty revenge.",
+    "She was magnanimous because she won by a large margin."
+  ],
+  "reasons": [
+    "Grace and generosity toward a rival show magnanimity.",
+    "Humiliation is ungenerous.",
+    "Petty revenge contradicts forgiving generosity.",
+    "The size of a victory does not establish character."
+  ],
+  "practice": null
+}

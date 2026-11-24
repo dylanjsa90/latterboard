@@ -1,0 +1,31 @@
+{
+  "id": 14,
+  "slug": "prosaic",
+  "word": "prosaic",
+  "pos": "adjective",
+  "pronunciation": "/proʊˈzeɪ.ɪk/",
+  "definition": "Ordinary or lacking imagination and poetic beauty.",
+  "difficulty": "Intermediate",
+  "example": "The trip ended for the prosaic reason that their car needed repairs.",
+  "synonyms": [
+    "mundane",
+    "ordinary",
+    "unimaginative"
+  ],
+  "nuance": "Prosaic evaluates the character of something, not merely its literary format.",
+  "alternatives": [
+    "esoteric"
+  ],
+  "prompt": "The mystery turns out to have a mundane explanation.",
+  "options": [
+    "The missing lights had a prosaic explanation: someone had unplugged the cable.",
+    "The prosaic explanation involved a startling, imaginative vision of another world.",
+    "The explanation was prosaic simply because it appeared in prose rather than verse."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: ordinary or lacking imagination and poetic beauty.",
+    "A startling imaginative vision is not mundane.",
+    "Writing in prose does not necessarily make its content dull or ordinary."
+  ],
+  "practice": null
+}

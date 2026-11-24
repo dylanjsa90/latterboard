@@ -1,0 +1,29 @@
+{
+  "id": 30,
+  "slug": "perspicacious",
+  "word": "perspicacious",
+  "pos": "adjective",
+  "pronunciation": "/ˌpɜːr.spɪˈkeɪ.ʃəs/",
+  "definition": "Quick to notice and understand things that are not obvious.",
+  "difficulty": "Advanced",
+  "example": "The perspicacious editor noticed that the two sources shared the same original error.",
+  "synonyms": [
+    "perceptive",
+    "astute",
+    "discerning"
+  ],
+  "nuance": "Perspicacious emphasizes penetrating insight; it is more specific than simply intelligent.",
+  "alternatives": [],
+  "prompt": "A reviewer spots a hidden assumption that everyone else has missed.",
+  "options": [
+    "Her perspicacious analysis exposed the assumption beneath the argument.",
+    "His perspicacious memory let him recite the report word for word.",
+    "The perspicacious speaker persuaded the audience through sheer charisma."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: quick to notice and understand things that are not obvious.",
+    "Memory alone does not establish perceptive understanding.",
+    "Charisma and persuasion do not necessarily involve insight."
+  ],
+  "practice": null
+}

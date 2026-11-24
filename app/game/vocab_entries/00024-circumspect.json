@@ -1,0 +1,30 @@
+{
+  "id": 24,
+  "slug": "circumspect",
+  "word": "circumspect",
+  "pos": "adjective",
+  "pronunciation": "/ˈsɜːr.kəm.spekt/",
+  "definition": "Cautious and attentive to possible risks or consequences.",
+  "difficulty": "Advanced",
+  "example": "Investors took a circumspect approach to the untested market.",
+  "synonyms": [
+    "cautious",
+    "prudent"
+  ],
+  "nuance": "Circumspect emphasizes looking at risks before acting.",
+  "alternatives": [],
+  "prompt": "A diplomat discusses an unresolved conflict.",
+  "options": [
+    "She was circumspect, weighing the consequences of each public statement.",
+    "She was circumspect, speaking recklessly without considering consequences.",
+    "The circumspect diplomat disclosed every secret on impulse.",
+    "Circumspect meant that she stood in a circle."
+  ],
+  "reasons": [
+    "Deliberate caution about consequences shows circumspection.",
+    "Recklessness contradicts caution.",
+    "Impulsive disclosure ignores risks.",
+    "The word describes judgment, not physical position."
+  ],
+  "practice": null
+}

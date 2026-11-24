@@ -1,7 +1,9 @@
+import asyncio
 import atexit
 import os
 import shutil
 import tempfile
+import traceback
 
 # Settings() reads the environment at import, so these must precede every app import.
 # Only real env vars count: a developer's app/.env.local (SMTP, Google, a Postgres
@@ -14,6 +16,9 @@ os.environ["SECRET_KEY"] = "tests-only-secret-key-at-least-32-bytes"
 # A private database per run, so concurrent runs (or a dev server) can't collide.
 os.environ["TEST_DB_DIR"] = tempfile.mkdtemp(prefix="latterboard-tests-")
 os.environ["DB_TYPE"] = "sqlite"
+# A developer's exported DSN would send test errors to sentry.io; sentry_sdk.init()
+# with no dsn falls back to this variable.
+os.environ.pop("SENTRY_DSN", None)
 os.environ["SQLITE_DATABASE_URL"] = f"sqlite:///{os.environ['TEST_DB_DIR']}/test.db"
 # Keep heartbeat frames from interleaving with the frames websocket tests assert on
 os.environ["WS_HEARTBEAT_SECONDS"] = "3600"
@@ -51,11 +56,43 @@ security.password_hash = PasswordHash(
 @event.listens_for(engine, "connect")
 def _skip_fsync(dbapi_connection, _record):
     """The test database is rebuilt for every test, so durability buys nothing. With
-    it, each DDL commit in the reset waited on the disk: seconds per test on WSL."""
+    it, each DDL commit in the reset waited on the disk: seconds per test on WSL.
+    Runs after the app's own `sqlite_pragmas`, so it keeps production's WAL mode."""
     cursor = dbapi_connection.cursor()
     cursor.execute("PRAGMA synchronous=OFF")
-    cursor.execute("PRAGMA journal_mode=MEMORY")
     cursor.close()
+
+
+_queries_on_the_loop: list[str] = []
+
+
+@event.listens_for(engine, "before_cursor_execute")
+def _record_queries_on_the_loop(_conn, _cursor, statement, *_args):
+    """The session is synchronous, so a query on the event loop's thread freezes every
+    request and websocket until the database answers. Sync routes and dependencies run
+    in FastAPI's threadpool; async code must hand database work to `run_in_threadpool`."""
+    try:
+        asyncio.get_running_loop()
+    except RuntimeError:
+        return
+    caller = [
+        f for f in traceback.extract_stack() if f"{os.sep}app{os.sep}" in f.filename
+    ]
+    _queries_on_the_loop.append(
+        f"{statement.split()[0]} from "
+        + " <- ".join(f"{f.name} ({f.filename}:{f.lineno})" for f in reversed(caller))
+    )
+
+
+@pytest.fixture(autouse=True)
+def no_queries_on_the_event_loop():
+    # Cleared here, not at import: the app's startup seeds the database on the loop
+    # before it serves anything, which is harmless.
+    _queries_on_the_loop.clear()
+    yield
+    assert not _queries_on_the_loop, "Database queries ran on the event loop:\n" + (
+        "\n".join(dict.fromkeys(_queries_on_the_loop))
+    )
 
 
 @pytest.fixture(scope="session")

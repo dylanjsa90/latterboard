@@ -1,0 +1,32 @@
+{
+  "id": 25,
+  "slug": "esoteric",
+  "word": "esoteric",
+  "pos": "adjective",
+  "pronunciation": "/ˌes.əˈter.ɪk/",
+  "definition": "Understood by or intended for a small group with specialized knowledge.",
+  "difficulty": "Intermediate",
+  "example": "The footnote addressed an esoteric dispute among textual scholars.",
+  "synonyms": [
+    "specialized",
+    "arcane",
+    "obscure"
+  ],
+  "nuance": "Esoteric need not mean secret; the audience may simply need specialist knowledge.",
+  "alternatives": [
+    "ubiquitous",
+    "laconic"
+  ],
+  "prompt": "A discussion assumes knowledge of a specialized branch of mathematics.",
+  "options": [
+    "The lecture explored esoteric notation familiar only to specialists in the field.",
+    "The esoteric lecture explained everyday facts that everyone already understood.",
+    "The esoteric lecture was brief enough to fit into five minutes."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: understood by or intended for a small group with specialized knowledge.",
+    "Widely understood everyday facts are not specialized or restricted in audience.",
+    "Length does not establish whether knowledge is esoteric."
+  ],
+  "practice": null
+}

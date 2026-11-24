@@ -1,0 +1,32 @@
+{
+  "id": 45,
+  "slug": "unequivocal",
+  "word": "unequivocal",
+  "pos": "adjective",
+  "pronunciation": "/ˌʌn.ɪˈkwɪv.ə.kəl/",
+  "definition": "Clear and leaving no room for doubt or ambiguity.",
+  "difficulty": "Intermediate",
+  "example": "She gave unequivocal support to the revised proposal.",
+  "synonyms": [
+    "unambiguous",
+    "clear",
+    "definite"
+  ],
+  "nuance": "Unequivocal concerns clarity of meaning; a clear statement can still be false.",
+  "alternatives": [
+    "equivocal",
+    "ambivalent"
+  ],
+  "prompt": "A decision states the committee's position in unmistakable terms.",
+  "options": [
+    "The committee's unequivocal rejection left no doubt about its position.",
+    "The unequivocal reply could reasonably be read as either yes or no.",
+    "The reply was unequivocal because its author felt both support and opposition."
+  ],
+  "reasons": [
+    "This sentence demonstrates the meaning: clear and leaving no room for doubt or ambiguity.",
+    "Two reasonable conflicting interpretations indicate ambiguity.",
+    "Mixed feelings are ambivalence, not clarity of expression."
+  ],
+  "practice": null
+}

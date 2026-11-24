@@ -1,0 +1,30 @@
+{
+  "id": 20,
+  "slug": "anomalous",
+  "word": "anomalous",
+  "pos": "adjective",
+  "pronunciation": "/əˈnɑː.mə.ləs/",
+  "definition": "Deviating from what is standard, normal, or expected.",
+  "difficulty": "Advanced",
+  "example": "One anomalous vote interrupted the unanimous pattern.",
+  "synonyms": [
+    "irregular",
+    "atypical"
+  ],
+  "nuance": "Anomalous describes deviation and does not itself explain the cause.",
+  "alternatives": [],
+  "prompt": "A scientist checks an unusual measurement.",
+  "options": [
+    "The anomalous reading differed sharply from every previous result.",
+    "The anomalous reading exactly matched the expected pattern.",
+    "The reading was anomalous because it was typical.",
+    "Anomalous meant the scientist disliked the reading."
+  ],
+  "reasons": [
+    "Departure from the established pattern is anomalous.",
+    "Matching expectations is not deviation.",
+    "Typical behavior contradicts anomalous behavior.",
+    "A personal preference does not establish an anomaly."
+  ],
+  "practice": null
+}

@@ -87,6 +87,11 @@ On the VM, settings come from `app/.env` (`APP_ENV=production` reads that file, 
 `app/.env.local`). Set a real `SECRET_KEY`, `DB_TYPE=sqlite`, and `SQLITE_DATABASE_URL` as an
 absolute path, e.g. `sqlite:////home/latterboard/latterboard/sql_app.db`.
 
+To report errors to Sentry, set `SENTRY_DSN` in `app/.env` to the sentry.io project's DSN
+(Settings → Client Keys). Unhandled 5xx errors and `logger.error` / `logger.exception` lines
+are sent, tagged with `APP_ENV`, the route, and the signed-in user's id. Empty leaves reporting
+off.
+
 To deploy:
 
 1. From your machine, `UNZIP=1 scripts/upload-to-vm.sh user@host [remote_dir]`. It zips the
@@ -97,13 +102,37 @@ To deploy:
 
    ```bash
    uv sync --frozen --no-dev
-   cp sql_app.db sql_app.db.bak          # if this deploy brings a migration
-   sudo systemctl restart latterboard    # runs alembic upgrade head, then Uvicorn
-   journalctl -u latterboard -n 50       # check it started
+   APP_ENV=production .venv/bin/python -m app.backup_db  # if this deploy brings a migration
+   sudo systemctl restart latterboard                    # runs alembic upgrade head, then Uvicorn
+   journalctl -u latterboard -n 50                       # check it started
    ```
 
-A database from before migrations existed must be stamped once before the unit's first start;
-see [`docs/guides/database-migrations.md`](docs/guides/database-migrations.md).
+### Backing up and restoring the database
+
+SQLite runs in WAL mode, which keeps the newest commits in a side file, `sql_app.db-wal`,
+next to `sql_app.db` (plus an index, `sql_app.db-shm`). So the database is not one file, and
+`cp` is the wrong tool both ways:
+
+- **Back up** with `APP_ENV=production .venv/bin/python -m app.backup_db [dest]` (default
+  `sql_app.db.bak`). It's safe while the service is running and includes the commits still
+  in `-wal`. A `cp` of `sql_app.db` misses those, and can catch a commit halfway.
+- **Restore** only with the service stopped, and delete the old `-wal` and `-shm` files
+  first. Otherwise SQLite replays that `-wal` onto the restored file, mixing data from two
+  points in time or corrupting it. A clean stop folds `-wal` back into the database, but a
+  crash leaves it behind, and a crash is when you're most likely to restore.
+
+```bash
+sudo systemctl stop latterboard
+# Optional: keep what you're about to discard (this includes the -wal contents).
+APP_ENV=production .venv/bin/python -m app.backup_db sql_app.db.before-restore
+rm -f sql_app.db-wal sql_app.db-shm
+cp sql_app.db.bak sql_app.db
+sudo systemctl start latterboard    # migrates the restored file to head, then serves
+```
+
+Use the path from `SQLITE_DATABASE_URL` if the database isn't in the app directory. In
+Docker, run the backup with `docker compose exec app python -m app.backup_db`. The file is
+`/data/sql_app.db` on the `app_data` volume.
 
 ## Tests and checks
 

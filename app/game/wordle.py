@@ -8,11 +8,13 @@ import random
 from collections import Counter
 from typing import Literal, cast
 
+from app.game.guess_words import GUESS_WORDS
 from app.game.word_list import word_list
 
 WORD_LENGTH = 5
 
-_WORD_SET = frozenset(w.lower() for w in word_list)
+# Answers come only from `word_list`; a guess may be any word in either list.
+_VALID_GUESSES = GUESS_WORDS | {w.lower() for w in word_list}
 
 
 def select_word(rng: random.Random | None = None) -> str:
@@ -21,7 +23,7 @@ def select_word(rng: random.Random | None = None) -> str:
 
 
 def is_valid_word(guess: str) -> bool:
-    return len(guess) == WORD_LENGTH and guess.lower() in _WORD_SET
+    return len(guess) == WORD_LENGTH and guess.lower() in _VALID_GUESSES
 
 
 def evaluate_guess(

@@ -30,7 +30,7 @@ class MatchPublic(BaseModel):
     inviter_username: str
     invitee_username: str
     # Named per side rather than "opponent", because this model has no viewer:
-    # `crud_match.to_public` builds one object that both players receive.
+    # `match_views.to_public` builds one object that both players receive.
     inviter_is_bot: bool = False
     invitee_is_bot: bool = False
     current_turn_username: str | None

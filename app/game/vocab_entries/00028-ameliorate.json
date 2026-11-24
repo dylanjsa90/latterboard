@@ -1,0 +1,30 @@
+{
+  "id": 28,
+  "slug": "ameliorate",
+  "word": "ameliorate",
+  "pos": "verb",
+  "pronunciation": "/əˈmiːl.jə.reɪt/",
+  "definition": "Improve a bad or unsatisfactory situation.",
+  "difficulty": "Advanced",
+  "example": "Extra support helped ameliorate the effects of isolation.",
+  "synonyms": [
+    "improve",
+    "alleviate"
+  ],
+  "nuance": "Ameliorate is formal and commonly concerns conditions or harmful effects.",
+  "alternatives": [],
+  "prompt": "A policy addresses poor living conditions.",
+  "options": [
+    "The reforms can ameliorate conditions by improving access to clean water.",
+    "The reforms ameliorated conditions by making them worse.",
+    "Ameliorate meant to preserve every existing problem unchanged.",
+    "The policy ameliorated conditions simply by describing them."
+  ],
+  "reasons": [
+    "Better access improves the unsatisfactory situation.",
+    "Worsening is the opposite of improvement.",
+    "Preserving problems does not improve them.",
+    "Description alone does not improve conditions."
+  ],
+  "practice": null
+}
