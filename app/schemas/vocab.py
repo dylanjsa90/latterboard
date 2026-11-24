@@ -102,6 +102,12 @@ class RoomSnapshot(BaseModel):
     server_now: int
 
 
+class GuestRoomSnapshot(RoomSnapshot):
+    """A new guest room and the token that opens it, returned once."""
+
+    guest_token: str
+
+
 class SavedWord(BaseModel):
     id: int
     word: str

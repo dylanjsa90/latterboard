@@ -8,6 +8,8 @@ from sqlalchemy import event
 from sqlalchemy.orm import Session
 
 from app.database import SessionLocal, engine
+from app.game import vocab
+from app.models import VocabRoom
 
 MATCHES = "/api/v1/matches"
 Headers = dict[str, str]
@@ -86,3 +88,17 @@ def match_detail(client: TestClient, headers: Headers, match_id: int) -> dict:
     r = client.get(f"{MATCHES}/{match_id}", headers=headers)
     assert r.status_code == 200, r.text
     return r.json()
+
+
+def vocab_state(code: str) -> vocab.Game:
+    """A vocab room's stored state, read straight from the database."""
+    with db_session() as db:
+        row = db.get(VocabRoom, code)
+        assert row is not None
+        return row.state  # type: ignore[return-value]
+
+
+def vocab_key(code: str) -> int:
+    """The index of the correct option in the room's current round."""
+    correct: int = vocab.full_question(vocab_state(code))["correct"]
+    return correct

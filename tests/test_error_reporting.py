@@ -92,6 +92,14 @@ def test_scrub_event_redacts_emails_in_urls():
     )
 
 
+def test_scrub_event_filters_the_guest_token_header():
+    event: Any = {"request": {"headers": {"X-Guest-Token": "t" * 43, "Accept": "*/*"}}}
+
+    headers = scrub_event(event, {})["request"]["headers"]
+
+    assert headers == {"X-Guest-Token": "[Filtered]", "Accept": "*/*"}
+
+
 def test_db_error_params_not_reported(sentry_events, failing_client, monkeypatch):
     # The email check passing for a taken email, as when two signups race it.
     monkeypatch.setattr(crud_user, "get_user_by_email", lambda *_a, **_k: None)

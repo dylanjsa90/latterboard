@@ -239,3 +239,28 @@ def test_review_ladder():
         new_level, wait = vocab.next_review(level, known)
         assert new_level == expected_level
         assert wait.total_seconds() == pytest.approx(expected_days * 86400)
+
+
+def test_guest_player_id_is_stable_and_never_holds_the_token():
+    token = "t" * 43
+    gid = vocab.guest_player_id(token)
+    assert gid == vocab.guest_player_id(token)
+    assert gid.startswith(vocab.GUEST_PREFIX)
+    assert token not in gid
+    assert gid != vocab.guest_player_id("u" * 43)
+
+
+def test_claim_hands_the_seat_over_with_its_answers():
+    guest = vocab.guest_player_id("t" * 43)
+    g = vocab.make_game(
+        "ABC123", "solo", vocab.new_player(guest, vocab.GUEST_NAME, 0), 0
+    )
+    answer(g, guest, vocab.full_question(g)["correct"], now=1000)
+    vocab.claim(g, guest, "7", "ada", now=2000)
+    me = g["players"][0]
+    assert (me["id"], me["name"], me["seen"]) == ("7", "ada", 2000)
+    assert me["answers"]["0"]["correct"] is True
+    assert vocab.visible(g, "7")["history"][0]["answers"][0]["name"] == "ada"
+    with pytest.raises(vocab.VocabError) as refused:
+        vocab.claim(g, guest, "8", "bob", now=3000)
+    assert refused.value.status == 403

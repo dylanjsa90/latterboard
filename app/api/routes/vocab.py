@@ -7,24 +7,38 @@ Nothing here runs on a timer: clients refetch at a round's deadline themselves, 
 frame goes out from the request's `BackgroundTasks`, never a detached task (see the
 `app/services/bot_turn.py` docstring for why).
 
-`GET /vocab/daily-word` is the one public call: the home page's word of the day.
+`GET /vocab/daily-word` (the home page's word of the day) and `POST /vocab/guest-rooms`
+are public. A guest room is a solo room started signed out; its own `GET` and `actions`
+take the `X-Guest-Token` header its create call returned, in place of a bearer.
 """
 
+import secrets
 from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from typing import Annotated
 
-from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Path, status
+from fastapi import (
+    APIRouter,
+    BackgroundTasks,
+    Depends,
+    Header,
+    HTTPException,
+    Path,
+    Request,
+    status,
+)
 from sqlalchemy.orm import Session
 
 from app.api import deps
 from app.connection_manager import manager
+from app.core.rate_limit import allow, network_of
 from app.crud.vocab import crud_vocab
 from app.game import puzzles, vocab
 from app.game.vocab_words import WORDS, daily_word
 from app.models import User
 from app.schemas.vocab import (
     DailyWord,
+    GuestRoomSnapshot,
     ReviewCreate,
     RoomAction,
     RoomCreate,
@@ -35,6 +49,21 @@ from app.schemas.vocab import (
 router = APIRouter(prefix="/vocab", tags=["vocab"])
 
 RoomCode = Annotated[str, Path(pattern="^[A-Fa-f0-9]{6}$")]
+
+GUEST_HEADER = "X-Guest-Token"
+GuestToken = Annotated[str, Header(alias=GUEST_HEADER, min_length=32, max_length=64)]
+OptionalGuestToken = Annotated[
+    str | None, Header(alias=GUEST_HEADER, min_length=32, max_length=64)
+]
+
+# Only creating a guest room is limited: per network (a class behind one school NAT
+# fits), then site-wide. Read at call time, so tests can lower them.
+GUEST_LIMIT_PREFIX = "rl:vocab-guest"
+GUEST_WINDOW_SECONDS = 3600
+GUEST_ROOMS_PER_NETWORK_PER_HOUR = 60
+GUEST_ROOMS_PER_HOUR = 2_000
+GUEST_NETWORK_LIMITED = "Too many guest games from your network. Sign in to keep playing, or try again later."
+GUEST_SITE_LIMITED = "Guest play is busy right now. Sign in to keep playing, or try again in a few minutes."
 
 
 @contextmanager
@@ -48,6 +77,41 @@ def _http_errors() -> Iterator[None]:
 def _player_id(user: User) -> str:
     # Room state is JSON, so player ids are strings.
     return str(user.id)
+
+
+async def _guest_room_allowed(request: Request) -> None:
+    host = request.client.host if request.client else None
+    network_key = f"{GUEST_LIMIT_PREFIX}:net:{network_of(host)}"
+    if not await allow(
+        network_key, GUEST_ROOMS_PER_NETWORK_PER_HOUR, GUEST_WINDOW_SECONDS
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail=GUEST_NETWORK_LIMITED
+        )
+    if not await allow(
+        f"{GUEST_LIMIT_PREFIX}:all", GUEST_ROOMS_PER_HOUR, GUEST_WINDOW_SECONDS
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail=GUEST_SITE_LIMITED
+        )
+
+
+def _room_player_id(
+    guest_token: OptionalGuestToken = None,
+    user: User | None = Depends(deps.get_optional_current_user),
+) -> str:
+    """Who is asking about a room: the guest whose token is sent (it wins over a bearer,
+    so a tab that has just signed in can still read its unclaimed room), else the
+    signed-in user."""
+    if guest_token is not None:
+        return vocab.guest_player_id(guest_token)
+    if user is not None:
+        return _player_id(user)
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
 
 
 def _mutate(
@@ -92,16 +156,32 @@ def create_room(
         )
 
 
+@router.post(
+    "/guest-rooms",
+    response_model=GuestRoomSnapshot,
+    status_code=status.HTTP_201_CREATED,
+    dependencies=[Depends(_guest_room_allowed)],
+)
+def create_guest_room(db: Session = Depends(deps.get_db)) -> GuestRoomSnapshot:
+    """A solo room for a signed-out visitor. The token is returned only here; the room
+    keeps a hash of it as the guest's seat id."""
+    token = secrets.token_urlsafe(32)
+    with _http_errors():
+        snapshot = crud_vocab.create_room(
+            db, "solo", vocab.guest_player_id(token), vocab.GUEST_NAME
+        )
+    return GuestRoomSnapshot(**snapshot.model_dump(), guest_token=token)
+
+
 @router.get("/rooms/{code}", response_model=RoomSnapshot)
 def get_room(
     code: RoomCode,
     background_tasks: BackgroundTasks,
     db: Session = Depends(deps.get_db),
-    current_user: User = Depends(deps.get_current_user),
+    player_id: str = Depends(_room_player_id),
 ) -> RoomSnapshot:
     """The room as the player sees it. Also records that they're still here, and
     resolves a round whose deadline has passed."""
-    player_id = _player_id(current_user)
     return _mutate(
         db,
         background_tasks,
@@ -133,10 +213,8 @@ def room_action(
     body: RoomAction,
     background_tasks: BackgroundTasks,
     db: Session = Depends(deps.get_db),
-    current_user: User = Depends(deps.get_current_user),
+    player_id: str = Depends(_room_player_id),
 ) -> RoomSnapshot:
-    player_id = _player_id(current_user)
-
     def change(g: vocab.Game, now: int) -> None:
         vocab.apply_action(
             g,
@@ -147,6 +225,24 @@ def room_action(
             round_index=body.round,
             generation=body.generation,
         )
+
+    return _mutate(db, background_tasks, code.upper(), player_id, change)
+
+
+@router.post("/rooms/{code}/claim", response_model=RoomSnapshot)
+def claim_room(
+    code: RoomCode,
+    guest_token: GuestToken,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(deps.get_db),
+    current_user: User = Depends(deps.get_current_user),
+) -> RoomSnapshot:
+    """Hand a guest room's seat to the signed-in caller, answers and score kept."""
+    player_id = _player_id(current_user)
+    guest_id = vocab.guest_player_id(guest_token)
+
+    def change(g: vocab.Game, now: int) -> None:
+        vocab.claim(g, guest_id, player_id, current_user.username, now)
 
     return _mutate(db, background_tasks, code.upper(), player_id, change)
 

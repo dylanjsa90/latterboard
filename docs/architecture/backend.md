@@ -1,6 +1,6 @@
 # Backend module map
 
-Last updated: 2026-11-13
+Last updated: 2026-11-23
 
 Where things live in `app/` and what each module exports. Rules for matches, matchmaking, and
 the computer opponent are in `docs/architecture/matches.md`; wire shapes are in the cross-repo
@@ -50,7 +50,7 @@ table), so imports always name the module.
 | `api/routes/matches.py` | `/matches/*`: invite/accept/decline/cancel/pending/detail, `/me/history`, `/me/active` + one move endpoint per mode; each move calls `_require_game`, then broadcasts to `match:{id}` | `router`, `SUPPORTED_GAMES` |
 | `api/routes/matchmaking.py` | `POST`/`DELETE /matchmaking/{game}`: Redis ZSET queue + Lua pairing, the bot after `MATCHMAKING_BOT_WAIT_SECONDS` | `router`, `queue_key`, `waiting_since_key` |
 | `api/routes/invite_links.py` | `/invite-links/*`: create (emails via `BackgroundTasks` when SMTP is on), list mine, public preview, claim, revoke | `router`, `GAME_TITLES` |
-| `api/routes/vocab.py` | `/vocab/*`: Vocab Challenger rooms (create, poll, join, actions) and the wordbook. Rooms aren't matches; a change sends `room_changed` on `vocab:{CODE}` | `router` |
+| `api/routes/vocab.py` | `/vocab/*`: Vocab Challenger rooms (create, poll, join, actions), guest rooms (`POST /guest-rooms`, public and rate-limited; their `GET`/`actions` take `X-Guest-Token`) and claiming one on sign-in, and the wordbook. Rooms aren't matches; a change sends `room_changed` on `vocab:{CODE}` | `router` |
 | `api/routes/ws.py` | **The websocket `/ws/{game_name}`** (join/leave_match, join/leave_room for vocab rooms) and REST presence (`/ws/{game}/connections`, `/ws/{game}/usernames`) | `socket_router` (at the root), `router` (under `/api/v1`) |
 
 ## `app/services/`
@@ -89,7 +89,7 @@ table), so imports always name the module.
 | `game/guess_words.py` | The 8,636 five-letter ENABLE words (public domain) a player may also guess, so plurals and everyday words that are never answers pass `is_valid_word` | `GUESS_WORDS` |
 | `game/match_modes.py` | Rules for the puzzle match modes (`word_race`, `cipher_race`, `sudoku_coop`): new puzzles, grading, outcomes, scores | `RACE_GAMES`, `PUZZLE_MATCH_GAMES`, `new_puzzle`, `initial_state`, `grade_race_guess`, `race_outcome`, `race_score`, `sudoku_coop_score` |
 | `game/bot.py` | Move selection for the computer: filter to still-possible answers, rank, then pick, handicapped by `skill` | `choose_word`, `choose_cipher`, `word_candidates`, `cipher_candidates`, `DEFAULT_SKILL` |
-| `game/vocab.py` | Vocab Challenger rules, ported from vocab-app's `engine.ts`: rounds, deadlines (epoch ms), scoring, per-player views, review ladder | `make_game`, `join`, `touch`, `apply_action`, `visible`, `full_question`, `next_review`, `VocabError` |
+| `game/vocab.py` | Vocab Challenger rules, ported from vocab-app's `engine.ts`: rounds, deadlines (epoch ms), scoring, per-player views, review ladder | `make_game`, `join`, `touch`, `claim`, `guest_player_id`, `apply_action`, `visible`, `full_question`, `next_review`, `VocabError` |
 | `game/vocab_words.py` | The 46-word curriculum; a word's id is its index, so append only | `WORDS`, `VocabWord`, `daily_word` |
 | `game/errors.py` | The error a refused move raises, shared by crud, services and routes (routes map it to 409) | `MoveRejected` |
 
@@ -105,7 +105,7 @@ table), so imports always name the module.
 | `schemas/game_score.py` | Score I/O models + per-game validity rules | `SCORE_RULES`, `GameScoreCreate`, `LeaderboardEntry`, `PlaysToday` |
 | `schemas/puzzle.py` | Puzzle I/O models | `{Word,Sudoku,Memory,Cipher}PuzzlePublic`, `WordGuessCreate`/`WordGuessResult`, `SudokuMoveCreate`/`SudokuMoveResult`, `CipherAttemptCreate`/`CipherFeedback`, `PuzzleStats`, `PuzzleHistory` |
 | `schemas/match.py` | Match I/O models | `MatchInviteCreate`, `MatchPublic`, `MatchDetail`, `MatchGuessResult`, `RaceDetail`, `RaceGuessResult`, `SudokuCoopMoveCreate`, `SudokuCoopDetail`, `PendingInvite` |
-| `schemas/invite_link.py`, `matchmaking.py`, `vocab.py`, `ws.py` | Invite links; the matchmaking answer; Vocab Challenger (times in epoch ms); presence | `InviteLinkCreate`, `InviteLinkPublic`, `InviteLinkPreview`, `MatchmakingStatus`, `RoomSnapshot`, `Wordbook`, `TopicPresence` |
+| `schemas/invite_link.py`, `matchmaking.py`, `vocab.py`, `ws.py` | Invite links; the matchmaking answer; Vocab Challenger (times in epoch ms); presence | `InviteLinkCreate`, `InviteLinkPublic`, `InviteLinkPreview`, `MatchmakingStatus`, `RoomSnapshot`, `GuestRoomSnapshot`, `Wordbook`, `TopicPresence` |
 
 ## `app/core/` and infrastructure
 
@@ -117,6 +117,7 @@ table), so imports always name the module.
 | `core/email.py` | Email rendering (`app/email-templates/build/`, not autoescaped) and SMTP sending | `send_email`, `render_email_template`, `generate_reset_password_email`, `generate_match_invite_email` |
 | `core/middleware.py` | Security headers (CSP etc.) on every response | `SecurityHeadersMiddleware` |
 | `core/loop_lag.py` | Logs a warning when the event loop stalls by more than 100 ms; started in the lifespan | `watch_loop_lag` |
+| `core/rate_limit.py` | Fixed-window limits in Redis keyed by network (an IPv4 address or an IPv6 /64), failing open | `allow`, `network_of` |
 | `core/redis_client.py` | Shared async Redis client for one-off commands (the `ConnectionManager` keeps its own for pub/sub) | `redis_client` |
 | `core/base_class.py` | Declarative base; a model without `__tablename__` gets its lowercased class name | `Base` |
 | `app/database.py` | Engine and session factory from `settings.DATABASE_URL`; SQLite runs in WAL mode with `synchronous=NORMAL` | `engine`, `SessionLocal`, `sqlite_pragmas` |
