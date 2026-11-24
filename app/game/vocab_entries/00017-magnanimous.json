@@ -26,5 +26,20 @@
     "Petty revenge contradicts forgiving generosity.",
     "The size of a victory does not establish character."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A younger brother accidentally breaks his older sister's prized model ship.",
+    "options": [
+      "The family's vote to repair the ship was magnanimous, with every single hand raised at the dinner table.",
+      "She was magnanimous about the ship, refusing to speak to her brother for the rest of the month.",
+      "Too magnanimous to confess, her brother hid the splintered pieces of the ship under his bed.",
+      "She was magnanimous about the broken ship and helped her tearful brother glue the mast back on."
+    ],
+    "answer": 3,
+    "reasons": [
+      "This confuses the word with unanimous; a vote everyone agrees on is not generosity.",
+      "Holding a monthlong grudge is the opposite of a forgiving, generous response.",
+      "Hiding a mistake out of fear has nothing to do with generosity toward someone else.",
+      "Forgiving a younger sibling and helping repair the damage shows a big-hearted spirit."
+    ]
+  }
 }

@@ -26,5 +26,20 @@
     "Obscurity is the opposite of clarity.",
     "Room lighting does not establish clarity of thought."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A volunteer writes directions to a campsite for families visiting for the first time.",
+    "options": [
+      "By lucid chance, a ranger happened to be at the trailhead to point the way.",
+      "Her lucid directions let every family reach the campsite without a wrong turn.",
+      "The directions were so lucid that no one could tell which trail to follow.",
+      "Selling copies of the lucid directions brought the volunteer a large profit."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word describes clear writing or thinking, not luck or a fortunate coincidence.",
+      "Directions that anyone can follow without getting lost show plain, well-organized writing.",
+      "If nobody can follow the directions, they are muddled, which reverses the meaning.",
+      "This confuses the word with lucrative; being clear has nothing to do with earning money."
+    ]
+  }
 }

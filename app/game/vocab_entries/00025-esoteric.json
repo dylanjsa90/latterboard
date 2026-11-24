@@ -21,12 +21,29 @@
   "options": [
     "The lecture explored esoteric notation familiar only to specialists in the field.",
     "The esoteric lecture explained everyday facts that everyone already understood.",
-    "The esoteric lecture was brief enough to fit into five minutes."
+    "The esoteric lecture was brief enough to fit into five minutes.",
+    "The esoteric lecture served tropical fruit flown in from distant islands."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: understood by or intended for a small group with specialized knowledge.",
     "Widely understood everyday facts are not specialized or restricted in audience.",
-    "Length does not establish whether knowledge is esoteric."
+    "Length does not establish whether knowledge is esoteric.",
+    "This confuses the word with exotic; foreign or colorful things are not thereby specialized knowledge."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A podcast about medieval bookbinding uses technical terms its hosts never explain.",
+    "options": [
+      "The esoteric episode had background music so loud it drowned out the hosts.",
+      "Newcomers were lost in the esoteric jargon, but veteran binders nodded along.",
+      "The hosts kept every topic esoteric so that any casual listener could follow along instantly.",
+      "The esoteric hosts posted episodes at random, sometimes daily and sometimes months apart."
+    ],
+    "answer": 1,
+    "reasons": [
+      "How loud the music is says nothing about who is able to understand the content.",
+      "Jargon that only experienced practitioners can follow is aimed at a narrow, expert audience.",
+      "Content that any casual listener grasps at once is the opposite of specialist material.",
+      "This confuses the word with erratic; an irregular schedule has nothing to do with expertise."
+    ]
+  }
 }

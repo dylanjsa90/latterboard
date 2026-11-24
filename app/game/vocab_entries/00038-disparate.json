@@ -21,12 +21,29 @@
   "options": [
     "The report combined data from disparate populations with markedly different circumstances.",
     "The disparate populations were identical in every relevant respect.",
-    "The populations were disparate only because they were separated by a locked door."
+    "The populations were disparate only because they were separated by a locked door.",
+    "The disparate families in the study pleaded for help after losing their jobs."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: essentially different in kind or difficult to compare.",
     "Identical groups are not essentially different.",
-    "Physical separation alone does not establish a difference in kind."
+    "Physical separation alone does not establish a difference in kind.",
+    "Pleading for help suggests the look-alike 'desperate'; this word means unlike, not hopeless."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A school robotics team includes students with very different interests.",
+    "options": [
+      "The club had disparate members, nearly forty of them crammed into the workshop.",
+      "The team blended disparate talents, from knitting to calculus, into one gripper arm.",
+      "Since all five members trained with one coach on the same drills, their skills were disparate.",
+      "The judges made disparate comments about the robot, mocking its wobbly wheels."
+    ],
+    "answer": 1,
+    "reasons": [
+      "A large headcount says nothing about how different the members are from one another.",
+      "Knitting and calculus are skills of completely unlike kinds, which is exactly the right fit.",
+      "Identical training produces matching skills, the reverse of what the word describes.",
+      "Mocking remarks would be disparaging; this look-alike word describes unlike things, not insults."
+    ]
+  }
 }

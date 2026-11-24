@@ -18,12 +18,29 @@
   "options": [
     "She accepted the assignment with alacrity and immediately offered to help further.",
     "He accepted with alacrity only after repeated pressure, visibly reluctant.",
-    "The work showed alacrity because every measurement was exact."
+    "The work showed alacrity because every measurement was exact.",
+    "The assignment sheet blew off the table with alacrity when a breeze came through the window."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: cheerful readiness or eagerness.",
     "Visible reluctance contradicts eager willingness.",
-    "Exactness is precision, not cheerful readiness."
+    "Exactness is precision, not cheerful readiness.",
+    "Paper can't be eager; fast movement alone isn't alacrity, which requires willingness."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A grandmother asks her grandson to help plant tomatoes in her garden on Saturday morning.",
+    "options": [
+      "The ripe tomatoes had a pleasant alacrity, tart and sharp on the tongue.",
+      "He agreed with alacrity and had the trowel in hand before she finished asking.",
+      "With obvious alacrity, he grumbled that gardening was a waste of his whole Saturday.",
+      "Thanks to years of practice, his alacrity let him tie every stake in a perfect knot."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word describes a person's eager response, not a sour or tangy taste.",
+      "Saying yes at once and grabbing the tool shows cheerful, ready willingness.",
+      "Grumbling about the chore shows unwillingness, the reverse of eager readiness.",
+      "Skilled hands are dexterity; the word describes willingness, not ability."
+    ]
+  }
 }

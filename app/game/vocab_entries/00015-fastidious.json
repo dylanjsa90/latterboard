@@ -20,12 +20,29 @@
   "options": [
     "The fastidious editor checked every reference and rejected even minor inconsistencies.",
     "The fastidious editor finished quickly by ignoring small inconsistencies.",
-    "His fastidious response arrived sooner than anyone expected."
+    "His fastidious response arrived sooner than anyone expected.",
+    "The fastidious meeting about citation rules dragged on until everyone in the office was bored."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: very attentive to detail and hard to please about standards.",
     "Ignoring details conflicts with exacting standards.",
-    "Fastidious is not related to being fast."
+    "Fastidious is not related to being fast.",
+    "This confuses the word with tedious; it describes exacting standards, not something dull."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A teenager sorts the stamps she has saved from old family letters.",
+    "options": [
+      "Maya was so fastidious that she stuffed loose stamps into a shoebox and lost half of them.",
+      "Being fastidious, Maya happily kept every stamp she found, even the torn and smudged ones.",
+      "Her fastidious collection now fills twelve albums, more than anyone else's in town.",
+      "Maya, ever fastidious, rejected any stamp with a bent corner or faded ink."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Careless storage and lost items show the opposite of close attention to detail.",
+      "Someone who is pleased with damaged items is easy to satisfy, not demanding.",
+      "Sheer size says nothing about standards; the sentence treats the word as if it meant vast.",
+      "Turning away stamps with tiny flaws shows exacting standards that are hard to satisfy."
+    ]
+  }
 }

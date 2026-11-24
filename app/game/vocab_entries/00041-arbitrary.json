@@ -21,12 +21,29 @@
   "options": [
     "The arbitrary cutoff excluded similar cases without a relevant justification.",
     "The arbitrary cutoff followed directly from a carefully validated safety threshold.",
-    "The cutoff was arbitrary because everyone agreed on its well-supported rationale."
+    "The cutoff was arbitrary because everyone agreed on its well-supported rationale.",
+    "The arbitrary cutoff was set by a neutral panel after hearing evidence from both sides."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: based on whim or an insufficiently justified choice rather than a clear reason.",
     "A validated relevant reason makes the cutoff justified rather than arbitrary.",
-    "Agreement alone is not enough, but a well-supported rationale contradicts the intended meaning."
+    "Agreement alone is not enough, but a well-supported rationale contradicts the intended meaning.",
+    "This confuses the word with arbitration; a ruling made by weighing both sides' evidence is reasoned, not arbitrary."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A coach announces which players will start in Saturday's game.",
+    "options": [
+      "The lineup seemed arbitrary because every starter had posted the highest scores in the week's practice drills.",
+      "The arbitrary official stood at midfield and settled a dispute between the two captains.",
+      "The coach made attendance arbitrary, so players could skip practice whenever they liked.",
+      "The lineup felt arbitrary because the coach ignored practice stats and picked starters on a hunch."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Choices tied directly to recorded performance have a clear reason, so they are the opposite of arbitrary.",
+      "This confuses the word with arbiter; it describes unjustified choices, not someone who settles disputes.",
+      "The word describes how a decision was made, not whether something is optional.",
+      "Picking starters on impulse while ignoring the relevant evidence leaves the choice without a real basis."
+    ]
+  }
 }

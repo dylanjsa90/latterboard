@@ -20,12 +20,29 @@
   "options": [
     "Smartphones have become ubiquitous in everyday life.",
     "The ubiquitous manuscript survives in just one private collection.",
-    "The ubiquitous device was unusually expensive."
+    "The ubiquitous device was unusually expensive.",
+    "The ubiquitous manager cheated his staff out of their overtime pay."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: present or found everywhere, or very widely.",
     "A single rare instance is not widespread.",
-    "Price does not establish how widely something is found."
+    "Price does not establish how widely something is found.",
+    "This confuses the word with iniquitous, which means wicked; dishonesty says nothing about how widespread something is."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A hiker keeps spotting the same flower on every trail in a mountain valley.",
+    "options": [
+      "By late spring, yellow wildflowers are ubiquitous along the valley's trails.",
+      "The ubiquitous orchid grows on one shaded cliff and nowhere else in the valley.",
+      "The ubiquitous guide could name every plant the hikers passed along the way.",
+      "The hikers reached a ubiquitous decision to rest beside the stream."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Flowers lining nearly every path are spread throughout the area, which is exactly the idea.",
+      "A plant confined to a single spot is rare, the reverse of turning up all over.",
+      "Knowing about everything is not the same as being found everywhere.",
+      "Full agreement among a group is unanimous; this word describes how widely something is spread."
+    ]
+  }
 }

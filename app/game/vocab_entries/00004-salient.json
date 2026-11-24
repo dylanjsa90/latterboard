@@ -20,12 +20,29 @@
   "options": [
     "She summarized the salient findings before discussing minor details.",
     "Every incidental detail was equally salient, with nothing standing out.",
-    "The findings were salient because they had remained hidden for years."
+    "The findings were salient because they had remained hidden for years.",
+    "The analyst stayed salient through the whole briefing, never saying a word."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: most noticeable or important in a particular context.",
     "Salience distinguishes what stands out from incidental details.",
-    "Being hidden is not being noticeable or prominent."
+    "Being hidden is not being noticeable or prominent.",
+    "This confuses the word with silent; it describes what stands out, not someone keeping quiet."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A birdwatcher explains to a friend how to recognize a rare warbler.",
+    "options": [
+      "The salient warbler cleverly figured out how to open the latched feeder.",
+      "The salient mark of this warbler is the bright yellow patch on its throat.",
+      "The warbler's salient markings blend into the leaves so well that nobody spots them.",
+      "Its salient feature is that it looks exactly like every other small brown bird."
+    ],
+    "answer": 1,
+    "reasons": [
+      "This treats the word as meaning clever, mixing it up with sapient.",
+      "A vivid patch that catches the eye is exactly what helps someone pick out the bird.",
+      "Markings that vanish against the leaves are the opposite of eye-catching.",
+      "Looking like every other bird gives the friend nothing distinctive to look for."
+    ]
+  }
 }

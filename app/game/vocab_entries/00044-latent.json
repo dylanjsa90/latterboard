@@ -21,12 +21,29 @@
   "options": [
     "The workshop revealed her latent talent for composition.",
     "Her latent talent was already openly displayed in every performance.",
-    "The latent talent did not exist in any form until it was created from nothing."
+    "The latent talent did not exist in any form until it was created from nothing.",
+    "Her latent arrival meant the choir began warming up without her."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: present but not yet visible, active, or developed.",
     "Something openly manifested is no longer latent in that respect.",
-    "Latent implies a present potential, not complete absence."
+    "Latent implies a present potential, not complete absence.",
+    "Arriving behind schedule is lateness. The word describes something dormant, not something tardy."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A gardener plants seeds that sat in a dry drawer for years.",
+    "options": [
+      "The latent shoots towered over the fence where every neighbor could see them.",
+      "The gardener made the seeds latent by hiding the packet behind the flour jar.",
+      "The latent seeds were long dead and could never sprout again, however much he watered.",
+      "The seeds had stayed latent in the drawer until water and warmth woke them."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Tall shoots that everyone can see are fully visible and active, not hidden or dormant.",
+      "Putting something out of sight is deliberate concealment, not an inactive inner state.",
+      "Dead seeds have no potential left, but something latent still holds a capacity that could become active.",
+      "The seeds were alive but inactive, and their growth was waiting for the right conditions."
+    ]
+  }
 }

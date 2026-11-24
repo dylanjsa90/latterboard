@@ -20,12 +20,29 @@
   "options": [
     "The campaign enjoyed ephemeral fame before the public moved on a week later.",
     "Her ephemeral influence persisted steadily across several generations.",
-    "The ephemeral painting was difficult to interpret because its symbols were obscure."
+    "The ephemeral painting was difficult to interpret because its symbols were obscure.",
+    "Because the gossip was ephemeral and silly, people kept repeating it for decades."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: lasting for a very short time.",
     "Influence lasting generations is enduring, not ephemeral.",
-    "Obscurity concerns understanding, not duration."
+    "Obscurity concerns understanding, not duration.",
+    "The word means brief, not trivial, and gossip that circulates for decades is hardly brief."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A seaside town holds a sandcastle contest on the beach each summer.",
+    "options": [
+      "The ephemeral builder measured every turret twice to make sure it was perfect.",
+      "The ephemeral sculptures vanished as soon as the evening tide rolled in.",
+      "The ephemeral sandcastle stood intact on the beach for three summers in a row.",
+      "Only a handful of experts could follow the ephemeral rules for scoring entries."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word describes how long something lasts, not how carefully a person works.",
+      "Sand towers that wash away within hours last only a short time.",
+      "Something that survives for years is lasting, the reverse of short-lived.",
+      "Rules that only specialists understand are esoteric; the word says nothing about difficulty."
+    ]
+  }
 }

@@ -21,12 +21,29 @@
   "options": [
     "The committee's unequivocal rejection left no doubt about its position.",
     "The unequivocal reply could reasonably be read as either yes or no.",
-    "The reply was unequivocal because its author felt both support and opposition."
+    "The reply was unequivocal because its author felt both support and opposition.",
+    "The committee's statement proved unequivocal once later events showed its prediction was correct."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: clear and leaving no room for doubt or ambiguity.",
     "Two reasonable conflicting interpretations indicate ambiguity.",
-    "Mixed feelings are ambivalence, not clarity of expression."
+    "Mixed feelings are ambivalence, not clarity of expression.",
+    "Being proven right is about accuracy; a statement is clear or unclear when it is made, true or not."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A teacher posts the rules for a take-home exam on the class website.",
+    "options": [
+      "The rules were so unequivocal that students spent all evening debating what the teacher meant.",
+      "The teacher read the rules aloud in an unequivocal voice so the back row could hear them.",
+      "The instructions were unequivocal: no notes, no calculators, and a firm Friday deadline.",
+      "The two sections of the exam were unequivocal, since one had ten questions and the other had forty."
+    ],
+    "answer": 2,
+    "reasons": [
+      "If readers argue over the meaning, the rules were unclear, which is the reverse.",
+      "Speaking loudly is about volume; the word concerns how clearly a message's meaning comes across.",
+      "Each rule is stated so plainly that no student could misread what is expected.",
+      "This confuses the word with unequal; it describes clear meaning, not mismatched sizes."
+    ]
+  }
 }

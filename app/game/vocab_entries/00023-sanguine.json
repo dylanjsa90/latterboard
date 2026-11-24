@@ -21,12 +21,29 @@
   "options": [
     "Despite the failed trial, she remained sanguine about the next attempt.",
     "He was sanguine about the project, expecting disaster at every stage.",
-    "The sanguine director became furious and shouted at the whole team."
+    "The sanguine director became furious and shouted at the whole team.",
+    "Sanguine after the setback, she stopped caring whether the company survived at all."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: optimistic or hopeful, especially despite difficulty.",
     "Expecting disaster is pessimistic, not optimistic.",
-    "Anger does not establish the hopeful outlook intended in this sense."
+    "Anger does not establish the hopeful outlook intended in this sense.",
+    "Not caring is indifference; a hopeful person still cares about the outcome and expects it to be good."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A gardener discovers that a late frost has damaged her spring seedlings.",
+    "options": [
+      "Though frost had nipped half her seedlings, the gardener stayed sanguine about a good harvest.",
+      "Sanguine about the season, the gardener announced that every surviving plant would surely wither by June.",
+      "Too sanguine to lift a trowel, the gardener napped in a hammock for the entire afternoon.",
+      "Feeling sanguine, the gardener lay awake all night fretting over the ruined beds and lost money."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Expecting a good result despite a real loss is exactly the hopeful outlook the word describes.",
+      "Predicting that everything will die is gloomy, the reverse of a hopeful outlook.",
+      "This confuses the word with languid; hopefulness has nothing to do with a lack of energy.",
+      "Lying awake with worry shows anxiety, which clashes with a confident, cheerful outlook."
+    ]
+  }
 }

@@ -26,5 +26,20 @@
     "Impulsive disclosure ignores risks.",
     "The word describes judgment, not physical position."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A ship's captain must steer through waters where the reefs have never been mapped.",
+    "options": [
+      "The captain's circumspect budget allowed for only one spare sail and two coils of rope.",
+      "The circumspect captain slowed down and had the crew check the water's depth every few minutes.",
+      "The circumspect captain ordered full speed ahead, sure that luck would carry them past the reefs.",
+      "The circumspect captain spent the night alone, examining his own feelings about leaving home."
+    ],
+    "answer": 1,
+    "reasons": [
+      "A tightly limited budget is circumscribed; a budget cannot be cautious, only people or actions can.",
+      "Reducing speed and constantly measuring for hidden danger shows careful attention to risk.",
+      "Rushing forward and trusting to luck ignores the danger instead of guarding against it.",
+      "Looking inward at one's emotions is introspection, not wariness about what could go wrong."
+    ]
+  }
 }

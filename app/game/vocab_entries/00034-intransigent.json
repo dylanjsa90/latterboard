@@ -21,12 +21,29 @@
   "options": [
     "The intransigent negotiator rejected every concession and refused to revise her demands.",
     "The intransigent negotiator readily revised her demands to reach a compromise.",
-    "His intransigent argument was difficult to understand because it used unfamiliar terminology."
+    "His intransigent argument was difficult to understand because it used unfamiliar terminology.",
+    "The intransigent negotiator stayed with the firm only a few weeks before leaving for another job."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: unwilling to change a position or compromise.",
     "Readiness to compromise conflicts with intransigence.",
-    "Unfamiliar terminology makes language difficult, not a person uncompromising."
+    "Unfamiliar terminology makes language difficult, not a person uncompromising.",
+    "A short stay suggests the look-alike transient. The word means refusing to yield, not staying briefly."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "Diners keep asking a chef to change a soup recipe she has made the same way for years.",
+    "options": [
+      "The intransigent chef turned down every request to use less salt in the soup.",
+      "The intransigent chef updated the menu daily to match whatever guests happened to request.",
+      "The intransigent recipe had so many layered steps that new cooks needed hours to learn it.",
+      "The intransigent steak was so tough that diners struggled to cut through it."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Rejecting every request and keeping the recipe as it is shows a stubborn refusal to budge.",
+      "Changing things whenever guests ask is flexibility, the opposite of holding firm.",
+      "Lots of complicated steps make a recipe intricate. That has nothing to do with refusing to compromise.",
+      "The word describes people's attitudes and positions, not how tough food is to chew."
+    ]
+  }
 }

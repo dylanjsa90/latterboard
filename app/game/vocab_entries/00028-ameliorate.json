@@ -26,5 +26,20 @@
     "Preserving problems does not improve them.",
     "Description alone does not improve conditions."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "During exam week, the school library is so crowded that students cannot find seats.",
+    "options": [
+      "Opening two empty classrooms as overflow study space helped ameliorate the crowding.",
+      "Squeezing three extra classes into the library ameliorated the crowding until students sat on the floor.",
+      "The librarian ameliorated the history and science shelves into a single jumbled section.",
+      "The new annex ameliorated the old library by copying its cramped layout exactly."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Adding seats elsewhere eases a bad situation and makes it more bearable.",
+      "Bringing in more people made the crowding worse, the reverse of easing it.",
+      "This confuses the word with amalgamate; merging shelves into a jumble fixes nothing.",
+      "Copying a model is emulating, and repeating a cramped design does not ease crowding."
+    ]
+  }
 }

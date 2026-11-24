@@ -21,12 +21,29 @@
   "options": [
     "The ostensible purpose of the visit was research, though the private meetings suggested otherwise.",
     "The ostensible purpose was the proven motive revealed after a full investigation.",
-    "The ostensible purpose was impossible to determine because none had been stated or appeared."
+    "The ostensible purpose was impossible to determine because none had been stated or appeared.",
+    "The ostensible purpose, which the visitors carefully hid from everyone, was to gain political favor."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: stated or appearing to be true, though possibly concealing something else.",
     "Ostensible refers to the apparent or professed purpose, not necessarily the proven real one.",
-    "There must be an apparent or professed basis for describing something as ostensible."
+    "There must be an apparent or professed basis for describing something as ostensible.",
+    "The word names the openly presented purpose, not the one kept hidden from view."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A student offers to help clean the science lab the day before grades are posted.",
+    "options": [
+      "Scrubbing every counter before the bell was barely ostensible with only one sponge.",
+      "Because her offer was ostensible, the teacher knew for certain that it was purely sincere.",
+      "Her ostensible reason was to tidy the beakers, but she lingered near the teacher's grade book.",
+      "The ostensible student arrived wearing sequins and announced her good deed over the intercom."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This treats the word as meaning feasible; it says nothing about a stated aim versus a real one.",
+      "Calling a motive ostensible raises doubt about it, so it cannot guarantee sincerity.",
+      "A stated, harmless task that may cover a different aim is exactly what the word describes.",
+      "Showy display belongs to the look-alike ostentatious; this word concerns appearance versus reality."
+    ]
+  }
 }

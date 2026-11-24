@@ -21,12 +21,29 @@
   "options": [
     "Her judicious allocation balanced urgent repairs against long-term needs.",
     "His judicious decision ignored all the evidence and followed a sudden impulse.",
-    "The allocation was judicious because it was made by a judge, regardless of its wisdom."
+    "The allocation was judicious because it was made by a judge, regardless of its wisdom.",
+    "Known for being judicious, the manager mocked every department head's spending habits."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: showing sound judgment and careful consideration.",
     "Ignoring evidence and acting impulsively does not show careful judgment.",
-    "Judicious concerns wisdom, not the profession of the decision-maker."
+    "Judicious concerns wisdom, not the profession of the decision-maker.",
+    "Wise decision-making is not the same as harshly criticizing others; that confuses it with judgmental."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A cook is seasoning a delicate fish broth for dinner guests.",
+    "options": [
+      "The broth tasted so judicious that the guests asked for second bowls.",
+      "She made a judicious choice by rolling a die to decide how much pepper to add.",
+      "A judicious pinch of salt sharpened the broth without masking the fish.",
+      "He was judicious with the salt, emptying half the shaker into the pot at once."
+    ],
+    "answer": 2,
+    "reasons": [
+      "The word describes wise choices, not flavor; it is not a fancier form of delicious.",
+      "Leaving a decision to chance is arbitrary, the opposite of weighing options with care.",
+      "Adding just enough after considering the delicate flavor shows careful judgment.",
+      "Pouring in salt without restraint is careless, not thoughtfully measured."
+    ]
+  }
 }

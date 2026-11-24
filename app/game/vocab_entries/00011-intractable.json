@@ -26,5 +26,20 @@
     "Ready agreement does not illustrate resistance.",
     "Intractability concerns manageability, not existence."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A city has tried for years to stop one low-lying neighborhood from flooding.",
+    "options": [
+      "The engineer said the flooding was intractable, meaning it stayed within one tract of land.",
+      "Despite new drains and pumps, the intractable flooding returned every spring.",
+      "Residents called the flooding intractable after one sandbag stopped it for good.",
+      "Because the floodwater was intractable, nobody could see or touch it."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word has nothing to do with tracts of land; it describes a problem that will not yield.",
+      "A problem that keeps coming back after repeated fixes is stubbornly resisting a solution.",
+      "A problem ended by a single easy step is the opposite of one that defies solving.",
+      "This confuses the word with intangible; it is about resisting control, not being invisible."
+    ]
+  }
 }

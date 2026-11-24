@@ -26,5 +26,20 @@
     "Hunger is associated with voracity, not veracity.",
     "Entertainment value is separate from truth."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A park ranger hears a hiker's report that a footbridge on the trail has collapsed.",
+    "options": [
+      "The hiker's veracity was obvious from how quickly she devoured three sandwiches.",
+      "The report's veracity was proven when the ranger found the footbridge standing firm.",
+      "The hiker spoke with such veracity that her voice echoed across the valley.",
+      "The ranger hiked to the creek to test the report's veracity."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Devouring food shows a huge appetite, which is voracity, a different word.",
+      "An intact bridge shows the report was wrong, so its truth was disproven, not proven.",
+      "Loudness or force of speech says nothing about whether a claim is true.",
+      "Looking at the bridge firsthand is a direct way to learn whether the report is true."
+    ]
+  }
 }

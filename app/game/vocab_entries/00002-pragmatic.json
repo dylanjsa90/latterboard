@@ -20,12 +20,29 @@
   "options": [
     "She took a pragmatic approach, choosing the repair they could afford today.",
     "He was pragmatic because he followed his principles regardless of the consequences.",
-    "The proposal was pragmatic because it was explained in exceptionally clear prose."
+    "The proposal was pragmatic because it was explained in exceptionally clear prose.",
+    "The pragmatic manager dismissed every teammate's suggestion simply because it wasn't her own idea."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: concerned with practical outcomes rather than abstract ideals.",
     "Following ideals regardless of results is not evidence of practical judgment.",
-    "Clear expression is lucid; it does not establish practicality."
+    "Clear expression is lucid; it does not establish practicality.",
+    "Rejecting ideas out of pride is stubbornness; a pragmatic person judges an idea by whether it works."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A community garden has very little water during a long, dry summer.",
+    "options": [
+      "The pragmatic gardener wept loudly and declared the dry summer a tragedy.",
+      "As a pragmatic gardener, she spent all summer reading soil theory and never planted a seed.",
+      "Taking a pragmatic view, the gardeners grew drought-tolerant beans instead of thirsty tomatoes.",
+      "Being pragmatic, the gardeners planted thirsty orchids simply because they found them beautiful."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Emotional theatrics are dramatic, a look-alike word; they do nothing to solve the water problem.",
+      "Studying theory without taking any action is the opposite of focusing on practical results.",
+      "Picking crops that can survive the conditions they actually face is a practical, results-minded choice.",
+      "Choosing plants for their beauty while ignoring the drought puts preference ahead of what will work."
+    ]
+  }
 }

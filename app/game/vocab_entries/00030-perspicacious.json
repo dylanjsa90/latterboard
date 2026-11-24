@@ -18,12 +18,29 @@
   "options": [
     "Her perspicacious analysis exposed the assumption beneath the argument.",
     "His perspicacious memory let him recite the report word for word.",
-    "The perspicacious speaker persuaded the audience through sheer charisma."
+    "The perspicacious speaker persuaded the audience through sheer charisma.",
+    "The reviewer called the essay perspicacious simply because its short sentences were easy to follow."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: quick to notice and understand things that are not obvious.",
     "Memory alone does not establish perceptive understanding.",
-    "Charisma and persuasion do not necessarily involve insight."
+    "Charisma and persuasion do not necessarily involve insight.",
+    "Easy-to-follow writing is perspicuous; perspicacious describes a perceptive mind, not clear prose."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A museum guide studies a painting that was recently donated to the collection.",
+    "options": [
+      "The perspicacious guide walked right past the large water stain across the corner.",
+      "The perspicacious guide declared the painting genuine without bothering to examine it.",
+      "The perspicacious guide spoke so loudly that visitors in the next gallery could hear.",
+      "The perspicacious guide realized the frame was decades newer than the canvas it held."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Missing a big, plain flaw is the reverse of keen perception.",
+      "Confident claims made without looking show certainty, not insight.",
+      "A loud voice has nothing to do with noticing or understanding things.",
+      "Spotting a subtle mismatch that most people would overlook shows sharp insight."
+    ]
+  }
 }

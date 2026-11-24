@@ -21,12 +21,29 @@
   "options": [
     "The successful first trial was an auspicious beginning for the collaboration.",
     "The auspicious beginning provided compelling evidence that failure was inevitable.",
-    "The beginning was auspicious because its exact date was unknown."
+    "The beginning was auspicious because its exact date was unknown.",
+    "The partners grew auspicious of each other and checked every email for hidden motives."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: suggesting favorable prospects or a promising outcome.",
     "Evidence of inevitable failure is unfavorable, not promising.",
-    "An unknown date says nothing about favorable prospects."
+    "An unknown date says nothing about favorable prospects.",
+    "This mixes the word up with suspicious; partners distrusting each other is not a hopeful sign."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A farmer studies the weather before planting a field of corn.",
+    "options": [
+      "Steady spring rains after a mild winter seemed auspicious for this year's corn crop.",
+      "The auspicious signs of a coming drought convinced the farmer his corn would wither.",
+      "The farmer built an auspicious barn with three silos and a shiny copper roof.",
+      "The farmer called his tractor auspicious simply because it was painted bright green."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Good rain after a gentle winter hints that the harvest will go well.",
+      "Signs that point to a withered crop are ominous, the reverse of promising.",
+      "The word is about hopeful signs for the future, not size or grandeur.",
+      "A paint color gives no hint about how the harvest will turn out."
+    ]
+  }
 }

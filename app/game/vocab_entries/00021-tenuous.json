@@ -20,12 +20,29 @@
   "options": [
     "The connection between the two events was tenuous and supported by little evidence.",
     "The tenuous evidence conclusively settled the question.",
-    "The discussion was tenuous because it continued for three hours."
+    "The discussion was tenuous because it continued for three hours.",
+    "The tenuous researcher kept defending the theory for twenty years despite every setback."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: weak, slight, or lacking a solid basis.",
     "Conclusive evidence is strong, not tenuous.",
-    "Duration does not establish weakness or lack of substance."
+    "Duration does not establish weakness or lack of substance.",
+    "Stubborn persistence is tenacious, a look-alike; this word describes weak support, not determined people."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "Two old classmates now keep in touch only through one birthday message a year.",
+    "options": [
+      "With just one message a year between them, their bond had grown tenuous.",
+      "Their tenuous friendship was the strongest in the class, built on daily phone calls.",
+      "Feeling tenuous before the reunion, she paced the hallway and bit her nails.",
+      "Planning the reunion was so tenuous that both of them needed a long nap afterward."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A link kept alive by a single yearly note is thin and could easily break.",
+      "Daily contact and great strength describe a sturdy bond, the reverse of a fragile one.",
+      "Nervousness means being tense; this word describes weak links or claims, not anxious people.",
+      "Exhausting effort is strenuous, a look-alike; this word means flimsy, not tiring."
+    ]
+  }
 }

@@ -26,5 +26,20 @@
     "Failing to notice an important distinction is the opposite of discernment.",
     "Alphabetical organization says nothing about judgment."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A judge at a bread-baking contest tastes two loaves that seem nearly the same.",
+    "options": [
+      "The discerning smell of burnt crust from the oven made the nervous bakers wince.",
+      "The discerning judge tasted a faint note of rye that the other judges had missed.",
+      "The discerning judge awarded every loaf first prize so that no baker would go home feeling left out.",
+      "The discerning judge was so muddled that she could not tell sweet bread from sour."
+    ],
+    "answer": 1,
+    "reasons": [
+      "This confuses the word with disconcerting; it describes a person who judges, not an upsetting thing.",
+      "Picking up a small flavor that others overlooked shows a sharp, careful palate.",
+      "Ranking every entry the same means the judge made no distinctions at all.",
+      "Missing an obvious difference in taste is the reverse of keen judgment."
+    ]
+  }
 }
