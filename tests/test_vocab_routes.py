@@ -9,16 +9,9 @@ from app.game import puzzles, vocab
 from app.game.vocab_words import daily_word
 from app.models import User, VocabRoom
 from app.utils import utcnow
-from tests.helpers import db_session
+from tests.helpers import db_session, vocab_key, vocab_state
 
 BASE = "/api/v1/vocab"
-
-
-def _state(code: str) -> vocab.Game:
-    with db_session() as db:
-        row = db.get(VocabRoom, code)
-        assert row is not None
-        return row.state  # type: ignore[return-value]
 
 
 def _set_state(code: str, **changes: Any) -> None:
@@ -27,11 +20,6 @@ def _set_state(code: str, **changes: Any) -> None:
         assert row is not None
         row.state = {**row.state, **changes}
         db.commit()
-
-
-def _key(code: str) -> int:
-    correct: int = vocab.full_question(_state(code))["correct"]
-    return correct
 
 
 def _create(client, headers, mode: str = "duel") -> dict:
@@ -86,7 +74,7 @@ def test_duel_plays_five_rounds_then_needs_both_for_a_rematch(
     code = game["code"]
 
     for r in range(vocab.ROUNDS):
-        key = _key(code)
+        key = vocab_key(code)
         mine = _act(
             client, inviter_headers, game, "answer", round=r, choice=key
         ).json()["game"]
@@ -162,7 +150,7 @@ def test_solo_waits_for_next(client, auth_headers):
     game = _create(client, auth_headers, "solo")
     assert game["phase"] == "question"
     assert _act(client, auth_headers, game, "next").status_code == 409
-    key = _key(game["code"])
+    key = vocab_key(game["code"])
     answered = _act(client, auth_headers, game, "answer", round=0, choice=key).json()[
         "game"
     ]
@@ -243,7 +231,7 @@ def test_simultaneous_answers_both_land(client, inviter_headers, opponent_header
         )
 
     assert snapshot.game.phase == "feedback"
-    players = _state(code)["players"]
+    players = vocab_state(code)["players"]
     assert [p["answers"]["0"]["choice"] for p in players] == [0, 1]
 
 
