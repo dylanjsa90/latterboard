@@ -24,12 +24,14 @@ from fastapi import (
     Header,
     HTTPException,
     Path,
+    Request,
     status,
 )
 from sqlalchemy.orm import Session
 
 from app.api import deps
 from app.connection_manager import manager
+from app.core.rate_limit import allow, network_of
 from app.crud.vocab import crud_vocab
 from app.game import puzzles, vocab
 from app.game.vocab_words import WORDS, daily_word
@@ -54,6 +56,15 @@ OptionalGuestToken = Annotated[
     str | None, Header(alias=GUEST_HEADER, min_length=32, max_length=64)
 ]
 
+# Only creating a guest room is limited: per network (a class behind one school NAT
+# fits), then site-wide. Read at call time, so tests can lower them.
+GUEST_LIMIT_PREFIX = "rl:vocab-guest"
+GUEST_WINDOW_SECONDS = 3600
+GUEST_ROOMS_PER_NETWORK_PER_HOUR = 60
+GUEST_ROOMS_PER_HOUR = 2_000
+GUEST_NETWORK_LIMITED = "Too many guest games from your network. Sign in to keep playing, or try again later."
+GUEST_SITE_LIMITED = "Guest play is busy right now. Sign in to keep playing, or try again in a few minutes."
+
 
 @contextmanager
 def _http_errors() -> Iterator[None]:
@@ -66,6 +77,23 @@ def _http_errors() -> Iterator[None]:
 def _player_id(user: User) -> str:
     # Room state is JSON, so player ids are strings.
     return str(user.id)
+
+
+async def _guest_room_allowed(request: Request) -> None:
+    host = request.client.host if request.client else None
+    network_key = f"{GUEST_LIMIT_PREFIX}:net:{network_of(host)}"
+    if not await allow(
+        network_key, GUEST_ROOMS_PER_NETWORK_PER_HOUR, GUEST_WINDOW_SECONDS
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail=GUEST_NETWORK_LIMITED
+        )
+    if not await allow(
+        f"{GUEST_LIMIT_PREFIX}:all", GUEST_ROOMS_PER_HOUR, GUEST_WINDOW_SECONDS
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail=GUEST_SITE_LIMITED
+        )
 
 
 def _room_player_id(
@@ -132,6 +160,7 @@ def create_room(
     "/guest-rooms",
     response_model=GuestRoomSnapshot,
     status_code=status.HTTP_201_CREATED,
+    dependencies=[Depends(_guest_room_allowed)],
 )
 def create_guest_room(db: Session = Depends(deps.get_db)) -> GuestRoomSnapshot:
     """A solo room for a signed-out visitor. The token is returned only here; the room

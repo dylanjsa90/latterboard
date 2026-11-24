@@ -2,6 +2,13 @@
 
 import json
 
+import pytest
+import redis as sync_redis
+from redis.exceptions import ConnectionError as RedisConnectionError
+
+from app.api.routes import vocab as vocab_routes
+from app.core import rate_limit
+from app.core.config import settings
 from app.game import vocab
 from tests.helpers import vocab_key, vocab_state
 
@@ -82,3 +89,53 @@ def test_claim_moves_the_guest_seat_to_the_account(client, auth_headers):
     assert client.get(f"{BASE}/rooms/{code}", headers=auth_headers).status_code == 200
     assert client.get(f"{BASE}/rooms/{code}", headers=guest).status_code == 403
     assert client.post(claim, headers={**guest, **auth_headers}).status_code == 403
+
+
+def _clear_guest_limits() -> int:
+    """Deletes every guest counter; returns the TTL the network one had, -2 if none."""
+    client = sync_redis.Redis.from_url(settings.REDIS_URL)
+    ttl = client.ttl(f"{vocab_routes.GUEST_LIMIT_PREFIX}:net:testclient")
+    for key in client.scan_iter(match=f"{vocab_routes.GUEST_LIMIT_PREFIX}:*"):
+        client.delete(key)
+    client.close()
+    return int(ttl)
+
+
+@pytest.fixture(autouse=True)
+def fresh_guest_limits():
+    """Tests share Redis across runs, so earlier counts would refuse this run's rooms."""
+    _clear_guest_limits()
+    yield
+    _clear_guest_limits()
+
+
+def test_guest_rooms_are_limited_per_network_then_site_wide(
+    client, monkeypatch, auth_headers
+):
+    monkeypatch.setattr(vocab_routes, "GUEST_ROOMS_PER_NETWORK_PER_HOUR", 2)
+    _guest(client)
+    _guest(client)
+    r = client.post(f"{BASE}/guest-rooms")
+    assert (r.status_code, r.json()["detail"]) == (
+        429,
+        vocab_routes.GUEST_NETWORK_LIMITED,
+    )
+    # Signed-in rooms are neither counted nor limited.
+    solo = client.post(f"{BASE}/rooms", json={"mode": "solo"}, headers=auth_headers)
+    assert solo.status_code == 201
+    assert 0 < _clear_guest_limits() <= vocab_routes.GUEST_WINDOW_SECONDS
+
+    monkeypatch.setattr(vocab_routes, "GUEST_ROOMS_PER_NETWORK_PER_HOUR", 100)
+    monkeypatch.setattr(vocab_routes, "GUEST_ROOMS_PER_HOUR", 1)
+    _guest(client)
+    r = client.post(f"{BASE}/guest-rooms")
+    assert (r.status_code, r.json()["detail"]) == (429, vocab_routes.GUEST_SITE_LIMITED)
+
+
+def test_guest_rooms_still_open_when_redis_is_down(client, monkeypatch):
+    class DownRedis:
+        def pipeline(self, *args: object, **kwargs: object) -> None:
+            raise RedisConnectionError("down")
+
+    monkeypatch.setattr(rate_limit, "redis", DownRedis())
+    _guest(client)

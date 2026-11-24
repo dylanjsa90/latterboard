@@ -29,11 +29,16 @@ def _redact_keys(
 
 
 def scrub_event(event: Event, _hint: Hint) -> Event:
-    """Redacts `token=` query values (the websocket's JWT) and emails in URLs before
-    an event leaves."""
+    """Redacts `token=` query values (the websocket's JWT), emails in URLs, and a
+    guest room's `X-Guest-Token` header before an event leaves."""
     _redact_keys(event.get("request"), ("query_string",))
     _redact_keys(event.get("request"), ("url",), _scrub_url)
     _redact_keys(event.get("logentry"), ("message", "formatted"))
+    headers = (event.get("request") or {}).get("headers")
+    if isinstance(headers, dict):
+        for name in headers:
+            if name.lower() == "x-guest-token":
+                headers[name] = "[Filtered]"
     breadcrumbs = event.get("breadcrumbs")
     if isinstance(breadcrumbs, dict):
         for crumb in breadcrumbs.get("values", []):
