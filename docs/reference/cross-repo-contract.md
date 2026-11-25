@@ -65,7 +65,7 @@ have a random password, which password recovery can replace.
 ### Puzzles (`/puzzles`, bearer; `puzzle_id` like `"word-2026-09-11"`, future dates 404; a move whose id isn't `{game}-YYYY-MM-DD` gets 400)
 | Call | Request | Response |
 | ---- | ------- | -------- |
-| `GET /word` | — | `{puzzle_id, word_length, max_attempts, initial_guess, initial_grade: Grade[], guesses: [{guess, grades}], won, lost, answer?}` |
+| `GET /word` | — | `{puzzle_id, word_length, max_attempts, guesses: [{guess, grades}], won, lost, answer?}` |
 | `POST /word/hint` | `{puzzle_id}` | `{letter}` |
 | `POST /word/guess` | `{puzzle_id, guess (5 chars), attempt_count}` | `{grades, won, lost, answer?}`; 409 once the signed-in player's word has an outcome; 400 `Not a valid word` for a guess outside the word list (nothing recorded) |
 | `GET /sudoku` | — | `{puzzle_id, puzzle: int[81], won, board: int[81]?}`; `board` (the solution) only when the signed-in player already won |
@@ -79,7 +79,8 @@ have a random password, which password recovery can replace.
 | `GET /me/history?skip&limit` | — | `{items: [{game, puzzle_id, won, attempt_count, completed_at}], total}` |
 
 The server decides word, sudoku, and cipher outcomes (webcade ADR 004). `attempt_count` counts
-board rows including the fixed starter and the move being sent (`max_attempts` rows in all), and
+board rows including the move being sent (`max_attempts` rows in all; cipher's first row is a
+fixed starter, while the word board starts empty), and
 is used only for guests: a signed-in player's moves are counted by the server, which also
 returns them on `GET` so word and cipher resume. Likewise sudoku's `board` is used only for
 guests: a signed-in player's board is the puzzle plus the cells the server saw them fill. Stats and history include lost puzzles

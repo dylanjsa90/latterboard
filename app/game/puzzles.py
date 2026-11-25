@@ -19,7 +19,6 @@ from zoneinfo import ZoneInfo
 from app.game import wordle
 
 WORD_LENGTH = 5
-WORD_STARTER = "ADORE"
 CIPHER_STARTER = [0, 2, 3, 1]
 WORD_MAX_ATTEMPTS = 6
 CIPHER_MAX_ATTEMPTS = 8
