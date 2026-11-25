@@ -1,0 +1,49 @@
+{
+  "id": 59,
+  "slug": "bolster",
+  "word": "bolster",
+  "pos": "verb",
+  "pronunciation": "/ˈboʊl.stər/",
+  "definition": "To support or strengthen something, such as an argument, an effort, or a person's confidence.",
+  "difficulty": "Foundation",
+  "example": "Cheers from the crowd helped bolster the tired runner's spirits during the final mile.",
+  "synonyms": [
+    "strengthen",
+    "reinforce",
+    "shore up",
+    "boost"
+  ],
+  "nuance": "Bolster means propping up something that already exists, while build suggests making something from scratch.",
+  "alternatives": [
+    "undermine"
+  ],
+  "prompt": "A small town library wants more people to visit on weekends.",
+  "options": [
+    "The librarians added Saturday story hours to bolster weekend attendance.",
+    "The librarians closed the reading room on Saturdays to bolster weekend attendance.",
+    "One librarian began to bolster loudly about how many books she had read.",
+    "The volunteers tried to bolster the broken shelves into the dumpster."
+  ],
+  "reasons": [
+    "A new weekend event gives visitors a reason to come, which strengthens attendance.",
+    "Shutting a space on weekends would weaken attendance, the reverse of propping it up.",
+    "Loud bragging is blustering, a look-alike word; bolster needs something to support.",
+    "Hauling shelves away discards them; bolstering them would mean propping them up."
+  ],
+  "practice": {
+    "prompt": "A student worries that her history essay sounds unconvincing.",
+    "options": [
+      "She added quotations from old letters to bolster her main claim.",
+      "To bolster her main claim, she deleted every piece of evidence from the essay.",
+      "Her little brother kept trying to bolster her by humming while she wrote.",
+      "She would bolster that her thesis was correct, even without any proof."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Firsthand evidence gives an argument more support and makes it more persuasive.",
+      "Removing evidence leaves an argument weaker, which is the opposite of strengthening it.",
+      "Annoying someone on purpose is bothering them, a sound-alike mix-up, not supporting them.",
+      "The verb takes a thing to be strengthened, not a statement someone insists on or asserts."
+    ]
+  }
+}

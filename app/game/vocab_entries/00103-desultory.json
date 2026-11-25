@@ -1,0 +1,49 @@
+{
+  "id": 103,
+  "slug": "desultory",
+  "word": "desultory",
+  "pos": "adjective",
+  "pronunciation": "/ˈdes.əl.tɔːr.i/",
+  "definition": "Done without a clear plan or real interest, jumping from one thing to another.",
+  "difficulty": "Advanced",
+  "example": "After a few desultory attempts at the crossword, he folded the newspaper and went to bed.",
+  "synonyms": [
+    "aimless",
+    "halfhearted",
+    "haphazard",
+    "unfocused"
+  ],
+  "nuance": "Haphazard stresses disorder, while desultory also suggests weak interest; it is unrelated to dilatory, which means slow or delaying.",
+  "alternatives": [
+    "assiduous"
+  ],
+  "prompt": "Two strangers at a crowded party try to make small talk while waiting for the host.",
+  "options": [
+    "They made desultory remarks about the weather and the snacks before drifting to opposite corners.",
+    "Their desultory conversation followed a careful outline and stayed on one topic for an hour.",
+    "Her desultory arrival meant she walked through the door forty minutes after everyone else.",
+    "The host called their desultory exchange the most gripping debate he had heard all year."
+  ],
+  "reasons": [
+    "Idle, wandering chatter that fizzles out shows aimlessness and little real interest.",
+    "A planned, tightly focused exchange is the reverse of rambling, halfhearted talk.",
+    "Lateness would be dilatory; this word describes unfocused effort, not tardiness.",
+    "The word implies listless drifting, so it cannot describe a gripping, intense debate."
+  ],
+  "practice": {
+    "prompt": "A student has two weeks to prepare for a final chemistry exam.",
+    "options": [
+      "Her desultory studying, a few flashcards one day and a random chapter the next, left big gaps.",
+      "His desultory schedule assigned each unit to a specific evening, and he never missed a session.",
+      "The desultory student kept postponing his review until the library had already closed.",
+      "The desultory gray sky outside the classroom window made everyone feel gloomy."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Skipping around with no plan or steady commitment is exactly this kind of scattered effort.",
+      "A strict, consistent study plan is methodical, the opposite of aimless.",
+      "Putting things off is dilatory; the word here concerns lack of focus, not delay.",
+      "The word does not mean dreary or depressing, and weather cannot lack a plan."
+    ]
+  }
+}

@@ -7,6 +7,7 @@ import pytest
 
 from app.game import vocab
 from app.game.vocab_words import (
+    BY_SLUG,
     DAILY_ANCHOR,
     LEGACY_DAILY_COUNT,
     WORDS,
@@ -91,8 +92,37 @@ def test_every_question_has_aligned_reasons_one_key_and_a_blank():
             if q["kind"] == "context":
                 assert "_____" in q["prompt"], word.word
                 assert q["options"][q["correct"]] == word.word
+                assert len(q["options"]) == 3, word.word
             else:
                 assert q["options"][q["correct"]] == word.options[0]
+
+
+def test_rematch_deals_words_the_room_has_not_played():
+    for _ in range(50):
+        first = vocab._pick_words()
+        second = vocab._pick_words(exclude=first)
+        assert len(set(second)) == vocab.ROUNDS and not set(first) & set(second)
+        assert len({WORDS[i].difficulty for i in second}) == 3
+    g = duel()
+    before = list(g["ids"])
+    g["phase"] = "results"
+    vocab.apply_action(g, "Alice", "rematch", 2000)
+    vocab.apply_action(g, "Bob", "rematch", 2001)
+    assert not set(before) & set(g["ids"])
+
+
+def test_context_distractors_vary_by_room_but_not_by_request():
+    w = BY_SLUG["discerning"]
+    assert w.alternatives == ()
+    seen = set()
+    for code in ("AAA111", "BBB222", "CCC333", "DDD444", "EEE555", "FFF666"):
+        g = vocab.make_game(code, "duel", player("Alice"), now=1000)
+        g["ids"] = [w.id] * vocab.ROUNDS
+        q = vocab.full_question(g, 1)
+        assert q == vocab.full_question(g, 1)
+        assert len(q["options"]) == 3 and w.word in q["options"]
+        seen.add(frozenset(q["options"]))
+    assert len(seen) > 1
 
 
 def test_option_order_is_stable_across_requests():

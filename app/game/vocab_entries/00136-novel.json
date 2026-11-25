@@ -1,0 +1,47 @@
+{
+  "id": 136,
+  "slug": "novel",
+  "word": "novel",
+  "pos": "adjective",
+  "pronunciation": "/ˈnɑː.vəl/",
+  "definition": "New and unlike anything seen or done before.",
+  "difficulty": "Foundation",
+  "example": "The engineers found a novel way to cool the building using collected rainwater.",
+  "synonyms": [
+    "original",
+    "innovative",
+    "fresh",
+    "unprecedented"
+  ],
+  "nuance": "Novel stresses originality, not recency: a novel idea differs from earlier ones, while a new car may match last year's model.",
+  "alternatives": [],
+  "prompt": "A science fair judge is reviewing student projects.",
+  "options": [
+    "The judge praised the student's novel method of measuring plant growth with a phone camera.",
+    "The judge called the project novel because it copied last year's winner step by step.",
+    "The judge called the report novel because it ran to three hundred pages, divided into chapters.",
+    "The judge called the volcano model novel simply because its glue was still wet."
+  ],
+  "reasons": [
+    "An inventive approach no one had tried before is exactly what the word describes.",
+    "Copying an earlier project is the opposite of being original.",
+    "This confuses the adjective with the book sense; length and chapters don't make an idea original.",
+    "Being freshly made is not the same as being unlike anything before."
+  ],
+  "practice": {
+    "prompt": "A chef is planning the menu for her restaurant's opening night.",
+    "options": [
+      "The salad was novel because its lettuce had been picked only an hour before dinner.",
+      "The chef called the portions novel because each plate now cost twice as much as before.",
+      "The chef's novel pairing of roasted pears with miso surprised even experienced diners.",
+      "The chef planned a novel menu made up entirely of dishes every diner in town already knew by heart."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Fresh ingredients are recent, but that does not make the dish original.",
+      "A higher price says nothing about whether something is new in kind.",
+      "An unexpected combination that diners had never tasted shows true originality.",
+      "Dishes everyone already knows are familiar, which reverses the meaning."
+    ]
+  }
+}

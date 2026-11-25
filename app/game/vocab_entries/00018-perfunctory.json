@@ -26,5 +26,20 @@
     "Intense care contradicts perfunctory performance.",
     "Correctness alone does not indicate care or its absence."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A museum tour guide is leading her tenth group of the day.",
+    "options": [
+      "By her last tour, her explanations had grown perfunctory, recited flatly while she glanced at the clock.",
+      "Her perfunctory tour ran three hours over because she answered every question in loving detail.",
+      "The museum's new elevator was perfunctory, so visitors using wheelchairs could reach every single floor.",
+      "In a perfunctory tone, she ordered the noisy guests to stop talking at once and permitted no reply."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Reciting in a flat voice while watching the clock shows she is only going through the motions.",
+      "Generous, enthusiastic attention is the reverse of routine, half-hearted effort.",
+      "This confuses the word with functional; it describes careless effort, not working equipment.",
+      "A commanding order that allows no reply is peremptory, a look-alike with a different meaning."
+    ]
+  }
 }

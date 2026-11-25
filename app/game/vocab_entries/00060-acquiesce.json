@@ -1,0 +1,47 @@
+{
+  "id": 60,
+  "slug": "acquiesce",
+  "word": "acquiesce",
+  "pos": "verb",
+  "pronunciation": "/ˌæk.wiˈɛs/",
+  "definition": "To accept or go along with something reluctantly, without arguing against it.",
+  "difficulty": "Intermediate",
+  "example": "After weeks of pleading, my parents finally acquiesced and let me adopt the stray cat.",
+  "synonyms": [
+    "give in",
+    "comply",
+    "consent",
+    "submit"
+  ],
+  "nuance": "Acquiesce suggests quiet, often grudging acceptance of another's wish, while consent can be willing and enthusiastic.",
+  "alternatives": [],
+  "prompt": "A team captain wants to practice outdoors, but the coach insists on using the gym.",
+  "options": [
+    "Seeing the coach would not budge, the captain chose to acquiesce and led the team inside.",
+    "Before practice, the captain stopped at the store to acquiesce a new pair of cleats.",
+    "The captain decided to acquiesce by storming out and holding practice on the field anyway.",
+    "The captain was thrilled to acquiesce, since moving indoors had been her own idea all along."
+  ],
+  "reasons": [
+    "She drops her objection and goes along with the coach's plan despite her own preference.",
+    "This confuses the word with acquire; it does not mean to buy or obtain something.",
+    "Defying the coach openly is resistance, the reverse of quietly giving in.",
+    "You cannot reluctantly yield to a plan that was yours and that you eagerly wanted."
+  ],
+  "practice": {
+    "prompt": "Two siblings disagree about which movie to watch on family night.",
+    "options": [
+      "Tired of the debate, Maya decided to acquiesce and let her little brother pick the cartoon.",
+      "Maya tried to acquiesce her brother into watching her nature documentary instead.",
+      "To acquiesce, Maya hid the remote so her brother could not change the channel at all.",
+      "Their father asked Maya to acquiesce the popcorn evenly into four bowls for everyone."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Maya stops arguing and accepts her brother's choice even though it wasn't what she wanted.",
+      "The word describes yielding yourself, not pressuring someone else to agree.",
+      "Hiding the remote is a way of getting her own way, not of giving in.",
+      "The word has nothing to do with dividing or handing out portions of anything."
+    ]
+  }
+}

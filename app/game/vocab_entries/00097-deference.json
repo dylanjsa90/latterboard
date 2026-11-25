@@ -1,0 +1,46 @@
+{
+  "id": 97,
+  "slug": "deference",
+  "word": "deference",
+  "pos": "noun",
+  "pronunciation": "/ˈdɛf.ər.əns/",
+  "definition": "Polite respect shown by giving way to another person's judgment, wishes, or authority.",
+  "difficulty": "Intermediate",
+  "example": "Out of deference to the sleeping baby, everyone in the kitchen spoke in whispers.",
+  "synonyms": [
+    "respect",
+    "submission",
+    "courtesy"
+  ],
+  "nuance": "Respect can be a feeling alone, but deference means actually giving way to someone else's wishes or judgment.",
+  "alternatives": [],
+  "prompt": "A new intern attends her first planning meeting with a team of experienced engineers.",
+  "options": [
+    "Out of deference to the senior engineers, the intern let them speak before sharing her idea.",
+    "The intern asked for a deference of the meeting until next Tuesday.",
+    "In a show of deference, the intern kept interrupting the senior engineers and mocked their plan.",
+    "The intern noticed a small deference between the two circuit diagrams."
+  ],
+  "reasons": [
+    "Holding back her own view until the experienced staff have spoken is respectful yielding.",
+    "Postponing an event is a deferral; this word describes respect, not delay.",
+    "Interrupting and mocking others is disrespect, the reverse of giving way to them.",
+    "This confuses the word with its look-alike 'difference,' which means a way things are unalike."
+  ],
+  "practice": {
+    "prompt": "A guest arrives at a family's home where everyone follows a particular house rule.",
+    "options": [
+      "In deference to his hosts' custom, the guest removed his shoes at the door.",
+      "Showing great deference, the guest rearranged the hosts' living room to suit his own taste.",
+      "With complete deference, the guest shrugged and said he didn't care what anyone thought.",
+      "The guest couldn't spot any deference between the two matching teacups."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Following the household's rule instead of his own habit shows respectful yielding.",
+      "Imposing his own preferences on the hosts is the opposite of yielding to theirs.",
+      "Not caring about others' views is indifference, which is not a form of respect.",
+      "Comparing objects calls for 'difference'; the word here is about respect for people."
+    ]
+  }
+}

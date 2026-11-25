@@ -1,0 +1,47 @@
+{
+  "id": 74,
+  "slug": "conciliatory",
+  "word": "conciliatory",
+  "pos": "adjective",
+  "pronunciation": "/kənˈsɪl.i.ə.tɔːr.i/",
+  "definition": "Meant to calm someone's anger or end a disagreement by making peace.",
+  "difficulty": "Intermediate",
+  "example": "After the tense meeting, the manager sent a conciliatory email offering to share credit for the project.",
+  "synonyms": [
+    "placatory",
+    "peacemaking",
+    "appeasing",
+    "pacifying"
+  ],
+  "nuance": "Conciliatory gestures aim to restore goodwill, while appeasing often suggests giving in too much just to avoid conflict.",
+  "alternatives": [],
+  "prompt": "Two neighbors have been arguing for months over a fence on their shared property line.",
+  "options": [
+    "Hoping to end the feud, Mr. Ortiz made a conciliatory offer to split the cost of a new fence.",
+    "Ms. Lane sent a conciliatory note demanding the fence come down by Friday or she would call a lawyer.",
+    "His conciliatory reply was only four words long, so the other neighbor read it in a second.",
+    "When the survey proved him right, the conciliatory neighbor gloated loudly over the fence for an hour."
+  ],
+  "reasons": [
+    "Offering to share the expense is a peace-making move meant to ease the conflict.",
+    "An ultimatum with a threat escalates the dispute instead of soothing it.",
+    "This confuses the word with concise; shortness says nothing about making peace.",
+    "Gloating rubs in a victory and would inflame the other neighbor, not calm them."
+  ],
+  "practice": {
+    "prompt": "A team captain snapped at a teammate during practice and now wants to repair the relationship.",
+    "options": [
+      "The next morning, the captain struck a conciliatory tone and admitted she had been too harsh.",
+      "In a conciliatory speech to the whole team, the captain blamed the teammate for every missed pass.",
+      "The captain gave a conciliatory cheer when the same teammate scored the winning goal later that week.",
+      "To show she was conciliatory, the captain refused to speak to the teammate for the rest of the week."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Admitting fault in a gentle way is an effort to smooth things over.",
+      "Publicly blaming someone deepens the hurt rather than mending it.",
+      "This mixes the word up with congratulatory; cheering a goal is praise, not peacemaking.",
+      "The silent treatment keeps the conflict going instead of resolving it."
+    ]
+  }
+}

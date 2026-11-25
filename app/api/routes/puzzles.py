@@ -97,14 +97,17 @@ def _open_attempt(
 
 
 def _rows_after_move(
-    current_user: User | None, attempt: PuzzleAttempt | None, sent_count: int | None
+    current_user: User | None,
+    attempt: PuzzleAttempt | None,
+    sent_count: int | None,
+    starter_rows: int,
 ) -> int:
-    """Rows on the board once this move lands, counting the fixed starter row. The server
+    """Rows on the board once this move lands, counting any fixed starter row. The server
     counts a signed-in player's own moves; nothing is recorded for guests, so their count stands.
     """
     if current_user is None:
         return sent_count or 0
-    return (len(attempt.guesses) if attempt else 0) + 2
+    return (len(attempt.guesses) if attempt else 0) + starter_rows + 1
 
 
 # --- stats -------------------------------------------------------------
@@ -151,8 +154,6 @@ def get_word_puzzle(
         puzzle_id=puzzle_id,
         word_length=puzzle_logic.WORD_LENGTH,
         max_attempts=puzzle_logic.WORD_MAX_ATTEMPTS,
-        initial_guess=puzzle_logic.WORD_STARTER,
-        initial_grade=puzzle_logic.grade_word(puzzle_logic.WORD_STARTER, answer),
         guesses=[
             WordGuessPublic(guess=guess, grades=puzzle_logic.grade_word(guess, answer))
             for guess in (attempt.guesses if attempt else [])
@@ -193,7 +194,7 @@ def word_guess(
         )
     grades = puzzle_logic.grade_word(body.guess, answer)
     won = body.guess.casefold() == answer.casefold()
-    rows = _rows_after_move(current_user, attempt, body.attempt_count)
+    rows = _rows_after_move(current_user, attempt, body.attempt_count, starter_rows=0)
     lost = not won and rows >= puzzle_logic.WORD_MAX_ATTEMPTS
 
     if current_user is not None:
@@ -407,7 +408,7 @@ def cipher_attempt(
 
     feedback = puzzle_logic.cipher_feedback(body.attempt, answer)
     won = feedback["won"]
-    rows = _rows_after_move(current_user, attempt, body.attempt_count)
+    rows = _rows_after_move(current_user, attempt, body.attempt_count, starter_rows=1)
     lost = not won and rows >= puzzle_logic.CIPHER_MAX_ATTEMPTS
 
     if current_user is not None:

@@ -1,6 +1,6 @@
 # Backend module map
 
-Last updated: 2026-11-23
+Last updated: 2026-11-25
 
 Where things live in `app/` and what each module exports. Rules for matches, matchmaking, and
 the computer opponent are in `docs/architecture/matches.md`; wire shapes are in the cross-repo
@@ -20,6 +20,8 @@ Calls flow `api/` → `services/` → `crud/` → `game/`, never back up: `crud/
 - `game/`: rules with no database or I/O. Grading, puzzles, bot move choice, Pacific days.
 - `models/`, `schemas/`, `core/`: tables, wire models, settings and infrastructure, imported from
   every layer.
+- `vocab_pipeline/`: a maintainer-only tool that grows the Vocab Challenger word list. It imports
+  from the layers above; nothing in the app imports it.
 
 Packages don't re-export from `__init__` (except `app.models`, whose import also registers every
 table), so imports always name the module.
@@ -50,7 +52,7 @@ table), so imports always name the module.
 | `api/routes/matches.py` | `/matches/*`: invite/accept/decline/cancel/pending/detail, `/me/history`, `/me/active` + one move endpoint per mode; each move calls `_require_game`, then broadcasts to `match:{id}` | `router`, `SUPPORTED_GAMES` |
 | `api/routes/matchmaking.py` | `POST`/`DELETE /matchmaking/{game}`: Redis ZSET queue + Lua pairing, the bot after `MATCHMAKING_BOT_WAIT_SECONDS` | `router`, `queue_key`, `waiting_since_key` |
 | `api/routes/invite_links.py` | `/invite-links/*`: create (emails via `BackgroundTasks` when SMTP is on), list mine, public preview, claim, revoke | `router`, `GAME_TITLES` |
-| `api/routes/vocab.py` | `/vocab/*`: Vocab Challenger rooms (create, poll, join, actions), guest rooms (`POST /guest-rooms`, public and rate-limited; their `GET`/`actions` take `X-Guest-Token`) and claiming one on sign-in, and the wordbook. Rooms aren't matches; a change sends `room_changed` on `vocab:{CODE}` | `router` |
+| `api/routes/vocab.py` | `/vocab/*`: Vocab Challenger rooms (create, poll, join, actions), guest rooms (`POST /guest-rooms`, public and rate-limited; their `GET`/`actions` take `X-Guest-Token`) and claiming one on sign-in, the wordbook, word reports (`POST /words/{id}/report`, public and rate-limited; `GET /reports`, superuser), the public word list for webcade's word pages (`GET /entries`, serialized once per process), and the word of the day with its archive (`GET /daily-word`, `GET /daily-word/history`, public). Rooms aren't matches; a change sends `room_changed` on `vocab:{CODE}` | `router` |
 | `api/routes/ws.py` | **The websocket `/ws/{game_name}`** (join/leave_match, join/leave_room for vocab rooms) and REST presence (`/ws/{game}/connections`, `/ws/{game}/usernames`) | `socket_router` (at the root), `router` (under `/api/v1`) |
 
 ## `app/services/`
@@ -59,7 +61,7 @@ table), so imports always name the module.
 | ---- | ------- | ----------- |
 | `services/match_start.py` | Starting a match between two known players, shared by accept, matchmaking, and invite links | `start_match`, `notify_match_started`, `max_guesses_for` |
 | `services/match_views.py` | Matches as response schemas, loading the players they name in one query | `to_public`, `to_detail`, `guess_result`, `history`, `active_items`, `pending_invites` |
-| `services/match_play.py` | Applying a move and broadcasting it, shared by the move routes and the bot. Raises `MoveRejected`, never `HTTPException` | `apply_wordle_guess`, `apply_race_guess`, `wordle_move_error` |
+| `services/match_play.py` | Applying a move and broadcasting it, shared by the move routes and the bot. Raises `MoveRejected`, never `HTTPException` | `apply_wordle_guess`, `apply_race_guess`, `apply_word_pick`, `wordle_move_error` |
 | `services/bot_turn.py` | When the computer moves and driving it, via `BackgroundTasks` | `schedule_bot_turn`, `run_bot_turn`, `bot_participant`, `BOT_GAMES` |
 | `services/google_sign_in.py` | What `/login/google` and `POST /users/google` share: verify the credential (mapping errors to 401/403/404), mint the token | `PROVIDER`, `verified_identity`, `access_token` |
 | `services/avatar.py` | Validates and re-encodes profile photos to a 256px WebP (dropping EXIF) | `process_avatar`, `InvalidImage`, `AVATAR_MAX_BYTES` |
@@ -74,9 +76,9 @@ table), so imports always name the module.
 | `crud/puzzle.py` | The dated puzzle bank: seeding, lookup by game and date, generating a sudoku once the bank runs out | `puzzle` (`seed_defaults`, `get_by_game_date`, `get_or_generate`, `count_by_game`) |
 | `crud/puzzle_attempt.py` | Daily puzzle attempts, stats, streaks | `puzzle_attempt` (`get_for_puzzle`, `get_or_create`, `record_attempt`, `get_stats`, `get_history`) |
 | `crud/match.py` | Match lifecycle + turn-based wordle rows | `match` (`create_invite`, `expire_if_needed`, `get_open_match_between`, `get_pending_invites`, `get_active`, `get_finished`, `get_record`, `get_guesses`, `accept_invite`, `decline_invite`, `cancel_invite`, `record_guess`) |
-| `crud/match_puzzle.py` | Race/co-op state in `match_puzzle`, optimistic lock via `_apply` | `match_puzzle` (`build`, `submit_race_guess`, `race_detail`, `submit_sudoku_move`, `sudoku_detail`) |
+| `crud/match_puzzle.py` | Race/co-op state in `match_puzzle`, optimistic lock via `_apply` | `match_puzzle` (`build`, `submit_word_pick`, `pick_answers`, `submit_race_guess`, `race_detail`, `submit_sudoku_move`, `sudoku_detail`) |
 | `crud/invite_link.py` | Invite link rows: create, daily count, open links, status, atomic claim, revoke | `invite_link`, `invite_url` |
-| `crud/vocab.py` | Loads a room, runs a rule, saves it with an optimistic lock (`VocabRoom.version`, replayed on `StaleDataError`); `create_room` also deletes rooms a week past expiry; wordbook rows | `crud_vocab` (`create_room`, `mutate`, `wordbook`, `save`, `remove`, `review`); not `vocab`, which the module uses for the game rules |
+| `crud/vocab.py` | Loads a room, runs a rule, saves it with an optimistic lock (`VocabRoom.version`, replayed on `StaleDataError`); `create_room` also deletes rooms a week past expiry; wordbook rows; word reports | `crud_vocab` (`create_room`, `mutate`, `wordbook`, `save`, `remove`, `review`, `report`, `reports`); not `vocab`, which the module uses for the game rules |
 
 ## `app/game/` (no database or I/O)
 
@@ -87,10 +89,14 @@ table), so imports always name the module.
 | `game/wordle.py` | Wordle word selection, validation (answers or `GUESS_WORDS`), and guess grading | `select_word`, `is_valid_word`, `evaluate_guess` |
 | `game/word_list.py` | The 2,309 five-letter answer words, shared by puzzles, matches, and the bot | `word_list` |
 | `game/guess_words.py` | The 8,636 five-letter ENABLE words (public domain) a player may also guess, so plurals and everyday words that are never answers pass `is_valid_word` | `GUESS_WORDS` |
-| `game/match_modes.py` | Rules for the puzzle match modes (`word_race`, `cipher_race`, `sudoku_coop`): new puzzles, grading, outcomes, scores | `RACE_GAMES`, `PUZZLE_MATCH_GAMES`, `new_puzzle`, `initial_state`, `grade_race_guess`, `race_outcome`, `race_score`, `sudoku_coop_score` |
+| `game/match_modes.py` | Rules for the puzzle match modes (`word_race`, `cipher_race`, `sudoku_coop`, `word_pick`): new puzzles, picks, grading, outcomes, scores | `RACE_GAMES`, `PUZZLE_MATCH_GAMES`, `new_puzzle`, `initial_state`, `is_pickable_word`, `race_answer`, `race_ready`, `grade_race_guess`, `race_outcome`, `race_score`, `sudoku_coop_score` |
 | `game/bot.py` | Move selection for the computer: filter to still-possible answers, rank, then pick, handicapped by `skill` | `choose_word`, `choose_cipher`, `word_candidates`, `cipher_candidates`, `DEFAULT_SKILL` |
 | `game/vocab.py` | Vocab Challenger rules, ported from vocab-app's `engine.ts`: rounds, deadlines (epoch ms), scoring, per-player views, review ladder | `make_game`, `join`, `touch`, `claim`, `guest_player_id`, `apply_action`, `visible`, `full_question`, `next_review`, `VocabError` |
-| `game/vocab_words.py` | The 46-word curriculum; a word's id is its index, so append only | `WORDS`, `VocabWord`, `daily_word` |
+| `game/vocab_words.py` | The word list: one JSON file per word in `game/vocab_entries/`, loaded once at import (ids and slugs permanent, append only), and the daily-word schedule | `WORDS`, `BY_SLUG`, `VocabWord`, `Practice`, `load_words`, `dump_entry`, `slugify`, `daily_word`, `daily_id`, `daily_runway`, `DAILY_ANCHOR` |
+| `game/daily_archive.py` | The days the word-of-the-day archive covers, from `ARCHIVE_START` through a given Pacific day; each day's word is `daily_word(day)`, so no table | `ARCHIVE_START`, `archive_days` |
+| `game/vocab_public.py` | Shipped words as their public pages show them: no room question's text, alternatives limited to other shipped slugs | `public_entries` |
+| `game/vocab_validation.py` | The rules every word must meet, for one entry and for the whole list; tests run them over every shipped file | `entry_errors`, `list_errors`, `LIMITS` |
+| `game/vocab_entries/` | The shipped words, `{id:05d}-{slug}.json`; how to add and fix them: `docs/guides/vocab-word-list.md` | |
 | `game/errors.py` | The error a refused move raises, shared by crud, services and routes (routes map it to 409) | `MoveRejected` |
 
 ## `app/models/` and `app/schemas/`
@@ -100,12 +106,12 @@ table), so imports always name the module.
 | `models/user.py`, `user_identity.py`, `user_avatar.py` | Users; external sign-in links (`provider`, `subject`, unique together); photos, kept apart so loading a user never loads the bytes | `User`, `UserIdentity`, `UserAvatar` |
 | `models/game_score.py`, `puzzle.py` | Scores; the dated puzzle bank and players' attempts (`puzzle_id` is a string key, not a foreign key) | `GameScore`, `Puzzle`, `PuzzleAttempt` |
 | `models/match.py` | Matches, turn-based guesses, race/co-op puzzle state, invite links | `Match`, `MatchGuess`, `MatchPuzzle`, `MatchInviteLink` |
-| `models/vocab.py` | Vocab rooms (one JSON document each) and wordbook rows | `VocabRoom`, `VocabSavedWord` |
+| `models/vocab.py` | Vocab rooms (one JSON document each), wordbook rows, and players' reports of problems with words | `VocabRoom`, `VocabSavedWord`, `VocabWordReport` |
 | `schemas/user.py` | User I/O + the handle/name/city/birth-year rules | `UserCreate`, `ProfileUpdate`, `UserPublic`, `UserPrivate`, `PlayerPublic`, `Token`, `NewPassword`, `avatar_url` |
 | `schemas/game_score.py` | Score I/O models + per-game validity rules | `SCORE_RULES`, `GameScoreCreate`, `LeaderboardEntry`, `PlaysToday` |
 | `schemas/puzzle.py` | Puzzle I/O models | `{Word,Sudoku,Memory,Cipher}PuzzlePublic`, `WordGuessCreate`/`WordGuessResult`, `SudokuMoveCreate`/`SudokuMoveResult`, `CipherAttemptCreate`/`CipherFeedback`, `PuzzleStats`, `PuzzleHistory` |
-| `schemas/match.py` | Match I/O models | `MatchInviteCreate`, `MatchPublic`, `MatchDetail`, `MatchGuessResult`, `RaceDetail`, `RaceGuessResult`, `SudokuCoopMoveCreate`, `SudokuCoopDetail`, `PendingInvite` |
-| `schemas/invite_link.py`, `matchmaking.py`, `vocab.py`, `ws.py` | Invite links; the matchmaking answer; Vocab Challenger (times in epoch ms); presence | `InviteLinkCreate`, `InviteLinkPublic`, `InviteLinkPreview`, `MatchmakingStatus`, `RoomSnapshot`, `GuestRoomSnapshot`, `Wordbook`, `TopicPresence` |
+| `schemas/match.py` | Match I/O models | `MatchInviteCreate`, `MatchPublic`, `MatchDetail`, `MatchGuessResult`, `RaceDetail`, `RaceGuessResult`, `WordPickCreate`, `WordPickResult`, `SudokuCoopMoveCreate`, `SudokuCoopDetail`, `PendingInvite` |
+| `schemas/invite_link.py`, `matchmaking.py`, `vocab.py`, `ws.py` | Invite links; the matchmaking answer; Vocab Challenger (times in epoch ms); presence | `InviteLinkCreate`, `InviteLinkPublic`, `InviteLinkPreview`, `MatchmakingStatus`, `RoomSnapshot`, `GuestRoomSnapshot`, `Wordbook`, `WordReportCreate`, `WordReport`, `TopicPresence` |
 
 ## `app/core/` and infrastructure
 
@@ -124,10 +130,24 @@ table), so imports always name the module.
 | `app/connection_manager.py` | Topic membership, Redis presence, pub/sub delivery, heartbeat | `manager` (`connect`, `join`, `disconnect`, `disconnect_all`, `broadcast(msg, topic)`, `send_to_user(user_id, msg)`, their `*_from_thread` twins for sync code in a worker thread, `count`, `usernames`) |
 | `app/utils.py` | `utcnow()` for the naive-UTC columns | `utcnow` |
 
+## `app/vocab_pipeline/` (maintainer only)
+
+Run as `uv run python -m app.vocab_pipeline <command>`; the commands and workflow are in
+`docs/guides/vocab-word-list.md`. State lives in `vocab/` at the repo root, never loaded by the app.
+
+| File | Purpose | Key exports |
+| ---- | ------- | ----------- |
+| `vocab_pipeline/store.py` | Draft files and `vocab/wanted.json`; approving a draft into a shipped entry (next id, wanted words linked back), rejecting, requeueing, `fmt` | `Store`, `Draft`, `ApprovalError`, `approval_order` |
+| `vocab_pipeline/prompts.py` | The exact prompts and structured-output schemas sent to Claude | `PROPOSE_SYSTEM`, `DRAFT_SYSTEM`, `PROPOSE_SCHEMA`, `DRAFT_SCHEMA`, `propose_message`, `draft_message` |
+| `vocab_pipeline/drafting.py` | Pure rules: the difficulty split, which proposals to keep, model output to entry | `allocate`, `select_candidates`, `entry_from_output`, `practice_slot`, `TARGET_MIX` |
+| `vocab_pipeline/claude.py` | The only module that runs `claude -p`, on the owner's subscription with API keys stripped: propose, draft each word, then approve what passes | `generate`, `approve_ready`, `run_claude`, `RunError` |
+| `vocab_pipeline/cli.py`, `__main__.py` | The commands, the `review` loop, `status` and `reports` | `main` |
+
 ## `tests/`
 
 | File | Purpose | Key exports |
 | ---- | ------- | ----------- |
 | `tests/conftest.py` | Env overrides before imports, per-test DB reset, shared fixtures | `client`, `auth_headers`, `superuser_headers`, `inviter_headers`, `opponent_headers`, `empty_queues` |
 | `tests/helpers.py` | Plain helpers test files import | `db_session`, `login`, `signup_and_login`, `start_match`, `match_detail` |
+| `tests/vocab_helpers.py` | Builders for word-list tests, and a `Runner` that never runs `claude` | `entry`, `write_entries`, `pending_draft`, `model_output`, `make_store`, `FakeRunner` |
 | `tests/test_migrations.py` | Migrations build exactly the models; single head | |

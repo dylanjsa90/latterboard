@@ -1,0 +1,47 @@
+{
+  "id": 73,
+  "slug": "exemplary",
+  "word": "exemplary",
+  "pos": "adjective",
+  "pronunciation": "/ɪɡˈzɛm.plə.ri/",
+  "definition": "So good that it serves as a model for others to follow.",
+  "difficulty": "Intermediate",
+  "example": "Her exemplary attendance record earned her a certificate at the end of the school year.",
+  "synonyms": [
+    "model",
+    "commendable",
+    "outstanding",
+    "ideal"
+  ],
+  "nuance": "Exemplary means worth copying, not just very good; excellent praises quality without suggesting that others should imitate it.",
+  "alternatives": [],
+  "prompt": "A community center is choosing which volunteer to honor at its annual dinner.",
+  "options": [
+    "The committee honored Jonah's exemplary service and urged others to follow his lead.",
+    "The committee honored Jonah for his exemplary service, though he missed nearly every shift.",
+    "Jonah was exemplary from volunteering this year because his schedule was full.",
+    "Jonah's exemplary rudeness to visitors embarrassed the entire committee."
+  ],
+  "reasons": [
+    "Work that others are encouraged to imitate is exactly what deserves this praise.",
+    "Skipping most shifts sets a poor model, so the praise contradicts the facts.",
+    "This confuses the word with exempt, which means freed from a duty.",
+    "The word carries strong approval, so it cannot describe a fault that embarrasses people."
+  ],
+  "practice": {
+    "prompt": "A soccer coach reflects on how a player behaved during a tense championship game.",
+    "options": [
+      "The coach drew an exemplary of a perfect pass on the whiteboard for the team.",
+      "Her exemplary sulking on the bench dragged down the whole team's mood.",
+      "The coach held up her exemplary sportsmanship as a standard for younger players.",
+      "Her exemplary sportsmanship led the referee to eject her for arguing every call."
+    ],
+    "answer": 2,
+    "reasons": [
+      "The word is an adjective, not a noun; the writer means example.",
+      "Sulking is a flaw, and the word is kept for behavior that deserves admiration.",
+      "Conduct a coach presents as a pattern for others is what the word describes.",
+      "Being thrown out for arguing is misconduct, not behavior anyone should copy."
+    ]
+  }
+}

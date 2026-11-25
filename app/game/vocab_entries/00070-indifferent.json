@@ -1,0 +1,49 @@
+{
+  "id": 70,
+  "slug": "indifferent",
+  "word": "indifferent",
+  "pos": "adjective",
+  "pronunciation": "/ɪnˈdɪf.ər.ənt/",
+  "definition": "Having no particular interest in or concern about something.",
+  "difficulty": "Foundation",
+  "example": "The cat seemed indifferent to the new toy and went back to sleep on the windowsill.",
+  "synonyms": [
+    "unconcerned",
+    "uninterested",
+    "apathetic",
+    "detached"
+  ],
+  "nuance": "Indifferent means not caring either way; disinterested, often confused with it, strictly means impartial, with no personal stake.",
+  "alternatives": [
+    "ambivalent"
+  ],
+  "prompt": "A student hears that her school will switch from blue uniforms to green ones next fall.",
+  "options": [
+    "Mara was indifferent to the switch; either color suited her fine.",
+    "Mara was indifferent to the change, so she wrote three angry letters to the principal begging them to reconsider.",
+    "Mara looked indifferent from her classmates once she put on the new green uniform.",
+    "Mara was indifferent, torn between her love of green and her loyalty to the old blue."
+  ],
+  "reasons": [
+    "Not minding which outcome happens is exactly what this lack of concern looks like.",
+    "Angry letters and begging show strong feelings, the reverse of not caring.",
+    "This confuses the word with different; it describes attitude, not appearance.",
+    "Being torn by strong pulls on both sides is ambivalence, not an absence of feeling."
+  ],
+  "practice": {
+    "prompt": "A chef asks a diner whether he would like rice or potatoes with his meal.",
+    "options": [
+      "Theo was indifferent and refused to eat unless the chef served potatoes, nothing else.",
+      "Theo chose rice because it tasted indifferent from the potatoes he had last week.",
+      "Theo answered in an indifferent voice that was full of warmth and excitement.",
+      "Theo was indifferent, so he told the chef to bring whichever side was easier."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Insisting on one option reveals a firm preference, which contradicts not caring.",
+      "This treats the word as a form of different; it cannot mean unlike something else.",
+      "A warm, excited tone signals real interest, which clashes with a flat, uncaring one.",
+      "Letting someone else pick because no choice matters to you shows a lack of preference."
+    ]
+  }
+}

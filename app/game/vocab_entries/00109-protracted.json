@@ -1,0 +1,47 @@
+{
+  "id": 109,
+  "slug": "protracted",
+  "word": "protracted",
+  "pos": "adjective",
+  "pronunciation": "/proʊˈtræk.tɪd/",
+  "definition": "Lasting much longer than expected or than usual, often in a tiresome way.",
+  "difficulty": "Intermediate",
+  "example": "After a protracted search, the family finally found an apartment near the park.",
+  "synonyms": [
+    "prolonged",
+    "drawn-out",
+    "lengthy",
+    "long-lasting"
+  ],
+  "nuance": "Protracted suggests unwelcome length; prolonged is more neutral and can describe pleasant things, as in prolonged applause.",
+  "alternatives": [],
+  "prompt": "A neighborhood committee spends months arguing about where to build a new playground.",
+  "options": [
+    "The protracted debate over the site dragged on through three seasons of meetings.",
+    "The protracted debate ended in five minutes when everyone chose the first site.",
+    "The protracted committee members pushed back their chairs and refused to vote.",
+    "The protracted slide on the new playground stuck out over the sidewalk."
+  ],
+  "reasons": [
+    "An argument stretching across many months is exactly the kind of tiresome length the word implies.",
+    "A discussion settled in minutes is short, the reverse of something drawn out.",
+    "The word describes events or processes that drag on, not people who pull away.",
+    "This confuses the word with protruding; sticking out in space is not lasting long in time."
+  ],
+  "practice": {
+    "prompt": "A mountain town waits for spring after an unusually cold year.",
+    "options": [
+      "The protracted ski lodge stood on the highest ridge above the town.",
+      "A protracted winter kept snow on the hiking trails well into May.",
+      "The protracted winter ended abruptly after a single mild week in January.",
+      "The protracted puddle shrank into a tiny circle of ice overnight."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Being located high up says nothing about something dragging on in time.",
+      "Snow lingering months past its usual season shows a cold spell lasting far longer than normal.",
+      "A season that quits early is cut short, not stretched out.",
+      "Shrinking in size is contraction; the word concerns how long something lasts."
+    ]
+  }
+}

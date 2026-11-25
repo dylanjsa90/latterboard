@@ -26,5 +26,20 @@
     "Explaining only the past does not show anticipation.",
     "Presentation quality does not establish foresight."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "Years ago, a librarian decided to scan all of the town's old newspapers.",
+    "options": [
+      "The prescient newspapers had turned yellow and brittle in the damp basement.",
+      "Her prescient choice protected the records years before the basement flooded.",
+      "Her prescient choice came only after the flood had ruined most of the archive.",
+      "Prescient at every board meeting, she never missed a single vote on the budget."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Old, fragile paper suggests ancient, not foresighted; the word describes anticipation.",
+      "Acting long before an unexpected disaster shows foresight about what was coming.",
+      "Responding after the damage is a reaction, not an anticipation of the future.",
+      "This confuses the word with present; showing up says nothing about seeing ahead."
+    ]
+  }
 }

@@ -1,0 +1,49 @@
+{
+  "id": 118,
+  "slug": "tenacious",
+  "word": "tenacious",
+  "pos": "adjective",
+  "pronunciation": "/təˈneɪ.ʃəs/",
+  "definition": "Refusing to give up or let go, even when things become difficult.",
+  "difficulty": "Intermediate",
+  "example": "The tenacious reporter called the city office every morning until someone finally answered her question.",
+  "synonyms": [
+    "persistent",
+    "determined",
+    "dogged",
+    "unyielding"
+  ],
+  "nuance": "Tenacious stresses a firm hold that will not loosen; persistent stresses effort repeated over time.",
+  "alternatives": [
+    "tenuous"
+  ],
+  "prompt": "A young scientist's experiment keeps failing in the lab.",
+  "options": [
+    "The tenacious scientist rebuilt the setup a dozen times until the results finally held.",
+    "The tenacious scientist abandoned the whole project after a single failed trial.",
+    "Her evidence was so tenacious and thin that no reviewer found it convincing.",
+    "The tenacious scientist mumbled a hesitant guess and then refused to test it again."
+  ],
+  "reasons": [
+    "Trying again and again after each failure shows a refusal to quit.",
+    "Quitting at the first setback is the reverse of stubborn determination.",
+    "Flimsy, weak evidence calls for the look-alike tenuous, not a word about persistence.",
+    "Hesitation and giving up suggest someone tentative, not someone who holds firm."
+  ],
+  "practice": {
+    "prompt": "A small dog has grabbed one end of a rope toy.",
+    "options": [
+      "The puppy had only a tenacious grip, so the rope slipped from its teeth at once.",
+      "The tenacious puppy sniffed the rope cautiously, unsure whether to touch it.",
+      "The tenacious puppy clung to the rope even when it was lifted off the ground.",
+      "The tenacious puppy dropped the rope the moment anyone tugged on it."
+    ],
+    "answer": 2,
+    "reasons": [
+      "A weak, slipping grip would be tenuous; this word describes a hold that lasts.",
+      "Cautious uncertainty fits tentative, not a determined, unshakable grip.",
+      "Holding on while dangling in the air shows a grip that will not loosen.",
+      "Letting go at the slightest pull shows no firm hold at all."
+    ]
+  }
+}

@@ -21,12 +21,29 @@
   "options": [
     "The committee offered an equivocal response that could be read as approval or refusal.",
     "The committee gave an equivocal refusal, making its opposition unmistakable.",
-    "Both candidates earned an equivocal number of votes: exactly 200 each."
+    "Both candidates earned an equivocal number of votes: exactly 200 each.",
+    "The committee's most equivocal member spoke up loudly and often at every meeting."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: ambiguous or open to more than one interpretation.",
     "An unmistakable refusal is unambiguous, the opposite of equivocal.",
-    "Equal quantities are equivalent or equal, not equivocal."
+    "Equal quantities are equivalent or equal, not equivocal.",
+    "Speaking up loudly and often makes someone vocal; the word is about unclear meaning, not volume."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A museum expert studies an old painting whose signature is partly smudged.",
+    "options": [
+      "The painting was so equivocal that the museum insured it for several million dollars before the show.",
+      "The canvas was equivocal, having been painted almost four hundred years ago.",
+      "The smudged signature was equivocal, since its faded letters could fit either of two painters.",
+      "Because the signature was equivocal, the expert named the painter instantly and without any doubt."
+    ],
+    "answer": 2,
+    "reasons": [
+      "A high price makes a work valuable or precious; nothing here has two possible readings.",
+      "Great age makes a work old, not ambiguous, and a known date leaves nothing open to doubt.",
+      "Marks that support two different readings leave the artist's identity uncertain.",
+      "A mark that allows instant, certain identification is clear, the reverse of the word's sense."
+    ]
+  }
 }

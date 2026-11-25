@@ -1,0 +1,47 @@
+{
+  "id": 105,
+  "slug": "temerity",
+  "word": "temerity",
+  "pos": "noun",
+  "pronunciation": "/təˈmɛr.ɪ.ti/",
+  "definition": "Reckless or cheeky boldness that ignores risk, rank or good manners.",
+  "difficulty": "Advanced",
+  "example": "The new intern had the temerity to correct the professor's math in front of the whole lecture hall.",
+  "synonyms": [
+    "audacity",
+    "nerve",
+    "gall",
+    "effrontery"
+  ],
+  "nuance": "Temerity implies rash or presumptuous nerve, not admirable courage; do not confuse it with timidity, which is close to its opposite.",
+  "alternatives": [],
+  "prompt": "A dinner guest has opinions about the meal the host spent all day cooking.",
+  "options": [
+    "The guest had the temerity to tell the host that the soup needed more salt.",
+    "The guest showed great temerity by quietly eating everything and saying nothing at all.",
+    "The guest's temerity made her too afraid to ask for a second helping.",
+    "Everyone praised the host's temerity in measuring each spice exactly."
+  ],
+  "reasons": [
+    "Criticizing a host's cooking to her face is the kind of cheeky nerve the word describes.",
+    "Silent, polite eating is restraint, the reverse of brazen boldness.",
+    "Fear and hesitation describe timidity, a look-alike with nearly the opposite meaning.",
+    "Careful precision is not rash nerve, and the word is rarely used as praise."
+  ],
+  "practice": {
+    "prompt": "A beginner joins a chess club where the reigning champion plays every week.",
+    "options": [
+      "The rookie's temerity was so great that he could not even look at the champion's board.",
+      "With great temerity, the rookie spent months patiently studying openings before playing.",
+      "The rookie admired the temerity of the champion's slow, cautious endgame.",
+      "On his first day, the rookie had the temerity to challenge the champion to a match."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Being too shy to look shows timidity, not presumptuous nerve.",
+      "Slow, patient preparation is caution, the opposite of rashness.",
+      "A cautious style of play cannot show reckless boldness.",
+      "A newcomer boldly confronting the top player ignores rank and risk."
+    ]
+  }
+}

@@ -21,12 +21,29 @@
   "options": [
     "The resilient community rebuilt its services after the storm.",
     "The resilient community never encountered any challenge, so its capacity to recover was demonstrated.",
-    "The resilient plan resisted every change even when conditions demanded adaptation."
+    "The resilient plan resisted every change even when conditions demanded adaptation.",
+    "The resilient community gave up after the storm and abandoned the town for good."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: able to recover or adapt after difficulty or strain.",
     "Without a challenge, this sentence does not demonstrate recovery capacity.",
-    "Rigid resistance to necessary adaptation is not resilience."
+    "Rigid resistance to necessary adaptation is not resilience.",
+    "Giving up and leaving after damage reverses the meaning; resilience means bouncing back, not collapsing."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A student gets a low grade on her first chemistry exam of the year.",
+    "options": [
+      "The resilient student was so discouraged by one low grade that she dropped chemistry for the rest of the year.",
+      "The resilient student was too shy to raise her hand and ask the teacher about the exam.",
+      "The resilient student hid the exam in a drawer and pretended the test had never happened.",
+      "The resilient student reviewed her mistakes, joined a study group, and earned a B on the next test."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Quitting after a single setback is the opposite of recovering from it.",
+      "Shyness about speaking up is reticence, a look-alike idea that has nothing to do with recovery.",
+      "Denying a setback is avoidance; a resilient person faces the difficulty and adapts.",
+      "She bounced back from the setback by changing how she prepared, which is exactly what resilience looks like."
+    ]
+  }
 }

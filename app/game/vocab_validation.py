@@ -10,8 +10,6 @@ from app.game.vocab import with_blank
 from app.game.vocab_words import DIFFICULTIES, POS, VocabWord
 
 OPTION_COUNT = 4
-# Ids below this may lack practice and have 3 room options (removed in Task 10).
-LEGACY_COUNT = 46
 # difflib ratio at or above which two sentences count as the same.
 SIMILAR = 0.8
 LIMITS: dict[str, tuple[int, int]] = {
@@ -87,9 +85,8 @@ def _usage_options(
     return errors
 
 
-def entry_errors(w: VocabWord, *, strict: bool = False) -> list[str]:
+def entry_errors(w: VocabWord) -> list[str]:
     s = w.slug
-    legacy = w.id < LEGACY_COUNT and not strict
     errors: list[str] = []
     if not _SLUG.match(w.slug):
         errors.append(f"{s}: slug must match ^[a-z]+(?:-[a-z]+)*$")
@@ -133,8 +130,7 @@ def entry_errors(w: VocabWord, *, strict: bool = False) -> list[str]:
     if w.slug in w.alternatives:
         errors.append(f"{s}: alternatives include the word itself")
 
-    expected = 3 if legacy and len(w.options) == 3 else OPTION_COUNT
-    if len(w.options) != expected:
+    if len(w.options) != OPTION_COUNT:
         errors.append(f"{s}: options: expected {OPTION_COUNT}, got {len(w.options)}")
     errors += _usage_options(s, "", w.word, w.options, w.reasons)
     if w.options and _exact_count(w.options[0], w.word) != 1:
@@ -151,10 +147,6 @@ def entry_errors(w: VocabWord, *, strict: bool = False) -> list[str]:
         errors.append(f"{s}: example is too close to the room question")
 
     p = w.practice
-    if p is None:
-        if not legacy:
-            errors.append(f"{s}: practice is required")
-        return errors
     if len(p.options) != OPTION_COUNT:
         errors.append(
             f"{s}: practice.options: expected {OPTION_COUNT}, got {len(p.options)}"

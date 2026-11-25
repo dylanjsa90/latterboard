@@ -47,7 +47,6 @@ def test_entry_errors_name_each_problem():
         ({"synonyms": ["first"]}, "synonyms: expected 2-4"),
         ({"alternatives": ["alpha"]}, "alternatives include the word itself"),
         ({"alternatives": ["b", "c", "d", "e"]}, "alternatives: at most 3"),
-        ({"practice": None}, "practice is required"),
         ({"practice": {**practice, "answer": 4}}, "practice.answer must be 0-3"),
         (
             {"practice": {**practice, "prompt": base["prompt"]}},
@@ -80,10 +79,9 @@ def test_entry_errors_name_each_problem():
     ]
     for overrides, expected in cases:
         assert expected in problems(**overrides), expected
-    legacy = {"options": room[:3], "reasons": base["reasons"][:3], "practice": None}
-    assert problems(word_id=45, **legacy) == ""
-    strict = entry_errors(word_from_json(entry(45, "alpha", **legacy)), strict=True)
-    assert any("practice is required" in e for e in strict)
+    # The original 46 words have no exemption any more.
+    three = {"options": room[:3], "reasons": base["reasons"][:3]}
+    assert "alpha: options: expected 4, got 3" in problems(word_id=0, **three)
 
 
 def test_list_errors_check_ids_slugs_words_and_alternatives():

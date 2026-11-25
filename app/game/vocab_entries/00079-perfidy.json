@@ -1,0 +1,47 @@
+{
+  "id": 79,
+  "slug": "perfidy",
+  "word": "perfidy",
+  "pos": "noun",
+  "pronunciation": "/ˈpɜːr.fə.di/",
+  "definition": "Deliberate betrayal of someone who trusted you or relied on your promise.",
+  "difficulty": "Advanced",
+  "example": "The novel's villain is remembered less for his greed than for his perfidy toward the friend who sheltered him.",
+  "synonyms": [
+    "treachery",
+    "betrayal",
+    "faithlessness",
+    "duplicity"
+  ],
+  "nuance": "Perfidy means breaking faith with someone who trusted you; duplicity is double-dealing deceit that need not break any bond.",
+  "alternatives": [],
+  "prompt": "A chess club captain secretly shared her team's strategy with a rival club before the finals.",
+  "options": [
+    "Her teammates were stunned by the perfidy of a captain they had trusted with every plan.",
+    "The captain's perfidy showed how faithfully she had guarded the team's secrets all season.",
+    "The captain was later charged with perfidy for lying under oath in a courtroom.",
+    "With admirable perfidy, the captain stayed late to teach openings to the newest members."
+  ],
+  "reasons": [
+    "Passing secrets to a rival breaks the trust the team placed in her, which is exactly this kind of betrayal.",
+    "Guarding secrets faithfully is loyalty, the reverse of breaking faith.",
+    "Lying under oath is perjury, a look-alike word with a different meaning.",
+    "The word names a shameful act, so calling generous mentoring admirable perfidy makes no sense."
+  ],
+  "practice": {
+    "prompt": "Two bakers agreed to share a prize-winning recipe, but one of them sold it secretly to a competitor.",
+    "options": [
+      "The cake's perfidy, with its flawless layers and smooth icing, won first place at the fair.",
+      "His perfidy was a simple scheduling slip: he forgot their meeting because his clock stopped.",
+      "Selling the recipe behind his partner's back was an act of perfidy she never forgave.",
+      "The baker's perfidy became clear when he split the prize money exactly as they had agreed."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This confuses the word with perfection; a cake cannot betray anyone.",
+      "An honest accident is not deliberate, and the word requires a knowing betrayal.",
+      "He knowingly broke a promise to someone who relied on him, which is a true betrayal.",
+      "Keeping an agreement to the letter is honoring trust, not betraying it."
+    ]
+  }
+}

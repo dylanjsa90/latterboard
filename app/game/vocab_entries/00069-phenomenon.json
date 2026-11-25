@@ -1,0 +1,47 @@
+{
+  "id": 69,
+  "slug": "phenomenon",
+  "word": "phenomenon",
+  "pos": "noun",
+  "pronunciation": "/fəˈnɑː.mə.nɑːn/",
+  "definition": "A fact or event that can be observed, especially one that is unusual or hard to explain.",
+  "difficulty": "Foundation",
+  "example": "The northern lights are a natural phenomenon caused by particles from the sun striking the atmosphere.",
+  "synonyms": [
+    "occurrence",
+    "event",
+    "happening",
+    "marvel"
+  ],
+  "nuance": "Unlike a mere event, a phenomenon is something observed and studied; use phenomena, not phenomenon, for more than one.",
+  "alternatives": [],
+  "prompt": "A science class watches water droplets form on the outside of a cold glass.",
+  "options": [
+    "The teacher said condensation is a phenomenon that occurs when moist air meets a cold surface.",
+    "The students phenomenon the droplets with a magnifying glass.",
+    "Three different phenomenon appeared on the glass that afternoon.",
+    "The students called it a phenomenon even though nothing on the glass could be seen or measured."
+  ],
+  "reasons": [
+    "Condensation is an observable natural occurrence, so the noun fits exactly.",
+    "The word is a noun naming an occurrence; it cannot serve as a verb for looking closely.",
+    "After a number like three, the plural phenomena is required, not the singular form.",
+    "The word names something perceived; an event no one can detect in any way does not qualify."
+  ],
+  "practice": {
+    "prompt": "Every evening, thousands of birds swirl together above a small town's bridge.",
+    "options": [
+      "The view from the bridge was phenomenon, so everyone stopped to take pictures.",
+      "The phenomenon are written down each evening in a notebook kept at the town library.",
+      "Nobody has ever seen the birds, but their nightly gathering is a well-known phenomenon.",
+      "Birdwatchers began recording the nightly gathering, a phenomenon that puzzled even experts."
+    ],
+    "answer": 3,
+    "reasons": [
+      "This confuses the noun with the adjective phenomenal; a noun cannot describe how impressive a view is.",
+      "The singular noun cannot take the plural verb are; more than one would be phenomena.",
+      "Something no one has ever witnessed cannot be an observed occurrence, so the claim contradicts itself.",
+      "A striking, repeated event that people observe and try to explain is exactly this kind of thing."
+    ]
+  }
+}

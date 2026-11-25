@@ -1,0 +1,47 @@
+{
+  "id": 140,
+  "slug": "deter",
+  "word": "deter",
+  "pos": "verb",
+  "pronunciation": "/dɪˈtɜːr/",
+  "definition": "To discourage someone from doing something, usually by making it seem risky, costly or unpleasant.",
+  "difficulty": "Foundation",
+  "example": "Steep ticket prices may deter some families from visiting the science museum.",
+  "synonyms": [
+    "discourage",
+    "dissuade",
+    "put off",
+    "inhibit"
+  ],
+  "nuance": "Deter usually works through fear, cost or obstacles, while dissuade usually means talking someone out of an action.",
+  "alternatives": [],
+  "prompt": "A town wants fewer people to leave trash at a scenic overlook.",
+  "options": [
+    "A sign announcing a hefty fine should deter visitors from dumping trash there.",
+    "The town hoped free picnic tables would deter more families to come and enjoy the view.",
+    "The council voted to deter the cleanup meeting until next spring.",
+    "Volunteers deter the litter each Saturday by hauling it to the recycling center."
+  ],
+  "reasons": [
+    "The threat of a penalty makes littering seem costly, so people choose not to do it.",
+    "This reverses the meaning: the word turns people away from an action and never draws them toward one.",
+    "Putting off a meeting is \"defer,\" a look-alike that means to postpone.",
+    "Removing trash after it is dropped cleans up the mess but discourages no one from dropping it."
+  ],
+  "practice": {
+    "prompt": "A student is thinking about signing up for a demanding advanced chemistry class.",
+    "options": [
+      "After reading the syllabus, she could deter which units would be hardest for her.",
+      "She refused to let the heavy workload deter her from enrolling in the course.",
+      "The teacher's warm welcome helped deter her into joining the class right away.",
+      "She asked the counselor to deter her enrollment until the fall semester."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word is not short for \"determine\"; it means to discourage, not to figure something out.",
+      "The workload could have scared her off, but she didn't let it stop her.",
+      "A friendly welcome pulls someone toward a choice, which is the opposite of what this verb does.",
+      "Delaying something to a later date is \"defer,\" not this word."
+    ]
+  }
+}

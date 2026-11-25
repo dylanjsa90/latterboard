@@ -1,0 +1,47 @@
+{
+  "id": 68,
+  "slug": "adversity",
+  "word": "adversity",
+  "pos": "noun",
+  "pronunciation": "/ədˈvɜːr.sə.ti/",
+  "definition": "Hard times or difficult conditions, such as hardship, trouble, or bad luck.",
+  "difficulty": "Foundation",
+  "example": "Her grandmother rarely spoke about the adversity of her early years on a struggling farm.",
+  "synonyms": [
+    "hardship",
+    "misfortune",
+    "difficulty",
+    "trouble"
+  ],
+  "nuance": "Adversity names hard circumstances, while an adversary is a person or group that opposes you.",
+  "alternatives": [],
+  "prompt": "A small family bakery reopens slowly after a flood damages its kitchen.",
+  "options": [
+    "The owners met adversity calmly, baking in a borrowed kitchen until repairs were done.",
+    "The owners refused to lend flour to their adversity, the rival baker across the street.",
+    "The bakery's adversity was a record month of sales, long lines, and glowing reviews from new customers.",
+    "The adversity floodwater ruined two ovens and a shelf of mixing bowls."
+  ],
+  "reasons": [
+    "Pressing on through a damaging setback is a fitting response to hard circumstances.",
+    "A rival is an adversary, a person; the word here means hardship, not an opponent.",
+    "Booming business is good fortune, the reverse of a hard time.",
+    "The word is a noun; describing the water calls for the adjective adverse."
+  ],
+  "practice": {
+    "prompt": "A student moves to a new country in the middle of the school year.",
+    "options": [
+      "Despite the adversity of learning in an unfamiliar language, she passed every class.",
+      "She practiced every night so her adversity in the debate club could not beat her again.",
+      "Her adversity was how easily every subject came to her from the very first week.",
+      "Her classmates were adversity toward her at first but soon became close friends."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Studying in a language you barely know is a genuine hardship to overcome.",
+      "Someone who beats you in a contest is an adversary, not a difficult situation.",
+      "Finding everything easy is a stroke of luck, not a struggle.",
+      "The word cannot describe people's attitudes; it names circumstances, not unfriendly behavior."
+    ]
+  }
+}

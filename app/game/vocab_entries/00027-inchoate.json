@@ -26,5 +26,20 @@
     "Completion contradicts the beginning stage.",
     "A precise final design is developed rather than unformed."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A music student has just started writing her first composition for the school orchestra.",
+    "options": [
+      "The violin sounded inchoate because one of its strings had slipped badly out of tune.",
+      "The inchoate folk song had been sung in the village for three hundred years.",
+      "The tune was still inchoate, just a few hummed phrases with no chorus or ending.",
+      "By opening night, the inchoate symphony had been rehearsed note for note by the full orchestra."
+    ],
+    "answer": 2,
+    "reasons": [
+      "A string out of tune is a pitch problem and has nothing to do with an early stage of growth.",
+      "A song passed down for centuries is long settled, the opposite of something just starting.",
+      "Scattered phrases with no structure yet are an early, unshaped stage of the piece.",
+      "A finished piece rehearsed in every detail is fully developed, not still forming."
+    ]
+  }
 }

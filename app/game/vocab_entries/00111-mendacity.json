@@ -1,0 +1,49 @@
+{
+  "id": 111,
+  "slug": "mendacity",
+  "word": "mendacity",
+  "pos": "noun",
+  "pronunciation": "/mɛnˈdæs.ə.ti/",
+  "definition": "The habit of telling lies, or a lack of honesty in what someone says.",
+  "difficulty": "Advanced",
+  "example": "Years of mendacity had left the merchant with no customers who believed his prices.",
+  "synonyms": [
+    "untruthfulness",
+    "dishonesty",
+    "deceitfulness",
+    "duplicity"
+  ],
+  "nuance": "Mendacity names a habit of lying, not one falsehood, and is unrelated to mendicancy, which means begging.",
+  "alternatives": [
+    "veracity"
+  ],
+  "prompt": "A judge compares a witness's account with the official shipping records.",
+  "options": [
+    "The records exposed the witness's mendacity, since nearly every date she gave was invented.",
+    "The witness's mendacity left her so poor that she begged for coins outside the courthouse.",
+    "The judge praised the witness's mendacity, because her account matched every record exactly.",
+    "Her mendacity amounted to one honest slip when she misremembered a single date."
+  ],
+  "reasons": [
+    "Giving one false date after another shows a pattern of deliberate untruthfulness.",
+    "Begging is mendicancy, a look-alike word; lying is a different matter entirely.",
+    "An account that agrees with the evidence shows truthfulness, the reverse of lying.",
+    "An innocent memory error is not deliberate lying, let alone a habit of it."
+  ],
+  "practice": {
+    "prompt": "A town council reviews a builder's weekly progress reports on a new bridge.",
+    "options": [
+      "The builder's mendacity came to light when inspectors found the \"finished\" bridge had no deck.",
+      "The builder's mendacity let him repair the cracked railing in a single afternoon.",
+      "The council trusted the builder's mendacity, since his reports listed every delay candidly.",
+      "After losing his savings, the builder turned to mendacity and asked strangers for spare change."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Reporting unbuilt work as complete, week after week, is sustained deception.",
+      "This confuses the word with mending; it has nothing to do with fixing things.",
+      "Openly reporting setbacks is honesty, the opposite of habitual lying.",
+      "Asking strangers for money is mendicancy, not dishonest speech."
+    ]
+  }
+}

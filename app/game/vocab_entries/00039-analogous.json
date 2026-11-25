@@ -21,12 +21,29 @@
   "options": [
     "She described an analogous process in biology to explain the feedback loop in economics.",
     "The systems were analogous because they had nothing relevant in common.",
-    "The two words were analogous simply because they rhymed."
+    "The two words were analogous simply because they rhymed.",
+    "She flagged one reading as analogous because it broke every pattern the two systems shared."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: comparable in certain respects, often to help explain something.",
     "Analogy requires a meaningful similarity.",
-    "A shared sound alone does not establish a useful comparison of meaning or structure."
+    "A shared sound alone does not establish a useful comparison of meaning or structure.",
+    "This confuses the word with anomalous, which describes something that departs from a pattern."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A science teacher wants her students to understand how the heart moves blood.",
+    "options": [
+      "She timed their pulses with the analogous clock that hung above the whiteboard.",
+      "A student called the heart analogous to a strawberry because both are red and roughly the same shape.",
+      "The heart is simply analogous, so she explained it without comparing it to anything else.",
+      "She told the class that the heart is analogous to a pump pushing water through pipes."
+    ],
+    "answer": 3,
+    "reasons": [
+      "This confuses the word with analog, which describes a clock with hands rather than digits.",
+      "Color and shape are surface features that reveal nothing about how a heart works.",
+      "A thing can only be analogous to something else, so the word needs a comparison.",
+      "A heart and a pump both move fluid, so the comparison makes the organ easier to grasp."
+    ]
+  }
 }

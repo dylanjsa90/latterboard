@@ -21,12 +21,29 @@
   "options": [
     "An accusatory email can exacerbate the tension between the departments.",
     "The careful apology exacerbated the tension by reducing it.",
-    "The analyst exacerbated the tension by describing it accurately, without affecting it."
+    "The analyst exacerbated the tension by describing it accurately, without affecting it.",
+    "The hasty reply exacerbated the department head, who walked out of the meeting."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: make a problem or negative condition worse.",
     "Reducing a problem alleviates or mitigates it.",
-    "Describing a condition does not necessarily worsen it."
+    "Describing a condition does not necessarily worsen it.",
+    "You exacerbate a situation, not a person; annoying someone is to exasperate them."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A hiker with a sore knee is deciding whether to keep climbing.",
+    "options": [
+      "Climbing farther would only exacerbate the pain in her knee.",
+      "A short rest by the stream exacerbated her energy for the final stretch.",
+      "She exacerbated the trail map on her phone to read the tiny print.",
+      "A tight bandage exacerbated the swelling, which went down within an hour."
+    ],
+    "answer": 0,
+    "reasons": [
+      "More strain on an injured joint would make an existing problem worse.",
+      "The verb is for worsening something bad, not for building up something good like energy.",
+      "Zooming in on a map makes it bigger, not worse, so this mistakes the verb for enlarge.",
+      "Swelling that goes down has improved, which contradicts the verb."
+    ]
+  }
 }

@@ -1,0 +1,47 @@
+{
+  "id": 104,
+  "slug": "incidental",
+  "word": "incidental",
+  "pos": "adjective",
+  "pronunciation": "/ˌɪn.sɪˈdɛn.təl/",
+  "definition": "Happening as a minor side part of something else rather than as its main purpose.",
+  "difficulty": "Intermediate",
+  "example": "The hotel bill listed a few incidental charges for snacks and phone calls.",
+  "synonyms": [
+    "secondary",
+    "peripheral",
+    "minor",
+    "accompanying"
+  ],
+  "nuance": "Incidental stresses a side role next to something more important; accidental stresses chance, and the two are often confused.",
+  "alternatives": [],
+  "prompt": "A team of researchers spends a summer counting songbirds in a forest.",
+  "options": [
+    "While counting songbirds, the team made an incidental discovery of a rare beetle.",
+    "The songbird count was the incidental purpose of the trip, the very reason it was funded.",
+    "The researchers filed an incidental report after their ladder slipped in the mud.",
+    "The bird data were so incidental that every later conclusion rested on them."
+  ],
+  "reasons": [
+    "The beetle find came along as a side result of the main bird survey.",
+    "The central aim that paid for a project is the opposite of a side matter.",
+    "This mixes up the adjective with the noun incident; a mishap report is not a side matter.",
+    "Something that all the conclusions depend on is central, not secondary."
+  ],
+  "practice": {
+    "prompt": "A student takes a part-time job at a bakery to save money for college.",
+    "options": [
+      "She knocked a bag of flour off the shelf with an incidental bump of her elbow.",
+      "Because her shifts were incidental, she worked every single morning without fail.",
+      "Learning to wake up early was an incidental benefit of her bakery job.",
+      "Saving for college was merely incidental, since it was her only reason for taking the job."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This treats the word as if it meant accidental; a clumsy bump is about chance, not a side role.",
+      "This confuses the word with occasional, and a daily schedule is not occasional anyway.",
+      "The habit was an extra gain that came along with her real goal of saving money.",
+      "Her one main reason for working cannot also be a minor side matter."
+    ]
+  }
+}

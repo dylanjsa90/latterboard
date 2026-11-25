@@ -1,0 +1,49 @@
+{
+  "id": 52,
+  "slug": "enduring",
+  "word": "enduring",
+  "pos": "adjective",
+  "pronunciation": "/ɪnˈdʊr.ɪŋ/",
+  "definition": "Lasting for a long time without fading or weakening.",
+  "difficulty": "Foundation",
+  "example": "Her grandmother's recipes left an enduring mark on the family's holiday meals.",
+  "synonyms": [
+    "lasting",
+    "abiding",
+    "long-lived",
+    "durable"
+  ],
+  "nuance": "Enduring stresses surviving through time and change, while durable usually describes the physical toughness of objects.",
+  "alternatives": [
+    "ephemeral"
+  ],
+  "prompt": "A historian discusses a novel written two centuries ago that is still widely read today.",
+  "options": [
+    "The novel's enduring appeal shows that its questions about family still matter to readers.",
+    "Critics praised the novel's enduring fame, which faded completely within a month of publication.",
+    "Students called the novel enduring because they had to struggle through its dull chapters.",
+    "The historian called the novel enduring because its clumsy young hero was so sweet and lovable."
+  ],
+  "reasons": [
+    "A book still loved after two hundred years has popularity that has lasted.",
+    "Fame that vanishes in a month is short-lived, the reverse of lasting.",
+    "The word describes what lasts, not something tiresome that readers must put up with.",
+    "Being sweet and lovable is endearing, a look-alike word with a different meaning."
+  ],
+  "practice": {
+    "prompt": "Two childhood friends still write letters to each other fifty years after leaving school.",
+    "options": [
+      "The new pen pal's first letter was so enduring that Mira loved its silly, adorable doodles.",
+      "Their enduring friendship has survived moves to three different countries.",
+      "Their enduring friendship ended the week after they met at summer camp.",
+      "Mira is so enduring that she smiles politely through her friend's long, dull stories."
+    ],
+    "answer": 1,
+    "reasons": [
+      "A brand-new letter cannot have lasted long; charming and adorable points to endearing.",
+      "A bond that holds up over decades and long distances has clearly lasted.",
+      "A friendship over in one week is brief, which contradicts the idea of lasting.",
+      "Patience with boredom is tolerance; the adjective describes things that last, not patient people."
+    ]
+  }
+}

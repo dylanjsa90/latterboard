@@ -21,12 +21,29 @@
   "options": [
     "The new barriers helped mitigate the damage from seasonal flooding.",
     "The barriers mitigated the river, making it vanish completely.",
-    "The committee mitigated the report by explaining every technical term."
+    "The committee mitigated the report by explaining every technical term.",
+    "Clearing the wetlands mitigated the flooding, so far more streets ended up underwater."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: make something harmful, severe, or painful less serious.",
     "Mitigate means lessen severity, not eliminate a thing entirely.",
-    "Clarifying language elucidates a report; it does not necessarily reduce harm."
+    "Clarifying language elucidates a report; it does not necessarily reduce harm.",
+    "Making flood damage worse is exacerbating it, the exact reverse of mitigating it."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A farmer expects a summer with very little rain and prepares her fields.",
+    "options": [
+      "The farmer mitigated her neighbors about the coming drought.",
+      "She spread straw mulch to mitigate moisture loss from the parched soil.",
+      "Generous spring rains mitigated her harvest, making it the largest in years.",
+      "The long-range forecast mitigated against planting thirsty crops this year."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The verb takes a harm or risk as its object; it does not mean to warn or inform people.",
+      "Mulch reduces a harmful effect, water loss, without pretending to end the drought itself.",
+      "The word reduces something bad; it cannot describe boosting a good result like a big harvest.",
+      "This mixes it up with militate; a fact that argues against a choice militates against it."
+    ]
+  }
 }

@@ -1,0 +1,46 @@
+{
+  "id": 110,
+  "slug": "arguably",
+  "word": "arguably",
+  "pos": "adverb",
+  "pronunciation": "/ˈɑːr.ɡju.ə.bli/",
+  "definition": "Used to say a claim can be supported with good reasons, even if not everyone agrees.",
+  "difficulty": "Foundation",
+  "example": "Sleep is arguably the most overlooked part of a student's study routine.",
+  "synonyms": [
+    "plausibly",
+    "it could be said",
+    "conceivably"
+  ],
+  "nuance": "Arguably leans toward agreeing with a claim that has support; it does not mean doubtful, and it has nothing to do with quarreling.",
+  "alternatives": [],
+  "prompt": "A sports club's members debate who was the best player in the club's history.",
+  "options": [
+    "Members agreed the old goalkeeper was arguably the finest player in club history.",
+    "The two members shouted arguably at each other across the crowded clubhouse.",
+    "The club was arguably founded in 1952, exactly as its signed charter clearly states.",
+    "Since the striker was arguably the club's best player, nobody believed he had any skill."
+  ],
+  "reasons": [
+    "It puts forward a judgment that has good support but could still be disputed.",
+    "This treats the word as describing a quarrelsome manner, which it never does.",
+    "A date fixed in an official record is a settled fact, not a defensible opinion.",
+    "The word backs a claim of excellence, so it cannot lead to a belief that he lacked skill."
+  ],
+  "practice": {
+    "prompt": "A food critic writes a review of a new neighborhood bakery.",
+    "options": [
+      "The baker answered the critic arguably, raising her voice and waving a wooden spoon.",
+      "Arguably, a dozen rolls contains exactly twelve rolls, the critic noted in her column.",
+      "The croissants were arguably the bakery's best item, so the critic urged readers to avoid them.",
+      "The critic wrote that the bakery's rye loaf is arguably the best bread in town."
+    ],
+    "answer": 3,
+    "reasons": [
+      "The word does not describe speaking in an angry or combative way.",
+      "A simple counting fact cannot be disputed, so hedging it makes no sense.",
+      "Calling something possibly the best and then warning people away contradicts the word's positive lean.",
+      "It offers a strong opinion that the critic could defend, while leaving room for disagreement."
+    ]
+  }
+}

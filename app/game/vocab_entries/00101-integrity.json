@@ -1,0 +1,47 @@
+{
+  "id": 101,
+  "slug": "integrity",
+  "word": "integrity",
+  "pos": "noun",
+  "pronunciation": "/ɪnˈtɛɡ.rə.ti/",
+  "definition": "The quality of being honest and sticking to strong moral principles, even when no one is watching.",
+  "difficulty": "Foundation",
+  "example": "A referee with integrity makes the same call no matter which team it helps.",
+  "synonyms": [
+    "honesty",
+    "uprightness",
+    "principle",
+    "probity"
+  ],
+  "nuance": "Integrity goes beyond honesty: it means acting on your principles consistently, even when doing so costs you something.",
+  "alternatives": [],
+  "prompt": "A cashier realizes a customer accidentally overpaid by twenty dollars and has already left.",
+  "options": [
+    "The cashier showed integrity by running after the customer to return the money.",
+    "The cashier showed integrity by keeping the extra bills and telling no one.",
+    "The cashier's integrity let her total long receipts in her head within seconds.",
+    "The cashier had the integrity to scold the customer loudly the next day."
+  ],
+  "reasons": [
+    "Giving back money that isn't yours, even with effort, reflects firm honesty.",
+    "Quietly pocketing someone else's money is dishonest, the reverse of the word.",
+    "Quick mental math is a skill, not a sign of moral character.",
+    "Publicly embarrassing someone is rudeness, not principled behavior."
+  ],
+  "practice": {
+    "prompt": "A student finds the answer key to tomorrow's exam left on a classroom desk.",
+    "options": [
+      "Thanks to her integrity, she blended easily into a new group of friends at lunch.",
+      "Her integrity was obvious from how nervous she always felt before exams.",
+      "Her integrity led her to hand the key to the teacher without peeking at it.",
+      "Her integrity led her to memorize every answer before anyone noticed."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Fitting into a group describes integration, a look-alike word, not moral character.",
+      "Feeling anxious says nothing about whether someone acts on firm principles.",
+      "Refusing an unfair advantage when nobody would know shows strong principles.",
+      "Secretly cheating is a failure of honesty, not an example of it."
+    ]
+  }
+}

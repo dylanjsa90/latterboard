@@ -14,18 +14,36 @@
   ],
   "nuance": "Laconic suggests a noticeably sparing manner of speech, sometimes dry or blunt.",
   "alternatives": [
-    "equivocal"
+    "equivocal",
+    "eloquent"
   ],
   "prompt": "A witness replies briefly, with no elaboration.",
   "options": [
     "Asked to describe the evening, the laconic witness replied, “Uneventful.”",
     "The laconic witness spoke for an hour but used simple vocabulary.",
-    "Her laconic answer carefully avoided revealing her real opinion."
+    "Her laconic answer carefully avoided revealing her real opinion.",
+    "The laconic witness strolled in an hour late, too lazy to care about the proceedings."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: using very few words.",
     "Simple words do not make a lengthy answer laconic.",
-    "Avoiding commitment is evasive or equivocal; the answer may still be long."
+    "Avoiding commitment is evasive or equivocal; the answer may still be long.",
+    "Laziness and indifference are lackadaisical; laconic concerns few words, not low effort."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A hiking guide leads a group up a mountain trail while hikers ask questions.",
+    "options": [
+      "The laconic guide was so thin that her backpack straps kept slipping off her shoulders.",
+      "Because of the rain, our laconic hike lasted only forty minutes.",
+      "The laconic guide answered every question about the trail with a nod or a single word.",
+      "The laconic guide described the history of every boulder we passed for three hours straight."
+    ],
+    "answer": 2,
+    "reasons": [
+      "The word describes speech, not body build; a thin person might be lanky.",
+      "A short outing is brief, but laconic applies to how people talk or write.",
+      "Replying with a nod or one word shows how sparingly she speaks.",
+      "Hours of nonstop narration are talkative, the reverse of sparing speech."
+    ]
+  }
 }

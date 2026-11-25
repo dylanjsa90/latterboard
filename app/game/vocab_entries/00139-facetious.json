@@ -1,0 +1,46 @@
+{
+  "id": 139,
+  "slug": "facetious",
+  "word": "facetious",
+  "pos": "adjective",
+  "pronunciation": "/fəˈsiː.ʃəs/",
+  "definition": "Joking about something serious at a moment when humor is out of place.",
+  "difficulty": "Intermediate",
+  "example": "His facetious remark about the flooded basement only annoyed his worried parents.",
+  "synonyms": [
+    "flippant",
+    "tongue-in-cheek",
+    "waggish"
+  ],
+  "nuance": "Witty praises clever humor, but facetious suggests joking at the wrong time; don't confuse it with fictitious, which means made up.",
+  "alternatives": [],
+  "prompt": "A coach is meeting with the team to talk about why they lost the championship game.",
+  "options": [
+    "When the coach asked what went wrong, Leo gave a facetious answer: the ball was too round.",
+    "The reporter's facetious account of the game invented a final score that never happened.",
+    "With tears in her eyes, Mia offered her teammates a facetious and deeply sincere apology.",
+    "The coach studied every facetious angle of the loss, from defense to stamina."
+  ],
+  "reasons": [
+    "A silly joke during a serious team review is humor at the wrong moment.",
+    "Making up facts is fictitious, a look-alike word that has nothing to do with joking.",
+    "A heartfelt, tearful apology is earnest, the opposite of a flippant joke.",
+    "Looking at many sides of a problem suggests facets; the word describes joking, not complexity."
+  ],
+  "practice": {
+    "prompt": "A family sits down to figure out how to pay for an expensive car repair.",
+    "options": [
+      "Grandpa's facetious suggestion that they trade the car for a horse earned a groan.",
+      "The mechanic's facetious bill charged them for parts that were never installed.",
+      "Aunt Rosa spoke in a facetious, solemn voice as she carefully added up each expense.",
+      "The repair fee was so facetious that nobody in the family could afford it."
+    ],
+    "answer": 0,
+    "reasons": [
+      "An obviously unserious idea during a tense money talk is flippant humor.",
+      "Invented charges are fictitious or dishonest, not playful or joking.",
+      "A solemn, careful tone is serious, which contradicts joking at the wrong time.",
+      "A high price has no tone of humor; the word describes remarks or attitudes, not cost."
+    ]
+  }
+}

@@ -21,12 +21,29 @@
   "options": [
     "She offered a cogent argument supported by relevant evidence and a clear chain of reasoning.",
     "His cogent speech relied on emotional appeals that concealed contradictions.",
-    "The cogent summary was short, though its reasoning was difficult to follow."
+    "The cogent summary was short, though its reasoning was difficult to follow.",
+    "The researcher was cogent of the gaps in her data and planned another round of trials."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: clear, logical, and convincing.",
     "Emotional force cannot substitute for the logical clarity implied by cogent.",
-    "Brevity alone does not make reasoning clear and convincing."
+    "Brevity alone does not make reasoning clear and convincing.",
+    "Being aware of something is being cognizant; cogent describes reasoning that persuades, not awareness."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A teenager asks her parents to let the family adopt a dog.",
+    "options": [
+      "She delivered her cogent proposal so loudly that the neighbors heard every word.",
+      "Her proposal became cogent only after she repeated it every night for a month.",
+      "Her cogent proposal explained who would walk the dog each day and how she would pay for its food.",
+      "Her cogent proposal jumped between unrelated topics and never mentioned who would care for the dog."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Volume makes a speech hard to ignore, not well reasoned or convincing.",
+      "Repeating a request may wear listeners down, but it adds no reasoning to it.",
+      "Answering the obvious objections with concrete plans makes the request logical and hard to refuse.",
+      "A rambling pitch that skips the key question lacks the clear logic the word requires."
+    ]
+  }
 }

@@ -14,18 +14,36 @@
   ],
   "nuance": "Nuanced concerns meaningful distinctions, not vagueness or unnecessary complexity.",
   "alternatives": [
-    "equivocal"
+    "equivocal",
+    "dogmatic"
   ],
   "prompt": "A critique distinguishes several shades of meaning instead of making a blanket judgment.",
   "options": [
     "Her nuanced critique separated the policy's intentions from its uneven results.",
     "His nuanced verdict declared every aspect either perfect or worthless.",
-    "The nuanced report used complicated words but ignored all distinctions."
+    "The nuanced report used complicated words but ignored all distinctions.",
+    "Her nuanced critique stayed so vague that no reader could tell what she actually thought."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: showing or recognizing subtle distinctions.",
     "A rigid either-or verdict suppresses subtle distinctions.",
-    "Complex language does not by itself demonstrate subtle understanding."
+    "Complex language does not by itself demonstrate subtle understanding.",
+    "Vagueness hides judgments, while nuance makes fine distinctions clear and specific."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A piano teacher gives a student feedback right after a recital.",
+    "options": [
+      "His nuanced feedback summed up the entire recital with one word: good.",
+      "The student's nuanced habit of tapping her foot loudly distracted the audience.",
+      "The feedback counted as nuanced simply because it repeated the same compliment across three full pages.",
+      "Her nuanced feedback praised the steady rhythm but noted that the soft passages felt rushed."
+    ],
+    "answer": 3,
+    "reasons": [
+      "A one-word verdict on the whole performance makes no distinctions at all.",
+      "This confuses the word with nuisance; an annoying habit has nothing to do with subtlety.",
+      "Length isn't subtlety; repeating one point over and over draws no fine distinctions.",
+      "Telling apart what went well from what needs work shows careful attention to fine differences."
+    ]
+  }
 }

@@ -1,0 +1,49 @@
+{
+  "id": 138,
+  "slug": "reluctant",
+  "word": "reluctant",
+  "pos": "adjective",
+  "pronunciation": "/rɪˈlʌk.tənt/",
+  "definition": "Not wanting to do something and holding back before agreeing to it.",
+  "difficulty": "Foundation",
+  "example": "The reluctant goalie took his place in the net only after the coach asked him a second time.",
+  "synonyms": [
+    "unwilling",
+    "hesitant",
+    "disinclined",
+    "loath"
+  ],
+  "nuance": "Reluctant suggests hesitation that may still give way; reticent specifically means holding back from speaking or sharing feelings.",
+  "alternatives": [
+    "reticent"
+  ],
+  "prompt": "A shy student has been asked to give a short speech at the school assembly.",
+  "options": [
+    "The reluctant student agreed to speak only after her teacher promised to sit up front.",
+    "The reluctant student signed up the moment the sheet went up and begged for a longer slot.",
+    "The reluctant student's speech stuck closely to the assembly's theme of kindness.",
+    "The reluctant student had never missed a rehearsal, so the principal trusted her to show up."
+  ],
+  "reasons": [
+    "She holds back and needs reassurance before saying yes, which is exactly this kind of hesitation.",
+    "Rushing to volunteer and asking for more time shows eagerness, the opposite of holding back.",
+    "Staying on topic describes a relevant speech, not a speaker who is hesitant.",
+    "A perfect attendance record makes someone reliable; it says nothing about unwillingness."
+  ],
+  "practice": {
+    "prompt": "A grandfather's family gives him his first smartphone as a birthday gift.",
+    "options": [
+      "Grandpa was so reluctant that he ordered a second phone for himself the very next morning.",
+      "Since he already owned a phone, the gift felt reluctant, so he passed it to a neighbor.",
+      "The reluctant phone survived a fall onto the kitchen tile without a single scratch.",
+      "Though reluctant at first, Grandpa eventually let his granddaughter show him how to send photos."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Buying another one right away shows enthusiasm, which reverses the meaning.",
+      "An extra, unneeded item is redundant; the word describes a person's hesitation, not surplus.",
+      "Surviving a drop shows toughness or resilience, not any unwillingness to act.",
+      "His early resistance that slowly gives way fits the word's sense of hesitant agreement."
+    ]
+  }
+}

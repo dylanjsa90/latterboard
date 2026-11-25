@@ -1,0 +1,47 @@
+{
+  "id": 83,
+  "slug": "insouciant",
+  "word": "insouciant",
+  "pos": "adjective",
+  "pronunciation": "/ɪnˈsuː.si.ənt/",
+  "definition": "Calm, carefree and unbothered, often when others think worry is called for.",
+  "difficulty": "Advanced",
+  "example": "She gave an insouciant shrug when the train was announced as an hour late.",
+  "synonyms": [
+    "nonchalant",
+    "carefree",
+    "unconcerned",
+    "blithe"
+  ],
+  "nuance": "Insouciant suggests a breezy, lighthearted freedom from worry; nonchalant stresses a cool, composed outward manner.",
+  "alternatives": [],
+  "prompt": "A pianist waits backstage a few minutes before her first big recital.",
+  "options": [
+    "Humming softly, the pianist seemed insouciant while the other performers paced the hallway.",
+    "The insouciant pianist was so nervous that she nearly fled the building before her turn.",
+    "The insouciant pianist sneered at the stage manager and called him a worthless fool.",
+    "The pianist had insouciant time to warm up, so she skipped her scales and hoped for the best."
+  ],
+  "reasons": [
+    "Staying relaxed and untroubled while others fret captures the breezy calm the word describes.",
+    "Overwhelming nerves are the reverse of a lighthearted, unworried attitude.",
+    "Open contempt is insolence, a look-alike word; this one means carefree, not rude.",
+    "This confuses the word with insufficient; it describes a person's mood, not an amount."
+  ],
+  "practice": {
+    "prompt": "A hiker realizes the trail map was left in the car several miles behind.",
+    "options": [
+      "He was insouciant that they turn back at once, repeating the demand until everyone agreed.",
+      "The insouciant trail climbed steeply over loose rocks and fallen logs toward the ridge.",
+      "With an insouciant grin, he said they would simply follow the river and see where it led.",
+      "Pale and gasping, he grew insouciant as he pictured being lost in the woods after dark."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This mistakes the word for insistent; it names a carefree manner, not a firm demand.",
+      "A trail has no feelings; the word describes a person's attitude or manner.",
+      "Treating a real setback with easygoing cheer shows exactly this kind of unbothered spirit.",
+      "Panic and fear are the opposite of a relaxed, worry-free outlook."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 86,
+  "slug": "apocryphal",
+  "word": "apocryphal",
+  "pos": "adjective",
+  "pronunciation": "/əˈpɑː.krə.fəl/",
+  "definition": "Widely repeated as true but of doubtful origin and probably made up.",
+  "difficulty": "Advanced",
+  "example": "The apocryphal story of the chef who invented the dish by accident is printed on every menu.",
+  "synonyms": [
+    "dubious",
+    "unverified",
+    "spurious",
+    "fabled"
+  ],
+  "nuance": "Unlike false, apocryphal describes a widely told story whose truth is doubtful or unproven, not one that has simply been shown to be wrong.",
+  "alternatives": [],
+  "prompt": "A tour guide tells visitors a famous story about the old lighthouse keeper.",
+  "options": [
+    "Historians call the guide's tale of a midnight rescue apocryphal, as no record of it exists.",
+    "An apocryphal storm once destroyed the lighthouse and every cottage along the coast.",
+    "The guide called the keeper's signed logbook apocryphal because three archives had confirmed it.",
+    "The guide grew apocryphal when visitors asked questions, refusing to believe a word they said."
+  ],
+  "reasons": [
+    "A popular story with no evidence behind it is exactly the kind of tale the word describes.",
+    "This confuses the word with apocalyptic; it says nothing about doubtful truth.",
+    "Confirmation by archives makes a source reliable, the reverse of what the word suggests.",
+    "The word describes stories that are doubted, not a person who doubts others."
+  ],
+  "practice": {
+    "prompt": "A class looks into a motto the town's founder supposedly carved above the school door.",
+    "options": [
+      "The motto is apocryphal: the founder's own diary records him carving it in 1852.",
+      "The students felt apocryphal about the whole project and doubted every single source the librarian handed them.",
+      "The apocryphal motto predicted that the world would end in a great flood.",
+      "The students decided the motto was apocryphal, since it first appeared in print long after the founder died."
+    ],
+    "answer": 3,
+    "reasons": [
+      "A firsthand diary entry is strong evidence, so the motto would be well documented, not doubtful.",
+      "This treats the word as a synonym for skeptical; it describes claims, not people's feelings.",
+      "This mixes the word up with apocalyptic, which concerns the end of the world.",
+      "A saying that shows up only long after the fact, with no early source, has a doubtful origin."
+    ]
+  }
+}

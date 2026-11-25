@@ -21,12 +21,29 @@
   "options": [
     "The spokesperson used technical jargon to obfuscate the simple question.",
     "The guide obfuscated the issue by explaining it clearly in plain language.",
-    "The contractor obfuscated the leak by repairing the broken pipe."
+    "The contractor obfuscated the leak by repairing the broken pipe.",
+    "The spokesperson obfuscated the old notices by tearing them off the bulletin board."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: make something obscure or difficult to understand.",
     "Plain explanation clarifies, the opposite of obfuscation.",
-    "Repairing a physical problem is not making its meaning obscure."
+    "Repairing a physical problem is not making its meaning obscure.",
+    "Tearing something down destroys it. This confuses the word with obliterate, since nothing was made hard to understand."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A student writes a lab report after her experiment fails to produce the expected result.",
+    "options": [
+      "After the long lab session, Maya felt so obfuscated that she went straight home to nap.",
+      "Hoping to obfuscate the failed result, Maya buried it under pages of irrelevant calculations.",
+      "Maya obfuscated the failed result by putting a bold, one-line summary of it at the top of the first page.",
+      "Maya obfuscated several new data points to replace the measurements that had gone wrong."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The verb describes clouding an idea or message, not a person feeling tired or worn out.",
+      "Hiding an unwelcome finding under clutter on purpose makes it hard to notice or understand.",
+      "A prominent summary makes the result easy to find, so it reveals the result instead of hiding it.",
+      "Inventing numbers is fabrication. Obfuscating clouds existing information but does not create false data."
+    ]
+  }
 }

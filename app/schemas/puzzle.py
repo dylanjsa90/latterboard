@@ -76,8 +76,6 @@ class WordPuzzlePublic(BaseModel):
     puzzle_id: str
     word_length: int
     max_attempts: int
-    initial_guess: str
-    initial_grade: list[Grade]
     # The signed-in player's progress on this puzzle; empty for anonymous visitors.
     guesses: list[WordGuessPublic] = Field(default_factory=list)
     won: bool = False
@@ -213,6 +211,6 @@ class CipherAttempt(BaseModel):
 
 class CipherAttemptCreate(CipherAttempt):
     puzzle_id: str
-    # Rows on the board including the starter and this attempt, like WordGuessCreate's.
+    # Rows on the board including the starter and this attempt.
     # Only a guest's count is used: the server counts a signed-in player's own attempts.
     attempt_count: int | None = Field(default=None, ge=0)

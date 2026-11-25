@@ -1,0 +1,47 @@
+{
+  "id": 130,
+  "slug": "vindicate",
+  "word": "vindicate",
+  "pos": "verb",
+  "pronunciation": "/ˈvɪn.dɪ.keɪt/",
+  "definition": "To prove that someone or something was right or blameless after being doubted or accused.",
+  "difficulty": "Intermediate",
+  "example": "Years later, a new fossil discovery vindicated the scientist's once-mocked theory about bird ancestry.",
+  "synonyms": [
+    "exonerate",
+    "prove right",
+    "clear",
+    "justify"
+  ],
+  "nuance": "To vindicate is to prove right someone who was doubted or accused, while to justify is simply to give reasons for something, even if nobody questioned it.",
+  "alternatives": [],
+  "prompt": "A student insists that her test answer was marked wrong by mistake.",
+  "options": [
+    "She asked the teacher to recheck the key, confident it would vindicate her answer.",
+    "She hoped the teacher would vindicate her by lowering her grade even further.",
+    "Angry about the grade, she planned to vindicate the teacher by spreading rumors about him.",
+    "She decided to vindicate her mistake by admitting she had only guessed."
+  ],
+  "reasons": [
+    "A recheck that confirms her answer would show she was right all along despite the doubt.",
+    "A lower grade would confirm the blame instead of clearing her, which reverses the meaning.",
+    "Seeking revenge is being vindictive; the verb means clearing a name, not damaging one.",
+    "Confessing an error concedes you were wrong; the verb requires being shown to be right."
+  ],
+  "practice": {
+    "prompt": "A chef was criticized for adding an unusual spice to a classic soup.",
+    "options": [
+      "Furious with her critics, the chef vowed to vindicate them by mocking their taste in print.",
+      "The printed menu would vindicate the spice by listing its name beside the soup.",
+      "The chef trusted that the diners' empty bowls would vindicate her bold recipe.",
+      "The critic's harsh review seemed to vindicate the chef, so she quietly dropped the soup from the menu."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Mocking critics is payback, which confuses the verb with being vindictive.",
+      "Listing a name only points something out; it does nothing to answer the doubt about it.",
+      "Diners finishing their soup would show the questioned choice was a good one.",
+      "A harsh review supports the criticism; it cannot prove the chef right."
+    ]
+  }
+}

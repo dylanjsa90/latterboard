@@ -21,12 +21,29 @@
   "options": [
     "The tutor used a diagram to elucidate the relationship between the variables.",
     "The tutor elucidated the confusion by making it more severe.",
-    "She elucidated the passage by deleting it without explanation."
+    "She elucidated the passage by deleting it without explanation.",
+    "The shy student elucidated the tutor's hard question by quickly changing the subject."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: make something clear by explaining it.",
     "Increasing confusion obscures rather than clarifies.",
-    "Removing a passage does not explain its meaning."
+    "Removing a passage does not explain its meaning.",
+    "Dodging a question is eluding it, a look-alike word; nothing was made clearer."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A museum guide stands beside an old star chart covered in unfamiliar symbols.",
+    "options": [
+      "The guide elucidated the chart by declaring it the finest object in the whole museum.",
+      "The guide offered to elucidate the symbols by matching each one to a modern constellation.",
+      "The guide elucidated the chart by switching on a brighter lamp above the glass case.",
+      "The guide elucidated the symbols with jargon so dense that visitors left more puzzled than before."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Praising an object says how good it is, not what it shows or means.",
+      "Linking strange marks to familiar names helps visitors understand what the chart means.",
+      "Better lighting makes the chart easier to see, but it explains nothing about it.",
+      "Leaving the audience more confused is the opposite of making something clear."
+    ]
+  }
 }

@@ -1,0 +1,48 @@
+{
+  "id": 95,
+  "slug": "tacitly",
+  "word": "tacitly",
+  "pos": "adverb",
+  "pronunciation": "/ˈtæs.ɪt.li/",
+  "definition": "In a way that is understood or agreed to without being said out loud.",
+  "difficulty": "Intermediate",
+  "example": "The roommates tacitly agreed that whoever cooked dinner would not have to wash the dishes.",
+  "synonyms": [
+    "implicitly",
+    "by unspoken agreement",
+    "silently"
+  ],
+  "nuance": "Tacitly means an understanding is shared without words. Implicitly is broader and can describe any meaning that is suggested rather than stated.",
+  "alternatives": [
+    "explicitly"
+  ],
+  "prompt": "Neighbors on a quiet street share the work of clearing snow, but they have never talked about how.",
+  "options": [
+    "The neighbors tacitly took turns clearing the shared sidewalk, though no one ever proposed a plan.",
+    "The neighbors tacitly announced the shoveling schedule in a long email to everyone on the street.",
+    "The neighbors shoveled tacitly, keeping the scrape of their shovels as soft as possible.",
+    "One neighbor tacitly hid the shared shovel in his garage so nobody else could find it."
+  ],
+  "reasons": [
+    "The neighbors keep to a routine they all understand but have never discussed, which is exactly a tacit arrangement.",
+    "An announcement in an email states the plan openly, which is the opposite of leaving it unspoken.",
+    "The word describes an understanding that goes unspoken. It does not mean making little noise.",
+    "Hiding something is secretive. Tacit describes something people mutually understand, not something done in secret."
+  ],
+  "practice": {
+    "prompt": "A family has never discussed who sits where at dinner, yet everyone always takes the same seat.",
+    "options": [
+      "Dad tacitly drew up a seating chart and taped it to the dining room wall.",
+      "The youngest child tacitly chewed her vegetables so that no one could hear her.",
+      "Grandma tacitly praised the burned soup out loud to spare the cook's feelings.",
+      "Over the years, each family member tacitly claimed one particular chair at the table."
+    ],
+    "answer": 3,
+    "reasons": [
+      "A posted chart spells out the arrangement in writing, so nothing is left unspoken.",
+      "Chewing quietly is about sound. Tacit refers to understanding without words, not to volume.",
+      "Kind words spoken aloud are tactful, a look-alike word. They are not tacit, because they are actually said.",
+      "Each person's seat became settled through habit and shared understanding, without anyone saying a word."
+    ]
+  }
+}

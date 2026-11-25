@@ -21,12 +21,29 @@
   "options": [
     "Usually talkative, he became reticent when asked about his family.",
     "She was reticent about the plan, explaining her reservations at great length.",
-    "The reticent runner hesitated to enter the race but freely discussed all his thoughts."
+    "The reticent runner hesitated to enter the race but freely discussed all his thoughts.",
+    "Everyone heard about his reticent promotion at yesterday's staff meeting."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: reluctant to speak or reveal one's thoughts.",
     "Openly explaining reservations at length is not being reserved in speech.",
-    "Reluctance to act alone is not reticence; the core meaning concerns speaking."
+    "Reluctance to act alone is not reticence; the core meaning concerns speaking.",
+    "This mixes up reticent with recent; the word describes holding back speech, not timing."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A food critic asks a chef to name the secret ingredient in her famous sauce.",
+    "options": [
+      "The reticent chef recited every spice and measurement before the critic finished asking.",
+      "Annoyed by the question, the reticent chef shouted at the critic across the dining room.",
+      "The critic said the sauce was reticent of a stew his grandmother used to make.",
+      "The reticent chef only smiled and said the recipe would stay in her family."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Volunteering every detail eagerly is the opposite of keeping things to oneself.",
+      "Loud anger is not reticence; the word suggests quiet restraint, not hostility.",
+      "This confuses reticent with reminiscent; a sauce cannot recall a memory.",
+      "Politely declining to share what she knows shows she is holding back."
+    ]
+  }
 }

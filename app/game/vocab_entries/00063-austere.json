@@ -1,0 +1,47 @@
+{
+  "id": 63,
+  "slug": "austere",
+  "word": "austere",
+  "pos": "adjective",
+  "pronunciation": "/ɔːˈstɪr/",
+  "definition": "Severely plain and strict, without comfort, decoration, or anything extra.",
+  "difficulty": "Intermediate",
+  "example": "After the storm knocked out the power, the family ate an austere supper of bread and plain soup.",
+  "synonyms": [
+    "spartan",
+    "stark",
+    "severe",
+    "stern"
+  ],
+  "nuance": "Austere can describe a stern person as well as a bare place, while spartan mostly stresses simple, uncomfortable living conditions.",
+  "alternatives": [],
+  "prompt": "A designer describes a newly finished office that has almost no furniture.",
+  "options": [
+    "The designer kept the office austere: a steel desk, one chair, and bare gray walls.",
+    "The austere office overflowed with velvet couches, gold mirrors, and crystal chandeliers.",
+    "Because she was so austere, the designer instantly spotted a clever shortcut in the plan.",
+    "The office was called austere simply because it was the biggest room on the whole floor."
+  ],
+  "reasons": [
+    "A room stripped down to a few plain essentials is exactly this kind of severe simplicity.",
+    "Luxurious, crowded decoration is the opposite of bare, strict plainness.",
+    "Quick, sharp insight describes someone astute; this word is about sternness and plainness.",
+    "Size has nothing to do with it; the word describes bareness and severity, not scale."
+  ],
+  "practice": {
+    "prompt": "A coach explains the training rules she sets for her team before a championship.",
+    "options": [
+      "Her austere routine allowed no desserts, no late nights, and no skipped drills.",
+      "Her austere routine let players sleep in and skip practice whenever they felt like it.",
+      "Her austere eye for talent helped her pick out a gifted rookie within minutes.",
+      "The coach called the sunny morning austere, a lucky sign before the big game."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Rules that cut out every comfort and indulgence show strict self-denial.",
+      "A relaxed, permissive schedule is the reverse of a strict, demanding one.",
+      "A sharp eye for talent calls for astute; the word means stern or plain, not perceptive.",
+      "A hopeful, lucky sign is auspicious; this word suggests severity, not good fortune."
+    ]
+  }
+}

@@ -26,5 +26,20 @@
     "Typical behavior contradicts anomalous behavior.",
     "A personal preference does not establish an anomaly."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A birdwatcher keeps a log of the birds she sees all winter.",
+    "options": [
+      "A hummingbird at her feeder in January was an anomalous sighting so far north.",
+      "The sparrows that showed up at dawn every single day were the most anomalous birds on her list.",
+      "The two finches seemed anomalous, since their beaks and songs were identical in every way.",
+      "She signed her log with a made-up name so the bird club would treat it as anomalous."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A warm-weather bird turning up in midwinter breaks the expected seasonal pattern.",
+      "Birds that arrive predictably every day are the norm, not an exception to it.",
+      "Closely matching each other suggests analogous; nothing here departs from a norm.",
+      "Hiding one's name makes a report anonymous, a look-alike word with a different meaning."
+    ]
+  }
 }

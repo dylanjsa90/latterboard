@@ -1,0 +1,47 @@
+{
+  "id": 50,
+  "slug": "benevolent",
+  "word": "benevolent",
+  "pos": "adjective",
+  "pronunciation": "/bəˈnɛv.ə.lənt/",
+  "definition": "Kind and wanting to do good for other people.",
+  "difficulty": "Intermediate",
+  "example": "The benevolent landlord lowered the rent for tenants who had recently lost their jobs.",
+  "synonyms": [
+    "kindly",
+    "charitable",
+    "well-meaning",
+    "generous"
+  ],
+  "nuance": "Benevolent describes a kind intention behind an action; beneficial describes a good effect, whether or not anyone meant it.",
+  "alternatives": [],
+  "prompt": "A retired teacher spends her weekends helping out at the town library.",
+  "options": [
+    "The benevolent retiree tutored young readers on weekends without asking for payment.",
+    "The benevolent retiree laughed loudly at the children who stumbled over long words in their books.",
+    "The new benevolent carpet made the library's reading room much quieter.",
+    "The doctor told the retiree that the small lump on her wrist was benevolent and nothing to fear."
+  ],
+  "reasons": [
+    "Giving time freely to help children shows real goodwill toward others.",
+    "Mocking struggling kids is cruel, the reverse of kindly intent.",
+    "A carpet can be useful but has no intentions; the speaker means beneficial.",
+    "A harmless growth is benign; this word describes kind people, not medical findings."
+  ],
+  "practice": {
+    "prompt": "A bakery owner decides what to do with her unsold bread at closing time each night.",
+    "options": [
+      "The benevolent oven baked every loaf evenly in under an hour.",
+      "The benevolent baker was known mainly for owning three shops and a large house.",
+      "Being benevolent, the baker gave her leftover loaves to the shelter down the street.",
+      "The benevolent baker threw the extra loaves in the trash so that no one else could have them."
+    ],
+    "answer": 2,
+    "reasons": [
+      "An oven can work well, but it cannot wish anyone good.",
+      "Wealth alone says nothing about whether someone is kind to others.",
+      "Donating food to people in need is an act of goodwill.",
+      "Wasting food out of spite shows ill will, not kindness."
+    ]
+  }
+}

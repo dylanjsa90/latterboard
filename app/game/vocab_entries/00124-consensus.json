@@ -1,0 +1,46 @@
+{
+  "id": 124,
+  "slug": "consensus",
+  "word": "consensus",
+  "pos": "noun",
+  "pronunciation": "/kənˈsɛn.səs/",
+  "definition": "General agreement among most or all members of a group.",
+  "difficulty": "Foundation",
+  "example": "After an hour of debate, the hiking club reached a consensus to take the shorter trail.",
+  "synonyms": [
+    "general agreement",
+    "accord",
+    "common ground"
+  ],
+  "nuance": "Consensus is broad shared agreement, not necessarily unanimity, and it never describes a single person's opinion.",
+  "alternatives": [],
+  "prompt": "A neighborhood committee must decide what to plant in the shared garden.",
+  "options": [
+    "After hearing every proposal, the committee reached a consensus to plant tomatoes and herbs.",
+    "The committee took a consensus by counting every household living on the block.",
+    "The consensus was that half the members wanted roses while the other half refused to plant anything.",
+    "The chairwoman announced her personal consensus without asking anyone else in the room."
+  ],
+  "reasons": [
+    "The members arrived at a broadly shared decision together, which is what the word names.",
+    "Counting residents is a census; this word refers to agreement, not a headcount.",
+    "An even split with no shared view is a deadlock, the opposite of general agreement.",
+    "One person's private opinion cannot be agreement among a group."
+  ],
+  "practice": {
+    "prompt": "Scientists from several labs compare their measurements of how fast a glacier is melting.",
+    "options": [
+      "One researcher reached a consensus with herself after rechecking her own spreadsheet.",
+      "The lead scientist imposed a consensus by forbidding anyone to publish a different number.",
+      "When the data from all five labs matched, a consensus formed around the melting rate.",
+      "Each lab published a different rate, so the consensus among them was complete disagreement."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Agreement of this kind requires a group; one person confirming her work does not qualify.",
+      "Silencing others by order produces obedience, not agreement the group genuinely shares.",
+      "Independent researchers converging on the same conclusion is broad agreement among experts.",
+      "Total disagreement is the absence of shared agreement, not a kind of it."
+    ]
+  }
+}

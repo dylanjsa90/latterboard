@@ -4,8 +4,9 @@
     docker compose run --rm app python -m app.schema_drift   # on the VM
 
 Prints the database's Alembic revision and every difference autogenerate finds, and
-exits 1 if there are any. Run it before `alembic stamp` on a database that predates
-migrations: stamping is only safe when this reports no differences.
+exits 1 if there are any. Run it before `alembic stamp 0001` on a database that
+predates migrations: it compares against head, so stamping is safe once it reports only
+the changes later migrations make (listed in docs/guides/database-migrations.md).
 """
 
 import sys

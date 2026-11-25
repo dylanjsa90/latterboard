@@ -4,7 +4,7 @@
 > head-to-head matches with matchmaking and a computer opponent, Vocab Challenger rooms and
 > wordbooks, and a websocket for live play.
 
-Last updated: 2026-11-23
+Last updated: 2026-11-24
 
 Python 3.10+ with uv, SQLAlchemy, Redis, JWT auth. SQLite everywhere. Production is a Linux VM
 running Uvicorn under systemd (`deploy/latterboard.service`), not Docker; the `Dockerfile` and
@@ -36,6 +36,7 @@ Paths are in backticks, not `@` imports, so they load only when read.
 | Matches, race/co-op modes, matchmaking, the computer opponent | `docs/architecture/matches.md`                    |
 | Any REST call, websocket frame, or new endpoint               | `docs/reference/cross-repo-contract.md`           |
 | Changing a model, writing or running a migration              | `docs/guides/database-migrations.md`              |
+| Adding, generating or fixing Vocab Challenger words           | `docs/guides/vocab-word-list.md`                  |
 | Picking up known issues, security and performance follow-ups  | `docs/plans/follow-ups.md`                        |
 | webcade, the React client                                     | `~/projects/webcade/AGENTS.md`                    |
 
@@ -82,6 +83,10 @@ Paths are in backticks, not `@` imports, so they load only when read.
 - `PuzzleAttempt.puzzle_id` is a string key like `"word-2026-09-11"`, not a foreign key to `Puzzle.id`. `(user_id, puzzle_id)` is unique; `get_or_create` handles two first moves racing to insert it.
 - The server decides word, sudoku, and cipher outcomes and counts a signed-in player's moves itself; a client's `attempt_count` is trusted only for guests, who record nothing. `PuzzleAttempt.guesses` holds word guesses, cipher codes (`encode_cipher`), or the sudoku cells filled, from which the server rebuilds a signed-in player's board; the board a client sends is used only for guests. Word guesses must pass `wordle.is_valid_word`. Why: webcade's `docs/decisions/004-daily-puzzle-outcomes.md`.
 - `app/game/puzzle_seed_data.py`: use `shuffled_words()`, which returns a copy. Don't shuffle or mutate the shared word list; `wordle.py` uses it too.
+
+### Vocab words
+- Words ship only through `python -m app.vocab_pipeline` approvals, which are automatic for drafts that pass validation; the PR into `main` is where a person looks. `app/game/vocab_entries/` holds shipped words only. Never renumber, rename or delete a shipped entry file: ids and slugs are permanent.
+- `generate` runs `claude -p` on the owner's Claude subscription, never an API key, and every run needs the owner's go-ahead on its usage estimate first. Players report problems from round feedback; `reports` lists them.
 
 ### Tests
 - `tests/conftest.py` sets env vars **before** any app import, because `Settings()` reads them at import time. Keep new overrides above the imports. `SKIP_ENV_FILE=1` keeps `app/.env.local` out, so tests see only what conftest sets (including their own `SECRET_KEY`).

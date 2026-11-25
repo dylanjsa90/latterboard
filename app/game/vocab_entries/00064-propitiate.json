@@ -1,0 +1,47 @@
+{
+  "id": 64,
+  "slug": "propitiate",
+  "word": "propitiate",
+  "pos": "verb",
+  "pronunciation": "/prəˈpɪʃ.i.eɪt/",
+  "definition": "To win back someone's goodwill by doing something that pleases them.",
+  "difficulty": "Advanced",
+  "example": "Late to rehearsal, the drummer tried to propitiate the conductor with a box of fresh pastries.",
+  "synonyms": [
+    "appease",
+    "conciliate",
+    "placate",
+    "mollify"
+  ],
+  "nuance": "Propitiate stresses winning favor from someone who has power over you, while placate simply means calming someone who is upset.",
+  "alternatives": [],
+  "prompt": "A tenant has annoyed the building manager by paying rent late several months in a row.",
+  "options": [
+    "Hoping to propitiate the manager, the tenant paid two months early and apologized in person.",
+    "To propitiate the manager, the tenant taped an insulting note to the office door.",
+    "The tenant's late payments threatened to propitiate a sudden crisis in the building budget.",
+    "Angry at the manager, the tenant tried to propitiate unkind rumors about him on every floor."
+  ],
+  "reasons": [
+    "Paying ahead and apologizing are pleasing gestures meant to restore the manager's favor.",
+    "An insult deepens the offense instead of earning back goodwill.",
+    "Triggering a crisis is what precipitate means; this word is about pleasing a person.",
+    "Spreading rumors is propagating them, and it would only worsen the conflict."
+  ],
+  "practice": {
+    "prompt": "A boy accidentally broke his older sister's favorite headphones.",
+    "options": [
+      "Saturday morning, when she was in a good mood, seemed a propitiate moment to confess.",
+      "To propitiate his sister, he replaced the headphones with his own savings and did her chores for a week.",
+      "To propitiate his sister, he insisted the whole thing was her fault for leaving them out.",
+      "He tried to propitiate the cracked headband by gluing it back together."
+    ],
+    "answer": 1,
+    "reasons": [
+      "A favorable moment calls for the adjective propitious; this verb cannot describe a time.",
+      "Making amends with gifts and favors is a clear effort to regain her goodwill.",
+      "Blaming the injured person adds to her anger rather than winning her over.",
+      "Only a person or being can be won over; repairing an object pleases no one by itself."
+    ]
+  }
+}

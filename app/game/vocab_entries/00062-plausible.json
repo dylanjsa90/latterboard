@@ -1,0 +1,49 @@
+{
+  "id": 62,
+  "slug": "plausible",
+  "word": "plausible",
+  "pos": "adjective",
+  "pronunciation": "/ˈplɑː.zə.bəl/",
+  "definition": "Seeming reasonable and believable enough that it could be true, even if not proven.",
+  "difficulty": "Foundation",
+  "example": "Her excuse about a flat bike tire sounded plausible, so the coach let her join practice late.",
+  "synonyms": [
+    "believable",
+    "credible",
+    "reasonable",
+    "conceivable"
+  ],
+  "nuance": "Plausible means an idea could believably be true; probable means it is more likely true than not. A plausible claim may still turn out false.",
+  "alternatives": [
+    "feasible"
+  ],
+  "prompt": "Scientists are trying to explain why the fish population in a mountain lake suddenly dropped.",
+  "options": [
+    "Warmer water holding less oxygen offered a plausible explanation for the sudden decline.",
+    "The researchers found it plausible to collect water samples every morning before breakfast.",
+    "The idea that the fish swam off to the ocean was plausible, even though the lake has no outlet.",
+    "The volunteers who counted the fish earned a plausible round of applause at the meeting."
+  ],
+  "reasons": [
+    "A cause that fits the known facts and could reasonably be true is exactly what the word describes.",
+    "This confuses the word with feasible; it describes believable claims, not tasks that can be managed.",
+    "A theory the facts rule out is far-fetched, which is the opposite of believable.",
+    "The word only looks like applause; in modern English it does not mean deserving praise."
+  ],
+  "practice": {
+    "prompt": "A novelist needs readers to accept why her main character misses an important train.",
+    "options": [
+      "The writer printed the draft in a plausible font so the editor could read it easily.",
+      "Her editor called the chapter plausible simply because it was exactly twenty pages long.",
+      "Oversleeping after a double shift gave the character a plausible reason to miss the train.",
+      "Readers found it plausible that a talking cloud lifted her off the platform and flew her home."
+    ],
+    "answer": 2,
+    "reasons": [
+      "How easy a typeface is to read has nothing to do with whether something is believable.",
+      "Page count says nothing about whether events in the story seem true to life.",
+      "An ordinary, realistic cause is one readers can easily believe.",
+      "A wildly impossible event in a realistic story strains belief instead of earning it."
+    ]
+  }
+}

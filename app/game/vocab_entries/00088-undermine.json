@@ -1,0 +1,49 @@
+{
+  "id": 88,
+  "slug": "undermine",
+  "word": "undermine",
+  "pos": "verb",
+  "pronunciation": "/ˌʌn.dɚˈmaɪn/",
+  "definition": "To weaken something gradually or indirectly, making it less effective or less secure.",
+  "difficulty": "Foundation",
+  "example": "Constant interruptions can slowly undermine a new speaker's confidence.",
+  "synonyms": [
+    "weaken",
+    "erode",
+    "subvert",
+    "sabotage"
+  ],
+  "nuance": "Undermine suggests gradual or indirect weakening, often unnoticed at first; sabotage implies a deliberate, direct act of damage.",
+  "alternatives": [
+    "bolster"
+  ],
+  "prompt": "A team captain worries about a teammate's habits during practice.",
+  "options": [
+    "Skipping drills every week could undermine the trust the team has built all season.",
+    "Her steady encouragement undermined the team's morale, so everyone played harder that day.",
+    "The captain undermined the rival goalie, assuming he would be easy to beat.",
+    "The coach undermined the key plays in red ink so no one would miss them."
+  ],
+  "reasons": [
+    "Repeated absences slowly wear away trust, which is exactly this kind of gradual weakening.",
+    "The word means to weaken, not to boost; encouragement that lifts spirits does the opposite.",
+    "This confuses the word with underestimate, which means to judge someone as weaker than they are.",
+    "Marking text for emphasis is underlining, a look-alike word with an unrelated meaning."
+  ],
+  "practice": {
+    "prompt": "A scientist reviews a research study before it is published.",
+    "options": [
+      "The reviewer undermined the chart's labels so they would fit on a single page.",
+      "Testing only six volunteers could undermine the study's main conclusion.",
+      "Repeating the experiment five times undermined the results, so other labs trusted them more.",
+      "Decades of solid data undermine the theory, holding it up like a sturdy foundation."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Shrinking labels to save space is resizing, not weakening something's strength or effect.",
+      "A tiny sample makes the conclusion less reliable, quietly weakening its support.",
+      "Careful repetition strengthens findings; the sentence treats the word as if it meant reinforce.",
+      "Supporting from below is what underpin means; this word means eroding that support."
+    ]
+  }
+}

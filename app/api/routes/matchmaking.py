@@ -39,7 +39,9 @@ WAITING_SINCE_PREFIX = "mm:waiting_since"
 
 # Games the computer opponent can play. Sudoku co-op is excluded: it is cooperative
 # and free-form, so there is no opponent to stand in for.
-BOT_GAMES = frozenset({"wordle", match_modes.WORD_RACE, match_modes.CIPHER_RACE})
+BOT_GAMES = frozenset(
+    {"wordle", match_modes.WORD_RACE, match_modes.CIPHER_RACE, match_modes.WORD_PICK}
+)
 
 # Pairs the caller with the longest-waiting other player, or queues them if nobody else
 # is waiting. A script so two players joining at once can't both pop the same opponent.

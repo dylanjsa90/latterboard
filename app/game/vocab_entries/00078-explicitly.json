@@ -1,0 +1,47 @@
+{
+  "id": 78,
+  "slug": "explicitly",
+  "word": "explicitly",
+  "pos": "adverb",
+  "pronunciation": "/ɪkˈsplɪs.ɪt.li/",
+  "definition": "In a clear and direct way that leaves no room for doubt.",
+  "difficulty": "Foundation",
+  "example": "The recipe explicitly says to let the dough rest for a full hour before baking.",
+  "synonyms": [
+    "clearly",
+    "expressly",
+    "directly",
+    "plainly"
+  ],
+  "nuance": "Explicitly means stated outright; implicitly means suggested or understood without being said.",
+  "alternatives": [],
+  "prompt": "A teacher explains the rules for a group project on the first day.",
+  "options": [
+    "The teacher explicitly stated that each student must write one section.",
+    "The teacher explicitly hinted at the deadline, so no one was quite sure when it was.",
+    "The teacher explicitly implied the rules by frowning whenever a student broke one.",
+    "The teacher explicitly decorated the project poster with delicate gold trim."
+  ],
+  "reasons": [
+    "Saying the rule outright leaves students with no doubt about what is required.",
+    "A hint is indirect, and the confusion shows the message was anything but clear.",
+    "A frown communicates indirectly; a facial expression is not a direct statement.",
+    "This confuses the word with exquisitely; fine decoration is about beauty, not clarity."
+  ],
+  "practice": {
+    "prompt": "A sign is posted at the entrance to a public swimming pool.",
+    "options": [
+      "The sign explicitly forbids running on the wet deck around the pool.",
+      "A faint drawing on the sign explicitly suggests that diving might be unwise.",
+      "The sign explicitly says nothing about food, so swimmers guess that snacks are banned.",
+      "The lifeguard explicitly swam three slow laps before the pool opened."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Naming the banned behavior in plain words is a direct, unmistakable rule.",
+      "A faint picture only suggests an idea, which is indirect rather than clearly stated.",
+      "Guessing from what a sign leaves out is inference, the opposite of a stated rule.",
+      "Swimming laps is not a message; the word describes how something is communicated."
+    ]
+  }
+}

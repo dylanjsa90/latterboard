@@ -1,8 +1,9 @@
 """Vocab Challenger I/O. Times are epoch milliseconds (see app/game/vocab.py)."""
 
+from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 Difficulty = Literal["Foundation", "Intermediate", "Advanced"]
 
@@ -131,10 +132,84 @@ class DailyWord(BaseModel):
     """The word of the day: only what the home card shows, never a question's answer."""
 
     id: int
-    # The UTC date it's the word for, YYYY-MM-DD.
+    # The Pacific date it's the word for, YYYY-MM-DD.
     date: str
+    slug: str
     word: str
     pronunciation: str
     pos: str
     definition: str
     example: str
+
+
+class DailyWordDay(BaseModel):
+    # A Pacific date, YYYY-MM-DD.
+    date: str
+    word_id: int
+    slug: str
+
+
+class DailyWordHistory(BaseModel):
+    """Every archived day through today, oldest first; never a later day."""
+
+    days: list[DailyWordDay]
+
+
+class PracticeQuestion(BaseModel):
+    """A word page's own usage question, never one a room asks."""
+
+    prompt: str
+    options: list[str]
+    answer: int
+    reasons: list[str]
+
+
+class VocabEntry(BaseModel):
+    """A shipped word as its public page shows it: no room question's text."""
+
+    id: int
+    slug: str
+    word: str
+    pos: str
+    pronunciation: str
+    definition: str
+    difficulty: Difficulty
+    example: str
+    synonyms: list[str]
+    nuance: str
+    # Slugs of other shipped words.
+    alternatives: list[str]
+    practice: PracticeQuestion
+
+
+class VocabEntries(BaseModel):
+    entries: list[VocabEntry]
+
+
+ReportReason = Literal[
+    "wrong_definition", "wrong_answer", "confusing", "inappropriate", "other"
+]
+
+
+class WordReportCreate(BaseModel):
+    """A player's report of a problem with a word's entry."""
+
+    reason: ReportReason
+    # Which question was on screen when they reported it.
+    kind: Literal["usage", "context"] | None = None
+    note: str = Field(default="", max_length=500)
+
+
+class WordReport(BaseModel):
+    """A stored report, as the owner reads it (superuser only)."""
+
+    id: int
+    word_id: int
+    word: str
+    reason: str
+    kind: str | None
+    note: str
+    # Null for a guest.
+    user_id: int | None
+    # Naive UTC.
+    created_at: datetime

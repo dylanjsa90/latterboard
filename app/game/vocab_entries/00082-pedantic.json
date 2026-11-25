@@ -1,0 +1,49 @@
+{
+  "id": 82,
+  "slug": "pedantic",
+  "word": "pedantic",
+  "pos": "adjective",
+  "pronunciation": "/pəˈdæn.tɪk/",
+  "definition": "Too focused on small details or rules, often in a way that shows off knowledge.",
+  "difficulty": "Intermediate",
+  "example": "The tour guide's pedantic asides about dates and spellings lost the attention of the whole group.",
+  "synonyms": [
+    "nitpicking",
+    "hairsplitting",
+    "fussy",
+    "overscrupulous"
+  ],
+  "nuance": "Meticulous praises careful attention, but pedantic criticizes it as showy fussing over points too minor to matter.",
+  "alternatives": [
+    "meticulous"
+  ],
+  "prompt": "You are telling a funny story to friends at lunch when one of them speaks up.",
+  "options": [
+    "My pedantic friend stopped my joke to note that a spider is not technically an insect.",
+    "The pedantic joke was so ordinary and dull that nobody at the lunch table bothered to laugh.",
+    "My pedantic friend never cares about accuracy and lets every small mistake slide by.",
+    "Everyone praised how pedantic my timing was, since the punch line landed perfectly."
+  ],
+  "reasons": [
+    "Interrupting a joke over a trivial technical point is the kind of fussiness the word criticizes.",
+    "Dull and ordinary fits the look-alike pedestrian; this word is about nitpicking, not blandness.",
+    "Shrugging off errors is the reverse of fixating on them.",
+    "The word is a criticism of fussiness, so it cannot serve as praise for good comic timing."
+  ],
+  "practice": {
+    "prompt": "A student reviews a classmate's poster before the science fair opens.",
+    "options": [
+      "The pedantic reviewer insisted on fixing a comma that no visitor would ever notice.",
+      "The poster's pedantic design used plain fonts and a familiar layout seen at every fair.",
+      "Being pedantic, the reviewer skimmed the poster in seconds and said any errors were fine.",
+      "The pedantic reviewer warmly urged the classmate to trust her bold, big-picture ideas."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Demanding a correction nobody would care about shows excessive concern with minor rules.",
+      "Plain and unoriginal describes something pedestrian, not something fussy about details.",
+      "A quick glance that waves away mistakes is the opposite of nitpicking.",
+      "Encouraging broad ideas has nothing to do with an irritating focus on small points."
+    ]
+  }
+}

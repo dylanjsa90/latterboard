@@ -1,0 +1,47 @@
+{
+  "id": 84,
+  "slug": "disparage",
+  "word": "disparage",
+  "pos": "verb",
+  "pronunciation": "/dɪˈspær.ɪdʒ/",
+  "definition": "To speak about someone or something as if it has little worth or importance.",
+  "difficulty": "Intermediate",
+  "example": "Rather than disparage her rival's design, the architect pointed out its strengths.",
+  "synonyms": [
+    "belittle",
+    "denigrate",
+    "run down",
+    "deprecate"
+  ],
+  "nuance": "To criticize can be fair and constructive, but to disparage is to talk something down and make it seem worth less than it is.",
+  "alternatives": [],
+  "prompt": "A chef learns that a new restaurant has opened across the street.",
+  "options": [
+    "The jealous chef began to disparage the new menu, calling it bland and unoriginal.",
+    "Hoping to disparage the crowd outside, the chef waved everyone toward the bus stop.",
+    "The chef chose to disparage the newcomer by calling its pastries the finest in town.",
+    "The two kitchens serve such disparage dishes that they rarely compete for diners."
+  ],
+  "reasons": [
+    "Scornful remarks meant to lower the rival's standing fit the word exactly.",
+    "Scattering a group of people is dispersing, not speaking scornfully of something.",
+    "High praise lifts a reputation instead of running it down.",
+    "This needs the look-alike adjective disparate; the verb cannot mean very different."
+  ],
+  "practice": {
+    "prompt": "Students discuss a classmate's entry at the science fair.",
+    "options": [
+      "After losing the prize, the student began to disparage of ever winning again.",
+      "The judges had to disparage each project by measuring its height with a ruler.",
+      "Some classmates tried to disparage the model as babyish, but the judges admired it.",
+      "To disparage the volcano model, one classmate described it as clever and carefully built."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Losing hope is despair; the phrase mixes up a look-alike word.",
+      "Taking neutral measurements involves no scorn or belittling remarks.",
+      "Calling the project childish is a dismissive attempt to make it seem worthless.",
+      "Admiring words raise the project's standing rather than lowering it."
+    ]
+  }
+}

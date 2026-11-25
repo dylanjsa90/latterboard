@@ -1,0 +1,47 @@
+{
+  "id": 75,
+  "slug": "juxtapose",
+  "word": "juxtapose",
+  "pos": "verb",
+  "pronunciation": "/ˈdʒʌk.stə.poʊz/",
+  "definition": "To place two things side by side, especially so that their differences stand out.",
+  "difficulty": "Intermediate",
+  "example": "The museum juxtaposed ancient clay bowls with modern ceramics to show how little the basic shapes had changed.",
+  "synonyms": [
+    "place side by side",
+    "set against",
+    "contrast",
+    "pair"
+  ],
+  "nuance": "Compare can happen only in the mind; juxtapose means physically or textually setting things next to each other so the comparison shows.",
+  "alternatives": [],
+  "prompt": "A photographer is arranging her prints on a long gallery wall before an exhibit opens.",
+  "options": [
+    "She decided to juxtapose a crowded city street with an empty desert road.",
+    "She wanted to juxtapose her largest print so it would fill the whole wall.",
+    "To juxtapose the two portraits, she hung them at opposite ends of the building.",
+    "Before the opening, she will juxtapose each print by signing the lower corner."
+  ],
+  "reasons": [
+    "Hanging the two scenes next to each other makes the contrast between them sharp.",
+    "Enlarging one image involves no second item set beside it.",
+    "Moving the pictures far apart is the reverse of placing them side by side.",
+    "Adding a signature is not arranging one thing next to another."
+  ],
+  "practice": {
+    "prompt": "A novelist is planning the first chapter of a book about two very different families.",
+    "options": [
+      "She tried to juxtapose her weak opening paragraph by deleting it entirely.",
+      "The chapter is meant to juxtapose that the quiet neighbor is secretly wealthy.",
+      "She plans to juxtapose the timeline so that every event happens in strict order.",
+      "She will juxtapose a lavish birthday feast with a family next door sharing cold soup."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Cutting a passage removes it; nothing ends up placed beside anything.",
+      "The verb needs two things to set together; it cannot announce a hidden fact.",
+      "Putting events in sequence is ordering them, not setting two elements in contrast.",
+      "Setting the scenes back to back makes the gap between plenty and want hard to miss."
+    ]
+  }
+}

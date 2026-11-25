@@ -26,5 +26,20 @@
     "Lack of instructions does not establish defiance.",
     "Quietness alone says nothing about resistance."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A babysitter is trying to get a toddler ready for bed.",
+    "options": [
+      "The recalcitrant toddler could recall every word of his favorite bedtime story without any help.",
+      "The recalcitrant toddler politely asked for one more song, then lay down as soon as it ended.",
+      "The recalcitrant toddler kept refusing to put on his pajamas despite the babysitter's patient coaxing.",
+      "The recalcitrant toddler cheerfully brushed his teeth and climbed into bed the moment he was asked."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This treats the word as if it came from recall. It is about defiance, not memory.",
+      "A polite request followed by going along with the routine shows no real defiance.",
+      "He keeps saying no to the adult in charge even when she asks gently, which is stubborn defiance.",
+      "Doing what he is told right away is cooperation, the reverse of stubborn resistance."
+    ]
+  }
 }

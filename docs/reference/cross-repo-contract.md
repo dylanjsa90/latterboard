@@ -1,6 +1,6 @@
 # Cross-repo contract
 
-Last updated: 2026-11-23
+Last updated: 2026-11-25
 
 webcade (`~/projects/webcade`, React) is latterboard's (`~/projects/latterboard`, FastAPI) only
 client. This file is `docs/reference/cross-repo-contract.md` in both repos: keep the two copies
@@ -65,7 +65,7 @@ have a random password, which password recovery can replace.
 ### Puzzles (`/puzzles`, bearer; `puzzle_id` like `"word-2026-09-11"`, future dates 404; a move whose id isn't `{game}-YYYY-MM-DD` gets 400)
 | Call | Request | Response |
 | ---- | ------- | -------- |
-| `GET /word` | — | `{puzzle_id, word_length, max_attempts, initial_guess, initial_grade: Grade[], guesses: [{guess, grades}], won, lost, answer?}` |
+| `GET /word` | — | `{puzzle_id, word_length, max_attempts, guesses: [{guess, grades}], won, lost, answer?}` |
 | `POST /word/hint` | `{puzzle_id}` | `{letter}` |
 | `POST /word/guess` | `{puzzle_id, guess (5 chars), attempt_count}` | `{grades, won, lost, answer?}`; 409 once the signed-in player's word has an outcome; 400 `Not a valid word` for a guess outside the word list (nothing recorded) |
 | `GET /sudoku` | — | `{puzzle_id, puzzle: int[81], won, board: int[81]?}`; `board` (the solution) only when the signed-in player already won |
@@ -79,7 +79,8 @@ have a random password, which password recovery can replace.
 | `GET /me/history?skip&limit` | — | `{items: [{game, puzzle_id, won, attempt_count, completed_at}], total}` |
 
 The server decides word, sudoku, and cipher outcomes (webcade ADR 004). `attempt_count` counts
-board rows including the fixed starter and the move being sent (`max_attempts` rows in all), and
+board rows including the move being sent (`max_attempts` rows in all; cipher's first row is a
+fixed starter, while the word board starts empty), and
 is used only for guests: a signed-in player's moves are counted by the server, which also
 returns them on `GET` so word and cipher resume. Likewise sudoku's `board` is used only for
 guests: a signed-in player's board is the puzzle plus the cells the server saw them fill. Stats and history include lost puzzles
@@ -102,7 +103,7 @@ invitee_is_bot, current_turn_username?, winner_username?, max_guesses, created_a
 completed_at?}`. The bot flags are per side, not "opponent", because `match_views.to_public` builds one object
 both players receive; the viewer-relative shapes (`/me/active`, `/me/history`, `match_started`) carry
 `opponent_is_bot` instead.
-`game` ∈ `wordle | word_race | cipher_race | sudoku_coop`; `status` ∈
+`game` ∈ `wordle | word_race | cipher_race | sudoku_coop | word_pick`; `status` ∈
 `pending_invite | in_progress | completed | declined | cancelled | expired`.
 
 | Call | Request | Response (+ frames sent) |
@@ -113,10 +114,13 @@ both players receive; the viewer-relative shapes (`/me/active`, `/me/history`, `
 | `POST /matches/{id}/cancel` | — | `MatchPublic` (+ `invite_cancelled` to invitee) |
 | `GET /matches/pending` | — | `[{id, game, from_username, created_at, expires_at}]` |
 | `GET /matches/me/history?skip&limit` | — | `{items: [{id, game, opponent_username, opponent_is_bot, result, completed_at}], total, record: {won, lost, drawn}}`, completed matches newest first; `result` ∈ `won \| lost \| draw` (`sudoku_coop`: `solved \| failed`); `record` spans every completed competitive match except those against the computer |
-| `GET /matches/me/active` | — | `[{id, game, status: pending_invite \| in_progress, opponent_username, opponent_is_bot, role: inviter \| invitee, your_move, created_at, started_at}]`, newest first; `your_move` = your turn (wordle), your side of a race unfinished, always (co-op), or an invite for you to answer |
+| `GET /matches/me/active` | — | `[{id, game, status: pending_invite \| in_progress, opponent_username, opponent_is_bot, role: inviter \| invitee, your_move, created_at, started_at}]`, newest first; `your_move` = your turn (wordle), your side of a race unfinished, always (co-op), your pick not yet made (word_pick, until both have picked), or an invite for you to answer |
 | `GET /matches/{id}` | — | `MatchDetail` (below); 403/404 if not a participant / missing |
 | `POST /matches/{id}/guess` | `{word}` (wordle, your turn only) | `{match_id, turn_number, username, word, result: [{letter, status}], correct, status, current_turn_username, winner_username}` |
 | `POST /matches/{id}/word/guess` | `{word}` | `RaceGuessResult {match_id, turn_number, guess, result, correct, status, winner_username, answer}` |
+| `GET /matches/word_pick/words` | — | `string[]`, every word a player may pick, sorted (~2,300); webcade loads it once and searches it in the browser |
+| `POST /matches/{id}/word_pick/pick` | `{word}` (an answer word) | `{match_id, word, both_picked}` (+ `word_picked {match_id, username, both_picked}`); 400 not an answer word, 409 already picked or match over |
+| `POST /matches/{id}/word_pick/guess` | `{word}` | `RaceGuessResult`, `answer` = the word your opponent picked; 409 until both have picked |
 | `POST /matches/{id}/cipher/guess` | `{attempt: int[4]}` | `RaceGuessResult` (`result` = `{exact, close, won}`) |
 | `POST /matches/{id}/sudoku/move` | `{index, value}` | `{match_id, index, value, correct, mistakes, status, outcome}`; 409 if rejected |
 | `POST /matchmaking/{game}` | — | `{status: "queued"\|"matched", match: MatchPublic?, queue_ttl_seconds}` (+ `match_started` on pairing). After `MATCHMAKING_BOT_WAIT_SECONDS` with no human, pairs the caller with the computer (not for `sudoku_coop`); `match.invitee_is_bot` says so |
@@ -131,7 +135,9 @@ polling still reaches the computer fallback.
 `MatchDetail` = `MatchPublic` + `{target_word?, guesses: MatchGuessResult[] (wordle), race?, sudoku?}`:
 - `race` = `{you, opponent, answer?}`, each player `{username, guesses: [{guess?, result: Grade[] |
   {exact, close, won}, correct}], solved, finished}`. The opponent's `guess` and the `answer` are
-  null until `status == "completed"`.
+  null until `status == "completed"`. In `word_pick`, `answer` is the viewer's own (the word the
+  opponent picked), and `race` adds `your_pick` (the word you picked, else null) and
+  `opponent_picked`; both are null in other races.
 - `sudoku` = `{puzzle, board, mistakes, max_mistakes, outcome: "solved"|"failed"|null, solution?}`.
 
 ### Invite links (`/invite-links`)
@@ -147,7 +153,7 @@ last `MATCH_INVITE_LINK_EXPIRY_DAYS` (7), and the link's sender becomes the matc
 | `POST /{token}/claim` (bearer) | — | `MatchPublic` (+ `match_started` to both), reusing an open match the pair already shares; the same match again for its claimer; 400 own link, 409 used by someone else, 410 expired or withdrawn |
 | `DELETE /{token}` (bearer, sender) | — | 204; 409 once used |
 
-### Vocab Challenger (`/vocab`, bearer; a guest room's own calls take `X-Guest-Token`)
+### Vocab Challenger (`/vocab`, bearer unless marked public; a guest room's own calls take `X-Guest-Token`)
 Five-round solo sessions and two-player duels, addressed by a six-character hex invite `code`
 (case-insensitive in paths). Rooms aren't matches. Every room call applies any transition
 that's due (a round ends at its `deadline` or once everyone answered; duel feedback ends 16 s
@@ -178,7 +184,11 @@ caller.
 | `GET /words` | — | `{saved: SavedWord[] (soonest due first), word_count}` |
 | `PUT /words/{id}` / `DELETE /words/{id}` | — | 204; saving again changes nothing; 400 unknown word |
 | `POST /words/{id}/review` | `{known: bool}` | 204; known moves up the ladder (due in 1, 3, 7, 14, 30, 60 days), a miss resets to level 0 (due in 10 min); 404 not saved |
+| `POST /words/{id}/report` (public; a bearer, if sent, ties the report to the account) | `{reason: wrong_definition \| wrong_answer \| confusing \| inappropriate \| other, kind?: usage \| context, note? (up to 500 characters)}` | 204; 400 unknown word; 422 a bad reason, kind or note; 429 past 20 reports an hour per network or 500 overall, with a readable `detail` |
+| `GET /reports` (superuser) | `?limit=` (1–1000, default 200) | `WordReport[]`, newest first; 403 not a superuser |
 | `GET /daily-word` (public) | — | `DailyWord`: the word of the day for today's Pacific date. From 2026-12-06 word ids show one per day in order, continuing the original 46-word rotation, so adding words never changes a past day while the list stays ahead of the calendar |
+| `GET /daily-word/history` (public) | — | `{days: [{date, word_id, slug}]}`: the word of each Pacific day from 2026-12-06 through today, oldest first, never a later day; `Cache-Control: public, max-age=300` |
+| `GET /entries` (public) | — | `VocabEntries {entries: VocabEntry[]}`, every shipped word in id order; `Cache-Control: public, max-age=300`. Never a room question's prompt, options or reasons |
 
 - `RoomSnapshot` = `{game: GameView, server_now}`. `GuestRoomSnapshot` = `RoomSnapshot` +
   `guest_token`, sent only by `POST /guest-rooms`.
@@ -186,7 +196,9 @@ caller.
 - `Seat` = `{id: "me" | "opponent", name (username), ready, seen, answered, score}`. Scores count only resolved rounds.
 - `question` = `{id, word, pos, definition, difficulty: Foundation | Intermediate | Advanced, kind: usage | context, prompt, options, correct, reasons, example, synonyms, nuance}`. Until the round resolves (`phase` feedback or results) `correct` through `nuance` are null, and so are `id`, `word`, `pos`, `definition` for a `context` question, whose answer is the word.
 - `SavedWord` = `{id, word, pos, definition, difficulty, example, synonyms, nuance, due, level (0-6)}`. Word ids are stable: wordbooks store them.
-- `DailyWord` = `{id, date (YYYY-MM-DD, Pacific), word, pronunciation (IPA), pos, definition, example}`.
+- `DailyWord` = `{id, date (YYYY-MM-DD, Pacific), slug, word, pronunciation (IPA), pos, definition, example}`.
+- `VocabEntry` = `{id, slug, word, pos, pronunciation (IPA), definition, difficulty, example, synonyms: string[], nuance, alternatives: string[] (slugs of other entries), practice: {prompt, options (4), answer (0-3), reasons (4)}}`. `practice` is the word page's own usage question, never asked in a room. Slugs are permanent (they are URLs).
+- `WordReport` = `{id, word_id, word, reason, kind, note, user_id (null for a guest), created_at (naive UTC)}`. Words ship without a person reviewing each one, so reports are how mistakes come back; webcade offers "Report a problem" on a resolved round's feedback.
 - A correct answer scores 100 plus `max(0, 5 - floor(ms / 8000))` speed points, `ms` counted from the round start; wrong or missing answers score 0.
 
 ### WebSocket `/ws/{topic}?token=<access_token>`
@@ -198,7 +210,7 @@ Browsers can't set headers on a websocket, so the token rides in the query strin
 | server → on connect | `connected {topic, username}` |
 | client → server | `join_match {match_id}` (participants only; answered `joined_match {match_id}`), `leave_match {match_id}`, `join_room {code}` (a vocab room's participants only; answered `joined_room {code}`, upper-case), `leave_room {code}`. Any other text is rebroadcast to the topic as `message {topic, username, data}` |
 | `user:{id}` | `invite_received {match_id, from_username, game, created_at, expires_at}`, `invite_declined {match_id}`, `invite_cancelled {match_id}`, `match_started {match_id, game, opponent_username, opponent_is_bot, current_turn_username, max_guesses, …}` |
-| `match:{id}` | `opponent_guessed {match_id, username, turn_number, result, correct, word?}` (`word` only in wordle; races send grades only), `your_turn {match_id, current_turn_username}`, `cell_filled {match_id, username, index, value}`, `mistake {match_id, username, index, value, mistakes, max_mistakes}`, `match_completed {match_id, …}` (wordle: `winner_username, target_word, reason`; races: `winner_username, answer, reason`; co-op: `outcome`) |
+| `match:{id}` | `opponent_guessed {match_id, username, turn_number, result, correct, word?}` (`word` only in wordle; races send grades only), `your_turn {match_id, current_turn_username}`, `cell_filled {match_id, username, index, value}`, `mistake {match_id, username, index, value, mistakes, max_mistakes}`, `word_picked {match_id, username, both_picked}` (never the word), `match_completed {match_id, …}` (wordle: `winner_username, target_word, reason`; races: `winner_username, answer, reason`, and in word_pick `answer: null, answers: {username: word they had to guess}`; co-op: `outcome`) |
 | `vocab:{CODE}` | `room_changed {code, revision}` after a room call that changed the room beyond players' `seen` (a join, an action, or a due transition) |
 | everyone | `heartbeat` every `WS_HEARTBEAT_SECONDS` |
 

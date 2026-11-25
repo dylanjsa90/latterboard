@@ -44,8 +44,9 @@ def test_get_word_puzzle(client):
     assert data["puzzle_id"].startswith("word-")
     assert data["word_length"] == 5
     assert data["max_attempts"] == 6
-    assert data["initial_guess"] == "ADORE"
-    assert len(data["initial_grade"]) == 5
+    # The board starts empty: every row is the player's own guess.
+    assert "initial_guess" not in data
+    assert "initial_grade" not in data
 
 
 def test_anonymous_word_puzzle_is_yesterdays(client):
@@ -180,9 +181,9 @@ def test_word_puzzle_resumes_signed_in_guesses(client, auth_headers):
 def test_word_puzzle_reports_finished_game(client, auth_headers, won):
     puzzle = client.get(f"{BASE}/word", headers=auth_headers).json()
     answer = _puzzle_answer("word", puzzle["puzzle_id"], "answer")
-    # The starter fills the first of six rows, so losing takes five wrong guesses.
-    guesses = [answer] if won else [_wrong_word(answer)] * 5
-    for count, guess in enumerate(guesses, start=2):
+    # Losing takes six wrong guesses.
+    guesses = [answer] if won else [_wrong_word(answer)] * 6
+    for count, guess in enumerate(guesses, start=1):
         _word_guess(client, auth_headers, puzzle["puzzle_id"], guess, count)
 
     data = client.get(f"{BASE}/word", headers=auth_headers).json()
@@ -199,9 +200,9 @@ def test_signed_in_word_loss_uses_the_server_count(client, auth_headers):
     # A client claiming its last row can't end the game on the first guess.
     results = [
         _word_guess(client, auth_headers, puzzle["puzzle_id"], _wrong_word(answer), 6)
-        for _ in range(5)
+        for _ in range(6)
     ]
-    assert [r["lost"] for r in results] == [False] * 4 + [True]
+    assert [r["lost"] for r in results] == [False] * 5 + [True]
     assert results[-1]["answer"] == answer
     assert results[0]["answer"] is None
 

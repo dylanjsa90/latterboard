@@ -26,5 +26,20 @@
     "Doubling required work does not remove it.",
     "Description is not prevention or removal of a need."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A town opens a footbridge across a river that people once crossed by ferry.",
+    "options": [
+      "Closing the footbridge for repairs will obviate the need for extra ferry trips.",
+      "Bright paint will help the footbridge obviate itself to passing drivers.",
+      "The engineers chose to obviate against building the deck too close to the water.",
+      "The new footbridge should obviate the need for the slow ferry crossing."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Shutting the bridge creates more demand for ferries instead of making them unnecessary.",
+      "This treats the word as a verb form of obvious, but it does not mean make easy to see.",
+      "The verb takes a direct object; obviate against mixes it up with militate against.",
+      "The bridge makes the ferry unnecessary, so the need goes away before it comes up."
+    ]
+  }
 }

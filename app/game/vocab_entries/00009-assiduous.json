@@ -26,5 +26,20 @@
     "Immediate abandonment does not show persistence.",
     "Assiduous describes effort, not task difficulty."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A gardener tends a vegetable plot through a long, dry summer.",
+    "options": [
+      "Her assiduous watering each dawn kept the tomato vines alive until August.",
+      "His assiduous care meant he watered the beans only when he happened to remember.",
+      "The assiduous soil in the corner bed turned the hydrangeas a deep blue.",
+      "After one assiduous glance at the sky, she left the rain to handle everything."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Watering faithfully every morning for weeks shows the steady, devoted work the word describes.",
+      "Watering only when it comes to mind is haphazard, the reverse of persistent attention.",
+      "This mixes the word up with acidic; soil chemistry involves no effort or care.",
+      "A single quick look is a passing act, not long and persistent effort."
+    ]
+  }
 }

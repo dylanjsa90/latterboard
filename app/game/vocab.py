@@ -12,10 +12,11 @@ import hashlib
 import random
 import re
 import time
+from collections.abc import Collection, Sequence
 from datetime import timedelta
 from typing import Any, Literal, TypedDict
 
-from app.game.vocab_words import BY_SLUG, WORDS, VocabWord
+from app.game.vocab_words import BY_SLUG, DIFFICULTIES, WORDS, VocabWord
 
 ROUNDS = 5
 ROUND_MS = 40_000
@@ -82,19 +83,29 @@ def guest_player_id(token: str) -> str:
     return GUEST_PREFIX + hashlib.sha256(token.encode()).hexdigest()
 
 
-def _pick_words() -> list[int]:
-    """Five distinct words, at least one from each difficulty, in random order."""
+_IDS_BY_DIFFICULTY = [
+    tuple(w.id for w in WORDS if w.difficulty == d) for d in DIFFICULTIES
+]
+
+
+def _pick_words(exclude: Collection[int] = ()) -> list[int]:
+    """Five distinct words, at least one from each difficulty, in random order. Words in
+    `exclude` are avoided while enough others remain."""
+    avoid = set(exclude)
     selected: list[int] = []
-    for difficulty in ("Foundation", "Intermediate", "Advanced"):
-        pool = [w.id for w in WORDS if w.difficulty == difficulty]
-        if pool:
-            selected.append(random.choice(pool))
-    for w in random.sample(WORDS, len(WORDS)):
-        if len(selected) == ROUNDS:
-            break
-        if w.id not in selected:
-            selected.append(w.id)
-    return random.sample(selected, len(selected))
+
+    def draw(pool: Sequence[int]) -> None:
+        unused = [i for i in pool if i not in selected]
+        fresh = [i for i in unused if i not in avoid]
+        if unused:
+            selected.append(random.choice(fresh or unused))
+
+    for ids in _IDS_BY_DIFFICULTY:
+        draw(ids)
+    while len(selected) < ROUNDS:
+        draw(range(len(WORDS)))
+    random.shuffle(selected)
+    return selected
 
 
 def make_game(code: str, mode: Mode, player: Player, now: int) -> Game:
@@ -143,6 +154,23 @@ def _base(w: VocabWord) -> dict[str, Any]:
     }
 
 
+def _distractors(g: Game, r: int, w: VocabWord) -> list[VocabWord]:
+    """Two wrong words for round `r`'s blank: `w`'s shipped alternatives first, then a
+    draw seeded per round from the same part of speech and difficulty, then the same
+    part of speech, then any word."""
+    picked = [BY_SLUG[a] for a in w.alternatives if a in BY_SLUG][:2]
+    rng = random.Random(f"{g['code']}:{g['created']}:{g['generation']}:{r}:distractors")
+    for fits in (
+        lambda c: c.pos == w.pos and c.difficulty == w.difficulty,
+        lambda c: c.pos == w.pos,
+        lambda c: True,
+    ):
+        taken = {w.id, *(c.id for c in picked)}
+        pool = [c for c in WORDS if c.id not in taken and fits(c)]
+        picked += rng.sample(pool, min(2 - len(picked), len(pool)))
+    return picked
+
+
 def full_question(g: Game, r: int | None = None) -> dict[str, Any]:
     """Round `r`'s question with its key and explanations. Even rounds ask which sentence
     uses the word correctly; odd rounds ask which word fills a blank in a sentence."""
@@ -158,17 +186,7 @@ def full_question(g: Game, r: int | None = None) -> dict[str, Any]:
             "reasons": [w.reasons[i] for i in order],
             "correct": order.index(0),
         }
-    distractors = [BY_SLUG[a] for a in w.alternatives if a in BY_SLUG]
-    for candidate in WORDS:
-        if len(distractors) >= 2:
-            break
-        if (
-            candidate.pos == w.pos
-            and candidate.id != w.id
-            and candidate not in distractors
-        ):
-            distractors.append(candidate)
-    words = [w, *distractors[:2]]
+    words = [w, *_distractors(g, r, w)]
     order = _order(g, r, len(words))
     return {
         **_base(w),
@@ -332,7 +350,7 @@ def _rematch(g: Game, player_id: str, now: int) -> None:
     if player_id not in g["rematch_ready"]:
         g["rematch_ready"].append(player_id)
     if all(x["id"] in g["rematch_ready"] for x in g["players"]):
-        g["ids"] = _pick_words()
+        g["ids"] = _pick_words(exclude=g["ids"])
         g["round"] = 0
         g["generation"] += 1
         g["rematch_ready"] = []

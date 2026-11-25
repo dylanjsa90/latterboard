@@ -1,0 +1,47 @@
+{
+  "id": 72,
+  "slug": "advocate",
+  "word": "advocate",
+  "pos": "verb",
+  "pronunciation": "/ˈæd.və.keɪt/",
+  "definition": "To speak or argue in favor of an idea, plan, or cause.",
+  "difficulty": "Foundation",
+  "example": "Many doctors advocate regular exercise as a simple way to improve sleep.",
+  "synonyms": [
+    "champion",
+    "promote",
+    "urge",
+    "speak up for"
+  ],
+  "nuance": "To advocate is to argue openly for something, while to support can mean simply agreeing with it in private.",
+  "alternatives": [],
+  "prompt": "A nurse thinks her hospital needs more hand-washing stations in the hallways.",
+  "options": [
+    "At the staff meeting, she will advocate adding three new stations near the patient rooms.",
+    "At the staff meeting, she will advocate the plan by insisting it would waste money.",
+    "Tired of long shifts, she decided to advocate her position and quit nursing.",
+    "She chose to advocate the idea by never mentioning it to anyone at work."
+  ],
+  "reasons": [
+    "Arguing for the change in front of colleagues is exactly what this verb describes.",
+    "Calling a plan wasteful argues against it, which reverses the meaning.",
+    "This confuses the word with abdicate, which means to give up a role or duty.",
+    "The word implies speaking out; keeping an idea secret is not arguing for it."
+  ],
+  "practice": {
+    "prompt": "A student wishes the school library stayed open later on weeknights.",
+    "options": [
+      "Maya wrote a letter to the principal to advocate longer evening hours.",
+      "Maya hoped to advocate later hours, so she asked that the library close at noon.",
+      "The principal will advocate the library budget evenly among the art and music clubs.",
+      "Maya tried to advocate the noisy library by studying at the kitchen table instead."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A persuasive letter to someone in charge is a clear way of arguing for a change.",
+      "Requesting earlier closing works against the goal instead of arguing for it.",
+      "This mixes up the word with allocate, which means to divide and hand out.",
+      "Staying away from a place is avoiding it, not speaking in favor of anything."
+    ]
+  }
+}

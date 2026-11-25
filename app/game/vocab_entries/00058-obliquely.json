@@ -1,0 +1,46 @@
+{
+  "id": 58,
+  "slug": "obliquely",
+  "word": "obliquely",
+  "pos": "adverb",
+  "pronunciation": "/oʊˈbliːk.li/",
+  "definition": "In an indirect or roundabout way, without saying something plainly.",
+  "difficulty": "Advanced",
+  "example": "The coach mentioned the missed practices only obliquely, asking whether everyone's calendar was working.",
+  "synonyms": [
+    "indirectly",
+    "allusively",
+    "in a roundabout way"
+  ],
+  "nuance": "Obliquely suggests a deliberate sidelong approach to a topic, while evasively implies dodging a question to avoid blame or commitment.",
+  "alternatives": [],
+  "prompt": "A guest at a dinner party wants to leave early without seeming rude.",
+  "options": [
+    "She referred obliquely to an early meeting, hoping the host would take the hint.",
+    "She declared obliquely, \"I am leaving now because this party is dull.\"",
+    "She was obliquely exhausted, yawning loudly every few minutes at the table.",
+    "She obliquely agreed to wash every dish before the dessert was served."
+  ],
+  "reasons": [
+    "Hinting at a reason instead of announcing a departure is a sidelong, indirect approach.",
+    "A blunt, explicit announcement is the opposite of an indirect one.",
+    "This confuses the word with \"obviously\"; loud yawning is plain to see, not roundabout.",
+    "This confuses the word with \"obligingly\"; helpful agreement has nothing to do with indirectness."
+  ],
+  "practice": {
+    "prompt": "A novelist wants readers to sense a widow's grief without the narrator naming it.",
+    "options": [
+      "The widow obliquely sobs on every page, so no reader could possibly miss her pain.",
+      "The author obliquely finished the whole manuscript in three weeks to meet a deadline.",
+      "The author conveys the sorrow obliquely, through the second teacup the widow still sets out each morning.",
+      "The author obliquely writes in chapter one, \"Maria is overwhelmed with grief.\""
+    ],
+    "answer": 2,
+    "reasons": [
+      "Open weeping on every page makes the grief unmistakable, which reverses the meaning.",
+      "How fast a book was written says nothing about approaching a subject indirectly.",
+      "A telling detail lets readers infer the feeling without it ever being stated.",
+      "Naming the emotion outright in a flat statement is a direct method, not an indirect one."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 141,
+  "slug": "expeditious",
+  "word": "expeditious",
+  "pos": "adjective",
+  "pronunciation": "/ˌɛk.spəˈdɪʃ.əs/",
+  "definition": "Done quickly and efficiently, without unnecessary delay.",
+  "difficulty": "Intermediate",
+  "example": "The clinic's expeditious check-in process had most patients seated within minutes.",
+  "synonyms": [
+    "prompt",
+    "speedy",
+    "efficient",
+    "swift"
+  ],
+  "nuance": "Expeditious means fast and efficient; expedient means convenient or useful, often at the cost of doing what is right.",
+  "alternatives": [],
+  "prompt": "A city crew must repair a burst water pipe before morning.",
+  "options": [
+    "The crew's expeditious repair restored water to the street before sunrise.",
+    "The crew's expeditious repair dragged on for three weeks while neighbors hauled bottled water.",
+    "Blaming the old pipes was expeditious, since it kept the crew from facing any criticism.",
+    "The crew worked in an expeditious panic, dropping tools and digging in the wrong spot twice."
+  ],
+  "reasons": [
+    "Fixing the pipe fast and well, ahead of the deadline, fits the word exactly.",
+    "A repair that drags on for weeks is slow, the reverse of the intended sense.",
+    "This confuses the word with expedient; a self-serving excuse is convenient, not speedy.",
+    "Frantic, error-filled work is hasty; the word implies efficiency, not just rushing."
+  ],
+  "practice": {
+    "prompt": "A student asks a teacher for a recommendation letter due the next day.",
+    "options": [
+      "The student felt expeditious about the deadline and lay awake worrying that the letter would be late.",
+      "The teacher sent an expeditious reply and uploaded the letter within the hour.",
+      "Her expeditious response finally arrived a week after the application had closed.",
+      "The letter praised the student's expeditious summer, which included a long hike across three mountain ranges."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word describes quick, efficient action, not a feeling of anxiety.",
+      "Answering promptly and finishing the task efficiently is exactly what the word describes.",
+      "A reply that comes too late is slow, so the word is used backward here.",
+      "This mistakes the word for something about expeditions; it means speedy, not adventurous."
+    ]
+  }
+}

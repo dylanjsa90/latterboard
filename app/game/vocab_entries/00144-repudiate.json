@@ -1,0 +1,47 @@
+{
+  "id": 144,
+  "slug": "repudiate",
+  "word": "repudiate",
+  "pos": "verb",
+  "pronunciation": "/rɪˈpjuː.di.eɪt/",
+  "definition": "To firmly reject something and refuse to accept it or be linked with it.",
+  "difficulty": "Intermediate",
+  "example": "Years later, the scientist repudiated her early theory once new data showed it could not be right.",
+  "synonyms": [
+    "reject",
+    "disown",
+    "disavow",
+    "renounce"
+  ],
+  "nuance": "To repudiate is to reject or disown something, while to refute is to prove it false with evidence.",
+  "alternatives": [],
+  "prompt": "A chess club realizes that a bylaw it wrote long ago was unfair to beginners.",
+  "options": [
+    "The club voted to repudiate the old bylaw and publicly apologized to the beginners it had excluded.",
+    "The club voted to repudiate the old bylaw so that its rules would be enforced even more strictly.",
+    "Each member was asked to repudiate the bylaw aloud twice so that everyone would memorize its wording.",
+    "Proud of the bylaw's fairness, the members chose to repudiate it by framing it above the front door."
+  ],
+  "reasons": [
+    "Formally rejecting an unfair rule and taking responsibility for it fits the word exactly.",
+    "Rejecting a rule cannot also mean making it stronger, so this reverses the meaning.",
+    "This treats the word like \"repeat\" or \"recite,\" a sound-alike confusion.",
+    "Displaying a rule with pride honors it; the word requires turning away from it."
+  ],
+  "practice": {
+    "prompt": "A novelist learns that a made-up interview with her is being passed around online.",
+    "options": [
+      "The novelist moved quickly to repudiate the interview, noting that she had never met the reporter.",
+      "The novelist decided to repudiate the interview by proudly sharing it with every one of her readers.",
+      "The novelist hoped to repudiate her good name by winning a second major literary prize this year.",
+      "The novelist chose to repudiate the interview by adding it to the official list of her published works."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Publicly denying any connection to a false interview is a clear act of disowning it.",
+      "Spreading something proudly is endorsing it, not rejecting it.",
+      "This confuses the word with \"repute\"; winning prizes builds a reputation rather than rejecting anything.",
+      "Claiming the interview as her own work is the opposite of refusing to be linked with it."
+    ]
+  }
+}

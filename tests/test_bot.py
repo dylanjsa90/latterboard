@@ -327,6 +327,27 @@ def test_a_word_race_against_the_computer_finishes(client, inviter_headers):
 
 
 @pytest.mark.usefixtures("instant_bot")
+def test_a_word_pick_race_against_the_computer_finishes(client, inviter_headers):
+    match = _start_against_bot(client, inviter_headers, "word_pick")
+    r = client.post(
+        f"{MATCHES}/{match['id']}/word_pick/pick",
+        json={"word": "crane"},
+        headers=inviter_headers,
+    )
+    assert r.json()["both_picked"] is False
+    # The computer picks in reply, which opens guessing.
+    race = match_detail(client, inviter_headers, match["id"])["race"]
+    assert race["opponent_picked"] is True
+
+    detail = _play_out(
+        client, inviter_headers, match, "word_pick/guess", [{"word": w} for w in WORDS]
+    )
+    assert detail["status"] == "completed"
+    assert detail["race"]["answer"] is not None
+    assert detail["race"]["opponent"]["finished"] is True
+
+
+@pytest.mark.usefixtures("instant_bot")
 def test_a_cipher_race_against_the_computer_finishes(client, inviter_headers):
     match = _start_against_bot(client, inviter_headers, "cipher_race")
     attempts = [

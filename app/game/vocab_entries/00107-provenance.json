@@ -1,0 +1,47 @@
+{
+  "id": 107,
+  "slug": "provenance",
+  "word": "provenance",
+  "pos": "noun",
+  "pronunciation": "/ˈprɑː.və.nəns/",
+  "definition": "The place something came from, or the record of who has owned it over time.",
+  "difficulty": "Intermediate",
+  "example": "Archaeologists doubted the provenance of the coins because no one knew where they had been dug up.",
+  "synonyms": [
+    "origin",
+    "source",
+    "ownership history",
+    "pedigree"
+  ],
+  "nuance": "Provenance suggests a traceable, often documented history of origin and ownership, while origin simply names where something began.",
+  "alternatives": [],
+  "prompt": "A museum curator is deciding whether to buy an old painting.",
+  "options": [
+    "The curator traced the painting's provenance through a century of sales records.",
+    "The curator thanked provenance for the lucky chance that led her to such a fine painting.",
+    "The painting's provenance is the new gallery where it will hang once the sale is complete.",
+    "The painting's provenance on the main wall made it the first thing visitors noticed."
+  ],
+  "reasons": [
+    "Following the painting's chain of owners back in time is exactly what checking its history means.",
+    "This confuses the word with providence, meaning fate or divine care.",
+    "The word points back to where something came from, not where it is going.",
+    "This confuses the word with prominence, meaning a conspicuous position."
+  ],
+  "practice": {
+    "prompt": "A chef wants to know more about a wheel of cheese delivered to her kitchen.",
+    "options": [
+      "The chef praised the cheese's provenance, which was sharp, nutty, and slightly sweet.",
+      "On the kitchen scale, the cheese's provenance came to just over two pounds.",
+      "The cheese's provenance was twelve dollars a pound, a price the chef found fair.",
+      "The chef learned the cheese's provenance: a small dairy high in the Alps."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Flavor describes how the cheese tastes, not where it came from.",
+      "Weight is a measurement, not a history of origin.",
+      "Cost has nothing to do with where an item was produced or who owned it.",
+      "Naming the farm where the cheese was made identifies its source."
+    ]
+  }
+}

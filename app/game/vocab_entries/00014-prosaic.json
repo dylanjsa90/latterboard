@@ -14,18 +14,36 @@
   ],
   "nuance": "Prosaic evaluates the character of something, not merely its literary format.",
   "alternatives": [
-    "esoteric"
+    "esoteric",
+    "novel"
   ],
   "prompt": "The mystery turns out to have a mundane explanation.",
   "options": [
     "The missing lights had a prosaic explanation: someone had unplugged the cable.",
     "The prosaic explanation involved a startling, imaginative vision of another world.",
-    "The explanation was prosaic simply because it appeared in prose rather than verse."
+    "The explanation was prosaic simply because it appeared in prose rather than verse.",
+    "The prosaic detective solved dozens of strange mysteries every single year."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: ordinary or lacking imagination and poetic beauty.",
     "A startling imaginative vision is not mundane.",
-    "Writing in prose does not necessarily make its content dull or ordinary."
+    "Writing in prose does not necessarily make its content dull or ordinary.",
+    "This confuses prosaic with prolific; producing a lot of work is not the same as being dull."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A town council picks a name for its new neighborhood park.",
+    "options": [
+      "The prosaic entrance was built from thousands of tiny colored tiles.",
+      "Most residents were prosaic about the park and voted eagerly to support it.",
+      "The council skipped the fanciful ideas and chose the prosaic name Third Street Park.",
+      "Children thought the name was prosaic because it sounded like a spell from a fairy tale."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This confuses prosaic with mosaic; a pattern of tiles has nothing to do with being dull.",
+      "Prosaic does not mean being in favor of something; eager support is not plainness.",
+      "A plain, practical name picked over imaginative ones shows the dull ordinariness the word conveys.",
+      "A name that sounds magical is whimsical and imaginative, the reverse of prosaic."
+    ]
+  }
 }

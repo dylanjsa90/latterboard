@@ -14,18 +14,36 @@
   ],
   "nuance": "Ambivalence involves competing reactions, rather than mere indifference.",
   "alternatives": [
-    "equivocal"
+    "equivocal",
+    "indifferent"
   ],
   "prompt": "Someone welcomes a promotion but regrets having to leave a close team.",
   "options": [
     "She felt ambivalent about the promotion: excited by the role but sad to leave her colleagues.",
     "She was ambivalent about the promotion because she had never heard about it.",
-    "The announcement was ambivalent because its wording allowed two interpretations."
+    "The announcement was ambivalent because its wording allowed two interpretations.",
+    "She felt ambivalent about the promotion, since she honestly didn't care about it either way."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: having mixed or conflicting feelings about something.",
     "Lack of knowledge is not conflicting feelings.",
-    "Ambiguous wording is equivocal; ambivalent describes attitudes or feelings."
+    "Ambiguous wording is equivocal; ambivalent describes attitudes or feelings.",
+    "Not caring is indifference; this word means feeling strongly in two directions at once."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A boy's family plans to sell the lakeside cabin where they spent every summer.",
+    "options": [
+      "Theo was ambivalent about the sale; he had wanted it for years and felt not a shred of regret.",
+      "The cabin was ambivalent, with a screened porch in front and a wooden dock out back.",
+      "Theo felt ambivalent about the sale: glad to skip the long drive, sorry to lose those summers.",
+      "Theo was so ambivalent that he could paddle the canoe equally well from either side of the boat."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Steady eagerness with no regret is one-sided, so nothing is pulling against it.",
+      "A building with two features has no attitudes; the word applies to how someone feels.",
+      "Relief and sadness pulling in opposite directions is exactly this kind of mixed reaction.",
+      "Skill with both sides is ambidexterity; the word concerns competing feelings, not physical ability."
+    ]
+  }
 }

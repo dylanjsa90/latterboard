@@ -1,0 +1,47 @@
+{
+  "id": 127,
+  "slug": "lament",
+  "word": "lament",
+  "pos": "verb",
+  "pronunciation": "/ləˈmɛnt/",
+  "definition": "To express sorrow, grief, or regret about something, often openly.",
+  "difficulty": "Intermediate",
+  "example": "Many older musicians lament that few young people learn to read sheet music anymore.",
+  "synonyms": [
+    "mourn",
+    "bemoan",
+    "grieve over",
+    "regret"
+  ],
+  "nuance": "To lament is to voice sorrow openly, while regret can stay private; bemoan often sounds more like complaining.",
+  "alternatives": [],
+  "prompt": "A small town's beloved bookshop closes its doors after fifty years.",
+  "options": [
+    "Longtime residents lament losing a shop where they spent many quiet afternoons.",
+    "Neighbors lament the closing by throwing a cheerful party to celebrate the news at last.",
+    "Before leaving, the owner will lament the old bookmarks in plastic so they last.",
+    "Customers lament the closing, shrugging that they never cared about the shop at all."
+  ],
+  "reasons": [
+    "Residents openly express sadness over something they valued, which fits the word.",
+    "Celebrating with delight is the reverse of expressing sorrow.",
+    "This confuses the word with laminate, which means sealing something in plastic.",
+    "Indifference contradicts the grief or regret the word requires."
+  ],
+  "practice": {
+    "prompt": "A soccer team loses a championship final on a last-minute goal.",
+    "options": [
+      "After loud protests, the referee laments and lets the disputed goal stand.",
+      "Afterward, the players lament the missed chances that might have changed the score.",
+      "The players lament the defeat by dancing happily in the locker room.",
+      "The striker laments, beaming, that she scored more goals than anyone in the league."
+    ],
+    "answer": 1,
+    "reasons": [
+      "This mixes up the word with relent, which means giving in.",
+      "Voicing regret over lost opportunities is exactly how the word is used.",
+      "Joyful dancing shows no sorrow, so the meaning is reversed.",
+      "Proudly boasting about success has nothing mournful about it."
+    ]
+  }
+}

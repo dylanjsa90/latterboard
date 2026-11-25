@@ -21,12 +21,29 @@
   "options": [
     "The specious argument looked persuasive until its false premise was exposed.",
     "Her specious argument survived every challenge because its premises and reasoning were sound.",
-    "The specious argument was obviously absurd to everyone from the first sentence."
+    "The specious argument was obviously absurd to everyone from the first sentence.",
+    "The specious argument was a tentative guess about the future, offered with no claim of certainty."
   ],
   "reasons": [
     "This sentence demonstrates the meaning: appearing sound or plausible but actually misleading or false.",
     "Sound premises and valid reasoning do not support calling an argument specious.",
-    "Specious implies a misleading appearance of plausibility, not obvious absurdity."
+    "Specious implies a misleading appearance of plausibility, not obvious absurdity.",
+    "This confuses the word with speculative. An openly uncertain guess doesn't pretend to be sound."
   ],
-  "practice": null
+  "practice": {
+    "prompt": "A science student reviews a classmate's claim that playing music makes bean plants grow faster.",
+    "options": [
+      "His specious data table listed every seedling's height to the nearest tenth of a millimeter.",
+      "The specious conclusion that music sped growth ignored that the plants by the speaker also got more sun.",
+      "The experiment ran in a specious greenhouse with enough shelf room for two hundred pots of beans.",
+      "Because the claim was specious, the judges praised its careful controls and accurate measurements."
+    ],
+    "answer": 1,
+    "reasons": [
+      "This treats the word as if it meant specific. Precise numbers don't show a misleading appearance.",
+      "The claim sounds reasonable, but a hidden factor, extra sunlight, makes its logic fail.",
+      "This confuses the word with spacious. A roomy building is not one that looks right but is wrong.",
+      "Praise for sound methods is the reverse of calling a claim falsely convincing."
+    ]
+  }
 }

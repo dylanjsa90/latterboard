@@ -1,0 +1,46 @@
+{
+  "id": 129,
+  "slug": "reconcile",
+  "word": "reconcile",
+  "pos": "verb",
+  "pronunciation": "/ˈrɛk.ən.saɪl/",
+  "definition": "To make two things that seem to conflict fit together or agree with each other.",
+  "difficulty": "Intermediate",
+  "example": "She struggled to reconcile her love of city life with her dream of owning a farm.",
+  "synonyms": [
+    "harmonize",
+    "square",
+    "make compatible"
+  ],
+  "nuance": "To reconcile is to make conflicting things coexist; to resolve a conflict can simply mean ending it, even if one side loses.",
+  "alternatives": [],
+  "prompt": "An accountant finds that the bank statement and the company ledger show different totals.",
+  "options": [
+    "By tracing each deposit, the accountant was able to reconcile the two sets of figures.",
+    "The accountant reconciled the totals by pushing them further apart.",
+    "The accountant needed a week to reconcile whether she wanted a promotion.",
+    "The accountant reconciled the mismatch by shredding the bank statement so no one could compare them."
+  ],
+  "reasons": [
+    "Checking each entry until the records match brings the conflicting totals into agreement.",
+    "Widening the gap between figures is the opposite of making them agree.",
+    "This confuses the word with reconsider; a personal choice is not two records being matched.",
+    "Destroying one record hides the conflict instead of making the records consistent."
+  ],
+  "practice": {
+    "prompt": "A student finds two old travel diaries that give different dates for the same voyage.",
+    "options": [
+      "A calendar change helped the student reconcile the diaries' conflicting dates.",
+      "The student reconciled the diaries by copying their dates into a neat spreadsheet.",
+      "The student reconciled the two diaries, proving that they could never agree on anything.",
+      "The student carefully reconciled the torn pages, gluing them back into the cover."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Finding a reason the dates differ lets both accounts make sense together.",
+      "Organizing the dates neatly does nothing to explain or remove the disagreement.",
+      "Showing the accounts are hopelessly at odds is the reverse of bringing them together.",
+      "Mending a damaged book is repair, not making conflicting accounts consistent."
+    ]
+  }
+}

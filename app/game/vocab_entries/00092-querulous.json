@@ -1,0 +1,47 @@
+{
+  "id": 92,
+  "slug": "querulous",
+  "word": "querulous",
+  "pos": "adjective",
+  "pronunciation": "/ˈkwɛr.ə.ləs/",
+  "definition": "Complaining often in a whining, irritable way.",
+  "difficulty": "Advanced",
+  "example": "The querulous passenger grumbled about the seat, the snacks and the chilly air for the entire train ride.",
+  "synonyms": [
+    "peevish",
+    "petulant",
+    "whiny",
+    "fretful"
+  ],
+  "nuance": "Querulous means fretful, whiny complaining, not picking fights like quarrelsome or asking questions like a query, despite the similar sound.",
+  "alternatives": [],
+  "prompt": "A diner at a restaurant is unhappy with nearly everything on the table.",
+  "options": [
+    "In a querulous tone, the diner whined that the soup was lukewarm and the napkins scratchy.",
+    "Feeling querulous after the rich dessert, the diner pressed a hand to his upset stomach.",
+    "The querulous diner asked the server curious questions about where the herbs were grown.",
+    "The querulous diner beamed through every course and left the cook a warm, glowing thank-you note."
+  ],
+  "reasons": [
+    "Peevish grumbling about small discomforts is exactly the kind of complaining the word describes.",
+    "This confuses the word with queasy; it describes a whiny temper, not nausea.",
+    "Friendly curiosity is inquisitive; the word's echo of 'query' is misleading.",
+    "Cheerful gratitude is the opposite of constant fault-finding."
+  ],
+  "practice": {
+    "prompt": "A tired hiker keeps falling behind the group on a long mountain trail.",
+    "options": [
+      "The querulous hiker raised an amused eyebrow at a rock shaped like a teapot.",
+      "Never one to grumble, the querulous hiker offered to carry extra water for everyone.",
+      "Unsure of the route, the querulous hiker studied the map carefully before taking the left fork.",
+      "By the third mile, the querulous hiker was muttering about blisters, gnats and her heavy pack."
+    ],
+    "answer": 3,
+    "reasons": [
+      "A puzzled or amused look is quizzical; this word is about fretful complaint.",
+      "Willing, uncomplaining help contradicts the word's peevish tone.",
+      "Being uncertain about directions is not grumbling; the word has nothing to do with doubt.",
+      "A steady stream of small grievances fits the word's sense of habitual whining."
+    ]
+  }
+}

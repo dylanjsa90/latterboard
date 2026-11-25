@@ -1,0 +1,47 @@
+{
+  "id": 108,
+  "slug": "equanimity",
+  "word": "equanimity",
+  "pos": "noun",
+  "pronunciation": "/ˌiː.kwəˈnɪm.ə.ti/",
+  "definition": "Calmness and an even temper, especially when facing stress, setbacks or bad news.",
+  "difficulty": "Advanced",
+  "example": "Years of mountain hiking taught him to meet sudden storms with equanimity rather than alarm.",
+  "synonyms": [
+    "composure",
+    "calmness",
+    "level-headedness",
+    "serenity"
+  ],
+  "nuance": "Equanimity is steady balance kept under strain, while serenity can describe calm when nothing is troubling you at all.",
+  "alternatives": [],
+  "prompt": "A chess player loses her queen early in an important tournament game.",
+  "options": [
+    "She absorbed the loss with equanimity and quietly planned her next defense.",
+    "Her equanimity showed as she slammed the board and stormed out of the hall.",
+    "She demanded equanimity, insisting the prize money be split evenly among all players.",
+    "Out of equanimity, she stopped caring about the match and stared at the ceiling."
+  ],
+  "reasons": [
+    "Staying steady and thinking clearly after a setback is exactly this kind of calm.",
+    "Slamming things and storming off show a lost temper, the reverse of an even mind.",
+    "The word refers to an even temper, not an even division of money.",
+    "Calm under pressure is different from giving up interest, which is apathy."
+  ],
+  "practice": {
+    "prompt": "A baker's oven breaks an hour before a large catering order is due.",
+    "options": [
+      "With equanimity, the baker phoned a neighbor who had a spare oven and kept working.",
+      "The baker's equanimity made him pace frantically and shout at his assistants.",
+      "The baker used equanimity to divide the dough into twelve loaves of identical weight.",
+      "The baker felt such equanimity about the order that he went home and left it unfinished."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Handling a sudden crisis calmly and practically shows a steady temper.",
+      "Frantic pacing and shouting reveal panic, not a composed state of mind.",
+      "This mixes up the word with equal measurement; it describes mood, not portions.",
+      "Abandoning the work shows indifference, which is not the same as staying calm."
+    ]
+  }
+}

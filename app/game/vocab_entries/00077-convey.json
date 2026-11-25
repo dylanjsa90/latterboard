@@ -1,0 +1,47 @@
+{
+  "id": 77,
+  "slug": "convey",
+  "word": "convey",
+  "pos": "verb",
+  "pronunciation": "/kənˈveɪ/",
+  "definition": "To communicate an idea, feeling, or message so that someone else understands it.",
+  "difficulty": "Foundation",
+  "example": "A single raised eyebrow can convey more doubt than a long speech.",
+  "synonyms": [
+    "communicate",
+    "get across",
+    "express",
+    "transmit"
+  ],
+  "nuance": "To express something is to put it out, but to convey it means the meaning actually reaches someone. Don't confuse it with convene, which means to gather.",
+  "alternatives": [],
+  "prompt": "A coach writes a short note to a nervous team before the final game.",
+  "options": [
+    "The coach chose a few warm words to convey her confidence in every player.",
+    "The coach will convey the whole team in the gym at noon for a meeting.",
+    "The coach conveyed her worries by locking the note in a drawer no one ever opens.",
+    "The coach conveyed the players to stop worrying, and every one of them agreed."
+  ],
+  "reasons": [
+    "Carefully chosen words carry the coach's belief over to the team.",
+    "This mixes up convey with convene. Gathering people is not passing along a message.",
+    "A hidden note reaches no one, so nothing gets communicated.",
+    "This mixes up convey with convince. You convey an idea, not a person to an action."
+  ],
+  "practice": {
+    "prompt": "A museum guide explains an old painting to a group of students.",
+    "options": [
+      "The guide mumbled so quietly that she conveyed the painting's history to every student in the back row.",
+      "The students conveyed about the painting for ten minutes after the tour ended.",
+      "The guide pointed out the dark storm clouds the artist used to convey a sense of dread.",
+      "The guide conveyed the room slowly, looking for any student who had wandered off."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Words nobody can hear never reach the listeners, so the history wasn't passed along.",
+      "The verb needs a message as its object. It cannot simply mean chatting about a topic.",
+      "The clouds are a visual way of getting a feeling across to viewers.",
+      "This mixes up convey with survey. Scanning a room is not communicating anything."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 114,
+  "slug": "arduous",
+  "word": "arduous",
+  "pos": "adjective",
+  "pronunciation": "/ˈɑːr.dʒu.əs/",
+  "definition": "Needing a lot of hard, tiring effort, often over a long time.",
+  "difficulty": "Foundation",
+  "example": "Restoring the old farmhouse was an arduous project that took three summers.",
+  "synonyms": [
+    "grueling",
+    "laborious",
+    "strenuous",
+    "demanding"
+  ],
+  "nuance": "Arduous stresses long, wearing effort; strenuous stresses intense physical exertion, and ardent (passionate) is only a look-alike.",
+  "alternatives": [],
+  "prompt": "A group of hikers spends several days climbing a steep mountain trail.",
+  "options": [
+    "After four days on the arduous trail, the hikers finally reached the summit.",
+    "The hikers were arduous fans of the mountain and talked about it constantly.",
+    "The arduous trail was so gentle that even toddlers finished it in minutes.",
+    "From the ridge, the hikers admired the arduous colors of the sunset."
+  ],
+  "reasons": [
+    "A steep, multiday climb takes sustained, exhausting effort, so the word fits.",
+    "This confuses the word with ardent; being enthusiastic is not the same as being difficult.",
+    "A gentle path that small children finish quickly is the opposite of hard and tiring.",
+    "Colors in the sky demand no effort from anyone, so the word has nothing to describe."
+  ],
+  "practice": {
+    "prompt": "A museum volunteer spends months cataloging thousands of handwritten letters.",
+    "options": [
+      "The arduous task took her only a quick glance before her lunch break.",
+      "The arduous letters were written by sailors more than two centuries ago.",
+      "Sorting the faded letters by date was arduous work that filled most of her winter.",
+      "She was an arduous admirer of the letter writers and spoke of them with great warmth."
+    ],
+    "answer": 2,
+    "reasons": [
+      "A job finished with a quick glance is easy, which reverses the meaning.",
+      "Being old does not make something hard to do; this mistakes the word for ancient.",
+      "Months of slow, careful sorting is the kind of draining labor the word describes.",
+      "Warm devotion calls for ardent; the word here should describe a task, not a feeling."
+    ]
+  }
+}

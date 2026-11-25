@@ -1,0 +1,49 @@
+{
+  "id": 133,
+  "slug": "coherent",
+  "word": "coherent",
+  "pos": "adjective",
+  "pronunciation": "/koʊˈhɪr.ənt/",
+  "definition": "Logical and well organized, so that all the parts fit together clearly.",
+  "difficulty": "Foundation",
+  "example": "After a full night's sleep, the hiker could finally give a coherent account of where she had been.",
+  "synonyms": [
+    "logical",
+    "well-organized",
+    "lucid",
+    "consistent"
+  ],
+  "nuance": "Coherent means ideas connect logically; cohesive means a group or whole holds together as a unit.",
+  "alternatives": [
+    "lucid"
+  ],
+  "prompt": "A student presents her science project to a panel of judges.",
+  "options": [
+    "Her explanation was coherent, moving from question to method to result.",
+    "The coherent tape held her poster firmly to the board all afternoon.",
+    "His coherent talk jumped between unrelated topics and never reached a point.",
+    "The judges called the poster coherent because its colors were so bright."
+  ],
+  "reasons": [
+    "Each step leads clearly to the next, so the ideas connect in a sensible order.",
+    "Physically sticking things together is adhesion, not logical clarity.",
+    "A rambling talk with no clear thread is the opposite of the word's meaning.",
+    "Bright colors say nothing about whether ideas fit together logically."
+  ],
+  "practice": {
+    "prompt": "A friend leaves a long voicemail after a confusing, stressful day.",
+    "options": [
+      "The message was so coherent that I had no idea what he wanted.",
+      "He stayed coherent to his promise and called back exactly at noon.",
+      "His voice was coherent, loud enough to hear over the traffic.",
+      "Once he calmed down, his message became coherent enough to follow."
+    ],
+    "answer": 3,
+    "reasons": [
+      "A message the listener cannot make sense of lacks clear logic.",
+      "Keeping a promise is being faithful or adherent, not logically organized.",
+      "Volume describes sound, not whether ideas connect sensibly.",
+      "When his thoughts settled into a clear order, the listener could understand him."
+    ]
+  }
+}
