@@ -1,0 +1,47 @@
+{
+  "id": 121,
+  "slug": "scarce",
+  "word": "scarce",
+  "pos": "adjective",
+  "pronunciation": "/skɛrs/",
+  "definition": "Available only in small amounts, so there is not enough to meet the need for it.",
+  "difficulty": "Foundation",
+  "example": "Fresh water becomes scarce on the island during the long dry season.",
+  "synonyms": [
+    "in short supply",
+    "scant",
+    "insufficient",
+    "rare"
+  ],
+  "nuance": "Scarce means there is not enough of something people need or want; rare just means uncommon, whether or not anyone wants it.",
+  "alternatives": [],
+  "prompt": "A small town's only bakery struggles after a winter storm blocks deliveries.",
+  "options": [
+    "With roads closed for days, flour grew scarce and the bakery cut its hours.",
+    "The flour was so scarce that bags were stacked to the ceiling of the storeroom.",
+    "The baker felt scarce when the wind rattled the windows all night long.",
+    "To stretch their supply, the bakers scarce the flour by mixing in extra water."
+  ],
+  "reasons": [
+    "Blocked deliveries left too little flour to meet demand, so the word fits.",
+    "A storeroom piled high describes plenty, the reverse of a shortage.",
+    "This confuses the word with the look-alike scared; it describes supply, not fear.",
+    "The word is an adjective, not a verb meaning to ration or thin something out."
+  ],
+  "practice": {
+    "prompt": "Volunteers plan a summer hike through a dry desert canyon.",
+    "options": [
+      "Shade is scarce on the trail, so hikers can rest beneath its many leafy trees.",
+      "The canyon trail was so scarce that finishing it took nearly eight hours.",
+      "One volunteer is scarce of heights and will wait near the trailhead.",
+      "Because shade is scarce along the trail, the leaders set the start time for dawn."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Many trees would provide plenty of shade, which contradicts the word.",
+      "The word describes a limited quantity of something, not a route's length or difficulty.",
+      "This mixes the word up with scared; being afraid has nothing to do with short supply.",
+      "Little shade means hikers need to avoid the midday sun, a sensible response to a shortage."
+    ]
+  }
+}

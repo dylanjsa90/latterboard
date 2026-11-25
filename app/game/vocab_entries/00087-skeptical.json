@@ -1,0 +1,49 @@
+{
+  "id": 87,
+  "slug": "skeptical",
+  "word": "skeptical",
+  "pos": "adjective",
+  "pronunciation": "/ˈskɛp.tɪ.kəl/",
+  "definition": "Slow to believe a claim and wanting good reasons or proof before accepting it.",
+  "difficulty": "Foundation",
+  "example": "Many scientists stayed skeptical of the surprising result until other labs repeated the experiment.",
+  "synonyms": [
+    "doubtful",
+    "unconvinced",
+    "dubious",
+    "questioning"
+  ],
+  "nuance": "Unlike cynical, which assumes people have selfish motives, skeptical means holding back belief in a claim until there is evidence.",
+  "alternatives": [
+    "credulous"
+  ],
+  "prompt": "A car dealer insists that a ten-year-old car has never needed a single repair.",
+  "options": [
+    "The buyer was skeptical of the claim and asked to see the maintenance records.",
+    "Fully skeptical of the dealer, the buyer signed the contract without a single question.",
+    "The scrape on the mechanic's arm turned skeptical and needed antibiotics.",
+    "The buyer's son was so skeptical about the car that he cheered and hugged the dealer."
+  ],
+  "reasons": [
+    "Asking for proof before accepting a hard-to-believe promise shows reasonable doubt.",
+    "Signing without asking anything shows complete trust, the reverse of doubt.",
+    "This confuses the word with septic, which describes infection, not doubt.",
+    "Cheering and hugging show delight and trust, not a reluctance to believe."
+  ],
+  "practice": {
+    "prompt": "A classmate shares an online post claiming that eating carrots lets people see in total darkness.",
+    "options": [
+      "Maya was skeptical and looked for a reliable science source before sharing the post.",
+      "Being skeptical, Jordan immediately forwarded the post to everyone in his contacts.",
+      "The teacher called the claim skeptical because it was written in such a confident tone.",
+      "Priya was skeptical, so she began eating carrots at every meal to see better at night."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Checking the evidence before passing along a strange claim is exactly this kind of doubt.",
+      "Spreading a claim right away shows ready belief, not careful doubt.",
+      "A doubtful claim is dubious; the people who doubt it are the ones who are skeptical.",
+      "Changing her habits to follow the claim shows she believed it without question."
+    ]
+  }
+}

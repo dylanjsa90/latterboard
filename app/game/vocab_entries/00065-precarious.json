@@ -1,0 +1,47 @@
+{
+  "id": 65,
+  "slug": "precarious",
+  "word": "precarious",
+  "pos": "adjective",
+  "pronunciation": "/prɪˈkɛr.i.əs/",
+  "definition": "Unsteady or insecure, so that it could easily fall, fail, or collapse.",
+  "difficulty": "Intermediate",
+  "example": "The stack of dishes looked precarious, so I moved half of them to the counter.",
+  "synonyms": [
+    "unstable",
+    "shaky",
+    "insecure",
+    "perilous"
+  ],
+  "nuance": "Precarious stresses a lack of stability that could tip into failure, while dangerous simply means likely to cause harm.",
+  "alternatives": [],
+  "prompt": "A hiker crosses a narrow ledge above a steep canyon.",
+  "options": [
+    "The hiker edged along the precarious ledge, testing every foothold first.",
+    "The precarious young hiker had already summited three peaks by age nine.",
+    "The ledge felt precarious because it was wide, flat, and solidly anchored to the rock.",
+    "Being precarious, the hiker packed extra water and checked the weather forecast twice."
+  ],
+  "reasons": [
+    "A narrow, risky perch where one slip could mean a fall is exactly the kind of footing the word describes.",
+    "This confuses the word with precocious, which describes talent that develops unusually early.",
+    "A broad, firmly anchored surface is secure, which is the reverse of unsteady.",
+    "The word describes shaky situations, not cautious people; it is not a synonym for careful."
+  ],
+  "practice": {
+    "prompt": "A small café struggles after its rent suddenly doubles.",
+    "options": [
+      "The barista was precarious about measuring each espresso shot to the exact gram.",
+      "The precarious aroma of fresh pastries drew people in from the sidewalk.",
+      "With rent doubled and few customers, the café's future looked precarious.",
+      "Profits were so precarious that the owner opened a second location with ease."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This mistakes the word for precise or meticulous; it refers to instability, not exactness.",
+      "A pleasant smell carries no risk of collapse, so the word's sense of threat does not fit.",
+      "Rising costs and thin business leave the café one bad month from closing, a truly shaky position.",
+      "Expanding easily requires steady, ample profits, not ones that could vanish at any moment."
+    ]
+  }
+}

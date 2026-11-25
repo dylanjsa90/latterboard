@@ -1,0 +1,47 @@
+{
+  "id": 106,
+  "slug": "candid",
+  "word": "candid",
+  "pos": "adjective",
+  "pronunciation": "/ˈkæn.dɪd/",
+  "definition": "Honest and open about what you think, even when the truth is uncomfortable.",
+  "difficulty": "Foundation",
+  "example": "In a candid interview, the coach admitted the team had trained poorly all season.",
+  "synonyms": [
+    "frank",
+    "forthright",
+    "straightforward",
+    "outspoken"
+  ],
+  "nuance": "Candid suggests sincere openness, while blunt adds a sense of harshness or a lack of tact.",
+  "alternatives": [],
+  "prompt": "A manager asks an employee for honest feedback on a new work schedule.",
+  "options": [
+    "She gave a candid answer, admitting the new schedule left her too tired to focus.",
+    "She gave a candid answer by quickly changing the subject to the weather.",
+    "Being candid, she flattered the manager by calling the schedule perfect, though it exhausted her.",
+    "She offered the manager a candid lemon peel coated in crunchy sugar."
+  ],
+  "reasons": [
+    "Sharing an uncomfortable truth openly with the person who asked is exactly what candor is.",
+    "Dodging the question is evasion, the opposite of speaking openly.",
+    "Telling someone a pleasing falsehood reverses the word's meaning of honesty.",
+    "This confuses the word with the look-alike candied, which describes food preserved in sugar."
+  ],
+  "practice": {
+    "prompt": "A student reads a friend's short story before it is entered in a writing contest.",
+    "options": [
+      "His candid review stayed sealed in a drawer because he feared upsetting his friend.",
+      "His candid review won the election for student council treasurer by twelve votes.",
+      "His candid review pointed out that the ending felt rushed and unconvincing.",
+      "His candid review hid his real opinion behind a cloud of vague, polite compliments."
+    ],
+    "answer": 2,
+    "reasons": [
+      "An opinion that is never shared cannot be open or forthright.",
+      "This mixes the word up with candidate, a person who runs for office.",
+      "Naming a real weakness plainly, even to a friend, shows open honesty.",
+      "Concealing what you actually think is guardedness, not frankness."
+    ]
+  }
+}

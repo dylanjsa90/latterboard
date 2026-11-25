@@ -1,0 +1,46 @@
+{
+  "id": 143,
+  "slug": "notorious",
+  "word": "notorious",
+  "pos": "adjective",
+  "pronunciation": "/noʊˈtɔːr.i.əs/",
+  "definition": "Widely known for something bad, such as a fault, a habit, or a problem.",
+  "difficulty": "Foundation",
+  "example": "The old printer in the library is notorious for jamming right before a big deadline.",
+  "synonyms": [
+    "infamous",
+    "disreputable",
+    "of ill repute"
+  ],
+  "nuance": "Famous can be neutral or positive, but notorious always points to a bad reputation; it is often milder than infamous and fits small faults.",
+  "alternatives": [],
+  "prompt": "A food writer reviews a local diner where the service is very slow.",
+  "options": [
+    "The diner is notorious for making customers wait an hour for a sandwich.",
+    "The diner is notorious for its friendly staff and quick, cheerful service at lunch.",
+    "The diner is so notorious that nobody in town has ever heard of it.",
+    "The new waiter felt notorious about spilling soup on his first day."
+  ],
+  "reasons": [
+    "A widely known bad habit, like slow service, is exactly what earns this kind of reputation.",
+    "Praise for good service calls for a positive word like renowned, not one that signals a bad reputation.",
+    "A place nobody knows about is obscure; the word requires that many people know the reputation.",
+    "The word describes how others see someone's reputation, not a nervous feeling inside a person."
+  ],
+  "practice": {
+    "prompt": "Students compare notes about a math teacher who gives surprise quizzes.",
+    "options": [
+      "Mr. Alvarez is notorious for springing quizzes on Monday mornings.",
+      "Mr. Alvarez became notorious for winning the district's award for excellent teaching.",
+      "Mr. Alvarez is notorious for being the teacher no student has ever noticed.",
+      "Mr. Alvarez took notorious notes during the staff meeting so he would remember everything."
+    ],
+    "answer": 0,
+    "reasons": [
+      "An unwelcome habit that every student knows about fits a reputation for something unpleasant.",
+      "An honor brings good fame; the word should describe a reputation for something negative.",
+      "Going unnoticed is the opposite of being widely talked about.",
+      "Despite the look-alike spelling, the word has nothing to do with taking notes."
+    ]
+  }
+}

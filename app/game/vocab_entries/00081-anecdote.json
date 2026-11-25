@@ -1,0 +1,47 @@
+{
+  "id": 81,
+  "slug": "anecdote",
+  "word": "anecdote",
+  "pos": "noun",
+  "pronunciation": "/ˈæn.ɪk.doʊt/",
+  "definition": "A short, often amusing story about a real person or event.",
+  "difficulty": "Foundation",
+  "example": "Grandpa told an anecdote about the summer he worked on a fishing boat.",
+  "synonyms": [
+    "story",
+    "tale",
+    "personal account",
+    "vignette"
+  ],
+  "nuance": "An anecdote is a brief real-life story, not an antidote (a cure for poison), and it counts as weaker evidence than data.",
+  "alternatives": [],
+  "prompt": "A guest speaker is opening her speech at a graduation ceremony.",
+  "options": [
+    "She began with an anecdote about getting lost on her first day of college.",
+    "Before speaking, she swallowed an anecdote to soothe her sore throat.",
+    "Her anecdote was a full-length novel she read aloud for three hours.",
+    "Her anecdote was a chart of graduation rates from the past twenty years, shown on the big screen."
+  ],
+  "reasons": [
+    "A brief true story from her own life is exactly this kind of story.",
+    "This confuses the word with antidote; a story is not something you swallow as a remedy.",
+    "An anecdote is short; a three-hour novel is far too long to count as one.",
+    "A chart of numbers is data, not a story about a person or event."
+  ],
+  "practice": {
+    "prompt": "A student is writing a persuasive essay about school lunches.",
+    "options": [
+      "Maya opened with an anecdote about the day the cafeteria ran out of bread.",
+      "The anecdote in her table showed that 62 percent of students skip lunch.",
+      "After drinking spoiled milk, a classmate needed an anecdote from the school nurse.",
+      "Her anecdote was a single word, \"delicious,\" written at the top of the page."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A short true story about one specific day is a fitting way to grab attention.",
+      "A percentage in a table is a statistic, not a story.",
+      "This mixes the word up with antidote, which treats poisoning; stories don't cure illness.",
+      "One word tells no story, so it cannot be an anecdote."
+    ]
+  }
+}

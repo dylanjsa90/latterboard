@@ -121,12 +121,15 @@ def run_claude(system: str, message: str, schema: Mapping[str, Any]) -> dict[str
 
 
 def propose(run: Runner, store: Store, quota: Mapping[Difficulty, int]) -> list[Draft]:
-    """Ask for new headwords and save the ones select_candidates keeps, as queued."""
+    """Ask for new headwords and save the ones select_candidates keeps, as queued.
+    Wanted words (alternatives entries list that don't ship yet) go along only as
+    suggestions, so they face the same rules and checks as any proposal."""
+    known = store.known_slugs()
     exclude = {w.word for w in store.shipped()} | {d["word"] for d in store.drafts()}
-    output = run(
-        PROPOSE_SYSTEM, propose_message(quota, sorted(exclude)), PROPOSE_SCHEMA
-    )
-    drafts = select_candidates(output["words"], quota, store.known_slugs())
+    suggest = [w["word"] for slug, w in store.wanted().items() if slug not in known]
+    message = propose_message(quota, sorted(exclude), suggest)
+    output = run(PROPOSE_SYSTEM, message, PROPOSE_SCHEMA)
+    drafts = select_candidates(output["words"], quota, known)
     for d in drafts:
         store.save_draft(d)
     return drafts
@@ -182,17 +185,14 @@ def generate(
     out: TextIO,
     confirm: Callable[[str], bool],
 ) -> int:
-    """Draft `count` words: retries first, then wanted words, then newly proposed ones.
-    Returns how many were drafted. A RunError stops the run and says how to carry on."""
+    """Draft `count` words: retries first, then newly proposed ones, then approve what
+    passes. Returns how many were drafted. A RunError stops the run and says how to
+    carry on."""
     if count <= 0:
         out.write("nothing to draft\n")
         return 0
     retries = [d for d in store.drafts() if _retryable(d)][:count]
-    known = store.known_slugs()
-    wanted = [
-        (slug, w["word"]) for slug, w in store.wanted().items() if slug not in known
-    ][: count - len(retries)]
-    to_propose = count - len(retries) - len(wanted)
+    to_propose = count - len(retries)
     if not confirm(
         f"Draft {count} words with {MODEL} on your Claude subscription, "
         f"about {count * EST_TOKENS_PER_WORD:,} tokens of usage?"
@@ -200,22 +200,6 @@ def generate(
         return 0
 
     queue = list(retries)
-    for slug, w in wanted:
-        d: Draft = {
-            "slug": slug,
-            "word": w,
-            "pos": None,
-            "difficulty": None,
-            "source": "wanted",
-            "status": "queued",
-            "attempts": 0,
-            "errors": [],
-            "note": "",
-            "entry": None,
-        }
-        store.save_draft(d)
-        queue.append(d)
-
     drafted = 0
     try:
         if to_propose > 0:
@@ -236,4 +220,16 @@ def generate(
             f"stopped: {e}. {drafted} drafted, {queued} still queued; once it is fixed "
             f"or the usage limit resets, run generate --count {queued} to carry on.\n"
         )
+    approve_ready(store, out)
     return drafted
+
+
+def approve_ready(store: Store, out: TextIO) -> dict[str, str]:
+    """Ship every pending draft that passes validation, and say what happened. Returns
+    the drafts that couldn't ship, with their errors; they stay behind as invalid."""
+    approved, failed = store.approve_ready()
+    if approved:
+        out.write(f"approved {len(approved)}: {', '.join(approved)}\n")
+    for slug, errors in failed.items():
+        out.write(f"not approved {slug}:\n{errors}\n")
+    return failed

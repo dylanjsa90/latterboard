@@ -1,0 +1,46 @@
+{
+  "id": 90,
+  "slug": "hubris",
+  "word": "hubris",
+  "pos": "noun",
+  "pronunciation": "/ˈhjuː.brɪs/",
+  "definition": "Extreme pride or overconfidence that leads a person to take foolish risks or ignore warnings.",
+  "difficulty": "Intermediate",
+  "example": "The architect's hubris showed when she brushed aside the engineers and insisted the tower needed no extra supports.",
+  "synonyms": [
+    "overweening pride",
+    "arrogance",
+    "overconfidence"
+  ],
+  "nuance": "Arrogance is simply acting superior, while hubris suggests pride so great that it invites a person's own downfall.",
+  "alternatives": [],
+  "prompt": "A champion chess player is scheduled to face an unranked newcomer.",
+  "options": [
+    "Out of hubris, the champion skipped preparing and lost to the newcomer in twelve moves.",
+    "The champion's hubris led her to thank the newcomer and admit she still had much to learn.",
+    "After the match, a janitor swept the hubris of snapped pencils and paper cups off the floor.",
+    "Hubris made the champion tremble with doubt, convinced the newcomer would surely beat her."
+  ],
+  "reasons": [
+    "Her pride made her careless, and that carelessness brought about her defeat.",
+    "Graciously admitting you still have a lot to learn is humility, which is the opposite.",
+    "This confuses the word with the look-alike debris, meaning scattered trash.",
+    "Nervous self-doubt is the reverse of the overconfidence the word describes."
+  ],
+  "practice": {
+    "prompt": "A student is getting ready for the final exam in a difficult course.",
+    "options": [
+      "Hubris led the student to skip every review session, certain the exam would be easy.",
+      "Showing admirable hubris, the student made flashcards and studied each night for three weeks.",
+      "The student's hubris prompted him to quietly ask his teacher for extra help after class.",
+      "The student's hubris, a mild stomachache, kept him home from the exam that morning."
+    ],
+    "answer": 0,
+    "reasons": [
+      "His inflated confidence made him ignore preparation he clearly needed.",
+      "The word is negative, and steady, careful studying shows diligence, not foolish pride.",
+      "Asking for help admits your limits, which is modesty rather than overconfidence.",
+      "The word names a character flaw, not a physical illness."
+    ]
+  }
+}

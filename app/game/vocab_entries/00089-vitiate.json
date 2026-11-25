@@ -1,0 +1,49 @@
+{
+  "id": 89,
+  "slug": "vitiate",
+  "word": "vitiate",
+  "pos": "verb",
+  "pronunciation": "/ˈvɪʃ.i.eɪt/",
+  "definition": "To spoil or weaken something, especially by adding a flaw that ruins its quality or makes it invalid.",
+  "difficulty": "Advanced",
+  "example": "A single leading question can vitiate an otherwise careful survey.",
+  "synonyms": [
+    "impair",
+    "undermine",
+    "invalidate",
+    "corrupt"
+  ],
+  "nuance": "Unlike destroy, vitiate suggests that a flaw spoils something's quality or cancels its validity while the thing itself still exists.",
+  "alternatives": [
+    "obviate"
+  ],
+  "prompt": "A scientist learns that some of the samples in her study were contaminated.",
+  "options": [
+    "Even trace contamination could vitiate the study's main conclusions.",
+    "A faster testing method would vitiate the need to collect new samples.",
+    "Replacing the samples with clean ones would vitiate the results and make them reliable.",
+    "A colleague's careful review would vitiate the scientist and prove her methods sound."
+  ],
+  "reasons": [
+    "A hidden flaw in the samples can make the findings unreliable, which is exactly this kind of damage.",
+    "Making a step unnecessary is what obviate means. This look-alike means to spoil, not to remove a need.",
+    "This reverses the meaning. Making results trustworthy strengthens them, and the word means to weaken.",
+    "Proving someone right is vindication. This word describes damage, not clearing a person's name."
+  ],
+  "practice": {
+    "prompt": "A lawyer reviews a house sale in which the seller hid a serious defect.",
+    "options": [
+      "The lawyer hoped a lively opening speech would vitiate the sleepy jury.",
+      "The seller's deliberate lie about the leaking roof may vitiate the entire contract.",
+      "Signatures on every page will vitiate the agreement and make it fully binding.",
+      "Signing the papers online could vitiate the buyer's trip to the lawyer's office."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Waking people up and energizing them is invigorating. This word refers to spoiling something.",
+      "Fraud is a defect that can cancel an agreement's legal force, which fits this legal sense.",
+      "Making a contract binding strengthens it. The word means the reverse: weakening or invalidating.",
+      "Sparing someone a trip is obviating it. The word does not mean to make something unnecessary."
+    ]
+  }
+}

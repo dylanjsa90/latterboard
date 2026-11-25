@@ -1,0 +1,47 @@
+{
+  "id": 125,
+  "slug": "inevitable",
+  "word": "inevitable",
+  "pos": "adjective",
+  "pronunciation": "/ɪˈnɛv.ɪ.tə.bəl/",
+  "definition": "Certain to happen and impossible to avoid or prevent.",
+  "difficulty": "Foundation",
+  "example": "Once cracks began spreading across the old dam, costly repairs became inevitable.",
+  "synonyms": [
+    "unavoidable",
+    "inescapable",
+    "bound to happen",
+    "certain"
+  ],
+  "nuance": "Inevitable means nothing can stop an outcome, while likely or probable allows that it might still be avoided.",
+  "alternatives": [],
+  "prompt": "Campers watch the sun set on a clear, cold autumn evening in the mountains.",
+  "options": [
+    "With the sun gone and the sky clear, a frosty night was inevitable.",
+    "Frost was inevitable, though the forecast said it would almost surely stay away.",
+    "Her inevitable campfire songs were so original that no one could ever copy them.",
+    "The inevitable flashlight turned out to be the most useful thing in his pack."
+  ],
+  "reasons": [
+    "Clear autumn skies after sunset make a cold night certain; nothing the campers do can stop it.",
+    "An outcome that will almost surely not happen is the reverse of an unavoidable one.",
+    "Being impossible to copy describes inimitable, a look-alike, not something bound to occur.",
+    "Great usefulness suggests invaluable; a tool is not an event that must happen."
+  ],
+  "practice": {
+    "prompt": "A town library has kept the same aging computers for fifteen years.",
+    "options": [
+      "Since the old machines break down every week, replacing them is inevitable.",
+      "Upgrading was inevitable, so the board easily decided never to do it at all.",
+      "The librarian made an inevitable choice by picking new models at random from a catalog.",
+      "The inevitable screens always showed the same gray menu and never changed."
+    ],
+    "answer": 0,
+    "reasons": [
+      "When failures keep piling up, replacement will come sooner or later no matter what.",
+      "If the board can refuse forever, the upgrade was avoidable rather than certain.",
+      "A random pick is arbitrary, the opposite of something that had to turn out one way.",
+      "Never changing describes invariable; this word concerns outcomes that cannot be escaped."
+    ]
+  }
+}

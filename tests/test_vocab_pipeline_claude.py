@@ -69,12 +69,20 @@ def word(w: str, difficulty: str, pos: str = "adjective") -> dict[str, str]:
 
 
 def three_words(tmp_path, **outputs):
-    """Shipped alpha and beta, wanted delta, and a proposal of candid, alpha (known) and
-    wane. allocate gives Intermediate 1, Advanced 1 for the two words still needed."""
+    """Shipped alpha and beta; beta wants delta, and wanted gamma was rejected. The
+    proposal takes the suggested delta, plus candid, alpha (known) and wane. allocate
+    gives Intermediate 2, Advanced 1 for three words."""
     store = make_store(tmp_path, [entry(0, "alpha"), entry(1, "beta")])
-    store.save_wanted({"delta": {"word": "delta", "referrers": ["beta"]}})
+    store.save_wanted(
+        {
+            "delta": {"word": "delta", "referrers": ["beta"]},
+            "gamma": {"word": "gamma", "referrers": ["beta"]},
+        }
+    )
+    store.save_draft({**pending_draft("gamma"), "status": "rejected"})
     fake = FakeRunner(
         proposal=[
+            word("delta", "Intermediate"),
             word("candid", "Advanced"),
             word("alpha", "Advanced"),
             word("wane", "Intermediate", "verb"),
@@ -89,26 +97,29 @@ def three_words(tmp_path, **outputs):
     return store, fake
 
 
-def test_generate_proposes_dedupes_and_drafts_each_word(tmp_path):
+def test_generate_proposes_drafts_and_approves_what_passes(tmp_path):
     store, fake = three_words(tmp_path)
-    assert generate(fake, store, 3, io.StringIO(), confirm=lambda _: True) == 3
+    out = io.StringIO()
+    assert generate(fake, store, 3, out, confirm=lambda _: True) == 3
     system, message, schema = fake.calls[0]
     assert (system, schema) == (PROPOSE_SYSTEM, PROPOSE_SCHEMA)
-    assert "alpha, beta, delta" in message
+    exclusions, suggestions = message.split("wrong answer:\n")
+    assert "alpha, beta, gamma" in exclusions
+    # Wanted words are only suggestions now, and never one already known.
+    assert suggestions == "delta"
     drafting = fake.calls[1:]
     assert [(s, sch) for s, _, sch in drafting] == [(DRAFT_SYSTEM, DRAFT_SCHEMA)] * 3
     assert ['"delta"' in m for _, m, _ in drafting] == [True, False, False]
-    assert store.draft("candid")["status"] == "pending"
-    delta = store.draft("delta")
-    assert delta["status"] == "pending" and delta["pos"] == "adjective"
-    wane = store.draft("wane")
-    assert wane["status"] == "invalid" and wane["entry"] is not None
+    # Candid and delta pass validation and ship; wane stays behind as invalid.
+    shipped = {w.slug: w for w in store.shipped()}
+    assert set(shipped) == {"alpha", "beta", "candid", "delta"}
+    assert {shipped["candid"].id, shipped["delta"].id} == {2, 3}
+    assert "delta" in shipped["beta"].alternatives  # the wanted word linked back
+    assert "approved 2:" in out.getvalue()
+    [wane] = [d for d in store.drafts() if d["status"] != "rejected"]
+    assert wane["slug"] == "wane" and wane["status"] == "invalid"
+    assert wane["entry"] is not None and wane["attempts"] == 1
     assert any("options: expected 4" in e for e in wane["errors"])
-    assert {d["slug"]: d["attempts"] for d in store.drafts()} == {
-        "candid": 1,
-        "delta": 1,
-        "wane": 1,
-    }
 
 
 def test_a_cli_failure_stops_the_run_and_the_next_run_carries_on(tmp_path):
@@ -117,7 +128,8 @@ def test_a_cli_failure_stops_the_run_and_the_next_run_carries_on(tmp_path):
     assert generate(fake, store, 3, out, confirm=lambda _: True) == 1
     assert "stopped: usage limit reached" in out.getvalue()
     assert "run generate --count 2 to carry on" in out.getvalue()
-    assert store.draft("delta")["status"] == "pending"
+    # What was drafted before the stop still ships.
+    assert "delta" in {w.slug for w in store.shipped()}
     assert {
         s: (store.draft(s)["status"], store.draft(s)["attempts"])
         for s in ("candid", "wane")
@@ -128,7 +140,7 @@ def test_a_cli_failure_stops_the_run_and_the_next_run_carries_on(tmp_path):
     fake.outputs["candid"] = model_output("candid")
     assert generate(fake, store, 2, io.StringIO(), confirm=lambda _: True) == 2
     assert sum(schema is PROPOSE_SCHEMA for _, _, schema in fake.calls) == 1
-    assert store.draft("candid")["status"] == "pending"
+    assert "candid" in {w.slug for w in store.shipped()}
 
 
 def test_no_structured_output_marks_the_word_invalid_and_carries_on(tmp_path):
@@ -142,7 +154,8 @@ def test_no_structured_output_marks_the_word_invalid_and_carries_on(tmp_path):
 def test_declined_confirmation_calls_nothing(tmp_path):
     store, fake = three_words(tmp_path)
     assert generate(fake, store, 3, io.StringIO(), confirm=lambda _: False) == 0
-    assert fake.calls == [] and store.drafts() == []
+    assert fake.calls == []
+    assert [d["slug"] for d in store.drafts()] == ["gamma"]  # the rejected one
 
 
 def test_retries_stop_after_max_attempts(tmp_path):

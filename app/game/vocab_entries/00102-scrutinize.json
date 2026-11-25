@@ -1,0 +1,47 @@
+{
+  "id": 102,
+  "slug": "scrutinize",
+  "word": "scrutinize",
+  "pos": "verb",
+  "pronunciation": "/ˈskruː.tən.aɪz/",
+  "definition": "To examine something very closely and carefully, often to find mistakes or hidden problems.",
+  "difficulty": "Foundation",
+  "example": "Before signing the lease, Maria scrutinized every clause about repairs and late fees.",
+  "synonyms": [
+    "examine closely",
+    "inspect",
+    "pore over",
+    "analyze"
+  ],
+  "nuance": "Scrutinize is more intense than examine and usually suggests a critical search for flaws, not just a careful look.",
+  "alternatives": [],
+  "prompt": "A scientist gets experimental results that look surprisingly perfect.",
+  "options": [
+    "Wary of a fluke, she asked a colleague to scrutinize every measurement for errors.",
+    "To scrutinize the results, she glanced at the final graph and then left for lunch.",
+    "She tried to scrutinize the data by locking the notebooks in a drawer no one could open.",
+    "She stood up to scrutinize her assistant loudly for arriving late to the lab."
+  ],
+  "reasons": [
+    "Checking each number in detail for mistakes is exactly the close, critical look the word describes.",
+    "A quick glance is the opposite of a slow, detailed inspection.",
+    "Hiding something away is concealing it, not studying it carefully.",
+    "Scolding someone out loud is a reprimand; the word is about looking closely, not telling someone off."
+  ],
+  "practice": {
+    "prompt": "A teenager is deciding whether to buy a used bicycle from a neighbor.",
+    "options": [
+      "His sister chose to scrutinize the bike from across the street, then paid without a closer look.",
+      "The buyer decided to scrutinize the neighbor by thanking him warmly for the fair price.",
+      "He began to scrutinize the tires by pumping them full of air for the ride home.",
+      "He took time to scrutinize the frame for cracks and rust before handing over any money."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Looking from far away and skipping any close check is the reverse of a thorough examination.",
+      "Thanking someone is a polite compliment; nothing is being inspected for problems.",
+      "Inflating tires is a maintenance chore, not a careful search for flaws.",
+      "Searching the frame carefully for hidden damage is a close, critical inspection."
+    ]
+  }
+}

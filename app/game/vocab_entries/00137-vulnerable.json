@@ -1,0 +1,47 @@
+{
+  "id": 137,
+  "slug": "vulnerable",
+  "word": "vulnerable",
+  "pos": "adjective",
+  "pronunciation": "/ˈvʌl.nər.ə.bəl/",
+  "definition": "Easily hurt, damaged, or harmed, either physically or emotionally.",
+  "difficulty": "Foundation",
+  "example": "Young seedlings are vulnerable to frost until their stems grow thicker.",
+  "synonyms": [
+    "exposed",
+    "defenseless",
+    "susceptible",
+    "unprotected"
+  ],
+  "nuance": "Vulnerable stresses being open to harm; susceptible stresses a tendency to be affected, often by illness or influence.",
+  "alternatives": [],
+  "prompt": "A town studies which neighborhoods might flood during the spring storms.",
+  "options": [
+    "Houses on the low riverbank are the most vulnerable when the water rises.",
+    "Because the new levee shields them completely, the riverside homes are now vulnerable.",
+    "The town's oldest house, admired for two centuries of history, is deeply vulnerable.",
+    "Residents were vulnerable to help, so they eagerly signed up to fill sandbags."
+  ],
+  "reasons": [
+    "Low-lying homes are the ones most exposed to damage from rising water.",
+    "Full protection makes the homes safe, which is the reverse of being open to harm.",
+    "This confuses the word with venerable, which means respected for age.",
+    "Being willing or eager to help is not the same as being exposed to harm."
+  ],
+  "practice": {
+    "prompt": "A student decides whether to share a personal poem with her class.",
+    "options": [
+      "The classmates who loudly mocked every line were the most vulnerable people in the room.",
+      "Reading her poem aloud left Maya feeling vulnerable, since it revealed her private fears.",
+      "Feeling vulnerable, Maya shrugged off every comment because nothing classmates said could touch her.",
+      "Maya's poem won first prize, making it the most vulnerable entry in the contest."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The mockers are the ones causing hurt, not the ones exposed to it.",
+      "Revealing private fears opens a person to emotional hurt.",
+      "Someone who can't be hurt by comments is emotionally guarded, not exposed.",
+      "Winning a prize shows merit; it says nothing about being open to harm."
+    ]
+  }
+}

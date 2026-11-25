@@ -1,0 +1,47 @@
+{
+  "id": 66,
+  "slug": "allocate",
+  "word": "allocate",
+  "pos": "verb",
+  "pronunciation": "/ˈæl.ə.keɪt/",
+  "definition": "To set aside or hand out a limited resource, such as money or time, for a particular purpose.",
+  "difficulty": "Foundation",
+  "example": "The museum allocated two of its largest rooms to the new fossil exhibit.",
+  "synonyms": [
+    "assign",
+    "distribute",
+    "earmark",
+    "apportion"
+  ],
+  "nuance": "Allocate stresses planning how a limited supply is divided among uses; allot more often means giving each person a fixed share.",
+  "alternatives": [],
+  "prompt": "A school club must divide its small budget among several events this year.",
+  "options": [
+    "The members voted to allocate half of the money to the spring science fair.",
+    "After an hour of searching, the members finally allocated the missing banner in a closet.",
+    "The treasurer allocated the funds by locking them away and refusing to spend them on anything.",
+    "Several members allocated passionately for a bigger party at the end of the year."
+  ],
+  "reasons": [
+    "Deciding that a set share of the budget goes to one event is exactly this kind of planned division.",
+    "Finding a lost object is locating it, a look-alike word with a different meaning.",
+    "Holding money back from every purpose is hoarding, the reverse of assigning it to uses.",
+    "Arguing in favor of something is advocating; this verb needs a resource being divided."
+  ],
+  "practice": {
+    "prompt": "A farmer has only a little water left during a long, dry summer.",
+    "options": [
+      "She allocated that the drought would probably end by August.",
+      "She allocated the thirsty bean plants, so they wilted in the heat.",
+      "She chose to allocate most of the water to the young tomato plants.",
+      "She allocated the water by pouring it all onto the gravel driveway."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Making a forecast is predicting; the verb cannot introduce a guess about the future.",
+      "The object should be the resource handed out, and the sentence describes withholding, not supplying.",
+      "Directing a scarce supply toward a chosen purpose is a correct use of the verb.",
+      "Dumping water where it serves no use is waste, not a planned assignment of a resource."
+    ]
+  }
+}

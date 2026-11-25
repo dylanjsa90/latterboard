@@ -14,7 +14,8 @@
   ],
   "nuance": "Ephemeral describes short duration, not low importance or poor quality.",
   "alternatives": [
-    "esoteric"
+    "esoteric",
+    "enduring"
   ],
   "prompt": "A brief burst of attention disappears almost as soon as it arrives.",
   "options": [

@@ -1,0 +1,47 @@
+{
+  "id": 91,
+  "slug": "galvanize",
+  "word": "galvanize",
+  "pos": "verb",
+  "pronunciation": "/ˈɡæl.və.naɪz/",
+  "definition": "To shock or excite people into taking sudden, energetic action.",
+  "difficulty": "Intermediate",
+  "example": "A leaky roof over the gym galvanized parents to raise money for repairs.",
+  "synonyms": [
+    "spur",
+    "rouse",
+    "electrify",
+    "stir"
+  ],
+  "nuance": "Galvanize suggests a jolt that sparks quick, energetic action, while motivate can describe a quieter, steadier push.",
+  "alternatives": [],
+  "prompt": "A science teacher shows the class photos of litter piled along the town's river.",
+  "options": [
+    "The teacher hoped the photos would galvanize her students into organizing a riverbank cleanup.",
+    "From one muddy photo, a student tried to galvanize about the health of every river on Earth.",
+    "To galvanize the class after the slideshow, the teacher dimmed the lights for a quiet nap.",
+    "The teacher used a brush to galvanize the printed photos with a layer of silver glitter."
+  ],
+  "reasons": [
+    "The shocking images are meant to stir the class into energetic action, which fits.",
+    "Drawing broad conclusions from one case is generalizing, a look-alike word.",
+    "Calming people into rest is the reverse of jolting them into action.",
+    "The coating sense means protecting iron or steel with zinc, not decorating paper."
+  ],
+  "practice": {
+    "prompt": "A school robotics team finishes in last place at its first competition.",
+    "options": [
+      "After the contest, two teammates wanted to galvanize around the city to go sightseeing.",
+      "The judges took careful notes to galvanize each robot's score before the final ranking.",
+      "The coach hoped the last-place finish would galvanize the team into rebuilding its robot.",
+      "The judges' praise for the winners seemed to galvanize our team into a gloomy, silent ride home."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Wandering around for fun is gallivanting, a word that only sounds similar.",
+      "Adding up scores is tallying; nobody is being roused to action.",
+      "A disappointing result that spurs fresh, energetic work is exactly this kind of jolt.",
+      "Gloomy silence shows a team losing energy, not being stirred to act."
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": 134,
+  "slug": "pusillanimous",
+  "word": "pusillanimous",
+  "pos": "adjective",
+  "pronunciation": "/ˌpjuː.səˈlæn.ə.məs/",
+  "definition": "Lacking courage or resolve; too timid to face risk or take a firm stand.",
+  "difficulty": "Advanced",
+  "example": "The committee's pusillanimous response let the leaky roof go unrepaired for another winter.",
+  "synonyms": [
+    "cowardly",
+    "fainthearted",
+    "spineless",
+    "timid"
+  ],
+  "nuance": "Unlike cowardly, which often suggests fleeing danger, pusillanimous usually condemns a weak, timid failure to decide or take a stand.",
+  "alternatives": [
+    "magnanimous"
+  ],
+  "prompt": "A team captain must decide whether to report a rule violation by the team's star player.",
+  "options": [
+    "Afraid of losing his popularity, the pusillanimous captain said nothing to the referee.",
+    "Being pusillanimous, the captain generously forgave the player and shared credit with the whole team.",
+    "The captain was so pusillanimous that he reported the violation despite angry pressure from teammates.",
+    "At barely five feet tall, the captain was the most pusillanimous player on the roster."
+  ],
+  "reasons": [
+    "Staying silent out of fear of disapproval is exactly the timid failure of nerve the word describes.",
+    "Generosity and forgiveness describe magnanimous, a look-alike with nearly the opposite meaning.",
+    "Speaking up against fierce pressure shows courage, the reverse of what the word means.",
+    "The word describes a lack of spirit, not small physical size."
+  ],
+  "practice": {
+    "prompt": "A scientist discovers an error in results she published last month.",
+    "options": [
+      "She showed pusillanimous bravery by announcing a correction the very next morning.",
+      "Pusillanimous about detail, she rechecked every figure three times before sharing anything.",
+      "Her colleagues admired her pusillanimous honesty and nominated her for an integrity award.",
+      "Too pusillanimous to admit the mistake, she hoped nobody would look closely at the flawed data."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Promptly owning a mistake takes nerve, so pairing the word with bravery reverses its sense.",
+      "Careful attention to detail would be punctilious or meticulous, not fearful.",
+      "The word is an insult, so using it as praise ignores its strongly negative tone.",
+      "Avoiding an uncomfortable admission out of fear shows a weak, timid lack of resolve."
+    ]
+  }
+}

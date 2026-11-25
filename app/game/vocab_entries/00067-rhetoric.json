@@ -1,0 +1,47 @@
+{
+  "id": 67,
+  "slug": "rhetoric",
+  "word": "rhetoric",
+  "pos": "noun",
+  "pronunciation": "/ˈrɛt.ər.ɪk/",
+  "definition": "Language crafted to persuade or impress, sometimes with more style than substance.",
+  "difficulty": "Intermediate",
+  "example": "Behind the advertisement's lofty rhetoric about freedom was simply a pricier phone plan.",
+  "synonyms": [
+    "oratory",
+    "persuasive language",
+    "eloquence",
+    "grandiloquence"
+  ],
+  "nuance": "Eloquence is almost always praise, but rhetoric often hints that the fine words may be hollow or insincere.",
+  "alternatives": [],
+  "prompt": "A student is preparing her closing speech for a debate tournament.",
+  "options": [
+    "Her coach taught her the rhetoric of a strong close: restate the claim and end on a vivid image.",
+    "When the judge asked a rhetoric, the debater paused, knowing no answer was expected.",
+    "Her rhetoric consisted of reading the timer aloud every thirty seconds and nothing else during the round.",
+    "Before the final round, she rhetoric her opponent's weakest points until the audience agreed with her."
+  ],
+  "reasons": [
+    "Techniques for shaping words so they persuade an audience are exactly what this noun names.",
+    "This confuses the noun with a rhetorical question; the word does not name a single question.",
+    "Announcing the time is not persuasive or impressive language of any kind.",
+    "The word is a noun, so it cannot serve as the verb of a sentence."
+  ],
+  "practice": {
+    "prompt": "A critic reviews a grand speech given at a school's anniversary gala.",
+    "options": [
+      "The critic praised the speaker's soaring rhetoric but noted that the speech announced no actual plans.",
+      "The speaker's rhetoric was a silent slideshow of tuition figures, shown without a single spoken or written word.",
+      "The critic said the gala's rhetoric was far too salty and needed a squeeze of lemon before serving.",
+      "The critic found the anniversary speech very rhetoric, with flourishes stacked on top of flourishes."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Impressive language that lacks concrete substance fits the word and its frequent hint of hollowness.",
+      "Persuasive language needs words; a wordless display of numbers is the opposite.",
+      "Treating the word as a dish to be seasoned ignores that it refers to language.",
+      "The adjective form is rhetorical; the noun cannot describe a speech after very."
+    ]
+  }
+}

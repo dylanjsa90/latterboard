@@ -1,0 +1,47 @@
+{
+  "id": 57,
+  "slug": "superfluous",
+  "word": "superfluous",
+  "pos": "adjective",
+  "pronunciation": "/suːˈpɜːr.flu.əs/",
+  "definition": "More than what is needed, and therefore unnecessary.",
+  "difficulty": "Intermediate",
+  "example": "Once the new bridge opened, the old ferry service became superfluous.",
+  "synonyms": [
+    "unnecessary",
+    "redundant",
+    "excess",
+    "surplus"
+  ],
+  "nuance": "Superfluous stresses going beyond what is needed; redundant adds that the extra thing repeats something already there.",
+  "alternatives": [],
+  "prompt": "A hiker is packing a light backpack for a one-day trail.",
+  "options": [
+    "She left the second flashlight at home because it seemed superfluous for a daytime hike.",
+    "The superfluous scratch on her water bottle only marked the surface of the plastic.",
+    "She packed the trail map first, since it was the most superfluous item for finding her way back.",
+    "She felt superfluous about the hike and could hardly wait to start."
+  ],
+  "reasons": [
+    "A spare light on a trip that ends before dark is extra gear she does not need.",
+    "A mark that stays on the surface is superficial; the sentence mixes up the two look-alikes.",
+    "Something she depends on to get home is essential, which is the reverse of extra.",
+    "The word describes things beyond what is needed, not a feeling of excitement."
+  ],
+  "practice": {
+    "prompt": "A student is revising a science lab report before turning it in.",
+    "options": [
+      "His teacher called the report superfluous and gave it the highest grade in the class.",
+      "Because the report was superfluous, it fell short of the two-page minimum.",
+      "He deleted a superfluous sentence that repeated the hypothesis word for word.",
+      "He kept the data table because it was superfluous to proving his conclusion."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This confuses the word with superb; it means unneeded, not excellent.",
+      "Being too short means something is lacking, the opposite of having more than enough.",
+      "A line that adds nothing new can be removed without any loss, so it is extra.",
+      "Evidence required to support a conclusion is necessary, not surplus."
+    ]
+  }
+}

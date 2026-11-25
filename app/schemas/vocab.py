@@ -1,8 +1,9 @@
 """Vocab Challenger I/O. Times are epoch milliseconds (see app/game/vocab.py)."""
 
+from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 Difficulty = Literal["Foundation", "Intermediate", "Advanced"]
 
@@ -138,3 +139,32 @@ class DailyWord(BaseModel):
     pos: str
     definition: str
     example: str
+
+
+ReportReason = Literal[
+    "wrong_definition", "wrong_answer", "confusing", "inappropriate", "other"
+]
+
+
+class WordReportCreate(BaseModel):
+    """A player's report of a problem with a word's entry."""
+
+    reason: ReportReason
+    # Which question was on screen when they reported it.
+    kind: Literal["usage", "context"] | None = None
+    note: str = Field(default="", max_length=500)
+
+
+class WordReport(BaseModel):
+    """A stored report, as the owner reads it (superuser only)."""
+
+    id: int
+    word_id: int
+    word: str
+    reason: str
+    kind: str | None
+    note: str
+    # Null for a guest.
+    user_id: int | None
+    # Naive UTC.
+    created_at: datetime

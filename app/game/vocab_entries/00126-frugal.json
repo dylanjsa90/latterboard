@@ -1,0 +1,46 @@
+{
+  "id": 126,
+  "slug": "frugal",
+  "word": "frugal",
+  "pos": "adjective",
+  "pronunciation": "/ˈfruː.ɡəl/",
+  "definition": "Careful to spend little money and to avoid wasting things.",
+  "difficulty": "Intermediate",
+  "example": "Her frugal grandfather turned old envelopes into grocery lists.",
+  "synonyms": [
+    "thrifty",
+    "economical",
+    "sparing"
+  ],
+  "nuance": "Frugal praises careful spending, while stingy and miserly criticize someone who won't spend even when spending is fair or kind.",
+  "alternatives": [],
+  "prompt": "A college student is trying to make a small monthly allowance last until the end of the term.",
+  "options": [
+    "The frugal student cooked big pots of rice and beans instead of buying takeout.",
+    "The frugal student splurged on concert tickets with the money saved for rent.",
+    "The frugal laptop cracked the moment it slid off the edge of the desk.",
+    "The frugal study group came up with dozens of creative ideas in one hour."
+  ],
+  "reasons": [
+    "Cooking cheap meals at home to stretch limited money is careful, economical spending.",
+    "Spending money set aside for essentials on a treat is the reverse of thrift.",
+    "This confuses the word with fragile; breaking easily has nothing to do with spending.",
+    "This mistakes the word for fruitful; it describes thrift, not productivity."
+  ],
+  "practice": {
+    "prompt": "A small-town library has to make a tight budget cover the whole year.",
+    "options": [
+      "The frugal librarian shushed every patron who whispered near the front desk.",
+      "The frugal librarian mended worn book spines with tape rather than ordering new copies.",
+      "The frugal librarian spent the entire annual budget on velvet armchairs in January.",
+      "The frugal librarian locked the donated books in a closet so nobody could borrow them."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Being strict about noise is about rules, not about spending carefully.",
+      "Repairing what you already have instead of replacing it saves money and avoids waste.",
+      "Using up all the funds at once on luxuries is lavish, not thrifty.",
+      "Hiding free resources so they go unused is wasteful hoarding, not wise economy."
+    ]
+  }
+}

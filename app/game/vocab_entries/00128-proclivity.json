@@ -1,0 +1,47 @@
+{
+  "id": 128,
+  "slug": "proclivity",
+  "word": "proclivity",
+  "pos": "noun",
+  "pronunciation": "/proʊˈklɪv.ə.ti/",
+  "definition": "A natural tendency to do something again and again, often something others see as a bad habit.",
+  "difficulty": "Advanced",
+  "example": "Her proclivity for staying up past midnight made early classes a daily struggle.",
+  "synonyms": [
+    "propensity",
+    "inclination",
+    "predilection",
+    "penchant"
+  ],
+  "nuance": "Proclivity often hints at a habit others may frown on, while penchant usually suggests a harmless fondness.",
+  "alternatives": [],
+  "prompt": "A soccer coach describes a goalkeeper's habits during matches.",
+  "options": [
+    "The goalkeeper has a proclivity for leaving the net too early on corner kicks.",
+    "The goalkeeper stood in close proclivity to the left post during the warm-up drill.",
+    "The goalkeeper's proclivity for diving left means she never dives to that side.",
+    "The goalkeeper picked up her proclivity from the equipment room before practice."
+  ],
+  "reasons": [
+    "A repeated, somewhat risky habit is exactly the kind of tendency the word names.",
+    "Physical nearness is proximity, a look-alike word; proclivity concerns tendencies.",
+    "Leaning toward an action means doing it often, not avoiding it completely.",
+    "A tendency is part of a person's behavior, not an object you can collect."
+  ],
+  "practice": {
+    "prompt": "A family talks about how their cat behaves around the house.",
+    "options": [
+      "Our cat has a proclivity for knocking pens off the desk while someone is writing.",
+      "The cat let out a loud proclivity by the door to announce that its dinner was late.",
+      "The cat's proclivity for water means it flees the room whenever the bathtub fills.",
+      "The cat showed a proclivity for napping on the couch exactly once, many years ago."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A mischievous habit the cat repeats again and again fits the word well.",
+      "A noisy announcement is closer to a proclamation; the word names a tendency, not a sound.",
+      "Running away from water shows dislike, which is the reverse of being drawn to it.",
+      "A single event long ago is not a pattern, so it cannot be a tendency."
+    ]
+  }
+}

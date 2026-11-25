@@ -1,0 +1,47 @@
+{
+  "id": 80,
+  "slug": "stagnant",
+  "word": "stagnant",
+  "pos": "adjective",
+  "pronunciation": "/ˈstæɡ.nənt/",
+  "definition": "Not flowing or changing, and often turning stale or showing no growth or progress.",
+  "difficulty": "Foundation",
+  "example": "The town's population has stayed stagnant ever since the old mill closed.",
+  "synonyms": [
+    "stale",
+    "sluggish",
+    "still",
+    "static"
+  ],
+  "nuance": "Static is neutral, but stagnant suggests that the lack of movement is unhealthy and leads to decay or decline.",
+  "alternatives": [],
+  "prompt": "A park ranger checks a small pond that has no stream flowing in or out.",
+  "options": [
+    "The stagnant pond had a green scum and a sour smell by late August.",
+    "The stagnant pond was fed by a rushing creek that kept it cold and clear.",
+    "Swimmers praised the stagnant pond for its fresh, sparkling water.",
+    "The ranger felt stagnant with surprise when she saw the pond's strange color."
+  ],
+  "reasons": [
+    "Water that sits without flowing goes foul, which is exactly what the word describes.",
+    "Constant fresh inflow is the opposite of standing, unmoving water.",
+    "The word carries a sense of staleness, so it can't describe water that is fresh and inviting.",
+    "This confuses the word with stunned; it describes a lack of flow, not a sudden shock."
+  ],
+  "practice": {
+    "prompt": "A singer has performed the same five songs at every show for years.",
+    "options": [
+      "She gave a stagnant bow at the end, wobbling and nearly tripping as she left the stage.",
+      "Fans drifted away from her stagnant act, which never changed from one show to the next.",
+      "Her stagnant career took off last spring when her three new albums sold out within a month.",
+      "She proudly called her act stagnant to show off how bold and fresh her music sounded."
+    ],
+    "answer": 1,
+    "reasons": [
+      "This mixes the word up with staggering; unsteady movement is not the same as being stuck.",
+      "An act that stays the same for years and loses fans has stopped growing.",
+      "A career that is taking off with new work is growing fast, not stuck.",
+      "The word is a criticism that points to staleness, so it can't be a boast about freshness."
+    ]
+  }
+}

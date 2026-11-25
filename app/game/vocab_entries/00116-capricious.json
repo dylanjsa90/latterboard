@@ -1,0 +1,47 @@
+{
+  "id": 116,
+  "slug": "capricious",
+  "word": "capricious",
+  "pos": "adjective",
+  "pronunciation": "/kəˈprɪʃ.əs/",
+  "definition": "Changing mood or behavior suddenly and without any clear reason.",
+  "difficulty": "Intermediate",
+  "example": "Sailors distrusted the capricious winds near the cape, which could shift direction in minutes.",
+  "synonyms": [
+    "fickle",
+    "unpredictable",
+    "whimsical",
+    "erratic"
+  ],
+  "nuance": "Capricious stresses impulsive whim behind the changes, while erratic can describe any irregular pattern, even a machine's.",
+  "alternatives": [],
+  "prompt": "Employees describe how their manager sets the rules in their office.",
+  "options": [
+    "The capricious manager banned headphones on Monday, then required them on Friday for no stated reason.",
+    "The capricious manager's corner office was roomy enough to hold thirty desks with space to spare.",
+    "The capricious manager kept the same clear rules in place for ten years, and everyone knew them.",
+    "The capricious manager changed one policy only after a month of surveys and a detailed memo."
+  ],
+  "reasons": [
+    "Abrupt reversals with no explanation behind them are exactly the kind of whim the word names.",
+    "Spaciousness belongs to the look-alike capacious; this word concerns unpredictable whims.",
+    "Rules that stay fixed for a decade show steadiness, the reverse of impulsive change.",
+    "A slow, carefully documented decision is deliberate, not a sudden whim."
+  ],
+  "practice": {
+    "prompt": "A family explains how their cat behaves around visitors.",
+    "options": [
+      "Our capricious cat curls up on a guest's lap, then hisses and stalks off for no clear reason.",
+      "Our capricious cat learned to open the pantry door when she was only ten weeks old.",
+      "Our capricious cat greets every visitor with the same slow blink and gentle purr, without fail.",
+      "Our capricious cat is so dependably sweet that we recommend her to anyone nervous around pets."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Affection that flips to hostility without cause fits the word's sense of unpredictable mood.",
+      "Skill at a young age suggests precocious, a different word; nothing here shows shifting moods.",
+      "Behaving identically every time is consistency, the opposite of whimsical shifts.",
+      "Calling a pet dependable contradicts the word, which signals moods no one can count on."
+    ]
+  }
+}

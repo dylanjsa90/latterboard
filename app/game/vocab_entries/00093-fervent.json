@@ -1,0 +1,47 @@
+{
+  "id": 93,
+  "slug": "fervent",
+  "word": "fervent",
+  "pos": "adjective",
+  "pronunciation": "/ˈfɜːr.vənt/",
+  "definition": "Having or showing very strong and sincere feeling about something.",
+  "difficulty": "Intermediate",
+  "example": "My grandfather stayed a fervent admirer of old jazz records long after his friends lost interest.",
+  "synonyms": [
+    "passionate",
+    "ardent",
+    "impassioned",
+    "zealous"
+  ],
+  "nuance": "Fervent suggests warm, sincere intensity; fervid often hints at overheated excess, and zealous can imply fanatical action.",
+  "alternatives": [],
+  "prompt": "A volunteer describes the community garden she started on an empty lot.",
+  "options": [
+    "Her fervent belief in shared green space kept her weeding there every weekend for years.",
+    "She was so fervent about the garden that she rarely bothered to visit it.",
+    "The fervent soil in the lot produced twice as many tomatoes as last summer.",
+    "She gave a fervent, half-hearted wave when neighbors asked about the plants."
+  ],
+  "reasons": [
+    "Years of steady effort grow naturally out of an intense, heartfelt conviction.",
+    "Ignoring a project shows indifference, the reverse of passionate feeling.",
+    "This confuses the word with fertile; dirt can be rich but cannot feel passion.",
+    "A half-hearted gesture lacks the strong emotion the word requires."
+  ],
+  "practice": {
+    "prompt": "Supporters of a small-town soccer team attend the championship final.",
+    "options": [
+      "The fervent supporters left at halftime because they found the match boring.",
+      "The fervent referee calmly applied every rule without favoring either side.",
+      "The fervent grass on the field had been mowed into neat stripes before kickoff.",
+      "The fervent supporters sang through the second half even while their team trailed."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Walking out from boredom shows a lack of feeling, not an abundance of it.",
+      "Calm neutrality is admirable for a referee but is the opposite of strong emotion.",
+      "Grass has no emotions, so it cannot be passionate about anything.",
+      "Singing loudly despite losing shows intense, sincere devotion."
+    ]
+  }
+}

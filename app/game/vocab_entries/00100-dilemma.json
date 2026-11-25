@@ -1,0 +1,46 @@
+{
+  "id": 100,
+  "slug": "dilemma",
+  "word": "dilemma",
+  "pos": "noun",
+  "pronunciation": "/dɪˈlɛm.ə/",
+  "definition": "A situation in which you must choose between two options that are both difficult or unpleasant.",
+  "difficulty": "Foundation",
+  "example": "The hikers faced a dilemma: turn back before the summit or risk descending in the dark.",
+  "synonyms": [
+    "quandary",
+    "hard choice",
+    "predicament"
+  ],
+  "nuance": "A dilemma always involves a hard choice between options; a predicament is any tough spot, even one with no decision to make.",
+  "alternatives": [],
+  "prompt": "A student has a concert and a final exam review scheduled for the same evening.",
+  "options": [
+    "Torn between the concert and the review session, Maya faced a real dilemma.",
+    "Maya's dilemma was simple, because the concert had been canceled weeks earlier.",
+    "Maya wrote a dilemma in her planner listing the start time of each event.",
+    "After eating too much popcorn, Maya had a dilemma in her stomach all night."
+  ],
+  "reasons": [
+    "Two commitments she values clash, so she has to give one of them up.",
+    "With one event canceled, nothing is left to choose between.",
+    "The word names a hard decision, not a note or a schedule entry.",
+    "The word describes a tough choice, not an ache or physical discomfort."
+  ],
+  "practice": {
+    "prompt": "A farmer must decide whether to harvest early before a storm or wait for riper crops.",
+    "options": [
+      "Harvest early for less grain or wait and risk losing it all: the farmer's dilemma.",
+      "The farmer planted a dilemma of sweet corn along the eastern fence last spring.",
+      "The forecast promised sunshine all week, so the farmer happily called his schedule a dilemma.",
+      "Using a borrowed dilemma, the farmer fixed the tractor's broken axle in under an hour."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Each path carries a real cost, so the farmer must accept one loss or the other.",
+      "The word refers to a difficult decision, not a crop or a planting row.",
+      "A calm week with no competing risks offers no hard decision to make.",
+      "A hard choice is not a tool that can be borrowed or used for repairs."
+    ]
+  }
+}

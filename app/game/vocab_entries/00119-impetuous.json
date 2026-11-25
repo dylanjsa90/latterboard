@@ -1,0 +1,47 @@
+{
+  "id": 119,
+  "slug": "impetuous",
+  "word": "impetuous",
+  "pos": "adjective",
+  "pronunciation": "/ɪmˈpɛtʃ.u.əs/",
+  "definition": "Acting quickly and eagerly without thinking carefully about the results.",
+  "difficulty": "Intermediate",
+  "example": "In an impetuous moment, she quit the choir before the concert season had even begun.",
+  "synonyms": [
+    "rash",
+    "impulsive",
+    "hasty",
+    "headlong"
+  ],
+  "nuance": "Impulsive can describe any sudden whim, but impetuous adds eager force, like someone charging ahead before thinking.",
+  "alternatives": [],
+  "prompt": "A hiker reaches a fork in the trail just as dark clouds start to gather.",
+  "options": [
+    "The impetuous hiker charged down the steeper path without checking the map or the sky.",
+    "The impetuous jacket kept every drop of rain from soaking through to her shirt.",
+    "The impetuous hiker studied the map and the clouds for twenty minutes before choosing a path.",
+    "The approaching storm gave the hikers the impetuous they needed to turn back."
+  ],
+  "reasons": [
+    "Rushing ahead without looking at the risks is exactly the rash eagerness the word names.",
+    "Keeping water out describes something impervious, a look-alike word, not hasty behavior.",
+    "Long, careful thought before acting is the opposite of rushing in.",
+    "This slot needs the noun impetus, meaning a push or motive. The adjective can't fill it."
+  ],
+  "practice": {
+    "prompt": "During a chess match, a player notices that the opponent has left a piece unprotected.",
+    "options": [
+      "The impetuous player earned her title through years of steady, patient study.",
+      "The impetuous player grabbed the loose bishop at once and walked straight into a trap.",
+      "The impetuous player spent ten quiet minutes checking every possible reply before moving.",
+      "The impetuous player seemed untouched by the crowd's noise, as if nothing could reach her."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Steady, patient effort over years is the opposite of acting on a sudden urge.",
+      "Taking the bait right away, without checking for danger, shows rash haste.",
+      "Patiently working through the options shows the self-control this word lacks.",
+      "Being unaffected by outside pressure fits impervious, a similar-sounding word."
+    ]
+  }
+}

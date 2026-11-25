@@ -46,3 +46,25 @@ class VocabSavedWord(Base):
     word_id: Mapped[int] = mapped_column(Integer, nullable=False)
     level: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     due: Mapped[datetime] = mapped_column(DateTime, nullable=False)
+
+
+class VocabWordReport(Base):
+    """A player's report that a word's entry is wrong or unsuitable. Words ship without a
+    person reviewing each one, so these are how mistakes come back. Guests can report
+    too; no address is stored (the network is only a rate-limit key)."""
+
+    __tablename__: str = "vocab_word_report"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    # Index into app.game.vocab_words.WORDS, not a foreign key.
+    word_id: Mapped[int] = mapped_column(Integer, nullable=False, index=True)
+    # Null for a guest, or once the reporter's account is deleted.
+    user_id: Mapped[int | None] = mapped_column(
+        Integer, ForeignKey("user.id", ondelete="SET NULL"), nullable=True
+    )
+    reason: Mapped[str] = mapped_column(String(32), nullable=False)
+    # Which question was on screen: "usage" or "context"; null if not sent.
+    kind: Mapped[str | None] = mapped_column(String(16), nullable=True)
+    note: Mapped[str] = mapped_column(String(500), nullable=False, default="")
+    # Naive UTC, like every DateTime column here (app.utils.utcnow).
+    created_at: Mapped[datetime] = mapped_column(DateTime, nullable=False)

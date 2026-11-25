@@ -4,8 +4,11 @@ import io
 import json
 from datetime import timedelta
 
-from app.game.vocab_words import DAILY_ANCHOR
-from app.vocab_pipeline.cli import main, render, review, status
+from app.crud.vocab import crud_vocab
+from app.game.vocab_words import DAILY_ANCHOR, WORDS
+from app.schemas.vocab import WordReportCreate
+from app.vocab_pipeline.cli import main, render, reports, review, status
+from tests.helpers import db_session
 from tests.vocab_helpers import entry, make_store, pending_draft
 
 
@@ -73,3 +76,32 @@ def test_main_runs_store_commands(tmp_path):
     assert main(["approve", "beta"], store=store, out=io.StringIO()) == 0
     assert main(["approve", "nope"], store=store, out=io.StringIO()) == 1
     assert main(["fmt"], store=store, out=io.StringIO()) == 0
+    store.save_draft(pending_draft("gamma"))
+    assert main(["approve"], store=store, out=io.StringIO()) == 1
+    out = io.StringIO()
+    assert main(["approve", "--all"], store=store, out=out) == 0
+    assert "approved 1: gamma" in out.getvalue()
+    assert [w.slug for w in store.shipped()] == ["alpha", "beta", "gamma"]
+
+
+def test_reports_groups_by_word_most_reported_first():
+    out = io.StringIO()
+    with db_session() as db:
+        reports(db, out)
+        assert out.getvalue() == "No reports.\n"
+        for word_id, reason, note in (
+            (3, "other", ""),
+            (1, "wrong_answer", "B is right too."),
+            (1, "confusing", ""),
+        ):
+            crud_vocab.report(
+                db, word_id, None, WordReportCreate(reason=reason, note=note)
+            )
+        out = io.StringIO()
+        reports(db, out)
+    lines = out.getvalue().splitlines()
+    assert lines[0] == f"{WORDS[1].word} (id 1): 2 report(s)"
+    assert lines[1].endswith("confusing") and lines[2].endswith(
+        "wrong_answer: B is right too."
+    )
+    assert lines[3] == f"{WORDS[3].word} (id 3): 1 report(s)"

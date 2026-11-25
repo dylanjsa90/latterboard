@@ -1,0 +1,47 @@
+{
+  "id": 112,
+  "slug": "conspicuously",
+  "word": "conspicuously",
+  "pos": "adverb",
+  "pronunciation": "/kənˈspɪk.ju.əs.li/",
+  "definition": "In a way that is easy to see or notice, so that something stands out.",
+  "difficulty": "Intermediate",
+  "example": "Her name was conspicuously absent from the list of volunteers thanked at the meeting.",
+  "synonyms": [
+    "noticeably",
+    "visibly",
+    "glaringly",
+    "obviously"
+  ],
+  "nuance": "Unlike ostentatiously, it doesn't mean someone is showing off. It means only that something stands out, and it is often used for an absence people notice.",
+  "alternatives": [],
+  "prompt": "A student arrives at a formal concert dressed very differently from everyone else.",
+  "options": [
+    "In a bright orange tracksuit, he sat conspicuously among rows of dark suits and gowns.",
+    "Nobody spotted him all evening because he was dressed so conspicuously.",
+    "He had conspicuously read the dress code three times and followed every rule.",
+    "He silently wondered, conspicuously, whether anyone in the hall had noticed his outfit."
+  ],
+  "reasons": [
+    "A vivid outfit in a sea of dark formal clothes is impossible to miss.",
+    "Whatever stands out gets noticed, so going unseen is the opposite.",
+    "Careful rule-following calls for the look-alike conscientiously, and it contradicts his unusual outfit.",
+    "An unspoken thought is hidden from others, so it cannot catch anyone's eye."
+  ],
+  "practice": {
+    "prompt": "Volunteers have just tidied a city park before a weekend festival.",
+    "options": [
+      "The new benches were placed conspicuously behind a shed, where no visitor would find them.",
+      "The grass grew conspicuously, looking exactly like the grass in every other part of the park.",
+      "The organizers conspicuously suspected that raccoons had scattered the litter.",
+      "A single overflowing trash can stood conspicuously beside the freshly swept path."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Hiding something out of sight is the reverse of making it stand out.",
+      "Something identical to everything around it blends in rather than standing out.",
+      "The word isn't a substitute for suspiciously, and a private suspicion can't be seen.",
+      "One messy bin in an otherwise spotless park would draw every visitor's attention."
+    ]
+  }
+}

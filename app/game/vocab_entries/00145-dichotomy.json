@@ -1,0 +1,49 @@
+{
+  "id": 145,
+  "slug": "dichotomy",
+  "word": "dichotomy",
+  "pos": "noun",
+  "pronunciation": "/daɪˈkɑː.tə.mi/",
+  "definition": "A sharp division or contrast between two things that are opposite or entirely different.",
+  "difficulty": "Intermediate",
+  "example": "The novel explores the dichotomy between big-city ambition and small-town loyalty.",
+  "synonyms": [
+    "division",
+    "contrast",
+    "split",
+    "polarity"
+  ],
+  "nuance": "A dichotomy is a clean split into two opposing parts; it is not a paradox, which is a puzzling contradiction, or a dilemma, which is a hard choice.",
+  "alternatives": [
+    "dilemma"
+  ],
+  "prompt": "A debate coach responds to a student who says speeches must be either logical or emotional.",
+  "options": [
+    "The coach called the split between logic and emotion a false dichotomy, since strong speeches use both.",
+    "Choosing between two equally good topics left the student stuck in a dichotomy for the whole afternoon.",
+    "The dichotomy of the team was clear, since all six members agreed on every single point.",
+    "The coach sorted last week's speeches into a dichotomy of seven different categories."
+  ],
+  "reasons": [
+    "It names a supposed two-way opposition and points out that the two sides can actually coexist.",
+    "A difficult choice is a dilemma; this word names a division, not a predicament someone is stuck in.",
+    "Complete agreement shows unity, the reverse of a sharp split into two opposing sides.",
+    "The word means a split into exactly two parts, so seven categories cannot form one."
+  ],
+  "practice": {
+    "prompt": "A biology class uses a key to identify animals step by step.",
+    "options": [
+      "The students saw a sharp dichotomy between the two beetles, which were identical in every way.",
+      "The teacher asked the class to dichotomy the specimens into two separate trays.",
+      "Each step in the key presents a dichotomy, such as whether the animal has a backbone.",
+      "It seemed a dichotomy that the lungfish lives in water yet can gulp air to breathe."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Identical things show no contrast, so there is no split between them to describe.",
+      "The word is a noun, not a verb; the verb form would be dichotomize.",
+      "Each step splits the animals into two contrasting groups, which is exactly what the word describes.",
+      "A surprising contradiction is a paradox, not a division of things into two opposing groups."
+    ]
+  }
+}

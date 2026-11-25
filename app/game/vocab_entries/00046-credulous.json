@@ -1,0 +1,49 @@
+{
+  "id": 46,
+  "slug": "credulous",
+  "word": "credulous",
+  "pos": "adjective",
+  "pronunciation": "/ˈkrɛdʒ.ə.ləs/",
+  "definition": "Too ready to believe what you are told, even without good evidence.",
+  "difficulty": "Intermediate",
+  "example": "Credulous readers shared the fake headline before checking whether any of it was true.",
+  "synonyms": [
+    "gullible",
+    "naive",
+    "overly trusting",
+    "unsuspecting"
+  ],
+  "nuance": "Credulous describes a person who believes too easily; credible describes a claim or source that deserves belief.",
+  "alternatives": [
+    "skeptical"
+  ],
+  "prompt": "At a county fair, a stranger claims his tonic can make hair grow back overnight.",
+  "options": [
+    "The credulous visitor bought three bottles without asking for any proof.",
+    "The salesman's credulous claim was backed by careful laboratory tests.",
+    "The credulous visitor demanded to see evidence and then walked away completely unconvinced.",
+    "The visitor stared in credulous disbelief at such an absurd promise."
+  ],
+  "reasons": [
+    "Paying for an unlikely promise without demanding evidence shows a person who believes too easily.",
+    "This mixes it up with credible; a well-supported claim is believable, and claims are not the ones doing the believing.",
+    "Insisting on proof and staying doubtful is skepticism, the reverse of easy belief.",
+    "Disbelief calls for incredulous; the word without the prefix means believing, not doubting."
+  ],
+  "practice": {
+    "prompt": "A rumor spreads through a middle school that classes will be canceled for a month.",
+    "options": [
+      "The rumor sounded so credulous that nobody bothered to question it.",
+      "Priya gave a credulous laugh, certain the whole story had been made up.",
+      "Being credulous, Mia packed away her books before anyone had confirmed the news.",
+      "Credulous as ever, Jonah phoned the front office to check whether the rumor was true."
+    ],
+    "answer": 2,
+    "reasons": [
+      "A believable story is credible; the word in question describes people who believe, not stories.",
+      "Being sure a story is invented shows doubt, which is the opposite of what the word means.",
+      "Acting on an unverified rumor as though it were fact shows belief given too readily.",
+      "Checking a story before accepting it is caution, not easy belief."
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": 113,
+  "slug": "begrudgingly",
+  "word": "begrudgingly",
+  "pos": "adverb",
+  "pronunciation": "/bɪˈɡrʌdʒ.ɪŋ.li/",
+  "definition": "In an unwilling, resentful way, as when doing something you would rather not do.",
+  "difficulty": "Intermediate",
+  "example": "He begrudgingly admitted that his little sister's plan was better than his own.",
+  "synonyms": [
+    "grudgingly",
+    "reluctantly",
+    "unwillingly"
+  ],
+  "nuance": "Begrudgingly adds a note of resentment that reluctantly lacks; you give in, but you are not happy about it.",
+  "alternatives": [],
+  "prompt": "A teenager is told to clean out the garage on a sunny Saturday.",
+  "options": [
+    "Sighing loudly, she begrudgingly dragged the old boxes to the curb.",
+    "She begrudgingly volunteered, thrilled to finally have a chance to tidy up.",
+    "She begrudgingly skipped the chore entirely and spent the day at the pool.",
+    "She begrudgingly agreed to the job, though no one had asked her to do anything."
+  ],
+  "reasons": [
+    "She does the chore but makes her resentment plain, which is exactly the right tone.",
+    "Being thrilled contradicts the resentment and reluctance the word requires.",
+    "The word describes giving in unwillingly, not avoiding the task altogether.",
+    "Reluctant compliance needs some pressure or request to resent; here there is none."
+  ],
+  "practice": {
+    "prompt": "A chess player loses a close match to a much younger opponent.",
+    "options": [
+      "He begrudgingly shook her hand and admitted she had played the better game.",
+      "He begrudgingly congratulated her, beaming with pure, wholehearted delight at her win.",
+      "He begrudgingly refused to shake her hand and stormed out of the room.",
+      "His begrudgingly was obvious to everyone still watching the board."
+    ],
+    "answer": 0,
+    "reasons": [
+      "He concedes defeat even though it stings, showing unwilling but real acceptance.",
+      "Wholehearted delight leaves no room for the resentment the word implies.",
+      "Refusing outright is not yielding; the word marks something done despite unwillingness.",
+      "An adverb cannot act as a noun here; a word like reluctance would be needed."
+    ]
+  }
+}

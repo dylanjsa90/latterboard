@@ -1,26 +1,30 @@
 """The word-list commands: `uv run python -m app.vocab_pipeline <command>`.
 
-status, generate, review, approve, reject, requeue and fmt. `generate` runs `claude -p` on
+status, generate, review, approve, reject, requeue, fmt and reports. `generate` runs `claude -p` on
 the owner's Claude subscription (see claude.py); everything else is local.
 """
 
 import argparse
-import hashlib
 import os
 import shlex
 import subprocess
 import sys
 from collections import Counter
-from collections.abc import Callable, Collection, Iterable, Sequence
+from collections.abc import Callable, Collection, Sequence
 from datetime import date, timedelta
 from pathlib import Path
 from typing import TextIO, TypedDict
 
+from sqlalchemy.orm import Session
+
+from app.crud.vocab import crud_vocab
+from app.database import SessionLocal
 from app.game.puzzles import today
 from app.game.vocab_words import DAILY_ANCHOR, DIFFICULTIES, daily_runway
+from app.schemas.vocab import WordReport
 from app.vocab_pipeline import claude
 from app.vocab_pipeline.drafting import TARGET_MIX
-from app.vocab_pipeline.store import ApprovalError, Draft, Store
+from app.vocab_pipeline.store import ApprovalError, Draft, Store, approval_order
 
 LETTERS = "ABCD"
 
@@ -68,12 +72,6 @@ def render(d: Draft, shipped_slugs: Collection[str], errors: Sequence[str]) -> s
     if errors:
         lines += ["Problems:", *(f"  - {error}" for error in errors)]
     return "\n".join(lines) + "\n"
-
-
-def review_order(drafts: Iterable[Draft]) -> list[Draft]:
-    """Hashed order, so the ids approval hands out interleave difficulties in the
-    daily walk."""
-    return sorted(drafts, key=lambda d: hashlib.sha256(d["slug"].encode()).hexdigest())
 
 
 def open_in_editor(path: Path) -> None:
@@ -137,7 +135,7 @@ def review(
     edit: Callable[[Path], None] = open_in_editor,
 ) -> ReviewTally:
     tally: ReviewTally = {"approved": 0, "rejected": 0, "skipped": 0}
-    for d in review_order(store.reviewable()):
+    for d in approval_order(store.reviewable()):
         if not _review_one(store, d["slug"], out, ask, edit, tally):
             break
     out.write(
@@ -171,6 +169,22 @@ def status(store: Store, today: date, out: TextIO) -> None:
         )
 
 
+def reports(db: Session, out: TextIO, limit: int = 500) -> None:
+    """Recent player reports, grouped by word, most-reported first."""
+    by_word: dict[int, list[WordReport]] = {}
+    for r in crud_vocab.reports(db, limit):
+        by_word.setdefault(r.word_id, []).append(r)
+    if not by_word:
+        out.write("No reports.\n")
+        return
+    for word_id, rs in sorted(by_word.items(), key=lambda kv: (-len(kv[1]), kv[0])):
+        out.write(f"{rs[0].word} (id {word_id}): {len(rs)} report(s)\n")
+        for r in rs:
+            kind = f" ({r.kind})" if r.kind else ""
+            note = f": {r.note}" if r.note else ""
+            out.write(f"  {r.created_at:%Y-%m-%d} {r.reason}{kind}{note}\n")
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m app.vocab_pipeline")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -183,8 +197,11 @@ def _parser() -> argparse.ArgumentParser:
         "--yes", action="store_true", help="skip the usage prompt (owner agreed)"
     )
     commands.add_parser("review", help="approve, edit or reject drafts one by one")
-    approve = commands.add_parser("approve", help="ship drafts without the review loop")
-    approve.add_argument("slugs", nargs="+")
+    approve = commands.add_parser("approve", help="ship drafts that pass validation")
+    approve.add_argument("slugs", nargs="*")
+    approve.add_argument(
+        "--all", action="store_true", help="every pending draft, in approval order"
+    )
     reject = commands.add_parser(
         "reject", help="reject a draft so it is never redrafted"
     )
@@ -193,6 +210,7 @@ def _parser() -> argparse.ArgumentParser:
     requeue = commands.add_parser("requeue", help="put drafts back in the queue")
     requeue.add_argument("slugs", nargs="+")
     commands.add_parser("fmt", help="rewrite shipped files in the canonical format")
+    commands.add_parser("reports", help="players' reports of problems with words")
     return parser
 
 
@@ -216,6 +234,11 @@ def main(
         elif args.command == "review":
             review(store, out)
         elif args.command == "approve":
+            if args.all:
+                return 1 if claude.approve_ready(store, out) else 0
+            if not args.slugs:
+                out.write("error: name the drafts to approve, or pass --all\n")
+                return 1
             for slug in args.slugs:
                 paths = store.approve(slug)
                 out.write(f"approved {slug}: {', '.join(p.name for p in paths)}\n")
@@ -224,6 +247,9 @@ def main(
         elif args.command == "requeue":
             for slug in args.slugs:
                 store.requeue(slug)
+        elif args.command == "reports":
+            with SessionLocal() as db:
+                reports(db, out)
         elif args.command == "fmt":
             for path in store.fmt():
                 out.write(f"rewrote {path.name}\n")

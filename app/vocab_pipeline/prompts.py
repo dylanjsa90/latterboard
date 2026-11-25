@@ -143,22 +143,32 @@ Here is a complete entry in the expected shape:
 )
 
 
-def propose_message(counts: Mapping[Difficulty, int], exclude: Sequence[str]) -> str:
-    return (
+def propose_message(
+    counts: Mapping[Difficulty, int],
+    exclude: Sequence[str],
+    suggest: Sequence[str] = (),
+) -> str:
+    """`suggest` holds words existing entries list as confusable alternatives. They are
+    only suggestions: the proposer applies its rules to them like any other word."""
+    message = (
         f"Propose exactly {counts['Foundation']} Foundation, "
         f"{counts['Intermediate']} Intermediate and {counts['Advanced']} Advanced "
         "words.\n\n"
         "Exclusion list (words already in the game or already drafted):\n"
         f"{', '.join(sorted(exclude))}"
     )
+    if suggest:
+        message += (
+            "\n\nWords existing entries list as easily confused with them. Prefer these "
+            "where one meets every rule above, but skip any that is an inflected or "
+            "derived form of an excluded word, or that a learner would only meet as a "
+            "wrong answer:\n"
+            f"{', '.join(sorted(suggest))}"
+        )
+    return message
 
 
 def draft_message(d: Draft) -> str:
-    if d["source"] == "wanted":
-        return (
-            f'Write the entry for "{d["word"]}". '
-            "Choose its part of speech and difficulty."
-        )
     return (
         f'Write the entry for "{d["word"]}" ({d["pos"]}). '
         f"Target difficulty: {d['difficulty']}."

@@ -1,0 +1,46 @@
+{
+  "id": 98,
+  "slug": "precision",
+  "word": "precision",
+  "pos": "noun",
+  "pronunciation": "/prɪˈsɪʒ.ən/",
+  "definition": "The quality of being exact and careful, with no small errors or vague details.",
+  "difficulty": "Foundation",
+  "example": "The watchmaker worked with such precision that every tiny gear turned smoothly against the next.",
+  "synonyms": [
+    "exactness",
+    "accuracy",
+    "meticulousness"
+  ],
+  "nuance": "Precision is about exact, consistent detail, while accuracy is about being correct; a measurement can be precise yet still wrong.",
+  "alternatives": [],
+  "prompt": "A carpenter is building cabinets that must fit into a narrow alcove.",
+  "options": [
+    "She measured each panel with precision, so the cabinets slid into place with no gaps.",
+    "She cut the panels with precision, eyeballing each line and leaving gaps an inch wide.",
+    "She gave precision to her partner's design, letting it go first because he was senior.",
+    "After weeks of doubt, the carpenter finally made a precision to paint the cabinets white."
+  ],
+  "reasons": [
+    "Careful, exact measuring that produces a perfect fit is exactly what the word describes.",
+    "Guessing at lines and leaving big gaps is sloppiness, the reverse of exactness.",
+    "This confuses the word with precedence, which means priority or going first.",
+    "This mixes the word up with decision; one cannot make a precision about a choice."
+  ],
+  "practice": {
+    "prompt": "A scientist writes up the results of a lab experiment.",
+    "options": [
+      "Before running the test, the scientist asked the lab director for precision to use the microscope.",
+      "The lab assistant added precision to the group meeting by chatting about his weekend hiking trip.",
+      "Her report listed each temperature to a tenth of a degree, a level of precision the reviewers praised.",
+      "The report showed great precision because every reading was rounded to the nearest hundred degrees."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This confuses the word with permission; exactness is not something you request access with.",
+      "Casual small talk has nothing to do with being exact or careful.",
+      "Reporting fine-grained, exact figures shows careful attention to detail.",
+      "Rounding off so heavily throws away detail, which makes the results less exact, not more."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 135,
+  "slug": "innocuous",
+  "word": "innocuous",
+  "pos": "adjective",
+  "pronunciation": "/ɪˈnɑːk.ju.əs/",
+  "definition": "Not harmful or offensive; unlikely to hurt or upset anyone.",
+  "difficulty": "Intermediate",
+  "example": "The question about summer plans seemed innocuous, yet it set off a long family argument.",
+  "synonyms": [
+    "harmless",
+    "inoffensive",
+    "benign",
+    "bland"
+  ],
+  "nuance": "Innocuous often hints at blandness, while harmless is neutral and innocent means free of guilt, not free of harm.",
+  "alternatives": [],
+  "prompt": "A host wants the dinner conversation to stay pleasant for guests who often disagree.",
+  "options": [
+    "She kept the chat to innocuous topics like the weather and favorite desserts.",
+    "Her innocuous remark about a guest's cooking left him close to tears.",
+    "Once the real culprit confessed, the guest was declared innocuous of breaking the vase.",
+    "She picked innocuous topics because she hoped for a loud, bitter debate."
+  ],
+  "reasons": [
+    "Weather and desserts are safe subjects that won't upset anyone, which fits the host's goal.",
+    "A comment that wounds someone is hurtful, the opposite of harmless.",
+    "This confuses the word with innocent; being cleared of blame calls for innocent.",
+    "Safe, inoffensive subjects would never be chosen to stir up a bitter fight."
+  ],
+  "practice": {
+    "prompt": "A scientist tests whether a new garden spray affects honeybees.",
+    "options": [
+      "Because the spray was innocuous, the scientists banned it from every garden.",
+      "Lab trials showed the spray was innocuous to bees, even at high doses.",
+      "The spray proved innocuous, wiping out half the hive within a day.",
+      "Before the trial, the team had to innocuous every bee against mites."
+    ],
+    "answer": 1,
+    "reasons": [
+      "No one would ban a product for being safe, so the logic of the sentence breaks.",
+      "Causing the bees no harm, even in large amounts, is exactly what the word describes.",
+      "Killing half the hive is serious harm, so the word is used backward here.",
+      "This mixes up the word with inoculate; it is an adjective, not a verb for protecting against disease."
+    ]
+  }
+}

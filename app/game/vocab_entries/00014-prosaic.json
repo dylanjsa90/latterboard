@@ -14,7 +14,8 @@
   ],
   "nuance": "Prosaic evaluates the character of something, not merely its literary format.",
   "alternatives": [
-    "esoteric"
+    "esoteric",
+    "novel"
   ],
   "prompt": "The mystery turns out to have a mundane explanation.",
   "options": [

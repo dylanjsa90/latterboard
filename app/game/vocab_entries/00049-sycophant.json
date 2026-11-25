@@ -1,0 +1,47 @@
+{
+  "id": 49,
+  "slug": "sycophant",
+  "word": "sycophant",
+  "pos": "noun",
+  "pronunciation": "/ˈsɪk.ə.fənt/",
+  "definition": "A person who flatters powerful or important people to win their favor.",
+  "difficulty": "Advanced",
+  "example": "The team captain grew tired of the sycophant who agreed with everything she said.",
+  "synonyms": [
+    "flatterer",
+    "toady",
+    "yes-man",
+    "bootlicker"
+  ],
+  "nuance": "An admirer's praise may be sincere, but a sycophant's praise is calculated to win favor from someone with power.",
+  "alternatives": [],
+  "prompt": "A new employee wants to win favor with a manager as quickly as possible.",
+  "options": [
+    "Eager for a raise, the sycophant applauded even the manager's weakest ideas.",
+    "The sycophant bluntly told the manager that her new schedule would never work.",
+    "Coworkers trusted the sycophant because his feedback on their projects was always honest and impartial.",
+    "The sycophant stayed home all week with a high fever and a cough."
+  ],
+  "reasons": [
+    "Praising the boss's poor ideas to gain an advantage is exactly this kind of self-serving flattery.",
+    "Openly criticizing a superior is the opposite of seeking favor through praise.",
+    "The word implies insincere praise, so it cannot describe a trusted, honest voice.",
+    "Despite its opening sound, the word has nothing to do with being sick."
+  ],
+  "practice": {
+    "prompt": "A celebrated painter shows an unfinished canvas to visitors in her studio.",
+    "options": [
+      "The sycophant, a quiet stranger, ignored the painter entirely and studied the window frames.",
+      "The painter thanked the sycophant, a respected critic known for sincere judgments.",
+      "Wanting an invitation to her gala, the sycophant called the rough sketch a masterpiece.",
+      "The sycophant pointed out that the colors in one corner looked muddy and rushed."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Paying no attention to an important person shows no effort to win favor.",
+      "The label is an insult for a false flatterer, not a title for an honest expert.",
+      "Exaggerated praise offered to an influential person for personal gain fits the word.",
+      "Frank criticism risks the painter's displeasure instead of courting her approval."
+    ]
+  }
+}

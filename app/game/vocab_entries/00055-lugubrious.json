@@ -1,0 +1,47 @@
+{
+  "id": 55,
+  "slug": "lugubrious",
+  "word": "lugubrious",
+  "pos": "adjective",
+  "pronunciation": "/lʊˈɡuː.bri.əs/",
+  "definition": "Looking or sounding sad and gloomy, often in an exaggerated way.",
+  "difficulty": "Advanced",
+  "example": "The old ferry's foghorn let out a lugubrious moan across the harbor at dusk.",
+  "synonyms": [
+    "mournful",
+    "doleful",
+    "woebegone",
+    "gloomy"
+  ],
+  "nuance": "Lugubrious suggests sorrow that is heavy or overdone, often a little comic, while mournful simply means sad.",
+  "alternatives": [],
+  "prompt": "A drama club rehearses a scene in which a butler announces bad news.",
+  "options": [
+    "The butler reported the canceled picnic in a lugubrious voice, sighing between words.",
+    "The butler's lugubrious grin lit up the whole stage as he cracked one joke after another.",
+    "The lugubrious butler was so slippery that he slid across the polished floor.",
+    "The butler's lugubrious costume was so absurd that the audience burst out laughing."
+  ],
+  "reasons": [
+    "A heavy, sighing delivery of bad news shows the exaggerated gloom the word conveys.",
+    "A beaming, joking butler is cheerful, which is the reverse of dismal and mournful.",
+    "Slipperiness suggests lubricated, a look-alike word, and has nothing to do with sadness.",
+    "Something absurd and laughable is ludicrous; this word means gloomy, not silly."
+  ],
+  "practice": {
+    "prompt": "A family's old dog watches them pack for a trip without him.",
+    "options": [
+      "With drooping ears, the old dog gave each suitcase a lugubrious look.",
+      "The dog wagged his tail in lugubrious delight when someone grabbed the leash.",
+      "The lugubrious dog was so huge that he barely squeezed through the doorway.",
+      "After his bath, the dog's coat was so lugubrious that it gleamed in the sunlight."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Drooping ears and a sorrowful gaze at the luggage show a dismal, woeful mood.",
+      "Delight and a wagging tail express joy, which contradicts a gloomy manner.",
+      "The word describes a sad manner, not size or bulk.",
+      "A gleaming coat is lustrous; the word describes mood, not shine."
+    ]
+  }
+}

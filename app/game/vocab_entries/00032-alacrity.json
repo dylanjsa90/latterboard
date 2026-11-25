@@ -13,7 +13,10 @@
     "readiness"
   ],
   "nuance": "Alacrity often describes willingness to act; speed without willingness is insufficient.",
-  "alternatives": [],
+  "alternatives": [
+    "reticence",
+    "precision"
+  ],
   "prompt": "A volunteer eagerly accepts an unexpected assignment.",
   "options": [
     "She accepted the assignment with alacrity and immediately offered to help further.",

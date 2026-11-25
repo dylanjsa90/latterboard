@@ -1,0 +1,49 @@
+{
+  "id": 142,
+  "slug": "dogmatic",
+  "word": "dogmatic",
+  "pos": "adjective",
+  "pronunciation": "/dɑːɡˈmæt.ɪk/",
+  "definition": "Stating opinions as if they are certainly true and refusing to consider other views.",
+  "difficulty": "Intermediate",
+  "example": "A dogmatic coach may ignore new training research simply because it contradicts his favorite drills.",
+  "synonyms": [
+    "opinionated",
+    "doctrinaire",
+    "inflexible",
+    "closed-minded"
+  ],
+  "nuance": "A confident person holds views firmly; a dogmatic person also refuses to examine them or hear any challenge.",
+  "alternatives": [
+    "pragmatic"
+  ],
+  "prompt": "A science teacher responds to a student who questions a claim in the textbook.",
+  "options": [
+    "The dogmatic teacher waved away the student's evidence and simply repeated the textbook's claim.",
+    "The dogmatic teacher happily revised the lesson after reviewing the student's data.",
+    "The dogmatic teacher kept grading lab reports late into the night until all were done.",
+    "The dogmatic teacher flung both arms wide and gasped theatrically at the question."
+  ],
+  "reasons": [
+    "Dismissing evidence without examining it shows rigid, unquestioning certainty.",
+    "Welcoming new evidence and changing one's view is the opposite of this rigidity.",
+    "Tireless persistence describes being dogged, a look-alike, not refusing other views.",
+    "A showy, theatrical reaction confuses the word with dramatic."
+  ],
+  "practice": {
+    "prompt": "Members of a hiking club disagree about which trail to take up the mountain.",
+    "options": [
+      "Ravi was so dogmatic that he chose whichever trail suited the morning's weather report.",
+      "Ravi was so dogmatic that he brought his two beagles along on every club hike.",
+      "Ravi was so dogmatic about his route that he dismissed the new map before even opening it.",
+      "Ravi was so dogmatic that he asked everyone for ideas and adopted the most popular route."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Adapting to current conditions is practical flexibility, closer to pragmatic.",
+      "The word comes from dogma, meaning fixed belief, and has nothing to do with dogs.",
+      "Rejecting information unseen shows a belief held beyond question.",
+      "Inviting input and changing course shows open-mindedness, not rigidity."
+    ]
+  }
+}

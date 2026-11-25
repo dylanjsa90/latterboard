@@ -1,0 +1,46 @@
+{
+  "id": 131,
+  "slug": "anachronism",
+  "word": "anachronism",
+  "pos": "noun",
+  "pronunciation": "/əˈnæk.rə.nɪz.əm/",
+  "definition": "Something shown in a time period where it could not have existed, like a phone in an ancient tale.",
+  "difficulty": "Intermediate",
+  "example": "A typewriter on stage in a play set in 1700 would be a glaring anachronism.",
+  "synonyms": [
+    "chronological error",
+    "misdating",
+    "throwback"
+  ],
+  "nuance": "An anachronism is out of place in time; an anomaly can be odd in any way, and an archaism is old wording used on purpose.",
+  "alternatives": [],
+  "prompt": "A historian reviews the costumes in a film set in medieval England.",
+  "options": [
+    "The historian noted that the zipper on the queen's gown was an anachronism.",
+    "The historian called the castle an anachronism simply because it was so old and grand.",
+    "The historian praised each anachronism for matching the medieval period perfectly.",
+    "The historian complained that the anachronism of the film ran nearly three hours."
+  ],
+  "reasons": [
+    "Zippers were invented centuries later, so one has no place in a medieval scene.",
+    "A castle fits a medieval setting; being ancient is not the same as being in the wrong era.",
+    "This reverses the meaning: these errors clash with their period instead of matching it.",
+    "A movie's running time is its length, not a detail misplaced in history."
+  ],
+  "practice": {
+    "prompt": "A student writes a short story about a farm family in the year 1850.",
+    "options": [
+      "In a story set in 1850, the farmer's text message to his neighbor is an anachronism.",
+      "The student included an anachronism by giving the 1850 farmer a horse-drawn plow.",
+      "The teacher said the story's anachronism was its flashback to the farmer's boyhood.",
+      "The student created an anachronism by spelling the farmer's name two different ways."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Cell phones did not exist in 1850, so the message belongs to a much later era.",
+      "Horse-drawn plows were common then, so this detail fits the period.",
+      "A flashback is a storytelling technique, not an object from the wrong era.",
+      "Spelling a name inconsistently is a typo, not a historical mismatch."
+    ]
+  }
+}

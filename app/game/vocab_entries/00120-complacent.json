@@ -1,0 +1,47 @@
+{
+  "id": 120,
+  "slug": "complacent",
+  "word": "complacent",
+  "pos": "adjective",
+  "pronunciation": "/kəmˈpleɪ.sənt/",
+  "definition": "So pleased with how things are that you stop noticing dangers or trying hard.",
+  "difficulty": "Intermediate",
+  "example": "Decades without a flood had made the town complacent about its aging levee.",
+  "synonyms": [
+    "self-satisfied",
+    "overconfident",
+    "smug",
+    "lax"
+  ],
+  "nuance": "Complacent means careless self-satisfaction that ignores risk; the look-alike complaisant means eager to please others.",
+  "alternatives": [],
+  "prompt": "A soccer team leads the league by ten points with five games left to play.",
+  "options": [
+    "The coach warned the players not to grow complacent with the title in sight.",
+    "The complacent goalkeeper agreed to every request the opposing fans shouted at him.",
+    "Complacent about the standings, the players added extra drills and studied every rival's game tapes.",
+    "Praising the team's complacent attitude, the captain called it the secret to their sharp focus."
+  ],
+  "reasons": [
+    "A big lead can tempt a team to relax and stop working, which is the risk the coach names.",
+    "Obliging everyone's wishes describes being complaisant, not being carelessly self-satisfied.",
+    "Extra drills and close study show alert effort, the reverse of easing off.",
+    "The word names a fault that dulls focus, so treating it as a virtue ignores its negative tone."
+  ],
+  "practice": {
+    "prompt": "A company's website has never been hacked, so employees stop bothering to update their passwords.",
+    "options": [
+      "The complacent receptionist happily rearranged her schedule to suit every visitor.",
+      "Complacent about security, the manager checked every login record twice a day.",
+      "The complacent employees filed a long list of grievances about the new rules.",
+      "The complacent staff shrugged off the security team's warnings."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Bending over backward to accommodate people is complaisance, a different word.",
+      "Checking records twice daily shows watchfulness, the opposite of relaxed overconfidence.",
+      "Filing complaints shows dissatisfaction, while this word describes people who feel too content.",
+      "Brushing aside warnings because nothing bad has happened yet shows comfortable carelessness."
+    ]
+  }
+}

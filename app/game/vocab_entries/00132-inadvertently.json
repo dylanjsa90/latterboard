@@ -1,0 +1,46 @@
+{
+  "id": 132,
+  "slug": "inadvertently",
+  "word": "inadvertently",
+  "pos": "adverb",
+  "pronunciation": "/ˌɪn.ədˈvɜːr.tənt.li/",
+  "definition": "Without meaning to, usually because of a lapse in attention.",
+  "difficulty": "Foundation",
+  "example": "While cleaning out the closet, she inadvertently donated the jacket with her keys still in the pocket.",
+  "synonyms": [
+    "unintentionally",
+    "accidentally",
+    "unwittingly"
+  ],
+  "nuance": "Inadvertently suggests an oversight or a moment of inattention, while accidentally can describe pure chance with no lapse at all.",
+  "alternatives": [],
+  "prompt": "Students are typing group messages about their weekend plans.",
+  "options": [
+    "Rushing to reply, Maya inadvertently sent the plans to her whole class instead of one friend.",
+    "After rereading it twice, Leo inadvertently sent the invitation exactly as he had intended.",
+    "Priya inadvertently hinted at the surprise party by mentioning cake, hoping her friend would guess.",
+    "Sam inadvertently promoted the club car wash in the chat, just as the club had asked him to."
+  ],
+  "reasons": [
+    "Sending a message to the wrong people in a hurry is an unplanned slip.",
+    "Rereading carefully and sending as intended describes a fully deliberate act.",
+    "Hoping someone will catch a hint makes it purposeful; this confuses the word with indirectly.",
+    "Doing what you were asked is intentional; the word has nothing to do with advertising."
+  ],
+  "practice": {
+    "prompt": "A hiker is walking along a muddy forest trail.",
+    "options": [
+      "The hiker felt it would be inadvertently to cross the swollen creek, so she turned back.",
+      "Distracted by a woodpecker, the hiker inadvertently wandered off the trail into some nettles.",
+      "After checking the forecast, the hiker inadvertently packed extra socks in case of rain.",
+      "The ranger inadvertently warned the group about the washed-out bridge, exactly as his job requires."
+    ],
+    "answer": 1,
+    "reasons": [
+      "This mistakes the word for inadvisable; it describes unplanned actions, not unwise ones.",
+      "Drifting off course while distracted is an unintended result of not paying attention.",
+      "Packing for rain after checking the weather is a planned, conscious choice.",
+      "A warning given on purpose as part of one's duties is not an accident."
+    ]
+  }
+}

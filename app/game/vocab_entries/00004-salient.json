@@ -14,7 +14,8 @@
   ],
   "nuance": "Salient is context-dependent: a fact can be salient for one decision and irrelevant to another.",
   "alternatives": [
-    "latent"
+    "latent",
+    "incidental"
   ],
   "prompt": "A briefing highlights the facts that matter most to the decision.",
   "options": [

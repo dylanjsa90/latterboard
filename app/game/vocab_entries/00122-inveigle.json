@@ -1,0 +1,47 @@
+{
+  "id": 122,
+  "slug": "inveigle",
+  "word": "inveigle",
+  "pos": "verb",
+  "pronunciation": "/ɪnˈveɪ.ɡəl/",
+  "definition": "To get someone to do something by using flattery, charm, or trickery.",
+  "difficulty": "Advanced",
+  "example": "The con artist inveigled his way into the gala by claiming to be the host's cousin.",
+  "synonyms": [
+    "wheedle",
+    "cajole",
+    "beguile",
+    "sweet-talk"
+  ],
+  "nuance": "Unlike coax, inveigle implies cunning or deceit; don't confuse it with inveigh, which means to protest angrily.",
+  "alternatives": [],
+  "prompt": "A teenager wants the last slice of cake, which her younger brother has already claimed.",
+  "options": [
+    "She tried to inveigle her brother out of it by claiming the frosting had gone sour.",
+    "She began to inveigle loudly against the unfair way their mother had cut the cake.",
+    "She chose to inveigle him by stating plainly and honestly that she wanted the slice too.",
+    "She offered to inveigle the remaining slice into two equal halves with a butter knife."
+  ],
+  "reasons": [
+    "She uses a sly fib to talk him into giving up the slice, which is exactly this kind of crafty persuasion.",
+    "Loud complaining against something is inveighing, a look-alike word, not persuading by guile.",
+    "A frank, honest request involves no flattery or trickery, so the word doesn't fit.",
+    "The verb describes luring people, not cutting or dividing objects."
+  ],
+  "practice": {
+    "prompt": "A student council member needs volunteers for a park cleanup that nobody seems eager to join.",
+    "options": [
+      "He hoped to inveigle a few classmates into helping by hinting at free pizza that was never planned.",
+      "He agreed to inveigle the volunteers, standing nearby to supervise them as they bagged litter.",
+      "Teachers praised how transparently he managed to inveigle volunteers, concealing nothing at all.",
+      "As council president, he could inveigle classmates simply by ordering them to show up on Saturday."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Luring people with a false promise is persuasion through deception, the heart of this verb.",
+      "Watching over workers is supervising, perhaps confused with the look-alike invigilate.",
+      "This kind of persuasion depends on hidden motives, so full transparency contradicts it.",
+      "Giving orders backed by authority is coercion, not winning someone over with charm or tricks."
+    ]
+  }
+}

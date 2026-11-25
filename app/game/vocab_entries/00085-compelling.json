@@ -1,0 +1,47 @@
+{
+  "id": 85,
+  "slug": "compelling",
+  "word": "compelling",
+  "pos": "adjective",
+  "pronunciation": "/kəmˈpɛl.ɪŋ/",
+  "definition": "So convincing or interesting that it is hard to ignore or resist.",
+  "difficulty": "Foundation",
+  "example": "The museum's new exhibit tells a compelling story about the first pilots to cross the ocean.",
+  "synonyms": [
+    "persuasive",
+    "convincing",
+    "gripping",
+    "captivating"
+  ],
+  "nuance": "Unlike convincing, which only means it proves a point, compelling also suggests a pull on your attention, as with a story you can't put down.",
+  "alternatives": [],
+  "prompt": "A science fair judge reviews a student's project on how light affects plant growth.",
+  "options": [
+    "The student's data offered compelling evidence that the plants grew faster under blue light.",
+    "Attending the awards ceremony was compelling, so every student had to be there by noon.",
+    "The judge found the results compelling, so she rejected every conclusion the student drew.",
+    "A compelling gust of wind pushed the student's poster off the display table and onto the floor."
+  ],
+  "reasons": [
+    "Clear data that persuades the judge is evidence that is hard to dismiss.",
+    "A required event is compulsory; this word describes persuasive force, not a rule.",
+    "Results that win her over would lead her to accept the conclusions, not reject them.",
+    "The word applies to ideas, stories, or evidence that win people over, not to physical pushing."
+  ],
+  "practice": {
+    "prompt": "A reader picks up a mystery novel on a rainy afternoon.",
+    "options": [
+      "The plot was so compelling that she read until the last page without getting up.",
+      "The plot was compelling, so she set the book aside after one chapter and forgot about it.",
+      "Reading the novel was compelling for her English class, since the teacher assigned it to everyone.",
+      "She had a compelling habit of checking the clock every few minutes while reading."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A story that holds her attention so strongly she can't stop shows the gripping sense.",
+      "Abandoning a book shows it failed to hold her interest, the opposite of the intended meaning.",
+      "An assignment makes reading required, which is compulsory, not attention-grabbing.",
+      "A habit she can't control is compulsive; this word describes what draws people in."
+    ]
+  }
+}

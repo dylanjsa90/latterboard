@@ -5,8 +5,9 @@ word that shipped entries want as an alternative to those entries, so approving 
 it back. Every file is written with `dump_entry`, so diffs stay small and stable.
 """
 
+import hashlib
 import json
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, Literal, TypedDict, cast
@@ -24,15 +25,15 @@ from app.game.vocab_words import (
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DraftStatus = Literal["queued", "pending", "invalid", "rejected"]
-Source = Literal["generated", "wanted"]
+Source = Literal["generated"]
 
 
 class Draft(TypedDict):
     slug: str
     word: str
-    # None until drafted for "wanted" drafts.
-    pos: str | None
-    difficulty: str | None
+    # From the proposal, then from the drafted entry.
+    pos: str
+    difficulty: str
     source: Source
     status: DraftStatus
     attempts: int
@@ -51,6 +52,12 @@ class WantedWord(TypedDict):
 
 class ApprovalError(Exception):
     """A draft that can't ship; nothing was written."""
+
+
+def approval_order(drafts: Iterable[Draft]) -> list[Draft]:
+    """Hashed order, so the ids approval hands out interleave difficulties in the
+    daily walk."""
+    return sorted(drafts, key=lambda d: hashlib.sha256(d["slug"].encode()).hexdigest())
 
 
 def _read_json(path: Path, default: Any) -> Any:
@@ -185,6 +192,24 @@ class Store:
         self.draft_path(slug).unlink()
         self.save_wanted(wanted)
         return paths
+
+    def approve_ready(self) -> tuple[list[str], dict[str, str]]:
+        """Approve every pending draft, in approval_order. Returns the slugs approved and,
+        for any that couldn't ship, its errors; those drafts become invalid."""
+        approved: list[str] = []
+        failed: dict[str, str] = {}
+        pending = [d for d in self.drafts() if d["status"] == "pending"]
+        for d in approval_order(pending):
+            try:
+                self.approve(d["slug"])
+            except ApprovalError as e:
+                failed[d["slug"]] = str(e)
+                self.save_draft(
+                    {**d, "status": "invalid", "errors": str(e).splitlines()}
+                )
+            else:
+                approved.append(d["slug"])
+        return approved, failed
 
     def reject(self, slug: str, note: str) -> None:
         """Keep the draft as rejected, so the word is never drafted again."""

@@ -1,0 +1,47 @@
+{
+  "id": 71,
+  "slug": "comply",
+  "word": "comply",
+  "pos": "verb",
+  "pronunciation": "/kəmˈplaɪ/",
+  "definition": "To do what a rule, request, or order says you must do.",
+  "difficulty": "Foundation",
+  "example": "Every restaurant in town must comply with the new food safety rules by spring.",
+  "synonyms": [
+    "obey",
+    "follow",
+    "conform",
+    "abide by"
+  ],
+  "nuance": "Comply usually takes \"with\" and suggests meeting a rule or request, while obey stresses yielding to a person's authority.",
+  "alternatives": [],
+  "prompt": "A school library posts a new rule asking students to silence their phones.",
+  "options": [
+    "Most students were glad to comply and set their phones to silent.",
+    "The librarian complied the new rule from three older policies.",
+    "To comply with the rule, Ava turned her ringer up to full volume.",
+    "Jamal complied about the rule to anyone in the library who would listen."
+  ],
+  "reasons": [
+    "Silencing their phones is exactly what the posted rule asked students to do.",
+    "Putting together material from several sources is compiling, not following a rule.",
+    "Making the phone louder goes against the rule instead of following it.",
+    "Grumbling about a rule is complaining; the word means going along with it."
+  ],
+  "practice": {
+    "prompt": "A soccer referee tells a player to tuck in his jersey before the match.",
+    "options": [
+      "The midfielder complied by pulling his jersey out even further than before.",
+      "The referee complied the player to fix his uniform right away.",
+      "His striped jersey complied nicely with his bright red socks and cleats.",
+      "The midfielder was quick to comply and tucked his shirt in before kickoff."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Doing the opposite of an instruction is defiance, not obedience.",
+      "The person who follows the order complies; the word cannot mean forcing someone.",
+      "Clothes that look good together complement each other; they do not follow rules.",
+      "He did what the referee asked, which is what following an instruction means."
+    ]
+  }
+}

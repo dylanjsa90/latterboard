@@ -1,76 +1,1605 @@
 {
-  "dogmatic": {
-    "word": "dogmatic",
+  "abdicate": {
+    "word": "abdicate",
     "referrers": [
-      "nuanced",
-      "pragmatic"
+      "advocate"
     ]
   },
-  "eloquent": {
-    "word": "eloquent",
+  "abstract": {
+    "word": "abstract",
     "referrers": [
-      "laconic",
-      "perspicacious"
+      "tangible"
     ]
   },
-  "enduring": {
-    "word": "enduring",
+  "abundant": {
+    "word": "abundant",
     "referrers": [
-      "ephemeral"
+      "scarce"
     ]
   },
-  "expeditious": {
-    "word": "expeditious",
+  "accidental": {
+    "word": "accidental",
     "referrers": [
-      "fastidious"
+      "incidental"
     ]
   },
-  "incidental": {
-    "word": "incidental",
+  "accuracy": {
+    "word": "accuracy",
     "referrers": [
-      "salient"
+      "precision"
     ]
   },
-  "indifferent": {
-    "word": "indifferent",
+  "acquit": {
+    "word": "acquit",
     "referrers": [
-      "ambivalent"
+      "acquiesce"
     ]
   },
-  "meticulous": {
-    "word": "meticulous",
+  "adversary": {
+    "word": "adversary",
     "referrers": [
-      "perspicacious"
+      "adversity"
     ]
   },
-  "novel": {
-    "word": "novel",
+  "agitation": {
+    "word": "agitation",
     "referrers": [
-      "prosaic"
+      "equanimity"
     ]
   },
-  "precision": {
-    "word": "precision",
+  "allegedly": {
+    "word": "allegedly",
     "referrers": [
-      "alacrity"
+      "arguably"
     ]
   },
-  "protracted": {
-    "word": "protracted",
+  "allegory": {
+    "word": "allegory",
     "referrers": [
-      "tenuous"
+      "anecdote"
     ]
   },
-  "reticence": {
-    "word": "reticence",
+  "allot": {
+    "word": "allot",
     "referrers": [
-      "alacrity"
+      "allocate"
     ]
   },
-  "scarce": {
-    "word": "scarce",
+  "anecdotal": {
+    "word": "anecdotal",
     "referrers": [
-      "ubiquitous"
+      "empirical"
+    ]
+  },
+  "anomaly": {
+    "word": "anomaly",
+    "referrers": [
+      "anachronism",
+      "phenomenon"
+    ]
+  },
+  "antagonize": {
+    "word": "antagonize",
+    "referrers": [
+      "propitiate"
+    ]
+  },
+  "antidote": {
+    "word": "antidote",
+    "referrers": [
+      "anecdote"
+    ]
+  },
+  "antiquity": {
+    "word": "antiquity",
+    "referrers": [
+      "anachronism"
+    ]
+  },
+  "anxious": {
+    "word": "anxious",
+    "referrers": [
+      "insouciant"
+    ]
+  },
+  "apathetic": {
+    "word": "apathetic",
+    "referrers": [
+      "fervent"
+    ]
+  },
+  "apathy": {
+    "word": "apathy",
+    "referrers": [
+      "equanimity"
+    ]
+  },
+  "apocalyptic": {
+    "word": "apocalyptic",
+    "referrers": [
+      "apocryphal"
+    ]
+  },
+  "appeasing": {
+    "word": "appeasing",
+    "referrers": [
+      "conciliatory"
+    ]
+  },
+  "archaism": {
+    "word": "archaism",
+    "referrers": [
+      "anachronism"
+    ]
+  },
+  "ardent": {
+    "word": "ardent",
+    "referrers": [
+      "arduous"
+    ]
+  },
+  "arrogance": {
+    "word": "arrogance",
+    "referrers": [
+      "hubris"
+    ]
+  },
+  "arrogate": {
+    "word": "arrogate",
+    "referrers": [
+      "abrogate"
+    ]
+  },
+  "articulate": {
+    "word": "articulate",
+    "referrers": [
+      "eloquent"
+    ]
+  },
+  "astute": {
+    "word": "astute",
+    "referrers": [
+      "austere"
+    ]
+  },
+  "audacity": {
+    "word": "audacity",
+    "referrers": [
+      "hubris",
+      "temerity"
+    ]
+  },
+  "authentic": {
+    "word": "authentic",
+    "referrers": [
+      "apocryphal"
+    ]
+  },
+  "aversion": {
+    "word": "aversion",
+    "referrers": [
+      "proclivity"
+    ]
+  },
+  "avoidable": {
+    "word": "avoidable",
+    "referrers": [
+      "inevitable"
+    ]
+  },
+  "belligerent": {
+    "word": "belligerent",
+    "referrers": [
+      "conciliatory"
+    ]
+  },
+  "bemoan": {
+    "word": "bemoan",
+    "referrers": [
+      "lament"
+    ]
+  },
+  "beneficial": {
+    "word": "beneficial",
+    "referrers": [
+      "benevolent"
+    ]
+  },
+  "benign": {
+    "word": "benign",
+    "referrers": [
+      "benevolent"
+    ]
+  },
+  "blunt": {
+    "word": "blunt",
+    "referrers": [
+      "candid"
+    ]
+  },
+  "bluster": {
+    "word": "bluster",
+    "referrers": [
+      "bolster"
+    ]
+  },
+  "bombast": {
+    "word": "bombast",
+    "referrers": [
+      "rhetoric"
+    ]
+  },
+  "brief": {
+    "word": "brief",
+    "referrers": [
+      "protracted"
+    ]
+  },
+  "buttress": {
+    "word": "buttress",
+    "referrers": [
+      "bolster"
+    ]
+  },
+  "cajole": {
+    "word": "cajole",
+    "referrers": [
+      "inveigle"
+    ]
+  },
+  "candor": {
+    "word": "candor",
+    "referrers": [
+      "reticence"
+    ]
+  },
+  "capacious": {
+    "word": "capacious",
+    "referrers": [
+      "capricious"
+    ]
+  },
+  "careless": {
+    "word": "careless",
+    "referrers": [
+      "meticulous"
+    ]
+  },
+  "cautious": {
+    "word": "cautious",
+    "referrers": [
+      "impetuous"
+    ]
+  },
+  "cavalier": {
+    "word": "cavalier",
+    "referrers": [
+      "pedantic"
+    ]
+  },
+  "census": {
+    "word": "census",
+    "referrers": [
+      "consensus"
+    ]
+  },
+  "coerce": {
+    "word": "coerce",
+    "referrers": [
+      "inveigle"
+    ]
+  },
+  "cohesive": {
+    "word": "cohesive",
+    "referrers": [
+      "coherent"
+    ]
+  },
+  "coincidental": {
+    "word": "coincidental",
+    "referrers": [
+      "incidental"
+    ]
+  },
+  "collaborate": {
+    "word": "collaborate",
+    "referrers": [
+      "corroborate"
+    ]
+  },
+  "commendable": {
+    "word": "commendable",
+    "referrers": [
+      "exemplary"
+    ]
+  },
+  "complaisant": {
+    "word": "complaisant",
+    "referrers": [
+      "complacent"
+    ]
+  },
+  "composure": {
+    "word": "composure",
+    "referrers": [
+      "equanimity"
+    ]
+  },
+  "compromise": {
+    "word": "compromise",
+    "referrers": [
+      "consensus"
+    ]
+  },
+  "compulsive": {
+    "word": "compulsive",
+    "referrers": [
+      "compelling"
+    ]
+  },
+  "compulsory": {
+    "word": "compulsory",
+    "referrers": [
+      "compelling"
+    ]
+  },
+  "conceal": {
+    "word": "conceal",
+    "referrers": [
+      "convey"
+    ]
+  },
+  "conciliate": {
+    "word": "conciliate",
+    "referrers": [
+      "reconcile"
+    ]
+  },
+  "conform": {
+    "word": "conform",
+    "referrers": [
+      "comply"
+    ]
+  },
+  "congratulatory": {
+    "word": "congratulatory",
+    "referrers": [
+      "conciliatory"
+    ]
+  },
+  "conscientiously": {
+    "word": "conscientiously",
+    "referrers": [
+      "conspicuously"
+    ]
+  },
+  "consent": {
+    "word": "consent",
+    "referrers": [
+      "acquiesce"
+    ]
+  },
+  "contentious": {
+    "word": "contentious",
+    "referrers": [
+      "tendentious"
+    ]
+  },
+  "contradict": {
+    "word": "contradict",
+    "referrers": [
+      "corroborate"
+    ]
+  },
+  "contrast": {
+    "word": "contrast",
+    "referrers": [
+      "juxtapose"
+    ]
+  },
+  "convene": {
+    "word": "convene",
+    "referrers": [
+      "convey"
+    ]
+  },
+  "conventional": {
+    "word": "conventional",
+    "referrers": [
+      "novel"
+    ]
+  },
+  "credible": {
+    "word": "credible",
+    "referrers": [
+      "credulous"
+    ]
+  },
+  "criticize": {
+    "word": "criticize",
+    "referrers": [
+      "disparage"
+    ]
+  },
+  "cynical": {
+    "word": "cynical",
+    "referrers": [
+      "skeptical"
+    ]
+  },
+  "defer": {
+    "word": "defer",
+    "referrers": [
+      "deter"
+    ]
+  },
+  "deferral": {
+    "word": "deferral",
+    "referrers": [
+      "deference"
+    ]
+  },
+  "defiance": {
+    "word": "defiance",
+    "referrers": [
+      "deference"
+    ]
+  },
+  "defy": {
+    "word": "defy",
+    "referrers": [
+      "comply"
+    ]
+  },
+  "deliberately": {
+    "word": "deliberately",
+    "referrers": [
+      "inadvertently"
+    ]
+  },
+  "deplorable": {
+    "word": "deplorable",
+    "referrers": [
+      "exemplary"
+    ]
+  },
+  "destination": {
+    "word": "destination",
+    "referrers": [
+      "provenance"
+    ]
+  },
+  "deterrent": {
+    "word": "deterrent",
+    "referrers": [
+      "incentive"
+    ]
+  },
+  "dilatory": {
+    "word": "dilatory",
+    "referrers": [
+      "desultory",
+      "expeditious"
+    ]
+  },
+  "directly": {
+    "word": "directly",
+    "referrers": [
+      "obliquely"
+    ]
+  },
+  "disinterested": {
+    "word": "disinterested",
+    "referrers": [
+      "indifferent"
+    ]
+  },
+  "disperse": {
+    "word": "disperse",
+    "referrers": [
+      "disparage"
+    ]
+  },
+  "dissent": {
+    "word": "dissent",
+    "referrers": [
+      "consensus"
+    ]
+  },
+  "dissenter": {
+    "word": "dissenter",
+    "referrers": [
+      "sycophant"
+    ]
+  },
+  "dissuade": {
+    "word": "dissuade",
+    "referrers": [
+      "deter"
+    ]
+  },
+  "doctrinaire": {
+    "word": "doctrinaire",
+    "referrers": [
+      "dogmatic"
+    ]
+  },
+  "dogged": {
+    "word": "dogged",
+    "referrers": [
+      "dogmatic"
+    ]
+  },
+  "doleful": {
+    "word": "doleful",
+    "referrers": [
+      "lugubrious"
+    ]
+  },
+  "dormant": {
+    "word": "dormant",
+    "referrers": [
+      "stagnant"
+    ]
+  },
+  "duplicity": {
+    "word": "duplicity",
+    "referrers": [
+      "integrity",
+      "mendacity",
+      "perfidy"
+    ]
+  },
+  "eager": {
+    "word": "eager",
+    "referrers": [
+      "indifferent",
+      "reluctant"
+    ]
+  },
+  "eagerly": {
+    "word": "eagerly",
+    "referrers": [
+      "begrudgingly"
+    ]
+  },
+  "earnest": {
+    "word": "earnest",
+    "referrers": [
+      "facetious",
+      "sardonic"
+    ]
+  },
+  "effortless": {
+    "word": "effortless",
+    "referrers": [
+      "arduous"
+    ]
+  },
+  "eloquence": {
+    "word": "eloquence",
+    "referrers": [
+      "rhetoric"
+    ]
+  },
+  "embrace": {
+    "word": "embrace",
+    "referrers": [
+      "repudiate"
+    ]
+  },
+  "encourage": {
+    "word": "encourage",
+    "referrers": [
+      "deter"
+    ]
+  },
+  "endearing": {
+    "word": "endearing",
+    "referrers": [
+      "enduring"
+    ]
+  },
+  "endorse": {
+    "word": "endorse",
+    "referrers": [
+      "advocate",
+      "repudiate"
+    ]
+  },
+  "essential": {
+    "word": "essential",
+    "referrers": [
+      "incidental",
+      "superfluous"
+    ]
+  },
+  "evasive": {
+    "word": "evasive",
+    "referrers": [
+      "candid"
+    ]
+  },
+  "evasively": {
+    "word": "evasively",
+    "referrers": [
+      "obliquely"
+    ]
+  },
+  "expedient": {
+    "word": "expedient",
+    "referrers": [
+      "expeditious"
+    ]
+  },
+  "express": {
+    "word": "express",
+    "referrers": [
+      "convey"
+    ]
+  },
+  "exquisitely": {
+    "word": "exquisitely",
+    "referrers": [
+      "explicitly"
+    ]
+  },
+  "extol": {
+    "word": "extol",
+    "referrers": [
+      "disparage"
+    ]
+  },
+  "extravagant": {
+    "word": "extravagant",
+    "referrers": [
+      "frugal"
+    ]
+  },
+  "famous": {
+    "word": "famous",
+    "referrers": [
+      "notorious"
+    ]
+  },
+  "fervid": {
+    "word": "fervid",
+    "referrers": [
+      "fervent"
+    ]
+  },
+  "fickle": {
+    "word": "fickle",
+    "referrers": [
+      "capricious"
+    ]
+  },
+  "fictitious": {
+    "word": "fictitious",
+    "referrers": [
+      "facetious"
+    ]
+  },
+  "fidelity": {
+    "word": "fidelity",
+    "referrers": [
+      "perfidy"
+    ]
+  },
+  "fleeting": {
+    "word": "fleeting",
+    "referrers": [
+      "enduring"
+    ]
+  },
+  "gallivant": {
+    "word": "gallivant",
+    "referrers": [
+      "galvanize"
+    ]
+  },
+  "glance": {
+    "word": "glance",
+    "referrers": [
+      "scrutinize"
+    ]
+  },
+  "guarded": {
+    "word": "guarded",
+    "referrers": [
+      "candid"
+    ]
+  },
+  "gullible": {
+    "word": "gullible",
+    "referrers": [
+      "skeptical"
+    ]
+  },
+  "hackneyed": {
+    "word": "hackneyed",
+    "referrers": [
+      "novel"
+    ]
+  },
+  "hardship": {
+    "word": "hardship",
+    "referrers": [
+      "adversity"
+    ]
+  },
+  "harmonious": {
+    "word": "harmonious",
+    "referrers": [
+      "incongruous"
+    ]
+  },
+  "hasty": {
+    "word": "hasty",
+    "referrers": [
+      "expeditious"
+    ]
+  },
+  "hesitant": {
+    "word": "hesitant",
+    "referrers": [
+      "reluctant"
+    ]
+  },
+  "hoard": {
+    "word": "hoard",
+    "referrers": [
+      "allocate"
+    ]
+  },
+  "honesty": {
+    "word": "honesty",
+    "referrers": [
+      "integrity"
+    ]
+  },
+  "humility": {
+    "word": "humility",
+    "referrers": [
+      "hubris"
+    ]
+  },
+  "hypothesis": {
+    "word": "hypothesis",
+    "referrers": [
+      "phenomenon"
+    ]
+  },
+  "iconoclast": {
+    "word": "iconoclast",
+    "referrers": [
+      "sycophant"
+    ]
+  },
+  "impartial": {
+    "word": "impartial",
+    "referrers": [
+      "tendentious"
+    ]
+  },
+  "impervious": {
+    "word": "impervious",
+    "referrers": [
+      "impetuous"
+    ]
+  },
+  "impetus": {
+    "word": "impetus",
+    "referrers": [
+      "incentive"
+    ]
+  },
+  "implausible": {
+    "word": "implausible",
+    "referrers": [
+      "plausible"
+    ]
+  },
+  "implicitly": {
+    "word": "implicitly",
+    "referrers": [
+      "explicitly",
+      "tacitly"
+    ]
+  },
+  "impractical": {
+    "word": "impractical",
+    "referrers": [
+      "feasible"
+    ]
+  },
+  "impulsive": {
+    "word": "impulsive",
+    "referrers": [
+      "impetuous"
+    ]
+  },
+  "inadvisably": {
+    "word": "inadvisably",
+    "referrers": [
+      "inadvertently"
+    ]
+  },
+  "inarticulate": {
+    "word": "inarticulate",
+    "referrers": [
+      "eloquent"
+    ]
+  },
+  "incoherent": {
+    "word": "incoherent",
+    "referrers": [
+      "coherent",
+      "incongruous"
+    ]
+  },
+  "inconsistent": {
+    "word": "inconsistent",
+    "referrers": [
+      "incongruous"
+    ]
+  },
+  "inconspicuously": {
+    "word": "inconspicuously",
+    "referrers": [
+      "conspicuously"
+    ]
+  },
+  "incredulous": {
+    "word": "incredulous",
+    "referrers": [
+      "credulous"
+    ]
+  },
+  "incriminate": {
+    "word": "incriminate",
+    "referrers": [
+      "vindicate"
+    ]
+  },
+  "ineffectual": {
+    "word": "ineffectual",
+    "referrers": [
+      "ineffable"
+    ]
+  },
+  "inexplicable": {
+    "word": "inexplicable",
+    "referrers": [
+      "ineffable"
+    ]
+  },
+  "inimitable": {
+    "word": "inimitable",
+    "referrers": [
+      "inevitable"
+    ]
+  },
+  "innocent": {
+    "word": "innocent",
+    "referrers": [
+      "innocuous"
+    ]
+  },
+  "innovative": {
+    "word": "innovative",
+    "referrers": [
+      "novel"
+    ]
+  },
+  "inquisitive": {
+    "word": "inquisitive",
+    "referrers": [
+      "querulous"
+    ]
+  },
+  "insolent": {
+    "word": "insolent",
+    "referrers": [
+      "insouciant"
+    ]
+  },
+  "intangible": {
+    "word": "intangible",
+    "referrers": [
+      "tangible"
+    ]
+  },
+  "integration": {
+    "word": "integration",
+    "referrers": [
+      "integrity"
+    ]
+  },
+  "intrepid": {
+    "word": "intrepid",
+    "referrers": [
+      "pusillanimous"
+    ]
+  },
+  "inveigh": {
+    "word": "inveigh",
+    "referrers": [
+      "inveigle"
+    ]
+  },
+  "invigorate": {
+    "word": "invigorate",
+    "referrers": [
+      "vitiate"
+    ]
+  },
+  "invulnerable": {
+    "word": "invulnerable",
+    "referrers": [
+      "vulnerable"
+    ]
+  },
+  "irresolute": {
+    "word": "irresolute",
+    "referrers": [
+      "tenacious"
+    ]
+  },
+  "jovial": {
+    "word": "jovial",
+    "referrers": [
+      "lugubrious"
+    ]
+  },
+  "justify": {
+    "word": "justify",
+    "referrers": [
+      "vindicate"
+    ]
+  },
+  "lavish": {
+    "word": "lavish",
+    "referrers": [
+      "austere"
+    ]
+  },
+  "locate": {
+    "word": "locate",
+    "referrers": [
+      "allocate"
+    ]
+  },
+  "loquacious": {
+    "word": "loquacious",
+    "referrers": [
+      "eloquent"
+    ]
+  },
+  "ludicrous": {
+    "word": "ludicrous",
+    "referrers": [
+      "lugubrious"
+    ]
+  },
+  "lukewarm": {
+    "word": "lukewarm",
+    "referrers": [
+      "fervent"
+    ]
+  },
+  "malevolent": {
+    "word": "malevolent",
+    "referrers": [
+      "benevolent"
+    ]
+  },
+  "mediocre": {
+    "word": "mediocre",
+    "referrers": [
+      "exemplary"
+    ]
+  },
+  "mendicancy": {
+    "word": "mendicancy",
+    "referrers": [
+      "mendacity"
+    ]
+  },
+  "methodical": {
+    "word": "methodical",
+    "referrers": [
+      "desultory"
+    ]
+  },
+  "motivate": {
+    "word": "motivate",
+    "referrers": [
+      "galvanize"
+    ]
+  },
+  "motive": {
+    "word": "motive",
+    "referrers": [
+      "incentive"
+    ]
+  },
+  "mundane": {
+    "word": "mundane",
+    "referrers": [
+      "ineffable"
+    ]
+  },
+  "nonchalant": {
+    "word": "nonchalant",
+    "referrers": [
+      "insouciant"
+    ]
+  },
+  "noxious": {
+    "word": "noxious",
+    "referrers": [
+      "innocuous"
+    ]
+  },
+  "obey": {
+    "word": "obey",
+    "referrers": [
+      "comply"
+    ]
+  },
+  "obscure": {
+    "word": "obscure",
+    "referrers": [
+      "notorious"
+    ]
+  },
+  "obviously": {
+    "word": "obviously",
+    "referrers": [
+      "obliquely"
+    ]
+  },
+  "offensive": {
+    "word": "offensive",
+    "referrers": [
+      "innocuous"
+    ]
+  },
+  "oppose": {
+    "word": "oppose",
+    "referrers": [
+      "advocate"
+    ]
+  },
+  "oratory": {
+    "word": "oratory",
+    "referrers": [
+      "rhetoric"
+    ]
+  },
+  "ornate": {
+    "word": "ornate",
+    "referrers": [
+      "austere"
+    ]
+  },
+  "ostentatiously": {
+    "word": "ostentatiously",
+    "referrers": [
+      "conspicuously"
+    ]
+  },
+  "overlook": {
+    "word": "overlook",
+    "referrers": [
+      "scrutinize"
+    ]
+  },
+  "pacify": {
+    "word": "pacify",
+    "referrers": [
+      "galvanize"
+    ]
+  },
+  "paradox": {
+    "word": "paradox",
+    "referrers": [
+      "dichotomy"
+    ]
+  },
+  "pedestrian": {
+    "word": "pedestrian",
+    "referrers": [
+      "pedantic"
+    ]
+  },
+  "penchant": {
+    "word": "penchant",
+    "referrers": [
+      "proclivity"
+    ]
+  },
+  "perilous": {
+    "word": "perilous",
+    "referrers": [
+      "precarious"
+    ]
+  },
+  "perjury": {
+    "word": "perjury",
+    "referrers": [
+      "perfidy"
+    ]
+  },
+  "phenomena": {
+    "word": "phenomena",
+    "referrers": [
+      "phenomenon"
+    ]
+  },
+  "precedence": {
+    "word": "precedence",
+    "referrers": [
+      "precision"
+    ]
+  },
+  "precipitate": {
+    "word": "precipitate",
+    "referrers": [
+      "propitiate"
+    ]
+  },
+  "precocious": {
+    "word": "precocious",
+    "referrers": [
+      "precarious"
+    ]
+  },
+  "predicament": {
+    "word": "predicament",
+    "referrers": [
+      "dilemma"
+    ]
+  },
+  "predominant": {
+    "word": "predominant",
+    "referrers": [
+      "prevalent"
+    ]
+  },
+  "probable": {
+    "word": "probable",
+    "referrers": [
+      "inevitable",
+      "plausible"
+    ]
+  },
+  "prodigal": {
+    "word": "prodigal",
+    "referrers": [
+      "frugal"
+    ]
+  },
+  "prolonged": {
+    "word": "prolonged",
+    "referrers": [
+      "protracted"
+    ]
+  },
+  "prominence": {
+    "word": "prominence",
+    "referrers": [
+      "provenance"
+    ]
+  },
+  "propagate": {
+    "word": "propagate",
+    "referrers": [
+      "propitiate"
+    ]
+  },
+  "prosperity": {
+    "word": "prosperity",
+    "referrers": [
+      "adversity"
+    ]
+  },
+  "providence": {
+    "word": "providence",
+    "referrers": [
+      "provenance"
+    ]
+  },
+  "proximity": {
+    "word": "proximity",
+    "referrers": [
+      "proclivity"
+    ]
+  },
+  "quandary": {
+    "word": "quandary",
+    "referrers": [
+      "dilemma"
+    ]
+  },
+  "quarrelsome": {
+    "word": "quarrelsome",
+    "referrers": [
+      "querulous"
+    ]
+  },
+  "questionably": {
+    "word": "questionably",
+    "referrers": [
+      "arguably"
+    ]
+  },
+  "rare": {
+    "word": "rare",
+    "referrers": [
+      "prevalent",
+      "scarce"
+    ]
+  },
+  "ratify": {
+    "word": "ratify",
+    "referrers": [
+      "abrogate"
+    ]
+  },
+  "reconsider": {
+    "word": "reconsider",
+    "referrers": [
+      "reconcile"
+    ]
+  },
+  "redundant": {
+    "word": "redundant",
+    "referrers": [
+      "superfluous"
+    ]
+  },
+  "refute": {
+    "word": "refute",
+    "referrers": [
+      "repudiate"
+    ]
+  },
+  "rejoice": {
+    "word": "rejoice",
+    "referrers": [
+      "lament"
+    ]
+  },
+  "relent": {
+    "word": "relent",
+    "referrers": [
+      "lament"
+    ]
+  },
+  "relevant": {
+    "word": "relevant",
+    "referrers": [
+      "prevalent"
+    ]
+  },
+  "reluctance": {
+    "word": "reluctance",
+    "referrers": [
+      "reticence"
+    ]
+  },
+  "reluctantly": {
+    "word": "reluctantly",
+    "referrers": [
+      "begrudgingly"
+    ]
+  },
+  "reminiscence": {
+    "word": "reminiscence",
+    "referrers": [
+      "reticence"
+    ]
+  },
+  "renowned": {
+    "word": "renowned",
+    "referrers": [
+      "notorious"
+    ]
+  },
+  "resist": {
+    "word": "resist",
+    "referrers": [
+      "acquiesce"
+    ]
+  },
+  "resolve": {
+    "word": "resolve",
+    "referrers": [
+      "reconcile"
+    ]
+  },
+  "reverence": {
+    "word": "reverence",
+    "referrers": [
+      "deference"
+    ]
+  },
+  "sartorial": {
+    "word": "sartorial",
+    "referrers": [
+      "sardonic"
+    ]
+  },
+  "scant": {
+    "word": "scant",
+    "referrers": [
+      "scarce"
+    ]
+  },
+  "secure": {
+    "word": "secure",
+    "referrers": [
+      "precarious"
+    ]
+  },
+  "separate": {
+    "word": "separate",
+    "referrers": [
+      "juxtapose"
+    ]
+  },
+  "skim": {
+    "word": "skim",
+    "referrers": [
+      "scrutinize"
+    ]
+  },
+  "smug": {
+    "word": "smug",
+    "referrers": [
+      "complacent"
+    ]
+  },
+  "solution": {
+    "word": "solution",
+    "referrers": [
+      "dilemma"
+    ]
+  },
+  "speculative": {
+    "word": "speculative",
+    "referrers": [
+      "empirical"
+    ]
+  },
+  "spurious": {
+    "word": "spurious",
+    "referrers": [
+      "apocryphal"
+    ]
+  },
+  "static": {
+    "word": "static",
+    "referrers": [
+      "stagnant"
+    ]
+  },
+  "statistic": {
+    "word": "statistic",
+    "referrers": [
+      "anecdote"
+    ]
+  },
+  "steadfast": {
+    "word": "steadfast",
+    "referrers": [
+      "capricious"
+    ]
+  },
+  "stingy": {
+    "word": "stingy",
+    "referrers": [
+      "frugal"
+    ]
+  },
+  "strenuous": {
+    "word": "strenuous",
+    "referrers": [
+      "arduous"
+    ]
+  },
+  "substantiate": {
+    "word": "substantiate",
+    "referrers": [
+      "corroborate"
+    ]
+  },
+  "superficial": {
+    "word": "superficial",
+    "referrers": [
+      "superfluous"
+    ]
+  },
+  "susceptible": {
+    "word": "susceptible",
+    "referrers": [
+      "vulnerable"
+    ]
+  },
+  "synthesis": {
+    "word": "synthesis",
+    "referrers": [
+      "dichotomy"
+    ]
+  },
+  "tactfully": {
+    "word": "tactfully",
+    "referrers": [
+      "tacitly"
+    ]
+  },
+  "tangential": {
+    "word": "tangential",
+    "referrers": [
+      "tangible"
+    ]
+  },
+  "temperance": {
+    "word": "temperance",
+    "referrers": [
+      "temerity"
+    ]
+  },
+  "tentative": {
+    "word": "tentative",
+    "referrers": [
+      "tenacious"
+    ]
+  },
+  "theoretical": {
+    "word": "theoretical",
+    "referrers": [
+      "empirical"
+    ]
+  },
+  "thriving": {
+    "word": "thriving",
+    "referrers": [
+      "stagnant"
+    ]
+  },
+  "timidity": {
+    "word": "timidity",
+    "referrers": [
+      "temerity"
+    ]
+  },
+  "timorous": {
+    "word": "timorous",
+    "referrers": [
+      "pusillanimous"
+    ]
+  },
+  "toady": {
+    "word": "toady",
+    "referrers": [
+      "sycophant"
+    ]
+  },
+  "transpose": {
+    "word": "transpose",
+    "referrers": [
+      "juxtapose"
+    ]
+  },
+  "truncated": {
+    "word": "truncated",
+    "referrers": [
+      "protracted"
+    ]
+  },
+  "uncomplaining": {
+    "word": "uncomplaining",
+    "referrers": [
+      "querulous"
+    ]
+  },
+  "unconvincing": {
+    "word": "unconvincing",
+    "referrers": [
+      "compelling"
+    ]
+  },
+  "undeniably": {
+    "word": "undeniably",
+    "referrers": [
+      "arguably"
+    ]
+  },
+  "underestimate": {
+    "word": "underestimate",
+    "referrers": [
+      "undermine"
+    ]
+  },
+  "underpin": {
+    "word": "underpin",
+    "referrers": [
+      "undermine"
+    ]
+  },
+  "unwittingly": {
+    "word": "unwittingly",
+    "referrers": [
+      "inadvertently"
+    ]
+  },
+  "uphold": {
+    "word": "uphold",
+    "referrers": [
+      "abrogate"
+    ]
+  },
+  "vaguely": {
+    "word": "vaguely",
+    "referrers": [
+      "explicitly"
+    ]
+  },
+  "vagueness": {
+    "word": "vagueness",
+    "referrers": [
+      "precision"
+    ]
+  },
+  "validate": {
+    "word": "validate",
+    "referrers": [
+      "vitiate"
+    ]
+  },
+  "venerable": {
+    "word": "venerable",
+    "referrers": [
+      "vulnerable"
+    ]
+  },
+  "viable": {
+    "word": "viable",
+    "referrers": [
+      "feasible"
+    ]
+  },
+  "vigilant": {
+    "word": "vigilant",
+    "referrers": [
+      "complacent"
+    ]
+  },
+  "vilify": {
+    "word": "vilify",
+    "referrers": [
+      "vindicate"
+    ]
+  },
+  "willingly": {
+    "word": "willingly",
+    "referrers": [
+      "begrudgingly"
+    ]
+  },
+  "witty": {
+    "word": "witty",
+    "referrers": [
+      "facetious"
+    ]
+  },
+  "wry": {
+    "word": "wry",
+    "referrers": [
+      "sardonic"
     ]
   }
 }

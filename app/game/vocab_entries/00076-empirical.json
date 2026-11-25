@@ -1,0 +1,47 @@
+{
+  "id": 76,
+  "slug": "empirical",
+  "word": "empirical",
+  "pos": "adjective",
+  "pronunciation": "/ɪmˈpɪr.ɪ.kəl/",
+  "definition": "Based on observation, experiment, or experience rather than on theory or pure reasoning.",
+  "difficulty": "Intermediate",
+  "example": "The engineer's claim about the bridge's strength needed empirical support from actual load tests.",
+  "synonyms": [
+    "evidence-based",
+    "observational",
+    "experimental",
+    "experiential"
+  ],
+  "nuance": "Empirical stresses evidence gathered by observing or testing, while theoretical stresses ideas worked out by reasoning alone.",
+  "alternatives": [],
+  "prompt": "A team of students wants to find out whether music helps houseplants grow faster.",
+  "options": [
+    "They ran an empirical test, growing twenty plants with music and twenty in silence.",
+    "Their answer was empirical because they reasoned it out without growing a single plant.",
+    "The empirical head gardener ruled over the greenhouse like a stern and distant queen.",
+    "They felt an empirical hope, deep in their hearts, that the music would cheer the plants."
+  ],
+  "reasons": [
+    "Comparing two measured groups of plants draws the answer from direct observation.",
+    "A conclusion reached purely by thinking, with no plants observed, is the opposite.",
+    "This confuses the word with imperial, which describes emperors and commanding rule.",
+    "A heartfelt wish is an emotion, not something drawn from evidence or testing."
+  ],
+  "practice": {
+    "prompt": "A doctor is deciding whether a new cough remedy actually works.",
+    "options": [
+      "The empirical remedy came in a jeweled gold bottle fit for a royal palace.",
+      "She declared the remedy empirical simply because its label had a scientific-sounding name.",
+      "She relied on empirical data from a trial that compared the remedy with a sugar pill.",
+      "She called the remedy empirical because its inventor was sure it ought to work in theory."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Royal splendor belongs to imperial, a look-alike word with an unrelated meaning.",
+      "A technical-sounding label proves nothing; only tested observations would count.",
+      "Results from a controlled trial come from observing real patients, so the word fits.",
+      "Confidence based only on theory is exactly the kind of support the word excludes."
+    ]
+  }
+}

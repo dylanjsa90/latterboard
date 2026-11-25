@@ -1,0 +1,47 @@
+{
+  "id": 123,
+  "slug": "tangible",
+  "word": "tangible",
+  "pos": "adjective",
+  "pronunciation": "/ˈtæn.dʒə.bəl/",
+  "definition": "Real and definite enough to be seen, measured, or touched, rather than vague or imagined.",
+  "difficulty": "Foundation",
+  "example": "After months of rehearsals, the choir finally heard a tangible improvement in its pitch.",
+  "synonyms": [
+    "concrete",
+    "measurable",
+    "palpable",
+    "real"
+  ],
+  "nuance": "Palpable often describes a mood felt in the air; tangible more often describes results or evidence you can point to or measure.",
+  "alternatives": [],
+  "prompt": "A town council reviews its new recycling program after its first full year.",
+  "options": [
+    "The program produced tangible savings, cutting the town's landfill bill by a third.",
+    "The program's gains were tangible, though no one could point to a single one.",
+    "Councilor Reyes is quite tangible and runs her fingers over every bin she inspects.",
+    "A tangible speech about one member's beach vacation drifted far from the subject of recycling."
+  ],
+  "reasons": [
+    "A specific, measurable drop in costs is exactly the kind of concrete result the word describes.",
+    "If no one can identify any gain, the benefits are imaginary, which is the reverse of tangible.",
+    "A person who loves touching things is tactile; tangible describes things that can be touched or measured.",
+    "This confuses the word with tangential, which describes remarks that wander off topic."
+  ],
+  "practice": {
+    "prompt": "A student wants to show her parents that her math tutoring is paying off.",
+    "options": [
+      "Her tutor is very tangible, so he always arrives early and stays late.",
+      "Her report card offered tangible proof, since her grade rose from a C to a B.",
+      "The improvement was tangible, so her parents had no way to notice or measure it.",
+      "Her headphone cord became tangible after a week stuffed in the bottom of her backpack."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Being punctual or dependable is a matter of reliability, not of being real and measurable.",
+      "A higher grade on paper is solid evidence that anyone can see and check.",
+      "Something tangible is easy to notice and measure; this sentence flips the meaning.",
+      "This mixes the word up with tangled; a knotted cord has nothing to do with being concrete."
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": 56,
+  "slug": "feasible",
+  "word": "feasible",
+  "pos": "adjective",
+  "pronunciation": "/ˈfiː.zə.bəl/",
+  "definition": "Possible to do or carry out in practice with the time and resources available.",
+  "difficulty": "Foundation",
+  "example": "Working from home made it feasible for him to care for his grandmother.",
+  "synonyms": [
+    "achievable",
+    "workable",
+    "practicable",
+    "doable"
+  ],
+  "nuance": "Feasible stresses that something can really be done with the means at hand, while possible can mean merely conceivable.",
+  "alternatives": [
+    "plausible"
+  ],
+  "prompt": "A town council is deciding whether to build a footbridge over a creek.",
+  "options": [
+    "With a state grant and volunteer labor, the footbridge finally looked feasible.",
+    "Engineers called the footbridge feasible after concluding it could never be built.",
+    "The old footbridge was so feasible that it wobbled under a single walker.",
+    "The council hired a feasible engineer who always arrived early to meetings."
+  ],
+  "reasons": [
+    "Money and workers made the project practical to carry out.",
+    "A project that can never be built is the reverse of doable.",
+    "This confuses the word with feeble; it does not mean weak or flimsy.",
+    "The word describes plans or tasks, not a person's punctuality or character."
+  ],
+  "practice": {
+    "prompt": "A student is planning how to finish a science project before Friday.",
+    "options": [
+      "Splitting the work into three short evenings made the deadline feasible.",
+      "Since the project needed a month of daily measurements, finishing by Friday was feasible.",
+      "Her poster board was too feasible to stand up and kept flopping over.",
+      "She felt feasible about her topic and couldn't wait to present it."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Breaking the task into manageable parts made it achievable in practice.",
+      "A month of work cannot fit into a few days, so the plan was not achievable.",
+      "Flimsiness is not the meaning; this mixes the word up with feeble.",
+      "The word does not describe feelings like eagerness or confidence."
+    ]
+  }
+}

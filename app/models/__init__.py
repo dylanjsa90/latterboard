@@ -4,7 +4,7 @@ from .puzzle import Puzzle, PuzzleAttempt
 from .user import User
 from .user_avatar import UserAvatar
 from .user_identity import UserIdentity
-from .vocab import VocabRoom, VocabSavedWord
+from .vocab import VocabRoom, VocabSavedWord, VocabWordReport
 
 __all__ = [
     "User",
@@ -19,4 +19,5 @@ __all__ = [
     "PuzzleAttempt",
     "VocabRoom",
     "VocabSavedWord",
+    "VocabWordReport",
 ]

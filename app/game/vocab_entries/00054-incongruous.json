@@ -1,0 +1,47 @@
+{
+  "id": 54,
+  "slug": "incongruous",
+  "word": "incongruous",
+  "pos": "adjective",
+  "pronunciation": "/ɪnˈkɑːŋ.ɡru.əs/",
+  "definition": "Strangely out of place, or not fitting in with its surroundings or setting.",
+  "difficulty": "Intermediate",
+  "example": "A flashing neon sign looked incongruous on the quiet stone cottage at the edge of the village.",
+  "synonyms": [
+    "out of place",
+    "jarring",
+    "discordant",
+    "inappropriate"
+  ],
+  "nuance": "Incongruous stresses a striking mismatch with surroundings; inconsistent stresses contradiction between statements or actions.",
+  "alternatives": [],
+  "prompt": "A guest arrives at a formal wedding dinner in an unusual outfit.",
+  "options": [
+    "His muddy hiking boots looked incongruous beneath the elegant tuxedo.",
+    "After the long toast, the tired guest gave an incongruous mumble nobody could follow.",
+    "Her silk gown was incongruous with the formal setting, matching it perfectly.",
+    "Because the dinner began right on schedule, the evening was perfectly incongruous."
+  ],
+  "reasons": [
+    "Dirty outdoor boots clash sharply with formal evening wear, so they seem out of place.",
+    "Speech that is hard to follow is incoherent; this word means mismatched, not unclear.",
+    "Something that suits its setting perfectly is fitting, the reverse of this word.",
+    "Starting on time is expected and fitting; nothing here clashes with its context."
+  ],
+  "practice": {
+    "prompt": "A history class watches a film set in ancient Rome.",
+    "options": [
+      "The movie's running time was incongruous, lasting exactly two hours.",
+      "Students laughed at the incongruous wristwatch visible on one senator's arm.",
+      "The incongruous costumes were so accurate that historians praised every detail.",
+      "The incongruous student forgot to thank the teacher for showing the film."
+    ],
+    "answer": 1,
+    "reasons": [
+      "A film's length alone says nothing about something being out of place.",
+      "A modern watch in ancient Rome is a glaring mismatch with the film's period.",
+      "Costumes that fit the era exactly blend in rather than standing out as wrong.",
+      "Forgetting to say thanks is thoughtless behavior, not a clash with surroundings."
+    ]
+  }
+}

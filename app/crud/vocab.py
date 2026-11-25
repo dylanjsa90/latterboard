@@ -16,8 +16,14 @@ from sqlalchemy.orm.exc import StaleDataError
 from app.game import vocab
 from app.game.vocab import VocabError
 from app.game.vocab_words import WORDS
-from app.models.vocab import VocabRoom, VocabSavedWord
-from app.schemas.vocab import RoomSnapshot, SavedWord, Wordbook
+from app.models.vocab import VocabRoom, VocabSavedWord, VocabWordReport
+from app.schemas.vocab import (
+    RoomSnapshot,
+    SavedWord,
+    Wordbook,
+    WordReport,
+    WordReportCreate,
+)
 from app.utils import utcnow
 
 # Every request saves the room (to record `seen`), and both players refetch together
@@ -182,6 +188,43 @@ class CRUDVocab:
         row.level, wait = vocab.next_review(row.level, known)
         row.due = utcnow() + wait
         db.commit()
+
+    def report(
+        self, db: Session, word_id: int, user_id: int | None, body: WordReportCreate
+    ) -> None:
+        db.add(
+            VocabWordReport(
+                word_id=word_id,
+                user_id=user_id,
+                reason=body.reason,
+                kind=body.kind,
+                note=body.note.strip(),
+                created_at=utcnow(),
+            )
+        )
+        db.commit()
+
+    def reports(self, db: Session, limit: int) -> list[WordReport]:
+        """The most recent reports first."""
+        rows = (
+            db.query(VocabWordReport)
+            .order_by(VocabWordReport.id.desc())
+            .limit(limit)
+            .all()
+        )
+        return [
+            WordReport(
+                id=r.id,
+                word_id=r.word_id,
+                word=WORDS[r.word_id].word,
+                reason=r.reason,
+                kind=r.kind,
+                note=r.note,
+                user_id=r.user_id,
+                created_at=r.created_at,
+            )
+            for r in rows
+        ]
 
 
 # Not `vocab` like the other crud instances: this module already imports the game

@@ -5,8 +5,25 @@ import json
 import pytest
 
 from app.game.vocab_words import dump_entry
-from app.vocab_pipeline.store import ApprovalError
+from app.vocab_pipeline.store import ApprovalError, approval_order
 from tests.vocab_helpers import entry, make_store, pending_draft
+
+
+def test_approve_ready_ships_pending_drafts_in_hashed_order(tmp_path):
+    store = make_store(tmp_path, [entry(0, "alpha")])
+    good = [pending_draft(w) for w in ("beta", "gamma", "delta")]
+    for d in good:
+        store.save_draft(d)
+    bad = entry(0, "zeta")
+    store.save_draft(
+        pending_draft("zeta", options=bad["options"][:3], reasons=bad["reasons"][:3])
+    )
+    approved, failed = store.approve_ready()
+    assert approved == [d["slug"] for d in approval_order(good)]
+    assert [w.slug for w in store.shipped()[1:]] == approved
+    assert list(failed) == ["zeta"] and "options: expected 4" in failed["zeta"]
+    assert store.draft("zeta")["status"] == "invalid"
+    assert store.approve_ready() == ([], {})
 
 
 def test_approve_assigns_the_next_id_and_removes_the_draft(tmp_path):
@@ -40,7 +57,7 @@ def test_unshipped_alternatives_wait_as_wanted_words_and_link_back_when_they_shi
     store.approve("gamma")
     assert store.shipped()[2].alternatives == ("alpha",)
     assert store.wanted() == {"delta": {"word": "delta", "referrers": ["gamma"]}}
-    store.save_draft({**pending_draft("delta"), "source": "wanted"})
+    store.save_draft(pending_draft("delta"))
     store.approve("delta")
     assert store.shipped()[2].alternatives == ("alpha", "delta")
     assert store.wanted() == {}

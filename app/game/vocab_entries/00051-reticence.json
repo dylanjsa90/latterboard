@@ -1,0 +1,47 @@
+{
+  "id": 51,
+  "slug": "reticence",
+  "word": "reticence",
+  "pos": "noun",
+  "pronunciation": "/ˈrɛt.ɪ.səns/",
+  "definition": "A habit of keeping your thoughts and feelings to yourself instead of speaking openly.",
+  "difficulty": "Intermediate",
+  "example": "Grandpa's reticence about his childhood ended the day he found a box of his old letters.",
+  "synonyms": [
+    "reserve",
+    "restraint",
+    "taciturnity",
+    "discretion"
+  ],
+  "nuance": "Reticence is restraint in speech, often by choice; diffidence is shyness that comes from a lack of confidence.",
+  "alternatives": [],
+  "prompt": "At a team lunch, a new employee is asked why she left her previous job.",
+  "options": [
+    "Her reticence about her last job left the team guessing why she had moved on.",
+    "Because of her reticence, she described every meeting at her old job in vivid detail.",
+    "The team enjoyed her reticence, a stream of fond stories about her old office.",
+    "She showed reticence by honestly forgetting the name of her former company."
+  ],
+  "reasons": [
+    "She chose to say little, so the others were left to wonder.",
+    "Sharing every detail is openness, the reverse of holding back.",
+    "Fond stories of the past are reminiscence, a look-alike word.",
+    "Forgetting something is not the same as choosing to keep it private."
+  ],
+  "practice": {
+    "prompt": "A novelist takes questions from an audience about a book he has not finished.",
+    "options": [
+      "With typical reticence, the novelist read the secret ending aloud to the crowd.",
+      "The novelist's reticence is a small cabin beside a lake, where he writes every morning before dawn.",
+      "In a burst of reticence, the novelist yelled at the host and stormed offstage.",
+      "Known for his reticence, the novelist met questions about the plot with a polite smile."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Revealing the secret ending is the opposite of keeping things back.",
+      "A home is a residence; the similar sound is misleading here.",
+      "An angry outburst is the opposite of calm, quiet restraint.",
+      "Answering with a smile instead of details shows quiet restraint."
+    ]
+  }
+}

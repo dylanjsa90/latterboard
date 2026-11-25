@@ -1,0 +1,46 @@
+{
+  "id": 96,
+  "slug": "prevalent",
+  "word": "prevalent",
+  "pos": "adjective",
+  "pronunciation": "/ˈprɛv.ə.lənt/",
+  "definition": "Widespread or common in a particular place or at a particular time.",
+  "difficulty": "Foundation",
+  "example": "Thick morning fog is prevalent along this stretch of coast in early summer.",
+  "synonyms": [
+    "widespread",
+    "common",
+    "pervasive"
+  ],
+  "nuance": "Prevalent means found widely; predominant means strongest or most numerous among rivals, so a thing can be prevalent without leading.",
+  "alternatives": [],
+  "prompt": "A biologist surveys which plants grow in a large meadow.",
+  "options": [
+    "Clover was prevalent across the meadow, covering nearly every patch of ground.",
+    "Clover was prevalent in the meadow, though she found only one sprig all day.",
+    "Her field notes were prevalent to the study because she knew the meadow well.",
+    "The clover was so prevalent that each stem stood a meter taller than the grass."
+  ],
+  "reasons": [
+    "A plant found almost everywhere in the area is widespread there.",
+    "A single sprig after a full day of searching means the plant is scarce.",
+    "This confuses the word with relevant; it describes how common something is, not whether it matters.",
+    "Height has nothing to do with how widely something occurs."
+  ],
+  "practice": {
+    "prompt": "A teacher grading sixty essays keeps seeing the same spelling mistake.",
+    "options": [
+      "The mistake was prevalent, appearing in just one essay out of sixty.",
+      "She called the error prevalent because it changed one sentence's meaning so badly.",
+      "The students prevalent the error by checking each other's drafts.",
+      "Mixing up its and it's was prevalent in the essays, showing up in almost every one."
+    ],
+    "answer": 3,
+    "reasons": [
+      "One case out of sixty makes the error rare, the reverse of widespread.",
+      "How serious a single mistake is says nothing about how often it occurs.",
+      "The word is an adjective, not a verb; this seems to confuse it with prevent.",
+      "An error that turns up in nearly all the papers is common throughout the group."
+    ]
+  }
+}

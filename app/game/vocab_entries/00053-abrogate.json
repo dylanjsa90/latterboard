@@ -1,0 +1,47 @@
+{
+  "id": 53,
+  "slug": "abrogate",
+  "word": "abrogate",
+  "pos": "verb",
+  "pronunciation": "/ˈæb.rə.ɡeɪt/",
+  "definition": "To officially cancel or do away with a law, rule, agreement, or right.",
+  "difficulty": "Advanced",
+  "example": "The league voted to abrogate the old rule that limited each team to a single substitute.",
+  "synonyms": [
+    "repeal",
+    "revoke",
+    "annul",
+    "rescind"
+  ],
+  "nuance": "To abrogate is to formally end an existing rule or agreement; the look-alike arrogate means to claim something you have no right to.",
+  "alternatives": [],
+  "prompt": "A homeowners' association reviews a decades-old rule about what colors fences may be painted.",
+  "options": [
+    "The board voted to abrogate the outdated fence rule, so residents could paint freely.",
+    "The treasurer tried to abrogate the board's powers by quietly signing contracts alone.",
+    "The board voted to abrogate the fence rule, making it stricter and enforcing it on every street.",
+    "A neighbor decided to abrogate her fence by painting it bright green over the weekend."
+  ],
+  "reasons": [
+    "Formally scrapping an old rule so it no longer applies is exactly the right use.",
+    "Grabbing authority you lack is arrogating; abrogating means canceling a rule or right.",
+    "Tightening and enforcing a rule is the reverse of officially doing away with it.",
+    "The word applies to laws, agreements, and rights, not to repainting a physical object."
+  ],
+  "practice": {
+    "prompt": "A small bakery signed a supply contract with a flour mill that it no longer wants to honor.",
+    "options": [
+      "Each autumn the mill would abrogate flour from several farms into one large shipment.",
+      "Citing a missed delivery deadline, the bakery moved to abrogate its contract with the mill.",
+      "The bakery chose to abrogate the contract by renewing it for another five years.",
+      "The mill owner tried to abrogate credit for the bakery's prize-winning bread as his own work."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Gathering items into one batch is aggregating; nothing official is being canceled.",
+      "Formally ending a binding agreement after a breach fits the word's legal sense.",
+      "Extending an agreement keeps it alive, which is the opposite of canceling it.",
+      "Taking credit that belongs to someone else is arrogating, a different word."
+    ]
+  }
+}

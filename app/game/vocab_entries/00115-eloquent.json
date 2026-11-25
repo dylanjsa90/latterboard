@@ -1,0 +1,47 @@
+{
+  "id": 115,
+  "slug": "eloquent",
+  "word": "eloquent",
+  "pos": "adjective",
+  "pronunciation": "/ˈɛl.ə.kwənt/",
+  "definition": "Able to express ideas clearly, gracefully, and persuasively, especially in speech.",
+  "difficulty": "Foundation",
+  "example": "His eloquent thank-you note brought his grandmother to tears.",
+  "synonyms": [
+    "articulate",
+    "expressive",
+    "persuasive",
+    "silver-tongued"
+  ],
+  "nuance": "Articulate means speaking clearly; eloquent adds grace and a power to move or persuade the listener.",
+  "alternatives": [],
+  "prompt": "A student gives a speech at her graduation ceremony.",
+  "options": [
+    "Speaking without notes, she gave an eloquent tribute to the teachers who had believed in her.",
+    "Her eloquent remarks wandered for forty minutes, repeating the same joke three times.",
+    "The eloquent valedictorian mumbled and lost her place so often that listeners gave up following.",
+    "Because the microphone was so eloquent, everyone in the back row could hear her."
+  ],
+  "reasons": [
+    "A moving, well-phrased tribute delivered with skill is exactly what the word describes.",
+    "Rambling and repetition show wordiness, not skill with words; that is closer to loquacious.",
+    "Halting, confusing delivery is the reverse of graceful, persuasive expression.",
+    "Volume and sound equipment have nothing to do with expressing ideas well."
+  ],
+  "practice": {
+    "prompt": "A museum guide describes a painting to a tour group.",
+    "options": [
+      "The painting's frame was eloquent, carved from solid oak and very heavy.",
+      "The guide's eloquent description made visitors see the loneliness in the painted figure's face.",
+      "The guide was so eloquent that she could only point at the painting and shrug.",
+      "The eloquent guide kept chatting about her weekend plans while the restless tour group waited to move on."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Weight and material describe sturdiness, not any ability to express meaning.",
+      "Words that help listeners feel and understand something new show real expressive power.",
+      "Being unable to put thoughts into words is the opposite of this quality.",
+      "Idle, off-topic chatter is mere talkativeness, not moving or persuasive speech."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 61,
+  "slug": "ineffable",
+  "word": "ineffable",
+  "pos": "adjective",
+  "pronunciation": "/ɪˈnɛf.ə.bəl/",
+  "definition": "Too great, deep, or intense to be described in words.",
+  "difficulty": "Advanced",
+  "example": "The faded photograph stirred an ineffable longing for a house he had never actually seen.",
+  "synonyms": [
+    "indescribable",
+    "inexpressible",
+    "beyond words",
+    "unutterable"
+  ],
+  "nuance": "Ineffable usually praises something wondrous or profound, while unspeakable more often suggests something too awful to name.",
+  "alternatives": [],
+  "prompt": "A young violinist tries to describe the moment she first heard a full orchestra play.",
+  "options": [
+    "She said the opening chord filled her with an ineffable joy she still cannot explain.",
+    "Her ineffable bow strokes failed to produce any sound at all.",
+    "She described the ineffable sound fully with a short, precise list of adjectives.",
+    "The ineffable squeak of the rehearsal room door annoyed every musician in the string section."
+  ],
+  "reasons": [
+    "A feeling so deep that she cannot put it into words fits the word exactly.",
+    "This confuses the word with ineffectual; it is about what can't be expressed, not what doesn't work.",
+    "If a few adjectives capture it completely, the sound was easy to express, not beyond words.",
+    "A squeaky door is a minor, easily named nuisance, not an overwhelming experience."
+  ],
+  "practice": {
+    "prompt": "A hiker reaches a quiet mountain lake just as the sun rises.",
+    "options": [
+      "The hiker felt an ineffable stillness as mist lifted off the silver water.",
+      "The ineffable error on her trail map was cleared up once she checked its printing date.",
+      "The hiker summed up the ineffable view in three plain words: nice, blue, cold.",
+      "Her ineffable blister made the last mile of the trail slow and painful."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A calm so profound that language falls short is exactly what the word conveys.",
+      "A puzzle that gets explained is inexplicable at most; the word concerns experiences beyond words.",
+      "A view captured by three ordinary words was easy to put into language.",
+      "A blister is an ordinary, easily described discomfort, not something transcending language."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 47,
+  "slug": "sardonic",
+  "word": "sardonic",
+  "pos": "adjective",
+  "pronunciation": "/sɑːrˈdɑː.nɪk/",
+  "definition": "Mocking in a dry, bitter way that shows scorn or grim amusement.",
+  "difficulty": "Advanced",
+  "example": "Her sardonic grin suggested she had expected the plan to fail all along.",
+  "synonyms": [
+    "scornfully mocking",
+    "cynical",
+    "derisive",
+    "wry"
+  ],
+  "nuance": "Sardonic is harsher than wry: wry humor is gently ironic, while sardonic humor carries bitterness or contempt.",
+  "alternatives": [],
+  "prompt": "A veteran mechanic watches a customer's rattling car arrive at the shop for the fourth time this month.",
+  "options": [
+    "The mechanic gave a sardonic smile and said the car must really enjoy his company.",
+    "The mechanic was sardonic, sincerely thrilled and warmly grateful to see the car again.",
+    "The mechanic straightened his sardonic overalls before opening the hood.",
+    "To calm the anxious driver, the mechanic offered a sardonic, reassuring pat on the back."
+  ],
+  "reasons": [
+    "A dry, scornful joke about the repeat visits shows bitter amusement.",
+    "Heartfelt delight is the reverse of scornful, mocking humor.",
+    "This confuses the word with sartorial, which concerns clothing.",
+    "Comfort and reassurance ignore the word's mocking, contemptuous edge."
+  ],
+  "practice": {
+    "prompt": "A film critic reviews a sequel that copies the original movie almost scene by scene.",
+    "options": [
+      "The critic's sardonic review gushed with honest admiration for every fresh idea.",
+      "The sardonic review simply listed each scene's running time in a neutral tone.",
+      "The critic admired the actors' sardonic costumes, calling them elegantly tailored.",
+      "In a sardonic review, the critic praised the sequel for its daring choice to change the title."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Genuine, enthusiastic praise contains no bitterness or mockery.",
+      "A flat, factual list has none of the scornful humor the word requires.",
+      "Tailoring and costumes point to sartorial, a look-alike about clothing.",
+      "Mock praise for a trivial change scornfully exposes the lack of originality."
+    ]
+  }
+}

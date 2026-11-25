@@ -7,8 +7,8 @@ Nothing here runs on a timer: clients refetch at a round's deadline themselves, 
 frame goes out from the request's `BackgroundTasks`, never a detached task (see the
 `app/services/bot_turn.py` docstring for why).
 
-`GET /vocab/daily-word` (the home page's word of the day) and `POST /vocab/guest-rooms`
-are public. A guest room is a solo room started signed out; its own `GET` and `actions`
+`GET /vocab/daily-word` (the home page's word of the day), `POST /vocab/guest-rooms`
+and `POST /vocab/words/{id}/report` are public. A guest room is a solo room started signed out; its own `GET` and `actions`
 take the `X-Guest-Token` header its create call returned, in place of a bearer.
 """
 
@@ -24,6 +24,7 @@ from fastapi import (
     Header,
     HTTPException,
     Path,
+    Query,
     Request,
     status,
 )
@@ -44,6 +45,8 @@ from app.schemas.vocab import (
     RoomCreate,
     RoomSnapshot,
     Wordbook,
+    WordReport,
+    WordReportCreate,
 )
 
 router = APIRouter(prefix="/vocab", tags=["vocab"])
@@ -64,6 +67,13 @@ GUEST_ROOMS_PER_NETWORK_PER_HOUR = 60
 GUEST_ROOMS_PER_HOUR = 2_000
 GUEST_NETWORK_LIMITED = "Too many guest games from your network. Sign in to keep playing, or try again later."
 GUEST_SITE_LIMITED = "Guest play is busy right now. Sign in to keep playing, or try again in a few minutes."
+
+# Reports are open to guests too, so they're limited the same way.
+REPORT_LIMIT_PREFIX = "rl:vocab-report"
+REPORT_WINDOW_SECONDS = 3600
+REPORTS_PER_NETWORK_PER_HOUR = 20
+REPORTS_PER_HOUR = 500
+REPORT_LIMITED = "Too many reports right now. Please try again later."
 
 
 @contextmanager
@@ -94,6 +104,19 @@ async def _guest_room_allowed(request: Request) -> None:
         raise HTTPException(
             status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail=GUEST_SITE_LIMITED
         )
+
+
+async def _report_allowed(request: Request) -> None:
+    host = request.client.host if request.client else None
+    keys_and_limits = (
+        (f"{REPORT_LIMIT_PREFIX}:net:{network_of(host)}", REPORTS_PER_NETWORK_PER_HOUR),
+        (f"{REPORT_LIMIT_PREFIX}:all", REPORTS_PER_HOUR),
+    )
+    for key, limit in keys_and_limits:
+        if not await allow(key, limit, REPORT_WINDOW_SECONDS):
+            raise HTTPException(
+                status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail=REPORT_LIMITED
+            )
 
 
 def _room_player_id(
@@ -306,3 +329,29 @@ def review_word(
     """Record a recall check: known moves the word up the ladder, a miss resets it."""
     with _http_errors():
         crud_vocab.review(db, current_user.id, _known_word(word_id), body.known)
+
+
+@router.post(
+    "/words/{word_id}/report",
+    status_code=status.HTTP_204_NO_CONTENT,
+    dependencies=[Depends(_report_allowed)],
+)
+def report_word(
+    word_id: int,
+    body: WordReportCreate,
+    db: Session = Depends(deps.get_db),
+    user: User | None = Depends(deps.get_optional_current_user),
+) -> None:
+    """Report a problem with a word's entry. Open to guests; a signed-in reporter is
+    recorded so a follow-up is possible."""
+    crud_vocab.report(db, _known_word(word_id), user.id if user else None, body)
+
+
+@router.get("/reports", response_model=list[WordReport])
+def list_reports(
+    limit: int = Query(200, ge=1, le=1000),
+    db: Session = Depends(deps.get_db),
+    _: User = Depends(deps.get_current_active_superuser),
+) -> list[WordReport]:
+    """Recent word reports, newest first (superuser only)."""
+    return crud_vocab.reports(db, limit)

@@ -1,0 +1,47 @@
+{
+  "id": 117,
+  "slug": "incentive",
+  "word": "incentive",
+  "pos": "noun",
+  "pronunciation": "/ɪnˈsɛn.tɪv/",
+  "definition": "Something, such as a reward, that encourages a person to do something or to try harder.",
+  "difficulty": "Foundation",
+  "example": "The free bus pass gave commuters an incentive to leave their cars at home.",
+  "synonyms": [
+    "motivation",
+    "inducement",
+    "encouragement",
+    "spur"
+  ],
+  "nuance": "An incentive is an outside reward or benefit that encourages action, while a motive is the inner reason a person acts.",
+  "alternatives": [],
+  "prompt": "A bakery wants more customers to visit on its slow Monday mornings.",
+  "options": [
+    "Half-price muffins on Mondays gave early risers an incentive to stop by.",
+    "Raising Monday prices sharply was an incentive that kept customers away.",
+    "The rude cashier's incentive remark upset a regular customer.",
+    "The bakery's biggest incentive was the new oven it bought for the kitchen last spring."
+  ],
+  "reasons": [
+    "A discount is an outside reward that encourages people to come in.",
+    "Something that drives people off is a deterrent, the reverse of an incentive.",
+    "This confuses the noun with the look-alike adjective \"insensitive.\"",
+    "Kitchen equipment that customers never see does not encourage anyone to visit."
+  ],
+  "practice": {
+    "prompt": "A school library hopes students will read more books over the summer.",
+    "options": [
+      "A pizza party was the librarian's incentive for students who read ten books.",
+      "The incentive of late fees made students afraid to borrow any books at all.",
+      "The librarian incentive the students by posting a reading chart.",
+      "Her incentive for skipping the reading list was that she simply forgot about it."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A promised party is a reward that encourages students to keep reading.",
+      "A penalty that scares students away discourages reading, so it is not an incentive.",
+      "The word is a noun; the action of encouraging this way is \"incentivize.\"",
+      "Forgetting is an accident, not a reward or benefit that pushes someone to act."
+    ]
+  }
+}

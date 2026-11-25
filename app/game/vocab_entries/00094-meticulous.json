@@ -1,0 +1,50 @@
+{
+  "id": 94,
+  "slug": "meticulous",
+  "word": "meticulous",
+  "pos": "adjective",
+  "pronunciation": "/məˈtɪk.jə.ləs/",
+  "definition": "Showing great care and close attention to every small detail.",
+  "difficulty": "Foundation",
+  "example": "The museum's meticulous restorers spent a year cleaning a single tapestry thread by thread.",
+  "synonyms": [
+    "painstaking",
+    "thorough",
+    "scrupulous",
+    "precise"
+  ],
+  "nuance": "Meticulous praises careful attention to detail, while fastidious often suggests fussiness or being hard to please.",
+  "alternatives": [
+    "fastidious",
+    "perfunctory"
+  ],
+  "prompt": "A baker is preparing a cake for a regional baking competition.",
+  "options": [
+    "The meticulous baker weighed each ingredient to the gram before mixing.",
+    "The meticulous baker tossed in flour by the handful and hoped the cake would rise.",
+    "The meticulous baker was so frightened of the judges that her hands shook nonstop.",
+    "The meticulous baker left smears of frosting on the plate and never noticed them."
+  ],
+  "reasons": [
+    "Measuring everything precisely shows close, careful attention to detail.",
+    "Rough guessing is the opposite of careful precision.",
+    "The word describes carefulness, not fear or nervousness.",
+    "Overlooking obvious messes contradicts careful attention to detail."
+  ],
+  "practice": {
+    "prompt": "A student is writing a research paper for a history class.",
+    "options": [
+      "His meticulous paper was typed the night before and never proofread at all.",
+      "The meticulous report was so long that it filled three thick binders.",
+      "She was meticulous about the due date, so she forgot it entirely.",
+      "Her meticulous notes listed the page number for every quotation she used."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Rushing and skipping revision shows no attention to detail.",
+      "Length alone says nothing about how carefully the work was done.",
+      "Forgetting a deadline is the reverse of being careful about it.",
+      "Recording each source detail exactly reflects thorough care."
+    ]
+  }
+}

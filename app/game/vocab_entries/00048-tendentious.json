@@ -1,0 +1,48 @@
+{
+  "id": 48,
+  "slug": "tendentious",
+  "word": "tendentious",
+  "pos": "adjective",
+  "pronunciation": "/tɛnˈdɛn.ʃəs/",
+  "definition": "Slanted to promote a particular point of view, often a disputed one, rather than being fair.",
+  "difficulty": "Advanced",
+  "example": "Critics dismissed the documentary as tendentious, since it interviewed only fans of the coach.",
+  "synonyms": [
+    "biased",
+    "slanted",
+    "one-sided"
+  ],
+  "nuance": "Tendentious describes writing or claims slanted toward one view; contentious describes something that stirs up arguments.",
+  "alternatives": [
+    "tenuous"
+  ],
+  "prompt": "A historian reviews a town's official guidebook about its founding.",
+  "options": [
+    "The guidebook's tendentious account left out every fact that might embarrass the founders.",
+    "The guidebook was tendentious, giving equal weight to each side of every old dispute.",
+    "She found the guidebook so tendentious that she yawned through its endless list of dates.",
+    "In one photo, the town's old rope bridge looked tendentious, as if it might snap."
+  ],
+  "reasons": [
+    "Leaving out unflattering facts to protect one side is exactly what slanted writing does.",
+    "Treating every side evenly is the opposite of a slanted account.",
+    "Boredom points to tedious, a look-alike; slanted writing need not be dull.",
+    "A fragile bridge is tenuous; tendentious applies to biased claims, not physical weakness."
+  ],
+  "practice": {
+    "prompt": "A science club compares two summaries of a study on homework and sleep.",
+    "options": [
+      "The summary was tendentious, quoting only the results that favored longer homework hours.",
+      "The summary was tendentious, reporting every result plainly, even ones that surprised its author.",
+      "After the long run, Mia stretched her stiff and tendentious calf muscles.",
+      "The club meeting turned tendentious once two members began shouting across the table."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Picking only the findings that support one conclusion shows a deliberate slant.",
+      "Neutral, complete reporting is the reverse of pushing a point of view.",
+      "This confuses the word with tendinous, which relates to tendons.",
+      "A heated quarrel is contentious; tendentious describes slanted content, not an angry mood."
+    ]
+  }
+}

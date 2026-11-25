@@ -1,6 +1,6 @@
 # Cross-repo contract
 
-Last updated: 2026-11-23
+Last updated: 2026-11-24
 
 webcade (`~/projects/webcade`, React) is latterboard's (`~/projects/latterboard`, FastAPI) only
 client. This file is `docs/reference/cross-repo-contract.md` in both repos: keep the two copies
@@ -178,6 +178,8 @@ caller.
 | `GET /words` | — | `{saved: SavedWord[] (soonest due first), word_count}` |
 | `PUT /words/{id}` / `DELETE /words/{id}` | — | 204; saving again changes nothing; 400 unknown word |
 | `POST /words/{id}/review` | `{known: bool}` | 204; known moves up the ladder (due in 1, 3, 7, 14, 30, 60 days), a miss resets to level 0 (due in 10 min); 404 not saved |
+| `POST /words/{id}/report` (public; a bearer, if sent, ties the report to the account) | `{reason: wrong_definition \| wrong_answer \| confusing \| inappropriate \| other, kind?: usage \| context, note? (up to 500 characters)}` | 204; 400 unknown word; 422 a bad reason, kind or note; 429 past 20 reports an hour per network or 500 overall, with a readable `detail` |
+| `GET /reports` (superuser) | `?limit=` (1–1000, default 200) | `WordReport[]`, newest first; 403 not a superuser |
 | `GET /daily-word` (public) | — | `DailyWord`: the word of the day for today's Pacific date. From 2026-12-06 word ids show one per day in order, continuing the original 46-word rotation, so adding words never changes a past day while the list stays ahead of the calendar |
 
 - `RoomSnapshot` = `{game: GameView, server_now}`. `GuestRoomSnapshot` = `RoomSnapshot` +
@@ -187,6 +189,7 @@ caller.
 - `question` = `{id, word, pos, definition, difficulty: Foundation | Intermediate | Advanced, kind: usage | context, prompt, options, correct, reasons, example, synonyms, nuance}`. Until the round resolves (`phase` feedback or results) `correct` through `nuance` are null, and so are `id`, `word`, `pos`, `definition` for a `context` question, whose answer is the word.
 - `SavedWord` = `{id, word, pos, definition, difficulty, example, synonyms, nuance, due, level (0-6)}`. Word ids are stable: wordbooks store them.
 - `DailyWord` = `{id, date (YYYY-MM-DD, Pacific), word, pronunciation (IPA), pos, definition, example}`.
+- `WordReport` = `{id, word_id, word, reason, kind, note, user_id (null for a guest), created_at (naive UTC)}`. Words ship without a person reviewing each one, so reports are how mistakes come back; webcade offers "Report a problem" on a resolved round's feedback.
 - A correct answer scores 100 plus `max(0, 5 - floor(ms / 8000))` speed points, `ms` counted from the round start; wrong or missing answers score 0.
 
 ### WebSocket `/ws/{topic}?token=<access_token>`

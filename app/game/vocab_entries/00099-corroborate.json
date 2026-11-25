@@ -1,0 +1,47 @@
+{
+  "id": 99,
+  "slug": "corroborate",
+  "word": "corroborate",
+  "pos": "verb",
+  "pronunciation": "/kəˈrɑː.bə.reɪt/",
+  "definition": "To support a claim or finding with more evidence that shows it is true.",
+  "difficulty": "Intermediate",
+  "example": "Satellite photos corroborated the farmers' reports that the lake was shrinking each summer.",
+  "synonyms": [
+    "confirm",
+    "back up",
+    "substantiate",
+    "verify"
+  ],
+  "nuance": "To corroborate is to confirm with separate, independent evidence; don't confuse it with collaborate, which means to work together.",
+  "alternatives": [],
+  "prompt": "A historian finds a second letter describing the same flood recorded in an old diary.",
+  "options": [
+    "The historian hoped a second letter would corroborate the diary's account of the flood.",
+    "The historian and a colleague agreed to corroborate on a new book about the flood.",
+    "A letter disputing every date in the diary seemed to corroborate its account of the flood.",
+    "The historian used archival tape to corroborate the torn pages of the old diary."
+  ],
+  "reasons": [
+    "An independent letter that agrees with the diary would strengthen its claims.",
+    "This confuses the word with collaborate; working together on a book is not confirming evidence.",
+    "A source that disagrees on every point undermines the diary rather than supporting it.",
+    "Physically mending paper is repair, not backing up a claim with evidence."
+  ],
+  "practice": {
+    "prompt": "A student checks a statistic before putting it in a science report.",
+    "options": [
+      "Maya tried to corroborate the figure by printing it in bold three times in her report.",
+      "The encyclopedia corroborated her figure by giving a number twice as large.",
+      "Damp air in the classroom began to corroborate the metal legs of her display stand.",
+      "Before citing the figure, Maya searched for a second source to corroborate it."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Repeating a number louder adds emphasis, not any new evidence that it is correct.",
+      "A conflicting number casts doubt on her statistic instead of confirming it.",
+      "This mixes the word up with corrode, which describes rust and decay, not evidence.",
+      "Finding another reliable source that agrees is exactly how a fact gets confirmed."
+    ]
+  }
+}
