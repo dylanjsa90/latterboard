@@ -132,13 +132,58 @@ class DailyWord(BaseModel):
     """The word of the day: only what the home card shows, never a question's answer."""
 
     id: int
-    # The UTC date it's the word for, YYYY-MM-DD.
+    # The Pacific date it's the word for, YYYY-MM-DD.
     date: str
+    slug: str
     word: str
     pronunciation: str
     pos: str
     definition: str
     example: str
+
+
+class DailyWordDay(BaseModel):
+    # A Pacific date, YYYY-MM-DD.
+    date: str
+    word_id: int
+    slug: str
+
+
+class DailyWordHistory(BaseModel):
+    """Every archived day through today, oldest first; never a later day."""
+
+    days: list[DailyWordDay]
+
+
+class PracticeQuestion(BaseModel):
+    """A word page's own usage question, never one a room asks."""
+
+    prompt: str
+    options: list[str]
+    answer: int
+    reasons: list[str]
+
+
+class VocabEntry(BaseModel):
+    """A shipped word as its public page shows it: no room question's text."""
+
+    id: int
+    slug: str
+    word: str
+    pos: str
+    pronunciation: str
+    definition: str
+    difficulty: Difficulty
+    example: str
+    synonyms: list[str]
+    nuance: str
+    # Slugs of other shipped words.
+    alternatives: list[str]
+    practice: PracticeQuestion
+
+
+class VocabEntries(BaseModel):
+    entries: list[VocabEntry]
 
 
 ReportReason = Literal[

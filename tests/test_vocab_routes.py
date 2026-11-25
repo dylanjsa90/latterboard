@@ -378,6 +378,7 @@ def test_daily_word_is_public_and_hides_answers(client, monkeypatch):
     assert body == {
         "id": expected.id,
         "date": "2026-10-05",
+        "slug": expected.slug,
         "word": expected.word,
         "pronunciation": expected.pronunciation,
         "pos": expected.pos,

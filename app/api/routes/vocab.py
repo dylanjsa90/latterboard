@@ -7,11 +7,13 @@ Nothing here runs on a timer: clients refetch at a round's deadline themselves, 
 frame goes out from the request's `BackgroundTasks`, never a detached task (see the
 `app/services/bot_turn.py` docstring for why).
 
-`GET /vocab/daily-word` (the home page's word of the day), `POST /vocab/guest-rooms`
-and `POST /vocab/words/{id}/report` are public. A guest room is a solo room started signed out; its own `GET` and `actions`
+`GET /vocab/daily-word` (the home page's word of the day), `GET /vocab/entries` (every
+shipped word, for webcade's word pages), `POST /vocab/guest-rooms` and
+`POST /vocab/words/{id}/report` are public. A guest room is a solo room started signed out; its own `GET` and `actions`
 take the `X-Guest-Token` header its create call returned, in place of a bearer.
 """
 
+import functools
 import secrets
 from collections.abc import Callable, Iterator
 from contextlib import contextmanager
@@ -26,6 +28,7 @@ from fastapi import (
     Path,
     Query,
     Request,
+    Response,
     status,
 )
 from sqlalchemy.orm import Session
@@ -34,16 +37,21 @@ from app.api import deps
 from app.connection_manager import manager
 from app.core.rate_limit import allow, network_of
 from app.crud.vocab import crud_vocab
-from app.game import puzzles, vocab
+from app.game import puzzles, vocab, vocab_words
+from app.game.daily_archive import archive_days
+from app.game.vocab_public import public_entries
 from app.game.vocab_words import WORDS, daily_word
 from app.models import User
 from app.schemas.vocab import (
     DailyWord,
+    DailyWordDay,
+    DailyWordHistory,
     GuestRoomSnapshot,
     ReviewCreate,
     RoomAction,
     RoomCreate,
     RoomSnapshot,
+    VocabEntries,
     Wordbook,
     WordReport,
     WordReportCreate,
@@ -275,17 +283,57 @@ def claim_room(
 
 @router.get("/daily-word", response_model=DailyWord)
 def get_daily_word() -> DailyWord:
-    """Today's word (UTC, the daily puzzles' day). Public: the vocab home is."""
+    """Today's word, for the Pacific day (`puzzles.today()`) every daily feature uses.
+    Public: the home page shows it."""
     day = puzzles.today()
     w = daily_word(day)
     return DailyWord(
         id=w.id,
         date=day.isoformat(),
+        slug=w.slug,
         word=w.word,
         pronunciation=w.pronunciation,
         pos=w.pos,
         definition=w.definition,
         example=w.example,
+    )
+
+
+# Public lists that change at most daily; CDNs and the build may cache them briefly.
+PUBLIC_CACHE = "public, max-age=300"
+
+
+@router.get("/daily-word/history", response_model=DailyWordHistory)
+def get_daily_word_history() -> Response:
+    """The word of each archived day through today, oldest first. Public. Today is the
+    server's Pacific day, never one from the request, so no later day's word appears."""
+    history = DailyWordHistory(
+        days=[
+            DailyWordDay(date=day.isoformat(), word_id=w.id, slug=w.slug)
+            for day in archive_days(puzzles.today())
+            for w in [daily_word(day)]
+        ]
+    )
+    return Response(
+        history.model_dump_json(),
+        media_type="application/json",
+        headers={"Cache-Control": PUBLIC_CACHE},
+    )
+
+
+@functools.cache
+def _entries_body() -> bytes:
+    # Serialized once per process: the list is public and grows to megabytes.
+    return public_entries(vocab_words.WORDS).model_dump_json().encode()
+
+
+@router.get("/entries", response_model=VocabEntries)
+def get_vocab_entries() -> Response:
+    """Every shipped word in id order, for webcade's word pages. Public."""
+    return Response(
+        _entries_body(),
+        media_type="application/json",
+        headers={"Cache-Control": PUBLIC_CACHE},
     )
 
 
