@@ -186,3 +186,15 @@ def test_websocket_announces_picks_without_the_word(
             "answers": {"inviter": FOR_INVITER, "opponent": FOR_OPPONENT},
             "reason": "draw",
         }
+
+
+def test_pickable_words_are_the_sorted_answer_words(client, auth_headers):
+    words = client.get(f"{BASE}/word_pick/words", headers=auth_headers).json()
+    assert words == sorted(words)
+    assert len(words) == len(set(words)) > 2000
+    assert "aback" in words and "dulia" not in words
+    assert all(match_modes.is_pickable_word(word) for word in words)
+
+
+def test_pickable_words_need_sign_in(client):
+    assert client.get(f"{BASE}/word_pick/words").status_code == 401

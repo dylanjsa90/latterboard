@@ -65,6 +65,8 @@ def initial_state(
 
 
 _ANSWER_WORDS = frozenset(word.lower() for word in word_list)
+# Sorted, for players searching the words they may pick.
+PICKABLE_WORDS = sorted(_ANSWER_WORDS)
 
 
 def is_pickable_word(word: str) -> bool:

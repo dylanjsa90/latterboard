@@ -118,6 +118,7 @@ both players receive; the viewer-relative shapes (`/me/active`, `/me/history`, `
 | `GET /matches/{id}` | — | `MatchDetail` (below); 403/404 if not a participant / missing |
 | `POST /matches/{id}/guess` | `{word}` (wordle, your turn only) | `{match_id, turn_number, username, word, result: [{letter, status}], correct, status, current_turn_username, winner_username}` |
 | `POST /matches/{id}/word/guess` | `{word}` | `RaceGuessResult {match_id, turn_number, guess, result, correct, status, winner_username, answer}` |
+| `GET /matches/word_pick/words` | — | `string[]`, every word a player may pick, sorted (~2,300); webcade loads it once and searches it in the browser |
 | `POST /matches/{id}/word_pick/pick` | `{word}` (an answer word) | `{match_id, word, both_picked}` (+ `word_picked {match_id, username, both_picked}`); 400 not an answer word, 409 already picked or match over |
 | `POST /matches/{id}/word_pick/guess` | `{word}` | `RaceGuessResult`, `answer` = the word your opponent picked; 409 until both have picked |
 | `POST /matches/{id}/cipher/guess` | `{attempt: int[4]}` | `RaceGuessResult` (`result` = `{exact, close, won}`) |

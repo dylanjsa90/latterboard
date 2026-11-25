@@ -318,6 +318,13 @@ def submit_cipher_race_guess(
     return _submit_race_guess(db, obj, current_user, guess_in.attempt, background_tasks)
 
 
+@router.get("/word_pick/words", response_model=list[str])
+def pickable_words(_: User = Depends(deps.get_current_user)) -> list[str]:
+    """Every word a player may pick, sorted. webcade searches it in the browser, so
+    no player-written pattern ever runs here."""
+    return match_modes.PICKABLE_WORDS
+
+
 @router.post("/{match_id}/word_pick/pick", response_model=WordPickResult)
 def pick_word(
     match_id: int,
