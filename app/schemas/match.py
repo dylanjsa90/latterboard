@@ -5,12 +5,12 @@ from pydantic import BaseModel, Field
 
 from app.schemas.puzzle import SUDOKU_CELLS, CipherFeedback, Grade
 
-multiplayer: Literal["wordle", "word_race", "cipher_race", "sudoku_coop"]
+multiplayer: Literal["wordle", "word_race", "cipher_race", "sudoku_coop", "word_pick"]
 
 
 class MatchInviteCreate(BaseModel):
     opponent_username: str
-    # "wordle" (turn-based), "word_race", "cipher_race" or "sudoku_coop".
+    # "wordle" (turn-based), "word_race", "cipher_race", "sudoku_coop" or "word_pick".
     game: str = "wordle"
 
 
@@ -54,7 +54,7 @@ class MatchGuessResult(BaseModel):
     winner_username: str | None
 
 
-# --- races (word_race, cipher_race) ------------------------------------------
+# --- races (word_race, cipher_race, word_pick) -------------------------------
 
 # Word grades per letter, or cipher exact/close counts.
 RaceResult = list[Grade] | CipherFeedback
@@ -77,7 +77,23 @@ class RacePlayer(BaseModel):
 class RaceDetail(BaseModel):
     you: RacePlayer
     opponent: RacePlayer
+    # The viewer's answer, once the race is over.
     answer: str | list[int] | None
+    # word_pick only (None in other races): the word the viewer picked for their
+    # opponent, and whether the opponent has picked one for the viewer yet.
+    your_pick: str | None = None
+    opponent_picked: bool | None = None
+
+
+class WordPickCreate(BaseModel):
+    word: str = Field(min_length=5, max_length=5)
+
+
+class WordPickResult(BaseModel):
+    match_id: int
+    word: str
+    # True once both players have picked, so guessing is open.
+    both_picked: bool
 
 
 class RaceGuessResult(BaseModel):

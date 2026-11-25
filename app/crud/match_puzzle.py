@@ -39,16 +39,13 @@ def _finished(guesses: list[dict[str, Any]], max_attempts: int) -> bool:
     return _solved(guesses) or len(guesses) >= max_attempts
 
 
-def _answer(row: MatchPuzzle) -> str | list[int]:
-    answer: str | list[int] = (
-        row.data["answer"] if "answer" in row.data else row.data["digits"]
-    )
-    return answer
-
-
 def _username(db: Session, user_id: int | None) -> str | None:
     user = db.get(User, user_id) if user_id is not None else None
     return user.username if user else None
+
+
+def _opponent_id(match: Match, user_id: int) -> int:
+    return match.invitee_id if user_id == match.inviter_id else match.inviter_id
 
 
 class CRUDMatchPuzzle:
@@ -93,12 +90,41 @@ class CRUDMatchPuzzle:
 
     # --- races ------------------------------------------------------------
 
+    def submit_word_pick(
+        self, db: Session, match: Match, user: User, word: str
+    ) -> bool:
+        """Pick the word the opponent must guess in a word_pick race. True once both
+        players have picked, which opens guessing."""
+        opponent_id = _opponent_id(match, user.id)
+
+        def change(row: MatchPuzzle) -> bool:
+            if match.status != "in_progress":
+                raise MoveRejected("Match is not in progress")
+            answers = row.data["answers"]
+            if str(opponent_id) in answers:
+                raise MoveRejected("You've already picked a word")
+            answers = {**answers, str(opponent_id): word}
+            # Reassign rather than mutate: JSON columns don't track in-place changes.
+            row.data = {**row.data, "answers": answers}
+            return len(answers) == 2
+
+        return self._apply(db, match, change)
+
+    def pick_answers(self, db: Session, match: Match) -> dict[str, str]:
+        """In a word_pick race, each player's username mapped to the word they had to
+        guess. Only for a finished match: it reveals both picks."""
+        answers = self.get_by_match(db, match.id).data["answers"]
+        return {_username(db, int(pid)) or "": word for pid, word in answers.items()}
+
     def submit_race_guess(
         self, db: Session, match: Match, user: User, guess: str | list[int]
     ) -> RaceGuessResult:
         def change(row: MatchPuzzle) -> tuple[int, Any, bool]:
             if match.status != "in_progress":
                 raise MoveRejected("Match is not in progress")
+            answer = match_modes.race_answer(row.data, user.id)
+            if answer is None or not match_modes.race_ready(row.data):
+                raise MoveRejected("Waiting for both words to be picked")
             guesses = row.state["guesses"]
             mine = guesses[str(user.id)]
             if _finished(mine, match.max_guesses):
@@ -106,7 +132,7 @@ class CRUDMatchPuzzle:
                     "You've finished this race; waiting on your opponent"
                 )
 
-            result, correct = match_modes.grade_race_guess(row.data, guess)
+            result, correct = match_modes.grade_race_guess(answer, guess)
             guesses = {
                 **guesses,
                 str(user.id): [
@@ -138,7 +164,7 @@ class CRUDMatchPuzzle:
             correct=correct,
             status=match.status,
             winner_username=_username(db, match.winner_id),
-            answer=_answer(row) if over else None,
+            answer=match_modes.race_answer(row.data, user.id) if over else None,
         )
 
     def _record_race_scores(self, db: Session, match: Match, row: MatchPuzzle) -> None:
@@ -177,9 +203,7 @@ class CRUDMatchPuzzle:
     def race_detail(self, db: Session, match: Match, viewer_id: int) -> RaceDetail:
         row = self.get_by_match(db, match.id)
         over = match.status == "completed"
-        opponent_id = (
-            match.invitee_id if viewer_id == match.inviter_id else match.inviter_id
-        )
+        opponent_id = _opponent_id(match, viewer_id)
 
         def player(user_id: int, show_guesses: bool) -> RacePlayer:
             guesses = row.state["guesses"][str(user_id)]
@@ -199,10 +223,14 @@ class CRUDMatchPuzzle:
 
         # The opponent's grades are visible throughout; their letters/digits only
         # once the race is over.
+        picks = row.data.get("answers")
         return RaceDetail(
             you=player(viewer_id, True),
             opponent=player(opponent_id, over),
-            answer=_answer(row) if over else None,
+            answer=match_modes.race_answer(row.data, viewer_id) if over else None,
+            # word_pick only: the word you picked is yours to see; theirs isn't.
+            your_pick=picks.get(str(opponent_id)) if picks is not None else None,
+            opponent_picked=str(viewer_id) in picks if picks is not None else None,
         )
 
     # --- sudoku co-op -----------------------------------------------------

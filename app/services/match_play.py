@@ -20,8 +20,9 @@ from sqlalchemy.orm import Session
 from app.connection_manager import manager
 from app.crud.match import match as crud_match
 from app.crud.match_puzzle import match_puzzle as crud_match_puzzle
+from app.game import match_modes
 from app.models import Match, User
-from app.schemas.match import MatchGuessResult, RaceGuessResult
+from app.schemas.match import MatchGuessResult, RaceGuessResult, WordPickResult
 from app.services import match_views
 
 
@@ -102,14 +103,34 @@ def apply_race_guess(
         topic=topic,
     )
     if result.status == "completed":
-        manager.broadcast_from_thread(
-            {
-                "type": "match_completed",
-                "match_id": match.id,
-                "winner_username": result.winner_username,
-                "answer": result.answer,
-                "reason": "solved" if result.winner_username else "draw",
-            },
-            topic=topic,
-        )
+        frame = {
+            "type": "match_completed",
+            "match_id": match.id,
+            "winner_username": result.winner_username,
+            "answer": result.answer,
+            "reason": "solved" if result.winner_username else "draw",
+        }
+        if match.game == match_modes.WORD_PICK:
+            # Each player had their own word, so name both rather than the guesser's.
+            frame["answer"] = None
+            frame["answers"] = crud_match_puzzle.pick_answers(db, match)
+        manager.broadcast_from_thread(frame, topic=topic)
     return result
+
+
+def apply_word_pick(db: Session, match: Match, user: User, word: str) -> WordPickResult:
+    """Pick the word the opponent must guess in a word_pick race, and broadcast that
+    a pick was made. Raises `MoveRejected` if the match is over or this player has
+    already picked."""
+    both_picked = crud_match_puzzle.submit_word_pick(db, match, user, word)
+    # Never the word itself: the opponent is about to guess it.
+    manager.broadcast_from_thread(
+        {
+            "type": "word_picked",
+            "match_id": match.id,
+            "username": user.username,
+            "both_picked": both_picked,
+        },
+        topic=f"match:{match.id}",
+    )
+    return WordPickResult(match_id=match.id, word=word, both_picked=both_picked)

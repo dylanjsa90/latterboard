@@ -32,16 +32,19 @@ from app.core.config import settings
 from app.crud.match import match as crud_match
 from app.crud.match_puzzle import match_puzzle as crud_match_puzzle
 from app.database import SessionLocal
-from app.game import bot, match_modes
+from app.game import bot, match_modes, wordle
 from app.game.errors import MoveRejected
 from app.models import Match, MatchGuess, MatchPuzzle, User
 from app.services.match_play import (
     apply_race_guess,
+    apply_word_pick,
     apply_wordle_guess,
     wordle_move_error,
 )
 
-BOT_GAMES = frozenset({"wordle", match_modes.WORD_RACE, match_modes.CIPHER_RACE})
+BOT_GAMES = frozenset(
+    {"wordle", match_modes.WORD_RACE, match_modes.CIPHER_RACE, match_modes.WORD_PICK}
+)
 
 
 def bot_participant(db: Session, match: Match) -> User | None:
@@ -154,7 +157,7 @@ def _next_race_guess(
 ) -> str | list[int]:
     """Only ever the bot's own history. Race boards are private, and the opponent's
     grades without their letters say nothing useful anyway."""
-    if match.game == match_modes.WORD_RACE:
+    if match.game in (match_modes.WORD_RACE, match_modes.WORD_PICK):
         word_history: bot.WordHistory = [
             (entry["guess"], list(entry["result"])) for entry in own_guesses
         ]
@@ -178,15 +181,24 @@ def _play_race(db: Session, match: Match, player: User, move: int) -> bool:
     if match.status != "in_progress":
         return False
     row = crud_match_puzzle.get_by_match(db, match.id)
-    if crud_match_puzzle.race_finished_in(row, match, player.id):
+    opponent_id = (
+        match.invitee_id if player.id == match.inviter_id else match.inviter_id
+    )
+    if (
+        match.game == match_modes.WORD_PICK
+        and str(opponent_id) not in (row.data["answers"])
+    ):
+        # The human's pick prompts this, so the bot picks in reply, not ahead.
+        apply_word_pick(db, match, player, wordle.select_word())
+        return False
+    if not match_modes.race_ready(row.data) or crud_match_puzzle.race_finished_in(
+        row, match, player.id
+    ):
         return False
 
     guess = _next_race_guess(match, _race_history(row, player.id))
     apply_race_guess(db, match, player, guess)
 
-    opponent_id = (
-        match.invitee_id if player.id == match.inviter_id else match.inviter_id
-    )
     # The match ends once both sides finish, so still in progress with the opponent
     # done means the bot isn't. `move` bounds the playout, as a backstop.
     return (

@@ -3,6 +3,8 @@
 
 - word_race / cipher_race: both players get the same private puzzle and play it at
   the same time on their own boards. Whoever solves it in fewer attempts wins.
+- word_pick: a word race where each player picks the word the other must guess.
+  Guessing opens once both have picked.
 - sudoku_coop: both players fill in one shared board against a shared mistake limit.
 
 No FastAPI/pydantic/SQLAlchemy imports here, mirroring app/game/wordle.py.
@@ -18,19 +20,22 @@ from app.game.puzzles import (
     CipherFeedback,
     cipher_feedback,
 )
+from app.game.word_list import word_list
 from app.schemas.puzzle import Grade
 
 WORD_RACE = "word_race"
 CIPHER_RACE = "cipher_race"
 SUDOKU_COOP = "sudoku_coop"
+WORD_PICK = "word_pick"
 
-RACE_GAMES = frozenset({WORD_RACE, CIPHER_RACE})
+RACE_GAMES = frozenset({WORD_RACE, CIPHER_RACE, WORD_PICK})
 PUZZLE_MATCH_GAMES = RACE_GAMES | {SUDOKU_COOP}
 
 # Stored in Match.max_guesses: attempts per player in a race, the team's mistake
 # limit in co-op.
 MAX_GUESSES = {
     WORD_RACE: WORD_MAX_ATTEMPTS,
+    WORD_PICK: WORD_MAX_ATTEMPTS,
     CIPHER_RACE: CIPHER_MAX_ATTEMPTS,
     SUDOKU_COOP: 3,
 }
@@ -42,6 +47,9 @@ def new_puzzle(game: str) -> dict[str, Any]:
         return {"answer": wordle.select_word()}
     if game == CIPHER_RACE:
         return {"digits": generate_cipher_digits()}
+    if game == WORD_PICK:
+        # Filled in by the players: each player's id maps to the word they must guess.
+        return {"answers": {}}
     if game == SUDOKU_COOP:
         return generate_sudoku()
     raise ValueError(f"No puzzle generator for game {game!r}")
@@ -56,15 +64,44 @@ def initial_state(
     return {"guesses": {str(player_id): [] for player_id in player_ids}}
 
 
+_ANSWER_WORDS = frozenset(word.lower() for word in word_list)
+
+
+def is_pickable_word(word: str) -> bool:
+    """Whether a player may pick `word` for their opponent: answer words only, so
+    nobody is handed an obscure word they could never be expected to find."""
+    return word.lower() in _ANSWER_WORDS
+
+
+def race_answer(puzzle: dict[str, Any], player_id: int) -> str | list[int] | None:
+    """The answer `player_id` is racing towards: the shared one, or in word_pick the
+    word their opponent picked (None until they have)."""
+    if "answers" in puzzle:
+        answer: str | None = puzzle["answers"].get(str(player_id))
+        return answer
+    shared: str | list[int] = (
+        puzzle["answer"] if "answer" in puzzle else puzzle["digits"]
+    )
+    return shared
+
+
+def race_ready(puzzle: dict[str, Any]) -> bool:
+    """Whether guessing is open: always, except a word_pick race until both words
+    have been picked."""
+    return "answers" not in puzzle or len(puzzle["answers"]) == 2
+
+
 def grade_race_guess(
-    puzzle: dict[str, Any], guess: str | list[int]
+    answer: str | list[int], guess: str | list[int]
 ) -> tuple[list[Grade] | CipherFeedback, bool]:
-    """Feedback for a race guess (word grades or cipher exact/close) and whether it
-    solves the puzzle."""
+    """Feedback for a race guess (word grades or cipher exact/close) against the
+    player's answer, and whether it solves it."""
     if isinstance(guess, str):
-        grades = wordle.evaluate_guess(puzzle["answer"], guess)
+        assert isinstance(answer, str)
+        grades = wordle.evaluate_guess(answer, guess)
         return grades, all(grade == "correct" for grade in grades)
-    feedback = cipher_feedback(guess, puzzle["digits"])
+    assert isinstance(answer, list)
+    feedback = cipher_feedback(guess, answer)
     return feedback, bool(feedback["won"])
 
 

@@ -1,6 +1,6 @@
 # Cross-repo contract
 
-Last updated: 2026-11-24
+Last updated: 2026-11-25
 
 webcade (`~/projects/webcade`, React) is latterboard's (`~/projects/latterboard`, FastAPI) only
 client. This file is `docs/reference/cross-repo-contract.md` in both repos: keep the two copies
@@ -103,7 +103,7 @@ invitee_is_bot, current_turn_username?, winner_username?, max_guesses, created_a
 completed_at?}`. The bot flags are per side, not "opponent", because `match_views.to_public` builds one object
 both players receive; the viewer-relative shapes (`/me/active`, `/me/history`, `match_started`) carry
 `opponent_is_bot` instead.
-`game` ∈ `wordle | word_race | cipher_race | sudoku_coop`; `status` ∈
+`game` ∈ `wordle | word_race | cipher_race | sudoku_coop | word_pick`; `status` ∈
 `pending_invite | in_progress | completed | declined | cancelled | expired`.
 
 | Call | Request | Response (+ frames sent) |
@@ -114,10 +114,12 @@ both players receive; the viewer-relative shapes (`/me/active`, `/me/history`, `
 | `POST /matches/{id}/cancel` | — | `MatchPublic` (+ `invite_cancelled` to invitee) |
 | `GET /matches/pending` | — | `[{id, game, from_username, created_at, expires_at}]` |
 | `GET /matches/me/history?skip&limit` | — | `{items: [{id, game, opponent_username, opponent_is_bot, result, completed_at}], total, record: {won, lost, drawn}}`, completed matches newest first; `result` ∈ `won \| lost \| draw` (`sudoku_coop`: `solved \| failed`); `record` spans every completed competitive match except those against the computer |
-| `GET /matches/me/active` | — | `[{id, game, status: pending_invite \| in_progress, opponent_username, opponent_is_bot, role: inviter \| invitee, your_move, created_at, started_at}]`, newest first; `your_move` = your turn (wordle), your side of a race unfinished, always (co-op), or an invite for you to answer |
+| `GET /matches/me/active` | — | `[{id, game, status: pending_invite \| in_progress, opponent_username, opponent_is_bot, role: inviter \| invitee, your_move, created_at, started_at}]`, newest first; `your_move` = your turn (wordle), your side of a race unfinished, always (co-op), your pick not yet made (word_pick, until both have picked), or an invite for you to answer |
 | `GET /matches/{id}` | — | `MatchDetail` (below); 403/404 if not a participant / missing |
 | `POST /matches/{id}/guess` | `{word}` (wordle, your turn only) | `{match_id, turn_number, username, word, result: [{letter, status}], correct, status, current_turn_username, winner_username}` |
 | `POST /matches/{id}/word/guess` | `{word}` | `RaceGuessResult {match_id, turn_number, guess, result, correct, status, winner_username, answer}` |
+| `POST /matches/{id}/word_pick/pick` | `{word}` (an answer word) | `{match_id, word, both_picked}` (+ `word_picked {match_id, username, both_picked}`); 400 not an answer word, 409 already picked or match over |
+| `POST /matches/{id}/word_pick/guess` | `{word}` | `RaceGuessResult`, `answer` = the word your opponent picked; 409 until both have picked |
 | `POST /matches/{id}/cipher/guess` | `{attempt: int[4]}` | `RaceGuessResult` (`result` = `{exact, close, won}`) |
 | `POST /matches/{id}/sudoku/move` | `{index, value}` | `{match_id, index, value, correct, mistakes, status, outcome}`; 409 if rejected |
 | `POST /matchmaking/{game}` | — | `{status: "queued"\|"matched", match: MatchPublic?, queue_ttl_seconds}` (+ `match_started` on pairing). After `MATCHMAKING_BOT_WAIT_SECONDS` with no human, pairs the caller with the computer (not for `sudoku_coop`); `match.invitee_is_bot` says so |
@@ -132,7 +134,9 @@ polling still reaches the computer fallback.
 `MatchDetail` = `MatchPublic` + `{target_word?, guesses: MatchGuessResult[] (wordle), race?, sudoku?}`:
 - `race` = `{you, opponent, answer?}`, each player `{username, guesses: [{guess?, result: Grade[] |
   {exact, close, won}, correct}], solved, finished}`. The opponent's `guess` and the `answer` are
-  null until `status == "completed"`.
+  null until `status == "completed"`. In `word_pick`, `answer` is the viewer's own (the word the
+  opponent picked), and `race` adds `your_pick` (the word you picked, else null) and
+  `opponent_picked`; both are null in other races.
 - `sudoku` = `{puzzle, board, mistakes, max_mistakes, outcome: "solved"|"failed"|null, solution?}`.
 
 ### Invite links (`/invite-links`)
@@ -205,7 +209,7 @@ Browsers can't set headers on a websocket, so the token rides in the query strin
 | server → on connect | `connected {topic, username}` |
 | client → server | `join_match {match_id}` (participants only; answered `joined_match {match_id}`), `leave_match {match_id}`, `join_room {code}` (a vocab room's participants only; answered `joined_room {code}`, upper-case), `leave_room {code}`. Any other text is rebroadcast to the topic as `message {topic, username, data}` |
 | `user:{id}` | `invite_received {match_id, from_username, game, created_at, expires_at}`, `invite_declined {match_id}`, `invite_cancelled {match_id}`, `match_started {match_id, game, opponent_username, opponent_is_bot, current_turn_username, max_guesses, …}` |
-| `match:{id}` | `opponent_guessed {match_id, username, turn_number, result, correct, word?}` (`word` only in wordle; races send grades only), `your_turn {match_id, current_turn_username}`, `cell_filled {match_id, username, index, value}`, `mistake {match_id, username, index, value, mistakes, max_mistakes}`, `match_completed {match_id, …}` (wordle: `winner_username, target_word, reason`; races: `winner_username, answer, reason`; co-op: `outcome`) |
+| `match:{id}` | `opponent_guessed {match_id, username, turn_number, result, correct, word?}` (`word` only in wordle; races send grades only), `your_turn {match_id, current_turn_username}`, `cell_filled {match_id, username, index, value}`, `mistake {match_id, username, index, value, mistakes, max_mistakes}`, `word_picked {match_id, username, both_picked}` (never the word), `match_completed {match_id, …}` (wordle: `winner_username, target_word, reason`; races: `winner_username, answer, reason`, and in word_pick `answer: null, answers: {username: word they had to guess}`; co-op: `outcome`) |
 | `vocab:{CODE}` | `room_changed {code, revision}` after a room call that changed the room beyond players' `seen` (a join, an action, or a due transition) |
 | everyone | `heartbeat` every `WS_HEARTBEAT_SECONDS` |
 

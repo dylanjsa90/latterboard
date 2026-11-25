@@ -1,6 +1,6 @@
 # Backend module map
 
-Last updated: 2026-11-24
+Last updated: 2026-11-25
 
 Where things live in `app/` and what each module exports. Rules for matches, matchmaking, and
 the computer opponent are in `docs/architecture/matches.md`; wire shapes are in the cross-repo
@@ -61,7 +61,7 @@ table), so imports always name the module.
 | ---- | ------- | ----------- |
 | `services/match_start.py` | Starting a match between two known players, shared by accept, matchmaking, and invite links | `start_match`, `notify_match_started`, `max_guesses_for` |
 | `services/match_views.py` | Matches as response schemas, loading the players they name in one query | `to_public`, `to_detail`, `guess_result`, `history`, `active_items`, `pending_invites` |
-| `services/match_play.py` | Applying a move and broadcasting it, shared by the move routes and the bot. Raises `MoveRejected`, never `HTTPException` | `apply_wordle_guess`, `apply_race_guess`, `wordle_move_error` |
+| `services/match_play.py` | Applying a move and broadcasting it, shared by the move routes and the bot. Raises `MoveRejected`, never `HTTPException` | `apply_wordle_guess`, `apply_race_guess`, `apply_word_pick`, `wordle_move_error` |
 | `services/bot_turn.py` | When the computer moves and driving it, via `BackgroundTasks` | `schedule_bot_turn`, `run_bot_turn`, `bot_participant`, `BOT_GAMES` |
 | `services/google_sign_in.py` | What `/login/google` and `POST /users/google` share: verify the credential (mapping errors to 401/403/404), mint the token | `PROVIDER`, `verified_identity`, `access_token` |
 | `services/avatar.py` | Validates and re-encodes profile photos to a 256px WebP (dropping EXIF) | `process_avatar`, `InvalidImage`, `AVATAR_MAX_BYTES` |
@@ -76,7 +76,7 @@ table), so imports always name the module.
 | `crud/puzzle.py` | The dated puzzle bank: seeding, lookup by game and date, generating a sudoku once the bank runs out | `puzzle` (`seed_defaults`, `get_by_game_date`, `get_or_generate`, `count_by_game`) |
 | `crud/puzzle_attempt.py` | Daily puzzle attempts, stats, streaks | `puzzle_attempt` (`get_for_puzzle`, `get_or_create`, `record_attempt`, `get_stats`, `get_history`) |
 | `crud/match.py` | Match lifecycle + turn-based wordle rows | `match` (`create_invite`, `expire_if_needed`, `get_open_match_between`, `get_pending_invites`, `get_active`, `get_finished`, `get_record`, `get_guesses`, `accept_invite`, `decline_invite`, `cancel_invite`, `record_guess`) |
-| `crud/match_puzzle.py` | Race/co-op state in `match_puzzle`, optimistic lock via `_apply` | `match_puzzle` (`build`, `submit_race_guess`, `race_detail`, `submit_sudoku_move`, `sudoku_detail`) |
+| `crud/match_puzzle.py` | Race/co-op state in `match_puzzle`, optimistic lock via `_apply` | `match_puzzle` (`build`, `submit_word_pick`, `pick_answers`, `submit_race_guess`, `race_detail`, `submit_sudoku_move`, `sudoku_detail`) |
 | `crud/invite_link.py` | Invite link rows: create, daily count, open links, status, atomic claim, revoke | `invite_link`, `invite_url` |
 | `crud/vocab.py` | Loads a room, runs a rule, saves it with an optimistic lock (`VocabRoom.version`, replayed on `StaleDataError`); `create_room` also deletes rooms a week past expiry; wordbook rows; word reports | `crud_vocab` (`create_room`, `mutate`, `wordbook`, `save`, `remove`, `review`, `report`, `reports`); not `vocab`, which the module uses for the game rules |
 
@@ -89,7 +89,7 @@ table), so imports always name the module.
 | `game/wordle.py` | Wordle word selection, validation (answers or `GUESS_WORDS`), and guess grading | `select_word`, `is_valid_word`, `evaluate_guess` |
 | `game/word_list.py` | The 2,309 five-letter answer words, shared by puzzles, matches, and the bot | `word_list` |
 | `game/guess_words.py` | The 8,636 five-letter ENABLE words (public domain) a player may also guess, so plurals and everyday words that are never answers pass `is_valid_word` | `GUESS_WORDS` |
-| `game/match_modes.py` | Rules for the puzzle match modes (`word_race`, `cipher_race`, `sudoku_coop`): new puzzles, grading, outcomes, scores | `RACE_GAMES`, `PUZZLE_MATCH_GAMES`, `new_puzzle`, `initial_state`, `grade_race_guess`, `race_outcome`, `race_score`, `sudoku_coop_score` |
+| `game/match_modes.py` | Rules for the puzzle match modes (`word_race`, `cipher_race`, `sudoku_coop`, `word_pick`): new puzzles, picks, grading, outcomes, scores | `RACE_GAMES`, `PUZZLE_MATCH_GAMES`, `new_puzzle`, `initial_state`, `is_pickable_word`, `race_answer`, `race_ready`, `grade_race_guess`, `race_outcome`, `race_score`, `sudoku_coop_score` |
 | `game/bot.py` | Move selection for the computer: filter to still-possible answers, rank, then pick, handicapped by `skill` | `choose_word`, `choose_cipher`, `word_candidates`, `cipher_candidates`, `DEFAULT_SKILL` |
 | `game/vocab.py` | Vocab Challenger rules, ported from vocab-app's `engine.ts`: rounds, deadlines (epoch ms), scoring, per-player views, review ladder | `make_game`, `join`, `touch`, `claim`, `guest_player_id`, `apply_action`, `visible`, `full_question`, `next_review`, `VocabError` |
 | `game/vocab_words.py` | The word list: one JSON file per word in `game/vocab_entries/`, loaded once at import (ids and slugs permanent, append only), and the daily-word schedule | `WORDS`, `BY_SLUG`, `VocabWord`, `Practice`, `load_words`, `dump_entry`, `slugify`, `daily_word`, `daily_id`, `daily_runway`, `DAILY_ANCHOR` |
@@ -110,7 +110,7 @@ table), so imports always name the module.
 | `schemas/user.py` | User I/O + the handle/name/city/birth-year rules | `UserCreate`, `ProfileUpdate`, `UserPublic`, `UserPrivate`, `PlayerPublic`, `Token`, `NewPassword`, `avatar_url` |
 | `schemas/game_score.py` | Score I/O models + per-game validity rules | `SCORE_RULES`, `GameScoreCreate`, `LeaderboardEntry`, `PlaysToday` |
 | `schemas/puzzle.py` | Puzzle I/O models | `{Word,Sudoku,Memory,Cipher}PuzzlePublic`, `WordGuessCreate`/`WordGuessResult`, `SudokuMoveCreate`/`SudokuMoveResult`, `CipherAttemptCreate`/`CipherFeedback`, `PuzzleStats`, `PuzzleHistory` |
-| `schemas/match.py` | Match I/O models | `MatchInviteCreate`, `MatchPublic`, `MatchDetail`, `MatchGuessResult`, `RaceDetail`, `RaceGuessResult`, `SudokuCoopMoveCreate`, `SudokuCoopDetail`, `PendingInvite` |
+| `schemas/match.py` | Match I/O models | `MatchInviteCreate`, `MatchPublic`, `MatchDetail`, `MatchGuessResult`, `RaceDetail`, `RaceGuessResult`, `WordPickCreate`, `WordPickResult`, `SudokuCoopMoveCreate`, `SudokuCoopDetail`, `PendingInvite` |
 | `schemas/invite_link.py`, `matchmaking.py`, `vocab.py`, `ws.py` | Invite links; the matchmaking answer; Vocab Challenger (times in epoch ms); presence | `InviteLinkCreate`, `InviteLinkPublic`, `InviteLinkPreview`, `MatchmakingStatus`, `RoomSnapshot`, `GuestRoomSnapshot`, `Wordbook`, `WordReportCreate`, `WordReport`, `TopicPresence` |
 
 ## `app/core/` and infrastructure

@@ -22,12 +22,15 @@ from app.schemas.match import (
     RaceGuessResult,
     SudokuCoopMoveCreate,
     SudokuCoopMoveResult,
+    WordPickCreate,
+    WordPickResult,
 )
 from app.schemas.puzzle import CipherAttempt
 from app.services import match_views
 from app.services.bot_turn import schedule_bot_turn
 from app.services.match_play import (
     apply_race_guess,
+    apply_word_pick,
     apply_wordle_guess,
     wordle_move_error,
 )
@@ -255,7 +258,7 @@ def submit_guess(
     return result
 
 
-# --- races (word_race, cipher_race) ------------------------------------------
+# --- races (word_race, cipher_race, word_pick) -------------------------------
 
 
 def _submit_race_guess(
@@ -313,6 +316,55 @@ def submit_cipher_race_guess(
     _require_participant(obj, current_user)
     _require_game(obj, match_modes.CIPHER_RACE)
     return _submit_race_guess(db, obj, current_user, guess_in.attempt, background_tasks)
+
+
+@router.post("/{match_id}/word_pick/pick", response_model=WordPickResult)
+def pick_word(
+    match_id: int,
+    pick_in: WordPickCreate,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(deps.get_db),
+    current_user: User = Depends(deps.get_current_user),
+) -> WordPickResult:
+    """Pick the word your opponent must guess. Guessing opens once both have picked."""
+    obj = _get_match_or_404(db, match_id)
+    _require_participant(obj, current_user)
+    _require_game(obj, match_modes.WORD_PICK)
+    if not match_modes.is_pickable_word(pick_in.word):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Pick a common five-letter word",
+        )
+    try:
+        result = apply_word_pick(db, obj, current_user, pick_in.word.lower())
+    except MoveRejected as exc:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT, detail=str(exc)
+        ) from exc
+    schedule_bot_turn(background_tasks, db, obj)
+    return result
+
+
+@router.post("/{match_id}/word_pick/guess", response_model=RaceGuessResult)
+def submit_word_pick_guess(
+    match_id: int,
+    guess_in: MatchGuessCreate,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(deps.get_db),
+    current_user: User = Depends(deps.get_current_user),
+) -> RaceGuessResult:
+    """Guess the word your opponent picked. Both players guess whenever they like;
+    fewest guesses wins."""
+    obj = _get_match_or_404(db, match_id)
+    _require_participant(obj, current_user)
+    _require_game(obj, match_modes.WORD_PICK)
+    if not wordle.is_valid_word(guess_in.word):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Not a valid word"
+        )
+    return _submit_race_guess(
+        db, obj, current_user, guess_in.word.lower(), background_tasks
+    )
 
 
 # --- sudoku co-op -----------------------------------------------------------

@@ -192,7 +192,12 @@ def _active_item(
     elif match.game == "wordle":
         your_move = match.current_turn_user_id == viewer_id
     elif match.game in match_modes.RACE_GAMES and row is not None:
-        your_move = not crud_match_puzzle.race_finished_in(row, match, viewer_id)
+        if match_modes.race_ready(row.data):
+            your_move = not crud_match_puzzle.race_finished_in(row, match, viewer_id)
+        else:
+            # word_pick before guessing opens: on you only until you've picked.
+            picked = str(_opponent_id(match, viewer_id)) in row.data["answers"]
+            your_move = not picked
     else:
         # Co-op has no turns: the shared board can always use another hand.
         your_move = True

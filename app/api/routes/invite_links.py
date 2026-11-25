@@ -28,6 +28,7 @@ router = APIRouter(prefix="/invite-links", tags=["invite-links"])
 GAME_TITLES = {
     "wordle": "Word Duel",
     "word_race": "Word Race",
+    "word_pick": "Word Duel: Your Pick",
     "cipher_race": "Cipher Race",
     "sudoku_coop": "Sudoku Co-op",
 }
