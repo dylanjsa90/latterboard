@@ -1,0 +1,49 @@
+{
+  "id": 212,
+  "slug": "zealous",
+  "word": "zealous",
+  "pos": "adjective",
+  "pronunciation": "/ˈzɛl.əs/",
+  "definition": "Showing great energy and passionate devotion in pursuing a cause, belief or goal.",
+  "difficulty": "Intermediate",
+  "example": "Her zealous study of bird calls filled three notebooks before the end of spring.",
+  "synonyms": [
+    "fervent",
+    "ardent",
+    "passionate",
+    "eager"
+  ],
+  "nuance": "Zealous suggests intense, sometimes excessive commitment to a cause, while eager can mean simply wanting something to happen.",
+  "alternatives": [
+    "ardent"
+  ],
+  "prompt": "A hall monitor takes her school's new recycling rule very seriously.",
+  "options": [
+    "The zealous monitor checked every trash can at lunch for stray plastic bottles.",
+    "The zealous monitor shrugged and let students toss bottles anywhere they pleased.",
+    "The zealous monitor resented that a classmate had won the school's recycling award.",
+    "The zealous monitor hesitated over every bin, unsure whether the rule mattered to her."
+  ],
+  "reasons": [
+    "Tireless, intense effort on behalf of a rule shows fervent commitment to it.",
+    "Indifference to the rule is the opposite of fiery devotion.",
+    "Resenting another's success describes jealousy, a look-alike word with a different meaning.",
+    "Doubt about whether a cause matters shows no passion for it."
+  ],
+  "practice": {
+    "prompt": "A student joins the debate team in the middle of the school year.",
+    "options": [
+      "The zealous newcomer stayed late each evening to research both sides of every topic.",
+      "The zealous newcomer skipped most practices and rarely opened the research packets.",
+      "The zealous newcomer made the team laugh with silly voices and goofy costumes.",
+      "The zealous newcomer agreed to join only after a friend begged her for a week."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Giving up free evenings to prepare shows energetic, wholehearted dedication.",
+      "Neglecting the work reveals a lack of interest, not intense enthusiasm.",
+      "Clownish silliness fits the look-alike zany, not devotion to a goal.",
+      "Joining reluctantly under pressure lacks the eager drive the word requires."
+    ]
+  }
+}

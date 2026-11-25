@@ -1,0 +1,49 @@
+{
+  "id": 167,
+  "slug": "ornate",
+  "word": "ornate",
+  "pos": "adjective",
+  "pronunciation": "/ɔːrˈneɪt/",
+  "definition": "Heavily decorated with many detailed patterns, carvings, or flourishes.",
+  "difficulty": "Intermediate",
+  "example": "The old theater's ornate ceiling was covered in gilded vines and tiny plaster roses.",
+  "synonyms": [
+    "elaborate",
+    "lavishly decorated",
+    "embellished",
+    "showy"
+  ],
+  "nuance": "Elaborate can mean merely complicated, but ornate always points to heavy decoration; said of writing, it often hints at excess.",
+  "alternatives": [
+    "austere"
+  ],
+  "prompt": "A tour guide describes the entrance hall of a nineteenth-century mansion.",
+  "options": [
+    "Carved oak garlands and gold leaf made the mansion's staircase ornate.",
+    "The ornate hallway had bare white walls and no trim of any kind.",
+    "The ornate butler grumbled and snapped at every visitor with a question.",
+    "The hall was ornate because it could hold two hundred guests at once."
+  ],
+  "reasons": [
+    "Carvings and gilding are exactly the kind of rich detail the word describes.",
+    "A bare, undecorated space is plain, the reverse of the word's meaning.",
+    "This confuses the word with ornery, which means grumpy and bad-tempered.",
+    "Size and capacity say nothing about how richly something is decorated."
+  ],
+  "practice": {
+    "prompt": "A student is revising an essay that her teacher called hard to follow.",
+    "options": [
+      "Feeling ornate after the teacher's comments, she grumbled and refused to revise.",
+      "The essay counted as ornate simply because she turned it in three days early.",
+      "Stacked adjectives and long metaphors made her draft so ornate that the point got lost.",
+      "Her ornate draft used only short, plain sentences and avoided figurative language."
+    ],
+    "answer": 2,
+    "reasons": [
+      "The word describes decoration, not a cranky mood; that would be ornery.",
+      "Submitting work early has nothing to do with how embellished its style is.",
+      "Prose crowded with flourishes is fancy enough to bury its main idea.",
+      "Spare, simple writing lacks the decoration the word requires."
+    ]
+  }
+}

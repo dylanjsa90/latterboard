@@ -1,0 +1,47 @@
+{
+  "id": 188,
+  "slug": "justify",
+  "word": "justify",
+  "pos": "verb",
+  "pronunciation": "/ˈdʒʌs.tə.faɪ/",
+  "definition": "To show or prove that a decision or action is right or reasonable.",
+  "difficulty": "Foundation",
+  "example": "Can you justify spending the club's entire budget on a single printer?",
+  "synonyms": [
+    "defend",
+    "warrant",
+    "vindicate",
+    "explain"
+  ],
+  "nuance": "To justify an action is to argue that it was right, while to excuse it is to ask that a fault be forgiven.",
+  "alternatives": [],
+  "prompt": "A student asks her teacher for an extension on a research paper.",
+  "options": [
+    "She tried to justify her request by showing a note about the library's delayed books.",
+    "She decided to justify the deadline by moving it two weeks later on her own.",
+    "To justify her request, she cheerfully admitted that she had no reason at all for needing more time.",
+    "Her teacher will justify the paper with a grade of B-plus."
+  ],
+  "reasons": [
+    "Offering evidence that the delay was beyond her control gives a good reason for the request.",
+    "Changing a date yourself is adjusting it, not giving reasons that support it.",
+    "Admitting there is no reason weakens the request instead of supporting it.",
+    "Assigning a grade is evaluating work, not defending a choice with reasons."
+  ],
+  "practice": {
+    "prompt": "A town council is debating whether to pay for a new bridge.",
+    "options": [
+      "A resident tried to justify the project by listing every single way it would waste the town's money.",
+      "Workers will justify the bridge by bolting its steel beams into place.",
+      "The engineer's report helped justify the cost by showing the old bridge was cracking.",
+      "The council voted to justify pale gray as the color for the railings."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Listing drawbacks argues against a project rather than for it.",
+      "Putting up a structure is construction; this verb involves argument or evidence.",
+      "Proof that the old bridge is unsafe makes the spending look sensible.",
+      "Picking a color is choosing, not giving reasons that a choice is sound."
+    ]
+  }
+}

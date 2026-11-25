@@ -1,0 +1,49 @@
+{
+  "id": 329,
+  "slug": "nonchalant",
+  "word": "nonchalant",
+  "pos": "adjective",
+  "pronunciation": "/ˌnɑːn.ʃəˈlɑːnt/",
+  "definition": "Calm and relaxed, seeming not to worry or get excited about something.",
+  "difficulty": "Foundation",
+  "example": "With a nonchalant wave, the chef flipped the omelet without even looking at the pan.",
+  "synonyms": [
+    "unconcerned",
+    "casual",
+    "cool",
+    "blasé"
+  ],
+  "nuance": "Nonchalant describes an outward air of easy calm that may hide real feelings, while indifferent means someone truly does not care.",
+  "alternatives": [
+    "indifferent"
+  ],
+  "prompt": "A goalkeeper faces a penalty kick in the final minute of a championship game.",
+  "options": [
+    "Despite the roaring crowd, the goalkeeper looked nonchalant as she adjusted her gloves.",
+    "The goalkeeper felt so nonchalant that her knees shook and her breathing turned ragged.",
+    "The nonchalant leap required every ounce of the goalkeeper's frantic, straining effort.",
+    "The referee measured the nonchalant distance from the penalty spot to the goal line."
+  ],
+  "reasons": [
+    "Appearing relaxed and unbothered under heavy pressure fits the word exactly.",
+    "Shaking knees and ragged breathing show nerves, the reverse of easy calm.",
+    "Frantic straining clashes with the word's sense of effortless, unhurried ease.",
+    "A distance has no attitude; the word describes a person's manner, not a length."
+  ],
+  "practice": {
+    "prompt": "A student learns that his class presentation has been moved up to today.",
+    "options": [
+      "Jamal stayed nonchalant, flipping through his note cards as if nothing had changed.",
+      "Jamal grew nonchalant, pacing the hallway and begging the teacher for one more day.",
+      "Jamal let out a nonchalant scream of panic when his lab partner shared the news.",
+      "The new schedule was nonchalant, so the presentation now started at nine o'clock."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Calmly carrying on after surprising news shows a relaxed, unworried manner.",
+      "Pacing and begging signal panic, which is the opposite of looking unconcerned.",
+      "A scream of panic cannot be casual and composed at the same time.",
+      "A schedule cannot feel calm; the word fits people and their behavior, not timetables."
+    ]
+  }
+}

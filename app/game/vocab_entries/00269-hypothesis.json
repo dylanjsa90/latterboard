@@ -1,0 +1,47 @@
+{
+  "id": 269,
+  "slug": "hypothesis",
+  "word": "hypothesis",
+  "pos": "noun",
+  "pronunciation": "/haɪˈpɑː.θə.sɪs/",
+  "definition": "A proposed explanation or prediction that can be checked by testing or further study.",
+  "difficulty": "Foundation",
+  "example": "The librarian's hypothesis was that students borrowed more books during weeks with rainy weather.",
+  "synonyms": [
+    "educated guess",
+    "supposition",
+    "conjecture",
+    "proposition"
+  ],
+  "nuance": "A hypothesis is a testable idea still waiting for evidence, while a scientific theory is an explanation already backed by much testing.",
+  "alternatives": [],
+  "prompt": "A student is planning a science fair experiment about how plants grow.",
+  "options": [
+    "Her hypothesis stated that seedlings exposed to music would grow taller than silent ones.",
+    "After measuring every seedling, she drew a bar graph and called it her hypothesis.",
+    "Her hypothesis was simply the list of pots, soil, and seed packets she bought for the project.",
+    "She refused to check any plants, since a hypothesis is already a proven fact."
+  ],
+  "reasons": [
+    "It is a specific prediction made before the experiment, and it can be checked by measuring.",
+    "A graph of measured results shows what happened; it is not a prediction made beforehand.",
+    "A list of supplies explains nothing and predicts nothing, so it cannot be tested.",
+    "This reverses the idea: a hypothesis is unproven and exists to be tested."
+  ],
+  "practice": {
+    "prompt": "A baker wonders why her loaves of bread keep coming out flat.",
+    "options": [
+      "Her hypothesis was the recipe card that listed the flour, water, salt, and yeast in exact amounts.",
+      "She kept her hypothesis in a glass jar and fed it a spoonful of flour every morning.",
+      "The flat loaf cooling on the rack was her hypothesis.",
+      "Her hypothesis was that the old yeast had gone weak, so she baked a test loaf with fresh yeast."
+    ],
+    "answer": 3,
+    "reasons": [
+      "A recipe gives instructions; it offers no explanation for why the bread fails.",
+      "This describes a sourdough starter, a physical thing, not an idea that can be tested.",
+      "The flat loaf is the problem she observed, not her proposed reason for it.",
+      "She proposes a possible cause and then runs a test that could support or reject it."
+    ]
+  }
+}

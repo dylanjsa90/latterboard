@@ -1,0 +1,47 @@
+{
+  "id": 286,
+  "slug": "toady",
+  "word": "toady",
+  "pos": "noun",
+  "pronunciation": "/ˈtoʊ.di/",
+  "definition": "A person who flatters and obeys someone powerful in a servile way to win favor.",
+  "difficulty": "Advanced",
+  "example": "In the novel, the duke's toady agrees with every opinion his master voices, even when the duke contradicts himself.",
+  "synonyms": [
+    "sycophant",
+    "flatterer",
+    "yes-man",
+    "bootlicker"
+  ],
+  "nuance": "A toady wins favor through fawning praise and agreement, while a lackey mainly runs errands and follows orders.",
+  "alternatives": [],
+  "prompt": "A chess club president surrounds herself with admiring members.",
+  "options": [
+    "Hoping for a spot on the travel team, the toady praised every move she made, even her blunders.",
+    "After the rain, a toady hopped across the damp path outside the club's meeting room.",
+    "Known as the club's toady, Marcus openly challenged the president's rules at every meeting.",
+    "The president thanked her mentor by calling him a toady for his years of honest guidance."
+  ],
+  "reasons": [
+    "Fawning over obvious mistakes to gain a reward is exactly how such a flatterer behaves.",
+    "This confuses the word with toad, the amphibian; it names a servile person, not an animal.",
+    "Openly defying a leader is the reverse of flattering and obeying her.",
+    "The word is an insult, so it cannot serve as praise for candid, sincere advice."
+  ],
+  "practice": {
+    "prompt": "A new head chef takes charge of a busy restaurant kitchen.",
+    "options": [
+      "The chef stirred a warm toady of honey, lemon, and hot water for the sick dishwasher.",
+      "Unafraid to speak up, the toady told the chef that her new menu was overpriced and bland.",
+      "The chef earned the proud title of toady by winning the city's top cooking award.",
+      "Angling for a promotion, the toady on the line called each sauce the chef tasted a masterpiece."
+    ],
+    "answer": 3,
+    "reasons": [
+      "This mixes it up with toddy, a hot drink; the word refers to a person who fawns.",
+      "Blunt criticism of the boss is the opposite of servile agreement.",
+      "The label is a sneer at servility, never an honor earned through real achievement.",
+      "Gushing over the boss's work to get ahead is classic self-serving flattery."
+    ]
+  }
+}

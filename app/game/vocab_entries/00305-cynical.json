@@ -1,0 +1,49 @@
+{
+  "id": 305,
+  "slug": "cynical",
+  "word": "cynical",
+  "pos": "adjective",
+  "pronunciation": "/ˈsɪn.ɪ.kəl/",
+  "definition": "Believing that people act mainly out of selfishness and distrusting the reasons they give.",
+  "difficulty": "Foundation",
+  "example": "After years of broken promises, she grew cynical about the landlord's offers to fix the heat.",
+  "synonyms": [
+    "distrustful",
+    "jaded",
+    "skeptical",
+    "sneering"
+  ],
+  "nuance": "A skeptic doubts a claim until there is evidence; a cynic assumes the worst about people's motives from the start.",
+  "alternatives": [
+    "skeptical"
+  ],
+  "prompt": "A neighbor offers to help a family move their furniture for free.",
+  "options": [
+    "Her cynical brother assumed the neighbor secretly wanted something in return.",
+    "Her cynical brother was certain the offer came from pure kindness and nothing else.",
+    "The neighbor's help was cynical, returning every spring like the robins.",
+    "The cynical boxes sat stacked in neat rows beside the front door."
+  ],
+  "reasons": [
+    "Suspecting a hidden selfish motive behind a kind offer is exactly the cynic's outlook.",
+    "Trusting that a motive is wholly generous is the opposite of a cynic's suspicion.",
+    "This confuses the word with cyclical, which describes something that repeats in a pattern.",
+    "Cardboard boxes hold no beliefs about anyone's motives, so they cannot be distrustful."
+  ],
+  "practice": {
+    "prompt": "A bakery announces it will donate its leftover bread to a local shelter.",
+    "options": [
+      "The donations were cynical, recurring on the same morning every week.",
+      "A cynical customer muttered that the owners only wanted good publicity.",
+      "A cynical customer cheered, convinced the owners were acting out of generosity alone.",
+      "The cynical loaves were still warm when the delivery van pulled up."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Repeating on a schedule describes something cyclical, a look-alike word with another meaning.",
+      "Dismissing a generous act as a bid for attention shows distrust of people's motives.",
+      "Wholehearted faith in someone's good intentions reverses what the word means.",
+      "Bread has no attitude toward human motives; the word describes a person's outlook."
+    ]
+  }
+}

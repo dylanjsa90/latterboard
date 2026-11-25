@@ -14,7 +14,9 @@
     "discretion"
   ],
   "nuance": "Reticence is restraint in speech, often by choice; diffidence is shyness that comes from a lack of confidence.",
-  "alternatives": [],
+  "alternatives": [
+    "reminiscence"
+  ],
   "prompt": "At a team lunch, a new employee is asked why she left her previous job.",
   "options": [
     "Her reticence about her last job left the team guessing why she had moved on.",

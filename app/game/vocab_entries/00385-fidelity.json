@@ -1,0 +1,47 @@
+{
+  "id": 385,
+  "slug": "fidelity",
+  "word": "fidelity",
+  "pos": "noun",
+  "pronunciation": "/fɪˈdɛl.ə.ti/",
+  "definition": "Faithfulness to a person, a promise, or an original source, shown through loyalty or accuracy.",
+  "difficulty": "Intermediate",
+  "example": "The film's fidelity to the novel pleased readers who had feared major changes to the plot.",
+  "synonyms": [
+    "faithfulness",
+    "loyalty",
+    "accuracy",
+    "devotion"
+  ],
+  "nuance": "Fidelity stresses steady faithfulness to a commitment or an original, while loyalty usually means allegiance to a person or group.",
+  "alternatives": [],
+  "prompt": "A translator is preparing an English version of an old poem.",
+  "options": [
+    "She prized fidelity to the poet's meaning over a smoother rhyme.",
+    "Her fidelity showed in the new stanzas she invented and added to the poem.",
+    "She felt a rush of fidelity when the publisher praised her draft.",
+    "With great fidelity, she finished the whole poem in under an hour."
+  ],
+  "reasons": [
+    "Putting the poet's intent ahead of convenience is staying true to the original.",
+    "Making up lines the poet never wrote moves away from the source instead of honoring it.",
+    "A burst of happiness is closer to felicity; faithfulness is not a sudden feeling of joy.",
+    "Working fast is about speed, not about how faithfully the original is kept."
+  ],
+  "practice": {
+    "prompt": "A longtime baker keeps turning down job offers from rival shops.",
+    "options": [
+      "Her fidelity to the bakery that trained her kept her there for twenty years.",
+      "Her fidelity led her to switch jobs every time a rival shop offered slightly higher pay.",
+      "The fidelity of the dough made each loaf rise twice as high as usual.",
+      "Her fidelity showed in the cheerful tunes she whistled while kneading."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Staying with the shop for decades despite other offers is steady faithfulness.",
+      "Leaving whenever a better deal appears is the opposite of faithfulness.",
+      "Dough can't be faithful; the word describes a commitment, not a physical texture.",
+      "A cheerful mood mixes the word up with felicity and shows nothing about loyalty."
+    ]
+  }
+}

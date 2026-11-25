@@ -1,0 +1,47 @@
+{
+  "id": 307,
+  "slug": "impecunious",
+  "word": "impecunious",
+  "pos": "adjective",
+  "pronunciation": "/ˌɪm.pəˈkjuː.ni.əs/",
+  "definition": "Having very little or no money, usually for a long time.",
+  "difficulty": "Advanced",
+  "example": "The impecunious graduate student lived on rice and borrowed textbooks for an entire year.",
+  "synonyms": [
+    "penniless",
+    "hard up",
+    "poor",
+    "broke"
+  ],
+  "nuance": "Impecunious means lacking money, while penurious can also mean stingy, describing someone who has money but hates to spend it.",
+  "alternatives": [],
+  "prompt": "A young painter is struggling to pay rent on her tiny apartment.",
+  "options": [
+    "The impecunious painter offered the landlord a small canvas instead of a month's rent.",
+    "The impecunious banker, sitting on a vast fortune, refused to leave even a small tip.",
+    "The impecunious painter paid cash for a second studio from her overflowing savings.",
+    "The impecunious terms of the lease, such as the deposit and late fees, were in tiny print."
+  ],
+  "reasons": [
+    "Trading artwork because she has no cash fits someone who is short of money.",
+    "This describes a rich miser; the word means lacking money, not being stingy.",
+    "Overflowing savings show wealth, the reverse of being poor.",
+    "This confuses the word with pecuniary, which means related to money."
+  ],
+  "practice": {
+    "prompt": "A college student checks his bank balance two days before payday.",
+    "options": [
+      "Impecunious until Friday, he chose dried beans over the pricier fresh fish.",
+      "Freshly impecunious after a huge lottery win, he paid off his parents' mortgage.",
+      "His impecunious handwriting was so flawless that teachers posted his essays as models.",
+      "With thousands in the account, the impecunious student still refused to chip in for pizza."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Picking cheaper food because his account is nearly empty shows a real lack of funds.",
+      "A big win makes someone wealthy, so the word's meaning is reversed here.",
+      "This mixes the word up with impeccable, which means without flaws.",
+      "Someone with thousands isn't poor; refusing to pay is stinginess, a different idea."
+    ]
+  }
+}

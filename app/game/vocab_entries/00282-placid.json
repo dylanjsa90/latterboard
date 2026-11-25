@@ -1,0 +1,47 @@
+{
+  "id": 282,
+  "slug": "placid",
+  "word": "placid",
+  "pos": "adjective",
+  "pronunciation": "/ˈplæs.ɪd/",
+  "definition": "Calm and peaceful, and not easily upset or stirred up.",
+  "difficulty": "Intermediate",
+  "example": "The placid lake reflected every pine tree along its shore.",
+  "synonyms": [
+    "calm",
+    "tranquil",
+    "unruffled",
+    "serene"
+  ],
+  "nuance": "Placid suggests a settled, untroubled calm that is hard to disturb, while serene adds a sense of lofty or radiant peace.",
+  "alternatives": [],
+  "prompt": "A farmer shows her oldest cow at a noisy county fair.",
+  "options": [
+    "Even with crowds and loud music nearby, the placid cow kept chewing her hay.",
+    "The farmer tried to placid the cow by offering her a crisp red apple.",
+    "The placid cow kicked the fence and bellowed at every stroller that passed by.",
+    "After the long walk, the cow's placid muscles hung loose and weak."
+  ],
+  "reasons": [
+    "Staying relaxed amid noise and commotion is exactly the untroubled calm the word describes.",
+    "This treats the adjective as a verb, confusing it with placate, which means to soothe.",
+    "Kicking and bellowing show agitation, the reverse of a calm temperament.",
+    "Limp, weak muscles are flaccid, a look-alike word; placid is about calmness, not limpness."
+  ],
+  "practice": {
+    "prompt": "A nurse describes how a toddler behaved during a routine checkup.",
+    "options": [
+      "The placid toddler shrieked and kicked whenever the nurse came near him.",
+      "The nurse explained that the placid pill was only sugar and had no medicine inside it.",
+      "His cheeks looked placid and gray, so the nurse worried he was coming down with a fever.",
+      "The placid toddler sat still on the exam table while the nurse looked in his ears."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Shrieking and kicking are signs of distress, the opposite of a calm child.",
+      "A harmless sugar pill is a placebo, a look-alike word that has nothing to do with calm.",
+      "A sickly, washed-out face is pallid; placid describes a peaceful mood, not skin color.",
+      "Sitting quietly through an exam without fuss shows an easygoing, undisturbed nature."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 359,
+  "slug": "bombast",
+  "word": "bombast",
+  "pos": "noun",
+  "pronunciation": "/ˈbɑːm.bæst/",
+  "definition": "Showy, inflated language that sounds impressive but says very little.",
+  "difficulty": "Intermediate",
+  "example": "The novel's villain hides his ignorance behind a wall of bombast and borrowed quotations.",
+  "synonyms": [
+    "grandiloquence",
+    "pomposity",
+    "hot air",
+    "verbiage"
+  ],
+  "nuance": "Eloquence is fluent speech that actually persuades; bombast only puffs itself up, and the word is always a criticism.",
+  "alternatives": [],
+  "prompt": "A guest speaker addresses a school's graduating class at the end of the year.",
+  "options": [
+    "Beneath the speaker's bombast about 'limitless horizons,' graduates heard little real advice.",
+    "The speaker's bombast was so plain and brief that her whole talk fit neatly on a single index card.",
+    "Grateful graduates praised the bombast of her quiet, modest, and carefully reasoned advice about budgeting.",
+    "The bombast of the fireworks rattled the gym windows as the families left the ceremony."
+  ],
+  "reasons": [
+    "Grand phrases that leave listeners with nothing useful are exactly what this word describes.",
+    "Short, plain speech is the reverse of puffed-up, overblown language.",
+    "The word is a criticism of empty showiness, so it cannot praise modest, careful reasoning.",
+    "This confuses the word with a loud blast; it refers to inflated words, not noise."
+  ],
+  "practice": {
+    "prompt": "A company writes a brochure to advertise its new kitchen blender.",
+    "options": [
+      "Customers sent the company a bombast of angry emails after several blenders began leaking from the base.",
+      "Shoppers trusted the brochure because its bombast was so honest, modest, and free of exaggeration.",
+      "The brochure's bombast called the blender 'a culinary revolution,' though it only made smoothies.",
+      "The brochure listed the blender's wattage and speeds with admirable bombast, in two short, factual lines."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This mixes the word up with bombardment; it does not mean a flood of messages.",
+      "Exaggeration is the heart of the word, so honest, modest writing cannot be described this way.",
+      "Lofty claims wildly out of proportion to an ordinary product show inflated, hollow language.",
+      "Brief factual lines lack the overblown style the word requires, and it is never admirable."
+    ]
+  }
+}

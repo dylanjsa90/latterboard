@@ -14,7 +14,9 @@
     "spur"
   ],
   "nuance": "An incentive is an outside reward or benefit that encourages action, while a motive is the inner reason a person acts.",
-  "alternatives": [],
+  "alternatives": [
+    "impetus"
+  ],
   "prompt": "A bakery wants more customers to visit on its slow Monday mornings.",
   "options": [
     "Half-price muffins on Mondays gave early risers an incentive to stop by.",

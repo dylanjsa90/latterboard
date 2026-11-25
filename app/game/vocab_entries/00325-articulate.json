@@ -1,0 +1,49 @@
+{
+  "id": 325,
+  "slug": "articulate",
+  "word": "articulate",
+  "pos": "verb",
+  "pronunciation": "/ɑːrˈtɪk.jə.leɪt/",
+  "definition": "To express an idea or feeling clearly and effectively in words.",
+  "difficulty": "Foundation",
+  "example": "It took the poet years to articulate what she felt about leaving her hometown.",
+  "synonyms": [
+    "express",
+    "put into words",
+    "voice",
+    "formulate"
+  ],
+  "nuance": "Articulate stresses clear, well-formed expression in words, whereas express can mean any outward showing, even a shrug or a frown.",
+  "alternatives": [
+    "obfuscate"
+  ],
+  "prompt": "A student meets with her teacher to discuss a confusing grade on an essay.",
+  "options": [
+    "After some thought, Maya managed to articulate why her thesis deserved more credit.",
+    "Maya chose to articulate her frustration by shrugging and saying nothing at all.",
+    "Maya tried to articulate her point by mumbling scattered phrases her teacher could not follow.",
+    "Maya used a calculator to articulate her final score from the rubric's point values."
+  ],
+  "reasons": [
+    "She puts her reasoning into clear words, which is exactly what the meeting calls for.",
+    "A wordless shrug may show a mood, but it puts no ideas into words.",
+    "Garbled, unclear speech is the opposite of clear, well-formed expression.",
+    "This confuses the word with calculate; adding up numbers is not expressing ideas."
+  ],
+  "practice": {
+    "prompt": "A team of scientists is preparing a short public talk about their research.",
+    "options": [
+      "The researchers planned to articulate their results by burying them in dense jargon.",
+      "The team decided to articulate the data by locking the files where no one could see them.",
+      "Over ten years, the lab managed to articulate a huge collection of rock samples.",
+      "The lead researcher worked hard to articulate the findings in plain, simple language."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Hiding ideas behind jargon makes them harder to grasp, not clearer.",
+      "Keeping information hidden is the reverse of conveying it to others.",
+      "This confuses the word with accumulate; gathering samples is not expressing ideas.",
+      "Shaping complex results into clear words for listeners is precisely the skill described."
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": 312,
+  "slug": "apostasy",
+  "word": "apostasy",
+  "pos": "noun",
+  "pronunciation": "/əˈpɑː.stə.si/",
+  "definition": "The abandonment of a belief, cause, or loyalty that a person once held.",
+  "difficulty": "Advanced",
+  "example": "The chef's decision to serve frozen fries struck her loyal diners as culinary apostasy.",
+  "synonyms": [
+    "defection",
+    "desertion",
+    "renunciation"
+  ],
+  "nuance": "Unlike a simple change of mind, apostasy means deserting a deep commitment, and the group left behind often sees it as betrayal.",
+  "alternatives": [
+    "fidelity"
+  ],
+  "prompt": "A painter famed for abstract canvases suddenly begins painting lifelike portraits.",
+  "options": [
+    "Her longtime admirers viewed the sudden turn to realistic portraits as apostasy.",
+    "Her apostasy to abstract art deepened with every bold canvas she completed.",
+    "She placed an apostasy before the s in the gallery's name on the sign.",
+    "Her only apostasy that year was forgetting to sign one small canvas before the show."
+  ],
+  "reasons": [
+    "Fans see her leaving the style she long championed as a betrayal of it.",
+    "Growing more devoted to a style is the reverse of deserting it.",
+    "This confuses the word with apostrophe, the punctuation mark.",
+    "A forgetful slip involves no rejection of a principle she once held."
+  ],
+  "practice": {
+    "prompt": "A lifelong fan of a city's soccer team starts cheering for its fiercest rival.",
+    "options": [
+      "After the loss, the team captain offered the fans a sincere apostasy.",
+      "To his old friends in the stands, cheering for the rival club was pure apostasy.",
+      "His apostasy kept him in the same seat behind the goal for thirty straight seasons.",
+      "He shouted with apostasy when the referee missed an obvious foul in the final minute."
+    ],
+    "answer": 1,
+    "reasons": [
+      "This mistakes the word for apology, an expression of regret.",
+      "Switching to the rival betrays a loyalty he kept for decades.",
+      "Staying faithful for decades describes loyalty, not leaving it behind.",
+      "The word names an act of desertion, not a feeling like anger."
+    ]
+  }
+}

@@ -14,7 +14,10 @@
     "silver-tongued"
   ],
   "nuance": "Articulate means speaking clearly; eloquent adds grace and a power to move or persuade the listener.",
-  "alternatives": [],
+  "alternatives": [
+    "articulate",
+    "loquacious"
+  ],
   "prompt": "A student gives a speech at her graduation ceremony.",
   "options": [
     "Speaking without notes, she gave an eloquent tribute to the teachers who had believed in her.",

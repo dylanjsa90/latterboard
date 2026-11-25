@@ -1,0 +1,49 @@
+{
+  "id": 244,
+  "slug": "fleeting",
+  "word": "fleeting",
+  "pos": "adjective",
+  "pronunciation": "/ˈfliː.tɪŋ/",
+  "definition": "Lasting for only a very short time and quickly gone.",
+  "difficulty": "Foundation",
+  "example": "He had a fleeting urge to quit the team, but it passed before practice even started.",
+  "synonyms": [
+    "brief",
+    "momentary",
+    "passing",
+    "transient"
+  ],
+  "nuance": "Fleeting stresses how quickly something slips away, while temporary only says it will end at some point, perhaps after months.",
+  "alternatives": [
+    "enduring"
+  ],
+  "prompt": "A hiker stops on a ridge to watch the sun go down.",
+  "options": [
+    "For a fleeting moment, the clouds glowed pink before fading to gray.",
+    "The fleeting hiker sprinted past her slower friends to reach the summit.",
+    "The fleeting granite peak has towered over the valley for ages.",
+    "A startled deer was fleeting from the hiker as she rounded the bend."
+  ],
+  "reasons": [
+    "The pink light lasts only an instant, which is exactly the brevity the word describes.",
+    "This confuses the word with fleet, meaning swift; it describes duration, not speed.",
+    "Something that stands for ages is the opposite of short-lived.",
+    "This mixes it up with fleeing; the word is an adjective about brevity, not a verb for running away."
+  ],
+  "practice": {
+    "prompt": "A pianist performs a recital in a small concert hall.",
+    "options": [
+      "The drummer in the next act played so fleeting that the back rows strained to hear.",
+      "The hall's fleeting tradition of a winter recital has run for a hundred years.",
+      "Fleeting audience members escaped through the side doors before the encore.",
+      "A fleeting smile crossed her face as she struck the final chord."
+    ],
+    "answer": 3,
+    "reasons": [
+      "The word concerns how long something lasts, not volume, and it cannot work as an adverb here.",
+      "A custom kept for a century is long-lasting, the reverse of what the word means.",
+      "Escaping people are fleeing; the look-alike word describes brief things, not people who run off.",
+      "A smile that appears and vanishes in a second is a natural fit for the word."
+    ]
+  }
+}

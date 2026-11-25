@@ -1,0 +1,47 @@
+{
+  "id": 368,
+  "slug": "inscrutable",
+  "word": "inscrutable",
+  "pos": "adjective",
+  "pronunciation": "/ɪnˈskruː.tə.bəl/",
+  "definition": "Impossible to understand or read because it gives away no clues about what lies beneath.",
+  "difficulty": "Advanced",
+  "example": "The cat watched us from the windowsill with an inscrutable stare, neither friendly nor annoyed.",
+  "synonyms": [
+    "unreadable",
+    "enigmatic",
+    "impenetrable",
+    "mysterious"
+  ],
+  "nuance": "Inscrutable stresses that something reveals nothing, while enigmatic suggests an intriguing puzzle that invites people to solve it.",
+  "alternatives": [],
+  "prompt": "A card player keeps a calm face during the final, high-stakes round of a game.",
+  "options": [
+    "Her inscrutable expression gave her opponents no hint of whether her hand was strong.",
+    "Being inscrutable, she examined every card closely for tiny marks.",
+    "Her inscrutable grin told everyone at once that she held four aces.",
+    "The inscrutable rules were printed in large, simple type so beginners could follow along easily."
+  ],
+  "reasons": [
+    "A face that hides every clue about her cards is exactly what the word describes.",
+    "Close examination is scrutiny; the word describes what resists being figured out, not the person examining.",
+    "A grin that announces her hand reveals everything, which reverses the meaning.",
+    "Rules that are plain and easy to follow are the opposite of hard to interpret."
+  ],
+  "practice": {
+    "prompt": "A student gets back an essay covered in a professor's handwritten comments.",
+    "options": [
+      "The margins held inscrutable scribbles that even the teaching assistant could not decipher.",
+      "The professor's inscrutable notes were so clear that the student fixed every error within minutes of reading them.",
+      "The professor was inscrutable in grading, rereading every sentence three times.",
+      "The student felt inscrutable after reading the comments, so she went for a walk."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Marks that nobody can interpret fit the sense of something impossible to make out.",
+      "Notes that are clear and quick to act on are easy to understand, so the word is reversed.",
+      "This confuses the word with scrutinizing; careful rereading is close inspection, not mystery.",
+      "The word describes how something looks to others, not a feeling like frustration or confusion."
+    ]
+  }
+}

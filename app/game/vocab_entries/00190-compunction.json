@@ -1,0 +1,47 @@
+{
+  "id": 190,
+  "slug": "compunction",
+  "word": "compunction",
+  "pos": "noun",
+  "pronunciation": "/kəmˈpʌŋk.ʃən/",
+  "definition": "A feeling of guilt or unease that makes a person hesitate to do something wrong.",
+  "difficulty": "Intermediate",
+  "example": "He felt a twinge of compunction after reading his sister's diary without asking.",
+  "synonyms": [
+    "scruple",
+    "qualm",
+    "pang of conscience",
+    "remorse"
+  ],
+  "nuance": "Compunction is a pang of conscience, often felt before acting and common in negatives like \"no compunction\"; remorse is deeper regret felt afterward.",
+  "alternatives": [],
+  "prompt": "A student finds a wallet full of cash on the seat beside him on the bus.",
+  "options": [
+    "He felt compunction at the thought of keeping the cash, so he gave the wallet to the driver.",
+    "An irresistible compunction to count the bills made him open the wallet again and again.",
+    "His compunction showed in how gleefully he spent the found cash on snacks.",
+    "The wallet's owner felt deep compunction when the driver returned it, and she thanked the student warmly."
+  ],
+  "reasons": [
+    "His guilty unease about taking money that wasn't his stopped him from doing it.",
+    "An uncontrollable urge is a compulsion, a look-alike word, not a twinge of conscience.",
+    "Cheerfully spending someone else's money shows a lack of guilt, the reverse of the word's sense.",
+    "She did nothing wrong; relief and gratitude are not feelings of guilt."
+  ],
+  "practice": {
+    "prompt": "A baker realizes she gave a customer the wrong change earlier that morning.",
+    "options": [
+      "With no compunction at all, the baker apologized tearfully and refunded the customer twice over.",
+      "Struck by compunction, the baker ran after the customer to return his missing change.",
+      "The baker felt compunction about her prize-winning loaf and proudly entered it in the county fair.",
+      "The baker's compunction meant she unlocked the shop at six sharp every single morning."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Tearful apologies show plenty of guilt, so saying she had none contradicts her actions.",
+      "Her uneasy conscience over the mistake pushed her to set it right.",
+      "Pride in good work is the opposite of a guilty conscience.",
+      "Opening on time reflects punctuality, a similar-sounding idea, not moral unease."
+    ]
+  }
+}

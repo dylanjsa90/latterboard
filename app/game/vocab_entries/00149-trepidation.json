@@ -1,0 +1,49 @@
+{
+  "id": 149,
+  "slug": "trepidation",
+  "word": "trepidation",
+  "pos": "noun",
+  "pronunciation": "/ˌtrɛp.ɪˈdeɪ.ʃən/",
+  "definition": "A nervous or fearful feeling about something that is about to happen.",
+  "difficulty": "Intermediate",
+  "example": "With some trepidation, the first-time hiker stepped onto the swaying rope bridge.",
+  "synonyms": [
+    "apprehension",
+    "nervousness",
+    "unease",
+    "dread"
+  ],
+  "nuance": "Trepidation is anxious worry about what lies ahead; it is milder than terror and points toward the future more than plain fear does.",
+  "alternatives": [
+    "equanimity"
+  ],
+  "prompt": "A student waits backstage before her first piano recital.",
+  "options": [
+    "Waiting for her name to be called, she felt a wave of trepidation in her stomach.",
+    "Her trepidation was so complete that she strolled onstage without a single worry.",
+    "After months of daily trepidation at the keyboard, she knew every note by heart.",
+    "She eyed the plate of cookies set out for intermission with cheerful trepidation."
+  ],
+  "reasons": [
+    "A jittery feeling before facing an audience is exactly this kind of anxious anticipation.",
+    "Strolling out without any worry describes confidence, the reverse of anxious dread.",
+    "This treats the word as if it meant practice or preparation, but it names a feeling.",
+    "Looking forward to a treat is pleasure, and a cheerful mood clashes with the word's fearful tone."
+  ],
+  "practice": {
+    "prompt": "A twelve-year-old is starting at a new school in a different town.",
+    "options": [
+      "At the front office, his mother signed a trepidation form for his class schedule.",
+      "The trepidation of seeing his best friend at the bus stop made him smile with relief.",
+      "He showed his trepidation by laughing and boasting that nothing about the move scared him.",
+      "He walked in on day one with trepidation, unsure anyone would sit with him at lunch."
+    ],
+    "answer": 3,
+    "reasons": [
+      "This mixes the word up with registration; it names an emotion, not a piece of paperwork.",
+      "Relief at a welcome surprise is the opposite of anxious fear about what is coming.",
+      "Boasting that nothing is scary shows bravado, not the uneasy fear the word requires.",
+      "Worry about an uncertain social situation ahead fits the word's sense of nervous expectation."
+    ]
+  }
+}

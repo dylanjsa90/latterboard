@@ -1,0 +1,47 @@
+{
+  "id": 271,
+  "slug": "cautious",
+  "word": "cautious",
+  "pos": "adjective",
+  "pronunciation": "/ˈkɔː.ʃəs/",
+  "definition": "Careful to avoid risks, danger, or mistakes.",
+  "difficulty": "Foundation",
+  "example": "The cautious hiker checked the weather report twice before setting out.",
+  "synonyms": [
+    "careful",
+    "wary",
+    "prudent",
+    "circumspect"
+  ],
+  "nuance": "Cautious means taking care to avoid risk in general, while wary adds suspicion of a particular threat or person.",
+  "alternatives": [],
+  "prompt": "A new driver approaches an icy intersection on a winter morning.",
+  "options": [
+    "The cautious driver slowed well before the intersection and tested the brakes gently.",
+    "The cautious driver sped through the icy intersection to get the danger over with quickly.",
+    "After a brief faint, the driver became cautious again and slowly opened her eyes.",
+    "The cautious intersection had caused three minor accidents that week."
+  ],
+  "reasons": [
+    "Easing off early and checking traction before reaching a hazard shows care to avoid harm.",
+    "Rushing straight into a hazard is reckless, the reverse of careful behavior.",
+    "This mixes the word up with conscious, which means awake; waking up has nothing to do with care.",
+    "The word describes careful people or actions, not a place that is dangerous."
+  ],
+  "practice": {
+    "prompt": "A scientist is about to announce results from a single small experiment.",
+    "options": [
+      "At the press event, she told a cautious tale about a lab that had rushed its results.",
+      "Her cautious announcement was packed with bold guesses and promises of a cure by next year.",
+      "Being cautious, she called the findings promising but said the test must be repeated.",
+      "Being cautious, she declared the question settled forever after one small trial."
+    ],
+    "answer": 2,
+    "reasons": [
+      "A story that warns others is a cautionary tale; a tale cannot itself be careful.",
+      "Bold guesses and big promises clash with the restraint the word implies.",
+      "Holding back strong claims until more evidence arrives guards against error.",
+      "Claiming certainty from one test is overconfident and invites mistakes."
+    ]
+  }
+}

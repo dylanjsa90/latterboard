@@ -1,0 +1,49 @@
+{
+  "id": 160,
+  "slug": "perilous",
+  "word": "perilous",
+  "pos": "adjective",
+  "pronunciation": "/ˈpɛr.ə.ləs/",
+  "definition": "Full of danger or likely to cause serious harm.",
+  "difficulty": "Intermediate",
+  "example": "Fixing the loose shingles during the windstorm was a perilous job.",
+  "synonyms": [
+    "hazardous",
+    "dangerous",
+    "treacherous",
+    "risky"
+  ],
+  "nuance": "Perilous stresses exposure to serious harm, while precarious stresses unsteadiness, something that could tip or collapse at any moment.",
+  "alternatives": [
+    "precarious"
+  ],
+  "prompt": "A group of hikers studies a trail map before crossing a high mountain ridge.",
+  "options": [
+    "The guide warned that the icy ridge would be perilous after dark.",
+    "The perilous meadow was so flat and soft that toddlers napped in it.",
+    "They packed perilous fruit, knowing it would spoil before lunch.",
+    "The hikers felt perilous with excitement as they laced their boots."
+  ],
+  "reasons": [
+    "Ice, height and darkness together create a real risk of a dangerous fall.",
+    "A flat, soft meadow where children nap safely is the reverse of dangerous.",
+    "This confuses the word with perishable; food that spoils quickly isn't a hazard.",
+    "The word describes risky situations or places, not a person's eager mood."
+  ],
+  "practice": {
+    "prompt": "A ship's captain plans a winter voyage across a cold northern sea.",
+    "options": [
+      "The sheltered harbor was perilous, so the crew relaxed and felt completely safe.",
+      "The sailors sang the same perilous song every year, as dependable as the tides.",
+      "The navigator gave a perilous nod to show he approved of the route.",
+      "Drifting icebergs made the narrow channel perilous for the small ship."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Feeling completely safe contradicts a place that threatens serious harm.",
+      "This mistakes the word for perennial; a yearly tradition carries no danger.",
+      "A simple nod of agreement poses no threat, so the word doesn't fit.",
+      "Floating ice in a tight passage could easily damage or sink a vessel."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 223,
+  "slug": "insolent",
+  "word": "insolent",
+  "pos": "adjective",
+  "pronunciation": "/ˈɪn.sə.lənt/",
+  "definition": "Rude and openly disrespectful, especially toward someone in charge.",
+  "difficulty": "Intermediate",
+  "example": "Her insolent shrug when the chef asked her to clean the stove got her moved to dish duty.",
+  "synonyms": [
+    "impudent",
+    "impertinent",
+    "disrespectful",
+    "cheeky"
+  ],
+  "nuance": "Insolent suggests scorn for authority; impudent and cheeky can describe bold rudeness that is milder or even playful.",
+  "alternatives": [],
+  "prompt": "A referee calls a foul against a player during a youth soccer match.",
+  "options": [
+    "The player gave the referee an insolent smirk and walked away mid-sentence.",
+    "The insolent club could no longer afford new uniforms or bus trips to away games.",
+    "The insolent player thanked the referee and calmly accepted the call.",
+    "The insolent goalkeeper lounged on the bench, too sluggish to bother warming up."
+  ],
+  "reasons": [
+    "A mocking look and walking off while an official is talking show contempt for authority.",
+    "Running out of money describes being insolvent, a look-alike word.",
+    "Accepting a ruling politely is respectful, which is the reverse of this word.",
+    "Laziness and lack of energy describe indolence, not rudeness."
+  ],
+  "practice": {
+    "prompt": "A librarian asks a teenager to lower his voice in the reading room.",
+    "options": [
+      "The insolent teenager spoke so softly that nobody at the next table could hear him.",
+      "The teenager answered with an insolent remark about minding her own business.",
+      "The insolent teenager apologized at once and whispered for the rest of the afternoon.",
+      "The insolent teenager owed so many late fees that his library card was frozen."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Speaking quietly is about volume and has nothing to do with disrespect.",
+      "A rude comeback to a reasonable request shows open scorn for the librarian's authority.",
+      "Apologizing and doing as asked show respect, the opposite of what the word means.",
+      "Debts a person cannot pay suggest insolvent, a word that only sounds similar."
+    ]
+  }
+}

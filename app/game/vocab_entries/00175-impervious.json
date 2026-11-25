@@ -1,0 +1,50 @@
+{
+  "id": 175,
+  "slug": "impervious",
+  "word": "impervious",
+  "pos": "adjective",
+  "pronunciation": "/ɪmˈpɜːr.vi.əs/",
+  "definition": "Unable to be affected, influenced, or passed through by something.",
+  "difficulty": "Intermediate",
+  "example": "The new coating made the old wooden deck impervious to rain and snow.",
+  "synonyms": [
+    "unaffected",
+    "immune",
+    "resistant",
+    "impermeable"
+  ],
+  "nuance": "Someone impervious to criticism hears it but is not moved by it, while someone oblivious never notices it at all.",
+  "alternatives": [
+    "imperious",
+    "susceptible"
+  ],
+  "prompt": "A goalkeeper plays in front of a hostile crowd that jeers at every move.",
+  "options": [
+    "The goalie seemed impervious to the jeers and calmly blocked the next shot.",
+    "The impervious goalie bossed his defenders around as if he owned the stadium.",
+    "The goalie was so impervious to the jeers that he burst into tears and left the field.",
+    "Impervious to the crowd, the goalie changed his stance every time a fan yelled advice."
+  ],
+  "reasons": [
+    "Staying steady while the crowd shouts shows the taunts had no effect on him.",
+    "Bossy, domineering behavior describes the look-alike imperious, not impervious.",
+    "Breaking down shows the jeers hurt him badly, the reverse of being unaffected.",
+    "Reacting to every shout means the crowd was influencing him constantly."
+  ],
+  "practice": {
+    "prompt": "A hiker tests a new rain jacket during a long afternoon downpour.",
+    "options": [
+      "Her impervious jacket kept her shirt completely dry through hours of rain.",
+      "Within minutes her impervious jacket was soaked through, and she was shivering.",
+      "Lost in a daydream, the impervious hiker never realized it had started to rain.",
+      "The impervious hiker rushed up the steep cliff without checking the map or the weather."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Water could not get through the jacket, which is exactly what the word describes.",
+      "A jacket that lets water in right away is the opposite of one that blocks it.",
+      "Failing to notice something is being oblivious; this word means resisting what you do notice.",
+      "Acting rashly without thinking fits impetuous, a different word that looks similar."
+    ]
+  }
+}

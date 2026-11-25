@@ -1,0 +1,48 @@
+{
+  "id": 201,
+  "slug": "defiance",
+  "word": "defiance",
+  "pos": "noun",
+  "pronunciation": "/dɪˈfaɪ.əns/",
+  "definition": "Bold, open refusal to obey a person, a rule, or an authority.",
+  "difficulty": "Foundation",
+  "example": "The toddler's defiance at bedtime tested his parents' patience every night.",
+  "synonyms": [
+    "disobedience",
+    "resistance",
+    "rebelliousness"
+  ],
+  "nuance": "Defiance is open and deliberate, while disobedience can be quiet, careless, or even accidental.",
+  "alternatives": [
+    "deference"
+  ],
+  "prompt": "A coach tells a player to sit out the rest of the game.",
+  "options": [
+    "In open defiance, the player walked back onto the field and kept playing.",
+    "In defiance, the player nodded and quietly took a seat on the bench.",
+    "Out of defiance for the coach's experience, the player thanked her warmly.",
+    "The player showed defiance by forgetting which jersey number he wore."
+  ],
+  "reasons": [
+    "Ignoring the coach's order on purpose, for everyone to see, is a clear act of refusal.",
+    "Calmly doing what the coach asked is obedience, not resistance.",
+    "This confuses the word with deference; respect and gratitude are the opposite of refusal.",
+    "An absent-minded slip is not a deliberate challenge to anyone's authority."
+  ],
+  "practice": {
+    "prompt": "A cat owner keeps lifting her pet off the kitchen counter.",
+    "options": [
+      "The cat's defiance showed when it jumped down and curled up in its basket as told.",
+      "In defiance of its owner, the cat waited patiently on the floor until she invited it up.",
+      "Defiance made the counter so slippery that the cat slid off.",
+      "With pure defiance, the cat stared at her and hopped right back onto the counter."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Going exactly where it was directed is cooperation, not rebellion.",
+      "Waiting for permission respects her rule instead of challenging it.",
+      "The word names an attitude of resistance, not a physical property of a surface.",
+      "Returning to the forbidden spot while holding her gaze is a bold refusal to obey."
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": 370,
+  "slug": "dilettante",
+  "word": "dilettante",
+  "pos": "noun",
+  "pronunciation": "/ˌdɪl.əˈtɑːnt/",
+  "definition": "Someone who dabbles in an art or field without serious study or lasting commitment.",
+  "difficulty": "Advanced",
+  "example": "Her uncle was a dilettante who took up pottery, chess and Italian, then quit each within a month.",
+  "synonyms": [
+    "dabbler",
+    "amateur",
+    "trifler"
+  ],
+  "nuance": "An amateur may be deeply skilled and devoted, but a dilettante's interest is shallow and often more for show than mastery.",
+  "alternatives": [],
+  "prompt": "A music teacher describes a student who keeps switching instruments.",
+  "options": [
+    "A true dilettante, Marco tried violin, drums and flute but never stuck with one.",
+    "As a dilettante, Marco has practiced the cello every morning for ten straight years.",
+    "The conservatory named Marco its leading dilettante for his flawless mastery of the oboe.",
+    "Marco felt like a nervous dilettante at his first formal society ball in a new suit."
+  ],
+  "reasons": [
+    "Sampling many instruments without committing to any is exactly what dabbling looks like.",
+    "A decade of daily practice shows deep commitment, the reverse of casual dabbling.",
+    "Flawless mastery marks an expert; the word suggests shallow skill and is rarely an honor.",
+    "A first society ball suggests the look-alike \"debutante,\" which has nothing to do with dabbling."
+  ],
+  "practice": {
+    "prompt": "Guests at a dinner party start talking about philosophy.",
+    "options": [
+      "The dilettante, a professor who had studied ethics for forty years, explained each argument in depth.",
+      "The dilettante arrived two hours late to dinner because he habitually put off every task.",
+      "Guests praised the dilettante as the most rigorous and disciplined thinker they had ever met.",
+      "The dilettante quoted famous philosophers but had read only the back covers of their books."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Forty years of scholarly study is expertise, not superficial dabbling.",
+      "Chronic delay fits the look-alike \"dilatory\"; the word is about shallow interest, not lateness.",
+      "The word usually implies a lack of rigor, so it can't sensibly name the most disciplined thinker.",
+      "Showing off knowledge picked up from book covers is the surface-level interest the word describes."
+    ]
+  }
+}

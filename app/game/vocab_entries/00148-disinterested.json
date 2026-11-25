@@ -1,0 +1,47 @@
+{
+  "id": 148,
+  "slug": "disinterested",
+  "word": "disinterested",
+  "pos": "adjective",
+  "pronunciation": "/dɪsˈɪn.tə.rɛs.tɪd/",
+  "definition": "Not influenced by any personal gain or loss, and so able to judge fairly.",
+  "difficulty": "Intermediate",
+  "example": "The study was checked by a disinterested scientist whose funding did not depend on the result.",
+  "synonyms": [
+    "impartial",
+    "unbiased",
+    "neutral",
+    "objective"
+  ],
+  "nuance": "Disinterested means having nothing to gain from the outcome; uninterested means bored, and careful writers keep the two apart.",
+  "alternatives": [],
+  "prompt": "Two neighbors need someone to settle their argument over where a shared fence belongs.",
+  "options": [
+    "They hired a disinterested surveyor, who knew neither family, to mark the property line.",
+    "They picked the disinterested surveyor because he owned the lot on one side.",
+    "The disinterested neighbor yawned and wandered off before anyone arrived.",
+    "The disinterested neighbor shouted that the fence was ugly and the family next door was even worse."
+  ],
+  "reasons": [
+    "A stranger with nothing to win or lose on either side is exactly the fair referee needed.",
+    "Owning one of the lots gives him a stake, which is the opposite of being impartial.",
+    "Yawning shows boredom; that calls for uninterested, not a word about fairness.",
+    "Open hostility toward one side is strong bias, not neutral judgment."
+  ],
+  "practice": {
+    "prompt": "A middle school needs someone to judge its annual science fair.",
+    "options": [
+      "The coach's daughter had entered, so he made a perfectly disinterested judge.",
+      "The judge seemed disinterested, checking the clock every few minutes and skipping half of the posters.",
+      "A disinterested judge gave top marks to projects built by his own former students.",
+      "The principal invited a disinterested chemist from another town with no relatives in the contest."
+    ],
+    "answer": 3,
+    "reasons": [
+      "A parent of a contestant has a personal stake and cannot count as neutral.",
+      "Watching the clock signals boredom, which is what uninterested describes.",
+      "Rewarding his own students shows favoritism, the reverse of fairness.",
+      "An outsider with no family competing has no reason to favor any project."
+    ]
+  }
+}

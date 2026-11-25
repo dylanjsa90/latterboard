@@ -13,7 +13,9 @@
     "throwback"
   ],
   "nuance": "An anachronism is out of place in time; an anomaly can be odd in any way, and an archaism is old wording used on purpose.",
-  "alternatives": [],
+  "alternatives": [
+    "antiquity"
+  ],
   "prompt": "A historian reviews the costumes in a film set in medieval England.",
   "options": [
     "The historian noted that the zipper on the queen's gown was an anachronism.",

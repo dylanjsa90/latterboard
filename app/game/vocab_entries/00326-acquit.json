@@ -1,0 +1,49 @@
+{
+  "id": 326,
+  "slug": "acquit",
+  "word": "acquit",
+  "pos": "verb",
+  "pronunciation": "/əˈkwɪt/",
+  "definition": "To officially declare that someone is not guilty of a charge.",
+  "difficulty": "Intermediate",
+  "example": "The jury took less than an hour to acquit the bookkeeper of fraud.",
+  "synonyms": [
+    "clear",
+    "find not guilty",
+    "exonerate",
+    "absolve"
+  ],
+  "nuance": "To acquit is to give a formal verdict of not guilty; to exonerate goes further and shows that someone was fully innocent.",
+  "alternatives": [
+    "acquiesce"
+  ],
+  "prompt": "A jury has finished weighing the evidence in a shoplifting case.",
+  "options": [
+    "The jury voted to acquit the teenager after the video showed another shopper.",
+    "The jury voted to acquit the teenager and ordered him to pay a heavy fine.",
+    "Tired and hungry, the jurors decided to acquit to the judge's request for more time.",
+    "Before deliberating, the jurors asked to acquit the store's security video again."
+  ],
+  "reasons": [
+    "Evidence pointing to someone else leads the jury to a formal verdict of not guilty.",
+    "A person found not guilty is not punished, so a fine reverses the meaning.",
+    "This confuses the word with acquiesce, which means to go along with a request.",
+    "You clear a person of a charge; you cannot do that to a video you want to rewatch."
+  ],
+  "practice": {
+    "prompt": "A chess federation panel reviews a claim that a player cheated during a tournament.",
+    "options": [
+      "The panel moved to acquit the player and stripped her of her title for a year.",
+      "The arbiter took a moment to acquit the newcomer with the clock and scoring rules.",
+      "The panel decided to acquit the player because the evidence proved she had cheated.",
+      "The panel moved to acquit the player since no device was found on her."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Taking away her title is a penalty, which contradicts a not-guilty decision.",
+      "This confuses the word with acquaint, which means to make someone familiar with something.",
+      "Proof of guilt would lead to a finding against her, not a ruling that clears her.",
+      "Without proof of cheating, the panel formally clears her of the accusation."
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": 206,
+  "slug": "supercilious",
+  "word": "supercilious",
+  "pos": "adjective",
+  "pronunciation": "/ˌsuː.pɚˈsɪl.i.əs/",
+  "definition": "Acting as if you are better than other people, often with a cool, scornful manner.",
+  "difficulty": "Advanced",
+  "example": "The new manager's supercilious emails made the whole staff feel like careless children.",
+  "synonyms": [
+    "haughty",
+    "condescending",
+    "disdainful",
+    "snooty"
+  ],
+  "nuance": "Supercilious stresses open, cool contempt for others, while arrogant can mean simple overconfidence without any sneer.",
+  "alternatives": [
+    "superficial"
+  ],
+  "prompt": "A museum guide answers questions from a group of visiting students.",
+  "options": [
+    "The supercilious guide sighed at every question as if the students were beneath his notice.",
+    "The supercilious guide crouched down and answered each child's question with patient warmth.",
+    "The supercilious guide covered the exhibits so briefly that the students learned only surface facts.",
+    "The supercilious guide was easy to spot because of her thick, dark eyebrows."
+  ],
+  "reasons": [
+    "Treating listeners as unworthy of attention shows exactly the scornful superiority the word describes.",
+    "Patience and warmth are the reverse of looking down on people.",
+    "This confuses the word with superficial; shallowness is not the same as disdain.",
+    "The word comes from Latin for eyebrow, but it describes a raised-brow attitude, not how brows look."
+  ],
+  "practice": {
+    "prompt": "A well-known food critic visits a small family-run diner.",
+    "options": [
+      "The supercilious critic sniffed at the paper napkins and asked if anything here was edible.",
+      "The supercilious critic praised the cook warmly and asked to learn the family recipe.",
+      "The supercilious critic was so eager to please that she agreed with every opinion at the table.",
+      "The supercilious critic felt too shy and unsure of her taste to say anything about the food."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Sneering at a modest place as if it were beneath her is a clear display of haughty contempt.",
+      "Warm admiration for the cook is the opposite of looking down on others.",
+      "Eagerness to please describes an obsequious person, not someone who feels superior.",
+      "Shyness and self-doubt clash with the confident sense of superiority the word requires."
+    ]
+  }
+}

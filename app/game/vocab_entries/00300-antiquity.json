@@ -1,0 +1,48 @@
+{
+  "id": 300,
+  "slug": "antiquity",
+  "word": "antiquity",
+  "pos": "noun",
+  "pronunciation": "/ænˈtɪk.wə.ti/",
+  "definition": "The distant past, especially the age of the ancient Greeks and Romans.",
+  "difficulty": "Intermediate",
+  "example": "Some of the city's roads still follow routes that were first laid out in antiquity.",
+  "synonyms": [
+    "ancient times",
+    "the distant past",
+    "the classical era"
+  ],
+  "nuance": "Antiquity names an era long gone, while an antique is a single old object that may be only a century old.",
+  "alternatives": [
+    "posterity"
+  ],
+  "prompt": "A museum guide introduces a hall of carved marble statues.",
+  "options": [
+    "The guide explained that the statues were carved in antiquity for a seaside temple.",
+    "The guide hoped the statues would be preserved so that antiquity could admire them.",
+    "The guide said the marble was quarried in antiquity, sometime around the late 1990s.",
+    "The guide pointed out the antiquity of the gift shop's brand-new postcards."
+  ],
+  "reasons": [
+    "Statues made for an ancient temple belong to the far-off era this word describes.",
+    "Future generations are posterity; this word looks backward in time, not forward.",
+    "A few decades ago is recent history, far too modern to count as the ancient world.",
+    "Freshly printed postcards have no great age, so calling attention to their age makes no sense."
+  ],
+  "practice": {
+    "prompt": "A student is writing a report on the history of mathematics.",
+    "options": [
+      "Scholars in antiquity estimated the size of the Earth with surprising accuracy.",
+      "Her report predicted that pocket calculators would become common in antiquity.",
+      "She described last spring's school math fair as a famous event of antiquity.",
+      "Her teacher praised the antiquity of the report, calling it clear and well organized."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Thinkers working thousands of years ago lived in the ancient era the word refers to.",
+      "A prediction points to the future, but the word names an age that ended long ago.",
+      "Something that happened a year ago is far too recent to belong to the ancient past.",
+      "Clarity and good organization are qualities of writing, not signs of great age."
+    ]
+  }
+}

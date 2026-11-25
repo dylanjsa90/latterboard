@@ -1,0 +1,50 @@
+{
+  "id": 234,
+  "slug": "extravagant",
+  "word": "extravagant",
+  "pos": "adjective",
+  "pronunciation": "/ɪkˈstræv.ə.ɡənt/",
+  "definition": "Spending or using much more than is necessary or sensible.",
+  "difficulty": "Foundation",
+  "example": "Buying a new phone every few months is an extravagant habit for a student on a budget.",
+  "synonyms": [
+    "lavish",
+    "wasteful",
+    "excessive",
+    "profligate"
+  ],
+  "nuance": "Extravagant usually criticizes going past sensible limits, while lavish can praise generous abundance.",
+  "alternatives": [
+    "frugal",
+    "lavish"
+  ],
+  "prompt": "A family is planning a birthday party for their seven-year-old daughter.",
+  "options": [
+    "Renting a ballroom for a seven-year-old's party struck the neighbors as extravagant.",
+    "The party felt extravagant because the parents spent almost nothing and served tap water.",
+    "Grandpa is so extravagant that he reuses wrapping paper from last year's gifts.",
+    "The shy birthday girl became extravagant, chatting happily with every guest she met."
+  ],
+  "reasons": [
+    "A grand venue for a small child's party goes far beyond what the occasion needs.",
+    "Spending almost nothing is thrift, which is the reverse of overspending.",
+    "Reusing old wrapping paper is frugal, the opposite of the word's meaning.",
+    "Being friendly and talkative is being outgoing; the word is about excess, not sociability."
+  ],
+  "practice": {
+    "prompt": "A friend is packing for a two-night camping trip in the hills.",
+    "options": [
+      "Feeling extravagant, he left the marked trail to wander through the woods and explore a cave.",
+      "The tent was so extravagant that it collapsed in the first gust of wind.",
+      "Packing four pairs of boots for a two-night campout seemed extravagant to her friends.",
+      "His extravagant packing list fit on a single index card: tent, water bottle, and one sweater."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Wandering off to explore is adventurous; the word describes overdoing things, not roaming.",
+      "A tent that collapses easily is flimsy; weakness has nothing to do with excess.",
+      "Four pairs of boots is far more than a short trip requires, so the choice is excessive.",
+      "A short list of bare essentials is modest packing, not excessive packing."
+    ]
+  }
+}

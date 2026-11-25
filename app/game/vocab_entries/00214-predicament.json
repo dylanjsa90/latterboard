@@ -1,0 +1,49 @@
+{
+  "id": 214,
+  "slug": "predicament",
+  "word": "predicament",
+  "pos": "noun",
+  "pronunciation": "/prɪˈdɪk.ə.mənt/",
+  "definition": "A difficult or awkward situation that is hard to get out of.",
+  "difficulty": "Foundation",
+  "example": "Locked out with her keys on the kitchen counter, Mara had to laugh at her own predicament.",
+  "synonyms": [
+    "plight",
+    "tight spot",
+    "quandary",
+    "jam"
+  ],
+  "nuance": "A dilemma forces a choice between bad options, but a predicament is any tight spot, whether or not a choice is involved.",
+  "alternatives": [
+    "dilemma"
+  ],
+  "prompt": "A hiker realizes at dusk that the trail markers she followed have led her far from camp.",
+  "options": [
+    "Lost on the ridge as night fell, the hiker weighed how to get out of her predicament.",
+    "The hiker's predicament was a sunny afternoon with nothing to do but admire the view from the ridge.",
+    "Studying the clouds, the hiker made a confident predicament that it would rain by nightfall.",
+    "Reaching the summit, the hiker felt a sudden predicament of joy and pride."
+  ],
+  "reasons": [
+    "Being lost in the dark with no easy way back is exactly the kind of hard situation the word names.",
+    "A relaxing, trouble-free afternoon is the opposite of a tight spot.",
+    "This confuses the word with its look-alike \"prediction,\" a guess about the future.",
+    "The word names an awkward situation, not a feeling, and certainly not a happy one."
+  ],
+  "practice": {
+    "prompt": "An hour before a wedding, a baker discovers he wrote down the wrong date for the cake order.",
+    "options": [
+      "The baker's predicament was that business had never been calmer and every order had gone perfectly.",
+      "The baker checked the weather predicament in the morning paper before opening the shop.",
+      "The baker sprinkled a predicament of powdered sugar over each cupcake.",
+      "With guests arriving soon and no cake ready, the baker called a friend to help with his predicament."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Calm business and flawless orders describe good fortune, not trouble.",
+      "A weather report is a forecast or prediction; the word does not mean a forecast.",
+      "The word names a situation, not an amount or a pinch of something.",
+      "A looming deadline with no cake is a hard spot he can't easily escape, so the word fits."
+    ]
+  }
+}

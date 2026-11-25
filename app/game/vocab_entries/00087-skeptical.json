@@ -15,7 +15,9 @@
   ],
   "nuance": "Unlike cynical, which assumes people have selfish motives, skeptical means holding back belief in a claim until there is evidence.",
   "alternatives": [
-    "credulous"
+    "credulous",
+    "cynical",
+    "gullible"
   ],
   "prompt": "A car dealer insists that a ten-year-old car has never needed a single repair.",
   "options": [

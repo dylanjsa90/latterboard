@@ -13,7 +13,10 @@
     "conceivably"
   ],
   "nuance": "Arguably leans toward agreeing with a claim that has support; it does not mean doubtful, and it has nothing to do with quarreling.",
-  "alternatives": [],
+  "alternatives": [
+    "undeniably",
+    "allegedly"
+  ],
   "prompt": "A sports club's members debate who was the best player in the club's history.",
   "options": [
     "Members agreed the old goalkeeper was arguably the finest player in club history.",

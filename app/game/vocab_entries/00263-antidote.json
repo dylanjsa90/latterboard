@@ -1,0 +1,49 @@
+{
+  "id": 263,
+  "slug": "antidote",
+  "word": "antidote",
+  "pos": "noun",
+  "pronunciation": "/ˈæn.tɪ.doʊt/",
+  "definition": "Something that works against a poison, or that eases a harmful or unpleasant situation.",
+  "difficulty": "Intermediate",
+  "example": "After three hours of studying, a brisk walk outside was the perfect antidote to her restlessness.",
+  "synonyms": [
+    "remedy",
+    "cure",
+    "countermeasure",
+    "corrective"
+  ],
+  "nuance": "A vaccine prevents harm in advance, but an antidote fights a harm that is already there. Don't mix it up with \"anecdote,\" which means a short story.",
+  "alternatives": [
+    "anecdote"
+  ],
+  "prompt": "A town library wants to help residents who feel lonely during the long, dark winter months.",
+  "options": [
+    "The library's weekly game night became an antidote to the isolation many residents felt.",
+    "At the first game night, the librarian told a hilarious antidote about her very first day on the job.",
+    "The cold, empty evenings at home were an antidote that left the residents feeling even lonelier than before.",
+    "Several residents worried that game night would be an antidote to the new friendships they had made there."
+  ],
+  "reasons": [
+    "The game night pushes back against loneliness, which is exactly what this word describes.",
+    "This confuses the word with \"anecdote\"; a funny personal story is not a remedy.",
+    "Something that makes loneliness worse is causing the problem, not counteracting it.",
+    "Friendships are good, and the word is used for countering something harmful, not something welcome."
+  ],
+  "practice": {
+    "prompt": "A science class is learning how doctors treat accidental poisonings.",
+    "options": [
+      "Everyone agreed that getting a good night's sleep is an antidote to feeling strong and well rested.",
+      "Students learned that the right antidote, given quickly, can save someone who ate a toxic plant.",
+      "The teacher opened the lesson with a funny antidote about a parrot that learned to say the word \"poison.\"",
+      "A toxic berry is itself an antidote, the class decided, since eating it is what makes people sick."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Feeling rested is not a problem, so nothing is being counteracted or cured.",
+      "The treatment counteracts the poison already in the body, which is the word's core meaning.",
+      "A short amusing story is an anecdote, a look-alike word with a completely different meaning.",
+      "The berry is the source of the harm, so it is a toxin, not what fights the toxin."
+    ]
+  }
+}

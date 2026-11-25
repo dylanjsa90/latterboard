@@ -1,0 +1,49 @@
+{
+  "id": 213,
+  "slug": "tentative",
+  "word": "tentative",
+  "pos": "adjective",
+  "pronunciation": "/ˈtɛn.tə.tɪv/",
+  "definition": "Not yet settled or final, and likely to be changed or confirmed later.",
+  "difficulty": "Foundation",
+  "example": "The museum set a tentative opening date in early spring, pending the final safety inspection.",
+  "synonyms": [
+    "provisional",
+    "preliminary",
+    "unconfirmed",
+    "hesitant"
+  ],
+  "nuance": "Tentative stresses uncertainty and openness to revision; provisional stresses a temporary stand-in until something permanent replaces it.",
+  "alternatives": [
+    "tenacious"
+  ],
+  "prompt": "A club is scheduling a meeting before it knows when all its members are free.",
+  "options": [
+    "They picked a tentative date of Thursday and asked everyone to confirm by Monday.",
+    "The tentative date was carved into the calendar as fixed, with no changes allowed.",
+    "The tentative organizer refused to give up and kept insisting on Thursday no matter what.",
+    "The date turned tentative the moment all ten members confirmed they could attend."
+  ],
+  "reasons": [
+    "A date chosen while waiting for confirmation is still open to change.",
+    "Something locked in for good is final, the reverse of what the word describes.",
+    "Stubborn persistence is tenacity, a look-alike word; this one suggests uncertainty.",
+    "Full confirmation removes doubt, so it would make the date settled, not uncertain."
+  ],
+  "practice": {
+    "prompt": "A researcher presents early findings from a small study.",
+    "options": [
+      "The tentative audience leaned forward and hung on every detail of her slides.",
+      "She proudly announced her tentative results as the final word on the subject.",
+      "She called her conclusions tentative because only twelve people had taken part so far.",
+      "She called her conclusions tentative because dozens of later studies had confirmed them."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Close, eager focus is attentiveness; this word is about doubt, not concentration.",
+      "Results presented as the last word are claimed as certain, not open to revision.",
+      "A tiny sample means the results could easily shift, so calling them unsettled fits.",
+      "Repeated confirmation makes findings firm, which contradicts calling them uncertain."
+    ]
+  }
+}

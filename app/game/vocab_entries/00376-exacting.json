@@ -1,0 +1,46 @@
+{
+  "id": 376,
+  "slug": "exacting",
+  "word": "exacting",
+  "pos": "adjective",
+  "pronunciation": "/ɪɡˈzæk.tɪŋ/",
+  "definition": "Requiring great care, effort, and precision because the standards are very high.",
+  "difficulty": "Intermediate",
+  "example": "Translating poetry is exacting work, since every word choice changes the rhythm of a line.",
+  "synonyms": [
+    "demanding",
+    "rigorous",
+    "stringent"
+  ],
+  "nuance": "Exacting stresses strict standards that call for precision, while demanding can simply mean tiring or needing lots of effort.",
+  "alternatives": [],
+  "prompt": "A veteran watchmaker is training a new apprentice in the workshop.",
+  "options": [
+    "The exacting watchmaker made the apprentice redo any gear that was off by a hair.",
+    "The exacting watchmaker shrugged and told the apprentice that any rough fit would do.",
+    "The apprentice showed up at the exacting time of nine o'clock on his first morning.",
+    "Using thin tweezers, the exacting watchmaker pulled a dead battery from the case."
+  ],
+  "reasons": [
+    "Refusing to accept even a tiny error shows the strict, precise standards the word describes.",
+    "Accepting sloppy work reflects low standards, the reverse of what the word means.",
+    "This confuses the word with exact; a time can be precise, but it cannot hold anyone to standards.",
+    "Pulling something out is extracting; the sentence shows a task, not high standards."
+  ],
+  "practice": {
+    "prompt": "A pastry chef is making a delicate caramel for a baking competition.",
+    "options": [
+      "Taking an exacting approach, she tossed random handfuls of flour into the bowl without measuring.",
+      "The judges granted her the exacting number of minutes she had asked for at the start.",
+      "After the long contest she felt so exacting that she napped on the couch for hours.",
+      "The recipe was exacting, so she checked that the sugar reached precisely 240 degrees."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Careless guessing is the opposite of working to strict, precise standards.",
+      "This mistakes the word for exact; a number of minutes cannot be strict or demanding.",
+      "This confuses the word with exhausted; the word describes standards, not tiredness.",
+      "A recipe that leaves no room for error calls for careful, precise work."
+    ]
+  }
+}

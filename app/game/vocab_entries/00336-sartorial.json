@@ -1,0 +1,48 @@
+{
+  "id": 336,
+  "slug": "sartorial",
+  "word": "sartorial",
+  "pos": "adjective",
+  "pronunciation": "/sɑːrˈtɔːr.i.əl/",
+  "definition": "Relating to clothing, tailoring, or the way a person dresses.",
+  "difficulty": "Advanced",
+  "example": "Our math teacher's sartorial trademark was a different bow tie every Friday.",
+  "synonyms": [
+    "relating to dress",
+    "vestimentary",
+    "fashion-related"
+  ],
+  "nuance": "Sartorial concerns clothes and how they are worn; it is often confused with sardonic, which means scornfully mocking.",
+  "alternatives": [
+    "sardonic"
+  ],
+  "prompt": "A guest arrives at a wedding reception in a bold outfit.",
+  "options": [
+    "His sartorial daring, a lime-green suit with orange cuffs, turned heads.",
+    "With a sartorial smirk, he made fun of the long toast the bride's uncle had just given.",
+    "The best man's sartorial speech poked fun at the groom's habit of oversleeping.",
+    "He proved his sartorial skill by finishing three plates of shrimp before the dancing began."
+  ],
+  "reasons": [
+    "The remark is about how he chose to dress, which is exactly what the word covers.",
+    "A mocking smirk is sardonic; this word refers to clothing, not scorn.",
+    "A speech that ridicules someone is satirical; nothing here involves dress.",
+    "Eating a lot at a buffet has nothing to do with garments or tailoring."
+  ],
+  "practice": {
+    "prompt": "A museum curator is planning an exhibit about everyday life in the 1920s.",
+    "options": [
+      "The guard gave a sartorial reply, mocking the visitor's question in a bitter tone.",
+      "The sartorial wing held only tractors and kitchen stoves, with not a single garment in sight.",
+      "The curator chose cloche hats and beaded dresses to show the era's sartorial tastes.",
+      "A sartorial display of razors, shaving mugs, and barber chairs showed how men kept their beards trim."
+    ],
+    "answer": 2,
+    "reasons": [
+      "A bitter, mocking answer is sardonic; the word has nothing to do with tone of voice.",
+      "A room with no clothing at all cannot be described by a word about dress.",
+      "Hats and dresses show how people of the period dressed, so the word fits.",
+      "Barbering tools concern hair, which would be tonsorial, not clothing."
+    ]
+  }
+}

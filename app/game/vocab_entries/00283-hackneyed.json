@@ -1,0 +1,47 @@
+{
+  "id": 283,
+  "slug": "hackneyed",
+  "word": "hackneyed",
+  "pos": "adjective",
+  "pronunciation": "/ˈhæk.nid/",
+  "definition": "Used so often that it has become stale, dull and unoriginal.",
+  "difficulty": "Intermediate",
+  "example": "The graduation speaker closed with a hackneyed line about following your dreams.",
+  "synonyms": [
+    "trite",
+    "clichéd",
+    "overused",
+    "stale"
+  ],
+  "nuance": "Hackneyed blames overuse for the dullness; banal can describe something ordinary from the start, even if it was never repeated.",
+  "alternatives": [],
+  "prompt": "A writing teacher marks up a student's short story.",
+  "options": [
+    "The teacher circled the hackneyed opening about a dark and stormy night.",
+    "The teacher praised the hackneyed plot because no story had ever tried it before.",
+    "The hackneyed sentence was so tangled that the teacher read it three times.",
+    "A virus had hackneyed the student's laptop, erasing the story's last page."
+  ],
+  "reasons": [
+    "That opening has been copied so many times that it now feels worn out.",
+    "A plot nobody has tried is new, the opposite of one made stale by repetition.",
+    "A confusing sentence is convoluted; the word describes staleness, not difficulty.",
+    "This mixes it up with hacked; it is an adjective about tired ideas, not a computer break-in."
+  ],
+  "practice": {
+    "prompt": "A film critic reviews a new action movie.",
+    "options": [
+      "Hoping to flatter the director, the critic called the dialogue hackneyed.",
+      "The critic felt hackneyed after racing across town to catch the late screening.",
+      "The critic called the special effects hackneyed since they were the first of their kind.",
+      "The critic groaned at the hackneyed twist she had seen in dozens of films."
+    ],
+    "answer": 3,
+    "reasons": [
+      "The word is a criticism, so using it could never flatter anyone.",
+      "Being rushed and worn down is harried; the word describes overused ideas, not people.",
+      "Being the first of its kind makes something groundbreaking, not tired from overuse.",
+      "A twist repeated across many movies has lost its power to surprise."
+    ]
+  }
+}

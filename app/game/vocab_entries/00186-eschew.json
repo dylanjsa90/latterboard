@@ -1,0 +1,49 @@
+{
+  "id": 186,
+  "slug": "eschew",
+  "word": "eschew",
+  "pos": "verb",
+  "pronunciation": "/ɛsˈtʃuː/",
+  "definition": "To deliberately avoid or stay away from something, often on principle.",
+  "difficulty": "Advanced",
+  "example": "Many seasoned hikers eschew paved trails, preferring rough paths that few others take.",
+  "synonyms": [
+    "shun",
+    "avoid",
+    "forgo",
+    "abstain from"
+  ],
+  "nuance": "Unlike simply avoiding, eschewing implies a deliberate, often principled choice to do without something.",
+  "alternatives": [
+    "embrace"
+  ],
+  "prompt": "A chef designs a new menu around simple, fresh ingredients.",
+  "options": [
+    "The chef chose to eschew heavy sauces so the vegetables could speak for themselves.",
+    "The chef asked diners to eschew each mouthful slowly to savor the herbs.",
+    "To eschew butter, the chef added an extra spoonful of it to every dish.",
+    "Stuck behind a stalled bus, the chef was forced to eschew the morning farmers' market."
+  ],
+  "reasons": [
+    "Deliberately leaving out rich sauces for the sake of a principle fits the word exactly.",
+    "This confuses the word with chewing; it has nothing to do with biting food.",
+    "Using more of something is the reverse of steering clear of it.",
+    "Missing something because of traffic is an accident, not a willing choice to avoid it."
+  ],
+  "practice": {
+    "prompt": "A student revising a research paper wants it to read clearly.",
+    "options": [
+      "In her introduction, she eschewed the theory loudly and urged readers to adopt it.",
+      "She eschewed the submission deadline simply because the due date slipped her mind.",
+      "She decided to eschew jargon and explain each idea in plain, everyday words.",
+      "She eschewed the eraser end of her pencil while staring at the blank screen."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Championing an idea is espousing it, which is the opposite of turning away from it.",
+      "Forgetting something is not a deliberate decision to keep away from it.",
+      "Purposely giving up technical terms to make the writing clearer is a fitting use.",
+      "Gnawing on a pencil is chewing; the word is about avoidance, not biting."
+    ]
+  }
+}

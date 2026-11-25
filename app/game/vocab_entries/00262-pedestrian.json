@@ -1,0 +1,50 @@
+{
+  "id": 262,
+  "slug": "pedestrian",
+  "word": "pedestrian",
+  "pos": "adjective",
+  "pronunciation": "/pəˈdɛs.tri.ən/",
+  "definition": "Dull and ordinary, with no imagination or excitement.",
+  "difficulty": "Intermediate",
+  "example": "Despite its thrilling trailer, the movie had a pedestrian plot that ended exactly as everyone expected.",
+  "synonyms": [
+    "uninspired",
+    "mundane",
+    "prosaic",
+    "humdrum"
+  ],
+  "nuance": "Ordinary can be neutral, but pedestrian is a criticism that something lacks spark; it has nothing to do with walking.",
+  "alternatives": [
+    "prosaic",
+    "pedantic"
+  ],
+  "prompt": "A music critic reviews a band's new album.",
+  "options": [
+    "The critic called the album pedestrian, since every song recycled the same tired chords.",
+    "The critic said the album was pedestrian, so she reviewed it while strolling through the park.",
+    "The critic hailed the album as pedestrian for its daring sounds unlike anything she had heard.",
+    "The album seemed pedestrian because the singer fussily corrected tiny grammar slips in the lyrics."
+  ],
+  "reasons": [
+    "Reusing stale chords makes music predictable and unoriginal, which is exactly the complaint.",
+    "This confuses the adjective with the noun for a person on foot; the word judges quality, not walking.",
+    "Bold, never-before-heard music is the opposite of dull and uninspired.",
+    "Fussing over small rules describes the look-alike pedantic, not something dull."
+  ],
+  "practice": {
+    "prompt": "A judge tastes a soup at a cooking competition.",
+    "options": [
+      "The judge called the soup pedestrian because a surprising blend of saffron and lime dazzled her.",
+      "The pedestrian soup was served to people walking past the food tent.",
+      "The judge called the soup pedestrian because it was so fiery that it burned her tongue.",
+      "The judge found the soup pedestrian: competently made but no different from a cafeteria version."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Being dazzled by a surprising combination is praise, not a complaint about dullness.",
+      "Serving people on foot mistakes the adjective for the noun meaning walkers.",
+      "Intense, painful heat is extreme, not bland; the word means boring, not unpleasant.",
+      "Food that is fine but completely unremarkable fits a word for flat, unimaginative work."
+    ]
+  }
+}

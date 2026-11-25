@@ -1,0 +1,49 @@
+{
+  "id": 174,
+  "slug": "static",
+  "word": "static",
+  "pos": "adjective",
+  "pronunciation": "/ˈstæt.ɪk/",
+  "definition": "Staying the same over time, with no movement, growth, or development.",
+  "difficulty": "Intermediate",
+  "example": "The village's population has remained static for twenty years, neither growing nor shrinking.",
+  "synonyms": [
+    "unchanging",
+    "stationary",
+    "fixed",
+    "stagnant"
+  ],
+  "nuance": "Static simply means unchanging and is often neutral, while stagnant suggests something has gone stale or declined because it does not change.",
+  "alternatives": [
+    "stagnant"
+  ],
+  "prompt": "A critic reviews a play whose main character never grows or changes.",
+  "options": [
+    "By the final scene, the hero is just as static as he was at the start, having learned nothing.",
+    "The static plot raced through five cities and three sudden twists in under an hour.",
+    "Her static performance was full of restless pacing, leaps, and sweeping gestures across the stage.",
+    "The audience was static with delight, cheering and stamping through every curtain call."
+  ],
+  "reasons": [
+    "A character who ends exactly where he began, with no growth, fits the word well.",
+    "A plot full of rapid travel and reversals is the opposite of unchanging.",
+    "Constant motion on stage contradicts the idea of stillness.",
+    "This confuses the word with the look-alike ecstatic, which means overjoyed."
+  ],
+  "practice": {
+    "prompt": "An economist studies how wages at a factory changed over a decade.",
+    "options": [
+      "The factory's static hiring added hundreds of new jobs to the payroll each season.",
+      "Pay at the plant stayed static for a decade while grocery prices kept climbing.",
+      "Wages were static, rising by at least a dollar an hour nearly every single year.",
+      "The economist felt static when her report won an award, grinning for days afterward."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Adding hundreds of jobs each season is growth, not a lack of change.",
+      "Wages that hold flat for years while prices rise show a lack of change.",
+      "Steady yearly raises describe change, which contradicts the word.",
+      "The word does not describe joy; this mixes it up with ecstatic."
+    ]
+  }
+}

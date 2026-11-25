@@ -14,7 +14,10 @@
     "effrontery"
   ],
   "nuance": "Temerity implies rash or presumptuous nerve, not admirable courage; do not confuse it with timidity, which is close to its opposite.",
-  "alternatives": [],
+  "alternatives": [
+    "temperance",
+    "audacity"
+  ],
   "prompt": "A dinner guest has opinions about the meal the host spent all day cooking.",
   "options": [
     "The guest had the temerity to tell the host that the soup needed more salt.",

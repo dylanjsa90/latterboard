@@ -14,7 +14,9 @@
     "plainly"
   ],
   "nuance": "Explicitly means stated outright; implicitly means suggested or understood without being said.",
-  "alternatives": [],
+  "alternatives": [
+    "implicitly"
+  ],
   "prompt": "A teacher explains the rules for a group project on the first day.",
   "options": [
     "The teacher explicitly stated that each student must write one section.",

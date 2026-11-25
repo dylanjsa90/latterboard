@@ -1,0 +1,47 @@
+{
+  "id": 278,
+  "slug": "vigilant",
+  "word": "vigilant",
+  "pos": "adjective",
+  "pronunciation": "/ˈvɪdʒ.ə.lənt/",
+  "definition": "Carefully watching for possible danger or trouble over a period of time.",
+  "difficulty": "Foundation",
+  "example": "Hikers must stay vigilant for loose rocks on the steep trail down the canyon.",
+  "synonyms": [
+    "watchful",
+    "alert",
+    "on guard",
+    "attentive"
+  ],
+  "nuance": "Vigilant implies watching steadily and on purpose for a threat; alert can describe a quick moment of readiness.",
+  "alternatives": [],
+  "prompt": "A night nurse is responsible for patients on a hospital ward.",
+  "options": [
+    "The vigilant nurse checked each patient's breathing every hour.",
+    "The vigilant nurse slept through her shift and missed three alarms.",
+    "The vigilant nurse mopped the hallway with tremendous energy and speed.",
+    "The vigilant nurse stayed up all night watching a comedy in the break room."
+  ],
+  "reasons": [
+    "Steady, repeated checks for signs of trouble show careful watchfulness.",
+    "Sleeping and missing warnings is the reverse of keeping watch.",
+    "Physical energy and force describe vigorous effort, a look-alike word.",
+    "Being awake isn't enough; the word means watching for problems."
+  ],
+  "practice": {
+    "prompt": "A gardener wants to protect young tomato plants from insects.",
+    "options": [
+      "The vigilant gardener gazed at the clouds simply to enjoy their shapes.",
+      "The vigilant gardener inspected the leaves each morning for beetles.",
+      "The vigilant gardener never looked at the plants until the harvest was ruined.",
+      "The vigilant tomato vines grew tall and strong in the summer heat."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Looking at something for fun is not watching out for a threat.",
+      "Looking for pests every day is ongoing guarding against harm.",
+      "Ignoring the plants until damage is done shows carelessness, not watchfulness.",
+      "Healthy, strong growth would be vigorous; plants cannot keep watch."
+    ]
+  }
+}

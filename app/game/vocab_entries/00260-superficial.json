@@ -1,0 +1,48 @@
+{
+  "id": 260,
+  "slug": "superficial",
+  "word": "superficial",
+  "pos": "adjective",
+  "pronunciation": "/ˌsuː.pɚˈfɪʃ.əl/",
+  "definition": "Existing only on the surface, or dealing only with what is obvious rather than what lies deeper.",
+  "difficulty": "Foundation",
+  "example": "The storm left only superficial damage: a few scratched shingles and a bent gutter.",
+  "synonyms": [
+    "shallow",
+    "surface-level",
+    "cursory"
+  ],
+  "nuance": "Cursory stresses haste, while superficial stresses a lack of depth, whether in a wound, an analysis or a friendship.",
+  "alternatives": [
+    "superfluous"
+  ],
+  "prompt": "A student writes a book report the night before it is due.",
+  "options": [
+    "Her report offered a superficial plot summary and never touched the novel's themes.",
+    "Her report was so superficial that the teacher cut three unneeded, repetitive paragraphs.",
+    "Her superficial report traced each theme with real depth through every single chapter.",
+    "Her report was superficial only because she printed it on thick, glossy paper."
+  ],
+  "reasons": [
+    "Recapping events while ignoring the book's ideas stays at the surface.",
+    "Unneeded extra material is superfluous, a look-alike word that means something different.",
+    "Exploring themes thoroughly is the opposite of staying on the surface.",
+    "The paper's finish has nothing to do with how deeply the book was explored."
+  ],
+  "practice": {
+    "prompt": "A school nurse checks a boy who fell off his bike on the playground.",
+    "options": [
+      "The scrape counted as superficial only because it was on his left knee, not his right.",
+      "The scrape on his knee was superficial, so the nurse simply cleaned and bandaged it.",
+      "The cut was so superficial that he needed surgery to repair a torn tendon underneath.",
+      "The nurse called the extra bandage superficial and removed it as unnecessary."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Which knee was hurt says nothing about how deep the injury went.",
+      "A minor injury that affects only the outer skin needs just basic care.",
+      "An injury that reaches deep tissue and needs surgery is anything but shallow.",
+      "Something unnecessary is superfluous; the two words are easy to mix up."
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": 288,
+  "slug": "expiate",
+  "word": "expiate",
+  "pos": "verb",
+  "pronunciation": "/ˈɛk.spi.eɪt/",
+  "definition": "To make up for a wrong you have done, or for your guilt, by doing something to set it right.",
+  "difficulty": "Advanced",
+  "example": "She tried to expiate her rudeness at dinner by writing each guest a sincere apology.",
+  "synonyms": [
+    "atone for",
+    "make amends for",
+    "make up for"
+  ],
+  "nuance": "The wrongdoer expiates by paying off guilt through action; someone else absolves by forgiving, and expatiate means to talk at length.",
+  "alternatives": [],
+  "prompt": "A teammate who skipped practice before a big game wants to make up for letting the team down.",
+  "options": [
+    "To expiate skipping practice, she volunteered to coach the younger players all week.",
+    "During the team meeting, she began to expiate at length on her favorite plays.",
+    "The coach chose to expiate her, announcing that the missed practice was forgiven.",
+    "To expiate skipping one practice, she cheerfully skipped the next two sessions as well."
+  ],
+  "reasons": [
+    "Doing extra work for the team is a concrete way to pay off her guilt.",
+    "Talking on and on about a topic is expatiating, a look-alike with an unrelated meaning.",
+    "Forgiving someone else is absolving; only the person at fault can make amends.",
+    "Repeating the offense adds to her guilt instead of repairing it."
+  ],
+  "practice": {
+    "prompt": "A neighbor carelessly backed a wheelbarrow into the shared garden fence and knocked a section down.",
+    "options": [
+      "He began to expiate about fence materials until the neighbors drifted away.",
+      "The old fence was so weak that it seemed ready to expiate on its own.",
+      "He tried to expiate his carelessness by rebuilding the fence himself over the weekend.",
+      "He tried to expiate his carelessness by blaming the wind and refusing to discuss it further."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Lecturing at length confuses the word with expatiate.",
+      "A fence wearing out or expiring is not a person making amends for a wrong.",
+      "Fixing the harm he caused is a real act of making amends.",
+      "Denying responsibility does nothing to set the wrong right."
+    ]
+  }
+}

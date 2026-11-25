@@ -1,0 +1,50 @@
+{
+  "id": 217,
+  "slug": "cajole",
+  "word": "cajole",
+  "pos": "verb",
+  "pronunciation": "/kəˈdʒoʊl/",
+  "definition": "To persuade someone gently through flattery, sweet talk, or patient coaxing.",
+  "difficulty": "Intermediate",
+  "example": "With patient praise, the coach managed to cajole the shy goalie into trying out for the team.",
+  "synonyms": [
+    "coax",
+    "wheedle",
+    "sweet-talk",
+    "inveigle"
+  ],
+  "nuance": "Unlike coerce, cajole wins agreement through charm and gentle persistence rather than pressure or threats.",
+  "alternatives": [
+    "coerce",
+    "dissuade"
+  ],
+  "prompt": "A young boy wants to stay up past his bedtime to keep reading.",
+  "options": [
+    "The boy tried to cajole his father into one more chapter with hugs and sweet promises.",
+    "The father barked a stern order to cajole the boy into bed at once.",
+    "After a bad dream, the father held his crying son close to cajole him back to calm.",
+    "The father cajoled the boy out of reading by leaving the room without a single word."
+  ],
+  "reasons": [
+    "Affection and promises are the gentle, winning tactics this verb describes.",
+    "A blunt command relies on authority, not on charm or coaxing.",
+    "Comforting someone in distress is consoling, not winning them over to a request.",
+    "Walking away in silence makes no attempt to persuade anyone of anything."
+  ],
+  "practice": {
+    "prompt": "A volunteer needs neighbors to help clean up the local park on Saturday.",
+    "options": [
+      "She cajoled the neighbors by posting a strict notice that attendance was required.",
+      "She cajoled the neighbors who stayed home, scolding them harshly in a long letter afterward.",
+      "She cajoled the neighbors simply by counting how many houses stood on the block.",
+      "She managed to cajole three reluctant neighbors with offers of lemonade and good company."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Making something mandatory is pressure, the reverse of gentle persuasion.",
+      "Harsh scolding after the fact is criticism, not flattering someone into agreeing.",
+      "Counting houses involves no attempt to win anyone over.",
+      "Small treats and friendly appeals gently talk hesitant people into helping."
+    ]
+  }
+}

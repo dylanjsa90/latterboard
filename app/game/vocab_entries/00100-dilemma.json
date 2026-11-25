@@ -13,7 +13,9 @@
     "predicament"
   ],
   "nuance": "A dilemma always involves a hard choice between options; a predicament is any tough spot, even one with no decision to make.",
-  "alternatives": [],
+  "alternatives": [
+    "predicament"
+  ],
   "prompt": "A student has a concert and a final exam review scheduled for the same evening.",
   "options": [
     "Torn between the concert and the review session, Maya faced a real dilemma.",

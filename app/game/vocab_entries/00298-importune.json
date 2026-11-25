@@ -1,0 +1,47 @@
+{
+  "id": 298,
+  "slug": "importune",
+  "word": "importune",
+  "pos": "verb",
+  "pronunciation": "/ˌɪm.pərˈtuːn/",
+  "definition": "To keep asking someone for something so often that it becomes annoying.",
+  "difficulty": "Advanced",
+  "example": "The young writer importuned the editor with weekly letters until she agreed to read his manuscript.",
+  "synonyms": [
+    "pester",
+    "badger",
+    "plead with",
+    "beseech"
+  ],
+  "nuance": "To beseech stresses how strongly you feel when you ask, while to importune stresses asking so persistently that you become a nuisance.",
+  "alternatives": [],
+  "prompt": "A young boy keeps asking his parents for a puppy at every meal.",
+  "options": [
+    "Night after night, the boy would importune his parents for a puppy.",
+    "The boy waited for an importune moment, when his parents seemed relaxed, to bring up puppies.",
+    "To importune his parents, the boy promised himself he would never mention puppies again.",
+    "His father would importune him by agreeing to the puppy the first time it came up."
+  ],
+  "reasons": [
+    "Raising the same request at every dinner is exactly the kind of tiresome pressing the verb describes.",
+    "This mixes up the verb with the adjective \"opportune,\" which means well-timed.",
+    "Deciding never to ask again is the reverse of pestering someone with requests.",
+    "Granting a wish right away is not making repeated demands, so the verb has nothing to do here."
+  ],
+  "practice": {
+    "prompt": "A pushy vendor at a street fair wants every passerby to buy one of his candles.",
+    "options": [
+      "Without saying a word, he would importune shoppers by letting them browse in peace.",
+      "A satisfied buyer stopped to importune him with a quick thank-you before leaving.",
+      "He would importune each passerby, calling after them to buy just one candle.",
+      "Each spring he had to importune his candles from a supplier overseas to keep his stall stocked."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Leaving people alone is the opposite of pressing them with requests.",
+      "A single word of thanks is neither a request nor persistent, so it cannot be pestering.",
+      "Chasing strangers with the same plea over and over is persistent, unwelcome asking.",
+      "This confuses the verb with \"import\"; you pester people, you do not bring in goods this way."
+    ]
+  }
+}

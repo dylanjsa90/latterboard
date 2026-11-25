@@ -1,0 +1,50 @@
+{
+  "id": 293,
+  "slug": "probity",
+  "word": "probity",
+  "pos": "noun",
+  "pronunciation": "/ˈproʊ.bə.ti/",
+  "definition": "Firm honesty and moral uprightness, especially when trusted with money or public duties.",
+  "difficulty": "Advanced",
+  "example": "The scholar's probity showed when she published data that undercut her own theory.",
+  "synonyms": [
+    "integrity",
+    "rectitude",
+    "uprightness",
+    "honesty"
+  ],
+  "nuance": "Probity is honesty proven under trust or temptation; propriety means correct manners and behavior, not moral uprightness.",
+  "alternatives": [
+    "perfidy",
+    "duplicity"
+  ],
+  "prompt": "A town treasurer is retiring after thirty years of handling public funds.",
+  "options": [
+    "No one ever doubted her probity; every dollar was accounted for.",
+    "Her probity showed when she quietly moved town funds into her own account.",
+    "The auditors' probity into her old ledgers took six weeks to finish.",
+    "There is a high probity that the council will hire her deputy next."
+  ],
+  "reasons": [
+    "Spotless records kept over decades of trust show tested honesty.",
+    "Taking public money is dishonest, the reverse of what the word praises.",
+    "This confuses the word with probe; it names a quality, not an investigation.",
+    "This mistakes the word for probability; it has nothing to do with likelihood."
+  ],
+  "practice": {
+    "prompt": "A referee is assigned to officiate a championship game involving his former team.",
+    "options": [
+      "The referee's probity led him to favor his former teammates on every close call.",
+      "With remarkable probity, the referee sprinted the whole length of the field in seconds.",
+      "The referee's probity was obvious from his neatly pressed uniform and polished shoes.",
+      "Known for his probity, the referee penalized his old team as readily as its rivals."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Biased calls are unfair, the opposite of the integrity the word describes.",
+      "Speed is a physical ability, not a sign of honesty or principle.",
+      "A tidy appearance says nothing about character; the word concerns ethics, not looks.",
+      "Refusing to play favorites despite personal ties shows moral uprightness."
+    ]
+  }
+}

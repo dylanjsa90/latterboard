@@ -1,0 +1,46 @@
+{
+  "id": 154,
+  "slug": "pejorative",
+  "word": "pejorative",
+  "pos": "adjective",
+  "pronunciation": "/pəˈdʒɔːr.ə.tɪv/",
+  "definition": "Expressing disapproval or contempt, often through the choice of a particular word.",
+  "difficulty": "Advanced",
+  "example": "Over the decades, the label lost its pejorative sense and became a plain, neutral description.",
+  "synonyms": [
+    "derogatory",
+    "disparaging",
+    "belittling"
+  ],
+  "nuance": "Pejorative usually describes words whose built-in connotation insults, while derogatory can describe any insulting remark or attitude.",
+  "alternatives": [],
+  "prompt": "A dictionary editor is deciding how to label an old nickname.",
+  "options": [
+    "Because speakers used it to sneer at newcomers, the editor tagged the nickname as pejorative.",
+    "The nickname was pejorative, so friends used it to praise each other's kindness.",
+    "The editor called the nickname pejorative simply because it has four syllables and a silent letter.",
+    "A pejorative note on the entry told readers they must use the nickname at once."
+  ],
+  "reasons": [
+    "A term used to sneer at people carries contempt, so the tag fits.",
+    "Praise and affection are the reverse of a disapproving term.",
+    "Length and spelling say nothing about whether a word expresses scorn.",
+    "Giving an order is the job of an imperative, not of a disparaging term."
+  ],
+  "practice": {
+    "prompt": "A teacher reviews the word choices in a student's history essay.",
+    "options": [
+      "The essay's pejorative chapter came first, preparing readers for the main argument.",
+      "The teacher swapped 'scheme' for 'plan,' since the pejorative term hinted at dishonesty.",
+      "The teacher praised the pejorative phrasing for being perfectly neutral and fair.",
+      "Her pejorative sentences ran so long that the teacher suggested breaking them into shorter ones."
+    ],
+    "answer": 1,
+    "reasons": [
+      "This describes a preparatory section; nothing in it signals disapproval.",
+      "Scheme suggests trickery, so its disapproving tone colors the description.",
+      "A neutral, fair phrase has no disapproving edge at all.",
+      "Sentence length is a matter of style, not of showing contempt."
+    ]
+  }
+}

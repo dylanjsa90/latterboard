@@ -1,0 +1,49 @@
+{
+  "id": 157,
+  "slug": "consent",
+  "word": "consent",
+  "pos": "noun",
+  "pronunciation": "/kənˈsɛnt/",
+  "definition": "Permission or agreement, freely given, for something to happen.",
+  "difficulty": "Foundation",
+  "example": "The museum needed written consent from each artist before displaying the sketches.",
+  "synonyms": [
+    "permission",
+    "approval",
+    "agreement",
+    "assent"
+  ],
+  "nuance": "Consent is permission granted by a person or party; consensus is broad agreement shared across a whole group.",
+  "alternatives": [
+    "consensus"
+  ],
+  "prompt": "A middle school is organizing a field trip to a science center.",
+  "options": [
+    "Each student needed a parent's signed consent before boarding the bus.",
+    "After an hour of debate, the whole class reached a consent on the trip's lunch menu.",
+    "The parent's consent meant the child was forbidden from going on the trip.",
+    "The principal's consent was a long list of the trip's possible hazards."
+  ],
+  "reasons": [
+    "A signed form is a parent's permission for the child to go.",
+    "Shared agreement within a group is consensus, not permission from someone.",
+    "Granting permission allows the trip; it cannot be what forbids it.",
+    "A list of risks is a warning, not an approval of anything."
+  ],
+  "practice": {
+    "prompt": "A photographer wants to include a neighbor's garden in a published book.",
+    "options": [
+      "She asked the gardener for his consent before printing any of the photos.",
+      "The gardener showed his consent by angrily ordering her off the property.",
+      "The gardener was full of consent after a satisfying afternoon of weeding.",
+      "Her consent to the gardener was a framed print of his prize roses."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Seeking the owner's okay before publishing is exactly asking for permission.",
+      "Sending someone away is a refusal, the reverse of saying yes.",
+      "Feeling pleased is contentment, a look-alike word; this word means permission.",
+      "A thank-you gift is not an act of granting permission."
+    ]
+  }
+}

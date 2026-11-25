@@ -1,0 +1,49 @@
+{
+  "id": 279,
+  "slug": "intrepid",
+  "word": "intrepid",
+  "pos": "adjective",
+  "pronunciation": "/ɪnˈtrɛp.ɪd/",
+  "definition": "Brave and adventurous, willing to face danger or hardship without being stopped by fear.",
+  "difficulty": "Intermediate",
+  "example": "Intrepid sailors once crossed open oceans with nothing but the stars to guide them.",
+  "synonyms": [
+    "fearless",
+    "daring",
+    "undaunted",
+    "bold"
+  ],
+  "nuance": "Intrepid praises courage in facing real risk, often while exploring; reckless suggests ignoring danger out of carelessness.",
+  "alternatives": [
+    "insipid"
+  ],
+  "prompt": "A small team explores a cave system that has never been mapped.",
+  "options": [
+    "The intrepid caver squeezed through a flooded passage to map the chamber beyond.",
+    "The intrepid caver stayed by the entrance all day, too frightened to step into the dark.",
+    "The underground pool was intrepid, neither warm nor cold, when the caver dipped a hand in.",
+    "The intrepid caver skipped checking her ropes because she found safety steps boring."
+  ],
+  "reasons": [
+    "Pushing into an unknown, risky space despite the danger is exactly this kind of courage.",
+    "Being held back by fear is the reverse of the word's meaning.",
+    "This mixes the word up with the look-alike tepid, which describes lukewarm temperature.",
+    "Careless neglect of safety is recklessness, not admirable bravery."
+  ],
+  "practice": {
+    "prompt": "A botanist searches for a rare orchid high in a rainforest canopy.",
+    "options": [
+      "The orchid's intrepid petals were covered in tiny, delicately interlocking veins.",
+      "The intrepid botanist climbed a swaying rope ladder to reach the orchid.",
+      "The intrepid botanist abandoned the search the moment she heard distant thunder.",
+      "The botanist found the orchid's faint scent dull and intrepid, hardly worth noting."
+    ],
+    "answer": 1,
+    "reasons": [
+      "This confuses the word with intricate; petals can be detailed but not brave.",
+      "Climbing to a dangerous height to make a discovery shows bold, fearless effort.",
+      "Quitting at the first hint of trouble shows timidity, not courage.",
+      "This confuses the word with insipid, which means bland or lacking flavor."
+    ]
+  }
+}

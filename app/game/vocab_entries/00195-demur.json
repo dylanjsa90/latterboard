@@ -1,0 +1,49 @@
+{
+  "id": 195,
+  "slug": "demur",
+  "word": "demur",
+  "pos": "verb",
+  "pronunciation": "/dɪˈmɜːr/",
+  "definition": "To politely express doubt, reluctance or mild objection to a plan or request.",
+  "difficulty": "Advanced",
+  "example": "Asked to give a speech at the banquet, the retired coach demurred, saying others deserved the spotlight.",
+  "synonyms": [
+    "object",
+    "hesitate",
+    "take exception",
+    "balk"
+  ],
+  "nuance": "To demur is to object mildly or hesitate, softer than protest; don't confuse it with demure, an adjective meaning modest or shy.",
+  "alternatives": [
+    "acquiesce"
+  ],
+  "prompt": "A school committee proposes moving the annual science fair to a Saturday.",
+  "options": [
+    "Several teachers began to demur, noting that many students work weekend jobs.",
+    "The quiet new student sat demur in the back row, hoping nobody would notice her.",
+    "Thrilled with the new date, the principal chose to demur and signed the plan at once.",
+    "The committee voted to demur the fair until the following month."
+  ],
+  "reasons": [
+    "The teachers voice a reasoned objection to the proposal, which is exactly what the verb describes.",
+    "This calls for the look-alike adjective demure, meaning modest or shy; demur is a verb.",
+    "Signing happily and immediately is agreement, the reverse of raising doubts.",
+    "Pushing an event to a later date is to defer or postpone it, not to object to it."
+  ],
+  "practice": {
+    "prompt": "A friend suggests hiking a steep, icy trail just as the sun is setting.",
+    "options": [
+      "Her demur smile suggested she was too modest to admit she felt tired.",
+      "Far below, a stream continued to demur softly over the smooth rocks.",
+      "The hiker was quick to demur, saying the ice would be treacherous after dark.",
+      "Delighted by the plan, she agreed to demur and laced up her boots without a second thought."
+    ],
+    "answer": 2,
+    "reasons": [
+      "A modest smile would be demure; demur is a verb and cannot describe a smile.",
+      "A gentle, steady sound of water is a murmur; demur has nothing to do with sound.",
+      "She hesitates and gives a reason against the idea, a polite form of objection.",
+      "Eager, unquestioning acceptance is the opposite of expressing reluctance."
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": 155,
+  "slug": "ludicrous",
+  "word": "ludicrous",
+  "pos": "adjective",
+  "pronunciation": "/ˈluː.dɪ.krəs/",
+  "definition": "So foolish or unreasonable that it seems laughable.",
+  "difficulty": "Foundation",
+  "example": "The movie's plot grew so ludicrous that the audience laughed during the serious scenes.",
+  "synonyms": [
+    "absurd",
+    "ridiculous",
+    "preposterous",
+    "farcical"
+  ],
+  "nuance": "Ludicrous stresses that something invites laughter, while absurd can simply mean illogical, with no humor involved.",
+  "alternatives": [
+    "lucid"
+  ],
+  "prompt": "A seller lists a rusty bicycle with a flat tire for sale online.",
+  "options": [
+    "Asking nine hundred dollars for a bike with a flat tire struck buyers as ludicrous.",
+    "The price was so ludicrous that buyers agreed it was fair and paid it at once.",
+    "The ludicrous listing was easy to follow because its photos were sharp and well lit.",
+    "The seller felt ludicrous about parting with the bike his grandfather once rode."
+  ],
+  "reasons": [
+    "A wildly excessive price for a damaged bike is laughably unreasonable.",
+    "Something laughably unreasonable would not be judged fair and accepted.",
+    "This confuses the word with lucid; clear presentation is not absurd.",
+    "Sadness over a family keepsake is sentimental, not laughably foolish."
+  ],
+  "practice": {
+    "prompt": "A student explains to a teacher why a history report is three weeks late.",
+    "options": [
+      "The student said a ludicrous weekend job had paid well enough to cover new textbooks.",
+      "The report was ludicrous, so the teacher praised its careful research and gave it an A.",
+      "The story that a seagull flew off with the report was too ludicrous to believe.",
+      "The teacher found the excuse ludicrous, so she believed every word and granted an extension."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This mixes the word up with lucrative; a well-paying job is not absurd.",
+      "Careful work that earns praise is the opposite of something laughably foolish.",
+      "An excuse so far-fetched that it invites laughter fits the word exactly.",
+      "An excuse that seems laughably unreasonable would not be trusted completely."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 168,
+  "slug": "convene",
+  "word": "convene",
+  "pos": "verb",
+  "pronunciation": "/kənˈviːn/",
+  "definition": "To come together, or bring people together, for a formal meeting.",
+  "difficulty": "Intermediate",
+  "example": "The judges will convene at noon to choose the winning painting.",
+  "synonyms": [
+    "assemble",
+    "call together",
+    "gather",
+    "meet"
+  ],
+  "nuance": "Convene suggests a planned, purposeful meeting, while congregate can describe any crowd that gathers, even casually.",
+  "alternatives": [],
+  "prompt": "A city council must respond quickly to a broken water main downtown.",
+  "options": [
+    "The mayor asked the council to convene an emergency session that evening.",
+    "The engineer hoped to convene the residents that their tap water was still safe to drink.",
+    "Once the vote was over, the members began to convene and headed home in separate cars.",
+    "A lone clerk decided to convene by herself at her desk."
+  ],
+  "reasons": [
+    "Calling officials together for an urgent, official session is the word's core use.",
+    "This confuses the word with convince; you persuade people of a claim, you don't assemble them of it.",
+    "Leaving and scattering after a meeting is adjourning, the reverse of coming together.",
+    "One person alone cannot hold a meeting; the word requires a group."
+  ],
+  "practice": {
+    "prompt": "A high school science club is planning its first meeting of the year.",
+    "options": [
+      "She tried to convene the new club rules to everyone through a long email.",
+      "After the final vote, the members began to convene, drifting out of the lab one by one.",
+      "Two students happened to convene by chance at the water fountain between classes.",
+      "The president will convene the members in the lab on Friday."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Rules are passed along, not assembled; this mixes the word up with convey.",
+      "Drifting away describes a group breaking up, not gathering.",
+      "A random run-in lacks the planning and purpose that the word implies.",
+      "Summoning the group to a set place and time for an organized meeting fits exactly."
+    ]
+  }
+}

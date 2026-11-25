@@ -1,0 +1,49 @@
+{
+  "id": 247,
+  "slug": "fatuous",
+  "word": "fatuous",
+  "pos": "adjective",
+  "pronunciation": "/ˈfætʃ.u.əs/",
+  "definition": "Silly and pointless in a smug way that shows a complete lack of real thought.",
+  "difficulty": "Advanced",
+  "example": "He wore a fatuous grin, unaware that the whole room was laughing at his mistake.",
+  "synonyms": [
+    "inane",
+    "witless",
+    "vacuous",
+    "asinine"
+  ],
+  "nuance": "Fatuous adds smug, unaware foolishness to inane's plain emptiness; don't confuse it with facetious, which means joking at the wrong time.",
+  "alternatives": [
+    "facetious"
+  ],
+  "prompt": "A guest speaker at a graduation ceremony offers the students advice about their futures.",
+  "options": [
+    "Her fatuous advice to just follow your dreams ignored every real obstacle.",
+    "His fatuous remark was a clever joke he made on purpose to relax the crowd.",
+    "The fatuous speech offered sharp, carefully reasoned insights about careers.",
+    "Her notes were so fatuous that they filled three thick binders."
+  ],
+  "reasons": [
+    "Cheerful advice that never considers actual difficulties is smugly empty.",
+    "Deliberate, well-timed humor is facetious or witty, not mindlessly foolish.",
+    "Careful reasoning and sharp insight are the reverse of empty silliness.",
+    "Despite the sound, the word has nothing to do with being fat, bulky or long."
+  ],
+  "practice": {
+    "prompt": "A school committee meets to decide how to repair a leaking gym roof.",
+    "options": [
+      "One member made the fatuous suggestion that buckets would solve the problem forever.",
+      "The engineer's fatuous plan measured exactly how much material each section needed.",
+      "The principal thanked the architect for such a fatuous and helpful report.",
+      "The old shingles had become so fatuous that rain poured straight through."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Treating a serious repair as solved by a lazy fix shows thoughtless foolishness.",
+      "Precise, practical planning shows real thought, the opposite of the word.",
+      "The word is an insult, so it cannot sit beside praise like helpful.",
+      "The word describes ideas, remarks or people, not physical wear and damage."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 194,
+  "slug": "castigate",
+  "word": "castigate",
+  "pos": "verb",
+  "pronunciation": "/ˈkæs.tɪ.ɡeɪt/",
+  "definition": "To criticize someone very harshly, often in public.",
+  "difficulty": "Advanced",
+  "example": "Critics were quick to castigate the museum for closing its only free gallery.",
+  "synonyms": [
+    "rebuke",
+    "berate",
+    "excoriate",
+    "upbraid"
+  ],
+  "nuance": "Castigate suggests severe, often public condemnation, while chastise usually means a scolding meant to correct someone's behavior.",
+  "alternatives": [],
+  "prompt": "A city inspector learns that a restaurant ignored three written safety warnings.",
+  "options": [
+    "The inspector's report will castigate the owners for brushing aside every warning.",
+    "The inspector plans to castigate the owners by giving them a gold star for cleanliness.",
+    "The cook hopes to castigate the fire risk by turning down the fryer a few degrees.",
+    "The inspector will castigate the staff with a cheerful reminder to wipe the counters."
+  ],
+  "reasons": [
+    "A sharp, formal condemnation suits owners who repeatedly ignored safety notices.",
+    "Handing out an award is praise, the reverse of a harsh rebuke.",
+    "This confuses the word with mitigate; you lessen a risk, you do not scold it.",
+    "A friendly nudge is far too mild; the word implies stinging criticism."
+  ],
+  "practice": {
+    "prompt": "A science journal discovers that a paper's authors copied another lab's data without credit.",
+    "options": [
+      "The authors tried to castigate a feud between rival labs by leaking an early draft.",
+      "The editor chose to castigate the authors by quietly pointing out a missing comma.",
+      "Reviewers are likely to castigate the authors for passing off borrowed data as their own.",
+      "The lab director decided to castigate the authors with a bonus for their honesty."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This mixes the word up with instigate, which means to stir up or start something.",
+      "A gentle note about a tiny error lacks the harshness the word requires.",
+      "Copying data without credit is serious misconduct that invites fierce condemnation.",
+      "A reward expresses approval, not severe disapproval."
+    ]
+  }
+}

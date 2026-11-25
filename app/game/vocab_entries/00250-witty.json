@@ -1,0 +1,49 @@
+{
+  "id": 250,
+  "slug": "witty",
+  "word": "witty",
+  "pos": "adjective",
+  "pronunciation": "/ˈwɪt.i/",
+  "definition": "Clever and quick with words in a way that makes people laugh or smile.",
+  "difficulty": "Foundation",
+  "example": "My grandfather's witty comments at dinner keep everyone laughing between bites.",
+  "synonyms": [
+    "clever",
+    "humorous",
+    "amusing",
+    "sharp"
+  ],
+  "nuance": "Witty humor comes from clever wording and quick thinking, while funny can describe anything that gets a laugh, even a pratfall.",
+  "alternatives": [
+    "facetious"
+  ],
+  "prompt": "A student gives a short speech at the class awards night.",
+  "options": [
+    "Her witty remark about the squeaky microphone made the whole audience laugh.",
+    "Her witty speech was so flat and humorless that several parents dozed off.",
+    "Her witty joke took ten minutes to set up and confused everyone at the end.",
+    "She was too witty to speak and simply stared at the floor in silence."
+  ],
+  "reasons": [
+    "A quick, clever joke about the moment that wins laughs shows sharp verbal humor.",
+    "A dull talk that puts people to sleep is the opposite of clever humor.",
+    "The word implies quickness and a joke that lands; a slow, confusing one shows neither.",
+    "Silence shows no humor at all; the word does not describe shyness or stage fright."
+  ],
+  "practice": {
+    "prompt": "Two friends write captions for photos in the school yearbook.",
+    "options": [
+      "Leo's witty caption repeated the same tired joke the class had heard all year.",
+      "The witty caption was printed in tiny gray letters along the bottom edge.",
+      "Maya wrote a witty caption calling the soggy picnic photo a rain check.",
+      "Leo's witty caption simply listed the names of everyone in the photo."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This kind of humor depends on fresh cleverness; a stale, worn-out joke lacks it.",
+      "Font size and color describe how text looks, not whether its words are clever or amusing.",
+      "Turning a wet picnic into a clever pun is exactly the kind of playful wordplay meant.",
+      "A plain list of names is useful information but contains no cleverness or humor."
+    ]
+  }
+}

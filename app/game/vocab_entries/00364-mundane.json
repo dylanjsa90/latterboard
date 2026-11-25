@@ -1,0 +1,47 @@
+{
+  "id": 364,
+  "slug": "mundane",
+  "word": "mundane",
+  "pos": "adjective",
+  "pronunciation": "/mʌnˈdeɪn/",
+  "definition": "Ordinary and dull, with nothing exciting or unusual about it.",
+  "difficulty": "Foundation",
+  "example": "After a week of hiking abroad, he returned to mundane errands like buying groceries and paying bills.",
+  "synonyms": [
+    "ordinary",
+    "humdrum",
+    "everyday",
+    "routine"
+  ],
+  "nuance": "Ordinary can be neutral, but mundane adds a sense of dullness, the gray, repetitive side of everyday life.",
+  "alternatives": [],
+  "prompt": "A writer keeps a diary of a typical day at her office job.",
+  "options": [
+    "Her diary listed only mundane tasks, like refilling the stapler and answering routine emails.",
+    "Attendance at the budget meeting was mundane, so nobody was permitted to skip it.",
+    "The mundane news that the firm had won an international prize set off wild cheering.",
+    "The manager called it the most mundane and dazzling presentation she had ever seen."
+  ],
+  "reasons": [
+    "Restocking supplies and replying to routine messages are dull, everyday duties.",
+    "This confuses the word with mandatory; it describes dullness, not obligation.",
+    "A rare, thrilling triumph is the reverse of something routine and unremarkable.",
+    "Dazzling clashes with a word that signals plainness and a lack of sparkle."
+  ],
+  "practice": {
+    "prompt": "An astronaut describes daily life aboard a space station.",
+    "options": [
+      "Even in orbit, she spent hours on mundane chores like wiping down air filters.",
+      "Watching a mundane sunrise over the planet from the window left her speechless with awe.",
+      "The crew felt mundane after the long launch, so they rested for a full day.",
+      "Her mundane bravery during the emergency repair earned her a special medal."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Cleaning filters is repetitive upkeep, the dull side of an unusual job.",
+      "A sight that leaves someone awestruck is anything but dull or commonplace.",
+      "The word describes dull things or activities, not tiredness; exhausted fits here.",
+      "Praising exceptional courage with a word meaning dull and routine makes no sense."
+    ]
+  }
+}

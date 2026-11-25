@@ -1,0 +1,48 @@
+{
+  "id": 362,
+  "slug": "anathema",
+  "word": "anathema",
+  "pos": "noun",
+  "pronunciation": "/əˈnæθ.ə.mə/",
+  "definition": "Something or someone that a person or group strongly dislikes or completely rejects.",
+  "difficulty": "Advanced",
+  "example": "Wasting food was anathema to my grandmother, who saved every vegetable scrap for soup.",
+  "synonyms": [
+    "abomination",
+    "bête noire",
+    "object of loathing"
+  ],
+  "nuance": "A bane causes trouble, but an anathema is rejected on principle because it goes against someone's deepest values.",
+  "alternatives": [
+    "panacea"
+  ],
+  "prompt": "A librarian who values quiet sets the rules for the reading room.",
+  "options": [
+    "Loud phone calls were anathema to the librarian, who prized silence.",
+    "The librarian adored quiet, so a silent study hall was anathema to her.",
+    "The librarian softly hummed a cheerful anathema while she shelved new novels.",
+    "Free earplugs proved an anathema that cured the noise problem for good."
+  ],
+  "reasons": [
+    "Noisy calls clash with everything she values, so she rejects them firmly.",
+    "This reverses the meaning: a thing she loves cannot be what she detests.",
+    "This confuses the word with the look-alike anthem; it is not a song.",
+    "A cure-all is a panacea; the word names something hated, not a remedy."
+  ],
+  "practice": {
+    "prompt": "A chef known for cooking only with fresh ingredients plans her menu.",
+    "options": [
+      "The chef loved fresh herbs so dearly that they were anathema to her cooking.",
+      "The chef's anathema was the warm stew that guests requested at every holiday dinner.",
+      "The chef told a funny anathema about her first burned soufflé.",
+      "Canned vegetables were anathema to the chef, who shopped for produce daily."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Something she treasures cannot also be the thing she rejects.",
+      "A beloved signature dish is a favorite, not an object of loathing.",
+      "A short amusing story is an anecdote; the word does not mean a tale.",
+      "Canned food goes against her commitment to freshness, so she shuns it."
+    ]
+  }
+}

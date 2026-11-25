@@ -1,0 +1,48 @@
+{
+  "id": 198,
+  "slug": "authentic",
+  "word": "authentic",
+  "pos": "adjective",
+  "pronunciation": "/ɔˈθɛn.tɪk/",
+  "definition": "Truly what it claims to be, rather than a copy, fake, or imitation.",
+  "difficulty": "Foundation",
+  "example": "Experts confirmed that the faded map was authentic, drawn by a ship's navigator in 1790.",
+  "synonyms": [
+    "genuine",
+    "real",
+    "bona fide"
+  ],
+  "nuance": "Authentic stresses a proven origin or faithfulness to a tradition, while genuine more broadly means real or sincere.",
+  "alternatives": [
+    "spurious"
+  ],
+  "prompt": "An appraiser examines a portrait said to be more than two hundred years old.",
+  "options": [
+    "Tests of the canvas showed the portrait was authentic, not a later copy.",
+    "The appraiser called the portrait authentic once she proved a forger had painted it last spring.",
+    "The portrait was authentic because it was the largest painting in the whole auction.",
+    "The appraiser was authentic enough to sign contracts on the museum's behalf."
+  ],
+  "reasons": [
+    "Scientific evidence that the work is no reproduction confirms it is the real thing.",
+    "A recent forgery is the opposite of a work that truly is what it claims to be.",
+    "Size says nothing about whether a painting is real or fake.",
+    "Having permission to act for others is being authorized, not authentic."
+  ],
+  "practice": {
+    "prompt": "A traveler wants to taste a regional dish the way local families cook it.",
+    "options": [
+      "The chef called his stew authentic, though he had invented it that morning from canned soups.",
+      "The stew was authentic because the waiter brought it out faster than any other dish.",
+      "The café felt authentic thanks to its plastic palm trees and staff in rented costumes.",
+      "The village cook made an authentic stew with her grandmother's recipe and local herbs."
+    ],
+    "answer": 3,
+    "reasons": [
+      "A new mix of canned products is an imitation, not the traditional dish.",
+      "Quick service has no bearing on whether food follows a real tradition.",
+      "Staged props and costumes create a fake atmosphere, not a real one.",
+      "A traditional family recipe and local ingredients keep the dish true to its roots."
+    ]
+  }
+}

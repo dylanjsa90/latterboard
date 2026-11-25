@@ -14,7 +14,11 @@
     "justify"
   ],
   "nuance": "To vindicate is to prove right someone who was doubted or accused, while to justify is simply to give reasons for something, even if nobody questioned it.",
-  "alternatives": [],
+  "alternatives": [
+    "justify",
+    "incriminate",
+    "vilify"
+  ],
   "prompt": "A student insists that her test answer was marked wrong by mistake.",
   "options": [
     "She asked the teacher to recheck the key, confident it would vindicate her answer.",

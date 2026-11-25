@@ -1,0 +1,47 @@
+{
+  "id": 289,
+  "slug": "iconoclast",
+  "word": "iconoclast",
+  "pos": "noun",
+  "pronunciation": "/aɪˈkɑː.nə.klæst/",
+  "definition": "A person who openly challenges or rejects widely respected beliefs, customs, or traditions.",
+  "difficulty": "Intermediate",
+  "example": "The young architect was an iconoclast who refused to put columns or domes on any building she designed.",
+  "synonyms": [
+    "rebel",
+    "nonconformist",
+    "dissenter",
+    "maverick"
+  ],
+  "nuance": "An iconoclast goes after cherished ideas on purpose, while a maverick simply acts independently without trying to tear tradition down.",
+  "alternatives": [],
+  "prompt": "A young chef enters a cooking contest famous for its strict classical rules.",
+  "options": [
+    "A true iconoclast, she served dessert first and called the century-old menu order pointless.",
+    "A true iconoclast, she followed her grandmother's handwritten recipe exactly as it had always been made.",
+    "She worked as the contest's iconoclast, drawing the little symbols printed on each recipe card.",
+    "Being an iconoclast, she simply forgot to pack her knives on the morning of the contest."
+  ],
+  "reasons": [
+    "Openly mocking a revered tradition is exactly what an iconoclast does.",
+    "Faithfully preserving tradition is the reverse of attacking it.",
+    "This confuses the word with someone who designs icons or symbols.",
+    "Forgetfulness is carelessness, not a deliberate challenge to accepted ideas."
+  ],
+  "practice": {
+    "prompt": "A historian publishes a book questioning a small town's beloved founding legend.",
+    "options": [
+      "The historian was an iconoclast because she spoke softly and seldom left her office.",
+      "Known as an iconoclast, the historian argued that the town's heroic founding story was mostly invented.",
+      "The historian was called an iconoclast because she repeated the legend exactly as the old schoolbooks told it.",
+      "The historian, an iconoclast, spent years collecting painted portraits of the town's founders."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Being shy or reserved says nothing about defying tradition.",
+      "Challenging a story the whole town treasures fits someone who targets revered beliefs.",
+      "Repeating the accepted version supports the legend rather than questioning it.",
+      "Gathering images mixes up the word with icon, meaning a picture."
+    ]
+  }
+}

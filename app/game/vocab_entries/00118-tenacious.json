@@ -15,7 +15,9 @@
   ],
   "nuance": "Tenacious stresses a firm hold that will not loosen; persistent stresses effort repeated over time.",
   "alternatives": [
-    "tenuous"
+    "tenuous",
+    "tentative",
+    "irresolute"
   ],
   "prompt": "A young scientist's experiment keeps failing in the lab.",
   "options": [

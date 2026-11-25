@@ -1,0 +1,51 @@
+{
+  "id": 153,
+  "slug": "dogged",
+  "word": "dogged",
+  "pos": "adjective",
+  "pronunciation": "/ˈdɔː.ɡɪd/",
+  "definition": "Continuing to try with stubborn determination, even when progress is slow or hard.",
+  "difficulty": "Intermediate",
+  "example": "Her dogged practice on the cello through the long winter finally paid off at the spring recital.",
+  "synonyms": [
+    "tenacious",
+    "persistent",
+    "unflagging",
+    "relentless"
+  ],
+  "nuance": "Dogged stresses steady, unglamorous persistence through difficulty; tenacious suggests a firm grip that refuses to let go.",
+  "alternatives": [
+    "tenacious",
+    "desultory",
+    "dogmatic"
+  ],
+  "prompt": "A local reporter is trying to get answers about a delayed bridge repair.",
+  "options": [
+    "The dogged reporter called the city office every morning for a month until a clerk finally talked.",
+    "The dogged reporter dropped the story after one email to the city went unanswered.",
+    "The dogged reporter refused to look at any fact that challenged her opinion of the mayor's office.",
+    "The dogged reporter was so worn out after her late shift that she dozed off at her desk."
+  ],
+  "reasons": [
+    "Calling again and again for weeks despite silence shows stubborn, patient persistence.",
+    "Quitting at the first obstacle is the reverse of refusing to give up.",
+    "Rigidly clinging to a belief describes being dogmatic, a look-alike word, not dogged.",
+    "Being exhausted is dog-tired; dogged is about determination, not fatigue."
+  ],
+  "practice": {
+    "prompt": "A student is working through a tough chemistry problem set the night before it is due.",
+    "options": [
+      "With dogged effort, Marcus insisted his wrong answers were correct and ignored the teacher's notes.",
+      "With dogged effort, Marcus reworked each problem until his answers matched the key.",
+      "With dogged effort, Marcus skimmed the first page and gave up before dinner.",
+      "With dogged effort, Marcus guessed at random and happened to get every answer right."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Stubbornly refusing correction is closed-mindedness, closer to dogmatic than to dogged.",
+      "Redoing hard work repeatedly until it comes out right is persistence in the face of difficulty.",
+      "Skimming and quitting early shows little effort and no staying power.",
+      "Lucky guessing involves no sustained struggle, so the word's sense of grinding effort is missing."
+    ]
+  }
+}

@@ -14,7 +14,10 @@
     "regret"
   ],
   "nuance": "To lament is to voice sorrow openly, while regret can stay private; bemoan often sounds more like complaining.",
-  "alternatives": [],
+  "alternatives": [
+    "relent",
+    "bemoan"
+  ],
   "prompt": "A small town's beloved bookshop closes its doors after fifty years.",
   "options": [
     "Longtime residents lament losing a shop where they spent many quiet afternoons.",

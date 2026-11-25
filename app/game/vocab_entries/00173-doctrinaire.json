@@ -1,0 +1,50 @@
+{
+  "id": 173,
+  "slug": "doctrinaire",
+  "word": "doctrinaire",
+  "pos": "adjective",
+  "pronunciation": "/ˌdɑːk.trɪˈner/",
+  "definition": "Sticking rigidly to a theory or set of rules without caring whether it works in practice.",
+  "difficulty": "Advanced",
+  "example": "Her doctrinaire approach to healthy eating left no room for even one slice of birthday cake.",
+  "synonyms": [
+    "dogmatic",
+    "rigid",
+    "inflexible",
+    "uncompromising"
+  ],
+  "nuance": "Doctrinaire stresses applying a theory no matter the practical results; dogmatic stresses stating opinions as if beyond question.",
+  "alternatives": [
+    "pragmatic",
+    "dogmatic"
+  ],
+  "prompt": "A youth soccer coach follows a single tactical theory no matter who the team plays.",
+  "options": [
+    "The doctrinaire coach kept the same formation even when it was plainly losing matches.",
+    "The doctrinaire coach changed tactics every week after carefully studying each new opponent's habits.",
+    "The doctrinaire coach bandaged a sprained ankle on the sidelines.",
+    "The doctrinaire coach had earned an advanced degree in sports science."
+  ],
+  "reasons": [
+    "Clinging to a theory despite clear evidence that it fails is exactly this kind of rigidity.",
+    "Adapting to each situation is flexible and practical, the reverse of rigid adherence.",
+    "This mistakes the word for something medical; it describes rigid thinking, not doctoring.",
+    "Holding a degree shows expertise, not stubborn devotion to one theory."
+  ],
+  "practice": {
+    "prompt": "A baker follows a century-old bread method from an inherited notebook.",
+    "options": [
+      "The doctrinaire baker taught a lively class to children at the library.",
+      "The doctrinaire baker sold her loaves at the farmers' market every Saturday.",
+      "Though every loaf came out dense, the doctrinaire baker refused to alter one step of the method.",
+      "The doctrinaire baker cheerfully swapped in whatever flour was in the pantry and adjusted the water by feel."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This confuses the word with teaching; it means rigid devotion to a theory, not instruction.",
+      "A regular selling schedule says nothing about an unbending attachment to theory.",
+      "Refusing to adjust a method after repeated failure shows impractical loyalty to rules.",
+      "Improvising based on results is flexible, not rigidly rule-bound."
+    ]
+  }
+}

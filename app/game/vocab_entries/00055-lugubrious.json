@@ -14,7 +14,11 @@
     "gloomy"
   ],
   "nuance": "Lugubrious suggests sorrow that is heavy or overdone, often a little comic, while mournful simply means sad.",
-  "alternatives": [],
+  "alternatives": [
+    "ludicrous",
+    "doleful",
+    "jovial"
+  ],
   "prompt": "A drama club rehearses a scene in which a butler announces bad news.",
   "options": [
     "The butler reported the canceled picnic in a lugubrious voice, sighing between words.",

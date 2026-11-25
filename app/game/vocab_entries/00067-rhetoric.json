@@ -14,7 +14,9 @@
     "grandiloquence"
   ],
   "nuance": "Eloquence is almost always praise, but rhetoric often hints that the fine words may be hollow or insincere.",
-  "alternatives": [],
+  "alternatives": [
+    "bombast"
+  ],
   "prompt": "A student is preparing her closing speech for a debate tournament.",
   "options": [
     "Her coach taught her the rhetoric of a strong close: restate the claim and end on a vivid image.",

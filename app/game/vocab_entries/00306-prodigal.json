@@ -1,0 +1,49 @@
+{
+  "id": 306,
+  "slug": "prodigal",
+  "word": "prodigal",
+  "pos": "adjective",
+  "pronunciation": "/ˈprɑː.dɪ.ɡəl/",
+  "definition": "Spending money or using resources wastefully, with no thought for the future.",
+  "difficulty": "Intermediate",
+  "example": "Years of prodigal spending left the old mansion without money for a new roof.",
+  "synonyms": [
+    "wasteful",
+    "extravagant",
+    "spendthrift",
+    "profligate"
+  ],
+  "nuance": "Prodigal means wasteful with resources; don't mix it up with prodigious, which means enormous or amazing.",
+  "alternatives": [
+    "frugal"
+  ],
+  "prompt": "A student club's treasurer reviews how this year's budget was spent.",
+  "options": [
+    "The prodigal committee spent the whole year's budget on a single lavish banquet.",
+    "The prodigal committee saved half its funds for next spring's field trip.",
+    "The prodigal treasurer is only fourteen yet already keeps accounts like a professional.",
+    "The prodigal stack of receipts nearly filled three shoeboxes."
+  ],
+  "reasons": [
+    "Using up every dollar on one extravagant event, with nothing left for later, is wasteful.",
+    "Putting money aside for the future is careful planning, the reverse of wastefulness.",
+    "This confuses the word with prodigy, a young person with remarkable talent.",
+    "This confuses the word with prodigious, which describes something huge."
+  ],
+  "practice": {
+    "prompt": "A town has asked residents to conserve water during a dry summer.",
+    "options": [
+      "The prodigal gardener collected rainwater in barrels to get through the drought.",
+      "A prodigal at botany, the ten-year-old could name every plant in the garden.",
+      "The prodigal gardener paid a fair price for a sturdy hose that should last for decades.",
+      "Running the sprinklers at noon every day was a prodigal use of scarce water."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Saving and reusing water is thrifty behavior, the opposite of waste.",
+      "This treats the word as a noun meaning prodigy; it describes waste, not talent.",
+      "A sensible purchase that pays off over time is not wasteful, even if it costs money.",
+      "Pouring out a scarce resource when most of it evaporates is careless waste."
+    ]
+  }
+}

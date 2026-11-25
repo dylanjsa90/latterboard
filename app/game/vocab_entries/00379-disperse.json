@@ -1,0 +1,47 @@
+{
+  "id": 379,
+  "slug": "disperse",
+  "word": "disperse",
+  "pos": "verb",
+  "pronunciation": "/dɪˈspɜːrs/",
+  "definition": "To spread out or scatter in different directions over a wide area.",
+  "difficulty": "Foundation",
+  "example": "When the concert ended, the audience began to disperse into the quiet side streets.",
+  "synonyms": [
+    "scatter",
+    "spread out",
+    "break up",
+    "dissipate"
+  ],
+  "nuance": "Disperse means to spread things widely apart, while its look-alike disburse means to pay out money.",
+  "alternatives": [],
+  "prompt": "A dandelion has gone to seed in a breezy field.",
+  "options": [
+    "A gust of wind made the seeds disperse across the field.",
+    "The seeds disperse into a single tight clump beside the stem.",
+    "The seeds disperse by staying fastened to the flower head all summer.",
+    "The gardener used a new tool to disperse which weeds were dandelions."
+  ],
+  "reasons": [
+    "The breeze carries the seeds off in many directions, scattering them widely.",
+    "Gathering into one clump is the opposite of spreading apart.",
+    "Seeds that never leave the plant are not scattering anywhere.",
+    "Telling weeds apart is discerning, a look-alike; nothing is being spread out."
+  ],
+  "practice": {
+    "prompt": "A student drops blue food coloring into a glass of still water.",
+    "options": [
+      "After the lab, the student had to disperse of the blue water in the sink.",
+      "Within minutes, the dye began to disperse until the water was evenly blue.",
+      "The dye will disperse into one dark bead that sinks and never spreads.",
+      "The student began to disperse her partner's lab notes as sloppy and careless."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Getting rid of something is \"dispose of\"; disperse is never followed by \"of.\"",
+      "The color spreads through the whole glass instead of staying in one spot.",
+      "Staying packed in a single bead reverses the idea of scattering.",
+      "Criticizing someone's work is disparaging, a look-alike word with a different meaning."
+    ]
+  }
+}

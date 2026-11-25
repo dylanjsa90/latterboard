@@ -1,0 +1,47 @@
+{
+  "id": 237,
+  "slug": "feckless",
+  "word": "feckless",
+  "pos": "adjective",
+  "pronunciation": "/ˈfɛk.ləs/",
+  "definition": "Lacking the drive, skill, or sense of duty needed to get things done.",
+  "difficulty": "Advanced",
+  "example": "His feckless cousin borrowed money to start a bakery and spent it all on concert tickets.",
+  "synonyms": [
+    "ineffectual",
+    "irresponsible",
+    "shiftless",
+    "good-for-nothing"
+  ],
+  "nuance": "Feckless faults a lack of purpose or competence, while the look-alike reckless faults dangerous, careless boldness.",
+  "alternatives": [],
+  "prompt": "A team leader keeps missing deadlines on a group project for science class.",
+  "options": [
+    "The feckless leader promised a schedule every week but never wrote one down.",
+    "The feckless leader sped through the parking lot at twice the posted limit.",
+    "The feckless leader finished every task early and organized the rest of the team.",
+    "The feckless leader did everything right but lost the files when a storm cut the power."
+  ],
+  "reasons": [
+    "Making empty promises and never following through shows weak, aimless leadership.",
+    "Dangerous daring is recklessness, a look-alike word, not a failure to get things done.",
+    "Early, well-organized work is the opposite of ineffectual behavior.",
+    "Bad luck despite real effort is hapless; this word blames a person's character."
+  ],
+  "practice": {
+    "prompt": "A town committee is responsible for repairing a broken footbridge over a creek.",
+    "options": [
+      "The feckless committee repaired the bridge within a week and came in under budget.",
+      "The feckless committee sent workers onto the bridge during a flood without safety lines.",
+      "Residents thanked the feckless committee for its firm, dependable leadership on the project.",
+      "After months of meetings, the feckless committee had still not hired a single carpenter."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Fast, thrifty results show competence, which reverses the meaning.",
+      "Taking careless risks is recklessness; the word describes doing too little, not acting rashly.",
+      "The word is always a criticism, so it cannot describe leadership worth praising.",
+      "Endless talk without action is exactly the ineffectiveness the word criticizes."
+    ]
+  }
+}

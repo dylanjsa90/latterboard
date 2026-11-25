@@ -1,0 +1,47 @@
+{
+  "id": 310,
+  "slug": "composure",
+  "word": "composure",
+  "pos": "noun",
+  "pronunciation": "/kəmˈpoʊ.ʒɚ/",
+  "definition": "A calm, controlled state of mind, especially in a tense or difficult moment.",
+  "difficulty": "Foundation",
+  "example": "When the microphone died, the speaker kept her composure and finished the talk without it.",
+  "synonyms": [
+    "calmness",
+    "poise",
+    "self-control",
+    "equanimity"
+  ],
+  "nuance": "Composure is calm self-control kept or lost in a particular tense moment, while equanimity suggests a deeper, lasting evenness of temper.",
+  "alternatives": [],
+  "prompt": "A goalkeeper faces a penalty kick in the final minute of a tied match.",
+  "options": [
+    "The goalkeeper kept her composure, watched the ball closely, and made the save.",
+    "Her composure made her hands shake and her breath come in short, panicked gasps.",
+    "The composure of the team changed when two new defenders joined the roster.",
+    "Hours of composure to the afternoon sun left the goalkeeper badly sunburned."
+  ],
+  "reasons": [
+    "Staying steady and focused under heavy pressure is exactly what the word describes.",
+    "Shaking and panic are signs of losing calm, not of having it.",
+    "The makeup of a group is its composition; composure is a calm state of mind.",
+    "Being left open to sunlight is exposure, a look-alike with a different meaning."
+  ],
+  "practice": {
+    "prompt": "A pianist's sheet music slides off the stand in the middle of a recital.",
+    "options": [
+      "The pianist's composure showed when she froze, gasped, and ran offstage in tears.",
+      "The composure of this sonata wrote it when he was only nineteen years old.",
+      "The piano's composure was perfect after the tuner adjusted every string.",
+      "With quiet composure, the pianist kept playing from memory until the page was replaced."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Freezing and fleeing in distress are the opposite of staying collected.",
+      "The person who writes music is a composer, not a state of calm.",
+      "The word describes a person's state of mind, not how well an instrument is tuned.",
+      "Carrying on steadily after a sudden mishap shows calm self-control."
+    ]
+  }
+}

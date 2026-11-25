@@ -1,0 +1,50 @@
+{
+  "id": 254,
+  "slug": "lavish",
+  "word": "lavish",
+  "pos": "adjective",
+  "pronunciation": "/ˈlæv.ɪʃ/",
+  "definition": "Very rich, costly, or generous, often more than is strictly needed.",
+  "difficulty": "Foundation",
+  "example": "The old hotel lobby was lavish, with crystal chandeliers and marble floors.",
+  "synonyms": [
+    "sumptuous",
+    "luxurious",
+    "generous",
+    "opulent"
+  ],
+  "nuance": "Lavish stresses rich abundance and generosity; extravagant more strongly suggests spending beyond what is sensible.",
+  "alternatives": [
+    "extravagant",
+    "frugal"
+  ],
+  "prompt": "A family hosts a large wedding reception for their daughter.",
+  "options": [
+    "The reception featured a lavish buffet with six kinds of dessert.",
+    "The lavish meal was one bowl of plain rice for every three guests.",
+    "The napkins were folded and dyed a soft lavish shade of light purple.",
+    "Everyone agreed the party felt lavish because the speeches ended on schedule."
+  ],
+  "reasons": [
+    "A huge, costly spread of food for guests shows rich abundance.",
+    "Scarce, simple food is the opposite of rich plenty.",
+    "This confuses the word with lavender; it does not name a color.",
+    "Punctual speeches have nothing to do with richness or expense."
+  ],
+  "practice": {
+    "prompt": "A soccer coach speaks to the team after a hard-fought win.",
+    "options": [
+      "The coach handed out lavish instructions, timed down to the exact second.",
+      "After the long bus ride home, the tired team felt lavish and fell asleep.",
+      "She gave lavish praise to every player, even the substitutes.",
+      "His idea of lavish praise was muttering \"fine\" and walking off the field."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This mistakes the word for precise; it means plentiful, not exact.",
+      "The word describes rich abundance, not a feeling of weariness.",
+      "Generous, abundant compliments for everyone fit the word well.",
+      "A single grudging word is stingy, not generous or abundant."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 316,
+  "slug": "inexplicable",
+  "word": "inexplicable",
+  "pos": "adjective",
+  "pronunciation": "/ˌɪn.ɪkˈsplɪk.ə.bəl/",
+  "definition": "Impossible to explain, understand or account for.",
+  "difficulty": "Intermediate",
+  "example": "For reasons that remained inexplicable, the hallway clock always ran exactly ten minutes fast.",
+  "synonyms": [
+    "baffling",
+    "mysterious",
+    "unaccountable",
+    "puzzling"
+  ],
+  "nuance": "Something unexplained simply hasn't been explained yet, while something inexplicable seems to defy any explanation at all.",
+  "alternatives": [],
+  "prompt": "A scientist reviews data from a lab sensor whose readings suddenly jumped overnight.",
+  "options": [
+    "The inexplicable spike puzzled the team, since nothing in the lab had changed.",
+    "The spike was inexplicable, because a loose wire had clearly caused it.",
+    "The sensor's wires were inexplicable, knotted so tightly that no one could pull them apart.",
+    "The scientist was so stunned that she stood inexplicable, unable to say a word."
+  ],
+  "reasons": [
+    "With no cause anyone can find, the jump truly defies explanation.",
+    "A clear, known cause means the event can be explained, so the word is reversed.",
+    "This confuses the word with inextricable, which describes things that can't be separated.",
+    "The word describes events or facts that can't be accounted for, not a speechless person."
+  ],
+  "practice": {
+    "prompt": "A family returns from a two-week trip and checks on the houseplants they left behind.",
+    "options": [
+      "Their fern's growth was inexplicable, since no one had watered it in two weeks.",
+      "The fern's growth was inexplicable because a neighbor had watered it daily, as planned.",
+      "The roots were inexplicable from the pot, wound so tightly they could not be removed.",
+      "The inexplicable watering instructions were so simple that even the youngest child followed them."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A plant thriving with no water and no obvious cause is genuinely baffling.",
+      "Daily watering fully accounts for the growth, so nothing here is mysterious.",
+      "Roots that can't be pulled free call for inextricable, a look-alike with another meaning.",
+      "Instructions that everyone easily understands are the opposite of impossible to make sense of."
+    ]
+  }
+}

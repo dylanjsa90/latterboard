@@ -1,0 +1,46 @@
+{
+  "id": 218,
+  "slug": "nadir",
+  "word": "nadir",
+  "pos": "noun",
+  "pronunciation": "/ˈneɪ.dɪr/",
+  "definition": "The lowest or worst point in the course of something, such as a career or a season.",
+  "difficulty": "Advanced",
+  "example": "The team reached its nadir in March, losing nine games in a row before the coach changed its lineup.",
+  "synonyms": [
+    "low point",
+    "rock bottom",
+    "the depths"
+  ],
+  "nuance": "Nadir is the opposite of zenith; it names the single lowest point of a decline, not just any bad stretch or the bottom of an object.",
+  "alternatives": [],
+  "prompt": "A small bakery struggled through a hard year before business finally recovered.",
+  "options": [
+    "The bakery hit its nadir in February, when just three customers came all week.",
+    "Customers praised the bakery's nadir, a crowded week when every shelf sold out.",
+    "The owner's nadir was to open a second location by the following spring.",
+    "The baker added a nadir of salt to each loaf to sharpen the flavor."
+  ],
+  "reasons": [
+    "The emptiest week marks the worst moment before the recovery, so the word fits.",
+    "A sold-out, crowded week is a high point, which reverses the word's meaning.",
+    "The word names a low point, not a goal or plan someone aims for.",
+    "The word does not mean a small amount; it marks the worst stage of something."
+  ],
+  "practice": {
+    "prompt": "A student looks back over his grades during a difficult school year.",
+    "options": [
+      "His teacher awarded him a nadir for turning in every essay a week early.",
+      "His grades hit their nadir in November, then rose once he joined a study group.",
+      "His nadir was the straight-A report card he proudly brought home at the end of June.",
+      "He finally found his lost calculator at the nadir of his crowded backpack."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word is not a prize or reward; it describes a time when things are at their worst.",
+      "November was his worst point before things improved, which is exactly the sense intended.",
+      "Perfect grades are a peak, the opposite of the lowest point.",
+      "The word describes the low point of a course or decline, not the physical bottom of a bag."
+    ]
+  }
+}

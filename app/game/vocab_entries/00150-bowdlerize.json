@@ -1,0 +1,47 @@
+{
+  "id": 150,
+  "slug": "bowdlerize",
+  "word": "bowdlerize",
+  "pos": "verb",
+  "pronunciation": "/ˈboʊd.lə.raɪz/",
+  "definition": "To cut words or scenes thought to be offensive from a book or play, often weakening it.",
+  "difficulty": "Advanced",
+  "example": "Early collectors tended to bowdlerize old folk ballads, quietly dropping every crude verse.",
+  "synonyms": [
+    "expurgate",
+    "sanitize",
+    "censor",
+    "clean up"
+  ],
+  "nuance": "Censor can mean banning a work outright, but bowdlerize means trimming its content, and the word usually signals disapproval of the cuts.",
+  "alternatives": [],
+  "prompt": "A publisher prepares a children's edition of a classic novel full of coarse language.",
+  "options": [
+    "The publisher decided to bowdlerize the novel, swapping each curse for a mild word.",
+    "The publisher chose to bowdlerize the novel by adding even saltier insults to the dialogue.",
+    "The publisher wanted to bowdlerize the novel by printing it in a larger, rounder font.",
+    "Critics expect to bowdlerize the novel with glowing reviews in every newspaper."
+  ],
+  "reasons": [
+    "Replacing offensive language with tamer words is exactly this kind of prudish editing.",
+    "Adding coarse material is the reverse of stripping it out.",
+    "Changing the typeface alters the look of the page, not its objectionable content.",
+    "Praising a book has nothing to do with cutting passages from it."
+  ],
+  "practice": {
+    "prompt": "A theater company stages a centuries-old comedy for a family audience.",
+    "options": [
+      "To bowdlerize the comedy, the director cut its rude puns and softened two songs.",
+      "The director chose to bowdlerize the comedy by restoring every rude line earlier versions had dropped.",
+      "The actors will bowdlerize the comedy by rehearsing it every evening for a month.",
+      "Audiences tend to bowdlerize the comedy, laughing loudest at its crudest scenes."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Removing and toning down improper material for propriety's sake fits the word.",
+      "Putting cut material back undoes expurgation rather than performing it.",
+      "Rehearsing is practice; it removes nothing offensive from the script.",
+      "Enjoying crude scenes is not editing them out; the word describes altering a text."
+    ]
+  }
+}

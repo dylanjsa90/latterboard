@@ -1,0 +1,47 @@
+{
+  "id": 164,
+  "slug": "temperance",
+  "word": "temperance",
+  "pos": "noun",
+  "pronunciation": "/ˈtɛm.pər.əns/",
+  "definition": "Moderation and self-control, especially in eating, spending, or other pleasures.",
+  "difficulty": "Intermediate",
+  "example": "Grandpa credited his long life to temperance: small meals, early nights, and daily walks.",
+  "synonyms": [
+    "moderation",
+    "self-restraint",
+    "self-control",
+    "abstemiousness"
+  ],
+  "nuance": "Temperance is restraint in one's appetites; don't confuse it with temperament, which is a person's natural disposition.",
+  "alternatives": [],
+  "prompt": "A teenager receives a generous sum of birthday money and must decide how to spend it.",
+  "options": [
+    "Showing temperance, he spent a little on a novel and saved the rest for summer.",
+    "The temperance in the store was so high that he took off his jacket.",
+    "In a fit of temperance, he spent every dollar within an hour on snacks.",
+    "His temperance flared when the cashier gave him the wrong change, and he shouted at her."
+  ],
+  "reasons": [
+    "Treating himself modestly and holding back the rest is exactly this kind of restraint.",
+    "This confuses the word with temperature; it describes self-control, not heat.",
+    "Blowing all the money at once is excess, the reverse of moderation.",
+    "This mixes the word up with temper; it means calm restraint, not an angry outburst."
+  ],
+  "practice": {
+    "prompt": "A family on vacation visits an all-you-can-eat buffet.",
+    "options": [
+      "Mia's temperance led her to pile four plates high and keep eating until she felt sick.",
+      "Mia has a high temperance for spicy food, so the hot curry didn't bother her.",
+      "With great temperance, the waiter refused to refill anyone's water glass.",
+      "Practicing temperance, Mia took one small plate and stopped once she was full."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Eating until sick is overindulgence, the opposite of self-restraint.",
+      "This confuses the word with tolerance; it is about restraint, not handling spice.",
+      "The word means limiting your own appetites, not denying things to other people.",
+      "Choosing a reasonable amount despite unlimited food shows moderation."
+    ]
+  }
+}

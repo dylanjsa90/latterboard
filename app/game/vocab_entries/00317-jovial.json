@@ -1,0 +1,47 @@
+{
+  "id": 317,
+  "slug": "jovial",
+  "word": "jovial",
+  "pos": "adjective",
+  "pronunciation": "/ˈdʒoʊ.vi.əl/",
+  "definition": "Cheerful and friendly in a warm, hearty, good-humored way.",
+  "difficulty": "Intermediate",
+  "example": "The jovial baker chatted with every customer while boxing up their pastries.",
+  "synonyms": [
+    "good-humored",
+    "jolly",
+    "convivial",
+    "cheerful"
+  ],
+  "nuance": "Jovial suggests hearty, outgoing good cheer among company; genial is warm and kind but quieter, and jocular means given to joking.",
+  "alternatives": [],
+  "prompt": "A grandfather welcomes relatives arriving for a big holiday dinner.",
+  "options": [
+    "Grandpa greeted every guest with a jovial laugh and a firm handshake.",
+    "Grandpa gave a jovial frown and told the children to stop talking.",
+    "Grandpa stayed jovial by refusing to speak to anyone at the table.",
+    "Grandpa wrote a jovial schedule listing the exact minute each dish would come out."
+  ],
+  "reasons": [
+    "A hearty laugh and warm welcome show exactly this kind of sociable good cheer.",
+    "A frown and a scolding are stern, which contradicts a cheerful, friendly mood.",
+    "The word describes outgoing friendliness, so silent withdrawal reverses its meaning.",
+    "A precise timetable has no mood; the word describes cheerful people or their manner."
+  ],
+  "practice": {
+    "prompt": "A tour guide leads a group of visitors through a city on a rainy afternoon.",
+    "options": [
+      "The guide was so jovial that she burst into tears when the rain began.",
+      "The jovial map showed every street in tiny gray print.",
+      "Despite the drizzle, the jovial guide kept everyone laughing with tales about the old bridge.",
+      "The jovial guide muttered complaints and walked ahead without looking back."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Crying from disappointment signals sadness, not good humor.",
+      "A map cannot feel cheerful; the word fits people and their behavior, not objects like this.",
+      "Keeping spirits high with humor in bad weather shows hearty, friendly cheer.",
+      "Grumbling and ignoring the group is gloomy and unfriendly, the opposite of the word."
+    ]
+  }
+}

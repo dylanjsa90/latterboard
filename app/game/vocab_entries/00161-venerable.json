@@ -1,0 +1,50 @@
+{
+  "id": 161,
+  "slug": "venerable",
+  "word": "venerable",
+  "pos": "adjective",
+  "pronunciation": "/ˈvɛn.ər.ə.bəl/",
+  "definition": "Deserving deep respect because of great age, wisdom, or long service.",
+  "difficulty": "Intermediate",
+  "example": "The venerable oak in the town square has shaded family picnics for three centuries.",
+  "synonyms": [
+    "revered",
+    "time-honored",
+    "august",
+    "esteemed"
+  ],
+  "nuance": "Old or ancient only states age, while venerable adds the honor that a long history or lifetime of service has earned.",
+  "alternatives": [
+    "vulnerable",
+    "venal"
+  ],
+  "prompt": "A small college celebrates its two-hundredth anniversary.",
+  "options": [
+    "Alumni returned to honor the venerable institution that had educated their grandparents.",
+    "Because it was so venerable, the college lay open to attack from every passing critic in town.",
+    "The venerable college had opened its doors only last spring, with ten students and one building.",
+    "Visitors mocked the venerable college as a shabby embarrassment unworthy of anyone's notice."
+  ],
+  "reasons": [
+    "Two centuries of teaching generations of families earns the school real reverence.",
+    "This confuses the word with vulnerable; being exposed to harm is not the same as being honored.",
+    "A brand-new school has no long history to earn that kind of respect.",
+    "The word carries esteem, so pairing it with scorn and ridicule contradicts it."
+  ],
+  "practice": {
+    "prompt": "A retired violin teacher visits the music school where she once worked.",
+    "options": [
+      "The venerable teacher quietly accepted bribes to raise the grades of her wealthier pupils.",
+      "The venerable teacher was a nervous beginner who had started the job just the week before.",
+      "Pupils ignored the venerable teacher, since nobody believed her advice was worth hearing.",
+      "Students rose to applaud the venerable teacher, who had trained musicians for decades."
+    ],
+    "answer": 3,
+    "reasons": [
+      "This confuses the word with venal; taking bribes is corrupt and earns no reverence.",
+      "A newcomer with one week of experience has no long record to be honored for.",
+      "The word means she is held in high regard, so dismissing her opinions contradicts it.",
+      "Long years of devoted service explain why the students greet her with such honor."
+    ]
+  }
+}

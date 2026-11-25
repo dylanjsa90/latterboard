@@ -1,0 +1,49 @@
+{
+  "id": 178,
+  "slug": "inimitable",
+  "word": "inimitable",
+  "pos": "adjective",
+  "pronunciation": "/ɪˈnɪm.ɪ.tə.bəl/",
+  "definition": "So distinctive or excellent that no one else can copy it.",
+  "difficulty": "Intermediate",
+  "example": "The museum guide spoke with an inimitable blend of dry humor and deep expertise.",
+  "synonyms": [
+    "matchless",
+    "incomparable",
+    "one of a kind",
+    "unrivaled"
+  ],
+  "nuance": "Inimitable stresses that others cannot copy something, while unique only says there is one; it is unrelated to inimical, meaning hostile.",
+  "alternatives": [
+    "inimical"
+  ],
+  "prompt": "A beloved jazz singer gives her farewell concert after forty years on stage.",
+  "options": [
+    "Critics praised her inimitable phrasing, which students had tried and failed to copy.",
+    "Her inimitable phrasing was so ordinary that any student in the hall could reproduce it.",
+    "The inimitable crowd booed loudly, hostile to every song she chose to perform.",
+    "Her inimitable encore was certain to happen, since she had closed every show with one."
+  ],
+  "reasons": [
+    "A style that many attempt to reproduce but none can match is exactly what the word describes.",
+    "Something easy to copy is the reverse of a style no one can match.",
+    "This confuses the word with inimical, which means unfriendly or hostile.",
+    "This mixes the word up with inevitable; being certain to occur has nothing to do with being uncopyable."
+  ],
+  "practice": {
+    "prompt": "A family gathers on a winter night to hear a grandfather tell his famous stories.",
+    "options": [
+      "His inimitable tale that night was copied straight from a magazine he had read last week.",
+      "Cousins tried his inimitable timing, but no one could pause quite the way he did.",
+      "His inimitable stories were simple to retell, so everyone told them just as well as he did.",
+      "His inimitable glare made the grandchildren feel unwelcome at the dinner table."
+    ],
+    "answer": 1,
+    "reasons": [
+      "A borrowed, copied story is derivative, the opposite of something no one can reproduce.",
+      "Others attempting his delivery and falling short shows it truly cannot be copied.",
+      "If anyone can match the performance, it is not beyond imitation.",
+      "The word praises matchless quality; it does not mean unfriendly, which would be inimical."
+    ]
+  }
+}

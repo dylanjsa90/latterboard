@@ -14,7 +14,10 @@
     "trouble"
   ],
   "nuance": "Adversity names hard circumstances, while an adversary is a person or group that opposes you.",
-  "alternatives": [],
+  "alternatives": [
+    "prosperity",
+    "adversary"
+  ],
   "prompt": "A small family bakery reopens slowly after a flood damages its kitchen.",
   "options": [
     "The owners met adversity calmly, baking in a borrowed kitchen until repairs were done.",

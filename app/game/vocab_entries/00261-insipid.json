@@ -1,0 +1,49 @@
+{
+  "id": 261,
+  "slug": "insipid",
+  "word": "insipid",
+  "pos": "adjective",
+  "pronunciation": "/ɪnˈsɪp.ɪd/",
+  "definition": "Lacking flavor, or so dull and bland that it fails to hold anyone's interest.",
+  "difficulty": "Advanced",
+  "example": "The sequel's insipid dialogue made even the talented cast seem bored with their own lines.",
+  "synonyms": [
+    "bland",
+    "flavorless",
+    "vapid",
+    "dull"
+  ],
+  "nuance": "Insipid stresses a lack of flavor or spark and fits both food and ideas, while vapid stresses emptiness of thought.",
+  "alternatives": [
+    "insidious"
+  ],
+  "prompt": "A food critic tastes the soup at a newly opened restaurant.",
+  "options": [
+    "The critic found the soup insipid, with barely a trace of salt or herbs.",
+    "The critic called the soup insipid because its fiery peppers made her eyes water for minutes.",
+    "An insipid draft from the kitchen door slowly chilled the dining room without anyone noticing.",
+    "The insipid restaurant had opened its doors for the very first time only three days earlier."
+  ],
+  "reasons": [
+    "A soup with almost no seasoning is flat and tasteless, so the word fits.",
+    "A fiercely spicy soup has strong flavor, which is the reverse of blandness.",
+    "This confuses the word with insidious, which describes harm that creeps in unnoticed.",
+    "Being new or just beginning is incipient, a look-alike word, not a lack of flavor."
+  ],
+  "practice": {
+    "prompt": "A teacher gives feedback on a student's draft of a class speech.",
+    "options": [
+      "Her teacher said the speech felt insipid, full of safe clichés and lacking any personal story.",
+      "The speech was so insipid that the audience leaped to their feet cheering after every line.",
+      "The insipid speaker bravely volunteered to go first despite her fear of crowds.",
+      "Insipid nerves about speaking grew quietly worse each week until he dreaded class."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Stale phrases and no personal spark make a speech dull, which is exactly the point.",
+      "Wild enthusiasm from listeners suggests a lively speech, not a lifeless one.",
+      "Courage is described by intrepid, a look-alike; the word here means dull, not brave.",
+      "Gradually worsening harm is insidious; the word in question concerns blandness."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 353,
+  "slug": "maladroit",
+  "word": "maladroit",
+  "pos": "adjective",
+  "pronunciation": "/ˌmæl.əˈdrɔɪt/",
+  "definition": "Clumsy or awkward, especially in handling people or delicate situations.",
+  "difficulty": "Advanced",
+  "example": "Brilliant in the lab, the chemist was maladroit at explaining her findings to a general audience.",
+  "synonyms": [
+    "clumsy",
+    "inept",
+    "tactless",
+    "awkward"
+  ],
+  "nuance": "Unlike gauche, which suggests a lack of social polish, maladroit stresses poor skill in handling a task or situation; its opposite is adroit.",
+  "alternatives": [],
+  "prompt": "A new manager has to tell her team that the budget is being cut.",
+  "options": [
+    "Her maladroit announcement, which opened with a joke about layoffs, left the staff more anxious.",
+    "Her maladroit speech soothed everyone with its graceful, well-chosen words.",
+    "The maladroit manager missed the meeting because she was home with a fever.",
+    "Her maladroit plan was a deliberate scheme to make the staff suffer."
+  ],
+  "reasons": [
+    "A badly judged joke at a tense moment shows clumsy handling of a sensitive situation.",
+    "Graceful, soothing words describe skill and tact, the reverse of the word's meaning.",
+    "Being sick confuses the word with malady; it describes clumsiness, not illness.",
+    "The word points to awkwardness, not cruel intent; it is not a cousin of malicious."
+  ],
+  "practice": {
+    "prompt": "A dinner guest tries to break an awkward silence at the table.",
+    "options": [
+      "The maladroit candles on the table were tall, white, and unscented.",
+      "His maladroit joke about the host's cooking made the quiet room feel even colder.",
+      "Her maladroit charm smoothed over the pause, and soon everyone was chatting happily.",
+      "The maladroit cheese on the platter smelled so strong that someone opened a window."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Plain candles involve no handling or skill, so calling them clumsy says nothing.",
+      "An ill-chosen remark that makes things worse is a classic case of social clumsiness.",
+      "Easing tension with charm shows deftness, which is the opposite of the word.",
+      "A strong smell confuses the word with malodorous; cheese cannot be clumsy."
+    ]
+  }
+}

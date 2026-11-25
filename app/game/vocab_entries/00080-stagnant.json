@@ -14,7 +14,10 @@
     "static"
   ],
   "nuance": "Static is neutral, but stagnant suggests that the lack of movement is unhealthy and leads to decay or decline.",
-  "alternatives": [],
+  "alternatives": [
+    "static",
+    "dormant"
+  ],
   "prompt": "A park ranger checks a small pond that has no stream flowing in or out.",
   "options": [
     "The stagnant pond had a green scum and a sour smell by late August.",

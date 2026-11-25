@@ -1,0 +1,49 @@
+{
+  "id": 361,
+  "slug": "chicanery",
+  "word": "chicanery",
+  "pos": "noun",
+  "pronunciation": "/ʃɪˈkeɪ.nər.i/",
+  "definition": "The use of clever tricks and dishonest schemes to fool people or gain an advantage.",
+  "difficulty": "Advanced",
+  "example": "Years of financial chicanery came to light when an auditor finally read the firm's old ledgers.",
+  "synonyms": [
+    "trickery",
+    "deception",
+    "subterfuge",
+    "sharp practice"
+  ],
+  "nuance": "Unlike outright fraud, chicanery suggests sly maneuvering and abuse of technicalities, especially in legal or financial dealings.",
+  "alternatives": [
+    "probity"
+  ],
+  "prompt": "A landlord looks for a way to keep a departing tenant's security deposit.",
+  "options": [
+    "Through chicanery, the landlord backdated a report to blame the tenant for old scratches.",
+    "The landlord's chicanery was handing back the full deposit in cash the morning the tenant left.",
+    "The landlord bowed and held the door for the tenant, a gracious act of chicanery.",
+    "The chicanery of the rattling radiator kept the tenant awake on her final night."
+  ],
+  "reasons": [
+    "Faking a document to shift blame is exactly the sly, dishonest maneuvering the word names.",
+    "Returning money promptly and fully is honest dealing, the reverse of trickery.",
+    "Courtly manners describe chivalry, a look-alike word; nothing deceptive happens here.",
+    "A noisy radiator schemes against no one; the word requires a person who deceives."
+  ],
+  "practice": {
+    "prompt": "A regional board game tournament reaches its final round.",
+    "options": [
+      "The judges suspected chicanery when a finalist's score sheet showed signs of quiet erasing.",
+      "Her chicanery was admitting a counting mistake that cost her the winning point.",
+      "Fans praised the champion for her chicanery, meaning her patient and scrupulously fair play.",
+      "The chicanery of the dice tumbling across the table made a cheerful clatter."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Secretly altering scores to win is a dishonest trick, which fits the word precisely.",
+      "Confessing an error against one's own interest is candor, the opposite of deceit.",
+      "The word always carries disapproval and dishonesty, so it cannot describe admirable fairness.",
+      "The word refers to deceptive schemes, not to a sound or a random physical event."
+    ]
+  }
+}

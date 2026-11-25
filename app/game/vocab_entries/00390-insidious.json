@@ -1,0 +1,46 @@
+{
+  "id": 390,
+  "slug": "insidious",
+  "word": "insidious",
+  "pos": "adjective",
+  "pronunciation": "/ɪnˈsɪd.i.əs/",
+  "definition": "Spreading or developing slowly and quietly in a way that causes serious harm.",
+  "difficulty": "Advanced",
+  "example": "Mold behind the wallpaper is insidious, spreading for months before anyone notices a smell.",
+  "synonyms": [
+    "stealthy",
+    "creeping",
+    "pernicious"
+  ],
+  "nuance": "Pernicious stresses how harmful something is; insidious stresses that the harm creeps in unnoticed until it is well established.",
+  "alternatives": [],
+  "prompt": "A gardener notices that a vine has been slowly choking an old oak tree.",
+  "options": [
+    "The insidious vine had wrapped the trunk for years before its damage showed.",
+    "The insidious vine appeared overnight, so loud and obvious that everyone spotted it at once.",
+    "The insidious vine gently shaded the oak's roots and helped the tree grow taller.",
+    "The gardener made an insidious comparison that unfairly praised one neighbor's yard over another's."
+  ],
+  "reasons": [
+    "The harm built up quietly over a long time and went unseen, which fits the word.",
+    "Something sudden and plain to see is the reverse of a hidden, gradual threat.",
+    "The word always carries a harmful sense, so it cannot describe something helpful.",
+    "This confuses it with invidious, which describes unfair comparisons that stir resentment."
+  ],
+  "practice": {
+    "prompt": "Over one semester, a student's habit of checking her phone slowly grows.",
+    "options": [
+      "Over the semester, her insidious habit grew from a quick glance to hours each night.",
+      "Her habit was insidious because she announced it proudly to the whole class on day one.",
+      "Her insidious habit of reviewing notes nightly lifted her grades and her confidence.",
+      "The teacher made an insidious remark that openly ranked her above her classmates."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A habit that grows bit by bit and does damage before she sees it fits the word well.",
+      "Announcing something openly is the opposite of harm that works out of sight.",
+      "The word implies damage, so it cannot describe a habit with good results.",
+      "An open remark that singles someone out unfairly is invidious, not slow or hidden."
+    ]
+  }
+}

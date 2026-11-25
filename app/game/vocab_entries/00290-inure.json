@@ -1,0 +1,47 @@
+{
+  "id": 290,
+  "slug": "inure",
+  "word": "inure",
+  "pos": "verb",
+  "pronunciation": "/ɪˈnjʊr/",
+  "definition": "To make someone used to something unpleasant through long exposure, so it bothers them less.",
+  "difficulty": "Advanced",
+  "example": "Years of rejection letters had inured the poet to disappointment.",
+  "synonyms": [
+    "harden",
+    "accustom",
+    "desensitize",
+    "habituate"
+  ],
+  "nuance": "Unlike accustom, inure is used for unpleasant things and suggests that repeated exposure has dulled a person's reaction.",
+  "alternatives": [],
+  "prompt": "A new resident has just moved into an apartment beside a busy airport.",
+  "options": [
+    "Months of living there will inure him to the roar of jets overhead.",
+    "Standing too close to the runway could inure his eardrums for good.",
+    "He called an agent to inure his windows against noise damage.",
+    "Months there will inure him, so every plane startles him more than the last."
+  ],
+  "reasons": [
+    "Repeated exposure over time dulls his reaction to an unpleasant noise, which fits the verb.",
+    "This confuses the verb with injure; it means hardening to hardship, not physical harm.",
+    "This mixes it up with insure; buying coverage has nothing to do with getting used to hardship.",
+    "Growing more startled is the reverse of becoming hardened to the noise."
+  ],
+  "practice": {
+    "prompt": "An apprentice starts working long shifts beside a bakery's hot ovens.",
+    "options": [
+      "Summers beside the ovens slowly helped inure the apprentice to the heat.",
+      "She could barely inure the heat, so she left the kitchen after an hour.",
+      "One brief visit to the kitchen was enough to inure him to the heat for life.",
+      "Weeks at the ovens seemed to inure him, since the heat bothered him more each day."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Gradual, repeated exposure to discomfort that leaves her less bothered is exactly the idea.",
+      "This treats it like endure; the verb needs a person as its object, as in 'inure oneself to' something.",
+      "A single short visit cannot do it; the word implies long or repeated exposure.",
+      "Finding the heat harder to bear each day is the opposite of being hardened to it."
+    ]
+  }
+}

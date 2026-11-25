@@ -1,0 +1,49 @@
+{
+  "id": 319,
+  "slug": "admonish",
+  "word": "admonish",
+  "pos": "verb",
+  "pronunciation": "/ədˈmɑː.nɪʃ/",
+  "definition": "To warn or scold someone firmly but not harshly about how they are behaving.",
+  "difficulty": "Intermediate",
+  "example": "Before the hike, the guide admonished the group to stay on the marked trail.",
+  "synonyms": [
+    "reprove",
+    "caution",
+    "rebuke",
+    "warn"
+  ],
+  "nuance": "To admonish is milder than to reprimand or castigate, and it often carries a sense of earnest advice rather than punishment.",
+  "alternatives": [
+    "castigate"
+  ],
+  "prompt": "Several students are chatting loudly in a quiet section of the library.",
+  "options": [
+    "The librarian stepped over to admonish the students for disturbing others.",
+    "The librarian paused to admonish the students' neat handwriting with lavish compliments.",
+    "The librarian will admonish visitors into the reading room once the doors open at nine.",
+    "The librarian decided to admonish the noisy group by handing each of them a prize."
+  ],
+  "reasons": [
+    "Gently but firmly correcting people who are breaking a rule is what the verb describes.",
+    "Admonishing expresses disapproval, so it cannot be a way of praising someone's work.",
+    "This confuses the word with admit; it means warning someone, not letting them in.",
+    "Rewarding bad behavior is the opposite of reproving it."
+  ],
+  "practice": {
+    "prompt": "Some children are running along the wet edge of a swimming pool.",
+    "options": [
+      "The lifeguard admonished the racing kids with a cheerful thumbs-up and a big grin.",
+      "The lifeguard admonished the children by banning them from the pool for life.",
+      "The lifeguard blew her whistle and admonished the children to walk slowly.",
+      "Each morning the lifeguard admonished the pool by testing the water and skimming leaves."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Cheering on the running shows approval, not a warning.",
+      "A lifetime ban is a harsh penalty, while the word means a spoken warning or mild rebuke.",
+      "A firm spoken warning about risky conduct fits the word exactly.",
+      "People are admonished about their conduct; a pool being cleaned is not."
+    ]
+  }
+}

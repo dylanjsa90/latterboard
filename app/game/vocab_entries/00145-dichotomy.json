@@ -15,7 +15,9 @@
   ],
   "nuance": "A dichotomy is a clean split into two opposing parts; it is not a paradox, which is a puzzling contradiction, or a dilemma, which is a hard choice.",
   "alternatives": [
-    "dilemma"
+    "dilemma",
+    "paradox",
+    "synthesis"
   ],
   "prompt": "A debate coach responds to a student who says speeches must be either logical or emotional.",
   "options": [

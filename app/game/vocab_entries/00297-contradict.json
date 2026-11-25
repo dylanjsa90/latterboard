@@ -1,0 +1,50 @@
+{
+  "id": 297,
+  "slug": "contradict",
+  "word": "contradict",
+  "pos": "verb",
+  "pronunciation": "/ˌkɑːn.trəˈdɪkt/",
+  "definition": "To say or show the opposite of what someone or something else has stated.",
+  "difficulty": "Foundation",
+  "example": "My little brother's muddy shoes contradict his claim that he stayed indoors all day.",
+  "synonyms": [
+    "deny",
+    "dispute",
+    "conflict with",
+    "gainsay"
+  ],
+  "nuance": "To contradict is to state or show the opposite; to refute is to prove a claim false, which is a stronger result.",
+  "alternatives": [
+    "refute",
+    "corroborate"
+  ],
+  "prompt": "A student's lab results don't match what her chemistry textbook says.",
+  "options": [
+    "Her careful measurements contradict the textbook's figure for water's boiling point.",
+    "Her measurements contradict the textbook, matching its figure to the last decimal place.",
+    "The metal rod began to contradict as it cooled in the ice bath.",
+    "She will contradict the readings aloud so her partner can write them down."
+  ],
+  "reasons": [
+    "Results that point to a different number go against the book's stated figure.",
+    "An exact match supports the book's figure instead of opposing it.",
+    "Shrinking from cold is contracting; contradicting involves opposing claims.",
+    "Reading numbers aloud for someone to record is dictating, not opposing them."
+  ],
+  "practice": {
+    "prompt": "A museum visitor compares a tour guide's story with the sign beside a painting.",
+    "options": [
+      "A visitor squinted hard to contradict the bright colors of the painting.",
+      "Visitors may contradict a few dollars to help pay for the gallery's new lights.",
+      "The plaque's dates contradict the guide's claim that the artist was a teenager then.",
+      "The guide was glad the plaque would contradict her, since it repeated her exact words."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Colors make no claim, and squinting at them denies nothing.",
+      "Giving money to a cause is contributing, a look-alike with a different meaning.",
+      "The written dates show something different from what the guide said.",
+      "Repeating someone's words backs them up rather than going against them."
+    ]
+  }
+}

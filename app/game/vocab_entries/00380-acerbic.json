@@ -1,0 +1,47 @@
+{
+  "id": 380,
+  "slug": "acerbic",
+  "word": "acerbic",
+  "pos": "adjective",
+  "pronunciation": "/əˈsɜːr.bɪk/",
+  "definition": "Sharp and stinging in tone, especially when criticizing or joking.",
+  "difficulty": "Advanced",
+  "example": "The coach's acerbic remarks about sloppy passing stung, but the team practiced harder all week.",
+  "synonyms": [
+    "caustic",
+    "biting",
+    "scathing",
+    "sardonic"
+  ],
+  "nuance": "Acerbic suggests a sharp, sour wit that stings; caustic implies harsher words meant to wound or corrode.",
+  "alternatives": [],
+  "prompt": "A theater critic writes a review of a play she found painfully dull.",
+  "options": [
+    "Her acerbic column called the second act a long nap with costumes.",
+    "Her acerbic column praised every actor with warm, gentle compliments.",
+    "The acerbic smoke from the fog machine made the front rows cough.",
+    "Her acerbic column simply listed the play's running time and ticket prices."
+  ],
+  "reasons": [
+    "A cutting joke that mocks the play's dullness has exactly the sharp, stinging edge the word requires.",
+    "Warm, gentle praise has no sting, so it is the opposite of the intended tone.",
+    "This confuses the word with acrid, which describes harsh smells; acerbic describes words or temperament.",
+    "A neutral list of facts carries no bite or criticism at all."
+  ],
+  "practice": {
+    "prompt": "A retired chef serves as the judge at a neighborhood baking contest.",
+    "options": [
+      "The acerbic judge hugged each baker and declared every pie a masterpiece.",
+      "Before judging began, the bakers stretched through an acerbic workout to stay limber.",
+      "The acerbic judge offered only a timid, mumbled \"nice job\" to every entry.",
+      "With acerbic wit, the judge said one pie crust could double as a roof shingle."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Affectionate, glowing praise is the reverse of a sharp, stinging manner.",
+      "This mixes up the word with aerobic, which describes exercise, not a harsh tone.",
+      "A shy, bland comment has no edge, so it misses the word's cutting quality.",
+      "A pointed, mocking joke about a tough crust shows sharp, stinging humor."
+    ]
+  }
+}

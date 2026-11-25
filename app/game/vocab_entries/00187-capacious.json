@@ -1,0 +1,49 @@
+{
+  "id": 187,
+  "slug": "capacious",
+  "word": "capacious",
+  "pos": "adjective",
+  "pronunciation": "/kəˈpeɪ.ʃəs/",
+  "definition": "Having plenty of room inside; able to hold a large amount.",
+  "difficulty": "Intermediate",
+  "example": "Her capacious memory held the birthday of every cousin in the family.",
+  "synonyms": [
+    "roomy",
+    "spacious",
+    "commodious",
+    "ample"
+  ],
+  "nuance": "Capacious stresses how much something can hold, while spacious stresses open room to move around in.",
+  "alternatives": [
+    "capricious"
+  ],
+  "prompt": "A hiker is choosing a backpack for a week-long trip in the mountains.",
+  "options": [
+    "She chose the capacious pack because it fit her tent, stove, and a week of food.",
+    "The capacious pack was so tiny that only a single water bottle would squeeze inside.",
+    "Her capacious mood about the hike swung from eager to gloomy every few hours.",
+    "She called the trail capacious because it climbed so steeply over loose rocks."
+  ],
+  "reasons": [
+    "A pack that swallows a tent and a week of supplies clearly holds a great deal.",
+    "A bag that barely fits one bottle is cramped, the reverse of the word's meaning.",
+    "Sudden mood swings describe capricious, a look-alike; the word is about holding a lot.",
+    "Steepness and rocky ground say nothing about how much something can contain."
+  ],
+  "practice": {
+    "prompt": "A family is touring an old house they are thinking about buying.",
+    "options": [
+      "The capacious landlord raised the rent on a whim and then lowered it the next week.",
+      "The capacious doorbell played a cheerful two-note chime whenever guests arrived.",
+      "The capacious pantry had enough shelves to store a whole season of canned beans.",
+      "The capacious closet was so narrow that one winter coat filled it completely."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Acting on whims fits capricious, a similar-sounding word, not one about room.",
+      "A doorbell's sound has nothing to do with interior space or holding things.",
+      "Shelving for months of food shows a room that can take in a large quantity.",
+      "A closet crammed full by a single coat has very little room, the opposite idea."
+    ]
+  }
+}

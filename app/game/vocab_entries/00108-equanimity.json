@@ -14,7 +14,10 @@
     "serenity"
   ],
   "nuance": "Equanimity is steady balance kept under strain, while serenity can describe calm when nothing is troubling you at all.",
-  "alternatives": [],
+  "alternatives": [
+    "composure",
+    "apathy"
+  ],
   "prompt": "A chess player loses her queen early in an important tournament game.",
   "options": [
     "She absorbed the loss with equanimity and quietly planned her next defense.",

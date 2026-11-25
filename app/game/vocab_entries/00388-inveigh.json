@@ -1,0 +1,50 @@
+{
+  "id": 388,
+  "slug": "inveigh",
+  "word": "inveigh",
+  "pos": "verb",
+  "pronunciation": "/ɪnˈveɪ/",
+  "definition": "To protest or criticize something strongly and angrily, in speech or writing.",
+  "difficulty": "Advanced",
+  "example": "Every week the old columnist would inveigh against the roar of leaf blowers at dawn.",
+  "synonyms": [
+    "rail against",
+    "denounce",
+    "fulminate",
+    "condemn"
+  ],
+  "nuance": "To inveigh is to rail against something, usually followed by \"against\"; inveigle means to coax someone with flattery or trickery.",
+  "alternatives": [
+    "inveigle",
+    "extol"
+  ],
+  "prompt": "A town council proposes paving over the only public park to build a parking lot.",
+  "options": [
+    "Residents packed the meeting to inveigh against paving the park.",
+    "A developer tried to inveigh the council into approving the lot by praising their wisdom.",
+    "The mayor rose to inveigh in favor of the lot, praising every detail of the design.",
+    "By noon the work crew had begun to inveigh the park, pouring concrete over the lawn."
+  ],
+  "reasons": [
+    "Crowding in to protest the plan loudly is exactly this kind of angry public objection.",
+    "Winning someone over with flattery is inveigle, a look-alike word, not inveigh.",
+    "The word expresses hostility, so it cannot describe enthusiastic support.",
+    "The word describes harsh words of protest, not a physical act like laying pavement."
+  ],
+  "practice": {
+    "prompt": "A food critic is fed up with restaurants serving tiny, overpriced portions.",
+    "options": [
+      "Delighted, the critic would inveigh against the meal as the finest she had ever eaten.",
+      "The waiter set out a kitchen scale to inveigh each portion before it left the kitchen.",
+      "In her column, the critic chose to inveigh against plates holding three peas and a dot of sauce.",
+      "The chef hoped to inveigh the critic into a kind review by sending out free desserts."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Calling a meal the finest ever is high praise, the reverse of angry condemnation.",
+      "Despite the spelling, the word has nothing to do with weighing anything.",
+      "Using her column to attack a trend she dislikes is a fitting case of fierce criticism.",
+      "Luring someone with gifts or charm is inveigle; the two words are often mixed up."
+    ]
+  }
+}

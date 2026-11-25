@@ -1,0 +1,49 @@
+{
+  "id": 233,
+  "slug": "adumbrate",
+  "word": "adumbrate",
+  "pos": "verb",
+  "pronunciation": "/ˈæd.əm.breɪt/",
+  "definition": "To give a faint or partial outline of something, often hinting at what will come later.",
+  "difficulty": "Advanced",
+  "example": "Rough sketches in the architect's early notebook adumbrate the curved roof she would design years later.",
+  "synonyms": [
+    "foreshadow",
+    "outline",
+    "prefigure",
+    "hint at"
+  ],
+  "nuance": "Foreshadow only points ahead, but adumbrate can also mean sketching an idea's rough shape while leaving out the details.",
+  "alternatives": [
+    "elucidate"
+  ],
+  "prompt": "A scientist gives a short preview talk months before publishing her full study.",
+  "options": [
+    "In ten minutes she could only adumbrate the theory her full paper would explain.",
+    "She tried to adumbrate every equation in exhaustive detail over three hours.",
+    "She asked the journal to adumbrate her old paper, canceling it entirely.",
+    "Afterward, fans adumbrated her with gushing praise and armfuls of flowers."
+  ],
+  "reasons": [
+    "A short talk gives a rough sketch of an idea and leaves the full account for later.",
+    "Laying out every detail at great length is the opposite of a faint sketch.",
+    "Officially canceling something is abrogating, a different word that only looks similar.",
+    "Showering someone with praise is adulation; the word has nothing to do with flattery."
+  ],
+  "practice": {
+    "prompt": "A director is planning the opening scene of a mystery film.",
+    "options": [
+      "A brief shot of a cracked window will adumbrate the break-in revealed at the end.",
+      "The editor adumbrated the film by cutting twenty minutes from its running time.",
+      "In the first minute, a narrator bluntly adumbrates the twist by naming the culprit.",
+      "The director adumbrated the actors for showing up late to rehearsal again."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A small, early image quietly suggests a key event the audience will only understand later.",
+      "Making something shorter is abbreviating, not giving a shadowy preview.",
+      "Announcing the answer outright is a plain reveal, not a faint or partial hint.",
+      "Scolding people is admonishing them; this word describes outlining or hinting, not blaming."
+    ]
+  }
+}

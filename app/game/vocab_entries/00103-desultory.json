@@ -15,7 +15,9 @@
   ],
   "nuance": "Haphazard stresses disorder, while desultory also suggests weak interest; it is unrelated to dilatory, which means slow or delaying.",
   "alternatives": [
-    "assiduous"
+    "assiduous",
+    "methodical",
+    "dilatory"
   ],
   "prompt": "Two strangers at a crowded party try to make small talk while waiting for the host.",
   "options": [

@@ -1,0 +1,49 @@
+{
+  "id": 205,
+  "slug": "embrace",
+  "word": "embrace",
+  "pos": "verb",
+  "pronunciation": "/ɪmˈbreɪs/",
+  "definition": "To accept or adopt an idea, change, or opportunity eagerly and willingly.",
+  "difficulty": "Foundation",
+  "example": "After years of folding paper maps, my grandfather finally embraced the navigation app on his phone.",
+  "synonyms": [
+    "welcome",
+    "adopt",
+    "take up",
+    "accept eagerly"
+  ],
+  "nuance": "You can accept something reluctantly, but embracing it means taking it up wholeheartedly and with enthusiasm.",
+  "alternatives": [
+    "endorse"
+  ],
+  "prompt": "A small bakery's owner learns that many customers want gluten-free options.",
+  "options": [
+    "Rather than resist the trend, the owner chose to embrace it and added three new recipes.",
+    "The owner showed how she embraced the request by refusing to change a single recipe.",
+    "Her cheeks turned red because the burnt loaf had embraced her in front of the customers.",
+    "The owner embraced the birthday cake with swirls of frosting and sugar pearls."
+  ],
+  "reasons": [
+    "Welcoming the change and acting on it with new recipes shows eager adoption.",
+    "Refusing any change is rejection, the reverse of taking an idea up willingly.",
+    "This confuses the word with embarrass; a loaf cannot welcome anyone.",
+    "Decorating with frosting is embellishing, not adopting an idea or change."
+  ],
+  "practice": {
+    "prompt": "A student who dislikes public speaking joins the debate team.",
+    "options": [
+      "She embraced on an early bus to the regional tournament with her teammates.",
+      "She embraced herself for the judges' scores by gripping the edge of her chair.",
+      "Instead of dreading the podium, she began to embrace each chance to speak.",
+      "She embraced the team by skipping every practice and quitting after one week."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This mixes the word up with embark, which means to get on or set out.",
+      "Preparing for a shock is bracing yourself; the word does not mean steadying.",
+      "Turning dread into eagerness for every opportunity is exactly this kind of welcome.",
+      "Avoiding and abandoning the team means she rejected it, not welcomed it."
+    ]
+  }
+}

@@ -14,7 +14,9 @@
     "captivating"
   ],
   "nuance": "Unlike convincing, which only means it proves a point, compelling also suggests a pull on your attention, as with a story you can't put down.",
-  "alternatives": [],
+  "alternatives": [
+    "compulsory"
+  ],
   "prompt": "A science fair judge reviews a student's project on how light affects plant growth.",
   "options": [
     "The student's data offered compelling evidence that the plants grew faster under blue light.",

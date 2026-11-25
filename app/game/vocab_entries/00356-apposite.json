@@ -1,0 +1,47 @@
+{
+  "id": 356,
+  "slug": "apposite",
+  "word": "apposite",
+  "pos": "adjective",
+  "pronunciation": "/ˈæp.ə.zɪt/",
+  "definition": "Especially suitable and relevant to the situation or subject at hand.",
+  "difficulty": "Advanced",
+  "example": "The doctor offered an apposite analogy, comparing the clogged artery to a kinked garden hose.",
+  "synonyms": [
+    "apt",
+    "pertinent",
+    "fitting",
+    "well chosen"
+  ],
+  "nuance": "Apposite is more formal than apt and stresses close relevance; do not confuse it with opposite, which means facing or contrary.",
+  "alternatives": [],
+  "prompt": "A student is choosing a quotation to open her essay about a long drought.",
+  "options": [
+    "She opened with an apposite line from a farmer's diary describing the cracked, empty fields.",
+    "Her quotation was apposite to her thesis, arguing the reverse of everything she claimed.",
+    "She chose an apposite quotation about holiday shopping that had no link to drought.",
+    "She picked an apposite quotation simply because it was the shortest one in the book."
+  ],
+  "reasons": [
+    "A quotation about parched fields bears directly on an essay about drought.",
+    "This confuses the word with opposite; a contradictory quotation is not well suited to the essay.",
+    "A quotation with no connection to the topic is the reverse of fitting.",
+    "Brevity says nothing about relevance; the word concerns how well something fits the subject."
+  ],
+  "practice": {
+    "prompt": "A teacher gives a short toast at a retirement party for the school librarian.",
+    "options": [
+      "The guests stood in apposite rows, facing each other across the crowded room.",
+      "His apposite toast lasted forty minutes and wandered through every topic he could think of.",
+      "His apposite joke about overdue books made the retiring librarian laugh.",
+      "His apposite remark was about a movie that none of the guests had ever seen."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This mistakes the word for opposite; it does not describe physical position.",
+      "A rambling speech that drifts off subject lacks the focus and fitness the word implies.",
+      "A joke about library life suits a toast for a librarian perfectly.",
+      "A comment unrelated to the guest of honor or the audience is not suitable to the moment."
+    ]
+  }
+}

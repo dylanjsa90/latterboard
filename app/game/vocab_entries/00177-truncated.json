@@ -1,0 +1,49 @@
+{
+  "id": 177,
+  "slug": "truncated",
+  "word": "truncated",
+  "pos": "adjective",
+  "pronunciation": "/ˈtrʌŋ.keɪ.tɪd/",
+  "definition": "Made shorter by having a part cut off, especially the end.",
+  "difficulty": "Intermediate",
+  "example": "The truncated version of the speech left out its most moving final paragraph.",
+  "synonyms": [
+    "shortened",
+    "cut short",
+    "clipped",
+    "abbreviated"
+  ],
+  "nuance": "Truncated suggests an abrupt cut, often at the end, while abridged implies careful condensing that keeps the essentials.",
+  "alternatives": [
+    "protracted"
+  ],
+  "prompt": "A student's essay file was damaged while it was being uploaded.",
+  "options": [
+    "The truncated file stopped mid-sentence, missing the last two pages.",
+    "The truncated file had grown to twice its original length after the upload.",
+    "The truncated file was complete, but every letter had been scrambled into symbols.",
+    "The truncated file now appeared in Spanish instead of the original English."
+  ],
+  "reasons": [
+    "Losing the ending so the text breaks off abruptly is exactly what this word describes.",
+    "Truncation removes material, so a file that doubled in size is the opposite.",
+    "Garbled characters in a complete file describe corruption, not a missing portion.",
+    "Changing the language is translation; nothing has been cut off."
+  ],
+  "practice": {
+    "prompt": "A radio station had to end its live concert broadcast early.",
+    "options": [
+      "The truncated broadcast was full of static, though every song aired in full.",
+      "The truncated broadcast played every song in full, just at a faster tempo.",
+      "Listeners got a truncated broadcast that ended before the final song.",
+      "The truncated broadcast ran an extra hour so the band could play encores."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Poor sound quality with nothing missing is not a shortening at all.",
+      "Speeding up keeps all the content, while this word requires a part to be removed.",
+      "A program cut off before its planned finish has been shortened abruptly.",
+      "Running longer than planned is the reverse of being cut short."
+    ]
+  }
+}

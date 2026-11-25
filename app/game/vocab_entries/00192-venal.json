@@ -1,0 +1,49 @@
+{
+  "id": 192,
+  "slug": "venal",
+  "word": "venal",
+  "pos": "adjective",
+  "pronunciation": "/ˈviː.nəl/",
+  "definition": "Willing to act dishonestly in exchange for money or other rewards.",
+  "difficulty": "Advanced",
+  "example": "A venal art appraiser would call a forged painting genuine for the right fee.",
+  "synonyms": [
+    "corrupt",
+    "bribable",
+    "mercenary",
+    "corruptible"
+  ],
+  "nuance": "Venal means open to bribery, while the look-alike venial describes a small fault that is easily forgiven.",
+  "alternatives": [
+    "venerable"
+  ],
+  "prompt": "A building inspector is reviewing a newly built apartment complex.",
+  "options": [
+    "The venal inspector signed off on cracked beams once the developer paid him.",
+    "The venal inspector refused a gift basket and failed the building for its missing fire exits.",
+    "The venal inspector made only a small, forgivable slip when he misspelled the street name.",
+    "The venal inspector, honored for forty years of loyal service, gave a speech at the ceremony."
+  ],
+  "reasons": [
+    "Approving unsafe work because he was paid shows judgment that can be bought.",
+    "Turning down gifts and enforcing the rules shows integrity, the reverse of venality.",
+    "A minor, pardonable error is venial; venal involves selling one's honesty.",
+    "Being respected for long service suggests venerable, a different word entirely."
+  ],
+  "practice": {
+    "prompt": "Judges at a county baking contest are choosing who wins first prize.",
+    "options": [
+      "One venal judge simply loved chocolate, so she ranked the fudge cake highest every year.",
+      "One venal judge gave the blue ribbon to a baker who had slipped her fifty dollars.",
+      "One venal judge returned a baker's bribe and scored every pie strictly on taste.",
+      "One venal judge felt guilty about a tiny mistake: she forgot to taste a single scone."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Favoring a flavor is personal bias, not trading her judgment for a reward.",
+      "Letting cash decide the winner means her vote was for sale.",
+      "Rejecting payment and judging fairly is incorruptible behavior.",
+      "A trivial, forgivable lapse would be venial; no bribe or dishonesty is involved."
+    ]
+  }
+}

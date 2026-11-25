@@ -15,7 +15,8 @@
   ],
   "nuance": "Coherent means ideas connect logically; cohesive means a group or whole holds together as a unit.",
   "alternatives": [
-    "lucid"
+    "lucid",
+    "cohesive"
   ],
   "prompt": "A student presents her science project to a panel of judges.",
   "options": [

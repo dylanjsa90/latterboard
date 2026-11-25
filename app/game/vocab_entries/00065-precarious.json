@@ -14,7 +14,9 @@
     "perilous"
   ],
   "nuance": "Precarious stresses a lack of stability that could tip into failure, while dangerous simply means likely to cause harm.",
-  "alternatives": [],
+  "alternatives": [
+    "perilous"
+  ],
   "prompt": "A hiker crosses a narrow ledge above a steep canyon.",
   "options": [
     "The hiker edged along the precarious ledge, testing every foothold first.",

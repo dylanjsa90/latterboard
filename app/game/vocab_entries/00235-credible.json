@@ -1,0 +1,49 @@
+{
+  "id": 235,
+  "slug": "credible",
+  "word": "credible",
+  "pos": "adjective",
+  "pronunciation": "/ˈkrɛd.ə.bəl/",
+  "definition": "Able to be believed or trusted because it seems honest and well supported.",
+  "difficulty": "Foundation",
+  "example": "Her account of the trip became more credible once the receipts matched the dates she gave.",
+  "synonyms": [
+    "believable",
+    "plausible",
+    "trustworthy",
+    "convincing"
+  ],
+  "nuance": "Credible describes a claim or source that deserves belief; credulous describes a person who believes things too easily.",
+  "alternatives": [
+    "credulous"
+  ],
+  "prompt": "A science fair judge reviews a student's surprising claim about how fast bean plants grow.",
+  "options": [
+    "The judge found the claim credible because the student had repeated the experiment five times.",
+    "The credible judge accepted the claim instantly without looking at a single measurement.",
+    "The claim seemed credible since the student's numbers contradicted each other on every page.",
+    "The judge called the claim credible precisely because no evidence supported it."
+  ],
+  "reasons": [
+    "Repeated trials give good grounds for belief, so calling the claim believable fits.",
+    "Believing without checking describes a credulous person, not a trustworthy one.",
+    "Contradictory data makes a claim harder to believe, not easier.",
+    "A lack of support is a reason for doubt, so the logic runs backward."
+  ],
+  "practice": {
+    "prompt": "A hiker hears two different reports about whether a mountain trail is open.",
+    "options": [
+      "Nobody believed the credible report, which everyone agreed was obviously invented.",
+      "The trail map was so credible that the hiker praised its neat, colorful drawings.",
+      "The ranger's report was credible, since she had walked the trail that very morning.",
+      "The hiker was so credible that he trusted a stranger's wild guess about the weather."
+    ],
+    "answer": 2,
+    "reasons": [
+      "A report that is plainly made up cannot also be worthy of belief.",
+      "Neat artwork earns praise, which is creditable; it says nothing about truth.",
+      "Firsthand, recent knowledge is a solid reason to trust what someone says.",
+      "Trusting a wild guess shows gullibility, which is credulous, not credible."
+    ]
+  }
+}

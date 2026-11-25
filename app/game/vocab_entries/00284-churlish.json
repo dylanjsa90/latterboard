@@ -1,0 +1,47 @@
+{
+  "id": 284,
+  "slug": "churlish",
+  "word": "churlish",
+  "pos": "adjective",
+  "pronunciation": "/ˈtʃɜːr.lɪʃ/",
+  "definition": "Rude and ungracious in a petty, sulky way, especially when kindness or thanks is expected.",
+  "difficulty": "Advanced",
+  "example": "It would be churlish to complain about the rain when the farmers have waited months for it.",
+  "synonyms": [
+    "ungracious",
+    "surly",
+    "mean-spirited",
+    "ill-mannered"
+  ],
+  "nuance": "Churlish stresses a petty lack of grace or gratitude, while boorish stresses crude, clumsy manners.",
+  "alternatives": [],
+  "prompt": "A guest opens a handmade gift from the host at a holiday dinner.",
+  "options": [
+    "Grumbling that the knitted scarf was itchy, Leo gave a churlish shrug instead of thanks.",
+    "The churlish guest hugged the host and praised every stitch of the green scarf.",
+    "Too young to read the card, the churlish toddler needed help opening the box.",
+    "Feeling churlish with joy, the guest wore the scarf for the rest of the night."
+  ],
+  "reasons": [
+    "Meeting a kind gesture with sulky ingratitude is exactly this kind of petty rudeness.",
+    "Warm thanks and generous praise are the opposite of grudging rudeness.",
+    "The word does not mean childish; being small and needing help is not rude.",
+    "The word has a sour, unfriendly tone and cannot describe happiness or delight."
+  ],
+  "practice": {
+    "prompt": "A soccer team loses a close championship match to its rival.",
+    "options": [
+      "The captain gave a churlish speech that generously credited the rivals for their skill.",
+      "After two overtime periods, the churlish players could barely lift their legs.",
+      "Calm and churlish, the coach reminded everyone that one loss would not define them.",
+      "Refusing to shake hands with the winners was a churlish end to an otherwise fine season."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Generously crediting opponents is gracious, not mean-spirited.",
+      "The word describes rudeness, not exhaustion; tired legs involve no bad manners.",
+      "A steady, encouraging message is kind, so it cannot be called ungracious.",
+      "Snubbing the victors out of spite shows a petty, graceless attitude."
+    ]
+  }
+}

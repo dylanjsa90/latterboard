@@ -1,0 +1,47 @@
+{
+  "id": 182,
+  "slug": "foment",
+  "word": "foment",
+  "pos": "verb",
+  "pronunciation": "/foʊˈmɛnt/",
+  "definition": "To deliberately stir up trouble, such as conflict or discontent, among people.",
+  "difficulty": "Advanced",
+  "example": "The anonymous notes were meant to foment distrust between the two roommates.",
+  "synonyms": [
+    "instigate",
+    "stir up",
+    "incite",
+    "provoke"
+  ],
+  "nuance": "Foment suggests slowly feeding trouble until it grows, while incite suggests a sharp push toward immediate action.",
+  "alternatives": [],
+  "prompt": "A jealous member of a school chess club wants the club to split into rival groups.",
+  "options": [
+    "He spread rumors about the captain to foment resentment among the newer players.",
+    "To foment the feud, the captain calmly invited both sides to share one long table.",
+    "The members planned to foment cheerful team spirit with a pizza party after practice.",
+    "Over winter break, the leftover cider began to foment in the clubroom fridge."
+  ],
+  "reasons": [
+    "Spreading rumors on purpose to build up bitterness is exactly how someone nurtures trouble.",
+    "Bringing rivals together peacefully calms a feud; it does not inflame it.",
+    "The word carries a negative sense of agitation, so it clashes with building warm team spirit.",
+    "Cider turning sour through yeast action is fermenting, a look-alike word with a different meaning."
+  ],
+  "practice": {
+    "prompt": "A student is upset that the cafeteria replaced the lunch menu without asking anyone.",
+    "options": [
+      "The kitchen left a batch of cucumbers to foment in salty brine for three weeks.",
+      "She taped mocking flyers in the hallway to foment discontent over the new menu.",
+      "The cafeteria staff hoped to foment calm by explaining the change at an assembly.",
+      "To win friends, she tried to foment her classmates by handing out free cookies."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Pickling through bacteria and brine is fermenting, which only sounds like this word.",
+      "Using flyers to make classmates angrier is a deliberate effort to grow dissatisfaction.",
+      "Soothing people is the reverse of agitating them, so calm cannot be the thing produced.",
+      "The word takes the trouble as its object, not people, and sharing treats agitates no one."
+    ]
+  }
+}

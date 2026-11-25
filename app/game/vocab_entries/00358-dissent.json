@@ -1,0 +1,49 @@
+{
+  "id": 358,
+  "slug": "dissent",
+  "word": "dissent",
+  "pos": "noun",
+  "pronunciation": "/dɪˈsɛnt/",
+  "definition": "Open disagreement with an opinion or decision that most people or those in charge accept.",
+  "difficulty": "Foundation",
+  "example": "Despite some dissent among the staff, the restaurant switched to a shorter menu.",
+  "synonyms": [
+    "disagreement",
+    "objection",
+    "opposition",
+    "nonconformity"
+  ],
+  "nuance": "Dissent is disagreement voiced against a majority or an authority; ordinary disagreement can be private or between equals.",
+  "alternatives": [
+    "consensus"
+  ],
+  "prompt": "A science club votes on which project to build for the school fair.",
+  "options": [
+    "Only one member voiced dissent, arguing that a volcano model had been done too many times.",
+    "Everyone nodded happily in dissent, so the volcano model was approved without objection.",
+    "The club cheered the dissent of their weather balloon as it drifted slowly back to the field.",
+    "The members agreed the finished poster looked dissent enough to hang in the hallway."
+  ],
+  "reasons": [
+    "A lone member objecting to the group's choice is exactly a case of open disagreement.",
+    "Happy nodding and approval with no objection show agreement, the reverse of the word's meaning.",
+    "This confuses the word with its look-alike descent, which means a downward movement.",
+    "The word is a noun about disagreeing, not the adjective decent, meaning acceptable."
+  ],
+  "practice": {
+    "prompt": "A choir director announces the song the group will perform at the spring concert.",
+    "options": [
+      "The sopranos practiced a slow dissent down the scale, from the highest note to the lowest.",
+      "The director gave her dissent, so the students were finally allowed to leave rehearsal early.",
+      "When the tenors expressed dissent, the director agreed to hear their case for another song.",
+      "The choir showed its dissent by cheerfully accepting every song the director picked."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Moving downward through notes is a descent; the look-alike has been swapped in.",
+      "Granting permission is consent or assent; the word here wrongly means approval.",
+      "The tenors push back against the leader's choice, which is what the word describes.",
+      "Cheerful acceptance of every choice is compliance, not objection."
+    ]
+  }
+}

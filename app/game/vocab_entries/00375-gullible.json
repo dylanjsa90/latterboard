@@ -1,0 +1,50 @@
+{
+  "id": 375,
+  "slug": "gullible",
+  "word": "gullible",
+  "pos": "adjective",
+  "pronunciation": "/ˈɡʌl.ə.bəl/",
+  "definition": "Too quick to believe what others say, and so easily tricked or fooled.",
+  "difficulty": "Foundation",
+  "example": "Only a gullible reader would trust a headline promising that chocolate cures every illness.",
+  "synonyms": [
+    "credulous",
+    "naive",
+    "easily fooled",
+    "trusting"
+  ],
+  "nuance": "Gullible is harsher than trusting: it suggests a foolish readiness to be deceived, not simple goodwill toward others.",
+  "alternatives": [
+    "credulous",
+    "skeptical"
+  ],
+  "prompt": "A stranger tells a group of campers that a sea monster lives in the lake.",
+  "options": [
+    "The gullible camper believed the tale and refused to wade past her knees.",
+    "The gullible camper asked for proof and laughed when the stranger had none.",
+    "The stranger's gullible story was so silly that nobody took it seriously.",
+    "The gullible camper bravely paddled out alone to rescue a drifting canoe."
+  ],
+  "reasons": [
+    "Accepting an unlikely story without question and acting on it shows she was easily fooled.",
+    "Demanding evidence and doubting the claim is skepticism, the reverse of the word's meaning.",
+    "The word describes a person who gets fooled, not a story, and here no one was fooled at all.",
+    "Courage has nothing to do with believing too easily; this confuses the word with gallant."
+  ],
+  "practice": {
+    "prompt": "A student gets a message claiming she has won a free trip abroad.",
+    "options": [
+      "Gullible as ever, Maya ignored the message, knowing she had entered no contest.",
+      "Gullible as ever, Maya kept the trip a secret so she would not have to share it.",
+      "Feeling gullible, Maya apologized for copying a friend's homework last week.",
+      "Gullible as ever, Maya replied with her home address to claim the prize."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Seeing through the trick shows caution and good sense, not a tendency to be deceived.",
+      "Wanting to keep a prize to herself is selfishness; the word is about believing too easily.",
+      "Regret over wrongdoing is guilt, a look-alike word, not being easily tricked.",
+      "Handing over personal details to an obvious scam shows she trusted the message far too readily."
+    ]
+  }
+}

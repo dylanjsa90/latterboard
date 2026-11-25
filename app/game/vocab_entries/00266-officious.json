@@ -1,0 +1,47 @@
+{
+  "id": 266,
+  "slug": "officious",
+  "word": "officious",
+  "pos": "adjective",
+  "pronunciation": "/əˈfɪʃ.əs/",
+  "definition": "Too eager to give orders or offer unwanted help, especially about small matters.",
+  "difficulty": "Intermediate",
+  "example": "An officious neighbor left a note on every car parked an inch over the painted line.",
+  "synonyms": [
+    "meddlesome",
+    "bossy",
+    "interfering",
+    "self-important"
+  ],
+  "nuance": "Officious does not mean official; it describes someone who oversteps by pushing petty authority or help nobody asked for.",
+  "alternatives": [],
+  "prompt": "A volunteer usher is working at a community concert.",
+  "options": [
+    "The officious usher scolded a guest for resting her coat on an empty seat.",
+    "The officious usher stayed quietly at the back and let people find their own seats.",
+    "The officious usher wore the badge the concert hall formally issues to all staff.",
+    "The officious usher was warmly thanked for helping a lost child find her parents."
+  ],
+  "reasons": [
+    "Making a fuss over a harmless detail is a petty, unwelcome use of authority.",
+    "Staying out of the way is the opposite of pushing in where you aren't wanted.",
+    "This treats the word as if it meant official or authorized, a common look-alike mix-up.",
+    "The word is negative; welcome, needed help is not officious behavior."
+  ],
+  "practice": {
+    "prompt": "A substitute librarian is running the front desk for a week.",
+    "options": [
+      "The officious librarian let every rule slide and never asked to see a card.",
+      "The officious librarian lectured a boy for writing his card number in blue ink.",
+      "The officious librarian gladly showed a student who asked where the atlases were kept.",
+      "The officious librarian signed the formal letter announcing the new hours."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Ignoring rules altogether reverses the word's sense of fussy overreach.",
+      "Making a big deal of an unimportant rule shows bossy, intrusive behavior.",
+      "Help that someone asked for is welcome, so it isn't meddling.",
+      "Signing a formal notice is official duty, which is a different word."
+    ]
+  }
+}

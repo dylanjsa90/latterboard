@@ -13,7 +13,10 @@
     "unwittingly"
   ],
   "nuance": "Inadvertently suggests an oversight or a moment of inattention, while accidentally can describe pure chance with no lapse at all.",
-  "alternatives": [],
+  "alternatives": [
+    "deliberately",
+    "unwittingly"
+  ],
   "prompt": "Students are typing group messages about their weekend plans.",
   "options": [
     "Rushing to reply, Maya inadvertently sent the plans to her whole class instead of one friend.",

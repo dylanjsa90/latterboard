@@ -1,0 +1,49 @@
+{
+  "id": 245,
+  "slug": "implicitly",
+  "word": "implicitly",
+  "pos": "adverb",
+  "pronunciation": "/ɪmˈplɪs.ɪt.li/",
+  "definition": "In a way that is suggested or understood without being stated directly.",
+  "difficulty": "Intermediate",
+  "example": "Her silence during the club's vote implicitly signaled that she agreed with the plan.",
+  "synonyms": [
+    "tacitly",
+    "indirectly",
+    "by implication"
+  ],
+  "nuance": "It means hinted rather than stated, the opposite of explicitly; in \"trust implicitly,\" though, it means completely and without doubt.",
+  "alternatives": [
+    "explicitly",
+    "tacitly"
+  ],
+  "prompt": "A teacher hands back graded essays without announcing any new rules.",
+  "options": [
+    "By grading only the typed essays, the teacher implicitly signaled that handwritten work would not count.",
+    "The teacher implicitly wrote the new rule on the board in large letters for everyone to read.",
+    "Without thinking it through, one student implicitly crumpled his essay and tossed it in the trash.",
+    "Some of the essays were implicitly long, with a few of them stretching past twenty pages."
+  ],
+  "reasons": [
+    "The message comes through her actions, never spoken aloud, so it is conveyed without direct words.",
+    "Writing a rule out plainly for all to see is direct, the opposite of leaving it unsaid.",
+    "Acting on a sudden urge calls for impulsively, a look-alike with a very different meaning.",
+    "The word describes how a message gets across, not how large or extreme something is."
+  ],
+  "practice": {
+    "prompt": "A new employee notices how coworkers handle lunch at the office.",
+    "options": [
+      "Because everyone ate quickly at their desks, the office culture implicitly discouraged long lunch breaks.",
+      "The manager implicitly announced over the intercom that lunch breaks were limited to thirty minutes.",
+      "The new hire implicitly forgot her lunch at home, so she bought a sandwich downstairs.",
+      "The cafeteria's wooden ceiling was implicitly carved with tiny leaves and twisting vines."
+    ],
+    "answer": 0,
+    "reasons": [
+      "No one stated a rule, yet the habits around her sent a clear unspoken message.",
+      "A spoken announcement to the whole office is a direct statement, not an unstated hint.",
+      "Forgetting something is an accident; it carries no hidden message to anyone.",
+      "Detailed, complex craftsmanship calls for intricately; this word has nothing to do with detail."
+    ]
+  }
+}

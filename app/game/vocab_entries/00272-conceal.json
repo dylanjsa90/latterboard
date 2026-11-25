@@ -1,0 +1,47 @@
+{
+  "id": 272,
+  "slug": "conceal",
+  "word": "conceal",
+  "pos": "verb",
+  "pronunciation": "/kənˈsiːl/",
+  "definition": "To hide something or keep it from being seen or known.",
+  "difficulty": "Foundation",
+  "example": "The magician used a hollow coin to conceal a tightly folded card.",
+  "synonyms": [
+    "hide",
+    "cover up",
+    "keep secret",
+    "mask"
+  ],
+  "nuance": "Conceal suggests deliberate hiding, often of something meant to stay unknown; hide is broader and more casual.",
+  "alternatives": [],
+  "prompt": "A teenager is secretly planning a surprise party for her older brother's birthday.",
+  "options": [
+    "She tried to conceal the balloons in the garage until he left for practice.",
+    "To conceal the plan, she texted her brother the time and address of the party.",
+    "She let the melted chocolate conceal into a firm shell on top of the cake.",
+    "She concealed the cake by setting it in the middle of the kitchen table."
+  ],
+  "reasons": [
+    "Keeping the decorations out of his sight protects the surprise.",
+    "Sending him the details exposes the plan rather than keeping it secret.",
+    "Liquid thickening as it cools is congealing, a look-alike word with a different meaning.",
+    "The center of a table is where anyone would notice it, so nothing is hidden."
+  ],
+  "practice": {
+    "prompt": "A hiker spots a small bird's nest tucked into a low bush beside the trail.",
+    "options": [
+      "From the path, the eggs seemed to conceal brightly in the afternoon sun.",
+      "Thick leaves helped conceal the nest from hawks circling overhead.",
+      "She tied a bright orange ribbon to the bush to conceal the nest from other hikers.",
+      "Sap from a broken branch began to conceal into sticky amber beads."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Gleaming in sunlight means being easy to see, the reverse of being hidden.",
+      "The leaves keep the nest out of a predator's view, which is exactly what hiding does.",
+      "A bright marker draws eyes toward the nest instead of keeping it out of sight.",
+      "Thickening and hardening describe congealing, not hiding anything."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 172,
+  "slug": "compromise",
+  "word": "compromise",
+  "pos": "verb",
+  "pronunciation": "/ˈkɑːm.prə.maɪz/",
+  "definition": "To settle a disagreement by having each side give up part of what it wants.",
+  "difficulty": "Foundation",
+  "example": "The buyer and seller agreed to compromise on a price between their two offers.",
+  "synonyms": [
+    "meet halfway",
+    "find middle ground",
+    "settle",
+    "give and take"
+  ],
+  "nuance": "Both sides give ground when they compromise; when only one side yields, it concedes or capitulates. Don't mix it up with comprise, which means \"to consist of.\"",
+  "alternatives": [],
+  "prompt": "Two roommates disagree about how warm to keep their shared apartment.",
+  "options": [
+    "The roommates agreed to compromise, setting the thermostat halfway between their choices.",
+    "To compromise, Maya refused to move the thermostat even one degree.",
+    "They chose to compromise by giving the louder roommate exactly the temperature he wanted.",
+    "Three small bedrooms and a narrow kitchen compromise the entire apartment they share."
+  ],
+  "reasons": [
+    "Each person gives up a few degrees, so both sides yield and meet in the middle.",
+    "Refusing to give any ground is the opposite of meeting someone partway.",
+    "When one side gets everything and the other gets nothing, that is giving in, not a middle ground.",
+    "This confuses the word with comprise, which describes the parts that make up a whole."
+  ],
+  "practice": {
+    "prompt": "A band's two singers each want to perform a different song at the school concert.",
+    "options": [
+      "Eight songs compromise the concert's full program this year.",
+      "The two singers compromise beautifully, so their voices blend in perfect harmony.",
+      "The singers agreed to compromise by performing a shortened version of both songs.",
+      "To compromise, each singer insisted on singing only her own song."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This mistakes the word for comprise; listing a program's parts involves no disagreement.",
+      "Singing in harmony is a musical skill, not a settlement in which each side gives something up.",
+      "Each singer accepts less than her full wish, so both make a concession to settle the dispute.",
+      "Two people holding firm without yielding have not settled anything."
+    ]
+  }
+}

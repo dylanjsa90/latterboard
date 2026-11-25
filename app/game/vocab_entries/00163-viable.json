@@ -1,0 +1,50 @@
+{
+  "id": 163,
+  "slug": "viable",
+  "word": "viable",
+  "pos": "adjective",
+  "pronunciation": "/ˈvaɪ.ə.bəl/",
+  "definition": "Able to work well in practice, or able to live and grow.",
+  "difficulty": "Foundation",
+  "example": "After months of testing, the engineers finally had a viable design for a cheaper battery.",
+  "synonyms": [
+    "workable",
+    "feasible",
+    "practicable",
+    "sustainable"
+  ],
+  "nuance": "Feasible means something can be done; viable means it can actually succeed or survive once it is done.",
+  "alternatives": [
+    "feasible",
+    "plausible"
+  ],
+  "prompt": "A student council is deciding how to raise money for a new school garden.",
+  "options": [
+    "Selling seedlings at the spring fair was the most viable plan the council found.",
+    "The plan was viable because it would cost far more than the council could ever hope to raise.",
+    "The posters were so viable that everyone in the hallway noticed them.",
+    "The treasurer felt viable after a long nap before the meeting."
+  ],
+  "reasons": [
+    "A cheap fundraiser that can realistically bring in money is a plan that can succeed.",
+    "A plan nobody can afford is bound to fail, so this reverses the meaning.",
+    "This confuses the word with visible; being easy to see says nothing about working.",
+    "The word judges whether a plan or living thing can last, not a person's mood or energy."
+  ],
+  "practice": {
+    "prompt": "A gardener checks whether seeds from an old packet will still sprout.",
+    "options": [
+      "The seeds were viable, so none of them sprouted no matter how much water they got.",
+      "The gardener picked the most viable seeds because their bright colors stood out on the table.",
+      "Her excuse for forgetting to water the pots was viable enough that her neighbor believed it.",
+      "Only a few seeds from the dusty packet were still viable, so just three sprouts appeared."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Seeds that never sprout cannot grow, so this flips the meaning.",
+      "Standing out to the eye is about visibility, not about the ability to grow.",
+      "This confuses the word with plausible; a believable excuse is not one that works or grows.",
+      "Seeds that can still germinate are alive and able to grow, which fits the sense."
+    ]
+  }
+}

@@ -14,7 +14,10 @@
     "speak up for"
   ],
   "nuance": "To advocate is to argue openly for something, while to support can mean simply agreeing with it in private.",
-  "alternatives": [],
+  "alternatives": [
+    "abdicate",
+    "endorse"
+  ],
   "prompt": "A nurse thinks her hospital needs more hand-washing stations in the hallways.",
   "options": [
     "At the staff meeting, she will advocate adding three new stations near the patient rooms.",

@@ -1,0 +1,46 @@
+{
+  "id": 253,
+  "slug": "proximity",
+  "word": "proximity",
+  "pos": "noun",
+  "pronunciation": "/prɑːkˈsɪm.ə.ti/",
+  "definition": "The state of being near something in space, time, or relationship.",
+  "difficulty": "Foundation",
+  "example": "The cabin's proximity to the lake made early morning swims easy.",
+  "synonyms": [
+    "nearness",
+    "closeness",
+    "adjacency"
+  ],
+  "nuance": "Proximity names how near something is, while vicinity names the surrounding area itself.",
+  "alternatives": [],
+  "prompt": "A family compares two apartments before signing a lease.",
+  "options": [
+    "They picked the smaller unit for its proximity to the children's school.",
+    "They praised the second unit's proximity, since it was an hour from any store.",
+    "The landlord offered a proximity of the rent, saying it was roughly a thousand dollars.",
+    "The first apartment had lovely proximity, with tall windows and oak floors."
+  ],
+  "reasons": [
+    "Being only a short walk from the school is exactly the kind of nearness the word describes.",
+    "An hour's trip from everything describes remoteness, the reverse of nearness.",
+    "A rough estimate is an approximation; the look-alike word does not mean a guess.",
+    "The word describes how close things are, not how attractive a room looks."
+  ],
+  "practice": {
+    "prompt": "A gardener decides where to put a new vegetable bed.",
+    "options": [
+      "After the rain, the proximity of the soil turned rich, dark, and crumbly.",
+      "Because of its proximity to the hose, the spot by the fence was easy to water.",
+      "The bed's proximity to the hose forced her to drag it across the whole yard.",
+      "Her neighbor served as her proximity, watering the plants while she traveled."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Texture and color are qualities of the soil itself, not a measure of how close things are.",
+      "Choosing a spot because the hose is close by uses the word for physical nearness.",
+      "Needing to haul the hose a long way shows the bed is far away, not near.",
+      "Someone acting on another's behalf is a proxy; the similar-sounding word means nearness."
+    ]
+  }
+}

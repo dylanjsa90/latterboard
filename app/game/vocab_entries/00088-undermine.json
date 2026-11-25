@@ -15,7 +15,8 @@
   ],
   "nuance": "Undermine suggests gradual or indirect weakening, often unnoticed at first; sabotage implies a deliberate, direct act of damage.",
   "alternatives": [
-    "bolster"
+    "bolster",
+    "underpin"
   ],
   "prompt": "A team captain worries about a teammate's habits during practice.",
   "options": [

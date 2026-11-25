@@ -1,0 +1,50 @@
+{
+  "id": 238,
+  "slug": "benign",
+  "word": "benign",
+  "pos": "adjective",
+  "pronunciation": "/bɪˈnaɪn/",
+  "definition": "Causing no harm, or gentle and mild in its effect.",
+  "difficulty": "Intermediate",
+  "example": "The rash looked alarming, but the doctor said it was benign and would fade within a week.",
+  "synonyms": [
+    "harmless",
+    "innocuous",
+    "mild",
+    "gentle"
+  ],
+  "nuance": "Benign usually just means harmless, while benevolent stresses an active wish to do good for others.",
+  "alternatives": [
+    "benevolent",
+    "innocuous"
+  ],
+  "prompt": "A laptop displays a strange warning message right after a software update.",
+  "options": [
+    "The technician explained that the warning was benign and could be safely dismissed.",
+    "Because the warning was benign, the technician stayed up all night rescuing corrupted files.",
+    "The benign error wiped out every document stored on the drive.",
+    "She called the warning benign simply because it flashed in bright red letters."
+  ],
+  "reasons": [
+    "A message that poses no threat and needs no action is exactly what the word describes.",
+    "A harmless warning would not lead to damaged files that need rescuing; this reverses the meaning.",
+    "Destroying all the files is serious harm, the opposite of being harmless.",
+    "Color and brightness say nothing about whether something causes damage."
+  ],
+  "practice": {
+    "prompt": "A gardener spots tiny beetles crawling on her tomato plants.",
+    "options": [
+      "The benign beetles chewed through nearly every leaf in the garden overnight.",
+      "Since the beetles were benign, she sprayed the tomatoes twice a day to protect them from attack.",
+      "She called the beetles benign because there were hundreds of them on each stem.",
+      "After checking a guidebook, she decided the beetles were benign and let them stay."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Eating the plants' leaves is real damage, so the insects are anything but harmless.",
+      "There is no need to defend plants from creatures that pose no danger; the logic is reversed.",
+      "How many insects there are has nothing to do with whether they cause harm.",
+      "Leaving the insects alone makes sense once she knows they won't hurt the plants."
+    ]
+  }
+}

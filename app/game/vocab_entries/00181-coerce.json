@@ -1,0 +1,47 @@
+{
+  "id": 181,
+  "slug": "coerce",
+  "word": "coerce",
+  "pos": "verb",
+  "pronunciation": "/koʊˈɜːrs/",
+  "definition": "To push someone into doing something by using threats or unfair pressure.",
+  "difficulty": "Foundation",
+  "example": "No tenant should be coerced into signing a lease they have not had time to read.",
+  "synonyms": [
+    "pressure",
+    "force",
+    "compel",
+    "intimidate"
+  ],
+  "nuance": "To coerce is to get your way through pressure or threats, while to coax is to win someone over gently with charm or rewards.",
+  "alternatives": [],
+  "prompt": "A manager wants employees to work over the weekend without extra pay.",
+  "options": [
+    "The manager tried to coerce the staff by hinting that anyone who refused might lose shifts.",
+    "The manager tried to coerce the staff by politely asking for volunteers and accepting every no.",
+    "The manager hoped to coerce the team with warm pastries and a cheerful thank-you note.",
+    "Slowly, the scattered weekend schedules began to coerce into one tidy plan."
+  ],
+  "reasons": [
+    "Implying a penalty for saying no is exactly the kind of pressure that forces compliance.",
+    "If refusing carries no cost and is freely accepted, nobody is being pressured.",
+    "Treats and kindness are ways to coax; the word requires threats or pressure, not charm.",
+    "This confuses the word with cohere or coalesce; it needs a person being pushed, not parts joining."
+  ],
+  "practice": {
+    "prompt": "A student wants to copy a classmate's finished homework.",
+    "options": [
+      "The two students agreed to coerce on the assignment, splitting the problems evenly.",
+      "Maya offered to coerce Leo by tutoring him in chemistry if he lent her the pages.",
+      "Maya tried to coerce Leo by warning she would spread a rumor about him unless he shared.",
+      "Maya tried to coerce Leo by asking once, then shrugging when he shook his head."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Working together by choice is cooperation; the word means one side compels the other.",
+      "A fair trade he can freely decline is a bargain, not a threat or unfair pressure.",
+      "Using a threat to make him hand over his work is a clear case of forcing his hand.",
+      "A single request dropped at the first refusal involves no pressure at all."
+    ]
+  }
+}

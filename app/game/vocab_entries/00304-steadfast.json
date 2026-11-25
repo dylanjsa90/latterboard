@@ -1,0 +1,49 @@
+{
+  "id": 304,
+  "slug": "steadfast",
+  "word": "steadfast",
+  "pos": "adjective",
+  "pronunciation": "/ˈstɛd.fæst/",
+  "definition": "Staying firmly loyal or determined over time, without giving up or changing sides.",
+  "difficulty": "Foundation",
+  "example": "Through three losing seasons, the team's steadfast fans still filled the bleachers every Saturday.",
+  "synonyms": [
+    "unwavering",
+    "loyal",
+    "resolute",
+    "constant"
+  ],
+  "nuance": "Steadfast praises loyalty that holds up under pressure, while stubborn suggests refusing to change even when you should.",
+  "alternatives": [
+    "fickle"
+  ],
+  "prompt": "A student decides whether to keep helping a classmate who is struggling through a hard semester.",
+  "options": [
+    "Maya stayed a steadfast friend, tutoring Leo every week until his grades recovered.",
+    "Maya's steadfast support vanished the first time Leo forgot to thank her for helping him.",
+    "Leo was so steadfast that he switched his study plan every single afternoon.",
+    "Maya is a steadfast walker who always reaches the library before anyone else."
+  ],
+  "reasons": [
+    "Helping week after week through a long, hard stretch shows loyalty that never wavers.",
+    "Support that disappears at the first disappointment is the opposite of lasting loyalty.",
+    "Constantly changing course describes someone fickle, not someone firm in purpose.",
+    "The \"fast\" in this word means firmly fixed, not quick, so speed is beside the point."
+  ],
+  "practice": {
+    "prompt": "A lighthouse keeper faces a long winter of storms on a remote island.",
+    "options": [
+      "The steadfast keeper climbed the tower stairs in record time to win a bet.",
+      "The keeper remained steadfast, lighting the lamp every night despite the constant gales.",
+      "Being steadfast, the keeper abandoned the lighthouse after the first rough storm of December.",
+      "The keeper's steadfast opinions changed with every suggestion a visiting sailor offered."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Quickness has nothing to do with it; the word is about firm loyalty and determination.",
+      "Carrying out a duty faithfully through hardship shows unshaken resolve.",
+      "Giving up at the first sign of difficulty shows a lack of firm commitment.",
+      "Views that shift with each new voice are wavering, not firmly held."
+    ]
+  }
+}

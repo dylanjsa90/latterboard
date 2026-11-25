@@ -1,0 +1,49 @@
+{
+  "id": 222,
+  "slug": "enervate",
+  "word": "enervate",
+  "pos": "verb",
+  "pronunciation": "/ˈɛn.ər.veɪt/",
+  "definition": "To drain someone of energy or strength, leaving them weak and listless.",
+  "difficulty": "Advanced",
+  "example": "The stuffy, windowless lecture hall seemed to enervate every student by the second hour.",
+  "synonyms": [
+    "weaken",
+    "sap",
+    "exhaust",
+    "debilitate"
+  ],
+  "nuance": "Though it sounds like energize, enervate means the reverse: it wears down vigor, often gradually, rather than tiring someone in one burst.",
+  "alternatives": [
+    "invigorate"
+  ],
+  "prompt": "A patient describes the lingering effects of a long fever.",
+  "options": [
+    "The long fever would enervate her for weeks, leaving even stairs exhausting.",
+    "Her doctor prescribed iron pills to enervate her and help her feel lively again.",
+    "She tried to enervate her symptoms, listing each one aloud for the nurse.",
+    "Grateful patients enervate their old family doctor, praising her at every chance."
+  ],
+  "reasons": [
+    "An illness that slowly wears away her strength until small tasks tire her fits the word exactly.",
+    "Medicine meant to restore liveliness would energize her; the word means the opposite.",
+    "Listing items one by one is enumerating, a look-alike word with an unrelated meaning.",
+    "Showing deep respect and admiration is venerating, not weakening."
+  ],
+  "practice": {
+    "prompt": "A manager wonders why her once-creative team has stopped offering ideas.",
+    "options": [
+      "They hired painters to enervate the break room with bright walls and new chairs.",
+      "Months of pointless meetings seemed to enervate the team, draining its old spark.",
+      "A surprise bonus would enervate the team, filling everyone with fresh excitement.",
+      "She plans to enervate Dana to team leader after her outstanding year in sales."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Fixing up a room is renovating; the word applies to people's energy, not decor.",
+      "Dull routine gradually wearing out the group's vigor is the sense the word carries.",
+      "Filling people with excitement is invigorating them, the reverse of the word's meaning.",
+      "Raising someone to a higher position is elevating or promoting, not draining strength."
+    ]
+  }
+}

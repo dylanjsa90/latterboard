@@ -1,0 +1,47 @@
+{
+  "id": 393,
+  "slug": "martinet",
+  "word": "martinet",
+  "pos": "noun",
+  "pronunciation": "/ˌmɑːr.təˈnɛt/",
+  "definition": "A very strict person who demands that rules and orders be followed exactly.",
+  "difficulty": "Advanced",
+  "example": "The new choir director was a martinet who halted rehearsal whenever a singer came in half a beat late.",
+  "synonyms": [
+    "disciplinarian",
+    "stickler",
+    "taskmaster",
+    "authoritarian"
+  ],
+  "nuance": "A disciplinarian simply enforces rules; a martinet does so rigidly and over trivial matters, so the word is almost always critical.",
+  "alternatives": [],
+  "prompt": "A new supervisor takes over a busy hotel kitchen.",
+  "options": [
+    "The cooks called the new supervisor a martinet because she timed every break to the second.",
+    "The new supervisor was such a martinet that she let the cooks wander in at any hour they pleased.",
+    "The new supervisor hung a little wooden martinet from strings above the stove.",
+    "The cooks praised the martinet for the gentle, flexible way she handled every mistake."
+  ],
+  "reasons": [
+    "Enforcing even tiny rules with rigid precision is exactly what earns this label.",
+    "Letting staff come and go freely is the reverse of strict control.",
+    "This confuses the word with marionette, a puppet moved by strings.",
+    "Gentleness and flexibility clash with the harsh rigidity the word conveys."
+  ],
+  "practice": {
+    "prompt": "A camp counselor runs the morning routine in a cabin of ten-year-olds.",
+    "options": [
+      "Every camper hoped to be named the cabin's martinet, the title for its most cheerful, generous kid.",
+      "Known as a martinet, the counselor inspected every bunk and made campers remake any with a wrinkle.",
+      "The counselor proved herself a martinet by letting campers skip breakfast and sleep in until noon every day.",
+      "The counselor played a cheerful tune on her martinet beside the campfire."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The term criticizes harsh strictness; it is not a compliment for warmth or kindness.",
+      "Demanding perfection over small details marks someone as a rigid enforcer of rules.",
+      "Letting the schedule slide completely is the opposite of strict discipline.",
+      "The word names a kind of person, not an instrument like a clarinet."
+    ]
+  }
+}

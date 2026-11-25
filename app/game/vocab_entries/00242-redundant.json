@@ -1,0 +1,49 @@
+{
+  "id": 242,
+  "slug": "redundant",
+  "word": "redundant",
+  "pos": "adjective",
+  "pronunciation": "/rɪˈdʌn.dənt/",
+  "definition": "Not needed because it repeats or duplicates something already there.",
+  "difficulty": "Foundation",
+  "example": "The tour guide's redundant reminders to stay together began to annoy the group.",
+  "synonyms": [
+    "superfluous",
+    "repetitive",
+    "unnecessary"
+  ],
+  "nuance": "Redundant usually means extra because something else already covers it; superfluous means extra for any reason.",
+  "alternatives": [
+    "superfluous",
+    "abundant"
+  ],
+  "prompt": "A student is trimming wordy phrases from a history essay before handing it in.",
+  "options": [
+    "She deleted \"past history\" because the word \"past\" was redundant.",
+    "She kept her thesis because it was redundant to the whole argument.",
+    "Her conclusion was redundant with fresh ideas the essay had never raised.",
+    "She felt redundant about handing in the essay because she feared a low grade."
+  ],
+  "reasons": [
+    "All history is already past, so the extra word adds nothing and can go.",
+    "A thesis the argument depends on is vital, which is the opposite of being extra.",
+    "New ideas are not repetition; this confuses the word with \"abundant.\"",
+    "Hesitating out of fear calls for \"reluctant\"; the word describes needless extras, not nerves."
+  ],
+  "practice": {
+    "prompt": "A cook is checking a recipe card for mistakes before printing copies.",
+    "options": [
+      "The recipe tasted so redundant that every guest at the table asked for a second helping.",
+      "The redundant step appeared only once and taught a technique found nowhere else.",
+      "The second \"add salt\" line was redundant, since step one already listed salt.",
+      "The redundant ingredient was flour, without which the bread would collapse."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Delicious flavor has nothing to do with repetition or excess.",
+      "A one-time step that adds something new duplicates nothing.",
+      "An instruction that repeats an earlier step is a needless duplicate.",
+      "Something the bread cannot do without is necessary, not a spare."
+    ]
+  }
+}

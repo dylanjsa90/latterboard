@@ -1,0 +1,50 @@
+{
+  "id": 292,
+  "slug": "bluster",
+  "word": "bluster",
+  "pos": "noun",
+  "pronunciation": "/ˈblʌs.tər/",
+  "definition": "Loud, aggressive, or boastful talk that has little real force behind it.",
+  "difficulty": "Intermediate",
+  "example": "The salesman's bluster about a once-in-a-lifetime deal did not fool my grandmother.",
+  "synonyms": [
+    "bravado",
+    "empty threats",
+    "swagger",
+    "bombast"
+  ],
+  "nuance": "Bluster is noisy and often threatening, while bombast is inflated, pompous language that need not be aggressive.",
+  "alternatives": [
+    "reticence",
+    "bombast"
+  ],
+  "prompt": "Before the chess final, a rival player loudly predicts an easy victory.",
+  "options": [
+    "For all his bluster, the rival resigned after just twenty moves.",
+    "After the long tournament, a bluster formed on her thumb from gripping the pieces.",
+    "His bluster was so quiet and modest that no one noticed him predicting anything.",
+    "The coach praised the bluster of her patient, carefully planned opening."
+  ],
+  "reasons": [
+    "His boasting was loud, but the quick loss showed it had nothing behind it.",
+    "This confuses the word with blister, a sore bump on the skin.",
+    "The word describes loud swagger, so quiet modesty contradicts it.",
+    "Patient, solid planning has real substance; the word mocks noisy talk that lacks it."
+  ],
+  "practice": {
+    "prompt": "A neighbor insists that a new fence sits on his side of the property line.",
+    "options": [
+      "The neighbor's bluster about suing faded once the survey showed the fence was legal.",
+      "Freshly waxed, the old wooden floor shone with a warm bluster.",
+      "He showed his bluster by apologizing softly and asking to talk it over.",
+      "The judge admired the bluster of the surveyor's precise, well-documented measurements."
+    ],
+    "answer": 0,
+    "reasons": [
+      "His threats sounded forceful but collapsed as soon as facts appeared.",
+      "This confuses the word with luster, the soft glow of a polished surface.",
+      "A gentle apology is the reverse of loud, threatening talk.",
+      "Careful evidence carries real weight, while the term implies noise without substance."
+    ]
+  }
+}

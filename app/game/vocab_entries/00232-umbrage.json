@@ -1,0 +1,47 @@
+{
+  "id": 232,
+  "slug": "umbrage",
+  "word": "umbrage",
+  "pos": "noun",
+  "pronunciation": "/ˈʌm.brɪdʒ/",
+  "definition": "A feeling of offense or resentment, often over a slight that others might consider minor.",
+  "difficulty": "Advanced",
+  "example": "The retired professor took umbrage when a student corrected his pronunciation in front of the class.",
+  "synonyms": [
+    "offense",
+    "resentment",
+    "pique",
+    "indignation"
+  ],
+  "nuance": "Umbrage is usually something you \"take\" and often hints at touchiness, whereas outrage suggests a reaction to a truly serious wrong.",
+  "alternatives": [],
+  "prompt": "A chef reads a review that calls her signature soup merely adequate.",
+  "options": [
+    "The chef took umbrage at the review and posted a long, wounded reply.",
+    "The chef took umbrage at the review and framed it proudly by the door.",
+    "The chef paid umbrage to the critic by naming a new dessert after him.",
+    "The chef felt such umbrage that she grinned and agreed with every word."
+  ],
+  "reasons": [
+    "A hurt, defensive response to a lukewarm judgment is exactly what taking offense looks like.",
+    "Displaying the review with pride shows pleasure, not a sense of being insulted.",
+    "This confuses the word with homage; honoring someone is the reverse of resenting them.",
+    "Cheerful agreement contradicts the irritation the word describes."
+  ],
+  "practice": {
+    "prompt": "A teenager's older cousin teases him about his new haircut at a family dinner.",
+    "options": [
+      "The cousin offered Marco umbrage, saying the haircut made him look sharp.",
+      "Though the joke was mild, Marco took umbrage and sulked through dessert.",
+      "Marco took umbrage at the joke, laughing louder than anyone and asking for more.",
+      "To show his umbrage, Marco hugged his cousin and thanked him warmly."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word names a resentful feeling someone takes, not a compliment someone gives.",
+      "Sulking over gentle teasing shows a bruised, somewhat touchy reaction.",
+      "Enjoying the teasing and wanting more shows amusement, not hurt feelings.",
+      "Gratitude and affection are the opposite of feeling slighted."
+    ]
+  }
+}

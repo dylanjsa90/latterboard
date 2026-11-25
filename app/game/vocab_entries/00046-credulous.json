@@ -15,7 +15,8 @@
   ],
   "nuance": "Credulous describes a person who believes too easily; credible describes a claim or source that deserves belief.",
   "alternatives": [
-    "skeptical"
+    "skeptical",
+    "credible"
   ],
   "prompt": "At a county fair, a stranger claims his tonic can make hair grow back overnight.",
   "options": [

@@ -1,0 +1,49 @@
+{
+  "id": 249,
+  "slug": "undeniably",
+  "word": "undeniably",
+  "pos": "adverb",
+  "pronunciation": "/ˌʌn.dɪˈnaɪ.ə.bli/",
+  "definition": "In a way that is so plainly true that no one could reasonably argue against it.",
+  "difficulty": "Foundation",
+  "example": "The new bridge is undeniably faster than the old ferry route across the bay.",
+  "synonyms": [
+    "unquestionably",
+    "indisputably",
+    "without doubt",
+    "clearly"
+  ],
+  "nuance": "Undeniably marks a claim as beyond dispute, while arguably admits that reasonable people might still disagree.",
+  "alternatives": [
+    "arguably"
+  ],
+  "prompt": "A coach reviews the season's results with the team at the final meeting.",
+  "options": [
+    "After twelve wins and no losses, this was undeniably the team's best season.",
+    "The referee couldn't tell who touched the ball last, so it was undeniably a foul.",
+    "When asked for an extra practice, the coach undeniably said no and walked away.",
+    "Since anything can happen, next year's team will undeniably win every game."
+  ],
+  "reasons": [
+    "A perfect record is plain evidence that nobody could reasonably dispute.",
+    "A call the referee could not see clearly is open to dispute, not beyond it.",
+    "The word does not mean refusing; it signals certainty about a fact, not a rejection.",
+    "Admitting that anything can happen makes the prediction uncertain, not indisputable."
+  ],
+  "practice": {
+    "prompt": "A science class measures how fast ice cubes melt in sunlight and in shade.",
+    "options": [
+      "The cubes in the sun undeniably melted first; every group's timer agreed.",
+      "The data was messy and confusing, so the results were undeniably clear.",
+      "One student undeniably rejected his partner's idea and refused to help.",
+      "Before taking any measurements, the teacher guessed the shaded cube would undeniably last longer."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Matching results from every group leave no room for argument.",
+      "Messy, confusing data cannot support a conclusion that is beyond question.",
+      "This treats the word as a kind of refusal; it describes certainty, not saying no.",
+      "A guess made before collecting evidence is speculation, not something proven."
+    ]
+  }
+}

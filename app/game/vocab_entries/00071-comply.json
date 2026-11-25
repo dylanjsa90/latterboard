@@ -14,7 +14,9 @@
     "abide by"
   ],
   "nuance": "Comply usually takes \"with\" and suggests meeting a rule or request, while obey stresses yielding to a person's authority.",
-  "alternatives": [],
+  "alternatives": [
+    "conform"
+  ],
   "prompt": "A school library posts a new rule asking students to silence their phones.",
   "options": [
     "Most students were glad to comply and set their phones to silent.",

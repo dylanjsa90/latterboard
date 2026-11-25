@@ -15,7 +15,9 @@
   ],
   "nuance": "Bolster means propping up something that already exists, while build suggests making something from scratch.",
   "alternatives": [
-    "undermine"
+    "undermine",
+    "bluster",
+    "buttress"
   ],
   "prompt": "A small town library wants more people to visit on weekends.",
   "options": [

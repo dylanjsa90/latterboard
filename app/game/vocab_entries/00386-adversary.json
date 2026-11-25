@@ -1,0 +1,50 @@
+{
+  "id": 386,
+  "slug": "adversary",
+  "word": "adversary",
+  "pos": "noun",
+  "pronunciation": "/ˈæd.vər.ser.i/",
+  "definition": "A person or group that opposes or competes against another.",
+  "difficulty": "Foundation",
+  "example": "The two lawyers were fierce adversaries in court but friendly neighbors at home.",
+  "synonyms": [
+    "opponent",
+    "rival",
+    "foe",
+    "antagonist"
+  ],
+  "nuance": "An adversary opposes you in a contest or dispute but need not hate you, while an enemy implies hostility; don't confuse it with adversity, meaning hardship.",
+  "alternatives": [
+    "adversity",
+    "advocate"
+  ],
+  "prompt": "Two players meet in the final round of a chess tournament.",
+  "options": [
+    "Before the first move, she shook hands with her adversary across the board.",
+    "She faced great adversary when her clock ran low in the endgame.",
+    "Her coach, her most devoted adversary, cheered every move she made.",
+    "She made a bold adversary move and captured her opponent's knight on the next turn."
+  ],
+  "reasons": [
+    "The player across the board is competing against her, so the word fits.",
+    "Running short on time is a hardship, which is adversity; an adversary is an opponent.",
+    "A devoted coach who cheers her on is an ally, the reverse of an opponent.",
+    "The noun cannot describe a move; it names the person on the other side."
+  ],
+  "practice": {
+    "prompt": "A student prepares for a formal debate against a classmate.",
+    "options": [
+      "Maya's adversary on the team helped her write their shared opening statement.",
+      "Maya felt adversary when the microphone stopped working halfway through her speech.",
+      "Maya called the judge her adversary because he timed both speeches fairly.",
+      "Maya studied the past speeches of her adversary to predict his main points."
+    ],
+    "answer": 3,
+    "reasons": [
+      "A teammate who writes with her is a partner, not someone working against her.",
+      "A broken microphone is a misfortune, not a person; that confuses the word with adversity.",
+      "A neutral official who treats both sides equally is not opposing anyone.",
+      "The classmate arguing the other side is the one she is up against."
+    ]
+  }
+}

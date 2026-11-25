@@ -1,0 +1,49 @@
+{
+  "id": 267,
+  "slug": "invigorate",
+  "word": "invigorate",
+  "pos": "verb",
+  "pronunciation": "/ɪnˈvɪɡ.ə.reɪt/",
+  "definition": "To fill someone or something with fresh energy, strength, or enthusiasm.",
+  "difficulty": "Intermediate",
+  "example": "A brisk walk in the cold air before breakfast can invigorate you for the whole morning.",
+  "synonyms": [
+    "energize",
+    "revitalize",
+    "enliven",
+    "refresh"
+  ],
+  "nuance": "Invigorate suggests a surge of active energy, while refresh can mean simply easing tiredness; don't confuse it with enervate, which means to drain.",
+  "alternatives": [
+    "enervate"
+  ],
+  "prompt": "A coach looks for ways to lift a tired team's spirits midway through a long season.",
+  "options": [
+    "The coach hoped a new training drill would invigorate the weary players.",
+    "Losing five games in a row seemed to invigorate the players, leaving them slumped and listless.",
+    "The coach began to invigorate the locker room to find out who left the lights on.",
+    "The coach invigorated the old jerseys by folding them neatly into a box."
+  ],
+  "reasons": [
+    "A fresh drill meant to revive worn-out athletes is a fitting way to restore their energy.",
+    "Leaving players slumped and listless drains them, which is the reverse of the word's meaning.",
+    "Searching for who did something is investigating, a look-alike word, not energizing.",
+    "Folding cloth gives nothing new life or energy; tidying is not reviving."
+  ],
+  "practice": {
+    "prompt": "A small town's main street has been quiet ever since the old factory closed.",
+    "options": [
+      "Officials hoped a weekend farmers market would invigorate the sleepy downtown.",
+      "The rows of empty storefronts seemed to invigorate the street, making it feel even more deserted.",
+      "The council voted to invigorate the factory's closing by reviewing its old financial records.",
+      "The mayor invigorated the parking rules by printing them in smaller type."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Bringing crowds and activity to a quiet area gives it new life, which fits the verb.",
+      "Making a place feel more deserted saps its life instead of adding vigor.",
+      "Reviewing records to learn what happened is an inquiry, confused with the look-alike investigate.",
+      "Shrinking the print on a sign adds no energy or enthusiasm to anything."
+    ]
+  }
+}

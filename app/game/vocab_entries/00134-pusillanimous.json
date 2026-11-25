@@ -15,7 +15,9 @@
   ],
   "nuance": "Unlike cowardly, which often suggests fleeing danger, pusillanimous usually condemns a weak, timid failure to decide or take a stand.",
   "alternatives": [
-    "magnanimous"
+    "magnanimous",
+    "timorous",
+    "intrepid"
   ],
   "prompt": "A team captain must decide whether to report a rule violation by the team's star player.",
   "options": [

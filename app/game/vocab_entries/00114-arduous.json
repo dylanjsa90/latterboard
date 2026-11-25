@@ -14,7 +14,9 @@
     "demanding"
   ],
   "nuance": "Arduous stresses long, wearing effort; strenuous stresses intense physical exertion, and ardent (passionate) is only a look-alike.",
-  "alternatives": [],
+  "alternatives": [
+    "ardent"
+  ],
   "prompt": "A group of hikers spends several days climbing a steep mountain trail.",
   "options": [
     "After four days on the arduous trail, the hikers finally reached the summit.",

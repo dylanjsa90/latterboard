@@ -1,0 +1,47 @@
+{
+  "id": 332,
+  "slug": "reverence",
+  "word": "reverence",
+  "pos": "noun",
+  "pronunciation": "/ˈrɛv.ər.əns/",
+  "definition": "A feeling of deep respect mixed with admiration or awe.",
+  "difficulty": "Intermediate",
+  "example": "The old carpenter handled his grandfather's tools with a reverence most people save for treasures.",
+  "synonyms": [
+    "veneration",
+    "awe",
+    "deep respect",
+    "esteem"
+  ],
+  "nuance": "Reverence goes beyond ordinary respect into awe; don't confuse it with reverie, which is a dreamy, wandering state of mind.",
+  "alternatives": [],
+  "prompt": "Visitors enter a museum room that holds a centuries-old handwritten manuscript.",
+  "options": [
+    "The visitors lowered their voices in reverence as they approached the fragile pages.",
+    "Lost in reverence, one visitor daydreamed about lunch and missed the entire tour.",
+    "Out of reverence, a teenager tapped on the glass case and joked that the manuscript looked like scrap paper.",
+    "The guide led the group through the gallery in reverence, starting at the exit and ending at the entrance."
+  ],
+  "reasons": [
+    "Quieting down before something old and precious shows awed respect.",
+    "Drifting off into daydreams is reverie, a look-alike word, not awed respect.",
+    "Mocking the manuscript shows disrespect, the opposite of the feeling the word names.",
+    "Walking a route backward confuses the word with reverse; it names a feeling, not a direction."
+  ],
+  "practice": {
+    "prompt": "A group of hikers reaches a grove of giant redwood trees.",
+    "options": [
+      "A ranger wrapped a long tape around each trunk to measure its reverence in feet.",
+      "The hikers stood still and gazed up at the ancient trunks with quiet reverence.",
+      "Because they felt such reverence for the grove, two hikers carved their initials into the oldest tree.",
+      "Bored by the view, Lena felt only reverence and kept checking how many miles were left."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word describes an attitude people feel, not a physical size that can be measured.",
+      "Silent wonder at something vast and old is exactly this kind of awed respect.",
+      "Damaging the tree shows a lack of respect, so the stated motive makes no sense.",
+      "Boredom and impatience are indifference, which cannot coexist with awe."
+    ]
+  }
+}

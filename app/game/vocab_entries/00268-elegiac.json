@@ -1,0 +1,47 @@
+{
+  "id": 268,
+  "slug": "elegiac",
+  "word": "elegiac",
+  "pos": "adjective",
+  "pronunciation": "/ˌɛl.əˈdʒaɪ.ək/",
+  "definition": "Expressing sorrow or wistful longing for something that has been lost or has passed away.",
+  "difficulty": "Advanced",
+  "example": "The novel closes on an elegiac note, recalling summers at a family farm that was sold long ago.",
+  "synonyms": [
+    "mournful",
+    "wistful",
+    "plaintive",
+    "lamenting"
+  ],
+  "nuance": "Elegiac means mourning a particular loss, often in a dignified, lyrical way, while melancholy can be sadness with no clear cause.",
+  "alternatives": [],
+  "prompt": "A town band plays one last concert on an old pier the night before it is torn down.",
+  "options": [
+    "The band's elegiac tune made the crowd remember every summer spent on the pier.",
+    "The pier's elegiac railings were carved with graceful, polished curves.",
+    "The elegiac polka was so bouncy and carefree that everyone laughed and danced.",
+    "The mayor gave an elegiac speech listing the demolition schedule and parking rules."
+  ],
+  "reasons": [
+    "A tune that stirs sad memories of a place about to vanish fits the word's mournful tone.",
+    "Graceful design is elegance, a look-alike word; nothing here expresses grief.",
+    "Carefree cheer is the reverse of a lament for something lost.",
+    "A dry list of logistics carries no sorrow or longing at all."
+  ],
+  "practice": {
+    "prompt": "A photographer exhibits pictures of a fishing village whose residents have all moved away.",
+    "options": [
+      "Critics called the frames elegiac because they were sleek, costly, and stylish.",
+      "The gallery's elegiac lighting meant visitors could easily read every caption.",
+      "Her elegiac photographs lingered on empty docks and faded boat names.",
+      "The elegiac photographs showed children splashing and grinning at a lively summer festival."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Sleek style describes elegance, not a sorrowful mood.",
+      "Bright, practical lighting has nothing to do with mourning.",
+      "Dwelling on abandoned, fading details mourns a way of life that is gone.",
+      "Joyful festival scenes celebrate the present instead of grieving a loss."
+    ]
+  }
+}

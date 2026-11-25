@@ -14,7 +14,11 @@
     "sweet-talk"
   ],
   "nuance": "Unlike coax, inveigle implies cunning or deceit; don't confuse it with inveigh, which means to protest angrily.",
-  "alternatives": [],
+  "alternatives": [
+    "coerce",
+    "cajole",
+    "inveigh"
+  ],
   "prompt": "A teenager wants the last slice of cake, which her younger brother has already claimed.",
   "options": [
     "She tried to inveigle her brother out of it by claiming the frosting had gone sour.",

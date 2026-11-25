@@ -1,0 +1,50 @@
+{
+  "id": 377,
+  "slug": "fickle",
+  "word": "fickle",
+  "pos": "adjective",
+  "pronunciation": "/ˈfɪk.əl/",
+  "definition": "Likely to change opinions, loyalties, or affections often and without good reason.",
+  "difficulty": "Intermediate",
+  "example": "Spring weather in the mountains is fickle, so hikers pack both sunscreen and rain gear.",
+  "synonyms": [
+    "changeable",
+    "capricious",
+    "inconstant",
+    "mercurial"
+  ],
+  "nuance": "Fickle stresses unreliable shifts in loyalty or affection, while capricious suggests sudden, impulsive whims.",
+  "alternatives": [
+    "steadfast",
+    "capricious"
+  ],
+  "prompt": "A teenager keeps switching her favorite band from one week to the next.",
+  "options": [
+    "Maya's fickle taste meant last week's favorite band was already off her playlist.",
+    "Maya is so fickle about volume that she always keeps her speaker on exactly level four.",
+    "Maya's fickle loyalty to one singer has not wavered in ten years.",
+    "Maya was fickle when she carefully saved her allowance to buy concert tickets."
+  ],
+  "reasons": [
+    "Dropping a band she loved just days earlier shows preferences that shift without warning.",
+    "Fussy, unchanging precision is being finicky, a look-alike; fickle means shifting preferences.",
+    "Devotion that never wavers is the reverse of fickleness.",
+    "Steady planning and saving show commitment, not changeable whims."
+  ],
+  "practice": {
+    "prompt": "A basketball team's fans cheer loudly only while the team is winning.",
+    "options": [
+      "The fickle fans calmly explained the rules of basketball to a newcomer.",
+      "The fickle fans who booed in March were chanting the players' names by April.",
+      "The fickle fans have bought season tickets every year for four decades.",
+      "The fickle fans complained for the whole game that the arena's popcorn was slightly too salty."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Patiently teaching the rules says nothing about loyalties that change.",
+      "Switching from scorn to praise as results change shows loyalty that is unreliable.",
+      "Decades of steady support show constancy, not changeable loyalty.",
+      "Fussing over small details is being finicky; fickle concerns shifting allegiances."
+    ]
+  }
+}

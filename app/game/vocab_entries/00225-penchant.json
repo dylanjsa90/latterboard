@@ -1,0 +1,49 @@
+{
+  "id": 225,
+  "slug": "penchant",
+  "word": "penchant",
+  "pos": "noun",
+  "pronunciation": "/ˈpɛn.tʃənt/",
+  "definition": "A strong, lasting liking for something or a habit of doing it.",
+  "difficulty": "Intermediate",
+  "example": "My grandfather has a penchant for telling long stories at the dinner table.",
+  "synonyms": [
+    "fondness",
+    "inclination",
+    "predilection",
+    "liking"
+  ],
+  "nuance": "A penchant is a settled taste, often a quirky one, while a whim is a passing impulse that fades quickly.",
+  "alternatives": [
+    "aversion"
+  ],
+  "prompt": "A college student describes her roommate's habits to a friend.",
+  "options": [
+    "My roommate has a penchant for rearranging our furniture every few weeks.",
+    "My roommate wears a silver penchant on a thin chain around her neck.",
+    "My roommate has a penchant for loud music, so she avoids it whenever she can.",
+    "My roommate showed a penchant for baking once last Tuesday and never again."
+  ],
+  "reasons": [
+    "A habit she keeps coming back to shows a lasting taste for doing it.",
+    "This confuses the word with pendant, a piece of jewelry that hangs from a chain.",
+    "Avoiding something is the opposite of having a fondness for it.",
+    "Something done once is not a lasting tendency or a settled taste."
+  ],
+  "practice": {
+    "prompt": "A teacher writes end-of-year comments about several students.",
+    "options": [
+      "Lena has a real penchant for math, which is why she dreads every algebra quiz.",
+      "Ava penchant her essay neatly in blue ink before handing it in.",
+      "Jordan has a penchant for catching colds and hates missing class because of them.",
+      "Marcus has a penchant for asking questions that push our discussions deeper."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Dreading a subject contradicts having a strong taste for it.",
+      "The word is a noun naming a liking; it is not a verb meaning to write.",
+      "Getting sick is unwanted and involuntary, not a taste or a chosen habit.",
+      "A repeated habit he clearly enjoys fits the idea of an enduring liking."
+    ]
+  }
+}

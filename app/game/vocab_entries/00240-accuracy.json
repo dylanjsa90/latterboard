@@ -1,0 +1,48 @@
+{
+  "id": 240,
+  "slug": "accuracy",
+  "word": "accuracy",
+  "pos": "noun",
+  "pronunciation": "/ˈæk.jɚ.ə.si/",
+  "definition": "The quality of being correct or exact and free from mistakes.",
+  "difficulty": "Foundation",
+  "example": "The lab technicians calibrate their scales every morning to ensure the accuracy of each measurement.",
+  "synonyms": [
+    "correctness",
+    "exactness",
+    "faithfulness"
+  ],
+  "nuance": "Accuracy means getting close to the true value; precision means results are consistent or finely detailed, even if they are wrong.",
+  "alternatives": [
+    "precision"
+  ],
+  "prompt": "A newspaper reporter checks a story the night before it is printed.",
+  "options": [
+    "She phoned each source to confirm the accuracy of every quote in the story.",
+    "Her editor praised the story's accuracy because she turned it in an hour early.",
+    "The story's accuracy was obvious from the many misspelled names in it.",
+    "The story had great accuracy because it filled four whole pages of the paper."
+  ],
+  "reasons": [
+    "Checking quotes against their sources is how a reporter makes sure nothing is wrong.",
+    "Finishing early is about speed, which says nothing about whether the facts are right.",
+    "Misspelled names are errors, so they show the reverse of correctness.",
+    "A long article can still be full of mistakes; length does not measure correctness."
+  ],
+  "practice": {
+    "prompt": "An archer practices at a target on a windy afternoon.",
+    "options": [
+      "Her accuracy impressed the coach, since her arrows scattered far from the target.",
+      "Her accuracy came from firing as many arrows per minute as she possibly could.",
+      "Thanks to her accuracy, she could pull the bowstring back farther than anyone else.",
+      "Once she aimed slightly into the wind, her accuracy improved and most arrows struck the center."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Arrows landing far from the mark are misses, the opposite of hitting the target.",
+      "Shooting fast is a matter of speed, and rushing usually makes shots less exact.",
+      "Drawing a bow farther takes strength, which is different from hitting what you aim at.",
+      "Arrows landing where she aimed show that her shots were on target."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 371,
+  "slug": "guarded",
+  "word": "guarded",
+  "pos": "adjective",
+  "pronunciation": "/ˈɡɑːr.dɪd/",
+  "definition": "Careful not to reveal much about your thoughts, feelings, or plans.",
+  "difficulty": "Intermediate",
+  "example": "The researchers expressed guarded optimism about the early results of their new battery design.",
+  "synonyms": [
+    "cautious",
+    "reserved",
+    "wary",
+    "noncommittal"
+  ],
+  "nuance": "Reserved describes a quiet temperament, while guarded suggests deliberately holding back in a particular situation, often out of caution.",
+  "alternatives": [],
+  "prompt": "On her first day, a new student is asked by classmates about the school she left.",
+  "options": [
+    "Her guarded replies revealed little beyond the name of the town she had left.",
+    "Feeling guarded, she poured out every detail of her old friendships and quarrels.",
+    "She was guarded highly by classmates who admired her from the moment she arrived.",
+    "A hall monitor stood by her desk, so her answers were guarded."
+  ],
+  "reasons": [
+    "Sharing only a bare fact and holding the rest back is exactly this kind of caution.",
+    "Telling everything freely is the opposite of holding back.",
+    "This confuses the word with \"regarded,\" which means thought of or esteemed.",
+    "The word describes a cautious manner, not answers watched over by a person on duty."
+  ],
+  "practice": {
+    "prompt": "A reporter asks a shop owner whether sales will improve next year.",
+    "options": [
+      "The owner was guarded, cheerfully promising that profits would triple by spring.",
+      "The owner felt guarded because a tall iron fence surrounded the store.",
+      "The owner was guarded, yelling at the reporter to leave and never come back.",
+      "The owner was guarded, saying only that it was too early to make predictions."
+    ],
+    "answer": 3,
+    "reasons": [
+      "A bold, confident promise reveals plenty and shows no caution.",
+      "A fence offers physical protection, but the word here means holding back what you say.",
+      "Open hostility goes too far; the word suggests quiet caution, not angry outbursts.",
+      "Avoiding a firm answer and giving away little shows careful restraint."
+    ]
+  }
+}

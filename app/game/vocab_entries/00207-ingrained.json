@@ -1,0 +1,49 @@
+{
+  "id": 207,
+  "slug": "ingrained",
+  "word": "ingrained",
+  "pos": "adjective",
+  "pronunciation": "/ɪnˈɡreɪnd/",
+  "definition": "Firmly fixed and hard to change, especially as a habit, belief, or attitude.",
+  "difficulty": "Intermediate",
+  "example": "Years of piano lessons left her with an ingrained habit of counting beats under her breath.",
+  "synonyms": [
+    "deep-rooted",
+    "entrenched",
+    "inveterate",
+    "firmly established"
+  ],
+  "nuance": "Ingrained traits are absorbed through long experience, while innate ones are present from birth; ingrained does not mean inborn.",
+  "alternatives": [
+    "superficial"
+  ],
+  "prompt": "A coach is trying to fix a swimmer's breathing technique.",
+  "options": [
+    "Ten years of lifting her head to breathe had left the habit ingrained.",
+    "The swimmer's ingrained habit appeared on Tuesday and disappeared by Wednesday.",
+    "Because the flaw was ingrained, the coach fixed it with a single quick reminder.",
+    "The coach had the swimmer's name ingrained on a silver medal after the meet."
+  ],
+  "reasons": [
+    "A pattern repeated for a decade becomes settled and resists correction.",
+    "Something that comes and goes within a day is fleeting, not deeply rooted.",
+    "A deeply settled habit would resist a one-time correction instead of vanishing instantly.",
+    "This confuses the word with engraved; letters cut into metal are carved, not fixed habits."
+  ],
+  "practice": {
+    "prompt": "A family moves from a country where people drive on the left side of the road.",
+    "options": [
+      "Mom's ingrained preference for the left lane faded the moment her plane landed.",
+      "The instructor ingrained the family to the local highways during one short lesson.",
+      "Their ingrained habit of driving on the left was something they had never once done.",
+      "Dad's ingrained reflex kept steering him toward the left lane for weeks."
+    ],
+    "answer": 3,
+    "reasons": [
+      "A preference that disappears instantly was never deeply rooted to begin with.",
+      "The word describes something already fixed; it does not mean to introduce or familiarize.",
+      "A habit becomes fixed only through long repetition, so it cannot exist without practice.",
+      "An instinct built over many years kept returning even after the rules changed."
+    ]
+  }
+}

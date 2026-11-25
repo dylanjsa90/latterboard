@@ -14,7 +14,11 @@
     "penchant"
   ],
   "nuance": "Proclivity often hints at a habit others may frown on, while penchant usually suggests a harmless fondness.",
-  "alternatives": [],
+  "alternatives": [
+    "penchant",
+    "aversion",
+    "proximity"
+  ],
   "prompt": "A soccer coach describes a goalkeeper's habits during matches.",
   "options": [
     "The goalkeeper has a proclivity for leaving the net too early on corner kicks.",

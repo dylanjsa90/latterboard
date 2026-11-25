@@ -1,0 +1,49 @@
+{
+  "id": 350,
+  "slug": "gainsay",
+  "word": "gainsay",
+  "pos": "verb",
+  "pronunciation": "/ˌɡeɪnˈseɪ/",
+  "definition": "To deny or speak against something, especially a claim or fact.",
+  "difficulty": "Advanced",
+  "example": "Few critics would gainsay the novel's importance, though many dislike its ending.",
+  "synonyms": [
+    "contradict",
+    "deny",
+    "dispute"
+  ],
+  "nuance": "More formal than contradict, gainsay often appears in negatives like \"no one can gainsay it,\" and unlike refute it does not imply proof.",
+  "alternatives": [
+    "refute",
+    "contradict"
+  ],
+  "prompt": "A coach reviews the season's statistics with her staff after the final game.",
+  "options": [
+    "No one could gainsay the coach's claim that the defense improved; the numbers were plain.",
+    "The team hoped to gainsay several extra points per game by adding more passing drills to practice.",
+    "Delighted by the report, the assistant coaches rose to gainsay it with loud applause.",
+    "The coach chose to gainsay the playbook aloud, reading each page exactly as written."
+  ],
+  "reasons": [
+    "With the statistics backing her, nobody was in a position to contradict what she said.",
+    "This treats the word as a form of gain, but it means to contradict, not to earn or win.",
+    "Applauding shows agreement, which is the opposite of speaking against something.",
+    "Reading text aloud is reciting it; the word means to dispute, not to repeat."
+  ],
+  "practice": {
+    "prompt": "A museum guide tells visitors when a painting was made, and a visiting scholar knows otherwise.",
+    "options": [
+      "To gainsay the guide's account, the scholar loudly repeated it word for word to the whole tour group.",
+      "Eager to gainsay the painting for her own collection, the scholar offered the museum a large sum.",
+      "The scholar chose to gainsay the guide's date by cheerfully confirming that it was exactly right.",
+      "With a dated letter from the artist, the scholar could gainsay the guide's account."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Echoing a statement supports it; the word calls for disputing it instead.",
+      "This mistakes the word for acquiring something, but it refers only to contradicting.",
+      "Confirming a claim reverses the meaning, since the word means to speak against it.",
+      "The letter gives the scholar grounds to deny the guide's date, which is exactly the sense."
+    ]
+  }
+}

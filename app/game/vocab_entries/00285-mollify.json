@@ -1,0 +1,47 @@
+{
+  "id": 285,
+  "slug": "mollify",
+  "word": "mollify",
+  "pos": "verb",
+  "pronunciation": "/ˈmɑː.lə.faɪ/",
+  "definition": "To calm someone's anger or ease their worry, often by being gentle or offering something.",
+  "difficulty": "Advanced",
+  "example": "A heartfelt apology did little to mollify the coach after the team skipped practice.",
+  "synonyms": [
+    "placate",
+    "appease",
+    "pacify",
+    "soothe"
+  ],
+  "nuance": "To mollify is to soften someone's anger, often only partly; to placate usually means giving in to demands to stop complaints.",
+  "alternatives": [],
+  "prompt": "A customer is upset because a package arrived a week late.",
+  "options": [
+    "The manager offered free shipping on the next order to mollify the frustrated customer.",
+    "The clerk tried to mollify the late order by deleting it from the computer system.",
+    "The rude reply managed to mollify the customer, who stormed out shouting.",
+    "To prevent more delays, the warehouse will mollify its schedule so that trucks leave an hour earlier."
+  ],
+  "reasons": [
+    "A friendly gesture meant to soften someone's irritation fits the word exactly.",
+    "This confuses the word with nullify; it concerns feelings, not canceling records.",
+    "Someone who leaves shouting has been angered further, not calmed.",
+    "This mixes it up with modify; changing a schedule doesn't soothe anyone's anger."
+  ],
+  "practice": {
+    "prompt": "Two neighbors disagree about a tree whose branches hang over a shared fence.",
+    "options": [
+      "A lawyer said a judge could mollify the old property agreement and declare it no longer valid.",
+      "The gusty wind seemed to mollify the problem, scattering twice as many leaves across the lawn.",
+      "Offering to pay for the trimming helped mollify the neighbor who was annoyed by falling leaves.",
+      "His sarcastic remark seemed to mollify her, since she slammed the gate and refused to speak to him."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Making an agreement void means nullifying it, not calming anyone.",
+      "Making a problem bigger is magnifying it; the word means easing upset feelings.",
+      "A generous offer that eases a neighbor's annoyance is a clear case of calming someone down.",
+      "Slamming a gate shows rising anger, the reverse of being soothed."
+    ]
+  }
+}

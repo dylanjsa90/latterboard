@@ -1,0 +1,50 @@
+{
+  "id": 355,
+  "slug": "innovative",
+  "word": "innovative",
+  "pos": "adjective",
+  "pronunciation": "/ˈɪn.əˌveɪ.tɪv/",
+  "definition": "Introducing new ideas or methods that are original and break from the usual way.",
+  "difficulty": "Foundation",
+  "example": "The town's innovative bus schedule let riders request a pickup with a simple text message.",
+  "synonyms": [
+    "inventive",
+    "groundbreaking",
+    "original",
+    "pioneering"
+  ],
+  "nuance": "Innovative suggests a new method actually put into practice, while creative can describe imagination that never leaves the page.",
+  "alternatives": [
+    "conventional",
+    "novel"
+  ],
+  "prompt": "A bakery owner is looking for ways to cut down on wasted food.",
+  "options": [
+    "Her innovative plan turned day-old bread into crackers sold at half price.",
+    "Her innovative plan was to keep running the bakery exactly as bakeries always had.",
+    "The innovative baker copied the shop next door's waste policy word for word.",
+    "Innovative weeds spread through the bakery's herb garden and choked the basil."
+  ],
+  "reasons": [
+    "Finding a fresh use for leftovers is an original solution to the waste problem.",
+    "Sticking with the traditional routine is the reverse of trying something new.",
+    "Copying someone else's idea exactly shows no originality.",
+    "This confuses the word with invasive, which describes things that spread harmfully."
+  ],
+  "practice": {
+    "prompt": "A science teacher wants her students to be more engaged during lab periods.",
+    "options": [
+      "The students felt too innovative to stay awake, so most of them dozed off.",
+      "She tried an innovative approach where students designed their own experiments.",
+      "Her innovative lesson was last year's handout with a new date written at the top.",
+      "The innovative teacher refused to change a single step of the lab manual from 1985."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word describes fresh ideas or methods, not a sleepy feeling.",
+      "Letting students invent experiments breaks from worksheet routines in a fresh way.",
+      "Reusing old material with a tiny change offers nothing new.",
+      "Refusing any change is the opposite of introducing new methods."
+    ]
+  }
+}

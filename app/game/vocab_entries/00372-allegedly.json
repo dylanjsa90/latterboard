@@ -1,0 +1,48 @@
+{
+  "id": 372,
+  "slug": "allegedly",
+  "word": "allegedly",
+  "pos": "adverb",
+  "pronunciation": "/əˈlɛdʒ.ɪd.li/",
+  "definition": "According to what people claim, even though it has not been proven.",
+  "difficulty": "Foundation",
+  "example": "The old lighthouse is allegedly haunted, yet no visitor has ever captured a single strange photo.",
+  "synonyms": [
+    "supposedly",
+    "reportedly",
+    "purportedly"
+  ],
+  "nuance": "Allegedly stresses that a claim is still unproven, while reportedly only says the information was passed along by someone.",
+  "alternatives": [
+    "undeniably"
+  ],
+  "prompt": "A neighbor blames a dog for the ruined flower bed, but no one saw what happened.",
+  "options": [
+    "The dog allegedly dug up the tulips, but nobody saw it.",
+    "I allegedly watched the dog dig up the tulips with my own two eyes this morning.",
+    "The dog dug allegedly, flinging dirt quickly across the whole lawn.",
+    "Security footage clearly proves that the dog allegedly dug up the tulips."
+  ],
+  "reasons": [
+    "The claim against the dog is unconfirmed, which is exactly when this word fits.",
+    "An eyewitness speaking about what they saw themselves has no reason to signal doubt.",
+    "The word marks a claim as unproven; it cannot describe the manner of an action.",
+    "Once video proves something, it is no longer just a claim, so the hedge contradicts the proof."
+  ],
+  "practice": {
+    "prompt": "Customers hear a rumor that a small bakery's pie won a county contest.",
+    "options": [
+      "The baker sliced the pie so allegedly that every single piece came out perfectly even.",
+      "I baked this pie myself this morning, so I know it allegedly contains three cups of cherries.",
+      "The judges' official results confirm that the pie allegedly took first place.",
+      "The bakery's cherry pie allegedly won a county prize, but I can't find any record of it."
+    ],
+    "answer": 3,
+    "reasons": [
+      "This treats the word like carefully, but it qualifies a claim rather than describing skill.",
+      "The baker has direct knowledge of the recipe, so casting doubt on it makes no sense.",
+      "Official confirmation removes the doubt that the word is meant to express.",
+      "The prize is talked about but not verified, so signaling an unproven claim is right."
+    ]
+  }
+}

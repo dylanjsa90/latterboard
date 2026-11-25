@@ -14,7 +14,10 @@
     "unprotected"
   ],
   "nuance": "Vulnerable stresses being open to harm; susceptible stresses a tendency to be affected, often by illness or influence.",
-  "alternatives": [],
+  "alternatives": [
+    "venerable",
+    "susceptible"
+  ],
   "prompt": "A town studies which neighborhoods might flood during the spring storms.",
   "options": [
     "Houses on the low riverbank are the most vulnerable when the water rises.",

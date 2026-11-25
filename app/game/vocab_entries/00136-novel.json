@@ -14,7 +14,11 @@
     "unprecedented"
   ],
   "nuance": "Novel stresses originality, not recency: a novel idea differs from earlier ones, while a new car may match last year's model.",
-  "alternatives": [],
+  "alternatives": [
+    "conventional",
+    "hackneyed",
+    "innovative"
+  ],
   "prompt": "A science fair judge is reviewing student projects.",
   "options": [
     "The judge praised the student's novel method of measuring plant growth with a phone camera.",

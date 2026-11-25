@@ -1,0 +1,47 @@
+{
+  "id": 246,
+  "slug": "endorse",
+  "word": "endorse",
+  "pos": "verb",
+  "pronunciation": "/ɪnˈdɔːrs/",
+  "definition": "To publicly say that you approve of or support a person, plan, product, or idea.",
+  "difficulty": "Foundation",
+  "example": "The school nurse endorsed the proposal to start morning classes an hour later.",
+  "synonyms": [
+    "back",
+    "support",
+    "approve",
+    "champion"
+  ],
+  "nuance": "Unlike approve, which can be private, endorse usually means declaring support openly so that others may be influenced.",
+  "alternatives": [],
+  "prompt": "A respected scientist reviews a new science textbook shortly before it is published.",
+  "options": [
+    "The scientist agreed to endorse the textbook in a short note printed on its back cover.",
+    "The scientist chose to endorse the textbook by listing its many errors in a harsh review.",
+    "The scientist had to endorse three long hours of a dull meeting about the textbook.",
+    "The scientist decided to endorse the textbook by never mentioning it to anyone."
+  ],
+  "reasons": [
+    "A public statement of praise that readers will see is exactly this kind of open support.",
+    "A harsh review attacks the book, which is the reverse of backing it.",
+    "Sitting through something unpleasant is enduring it; this confuses two similar-sounding verbs.",
+    "Silence offers no support at all; the word requires an active, visible expression of approval."
+  ],
+  "practice": {
+    "prompt": "A baker is asked what she thinks of a new flour supplier at a meeting of local shop owners.",
+    "options": [
+      "At the meeting, the baker stood up to endorse the supplier and urged others to try its flour.",
+      "The baker wanted to endorse the supplier, so she warned every shop owner to stay away from it.",
+      "The baker hopes to endorse the supplier with a large gift of money for a new warehouse.",
+      "The baker hired a guard to endorse the market's rule against bringing dogs inside."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Speaking up in front of peers and recommending the supplier is open, public backing.",
+      "Warning people away is criticism, the opposite of lending your support.",
+      "Donating funds to an organization is endowing it, a different verb that only looks similar.",
+      "Making people obey a rule is enforcing it; the look-alike word does not mean this."
+    ]
+  }
+}

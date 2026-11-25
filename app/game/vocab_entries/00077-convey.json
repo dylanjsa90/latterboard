@@ -14,7 +14,10 @@
     "transmit"
   ],
   "nuance": "To express something is to put it out, but to convey it means the meaning actually reaches someone. Don't confuse it with convene, which means to gather.",
-  "alternatives": [],
+  "alternatives": [
+    "convene",
+    "conceal"
+  ],
   "prompt": "A coach writes a short note to a nervous team before the final game.",
   "options": [
     "The coach chose a few warm words to convey her confidence in every player.",

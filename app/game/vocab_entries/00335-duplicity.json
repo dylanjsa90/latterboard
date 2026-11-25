@@ -1,0 +1,47 @@
+{
+  "id": 335,
+  "slug": "duplicity",
+  "word": "duplicity",
+  "pos": "noun",
+  "pronunciation": "/duˈplɪs.ə.ti/",
+  "definition": "Dishonest behavior in which someone pretends to think or act one way while secretly doing another.",
+  "difficulty": "Intermediate",
+  "example": "The partner's duplicity surfaced when auditors found a second, hidden set of account books.",
+  "synonyms": [
+    "deceitfulness",
+    "double-dealing",
+    "two-facedness",
+    "guile"
+  ],
+  "nuance": "Duplicity means showing one face while hiding another, so it goes beyond telling a single lie, which can be plain dishonesty.",
+  "alternatives": [],
+  "prompt": "A teammate promised the captain she would support his new game plan.",
+  "options": [
+    "Her duplicity showed when she cheered the plan in public yet quietly urged others to resist it.",
+    "Because of a copier glitch, his duplicity left every player holding two identical playbooks.",
+    "In a show of duplicity, she told the captain directly and honestly that she disliked the plan.",
+    "Out of duplicity, she stayed late every night drilling the new plays so the plan would work."
+  ],
+  "reasons": [
+    "Backing the plan openly while undermining it in secret is exactly this kind of two-faced deceit.",
+    "This confuses the word with duplication; a machine making extra copies involves no deceit.",
+    "Speaking frankly to someone's face is candor, the reverse of hiding your true position.",
+    "Working loyally for the plan shows commitment; nothing here is hidden or false."
+  ],
+  "practice": {
+    "prompt": "A salesman is bargaining with two rival buyers over the same used car.",
+    "options": [
+      "The salesman made a duplicity of the car's title so each buyer could keep one.",
+      "His duplicity impressed both buyers, since he openly shared every offer with each of them.",
+      "Out of duplicity, he lowered the price for the buyer who seemed short on money.",
+      "His duplicity unraveled when both buyers learned he had promised each of them the lowest price."
+    ],
+    "answer": 3,
+    "reasons": [
+      "This treats the word as if it meant a copy, mixing it up with duplicate.",
+      "Full openness with everyone is honesty, which is the opposite of deceit.",
+      "A kind discount involves no pretense, and the word always carries a negative charge.",
+      "Making the same secret promise to two rivals is classic double-dealing."
+    ]
+  }
+}

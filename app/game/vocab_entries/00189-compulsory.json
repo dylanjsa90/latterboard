@@ -1,0 +1,46 @@
+{
+  "id": 189,
+  "slug": "compulsory",
+  "word": "compulsory",
+  "pos": "adjective",
+  "pronunciation": "/kəmˈpʌl.sə.ri/",
+  "definition": "Required by a rule or law, so that people have no choice about doing it.",
+  "difficulty": "Foundation",
+  "example": "Swimming lessons are compulsory for all third graders at the school.",
+  "synonyms": [
+    "mandatory",
+    "required",
+    "obligatory"
+  ],
+  "nuance": "Compulsory describes a requirement set by a rule or authority; compulsive describes a personal urge someone cannot resist.",
+  "alternatives": [],
+  "prompt": "A school announces new rules for the coming year.",
+  "options": [
+    "Wearing safety goggles in the science lab is now compulsory for all students.",
+    "Joining the compulsory chess club is entirely up to each student and their family.",
+    "Leo is a compulsory talker who can't stop chatting during lessons.",
+    "The new reading list is so compulsory that students can't wait to start it."
+  ],
+  "reasons": [
+    "Every student must follow the goggle rule with no exceptions, so the word fits.",
+    "An activity left to personal choice is optional, the reverse of required.",
+    "An urge Leo can't resist calls for compulsive, which is a different word that has nothing to do with rules.",
+    "This treats the word as if it meant appealing or compelling. Being required says nothing about appeal."
+  ],
+  "practice": {
+    "prompt": "A youth soccer league explains what players need before the season starts.",
+    "options": [
+      "A physical exam by a doctor is compulsory before any player can join a team.",
+      "The compulsory team photo is optional, so players can skip it if they like.",
+      "Mia's compulsory need to juggle the ball every spare minute amazed her coach.",
+      "The players felt compulsory about the season and cheered loudly at practice."
+    ],
+    "answer": 0,
+    "reasons": [
+      "No one may play without the exam, so the league demands it of everyone.",
+      "Something can't be both optional and required, so the sentence contradicts itself.",
+      "Mia's habit is an inner urge, which is compulsive. This word refers to outside rules.",
+      "The word describes requirements, not a feeling such as eagerness or excitement."
+    ]
+  }
+}

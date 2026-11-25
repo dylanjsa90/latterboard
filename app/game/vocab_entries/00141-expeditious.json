@@ -14,7 +14,11 @@
     "swift"
   ],
   "nuance": "Expeditious means fast and efficient; expedient means convenient or useful, often at the cost of doing what is right.",
-  "alternatives": [],
+  "alternatives": [
+    "dilatory",
+    "expedient",
+    "hasty"
+  ],
   "prompt": "A city crew must repair a burst water pipe before morning.",
   "options": [
     "The crew's expeditious repair restored water to the street before sunrise.",

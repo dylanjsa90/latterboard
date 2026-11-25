@@ -1,0 +1,47 @@
+{
+  "id": 369,
+  "slug": "precipitate",
+  "word": "precipitate",
+  "pos": "verb",
+  "pronunciation": "/prɪˈsɪp.ɪ.teɪt/",
+  "definition": "To cause something, usually something unwelcome, to happen suddenly or sooner than expected.",
+  "difficulty": "Advanced",
+  "example": "A sharp drop in the price of wheat helped precipitate hard times for the region's farms.",
+  "synonyms": [
+    "trigger",
+    "hasten",
+    "bring on",
+    "spark"
+  ],
+  "nuance": "Unlike plain \"cause,\" it stresses speed or suddenness, usually of a bad outcome; don't confuse it with the adjective \"precipitous,\" meaning steep.",
+  "alternatives": [],
+  "prompt": "A small bakery's main supplier suddenly doubles the price of flour.",
+  "options": [
+    "The steep increase could precipitate the bakery's search for a cheaper supplier.",
+    "The owner stockpiled flour to precipitate any shortage until next spring.",
+    "The baker was invited to precipitate in the town's spring food festival.",
+    "Before signing, the owner sat down to precipitate the new contract line by line."
+  ],
+  "reasons": [
+    "A sudden price jump can force a decision to happen sooner than planned.",
+    "Stockpiling pushes a problem later, but the verb means bringing it on sooner.",
+    "This confuses the word with its look-alike \"participate,\" meaning to take part.",
+    "Reading something slowly and carefully is the opposite of hurrying an outcome."
+  ],
+  "practice": {
+    "prompt": "One student keeps skipping meetings during a group science project.",
+    "options": [
+      "A friendly reminder helped precipitate the argument for several more weeks.",
+      "The others precipitate that he will miss Friday's meeting as well.",
+      "Over many calm months, the group's friendship managed to precipitate steadily.",
+      "His repeated absences may precipitate a tense talk with the teacher."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Holding off a conflict for weeks is delaying it, not speeding it up.",
+      "This treats the word as \"anticipate,\" meaning to expect, not to cause.",
+      "Slow, steady growth with nothing set off suddenly misses the word's sense of abruptness.",
+      "The missed meetings could quickly bring on an uncomfortable conversation."
+    ]
+  }
+}

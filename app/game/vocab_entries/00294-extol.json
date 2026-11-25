@@ -1,0 +1,49 @@
+{
+  "id": 294,
+  "slug": "extol",
+  "word": "extol",
+  "pos": "verb",
+  "pronunciation": "/ɪkˈstoʊl/",
+  "definition": "To praise someone or something with great enthusiasm.",
+  "difficulty": "Intermediate",
+  "example": "The old travel guide extols the island's quiet beaches and its fresh seafood.",
+  "synonyms": [
+    "laud",
+    "praise highly",
+    "acclaim",
+    "glorify"
+  ],
+  "nuance": "Extol suggests lavish, often public praise; it is stronger than commend and more formal than rave about.",
+  "alternatives": [
+    "disparage"
+  ],
+  "prompt": "A retiring librarian is honored at a community dinner.",
+  "options": [
+    "Speaker after speaker rose to extol her decades of patient help to young readers.",
+    "The organizers asked the caterer to extol the dinner by another hour so guests could linger.",
+    "Her board members tried to extol a bigger pension from the town on her behalf.",
+    "One guest extolled her in a bitter speech about every book she had wrongly discarded."
+  ],
+  "reasons": [
+    "Glowing public tributes to her long service are exactly this kind of enthusiastic praise.",
+    "This confuses the word with extend; praise cannot make an event last longer.",
+    "This mixes the word up with extort, which means to force something out of someone.",
+    "A bitter list of complaints is criticism, the reverse of warm admiration."
+  ],
+  "practice": {
+    "prompt": "A food critic writes about a small bakery that just opened.",
+    "options": [
+      "Her column extols the stale bread and warns readers never to set foot inside.",
+      "Using a fork, she managed to extol a single raisin from the dense muffin.",
+      "She extolled the bakery in one flat line, noting only that it sells bread.",
+      "Her column goes on to extol the flaky croissants and the cheerful counter staff."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Warning people away is condemnation, so the sentence contradicts itself.",
+      "Pulling something out is extracting; the verb is about words of praise, not removal.",
+      "A dull, minimal mention lacks the warmth and intensity the word requires.",
+      "Warm, detailed approval of the pastries and the service is fittingly enthusiastic."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 276,
+  "slug": "unassuming",
+  "word": "unassuming",
+  "pos": "adjective",
+  "pronunciation": "/ˌʌn.əˈsuː.mɪŋ/",
+  "definition": "Modest and quiet, not trying to draw attention or seem important.",
+  "difficulty": "Intermediate",
+  "example": "The unassuming farmhouse at the end of the lane held a library of rare maps.",
+  "synonyms": [
+    "modest",
+    "low-key",
+    "self-effacing",
+    "humble"
+  ],
+  "nuance": "Humble names an inner attitude, but unassuming describes an outward manner or look, so it also fits places and objects.",
+  "alternatives": [],
+  "prompt": "A highly skilled programmer joins a new team at a software company.",
+  "options": [
+    "Though she had won national awards, the unassuming coder rarely mentioned them.",
+    "The unassuming coder bragged about her prizes in every team meeting and email.",
+    "The unassuming coder fell for the prank because she never suspected a trick.",
+    "The unassuming coder questioned every claim, refusing to take anything for granted."
+  ],
+  "reasons": [
+    "Keeping quiet about real achievements shows a modest, low-key manner.",
+    "Constant boasting is showy, the reverse of a modest manner.",
+    "This confuses the word with unsuspecting, which means not expecting a trick.",
+    "The word describes modesty, not a literal refusal to make assumptions."
+  ],
+  "practice": {
+    "prompt": "A tiny restaurant sits between two larger shops on a busy street.",
+    "options": [
+      "The unassuming diner made guests confirm each order twice so no one would guess wrong.",
+      "With its faded sign and six tables, the unassuming diner served superb soup.",
+      "The unassuming diner hung gold chandeliers and flashing banners to lure crowds.",
+      "The unassuming diner had no idea that a famous food critic was eating there."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Avoiding guesses has nothing to do with a plain, modest appearance.",
+      "A plain, easy-to-miss place that hides real quality fits the word well.",
+      "Flashy decorations meant to grab attention are the opposite of modest.",
+      "Not knowing about a visitor is being unaware, not being modest."
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": 374,
+  "slug": "susceptible",
+  "word": "susceptible",
+  "pos": "adjective",
+  "pronunciation": "/səˈsɛp.tə.bəl/",
+  "definition": "Easily affected, harmed, or influenced by something.",
+  "difficulty": "Foundation",
+  "example": "Younger kids are often susceptible to peer pressure when deciding what to wear.",
+  "synonyms": [
+    "vulnerable",
+    "prone",
+    "liable",
+    "open to"
+  ],
+  "nuance": "Susceptible suggests a tendency to be affected or swayed; vulnerable stresses being exposed to harm or attack.",
+  "alternatives": [
+    "vulnerable"
+  ],
+  "prompt": "A nurse explains why some patients at a clinic receive flu shots before others.",
+  "options": [
+    "Older patients are more susceptible to the flu, so they get the shot first.",
+    "Because Marta is susceptible to the flu, she has never once caught it.",
+    "The nurse grew susceptible of the man who kept skipping his appointments.",
+    "The nurse gave a susceptible explanation that every patient understood easily."
+  ],
+  "reasons": [
+    "People who catch the illness more easily are the ones who benefit most from early protection.",
+    "Being easily affected by an illness would make catching it more likely, not impossible.",
+    "This confuses the word with suspicious; distrusting someone is not the same as being easily affected.",
+    "The word describes something open to influence or harm, not an explanation that is clear."
+  ],
+  "practice": {
+    "prompt": "A gardener is deciding which tomato variety to plant this year.",
+    "options": [
+      "A thick, susceptible stem held up the heavy fruit through every summer storm.",
+      "She skipped the heirloom variety because it is susceptible to leaf blight.",
+      "That variety is so susceptible to blight that its leaves never show a spot.",
+      "The gardener was susceptible that someone had been picking her tomatoes at night."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word points to weakness against outside forces, so it cannot describe a sturdy stem.",
+      "Avoiding a plant that catches a disease easily is a sensible reason to choose another.",
+      "A plant that readily catches a disease would show signs of it; spotless leaves suggest resistance.",
+      "Here the word is mistaken for suspicious, which means doubting or distrusting."
+    ]
+  }
+}

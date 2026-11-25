@@ -1,0 +1,49 @@
+{
+  "id": 264,
+  "slug": "conform",
+  "word": "conform",
+  "pos": "verb",
+  "pronunciation": "/kənˈfɔːrm/",
+  "definition": "To follow rules or standards, or to act the way a group expects.",
+  "difficulty": "Foundation",
+  "example": "Many newcomers conform to local customs within a few months of moving to a new town.",
+  "synonyms": [
+    "comply",
+    "fit in",
+    "adhere",
+    "follow"
+  ],
+  "nuance": "To conform is to match a group or standard, sometimes giving up some individuality; to comply is to obey a specific request or order.",
+  "alternatives": [
+    "comply"
+  ],
+  "prompt": "A student transfers to a school where everyone wears the same uniform.",
+  "options": [
+    "Maya chose to conform to the dress code and wore the navy blazer every day.",
+    "Maya called the front office to conform that her new blazer had arrived.",
+    "Maya decided to conform by wearing a bright orange jacket that no one else owned.",
+    "Each morning the students conform in a neat line outside the gym doors."
+  ],
+  "reasons": [
+    "Wearing what the school requires is matching its expected standard.",
+    "This mixes the word up with confirm, which means to check that something is true.",
+    "Standing out from everyone else is the reverse of going along with the group.",
+    "The word does not mean to gather or line up; it is a look-alike of form."
+  ],
+  "practice": {
+    "prompt": "An engineer checks whether a new bridge design meets local building codes.",
+    "options": [
+      "The design will conform to the code by ignoring its rules on steel thickness.",
+      "The code will conform to the design so the engineer can skip the inspection.",
+      "The design must conform to the building code before construction can begin.",
+      "The engineer will conform the meeting time with the inspector by email."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Ignoring the rules is breaking them, the opposite of meeting them.",
+      "This gets the direction backward: the design has to meet the code, not the other way around.",
+      "A plan has to meet the official requirements before work can start.",
+      "Checking or settling a time is confirming, not matching a standard."
+    ]
+  }
+}

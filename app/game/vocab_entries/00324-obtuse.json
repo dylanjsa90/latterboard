@@ -1,0 +1,49 @@
+{
+  "id": 324,
+  "slug": "obtuse",
+  "word": "obtuse",
+  "pos": "adjective",
+  "pronunciation": "/ɑːbˈtuːs/",
+  "definition": "Slow to understand or notice things, sometimes on purpose.",
+  "difficulty": "Advanced",
+  "example": "Playing obtuse, he asked why the room had gone quiet right after his careless remark.",
+  "synonyms": [
+    "dense",
+    "imperceptive",
+    "slow-witted",
+    "insensitive"
+  ],
+  "nuance": "Obtuse describes a mind that fails to grasp something; it is often confused with abstruse, which describes ideas that are hard to grasp.",
+  "alternatives": [
+    "astute"
+  ],
+  "prompt": "During a long training session, the audience keeps signaling that it is time to stop.",
+  "options": [
+    "Despite our yawns and glances at the clock, the obtuse presenter kept adding slides.",
+    "The obtuse presenter noticed our restlessness at once and wrapped up early.",
+    "We thanked the presenter for her obtuse reading of the room, which saved us time.",
+    "The session grew obtuse as it dragged past the two-hour mark."
+  ],
+  "reasons": [
+    "Missing obvious signals of restlessness shows a failure to pick up on what is plain.",
+    "Catching the mood instantly is the reverse of being slow on the uptake.",
+    "The word is a criticism, not praise for sensing what a group needs.",
+    "The word describes a person's perception, not how long an event lasts."
+  ],
+  "practice": {
+    "prompt": "A teenager drops hints that she needs a ride to the train station.",
+    "options": [
+      "She gave an obtuse hint, so subtle and clever that he admired it.",
+      "Her brother proudly called himself obtuse after finishing the crossword in minutes.",
+      "Her brother stayed obtuse, chatting about baseball while she waited by the door with her suitcase.",
+      "Her obtuse brother grasped the hint immediately and grabbed his keys."
+    ],
+    "answer": 2,
+    "reasons": [
+      "The word does not mean subtle or clever; it describes someone who misses things.",
+      "Quick puzzle-solving shows sharpness, and no one would boast of being obtuse.",
+      "Ignoring a hint as clear as a packed suitcase shows he failed to notice the obvious.",
+      "Understanding right away is the opposite of being dense."
+    ]
+  }
+}

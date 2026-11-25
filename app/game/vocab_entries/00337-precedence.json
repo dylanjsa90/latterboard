@@ -1,0 +1,47 @@
+{
+  "id": 337,
+  "slug": "precedence",
+  "word": "precedence",
+  "pos": "noun",
+  "pronunciation": "/ˈprɛs.ə.dəns/",
+  "definition": "The right to come first because something is judged more important or higher in rank.",
+  "difficulty": "Intermediate",
+  "example": "When the two club rules conflict, the newer one takes precedence.",
+  "synonyms": [
+    "priority",
+    "preference",
+    "seniority",
+    "the upper hand"
+  ],
+  "nuance": "Precedence means being first in importance or order; a precedent is an earlier case used as a model for later ones.",
+  "alternatives": [],
+  "prompt": "An emergency room nurse decides which patients to see first.",
+  "options": [
+    "Patients with severe injuries take precedence over those with minor cuts.",
+    "The nurse treated a sprained ankle first because the chest pain took precedence.",
+    "Last year's flu outbreak set a precedence for how the ward handles crowds.",
+    "The nurse showed great precedence by staying calm during the busy shift."
+  ],
+  "reasons": [
+    "The most urgent cases rightly come before less serious ones, which is the idea of ranking first.",
+    "If the chest pain came first in importance, it should have been treated first; the logic is reversed.",
+    "An earlier event that serves as a model is a precedent, not a precedence.",
+    "The word names an order of importance, not a personal quality like composure or poise."
+  ],
+  "practice": {
+    "prompt": "A student has an essay due tomorrow and a club meeting tonight.",
+    "options": [
+      "The precedence of the meeting was a classroom on the library's second floor.",
+      "With the essay due tomorrow, it took precedence over the chess club meeting.",
+      "She gave the club meeting precedence, so she skipped it to work on her essay.",
+      "Her older brother's study habits became a precedence she decided to follow."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word refers to rank or order of importance, not to a location.",
+      "The urgent deadline made the essay more important, so it came before the meeting.",
+      "Skipping the meeting shows the essay came first, which contradicts giving the meeting priority.",
+      "A past example someone copies is a precedent; this sentence mixes up the look-alike words."
+    ]
+  }
+}

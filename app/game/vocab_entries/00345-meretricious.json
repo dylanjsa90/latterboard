@@ -1,0 +1,47 @@
+{
+  "id": 345,
+  "slug": "meretricious",
+  "word": "meretricious",
+  "pos": "adjective",
+  "pronunciation": "/ˌmɛr.ɪˈtrɪʃ.əs/",
+  "definition": "Attractive on the surface but cheap, false, or lacking any real worth.",
+  "difficulty": "Advanced",
+  "example": "The novel's meretricious plot twists dazzled readers but fell apart on a second reading.",
+  "synonyms": [
+    "tawdry",
+    "specious",
+    "gaudy",
+    "flashy"
+  ],
+  "nuance": "Gaudy only means showy, but meretricious adds falseness: the glitter hides a lack of real value. Don't confuse it with meritorious.",
+  "alternatives": [],
+  "prompt": "A critic reviews a new hotel whose lobby is covered in imitation gold leaf.",
+  "options": [
+    "The critic dismissed the lobby's meretricious glitter as cheap plastic posing as luxury.",
+    "The critic praised the lobby's meretricious craftsmanship, calling it honest, solid work.",
+    "The critic said the architect deserved a meretricious award for years of faithful service.",
+    "The critic called the lobby meretricious because it was plain, quiet, and modestly furnished."
+  ],
+  "reasons": [
+    "A flashy surface that disguises low-quality material is exactly the kind of false appeal the word describes.",
+    "Honest, solid work has real value, so the word's sense of hollow showiness is reversed here.",
+    "This mixes up the word with meritorious, which means deserving praise.",
+    "Plain, modest rooms aren't flashy, and the word needs a showy surface."
+  ],
+  "practice": {
+    "prompt": "A teacher grades an essay packed with impressive-sounding phrases but little support.",
+    "options": [
+      "The teacher called the essay meretricious simply because it was handed in two days late.",
+      "Beneath its meretricious vocabulary, the essay offered almost no real evidence.",
+      "The student earned a meretricious grade by revising each paragraph with great care.",
+      "The teacher found the essay meretricious because its plain style hid a brilliant argument."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Lateness has nothing to do with showy appeal that hides a lack of value.",
+      "Fancy words that cover up a weak argument have surface appeal without substance.",
+      "This confuses the word with meritorious, which describes something that earns its reward.",
+      "This flips the meaning: a plain surface over real worth is the reverse of hollow glitter."
+    ]
+  }
+}

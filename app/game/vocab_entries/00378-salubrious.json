@@ -1,0 +1,49 @@
+{
+  "id": 378,
+  "slug": "salubrious",
+  "word": "salubrious",
+  "pos": "adjective",
+  "pronunciation": "/səˈluː.bri.əs/",
+  "definition": "Good for your health, especially when describing air, climate, or surroundings.",
+  "difficulty": "Advanced",
+  "example": "Doctors once sent patients with weak lungs to recover in salubrious mountain towns.",
+  "synonyms": [
+    "healthful",
+    "wholesome",
+    "health-giving",
+    "invigorating"
+  ],
+  "nuance": "Salubrious describes things that improve physical health; salutary describes anything beneficial, often an unpleasant but useful lesson.",
+  "alternatives": [
+    "lugubrious"
+  ],
+  "prompt": "A travel writer describes a seaside village famous for its climate.",
+  "options": [
+    "The village's salubrious climate drew retirees hoping to breathe more easily.",
+    "The village's salubrious fog left visitors coughing for days after they went home.",
+    "The fishermen sang salubrious songs about lost boats that left the whole tavern in tears.",
+    "Losing the regatta was a salubrious lesson in humility for the young sailing crew."
+  ],
+  "reasons": [
+    "Mild sea air that helps people breathe better is exactly the kind of setting that promotes health.",
+    "Fog that makes people sick harms health, so this reverses the meaning.",
+    "Mournful, tearful songs call for lugubrious, a look-alike meaning gloomy.",
+    "A useful but painful lesson is salutary; the word confused here concerns bodily well-being."
+  ],
+  "practice": {
+    "prompt": "A doctor advises a patient who works long hours at a desk indoors.",
+    "options": [
+      "She frowned at the salubrious gossip magazine lying open in the waiting room.",
+      "She recommended a salubrious routine of morning walks and earlier bedtimes.",
+      "She warned that his salubrious diet of fried snacks was raising his blood pressure.",
+      "She delivered the disappointing test results in a slow, salubrious voice."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Scandalous gossip is salacious, a look-alike; reading material is not health-giving.",
+      "Daily exercise and more sleep strengthen the body, which fits the word's sense.",
+      "A diet that damages the heart is unhealthy, the opposite of what the word conveys.",
+      "A sad, somber tone would be lugubrious; the word has nothing to do with mood."
+    ]
+  }
+}

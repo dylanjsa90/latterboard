@@ -14,7 +14,11 @@
     "stern"
   ],
   "nuance": "Austere can describe a stern person as well as a bare place, while spartan mostly stresses simple, uncomfortable living conditions.",
-  "alternatives": [],
+  "alternatives": [
+    "astute",
+    "ornate",
+    "lavish"
+  ],
   "prompt": "A designer describes a newly finished office that has almost no furniture.",
   "options": [
     "The designer kept the office austere: a steel desk, one chair, and bare gray walls.",

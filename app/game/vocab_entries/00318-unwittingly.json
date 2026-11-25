@@ -1,0 +1,48 @@
+{
+  "id": 318,
+  "slug": "unwittingly",
+  "word": "unwittingly",
+  "pos": "adverb",
+  "pronunciation": "/ʌnˈwɪt.ɪŋ.li/",
+  "definition": "Without knowing or realizing what one is doing or what is happening.",
+  "difficulty": "Intermediate",
+  "example": "By repeating the rumor at lunch, he unwittingly helped spread a story that wasn't true.",
+  "synonyms": [
+    "unknowingly",
+    "inadvertently",
+    "unconsciously"
+  ],
+  "nuance": "Unwittingly means without awareness, while the look-alike unwillingly means with reluctance; a person can act willingly yet unwittingly.",
+  "alternatives": [
+    "deliberately"
+  ],
+  "prompt": "At a dinner party, a guest sits down in the host's favorite chair.",
+  "options": [
+    "Unaware of its history, the guest unwittingly took the host's favorite chair.",
+    "The guest sat down unwittingly, complaining loudly that she would much rather stand.",
+    "After asking which seat the host loved most, the guest unwittingly chose it on purpose.",
+    "Unwittingly, the old chair creaked as the guest lowered herself onto its cushion."
+  ],
+  "reasons": [
+    "She did not know the chair was special, so she acted without realizing the significance.",
+    "Complaining shows reluctance, which fits unwillingly; it says nothing about lacking awareness.",
+    "Asking first and choosing on purpose means she knew exactly what she was doing.",
+    "A chair has no awareness to lack; the word describes a person who fails to realize something."
+  ],
+  "practice": {
+    "prompt": "A hiker walks through a field of plants with sticky seeds.",
+    "options": [
+      "Seeds clung to her socks, so the hiker unwittingly spread the plant to a distant meadow.",
+      "The hiker unwittingly gathered the seeds one by one to plant in her garden at home.",
+      "The hiker unwittingly kept walking, though her aching feet begged her to stop.",
+      "Knowing full well the risk, the hiker unwittingly left the trail to cut across the field."
+    ],
+    "answer": 0,
+    "reasons": [
+      "She never noticed the seeds, so she carried them off without realizing it.",
+      "Collecting seeds one at a time for a planned purpose is fully intentional.",
+      "Pushing on despite pain describes reluctance, a meaning that belongs to unwillingly.",
+      "Knowing the risk means she was aware; this fits unwisely or recklessly instead."
+    ]
+  }
+}

@@ -14,7 +14,10 @@
     "submit"
   ],
   "nuance": "Acquiesce suggests quiet, often grudging acceptance of another's wish, while consent can be willing and enthusiastic.",
-  "alternatives": [],
+  "alternatives": [
+    "consent",
+    "acquit"
+  ],
   "prompt": "A team captain wants to practice outdoors, but the coach insists on using the gym.",
   "options": [
     "Seeing the coach would not budge, the captain chose to acquiesce and led the team inside.",

@@ -14,7 +14,10 @@
     "verify"
   ],
   "nuance": "To corroborate is to confirm with separate, independent evidence; don't confuse it with collaborate, which means to work together.",
-  "alternatives": [],
+  "alternatives": [
+    "contradict",
+    "collaborate"
+  ],
   "prompt": "A historian finds a second letter describing the same flood recorded in an old diary.",
   "options": [
     "The historian hoped a second letter would corroborate the diary's account of the flood.",

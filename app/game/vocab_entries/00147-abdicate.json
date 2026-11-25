@@ -1,0 +1,49 @@
+{
+  "id": 147,
+  "slug": "abdicate",
+  "word": "abdicate",
+  "pos": "verb",
+  "pronunciation": "/ˈæb.dɪ.keɪt/",
+  "definition": "To formally give up a position of power, or to fail to carry out a duty you are responsible for.",
+  "difficulty": "Intermediate",
+  "example": "In the fairy tale, the weary king decides to abdicate so that his daughter can rule.",
+  "synonyms": [
+    "relinquish",
+    "renounce",
+    "step down",
+    "give up"
+  ],
+  "nuance": "Unlike resign, abdicate suggests giving up something you were expected to keep, such as a throne or a duty, and it often carries blame.",
+  "alternatives": [
+    "abrogate"
+  ],
+  "prompt": "A team captain is deciding whether to keep leading during a losing season.",
+  "options": [
+    "Rather than abdicate her role, the captain scheduled extra practices for the team.",
+    "Eager to take charge, the captain stepped forward to abdicate command of the whole team.",
+    "The captain plans to abdicate for a longer season when she meets with league officials.",
+    "On every corner kick, the captain will abdicate the ball to the fastest striker."
+  ],
+  "reasons": [
+    "She keeps her leadership role and acts on it instead of walking away from it.",
+    "Taking charge is the reverse of giving up a position of authority.",
+    "Arguing in favor of something is advocating, a different word; abdicating means surrendering a role.",
+    "Passing a ball is a physical act, not giving up a post or a responsibility."
+  ],
+  "practice": {
+    "prompt": "The treasurer of a chess club stops checking the club's accounts for a whole year.",
+    "options": [
+      "By ignoring the accounts, the treasurer seemed to abdicate a basic duty of the job.",
+      "The treasurer will abdicate the club's savings by spending them on fancy new boards.",
+      "To abdicate his duties, the treasurer reviewed every receipt twice each month.",
+      "At the meeting, the treasurer moved to abdicate the old dues rule and declare it void."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Neglecting the main task of an office is a clear case of walking away from a responsibility.",
+      "Wasting money is squandering it; the word refers to giving up a duty or position, not spending.",
+      "Checking receipts carefully means doing the job, the opposite of abandoning it.",
+      "Canceling a rule is abrogating, a look-alike word; the treasurer is not giving up any role."
+    ]
+  }
+}

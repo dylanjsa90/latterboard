@@ -14,7 +14,9 @@
     "marvel"
   ],
   "nuance": "Unlike a mere event, a phenomenon is something observed and studied; use phenomena, not phenomenon, for more than one.",
-  "alternatives": [],
+  "alternatives": [
+    "hypothesis"
+  ],
   "prompt": "A science class watches water droplets form on the outside of a cold glass.",
   "options": [
     "The teacher said condensation is a phenomenon that occurs when moist air meets a cold surface.",

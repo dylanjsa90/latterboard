@@ -14,7 +14,11 @@
     "headlong"
   ],
   "nuance": "Impulsive can describe any sudden whim, but impetuous adds eager force, like someone charging ahead before thinking.",
-  "alternatives": [],
+  "alternatives": [
+    "impervious",
+    "cautious",
+    "impulsive"
+  ],
   "prompt": "A hiker reaches a fork in the trail just as dark clouds start to gather.",
   "options": [
     "The impetuous hiker charged down the steeper path without checking the map or the sky.",

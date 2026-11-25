@@ -14,7 +14,9 @@
     "certain"
   ],
   "nuance": "Inevitable means nothing can stop an outcome, while likely or probable allows that it might still be avoided.",
-  "alternatives": [],
+  "alternatives": [
+    "inimitable"
+  ],
   "prompt": "Campers watch the sun set on a clear, cold autumn evening in the mountains.",
   "options": [
     "With the sun gone and the sky clear, a frosty night was inevitable.",

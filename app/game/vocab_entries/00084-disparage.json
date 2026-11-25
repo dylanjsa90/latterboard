@@ -14,7 +14,10 @@
     "deprecate"
   ],
   "nuance": "To criticize can be fair and constructive, but to disparage is to talk something down and make it seem worth less than it is.",
-  "alternatives": [],
+  "alternatives": [
+    "extol",
+    "disperse"
+  ],
   "prompt": "A chef learns that a new restaurant has opened across the street.",
   "options": [
     "The jealous chef began to disparage the new menu, calling it bland and unoriginal.",

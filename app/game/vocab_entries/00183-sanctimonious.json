@@ -1,0 +1,50 @@
+{
+  "id": 183,
+  "slug": "sanctimonious",
+  "word": "sanctimonious",
+  "pos": "adjective",
+  "pronunciation": "/ˌsæŋk.təˈmoʊ.ni.əs/",
+  "definition": "Acting as if you are morally better than other people, in a smug and preachy way.",
+  "difficulty": "Advanced",
+  "example": "The critic's sanctimonious review scolded readers for enjoying a harmless comedy.",
+  "synonyms": [
+    "self-righteous",
+    "preachy",
+    "holier-than-thou",
+    "moralizing"
+  ],
+  "nuance": "Unlike sincere moral concern, sanctimonious implies the virtue is put on for show, usually with smugness or a hint of hypocrisy.",
+  "alternatives": [
+    "sanguine",
+    "earnest"
+  ],
+  "prompt": "A neighbor comments on how the other people on her street sort their recycling.",
+  "options": [
+    "With a sanctimonious sigh, she announced that she alone bothered to rinse her jars.",
+    "Feeling sanctimonious about the weather, she predicted a sunny day for the pickup.",
+    "Too sanctimonious to boast, she quietly helped the neighbors on her street sort their bottles.",
+    "The sanctimonious bins were scrubbed and disinfected after every single pickup."
+  ],
+  "reasons": [
+    "Making a smug show of her own goodness while looking down on others fits the word.",
+    "This treats the word like sanguine, which means hopeful; it has nothing to do with optimism.",
+    "Quiet, modest helpfulness is the reverse of a showy, preachy display of virtue.",
+    "This confuses the word with sanitary; it describes a person's smug attitude, not cleanliness."
+  ],
+  "practice": {
+    "prompt": "A teenager has just given up sugary snacks for a month.",
+    "options": [
+      "He became so sanctimonious that he lectured his friends about every cookie they ate.",
+      "The coach gave a sanctimonious nod, officially approving the new meal plan.",
+      "Being sanctimonious, he never mentioned his diet and gladly passed the snacks around.",
+      "His aunt praised his sanctimonious honesty when he admitted eating one candy bar."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Preaching at friends as if his new habit made him better than them is exactly this attitude.",
+      "This mixes the word up with sanction, meaning to approve; it does not mean giving permission.",
+      "Keeping quiet and not judging anyone is the opposite of smug moral posturing.",
+      "The word is an insult, not praise, and humbly owning up to a slip is not smug at all."
+    ]
+  }
+}

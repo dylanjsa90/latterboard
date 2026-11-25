@@ -1,0 +1,47 @@
+{
+  "id": 258,
+  "slug": "egregious",
+  "word": "egregious",
+  "pos": "adjective",
+  "pronunciation": "/ɪˈɡriː.dʒəs/",
+  "definition": "Shockingly bad in a way that is obvious to anyone who notices it.",
+  "difficulty": "Advanced",
+  "example": "The bank's egregious billing mistake charged the family for the same purchase forty times.",
+  "synonyms": [
+    "flagrant",
+    "glaring",
+    "outrageous",
+    "appalling"
+  ],
+  "nuance": "Egregious stresses how glaring and extreme a wrong is; flagrant adds that it was done openly, often on purpose.",
+  "alternatives": [],
+  "prompt": "A health inspector walks through a restaurant kitchen during a surprise visit.",
+  "options": [
+    "Keeping raw chicken above the salad greens was an egregious lapse.",
+    "The egregious cook chatted warmly with every guest who came in.",
+    "The inspector praised the kitchen's egregious cleanliness and gave it top marks.",
+    "She found one tiny, egregious crumb that posed no risk at all."
+  ],
+  "reasons": [
+    "An obvious, serious food-safety failure is exactly the kind of wrong the word describes.",
+    "This confuses the word with gregarious, which means sociable and friendly.",
+    "The word condemns something as terrible, so it cannot describe praiseworthy cleanliness.",
+    "A harmless, barely noticeable crumb is neither glaring nor seriously bad."
+  ],
+  "practice": {
+    "prompt": "A student proofreads a classmate's history report before it is turned in.",
+    "options": [
+      "Being egregious, Marco eagerly joined every group discussion in class.",
+      "The report had one egregious typo so subtle that nobody noticed it.",
+      "Dating the first moon landing to 1869 was an egregious error.",
+      "Her egregious research was so thorough that the teacher gave it top marks."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Enjoying group conversation describes being gregarious, a look-alike word.",
+      "An egregious flaw stands out; one that nobody notices cannot be glaring.",
+      "Missing the date by a whole century is a glaring, serious mistake anyone would catch.",
+      "Thorough, excellent work is the opposite of something shockingly bad."
+    ]
+  }
+}

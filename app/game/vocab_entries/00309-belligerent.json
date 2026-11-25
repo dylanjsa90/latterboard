@@ -1,0 +1,49 @@
+{
+  "id": 309,
+  "slug": "belligerent",
+  "word": "belligerent",
+  "pos": "adjective",
+  "pronunciation": "/bəˈlɪdʒ.ər.ənt/",
+  "definition": "Openly hostile and eager to argue or pick a fight.",
+  "difficulty": "Intermediate",
+  "example": "After losing the debate, he grew belligerent and challenged every point the judges had made.",
+  "synonyms": [
+    "hostile",
+    "combative",
+    "aggressive",
+    "pugnacious"
+  ],
+  "nuance": "Belligerent describes hostile behavior shown in the moment, while bellicose suggests a lasting temperament inclined toward fighting.",
+  "alternatives": [
+    "conciliatory"
+  ],
+  "prompt": "A referee calls a foul against the home team during a youth basketball game.",
+  "options": [
+    "The belligerent coach shouted at the referee and refused to return to the bench.",
+    "The belligerent coach thanked the referee warmly and shook hands after the whistle.",
+    "The belligerent coach reviewed game film every night to help her players improve.",
+    "The belligerent coach cheered so loudly for both teams that the whole gym smiled."
+  ],
+  "reasons": [
+    "Yelling and defying the official is the kind of open hostility the word describes.",
+    "Warm thanks and a handshake are friendly, the reverse of a combative attitude.",
+    "Steady hard work suggests diligent, a sound-alike, not someone itching for a fight.",
+    "Being loud is not the same as being hostile; cheerful noise has no aggression in it."
+  ],
+  "practice": {
+    "prompt": "A neighbor is upset about a tree branch hanging over the fence.",
+    "options": [
+      "The belligerent neighbor stormed over and demanded, in a raised voice, that we cut it today.",
+      "The belligerent neighbor politely asked if we might trim the branch sometime this spring.",
+      "The belligerent neighbor, worn out after a week of storms, sighed at yet another fallen limb.",
+      "The belligerent neighbor measured the branch with a tape and wrote its length in a notebook."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Storming over and making angry demands shows an aggressive, confrontational manner.",
+      "A polite, patient request is courteous, the opposite of picking a fight.",
+      "Weariness from repeated trouble fits beleaguered, a look-alike, not hostility.",
+      "Calmly taking a measurement shows no anger or urge to argue at all."
+    ]
+  }
+}

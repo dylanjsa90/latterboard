@@ -14,7 +14,11 @@
     "duplicity"
   ],
   "nuance": "Perfidy means breaking faith with someone who trusted you; duplicity is double-dealing deceit that need not break any bond.",
-  "alternatives": [],
+  "alternatives": [
+    "perjury",
+    "duplicity",
+    "fidelity"
+  ],
   "prompt": "A chess club captain secretly shared her team's strategy with a rival club before the finals.",
   "options": [
     "Her teammates were stunned by the perfidy of a captain they had trusted with every plan.",

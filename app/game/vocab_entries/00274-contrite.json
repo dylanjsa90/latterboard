@@ -1,0 +1,47 @@
+{
+  "id": 274,
+  "slug": "contrite",
+  "word": "contrite",
+  "pos": "adjective",
+  "pronunciation": "/kənˈtraɪt/",
+  "definition": "Feeling or showing sincere sorrow for having done something wrong.",
+  "difficulty": "Advanced",
+  "example": "After snapping at his sister, Marco gave her a contrite look and offered to wash the dishes for a week.",
+  "synonyms": [
+    "remorseful",
+    "penitent",
+    "repentant",
+    "apologetic"
+  ],
+  "nuance": "Contrite implies genuine inner regret for a wrong, while apologetic can describe a merely polite or routine show of regret.",
+  "alternatives": [],
+  "prompt": "A student realizes she has lost the notes a classmate lent her before a big exam.",
+  "options": [
+    "Feeling contrite, she apologized and offered to recopy the missing pages by hand.",
+    "Feeling contrite, she shrugged and told him the notes were his problem now.",
+    "Her contrite excuse, invented on the spot, was too elaborate for anyone to believe.",
+    "She felt contrite because her own notes were so much neater than his."
+  ],
+  "reasons": [
+    "Her apology and effort to make things right show real regret for her mistake.",
+    "Shrugging off blame shows no remorse, which is the reverse of the word's meaning.",
+    "This confuses the word with contrived, which means artificial or made up.",
+    "Having neater notes is not a wrongdoing, so there is nothing to regret."
+  ],
+  "practice": {
+    "prompt": "A neighbor's dog escaped overnight and dug holes all through the garden next door.",
+    "options": [
+      "The owner felt contrite and pleased that the dog finally had room to play.",
+      "The owner, looking contrite, knocked on the door holding a tray of new seedlings.",
+      "The contrite owner insisted the garden looked better with the holes in it.",
+      "The owner told a contrite story about a raccoon, but nobody was fooled."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Satisfaction about the outcome clashes with the sorrow the word requires.",
+      "Arriving with replacements and a sorry expression signals sincere remorse.",
+      "Defending the damage is unrepentant, not regretful.",
+      "A fabricated story is contrived; the word here is mistaken for its look-alike."
+    ]
+  }
+}

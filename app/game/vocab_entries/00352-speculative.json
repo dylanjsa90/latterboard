@@ -1,0 +1,49 @@
+{
+  "id": 352,
+  "slug": "speculative",
+  "word": "speculative",
+  "pos": "adjective",
+  "pronunciation": "/ˈspɛk.jə.lə.tɪv/",
+  "definition": "Based on guesses or theories rather than on solid facts or evidence.",
+  "difficulty": "Foundation",
+  "example": "Without the original letters, any account of the poet's childhood remains speculative.",
+  "synonyms": [
+    "conjectural",
+    "unproven",
+    "hypothetical",
+    "theoretical"
+  ],
+  "nuance": "Speculative stresses a lack of supporting evidence, while hypothetical describes a case imagined for the sake of argument.",
+  "alternatives": [
+    "empirical"
+  ],
+  "prompt": "Scientists discuss a newly found fossil that consists of just one tooth.",
+  "options": [
+    "With only a single tooth, any claim about the animal's diet is speculative.",
+    "The speculative findings had been confirmed by dozens of careful measurements.",
+    "The museum labeled the tooth speculative because it was so beautifully polished.",
+    "The team took a speculative look at the tooth through a magnifying glass."
+  ],
+  "reasons": [
+    "One tooth gives too little evidence, so conclusions about diet must rest on guesswork.",
+    "Results backed by many measurements are well supported, the reverse of guesswork.",
+    "This confuses the word with spectacular; shine has nothing to do with uncertain reasoning.",
+    "The word describes ideas lacking proof, not the act of looking closely at something."
+  ],
+  "practice": {
+    "prompt": "A local reporter hears rumors that a neighborhood bakery will close.",
+    "options": [
+      "Until the owner comments, talk of the bakery closing is purely speculative.",
+      "The owner's signed announcement made the exact closing date speculative.",
+      "The reporter was so speculative that she refused to guess about anything at all.",
+      "The bakery's speculative rye bread sold out early because it smelled so fresh."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Without confirmation from the owner, the rumor rests on guesses rather than facts.",
+      "An official signed statement is firm evidence, which removes the need to guess.",
+      "Refusing to guess is the opposite of reasoning from conjecture.",
+      "Bread's smell or freshness can't be based on theory; the word describes claims and ideas."
+    ]
+  }
+}

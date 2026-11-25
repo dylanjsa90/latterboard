@@ -1,0 +1,47 @@
+{
+  "id": 340,
+  "slug": "rapacious",
+  "word": "rapacious",
+  "pos": "adjective",
+  "pronunciation": "/rəˈpeɪ.ʃəs/",
+  "definition": "Aggressively greedy and eager to grab money or goods, even by unfair means.",
+  "difficulty": "Advanced",
+  "example": "Rapacious speculators bought up the valley's water rights and resold them to farmers at triple the price.",
+  "synonyms": [
+    "grasping",
+    "predatory",
+    "greedy",
+    "avaricious"
+  ],
+  "nuance": "Rapacious suggests actively seizing what belongs to others, while avaricious stresses a hoarding love of wealth itself.",
+  "alternatives": [],
+  "prompt": "A logging company is deciding how to harvest a forest it has leased from a small town.",
+  "options": [
+    "The rapacious company stripped every acre bare and ignored its promise to replant.",
+    "The rapacious loggers worked so fast that the whole crew finished the job before lunch.",
+    "The rapacious company cut only a few dead trees and left the rest standing.",
+    "The rapacious foreman ate four sandwiches during the lunch break."
+  ],
+  "reasons": [
+    "Taking everything it could while breaking an agreement shows grasping, unscrupulous greed.",
+    "Speed is not greed; this confuses the word with the look-alike rapid.",
+    "Restraint and moderation are the reverse of grabbing as much as possible.",
+    "A big appetite for food is voracious; rapacious is about seizing wealth or goods."
+  ],
+  "practice": {
+    "prompt": "A landlord owns nearly every apartment on a narrow city street.",
+    "options": [
+      "The rapacious landlord sat motionless, completely absorbed in a street musician's song.",
+      "The rapacious landlord doubled the rent the moment tenants had nowhere else to go.",
+      "The rapacious landlord lowered rents during winter so families could afford heat.",
+      "The rapacious landlord's apartments had enormous closets and wide hallways."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Deep, fascinated attention is rapt; nothing here involves greed or seizing.",
+      "Exploiting tenants' lack of choices to extract more money is ruthless greed.",
+      "Giving up income to help tenants is kindness, the opposite of greedy grabbing.",
+      "Roomy spaces are capacious, a look-alike; the word describes a greedy person."
+    ]
+  }
+}

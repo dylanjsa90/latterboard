@@ -1,0 +1,47 @@
+{
+  "id": 344,
+  "slug": "abeyance",
+  "word": "abeyance",
+  "pos": "noun",
+  "pronunciation": "/əˈbeɪ.əns/",
+  "definition": "A state of temporary pause, when something is set aside for now but may start again later.",
+  "difficulty": "Advanced",
+  "example": "The town's plan for a new library was held in abeyance until the budget recovered.",
+  "synonyms": [
+    "suspension",
+    "dormancy",
+    "limbo",
+    "temporary inactivity"
+  ],
+  "nuance": "Unlike cancellation or abolition, abeyance means a pause, not an end: the matter is expected to resume someday.",
+  "alternatives": [],
+  "prompt": "A museum's renovation stalls while engineers inspect cracks in the building's foundation.",
+  "options": [
+    "The renovation was held in abeyance until the engineers finished their report.",
+    "The director showed abeyance to the engineers by bowing deeply as they entered.",
+    "With the renovation in abeyance, workers hammered away on the new gallery all week.",
+    "The museum had such abeyance of donations that it added two wings."
+  ],
+  "reasons": [
+    "The project is paused for now and will continue once the inspection is done.",
+    "This confuses the word with obeisance, a gesture of respect, not a pause.",
+    "Busy hammering means work is going on, which contradicts a suspended project.",
+    "This mixes the word up with abundance; it has nothing to do with having plenty."
+  ],
+  "practice": {
+    "prompt": "A family postpones a long-planned road trip after their car breaks down.",
+    "options": [
+      "The children knelt in abeyance before their grandmother to thank her for the map.",
+      "Putting the trip in abeyance meant they erased it from their plans for good.",
+      "Their road trip stayed in abeyance until the mechanic could replace the engine.",
+      "Their trip was in abeyance, so they left at dawn and drove four hundred miles."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Kneeling in thanks describes obeisance, a look-alike meaning humble respect.",
+      "Dropping something forever is cancellation; the word implies it may come back.",
+      "The trip is on hold, with a clear chance of going ahead once the car is fixed.",
+      "Setting off and driving far means the trip is happening, not paused."
+    ]
+  }
+}

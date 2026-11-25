@@ -13,7 +13,10 @@
     "overconfidence"
   ],
   "nuance": "Arrogance is simply acting superior, while hubris suggests pride so great that it invites a person's own downfall.",
-  "alternatives": [],
+  "alternatives": [
+    "audacity",
+    "humility"
+  ],
   "prompt": "A champion chess player is scheduled to face an unranked newcomer.",
   "options": [
     "Out of hubris, the champion skipped preparing and lost to the newcomer in twelve moves.",

@@ -1,0 +1,46 @@
+{
+  "id": 341,
+  "slug": "inquisitive",
+  "word": "inquisitive",
+  "pos": "adjective",
+  "pronunciation": "/ɪnˈkwɪz.ə.tɪv/",
+  "definition": "Eager to learn about things and quick to ask questions.",
+  "difficulty": "Foundation",
+  "example": "The inquisitive toddler wanted to know why the moon seemed to follow the car.",
+  "synonyms": [
+    "curious",
+    "inquiring",
+    "questioning"
+  ],
+  "nuance": "Inquisitive stresses actively asking questions; it is often admiring but can hint at prying, while curious stays more neutral.",
+  "alternatives": [],
+  "prompt": "A museum guide leads a group of students through a fossil exhibit.",
+  "options": [
+    "One inquisitive student asked how scientists tell how old each bone is.",
+    "The inquisitive boy yawned and wandered past every display without a glance.",
+    "An inquisitive girl tried to slip a small fossil into her pocket to keep.",
+    "Being inquisitive, the student felt sure he knew it all and asked nothing."
+  ],
+  "reasons": [
+    "Asking a question to learn more about the fossils shows an active wish to understand.",
+    "Ignoring the exhibits shows a lack of interest, the reverse of this trait.",
+    "Wanting to own things is being acquisitive, a look-alike word, not asking questions.",
+    "Someone with no wish to ask or learn cannot be described this way."
+  ],
+  "practice": {
+    "prompt": "A new intern spends her first week working at a bakery.",
+    "options": [
+      "The inquisitive frosting on the wedding cake looked delicate and lovely.",
+      "The inquisitive intern kept asking the baker why the dough had to rest overnight.",
+      "The inquisitive intern never wondered how anything worked and just waited for orders.",
+      "The inquisitive intern piled up free pastries until her bag could hold no more."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Frosting cannot ask questions; the writer has mixed this word up with exquisite.",
+      "Repeated questions about how baking works show a strong desire to learn.",
+      "Never wondering about anything describes someone incurious, the opposite.",
+      "Greedily gathering things fits acquisitive, not a hunger for knowledge."
+    ]
+  }
+}

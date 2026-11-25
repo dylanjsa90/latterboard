@@ -1,0 +1,47 @@
+{
+  "id": 202,
+  "slug": "cupidity",
+  "word": "cupidity",
+  "pos": "noun",
+  "pronunciation": "/kjuˈpɪd.ə.ti/",
+  "definition": "A strong, selfish desire for money or possessions.",
+  "difficulty": "Advanced",
+  "example": "Critics blamed the merchants' cupidity for the shortage, since they hoarded grain to push prices higher.",
+  "synonyms": [
+    "greed",
+    "avarice",
+    "acquisitiveness",
+    "rapacity"
+  ],
+  "nuance": "Despite its link to Cupid, it means greed for wealth, not love; next to avarice, it stresses eager craving more than miserly hoarding.",
+  "alternatives": [],
+  "prompt": "A landlord learns that his tenants have almost no other housing options in town.",
+  "options": [
+    "The landlord's cupidity showed when he doubled the rent once he knew the tenants were stuck.",
+    "The landlord's cupidity led him to cut rents for every family that was struggling to pay.",
+    "Out of cupidity, the landlord wrote tender love poems and slipped them under his wife's door.",
+    "The landlord's cupidity made him forget to lock the front door of the building at night."
+  ],
+  "reasons": [
+    "Exploiting people's lack of choice to grab more money is a clear display of greed.",
+    "Giving up income to help others is generosity, the reverse of greed.",
+    "The word sounds like Cupid but has nothing to do with romance or affection.",
+    "Forgetfulness is a lapse of attention, not a hunger for wealth; this confuses it with stupidity."
+  ],
+  "practice": {
+    "prompt": "A diver discovers that an old shipwreck still holds a scattering of gold coins.",
+    "options": [
+      "Her cupidity moved her to hand every coin over to the town museum for free.",
+      "In a burst of cupidity, the diver mailed a heartfelt valentine to her old shipmate.",
+      "His cupidity caused him to misread the chart and search the wrong reef all week.",
+      "Driven by cupidity, the diver ignored the storm warning to scoop up a few more coins."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Freely giving away the treasure is selfless, the opposite of craving wealth.",
+      "Sending a valentine is about affection, and the word refers to greed rather than love.",
+      "Misreading a map is a simple error in thinking, not a desire for possessions.",
+      "Risking safety just to collect more treasure shows an overpowering hunger for riches."
+    ]
+  }
+}

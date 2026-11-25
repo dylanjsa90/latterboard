@@ -14,7 +14,8 @@
   ],
   "nuance": "Tacitly means an understanding is shared without words. Implicitly is broader and can describe any meaning that is suggested rather than stated.",
   "alternatives": [
-    "explicitly"
+    "explicitly",
+    "implicitly"
   ],
   "prompt": "Neighbors on a quiet street share the work of clearing snow, but they have never talked about how.",
   "options": [

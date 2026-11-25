@@ -1,0 +1,47 @@
+{
+  "id": 315,
+  "slug": "cavil",
+  "word": "cavil",
+  "pos": "verb",
+  "pronunciation": "/ˈkæv.əl/",
+  "definition": "To raise small, petty objections that do not really matter.",
+  "difficulty": "Advanced",
+  "example": "Critics may cavil at a few awkward lines, but the novel's plot is gripping from start to finish.",
+  "synonyms": [
+    "quibble",
+    "nitpick",
+    "carp",
+    "split hairs"
+  ],
+  "nuance": "To cavil is to object over trivial points; to carp suggests nagging, repeated complaint rather than one petty objection.",
+  "alternatives": [],
+  "prompt": "A town committee reviews a carefully planned proposal for a new public garden.",
+  "options": [
+    "Two members began to cavil about comma placement while ignoring the plan itself.",
+    "Thrilled by the drawings, the members could only cavil, praising each flower bed in turn.",
+    "After the vote passed, the members began to cavil around the room, dancing and cheering loudly.",
+    "The engineer was right to cavil when she found the garden wall would collapse onto the sidewalk."
+  ],
+  "reasons": [
+    "Fussing over punctuation while the real substance goes unexamined is a textbook petty objection.",
+    "Praise is the reverse of finding fault, so the word cannot describe enthusiastic approval.",
+    "This confuses the word with cavort, which means to leap about playfully.",
+    "A serious safety flaw is a weighty concern, not the trivial objection the word implies."
+  ],
+  "practice": {
+    "prompt": "A guest attends a dinner party where the food is excellent.",
+    "options": [
+      "The host asked a guest to cavil the roast into thin, even slices for the table.",
+      "Delighted with every course, the guest did nothing but cavil, thanking the cook again and again.",
+      "A guest had to cavil after learning the soup contained nuts, which she is dangerously allergic to.",
+      "One guest chose to cavil over the napkin color while everyone else enjoyed the meal."
+    ],
+    "answer": 3,
+    "reasons": [
+      "This mixes the word up with carve; it has nothing to do with cutting food.",
+      "Gratitude and delight are the opposite of raising objections.",
+      "A health risk is a legitimate, serious concern, so calling it a trivial objection is wrong.",
+      "Complaining about a minor detail amid a fine dinner is exactly this kind of petty fault-finding."
+    ]
+  }
+}

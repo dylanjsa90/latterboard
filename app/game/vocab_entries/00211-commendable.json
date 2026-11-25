@@ -1,0 +1,47 @@
+{
+  "id": 211,
+  "slug": "commendable",
+  "word": "commendable",
+  "pos": "adjective",
+  "pronunciation": "/kəˈmɛn.də.bəl/",
+  "definition": "Deserving praise, especially for effort, honesty, or good conduct.",
+  "difficulty": "Foundation",
+  "example": "Her commendable patience with the new volunteers kept the food drive running smoothly.",
+  "synonyms": [
+    "praiseworthy",
+    "admirable",
+    "laudable",
+    "creditable"
+  ],
+  "nuance": "Commendable means deserving praise, while laudatory means expressing it; commendable is also milder than outstanding or brilliant.",
+  "alternatives": [],
+  "prompt": "A student finds a lost wallet in the hallway and brings it to the school office.",
+  "options": [
+    "Handing it in with every dollar still inside was a commendable act of honesty.",
+    "The student felt so commendable toward the principal that she thanked him twice.",
+    "Quietly keeping the cash and tossing the empty wallet in a trash can was commendable.",
+    "The office gave a small reward that was commendable with the cash in the wallet."
+  ],
+  "reasons": [
+    "Returning someone's money untouched is conduct that rightly earns praise.",
+    "The word describes what deserves praise, not a feeling of gratitude toward someone.",
+    "Taking the money is dishonest and deserves blame, so this reverses the meaning.",
+    "This confuses the word with commensurate, which means in proportion to something."
+  ],
+  "practice": {
+    "prompt": "A soccer team is losing by four goals but keeps playing hard until the final whistle.",
+    "options": [
+      "The scoreboard showed a commendable four to nothing, the season's widest gap.",
+      "The referee was commendable of the team's spirit and told them so after the match.",
+      "The coach praised the players' commendable refusal to give up in the last minutes.",
+      "Walking slowly and sulking after each goal, the captain showed commendable effort."
+    ],
+    "answer": 2,
+    "reasons": [
+      "A lopsided score is just a number, not an action that merits praise.",
+      "The word applies to what earns praise, not to a person who gives it.",
+      "Fighting on when the game is lost is effort worth applauding.",
+      "Sulking and slowing down are the opposite of effort that earns admiration."
+    ]
+  }
+}

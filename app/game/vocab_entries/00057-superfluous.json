@@ -14,7 +14,10 @@
     "surplus"
   ],
   "nuance": "Superfluous stresses going beyond what is needed; redundant adds that the extra thing repeats something already there.",
-  "alternatives": [],
+  "alternatives": [
+    "redundant",
+    "superficial"
+  ],
   "prompt": "A hiker is packing a light backpack for a one-day trail.",
   "options": [
     "She left the second flashlight at home because it seemed superfluous for a daytime hike.",

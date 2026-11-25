@@ -1,0 +1,48 @@
+{
+  "id": 243,
+  "slug": "malevolent",
+  "word": "malevolent",
+  "pos": "adjective",
+  "pronunciation": "/məˈlɛv.ə.lənt/",
+  "definition": "Wishing or intending harm to other people.",
+  "difficulty": "Intermediate",
+  "example": "She mistook his blunt advice for malevolent intent, though he only wanted her to succeed.",
+  "synonyms": [
+    "malicious",
+    "spiteful",
+    "ill-intentioned"
+  ],
+  "nuance": "Malevolent stresses a deep-seated wish for harm, while malicious more often describes a particular spiteful act.",
+  "alternatives": [
+    "benevolent"
+  ],
+  "prompt": "A student learns that a classmate deliberately deleted her group's shared project file.",
+  "options": [
+    "The malevolent classmate erased the file so the group would miss its deadline.",
+    "The malevolent classmate stayed late to help the group rebuild every lost page.",
+    "The malevolent classmate erased the file by accident while trying to save a copy.",
+    "The malevolent classmate complained loudly that the project topic was dull."
+  ],
+  "reasons": [
+    "Destroying work on purpose to make others fail shows a clear desire to hurt them.",
+    "Pitching in to repair the damage shows goodwill, the reverse of ill intent.",
+    "An honest mistake involves no wish to cause harm, so the word does not fit.",
+    "Grumbling about a topic shows dissatisfaction, not a desire to injure anyone."
+  ],
+  "practice": {
+    "prompt": "Readers discuss a scheming uncle in a mystery novel who wants the family fortune.",
+    "options": [
+      "The malevolent uncle quietly paid his niece's college tuition and asked for no thanks.",
+      "The malevolent uncle changed his opinions to match whoever had spoken last.",
+      "The malevolent uncle was famous at family dinners for his long and terrible puns.",
+      "The malevolent uncle forged letters to turn the siblings against each other."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Generous, selfless giving reflects kindness, which is the opposite quality.",
+      "Being easily swayed describes a weak will, not a wish to do others harm.",
+      "Corny jokes may annoy people, but they show no intention to hurt anyone.",
+      "Deliberately stirring up conflict among relatives for gain reveals real ill will."
+    ]
+  }
+}

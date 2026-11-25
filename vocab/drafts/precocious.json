@@ -1,0 +1,62 @@
+{
+  "slug": "precocious",
+  "word": "precocious",
+  "pos": "adjective",
+  "difficulty": "Intermediate",
+  "source": "generated",
+  "status": "invalid",
+  "attempts": 1,
+  "errors": [
+    "precocious: nuance: 162 characters (max 160)"
+  ],
+  "note": "",
+  "entry": {
+    "slug": "precocious",
+    "word": "precocious",
+    "pos": "adjective",
+    "pronunciation": "/prɪˈkoʊ.ʃəs/",
+    "definition": "Showing skills or maturity much earlier than usual, especially as a child.",
+    "difficulty": "Intermediate",
+    "example": "Her precocious questions about the stars led her parents to buy her a telescope when she was five.",
+    "synonyms": [
+      "advanced",
+      "mature for one's age",
+      "gifted"
+    ],
+    "nuance": "Precocious stresses that abilities appear unusually early, while gifted describes talent at any age; precocious can also hint at a child acting cheekily grown-up.",
+    "alternatives": [
+      "precarious",
+      "precious",
+      "gifted"
+    ],
+    "prompt": "A teacher describes one of the students in her second-grade class.",
+    "options": [
+      "The precocious seven-year-old was already solving fifth-grade fractions.",
+      "The precocious pile of books on her desk looked ready to tumble onto the floor.",
+      "The precocious student was the last in her class to learn to tie her shoes.",
+      "The precocious gold sticker was so dear to her that she kept it in a locked box."
+    ],
+    "reasons": [
+      "A young child doing math meant for older students is developing ahead of schedule.",
+      "This confuses the word with precarious; an unstable pile has nothing to do with early development.",
+      "Lagging behind classmates is the reverse of reaching milestones early.",
+      "This mixes the word up with precious; a treasured object cannot mature early."
+    ],
+    "practice": {
+      "prompt": "A music instructor talks about the campers at a summer piano program.",
+      "options": [
+        "The precocious teenager had only just learned to find middle C on the keyboard.",
+        "At nine, the precocious pianist was writing short sonatas of her own.",
+        "The precocious bench wobbled every time a camper leaned toward the keys.",
+        "The precocious toddler could clap along to a song, just as most toddlers can."
+      ],
+      "answer": 1,
+      "reasons": [
+        "Learning a basic skill late points to slow progress, not early mastery.",
+        "Composing original music at such a young age is far ahead of what most children can do.",
+        "A shaky seat is precarious, not advanced for its age.",
+        "Doing what is ordinary for one's age is not unusually early at all."
+      ]
+    }
+  }
+}

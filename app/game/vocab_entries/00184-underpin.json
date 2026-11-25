@@ -1,0 +1,50 @@
+{
+  "id": 184,
+  "slug": "underpin",
+  "word": "underpin",
+  "pos": "verb",
+  "pronunciation": "/ˌʌn.dərˈpɪn/",
+  "definition": "To support something from below, or to serve as the basis for an idea or claim.",
+  "difficulty": "Intermediate",
+  "example": "Shared trust underpins every lasting friendship, even more than common interests do.",
+  "synonyms": [
+    "support",
+    "form the basis of",
+    "undergird",
+    "buttress"
+  ],
+  "nuance": "Underpin is the opposite of undermine: one strengthens a thing from beneath, while the other weakens it from beneath.",
+  "alternatives": [
+    "undermine",
+    "bolster"
+  ],
+  "prompt": "A student explains the evidence behind her science fair conclusion.",
+  "options": [
+    "Weeks of daily measurements underpin her claim that light matters most.",
+    "The serious flaws a judge discovered underpin her claim, so she has to abandon it.",
+    "She took a red marker to underpin the key results printed on her poster.",
+    "She worried the judges would underpin how many hours she had spent."
+  ],
+  "reasons": [
+    "The measurements are the foundation her claim rests on, so the word fits.",
+    "Flaws that force her to drop the claim weaken it. That is undermining, not supporting.",
+    "Drawing a line beneath words is underlining. This word has nothing to do with marking a page.",
+    "This treats the word like underestimate, but it does not mean judging something too low."
+  ],
+  "practice": {
+    "prompt": "Builders inspect an old farmhouse whose walls have started to sag.",
+    "options": [
+      "To underpin the house, the owners plan to remove its stone foundation.",
+      "The family chose to underpin the sagging house by painting its front door red.",
+      "The crew will pour fresh concrete beneath the walls to underpin them.",
+      "Deep cracks in the cellar underpin the walls, which is why the house keeps sinking."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Taking the foundation away removes support instead of adding it.",
+      "Paint changes how the house looks but does nothing to hold the structure up.",
+      "Adding solid material underneath to hold the walls up is exactly this kind of support.",
+      "Cracks that let the house sink weaken it. They do the opposite of holding it up."
+    ]
+  }
+}

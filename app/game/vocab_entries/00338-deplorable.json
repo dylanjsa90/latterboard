@@ -1,0 +1,49 @@
+{
+  "id": 338,
+  "slug": "deplorable",
+  "word": "deplorable",
+  "pos": "adjective",
+  "pronunciation": "/dɪˈplɔːr.ə.bəl/",
+  "definition": "So bad or wrong that it deserves strong disapproval.",
+  "difficulty": "Foundation",
+  "example": "The landlord left the apartment in deplorable condition, with broken windows and leaking pipes.",
+  "synonyms": [
+    "disgraceful",
+    "shameful",
+    "appalling",
+    "lamentable"
+  ],
+  "nuance": "Deplorable condemns something as shameful or terrible; regrettable only expresses sorrow and suggests no one need be blamed.",
+  "alternatives": [
+    "commendable"
+  ],
+  "prompt": "A health inspector visits a restaurant kitchen for a surprise check.",
+  "options": [
+    "The inspector called the kitchen's moldy, filthy counters deplorable and shut it down.",
+    "The inspector called the spotless kitchen deplorable and awarded it top marks.",
+    "The inspector confirmed the fire extinguisher was deplorable and ready to use in seconds.",
+    "After skipping lunch, the hungry inspector felt deplorable all afternoon."
+  ],
+  "reasons": [
+    "Filthy, moldy surfaces are bad enough to deserve harsh criticism and closure.",
+    "A spotless kitchen earns praise, so a word of strong condemnation contradicts the top marks.",
+    "This confuses the word with deployable, which means ready to be put into use.",
+    "The word judges things as shameful; it does not describe someone feeling tired or unwell."
+  ],
+  "practice": {
+    "prompt": "A soccer coach talks with her team about how they behaved after a loss.",
+    "options": [
+      "The equipment manager kept the spare nets deplorable so they could be set up in minutes.",
+      "The coach giggled and called the fluffy puppy mascot deplorable as she hugged it.",
+      "Mocking the winners and refusing to shake hands was deplorable, the coach told the team.",
+      "The coach proudly called the players' gracious handshakes deplorable."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Being quick to set up describes something deployable, a look-alike with a different meaning.",
+      "This mixes the word up with adorable; a cuddly puppy is charming, not shameful.",
+      "Taunting opponents and refusing a handshake is poor sportsmanship that deserves blame.",
+      "Gracious behavior makes a coach proud, so condemning it reverses the meaning."
+    ]
+  }
+}

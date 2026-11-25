@@ -1,0 +1,47 @@
+{
+  "id": 230,
+  "slug": "hoard",
+  "word": "hoard",
+  "pos": "verb",
+  "pronunciation": "/hɔːrd/",
+  "definition": "To collect and store away a large supply of something, often secretly or more than is needed.",
+  "difficulty": "Foundation",
+  "example": "Before the long winter, the villagers began to hoard firewood and sacks of dried beans.",
+  "synonyms": [
+    "stockpile",
+    "stash",
+    "amass",
+    "squirrel away"
+  ],
+  "nuance": "Unlike stockpile, hoard suggests excess or selfish secrecy; don't confuse it with horde, which means a large crowd.",
+  "alternatives": [],
+  "prompt": "A grocery store announces that paper towels will be scarce next month.",
+  "options": [
+    "Worried shoppers began to hoard paper towels, filling their carts with a dozen packs each.",
+    "A crowd of shoppers began to hoard through the doors the moment the manager unlocked them.",
+    "Generous customers chose to hoard their extra rolls by handing them out to elderly neighbors.",
+    "One cautious shopper decided to hoard a single roll, just enough to get through the week."
+  ],
+  "reasons": [
+    "Grabbing far more than they need and storing it against a shortage is exactly this behavior.",
+    "Pouring in as a mass of people describes a horde, a look-alike word for a crowd.",
+    "Giving supplies away is the reverse of keeping a stash for yourself.",
+    "Buying only what you need lacks the excess the word implies."
+  ],
+  "practice": {
+    "prompt": "In an art class, one student keeps the best supplies to herself.",
+    "options": [
+      "Lena would hoard one marker for a minute and then return it to the shared bin.",
+      "Instead of sharing, Lena tended to hoard the brightest markers in her desk drawer.",
+      "To be fair to classmates, Lena would hoard the markers by passing them around the table.",
+      "When the bell rang, the students would hoard toward the supply closet in a noisy rush."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Briefly borrowing one item is not building up a hidden supply.",
+      "Hiding away more than her share of supplies shows selfish stockpiling.",
+      "Passing supplies around spreads them out instead of keeping them back.",
+      "A rushing group of people is a horde; the sound-alike verb means storing things."
+    ]
+  }
+}

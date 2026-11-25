@@ -1,0 +1,49 @@
+{
+  "id": 331,
+  "slug": "beneficial",
+  "word": "beneficial",
+  "pos": "adjective",
+  "pronunciation": "/ˌbɛn.əˈfɪʃ.əl/",
+  "definition": "Having a good or helpful effect on someone or something.",
+  "difficulty": "Foundation",
+  "example": "Regular stretching proved beneficial for the runner's sore knees.",
+  "synonyms": [
+    "helpful",
+    "advantageous",
+    "favorable",
+    "salutary"
+  ],
+  "nuance": "Beneficial describes a good effect something has, while benevolent describes a kind intention or a generous character.",
+  "alternatives": [
+    "benevolent"
+  ],
+  "prompt": "A gardener is deciding whether to add compost to her vegetable beds.",
+  "options": [
+    "Adding compost proved beneficial, and the tomatoes grew larger that summer.",
+    "The gardener felt beneficial toward the robins and hoped they would stay warm all winter.",
+    "The compost was beneficial, causing the lettuce to rot and wilt within days.",
+    "The beneficial hose was green and about fifty feet long."
+  ],
+  "reasons": [
+    "The compost improved the plants, so it had a clearly positive effect.",
+    "Wishing the birds well is goodwill, which is benevolence, not a helpful effect.",
+    "Something that ruins the crop is harmful, the opposite of the word's meaning.",
+    "Color and length describe how the hose looks, not any good it does."
+  ],
+  "practice": {
+    "prompt": "A student tries out a new study habit in the weeks before final exams.",
+    "options": [
+      "Reviewing notes each evening was beneficial, and her quiz scores rose steadily.",
+      "Staying up all night was beneficial, leaving her too exhausted to finish the exam.",
+      "She received a beneficial from the school for having perfect attendance.",
+      "The habit was beneficial even though it made no difference to her grades at all."
+    ],
+    "answer": 0,
+    "reasons": [
+      "The habit led to better scores, so it clearly helped her.",
+      "A habit that wears her out and hurts her performance did harm, not good.",
+      "The word is an adjective; it cannot name a reward the way the noun benefit can.",
+      "Calling something helpful requires some good result, and here there was none."
+    ]
+  }
+}

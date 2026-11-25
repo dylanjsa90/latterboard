@@ -1,0 +1,49 @@
+{
+  "id": 389,
+  "slug": "verisimilitude",
+  "word": "verisimilitude",
+  "pos": "noun",
+  "pronunciation": "/ˌvɛr.ə.sɪˈmɪl.ə.tuːd/",
+  "definition": "The quality of seeming true or real, especially in a story, play or painting.",
+  "difficulty": "Advanced",
+  "example": "The novel's careful descriptions of a 1920s bakery lend it remarkable verisimilitude.",
+  "synonyms": [
+    "realism",
+    "plausibility",
+    "lifelikeness",
+    "authenticity"
+  ],
+  "nuance": "Verisimilitude is the appearance of truth, not truth itself: invented fiction can have it, while a true account told badly can lack it.",
+  "alternatives": [
+    "veracity"
+  ],
+  "prompt": "A film crew is building a set for a movie that takes place in a 1950s diner.",
+  "options": [
+    "Period menus and cracked vinyl stools gave the set a striking verisimilitude.",
+    "Neon spaceships hovering over the counter added to the diner's verisimilitude.",
+    "The verisimilitude between the two lead actors was so strong that fans mixed them up.",
+    "The cook was known for his verisimilitude, since he never lied about prices."
+  ],
+  "reasons": [
+    "Accurate small details make the invented diner feel like a real place from that era.",
+    "Wildly out-of-place props make a 1950s scene less believable, not more.",
+    "This confuses the word with similitude, meaning resemblance between two people.",
+    "Personal honesty is veracity; the word describes how real something seems."
+  ],
+  "practice": {
+    "prompt": "A student is writing a realistic short story about a summer job at a fruit stand.",
+    "options": [
+      "Mentioning sticky fingers and bruised peaches added verisimilitude to her scenes.",
+      "A scene where the melons burst into song boosted the story's verisimilitude.",
+      "Her verisimilitude stretched one simple paragraph across six pages of extra words.",
+      "The contest judges measured each story's verisimilitude by counting its pages."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Small sensory details from real life make the fictional job feel convincing.",
+      "Singing fruit breaks the realism a story like this depends on.",
+      "This mistakes the word for its look-alike verbosity, which means wordiness.",
+      "Length tells you nothing about whether a story seems true to life."
+    ]
+  }
+}

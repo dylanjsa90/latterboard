@@ -14,7 +14,9 @@
     "long-lasting"
   ],
   "nuance": "Protracted suggests unwelcome length; prolonged is more neutral and can describe pleasant things, as in prolonged applause.",
-  "alternatives": [],
+  "alternatives": [
+    "truncated"
+  ],
   "prompt": "A neighborhood committee spends months arguing about where to build a new playground.",
   "options": [
     "The protracted debate over the site dragged on through three seasons of meetings.",

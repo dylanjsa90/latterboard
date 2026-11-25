@@ -1,0 +1,49 @@
+{
+  "id": 162,
+  "slug": "lucrative",
+  "word": "lucrative",
+  "pos": "adjective",
+  "pronunciation": "/ˈluː.krə.tɪv/",
+  "definition": "Producing a large amount of money or profit.",
+  "difficulty": "Intermediate",
+  "example": "The fishing village found that renting rooms to summer visitors was more lucrative than hauling nets.",
+  "synonyms": [
+    "profitable",
+    "moneymaking",
+    "well-paying",
+    "remunerative"
+  ],
+  "nuance": "Profitable can mean earning any profit at all, while lucrative stresses that the money earned is large; don't confuse it with ludicrous.",
+  "alternatives": [
+    "ludicrous"
+  ],
+  "prompt": "A baker is deciding whether she can afford to open a second shop.",
+  "options": [
+    "Catering weddings proved so lucrative that the baker could afford a second shop.",
+    "Her lucrative side business lost money every single month until she finally shut it down.",
+    "The baker told a lucrative joke that left everyone at the counter laughing.",
+    "After a long nap, the baker felt lucrative and ready to knead dough."
+  ],
+  "reasons": [
+    "The catering brought in enough money to pay for expansion, which is exactly the point of the word.",
+    "A venture that loses money every month is the reverse of one that pays well.",
+    "This confuses the word with ludicrous; a joke that gets laughs earns nothing.",
+    "The word describes jobs or ventures that earn money, not how a person feels."
+  ],
+  "practice": {
+    "prompt": "A high school student is comparing summer jobs before choosing one.",
+    "options": [
+      "The manager's lucrative explanation cleared up every question she had about her schedule.",
+      "The lucrative July heat made her want to stay indoors with a fan.",
+      "Lifeguarding was the most lucrative choice, paying nearly double the library job.",
+      "Walking the neighbors' dogs for free turned out to be her most lucrative summer job of all."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This mixes the word up with lucid; a clear explanation is not a source of income.",
+      "Hot weather earns no money, so the adjective has nothing to describe here.",
+      "A job that pays far more than the others earns this description.",
+      "Unpaid work can't be the best-paying option, so the sentence contradicts itself."
+    ]
+  }
+}

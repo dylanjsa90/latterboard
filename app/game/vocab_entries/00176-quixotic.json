@@ -1,0 +1,49 @@
+{
+  "id": 176,
+  "slug": "quixotic",
+  "word": "quixotic",
+  "pos": "adjective",
+  "pronunciation": "/kwɪkˈsɑː.tɪk/",
+  "definition": "Idealistic in a noble, romantic way but wildly unrealistic or impractical.",
+  "difficulty": "Advanced",
+  "example": "Her quixotic plan to restore the old canal using only volunteers charmed the town but stalled within a year.",
+  "synonyms": [
+    "idealistic",
+    "impractical",
+    "starry-eyed",
+    "visionary"
+  ],
+  "nuance": "Unrealistic just means unlikely to work; quixotic adds a lofty, generous motive, so the folly is admirable rather than foolish.",
+  "alternatives": [
+    "pragmatic"
+  ],
+  "prompt": "A retired teacher announces a goal for her small hometown library.",
+  "options": [
+    "Her quixotic goal was for every child in the county to read a thousand books by age ten.",
+    "Her quixotic plan was to replace the cracked shelves this spring before any of them collapsed.",
+    "She filled the reading room with quixotic plants imported from distant rainforests.",
+    "Her quixotic scheme was to quietly raise late fees and keep the extra money herself."
+  ],
+  "reasons": [
+    "A generous ambition far beyond what one small library can achieve is noble but impractical.",
+    "Fixing a clear, achievable problem on schedule is sensible, not a lofty dream.",
+    "This confuses the word with exotic; it describes impractical ideals, not faraway origins.",
+    "A selfish, calculated scheme lacks the high-minded idealism the word requires."
+  ],
+  "practice": {
+    "prompt": "A young engineer talks about what he hopes to build after graduating.",
+    "options": [
+      "His quixotic aim was to cut corners on safety so his firm could earn more each quarter.",
+      "He was so quixotic that he finished the exam twenty minutes before anyone else.",
+      "His quixotic dream was to give away a solar water pump to every farm on the continent.",
+      "His quixotic approach was to copy a proven design and stay strictly within the budget."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Profit-driven corner cutting is cynical, with none of the noble idealism implied.",
+      "The word has nothing to do with being quick; it describes lofty, unworkable ideals.",
+      "A kind-hearted vision on an impossible scale captures the romantic impracticality.",
+      "Relying on tested methods and tight budgets is cautious realism, the reverse of the word."
+    ]
+  }
+}

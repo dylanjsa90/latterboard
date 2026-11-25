@@ -14,7 +14,10 @@
     "rare"
   ],
   "nuance": "Scarce means there is not enough of something people need or want; rare just means uncommon, whether or not anyone wants it.",
-  "alternatives": [],
+  "alternatives": [
+    "scant",
+    "abundant"
+  ],
   "prompt": "A small town's only bakery struggles after a winter storm blocks deliveries.",
   "options": [
     "With roads closed for days, flour grew scarce and the bakery cut its hours.",

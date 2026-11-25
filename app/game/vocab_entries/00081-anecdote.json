@@ -14,7 +14,10 @@
     "vignette"
   ],
   "nuance": "An anecdote is a brief real-life story, not an antidote (a cure for poison), and it counts as weaker evidence than data.",
-  "alternatives": [],
+  "alternatives": [
+    "allegory",
+    "antidote"
+  ],
   "prompt": "A guest speaker is opening her speech at a graduation ceremony.",
   "options": [
     "She began with an anecdote about getting lost on her first day of college.",

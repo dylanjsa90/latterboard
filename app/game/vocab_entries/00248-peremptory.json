@@ -1,0 +1,49 @@
+{
+  "id": 248,
+  "slug": "peremptory",
+  "word": "peremptory",
+  "pos": "adjective",
+  "pronunciation": "/pəˈrɛmp.tə.ri/",
+  "definition": "Demanding immediate obedience in a curt way that leaves no room for argument.",
+  "difficulty": "Advanced",
+  "example": "With a peremptory wave of her baton, the conductor silenced the chattering orchestra.",
+  "synonyms": [
+    "imperious",
+    "brusque",
+    "high-handed",
+    "dictatorial"
+  ],
+  "nuance": "Peremptory describes a curt command that shuts down discussion; perfunctory, its look-alike, means done carelessly just to get it over with.",
+  "alternatives": [
+    "perfunctory"
+  ],
+  "prompt": "A team captain gives instructions during the tense final minute of a match.",
+  "options": [
+    "Her peremptory order to fall back left no time for anyone to question the plan.",
+    "His peremptory glance at the scoreboard showed he barely cared about the result.",
+    "In a peremptory tone, the captain gently invited teammates to suggest other ideas.",
+    "The captain's peremptory strategy was to strike first, before the rivals could score."
+  ],
+  "reasons": [
+    "A sharp command that allows no debate is exactly the right sense.",
+    "A bored, halfhearted look is perfunctory, a look-alike word, not commanding.",
+    "Gently welcoming suggestions encourages discussion, which is the reverse of this word.",
+    "Acting first to head off a threat is preemptive; the similar sound causes the mix-up."
+  ],
+  "practice": {
+    "prompt": "A head chef addresses the kitchen staff on a crowded Friday night.",
+    "options": [
+      "Unsure of himself, the chef offered a peremptory suggestion that the staff might try a new garnish.",
+      "The chef issued a peremptory command, and the cooks plated the orders without a word of protest.",
+      "The chef gave the sauces a peremptory stir, bored and eager to go home.",
+      "Her peremptory manner made every new cook feel free to argue with each instruction."
+    ],
+    "answer": 1,
+    "reasons": [
+      "A hesitant, optional idea is tentative; the word calls for firm, final speech.",
+      "A brisk order that silences objection fits the word's meaning.",
+      "Careless, going-through-the-motions effort is perfunctory, not commanding.",
+      "This kind of manner discourages arguing; it does not invite it."
+    ]
+  }
+}

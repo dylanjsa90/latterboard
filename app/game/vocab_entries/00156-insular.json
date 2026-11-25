@@ -1,0 +1,49 @@
+{
+  "id": 156,
+  "slug": "insular",
+  "word": "insular",
+  "pos": "adjective",
+  "pronunciation": "/ˈɪn.sə.lər/",
+  "definition": "Focused only on your own small group or place and not interested in outside people or ideas.",
+  "difficulty": "Intermediate",
+  "example": "The village's insular culture made even longtime newcomers feel like permanent strangers.",
+  "synonyms": [
+    "parochial",
+    "inward-looking",
+    "narrow-minded",
+    "provincial"
+  ],
+  "nuance": "Insular stresses being cut off from outside influence, while parochial stresses caring only about local matters.",
+  "alternatives": [
+    "insolent"
+  ],
+  "prompt": "A small research lab has rarely shared its work with other teams.",
+  "options": [
+    "The insular lab ignored findings from other universities and kept repeating old methods.",
+    "The insular lab eagerly invited visiting scientists from a dozen countries to join every project.",
+    "The insular intern rudely talked back to the director during the meeting.",
+    "The lab's insular freezer kept the samples cold all through the power outage."
+  ],
+  "reasons": [
+    "Shutting out outside work and sticking to familiar habits is exactly what an inward-looking group does.",
+    "Welcoming outsiders from many places is the opposite of being closed off.",
+    "This confuses the word with insolent; being disrespectful is not the same as being closed off.",
+    "This confuses the word with insulated; it describes groups and attitudes, not heat-blocking equipment."
+  ],
+  "practice": {
+    "prompt": "A high school chess club has played only against its own members for years.",
+    "options": [
+      "The insular club traveled to tournaments across the state just to meet new rivals.",
+      "The insular captain mocked the coach to his face and refused to apologize.",
+      "The club bought insular mats so the cold gym floor would not chill anyone's feet.",
+      "Being so insular, the club had never learned the openings that other schools used."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Seeking out unfamiliar opponents shows openness, not isolation.",
+      "Mocking someone is rude behavior, which mixes up this word with insolent.",
+      "Mats that block cold are insulating; this word describes a closed-off mindset, not a material.",
+      "Never looking beyond its own members left the club unaware of outside ideas."
+    ]
+  }
+}

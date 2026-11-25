@@ -1,0 +1,47 @@
+{
+  "id": 302,
+  "slug": "abate",
+  "word": "abate",
+  "pos": "verb",
+  "pronunciation": "/əˈbeɪt/",
+  "definition": "To become less strong, intense or severe.",
+  "difficulty": "Intermediate",
+  "example": "The audience's laughter took nearly a minute to abate after the final joke of the play.",
+  "synonyms": [
+    "subside",
+    "diminish",
+    "ease",
+    "let up"
+  ],
+  "nuance": "Abate means to lessen, not to stop completely; a storm that has abated may still be blowing, only less fiercely.",
+  "alternatives": [],
+  "prompt": "A ferry captain watches a storm sweep across the harbor before a scheduled crossing.",
+  "options": [
+    "The captain decided to wait for the wind to abate before leaving the dock.",
+    "The captain worried the waves would abate into towering swells that could tip the ferry over.",
+    "The first mate offered to abate the captain by steering the ferry himself.",
+    "The passengers had to abate in the terminal for two hours before boarding."
+  ],
+  "reasons": [
+    "Waiting until the wind weakens before setting out fits the word and the scene.",
+    "Waves that grow into towering swells are getting stronger, the reverse of easing.",
+    "Helping a person suggests confusion with abet; you cannot lessen a captain by assisting him.",
+    "Sitting and waiting is not a weakening of anything; the word does not mean to linger."
+  ],
+  "practice": {
+    "prompt": "A soccer player rests at home after twisting her ankle during practice.",
+    "options": [
+      "Her trainer said the swelling should abate within a few days if she kept ice on it.",
+      "The swelling began to abate, and by evening her ankle had puffed up to twice its normal size.",
+      "Her teammates promised to abate her recovery by carrying her books to class.",
+      "She was eager to abate her comeback by playing in Saturday's game."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Swelling that goes down gradually with care is a natural thing to ease off.",
+      "An ankle that doubles in size is swelling more, which contradicts any lessening.",
+      "Carrying her books supports her recovery rather than reducing it; this mixes it up with abet.",
+      "Starting a comeback is a beginning, and the word never means to launch something."
+    ]
+  }
+}

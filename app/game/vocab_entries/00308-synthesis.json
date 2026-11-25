@@ -1,0 +1,47 @@
+{
+  "id": 308,
+  "slug": "synthesis",
+  "word": "synthesis",
+  "pos": "noun",
+  "pronunciation": "/ˈsɪn.θə.sɪs/",
+  "definition": "The combining of separate ideas or parts into a new, unified whole.",
+  "difficulty": "Intermediate",
+  "example": "The committee's final plan was a synthesis of the strongest ideas from all four proposals.",
+  "synonyms": [
+    "integration",
+    "combination",
+    "fusion",
+    "blend"
+  ],
+  "nuance": "A synthesis builds something new and coherent from many parts, while a summary just restates material in shorter form.",
+  "alternatives": [],
+  "prompt": "A student is writing a report that draws on five scientific studies about sleep.",
+  "options": [
+    "Her report offered a synthesis of the five studies, showing how their findings fit together.",
+    "Her synthesis broke a single study down into its separate parts so she could examine each one alone.",
+    "Her synthesis was a two-line recap of one study's abstract.",
+    "Her synthesis was fake data she invented to make the graph look neater."
+  ],
+  "reasons": [
+    "Weaving several sources into one connected picture is exactly what the word describes.",
+    "Taking one thing apart to inspect its pieces is analysis, the reverse process.",
+    "Briefly restating a single source is a summary; nothing is being brought together.",
+    "This confuses the noun with \"synthetic\" in the sense of artificial or fake."
+  ],
+  "practice": {
+    "prompt": "A chef designs a new dish that draws on two different cooking traditions.",
+    "options": [
+      "The chef made a synthesis by reheating yesterday's soup exactly as it was.",
+      "The dish was a synthesis of two cuisines, pairing Korean spices with Mexican tortillas.",
+      "The chef's synthesis was to serve the spices and the tortillas on separate plates so they never touched.",
+      "The cake's synthesis came from the imitation vanilla the chef used."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Warming up one unchanged dish combines nothing and creates nothing new.",
+      "Merging flavors from two traditions into one new creation fits the word well.",
+      "Keeping the elements apart is the opposite of uniting them.",
+      "This mistakes the word for \"synthetic,\" meaning artificial, rather than combined."
+    ]
+  }
+}

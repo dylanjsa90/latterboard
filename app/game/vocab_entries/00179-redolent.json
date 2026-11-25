@@ -1,0 +1,49 @@
+{
+  "id": 179,
+  "slug": "redolent",
+  "word": "redolent",
+  "pos": "adjective",
+  "pronunciation": "/ˈrɛd.əl.ənt/",
+  "definition": "Strongly bringing something to mind, or full of its scent.",
+  "difficulty": "Advanced",
+  "example": "The old railway station felt redolent of an era when travel was slow and formal.",
+  "synonyms": [
+    "evocative",
+    "reminiscent",
+    "suggestive",
+    "fragrant"
+  ],
+  "nuance": "Unlike fragrant, redolent often reaches past smell to memory, as in a town redolent of the past; it has nothing to do with indolent.",
+  "alternatives": [
+    "redundant"
+  ],
+  "prompt": "A writer describes a seaside harbor in the early morning.",
+  "options": [
+    "The harbor was redolent of salt, tar, and fresh fish.",
+    "The redolent fishermen slept through the morning tide instead of hauling their nets.",
+    "The harbor was redolent of nothing, its air so clean it carried no odor at all.",
+    "The redolent sunrise glittered so brightly that the sailors had to shade their eyes."
+  ],
+  "reasons": [
+    "The air is heavy with smells that call up the sea, which is just what the word conveys.",
+    "Laziness is indolence, a look-alike; redolent concerns scent and association.",
+    "Something with no scent or suggestion cannot be redolent; this reverses the meaning.",
+    "Dazzling light is resplendent; redolent is about smell or memory, not brightness."
+  ],
+  "practice": {
+    "prompt": "A family discovers a grandmother's handwritten recipe notebook in the attic.",
+    "options": [
+      "Half the recipes were redolent, since each one had been copied out twice.",
+      "Sealed in plastic for years, the notebook was redolent of no scent or memory whatsoever.",
+      "The redolent cook hesitated for weeks before sharing her secret ingredient.",
+      "Its stained pages were redolent of cinnamon and decades of holiday baking."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Needless repetition is redundancy, a different word that only sounds similar.",
+      "Lacking any smell or association is the opposite of what the word describes.",
+      "Hesitation is reluctance; the word describes what evokes, not a person's unwillingness.",
+      "The pages carry lingering spice and call up old memories, fitting both senses."
+    ]
+  }
+}

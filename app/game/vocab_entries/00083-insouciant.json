@@ -14,7 +14,10 @@
     "blithe"
   ],
   "nuance": "Insouciant suggests a breezy, lighthearted freedom from worry; nonchalant stresses a cool, composed outward manner.",
-  "alternatives": [],
+  "alternatives": [
+    "insolent",
+    "nonchalant"
+  ],
   "prompt": "A pianist waits backstage a few minutes before her first big recital.",
   "options": [
     "Humming softly, the pianist seemed insouciant while the other performers paced the hallway.",

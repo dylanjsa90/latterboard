@@ -1,0 +1,47 @@
+{
+  "id": 166,
+  "slug": "conscientiously",
+  "word": "conscientiously",
+  "pos": "adverb",
+  "pronunciation": "/ˌkɑːn.ʃiˈen.ʃəs.li/",
+  "definition": "In a careful, thorough way that shows a strong sense of duty to do things right.",
+  "difficulty": "Intermediate",
+  "example": "The club treasurer conscientiously kept a receipt for every purchase, however small.",
+  "synonyms": [
+    "diligently",
+    "dutifully",
+    "scrupulously",
+    "painstakingly"
+  ],
+  "nuance": "Conscientiously means acting with dutiful care, while the look-alike consciously only means acting with awareness or on purpose.",
+  "alternatives": [],
+  "prompt": "A lab assistant is recording measurements during a long experiment.",
+  "options": [
+    "She conscientiously logged every reading and double-checked each figure.",
+    "He conscientiously made up the missing numbers so he could leave early.",
+    "After dozing off at the bench, he woke and was conscientiously alert again.",
+    "The assistant conscientiously knocked her coffee over, smearing the notebook."
+  ],
+  "reasons": [
+    "Recording and rechecking each result out of responsibility is exactly this kind of care.",
+    "Inventing data to save time is the opposite of doing a job faithfully.",
+    "This confuses the word with consciously; waking up involves awareness, not a sense of duty.",
+    "A clumsy accident shows no deliberate care, so the word does not fit."
+  ],
+  "practice": {
+    "prompt": "A volunteer is responsible for returning library books to the shelves.",
+    "options": [
+      "He conscientiously checked each call number so no book ended up in the wrong spot.",
+      "To finish faster, she conscientiously shoved the books onto any empty shelf.",
+      "She didn't conscientiously notice the rain outside until her shift ended.",
+      "The old book cart squeaked conscientiously as it rolled down the aisle."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Taking pains to get every placement right reflects a strong sense of responsibility.",
+      "Rushing and ignoring the proper order is neglect, not dutiful effort.",
+      "Noticing something is about awareness, so this mixes the word up with consciously.",
+      "A cart has no sense of duty, so describing its noise this way ignores the word's meaning."
+    ]
+  }
+}

@@ -14,7 +14,10 @@
     "bootlicker"
   ],
   "nuance": "An admirer's praise may be sincere, but a sycophant's praise is calculated to win favor from someone with power.",
-  "alternatives": [],
+  "alternatives": [
+    "toady",
+    "iconoclast"
+  ],
   "prompt": "A new employee wants to win favor with a manager as quickly as possible.",
   "options": [
     "Eager for a raise, the sycophant applauded even the manager's weakest ideas.",

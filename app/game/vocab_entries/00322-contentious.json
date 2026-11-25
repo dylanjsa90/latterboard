@@ -1,0 +1,47 @@
+{
+  "id": 322,
+  "slug": "contentious",
+  "word": "contentious",
+  "pos": "adjective",
+  "pronunciation": "/kənˈtɛn.ʃəs/",
+  "definition": "Likely to cause strong disagreement or heated argument.",
+  "difficulty": "Intermediate",
+  "example": "The referee's last-second call proved contentious, and fans debated it for weeks.",
+  "synonyms": [
+    "controversial",
+    "disputed",
+    "divisive",
+    "argumentative"
+  ],
+  "nuance": "Contentious suggests heated, ongoing argument, while controversial can simply mean opinions are divided; it can also describe a quarrelsome person.",
+  "alternatives": [],
+  "prompt": "A book club must decide which novel to read next month.",
+  "options": [
+    "Choosing the next novel proved contentious, and members argued for over an hour.",
+    "Everyone agreed on the first title at once, so the decision was quite contentious.",
+    "The contentious member read every assigned chapter on time and took careful notes.",
+    "After the pleasant meeting, she felt contentious and relaxed happily on the sofa."
+  ],
+  "reasons": [
+    "A long, heated debate over the choice is exactly what makes a decision contentious.",
+    "Instant agreement is the opposite of a decision that sparks dispute.",
+    "This confuses the word with conscientious, which means diligent and careful.",
+    "This confuses the word with contented; relaxed satisfaction has nothing to do with quarreling."
+  ],
+  "practice": {
+    "prompt": "Two neighbors share an old wooden fence that needs repair.",
+    "options": [
+      "Both neighbors gladly split the cost, so the matter was contentious from the very start.",
+      "The neighbor was so contentious that he measured every board twice before nailing it.",
+      "Who should pay for the new fence became a contentious question between the neighbors.",
+      "The contentious repair took only an hour because the boards were already cut to size."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Happy cooperation reverses the meaning; nothing here was fought over.",
+      "Careful, thorough work describes a conscientious person, not a quarrelsome one.",
+      "A cost both sides argue over is a matter that provokes dispute.",
+      "How quickly a job goes says nothing about whether it causes argument."
+    ]
+  }
+}

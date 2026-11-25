@@ -14,7 +14,11 @@
     "mollify"
   ],
   "nuance": "Propitiate stresses winning favor from someone who has power over you, while placate simply means calming someone who is upset.",
-  "alternatives": [],
+  "alternatives": [
+    "antagonize",
+    "propagate",
+    "precipitate"
+  ],
   "prompt": "A tenant has annoyed the building manager by paying rent late several months in a row.",
   "options": [
     "Hoping to propitiate the manager, the tenant paid two months early and apologized in person.",

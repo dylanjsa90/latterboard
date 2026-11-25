@@ -14,7 +14,11 @@
     "lax"
   ],
   "nuance": "Complacent means careless self-satisfaction that ignores risk; the look-alike complaisant means eager to please others.",
-  "alternatives": [],
+  "alternatives": [
+    "complaisant",
+    "vigilant",
+    "smug"
+  ],
   "prompt": "A soccer team leads the league by ten points with five games left to play.",
   "options": [
     "The coach warned the players not to grow complacent with the title in sight.",

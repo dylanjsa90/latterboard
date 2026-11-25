@@ -14,7 +14,11 @@
     "generous"
   ],
   "nuance": "Benevolent describes a kind intention behind an action; beneficial describes a good effect, whether or not anyone meant it.",
-  "alternatives": [],
+  "alternatives": [
+    "benign",
+    "malevolent",
+    "beneficial"
+  ],
   "prompt": "A retired teacher spends her weekends helping out at the town library.",
   "options": [
     "The benevolent retiree tutored young readers on weekends without asking for payment.",

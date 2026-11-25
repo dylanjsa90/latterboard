@@ -1,0 +1,47 @@
+{
+  "id": 357,
+  "slug": "belie",
+  "word": "belie",
+  "pos": "verb",
+  "pronunciation": "/bɪˈlaɪ/",
+  "definition": "To give a false impression of something, especially by hiding or contradicting what is really true.",
+  "difficulty": "Intermediate",
+  "example": "The farmhouse's plain, weathered exterior belied the bright, modern kitchen inside.",
+  "synonyms": [
+    "contradict",
+    "disguise",
+    "misrepresent",
+    "conceal"
+  ],
+  "nuance": "To belie a feeling is to hide or contradict it, while to betray a feeling is to let it show, so the two words are nearly opposites.",
+  "alternatives": [],
+  "prompt": "A chess player sits down for the final round of a tournament, secretly terrified.",
+  "options": [
+    "Her steady hands seemed to belie the panic she felt inside.",
+    "Her shaking voice did belie her nerves, so everyone in the hall could tell she was scared.",
+    "Her opponent tried to belie her by sneering at each of her opening moves.",
+    "Her coach will always belie in her talent, whatever the final score."
+  ],
+  "reasons": [
+    "Her calm hands hide her fear and give a misleading picture of how she really feels.",
+    "The word means masking a truth, not exposing it; \"betray\" would fit this sentence.",
+    "Sneering to make someone feel small is belittling, a look-alike with a different meaning.",
+    "This mixes the word up with \"believe\"; it has nothing to do with trust or faith."
+  ],
+  "practice": {
+    "prompt": "A shy student presents a science fair project on electrical circuits.",
+    "options": [
+      "He asked his teacher to belie the presentation until next Friday.",
+      "His quiet, halting manner tended to belie how much he knew about wiring.",
+      "His flawless diagrams belie his expertise and make it obvious to every judge.",
+      "A jealous classmate tried to belie the project by calling it babyish and dull."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Pushing an event back is delaying; the word has nothing to do with scheduling.",
+      "His timid delivery made him seem far less expert than he actually was.",
+      "Diagrams that display his skill confirm the truth instead of hiding or contradicting it.",
+      "Mocking work so it seems trivial is belittling, not creating a false impression."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 227,
+  "slug": "relegate",
+  "word": "relegate",
+  "pos": "verb",
+  "pronunciation": "/ˈrɛl.ə.ɡeɪt/",
+  "definition": "To move someone or something to a lower, less important, or less noticeable place.",
+  "difficulty": "Intermediate",
+  "example": "A single harsh review can relegate a promising young restaurant to obscurity.",
+  "synonyms": [
+    "demote",
+    "downgrade",
+    "consign",
+    "sideline"
+  ],
+  "nuance": "Demote usually means lowering an official rank, while relegate more broadly pushes something aside, often out of sight or attention.",
+  "alternatives": [],
+  "prompt": "A museum curator is rearranging the galleries before a new exhibit opens.",
+  "options": [
+    "The curator chose to relegate the faded tapestries to a dim back hallway.",
+    "To celebrate its arrival, the curator will relegate the prized new sculpture to the center of the main hall.",
+    "During the tour, the curator tried to relegate the guests with funny stories about the artists.",
+    "Staff relegate the gallery temperature each morning to protect the canvases."
+  ],
+  "reasons": [
+    "Moving worn pieces out of the spotlight to a minor spot is exactly the right use.",
+    "Giving a piece the place of honor raises its status; it does not push it down.",
+    "Entertaining people with stories is regaling them, a look-alike word.",
+    "Controlling temperature is regulating it; nothing is being lowered in importance."
+  ],
+  "practice": {
+    "prompt": "A school newspaper editor is planning the layout of this week's issue.",
+    "options": [
+      "At the staff meeting, the editor tried to relegate the new writers with tales of her first big interview.",
+      "The editor asked a student to relegate her message to the print shop by phone before noon.",
+      "Short on space, the editor had to relegate the chess club results to a small box on page eight.",
+      "Thrilled by the scoop, the editor decided to relegate the story to the top of the front page."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Amusing listeners with tales is regaling, not pushing anyone into a minor role.",
+      "Passing a message along is relaying it; the word does not mean deliver.",
+      "Shrinking a story and burying it deep in the paper gives it a lesser position.",
+      "The front page is the most prominent spot, so this reverses the meaning."
+    ]
+  }
+}

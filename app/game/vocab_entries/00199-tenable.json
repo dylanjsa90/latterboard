@@ -1,0 +1,50 @@
+{
+  "id": 199,
+  "slug": "tenable",
+  "word": "tenable",
+  "pos": "adjective",
+  "pronunciation": "/ˈtɛn.ə.bəl/",
+  "definition": "Reasonable enough to be defended against objections or criticism.",
+  "difficulty": "Intermediate",
+  "example": "With only two healthy players left, the coach admitted the team's narrow lead was no longer tenable.",
+  "synonyms": [
+    "defensible",
+    "justifiable",
+    "reasonable",
+    "sound"
+  ],
+  "nuance": "Tenable describes a position or idea that can withstand challenge, while tenacious describes a person who refuses to let go.",
+  "alternatives": [
+    "tenuous",
+    "tenacious"
+  ],
+  "prompt": "A student defends her thesis during a school debate tournament.",
+  "options": [
+    "Her thesis remained tenable even after the judges raised three sharp objections.",
+    "Her thesis was tenable, so it collapsed the moment anyone questioned it.",
+    "The tenable debater clung to the podium and refused to yield her remaining time to the other team.",
+    "The links between her points were tenable, held together by the thinnest of threads."
+  ],
+  "reasons": [
+    "An argument that survives tough questioning is one that can be defended.",
+    "Falling apart under the first challenge is the opposite of being defensible.",
+    "This confuses the word with tenacious; it describes claims and positions, not stubborn people.",
+    "This confuses the word with tenuous, which means weak or flimsy."
+  ],
+  "practice": {
+    "prompt": "A scientist rethinks a hypothesis after surprising new data arrives.",
+    "options": [
+      "The tenable new microscope gave the team brighter and sharper images of the cells.",
+      "With the new measurements, the old theory is no longer tenable.",
+      "The tenable lab assistant repeated the same experiment every night for six straight weeks.",
+      "The data contradicted the theory at every turn, which made it more tenable than ever."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word is not general praise for equipment; it judges whether a position can be justified.",
+      "Evidence that undercuts a theory means it can no longer be reasonably defended.",
+      "Persistence belongs to tenacity; the word applies to ideas that hold up, not hardworking people.",
+      "Contradicting evidence weakens a claim, so it cannot make the claim easier to defend."
+    ]
+  }
+}

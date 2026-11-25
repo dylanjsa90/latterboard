@@ -1,0 +1,48 @@
+{
+  "id": 228,
+  "slug": "methodical",
+  "word": "methodical",
+  "pos": "adjective",
+  "pronunciation": "/məˈθɑː.dɪ.kəl/",
+  "definition": "Doing things in a careful, orderly way, following clear steps one at a time.",
+  "difficulty": "Foundation",
+  "example": "He took a methodical approach to cleaning the garage, emptying and sorting one shelf before touching the next.",
+  "synonyms": [
+    "systematic",
+    "orderly",
+    "step-by-step"
+  ],
+  "nuance": "Methodical stresses following an orderly system; meticulous stresses close attention to tiny details.",
+  "alternatives": [
+    "meticulous"
+  ],
+  "prompt": "A librarian is searching the building for a rare book that has been misplaced.",
+  "options": [
+    "The methodical librarian checked each shelf in order, beginning with the first aisle.",
+    "The methodical librarian pulled books at random from whichever shelf happened to be nearest.",
+    "The methodical librarian wrote a long essay comparing the research methods used in libraries.",
+    "The methodical librarian glanced around once, shrugged, and declared the book lost forever."
+  ],
+  "reasons": [
+    "Working through the shelves in a fixed sequence is an orderly, step-by-step search.",
+    "Grabbing books at random is haphazard, the opposite of following a plan.",
+    "Writing about methods would be methodological; the word describes how someone works.",
+    "A single glance and a quick surrender show no system or patience at all."
+  ],
+  "practice": {
+    "prompt": "A student has three weeks to prepare for a final exam in chemistry.",
+    "options": [
+      "Her methodical study plan was simply a list of the scientific methods named in her textbook.",
+      "Her methodical study plan covered one chapter each evening and ended with a full review.",
+      "Her methodical study plan was to skim whatever page fell open the night before the test.",
+      "Her methodical study plan switched subjects every hour, depending on her mood at the moment."
+    ],
+    "answer": 1,
+    "reasons": [
+      "A list about methods confuses the topic with an orderly way of working.",
+      "A set schedule that moves chapter by chapter shows steady, organized effort.",
+      "Last-minute skimming of random pages has no order or structure.",
+      "Choosing topics by whim abandons any consistent system."
+    ]
+  }
+}

@@ -15,7 +15,8 @@
   ],
   "nuance": "Unlike destroy, vitiate suggests that a flaw spoils something's quality or cancels its validity while the thing itself still exists.",
   "alternatives": [
-    "obviate"
+    "obviate",
+    "invigorate"
   ],
   "prompt": "A scientist learns that some of the samples in her study were contaminated.",
   "options": [

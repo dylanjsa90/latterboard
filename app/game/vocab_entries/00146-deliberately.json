@@ -1,0 +1,49 @@
+{
+  "id": 146,
+  "slug": "deliberately",
+  "word": "deliberately",
+  "pos": "adverb",
+  "pronunciation": "/dɪˈlɪb.ər.ət.li/",
+  "definition": "On purpose, with full awareness of what one is doing.",
+  "difficulty": "Foundation",
+  "example": "The author deliberately left the ending open so readers could decide what happened.",
+  "synonyms": [
+    "intentionally",
+    "on purpose",
+    "knowingly",
+    "purposely"
+  ],
+  "nuance": "Deliberately can also mean slowly and carefully, as in \"she spoke deliberately\"; context shows whether intent or pace is meant.",
+  "alternatives": [
+    "inadvertently"
+  ],
+  "prompt": "A chess player is setting a trap for her opponent in a tournament game.",
+  "options": [
+    "She deliberately left her bishop unguarded to lure her opponent forward.",
+    "Her sleeve brushed a pawn, so she deliberately knocked it off the board.",
+    "So tired she couldn't help it, she deliberately dozed off between moves.",
+    "He deliberately walked into the trap because he never saw it coming."
+  ],
+  "reasons": [
+    "Leaving a piece exposed as part of a plan is a choice made on purpose.",
+    "A stray sleeve causes an accident, not an intended action.",
+    "Nodding off from exhaustion happens against one's will, which is the reverse of intent.",
+    "Someone unaware of a danger cannot be choosing to step into it."
+  ],
+  "practice": {
+    "prompt": "A gardener is planning how to protect a new vegetable bed.",
+    "options": [
+      "The gardener deliberately planted marigolds beside the tomatoes to keep pests away.",
+      "The gardener deliberately lost the seed packet when a gust tore it from her hand.",
+      "Standing in the frosty morning air, the gardener deliberately shivered.",
+      "The gardener deliberately stepped on a seedling she didn't know was there."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Placing flowers in a chosen spot for a stated goal is a purposeful act.",
+      "Wind snatching something away is an accident, not a decision.",
+      "Shivering is an automatic reaction to cold, not something done by choice.",
+      "You can't mean to crush a plant you haven't noticed, so the intent makes no sense."
+    ]
+  }
+}

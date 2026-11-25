@@ -1,0 +1,49 @@
+{
+  "id": 330,
+  "slug": "cohesive",
+  "word": "cohesive",
+  "pos": "adjective",
+  "pronunciation": "/koʊˈhiː.sɪv/",
+  "definition": "Forming a united whole whose parts fit together or work well as one.",
+  "difficulty": "Intermediate",
+  "example": "Though written years apart, the album's songs form a cohesive story about leaving home.",
+  "synonyms": [
+    "unified",
+    "integrated",
+    "tight-knit",
+    "harmonious"
+  ],
+  "nuance": "Cohesive stresses parts holding together as one; coherent stresses logical clarity, so a clear speaker is coherent, not cohesive.",
+  "alternatives": [
+    "coherent"
+  ],
+  "prompt": "A coach describes how her soccer team played in the championship final.",
+  "options": [
+    "The cohesive team passed smoothly because every player trusted the others.",
+    "The cohesive team argued constantly, and each player ignored the others' calls.",
+    "The cohesive team wore jerseys so sticky that the ball clung to their chests.",
+    "The cohesive striker explained her winning goal in one clear, logical sentence."
+  ],
+  "reasons": [
+    "Players who trust each other and move the ball as one show real unity.",
+    "Constant arguing and ignoring teammates describe a team that is falling apart.",
+    "Physical stickiness is what adhesive means; the word describes unity, not glue.",
+    "A clear, logical explanation is coherent; one person speaking well is not a unified group."
+  ],
+  "practice": {
+    "prompt": "An interior designer is furnishing a family's living room.",
+    "options": [
+      "She chose a cohesive palette so the rugs, lamps, and curtains all matched.",
+      "She chose a cohesive mix of clashing styles that seemed to have nothing in common.",
+      "She chose a cohesive paste to keep the new wallpaper from peeling off.",
+      "She chose a cohesive sofa because it was the cheapest one in the catalog."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Colors that tie every piece of the room together create a unified whole.",
+      "Pieces with nothing in common clash; they do not come together as one.",
+      "A paste that makes paper stick is adhesive, which is a different word.",
+      "Price says nothing about whether the parts of a room fit together."
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": 392,
+  "slug": "ratify",
+  "word": "ratify",
+  "pos": "verb",
+  "pronunciation": "/ˈræt.ə.faɪ/",
+  "definition": "To formally approve an agreement or decision so that it becomes official.",
+  "difficulty": "Intermediate",
+  "example": "The hiking club gathered at the lodge to ratify its new trail-safety rules.",
+  "synonyms": [
+    "approve formally",
+    "confirm",
+    "sanction",
+    "endorse"
+  ],
+  "nuance": "To ratify is to give official approval to something already drafted, usually by a group with authority; do not confuse it with rectify, to fix.",
+  "alternatives": [
+    "endorse"
+  ],
+  "prompt": "Members of a neighborhood garden association meet to review bylaws written by a committee.",
+  "options": [
+    "After a short debate, the members voted to ratify the committee's bylaws.",
+    "Before the meeting, a volunteer tried to ratify the broken gate by nailing a new board across it.",
+    "The members chose to ratify the bylaws, so the whole proposal was rejected and thrown out.",
+    "One gardener decided to ratify the bylaws quietly by skimming them alone in her kitchen."
+  ],
+  "reasons": [
+    "A group with authority voting to make a drafted document official is exactly what this verb describes.",
+    "Repairing something is rectifying it; this sentence mixes up two similar-sounding words.",
+    "Giving official approval cannot also mean rejecting; the sentence reverses the meaning.",
+    "Reading something privately is not a formal act of approval, and one person here has no power to make it official."
+  ],
+  "practice": {
+    "prompt": "The board of a youth soccer league considers a schedule agreement worked out with a nearby league.",
+    "options": [
+      "On Monday the board met to ratify the schedule that the two leagues had negotiated.",
+      "At halftime the coach shouted to ratify his players so they would run faster in the second half.",
+      "The board chose to ratify the agreement by refusing to sign it and sending it back unchanged.",
+      "A curious goalie wanted to ratify the new schedule by asking a teammate what dates it listed."
+    ],
+    "answer": 0,
+    "reasons": [
+      "The governing board officially confirms a deal that was negotiated beforehand, which is the correct use.",
+      "The word has nothing to do with motivating or energizing people.",
+      "Refusing to sign is a rejection, the opposite of making an agreement official.",
+      "Asking about a document is not approving it, and a single player has no authority to make it official."
+    ]
+  }
+}

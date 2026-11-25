@@ -1,0 +1,49 @@
+{
+  "id": 275,
+  "slug": "endearing",
+  "word": "endearing",
+  "pos": "adjective",
+  "pronunciation": "/ɪnˈdɪr.ɪŋ/",
+  "definition": "Making people feel fond of or warm toward someone or something.",
+  "difficulty": "Intermediate",
+  "example": "The speaker's endearing nervousness at the podium made the audience cheer even louder when she finished.",
+  "synonyms": [
+    "lovable",
+    "charming",
+    "appealing",
+    "winning"
+  ],
+  "nuance": "Endearing qualities often come from small quirks or flaws that win affection, while charming suggests a more polished, deliberate appeal.",
+  "alternatives": [
+    "enduring"
+  ],
+  "prompt": "A grandfather is learning to make video calls with his family.",
+  "options": [
+    "His endearing habit of waving at the camera before saying hello made the grandkids laugh.",
+    "The endearing call lasted four hours because nobody remembered how to hang up.",
+    "His endearing rudeness toward the grandkids made them dread every single call.",
+    "The endearing static on the line made it impossible to hear anything he said."
+  ],
+  "reasons": [
+    "A harmless little quirk that makes his family smile wins their affection.",
+    "Lasting a long time describes something enduring, a look-alike word, not something lovable.",
+    "Behavior that makes people dread you pushes them away instead of drawing them closer.",
+    "Noise that ruins a conversation causes frustration, not warm feelings."
+  ],
+  "practice": {
+    "prompt": "An animal shelter is trying to find homes for its dogs.",
+    "options": [
+      "The endearing terrier growled and snapped at everyone who walked past its kennel.",
+      "The puppy's endearing way of tilting its head at every question won over a young couple.",
+      "The shelter's endearing smell of bleach drove visitors back outside within minutes.",
+      "The endearing fence has stood around the yard since the shelter first opened."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Aggressive behavior that frightens people is the reverse of making them feel affection.",
+      "A sweet mannerism that makes visitors fall for the puppy is exactly what wins hearts.",
+      "A smell that sends people away creates discomfort, so it cannot be described this way.",
+      "Standing for many years makes a fence enduring; long life alone does not inspire fondness."
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": 171,
+  "slug": "impetus",
+  "word": "impetus",
+  "pos": "noun",
+  "pronunciation": "/ˈɪm.pə.təs/",
+  "definition": "A force or reason that drives someone to act or makes something happen.",
+  "difficulty": "Intermediate",
+  "example": "A bitterly cold winter gave the town the impetus to finally repair its drafty library.",
+  "synonyms": [
+    "motivation",
+    "stimulus",
+    "catalyst",
+    "spur"
+  ],
+  "nuance": "An impetus starts or speeds up action, while an impediment blocks it; an incentive is more specifically a reward that is offered.",
+  "alternatives": [
+    "incentive"
+  ],
+  "prompt": "A neighborhood finally gets a crosswalk after years of complaints.",
+  "options": [
+    "A near miss outside the school provided the impetus for the new crosswalk.",
+    "The lack of funding was an impetus that kept the crosswalk from being built for years.",
+    "The city planner made an impetus decision without studying the traffic.",
+    "The impetus for the crosswalk was the white paint used for its stripes."
+  ],
+  "reasons": [
+    "The close call is the event that finally pushed the city to act.",
+    "Something that holds a project back is an obstacle, not a driving force.",
+    "The word is a noun; a rash, hasty choice would be called impetuous.",
+    "Paint is a material for the job, not the cause that prompted it."
+  ],
+  "practice": {
+    "prompt": "A student begins practicing piano every day before a recital.",
+    "options": [
+      "A recording of the piece gave Maya the impetus to practice daily.",
+      "The impetus slowed Maya down until she stopped practicing altogether.",
+      "Maya played the impetus on the piano, a short piece in C major.",
+      "Maya was so impetus that she skipped her warm-ups and rushed the opening bars."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Hearing the music is what moved her to start her daily routine.",
+      "A driving force pushes action forward; it does not bring it to a halt.",
+      "The word names a cause or push, not a musical composition.",
+      "A noun cannot describe a person; the adjective for rash behavior is impetuous."
+    ]
+  }
+}

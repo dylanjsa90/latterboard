@@ -1,0 +1,47 @@
+{
+  "id": 158,
+  "slug": "rancor",
+  "word": "rancor",
+  "pos": "noun",
+  "pronunciation": "/ˈræŋ.kɚ/",
+  "definition": "Deep, bitter resentment that lasts a long time.",
+  "difficulty": "Intermediate",
+  "example": "Years after the dispute over the fence, rancor still soured every conversation between the two neighbors.",
+  "synonyms": [
+    "bitterness",
+    "resentment",
+    "animosity",
+    "ill will"
+  ],
+  "nuance": "Anger can flare up and fade quickly, but rancor is bitterness that has hardened and lasts long after the original offense.",
+  "alternatives": [],
+  "prompt": "Two former business partners meet again ten years after a bitter split.",
+  "options": [
+    "The rancor between the partners was still obvious when they refused to shake hands.",
+    "Full of rancor, she warmly thanked her old partner for all he had taught her.",
+    "Speaking with rancor, he frankly and fairly listed the mistakes they had both made.",
+    "The rancor of the stale coffee in the lobby made both partners wrinkle their noses."
+  ],
+  "reasons": [
+    "Refusing a handshake a decade later shows a grudge that never healed.",
+    "Warm gratitude is the opposite of lingering bitterness.",
+    "This confuses the word with candor; fair, honest speech is not resentment.",
+    "This mixes the word up with rancid; it names a feeling, not a spoiled smell."
+  ],
+  "practice": {
+    "prompt": "A violinist is passed over for first chair in favor of a newer student.",
+    "options": [
+      "Her rancor toward the newcomer lasted all season, and she rarely spoke to him.",
+      "Out of rancor, she baked him cookies to celebrate his well-earned new seat.",
+      "She practiced scales with such rancor that her technique grew precise and polished.",
+      "The rancor of the brass section was so loud that the violinists covered their ears."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A grudge that keeps her silent for months is the long-held bitterness the word names.",
+      "Celebrating a rival's success shows generosity, not resentment.",
+      "This treats the word as diligence or rigor, but it means bitterness, not hard work.",
+      "The word names an emotion, not a loud noise like a racket."
+    ]
+  }
+}

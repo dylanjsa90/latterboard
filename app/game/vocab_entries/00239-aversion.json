@@ -1,0 +1,48 @@
+{
+  "id": 239,
+  "slug": "aversion",
+  "word": "aversion",
+  "pos": "noun",
+  "pronunciation": "/əˈvɜːr.ʒən/",
+  "definition": "A strong feeling of dislike that makes you want to avoid something.",
+  "difficulty": "Intermediate",
+  "example": "Her lifelong aversion to crowds made the packed stadium feel overwhelming.",
+  "synonyms": [
+    "distaste",
+    "dislike",
+    "antipathy"
+  ],
+  "nuance": "Aversion stresses wanting to turn away from something, while antipathy suggests active hostility, often toward a person.",
+  "alternatives": [
+    "adversity"
+  ],
+  "prompt": "A cat owner notices how her pet reacts every time she runs a bath.",
+  "options": [
+    "The cat's aversion to water was obvious when it bolted from the bathroom at the sound of the tap.",
+    "Because of its aversion to water, the cat leapt eagerly into the tub each evening.",
+    "The stray survived the aversion of a bitter winter by sheltering in the garage.",
+    "The cat made a quick aversion around the puddle and kept walking down the hall."
+  ],
+  "reasons": [
+    "Running away from the bath shows a strong wish to stay clear of water.",
+    "Eagerly jumping in shows attraction, which is the reverse of the intended feeling.",
+    "This confuses the word with adversity, which means hardship or misfortune.",
+    "The word names a feeling, not a physical move like a swerve or a detour."
+  ],
+  "practice": {
+    "prompt": "A chef is planning dinner for a guest who cannot stand hot peppers.",
+    "options": [
+      "With his aversion to spicy food, the guest asked for extra hot sauce on every dish.",
+      "The guest was aversion to anything with peppers in it.",
+      "While dessert baked, the guests played cards as a pleasant aversion.",
+      "Knowing the guest's aversion to spicy food, the chef left the chili flakes out of the soup."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Requesting more heat shows a liking, so the sentence contradicts itself.",
+      "This needs the adjective averse; the noun cannot follow was to describe a person.",
+      "This confuses the word with diversion, an activity that entertains or distracts.",
+      "The chef adjusts the meal to respect the guest's strong distaste for heat."
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": 226,
+  "slug": "evasive",
+  "word": "evasive",
+  "pos": "adjective",
+  "pronunciation": "/ɪˈveɪ.sɪv/",
+  "definition": "Avoiding a direct answer or commitment, often to hide something.",
+  "difficulty": "Foundation",
+  "example": "When asked where the last cookies had gone, my little brother gave an evasive shrug and changed the subject.",
+  "synonyms": [
+    "elusive",
+    "noncommittal",
+    "equivocal",
+    "cagey"
+  ],
+  "nuance": "A vague answer may simply be unclear, but an evasive one deliberately dodges the question; do not confuse it with invasive, meaning intrusive.",
+  "alternatives": [
+    "candid"
+  ],
+  "prompt": "A reporter asks a town official why a budget report has gone missing.",
+  "options": [
+    "The official's evasive reply praised the new park instead of mentioning the report.",
+    "The evasive reporter pushed into the official's private office without asking.",
+    "Her evasive answer listed every missing figure plainly, clearly, and in full.",
+    "The budget report seemed evasive because it was printed in a tiny font."
+  ],
+  "reasons": [
+    "Steering away from the real question to dodge it is exactly what this word describes.",
+    "Barging in where you are not welcome is invasive, a look-alike word, not dodging.",
+    "A complete, straightforward answer is the opposite of sidestepping the question.",
+    "Small print makes a page hard to read; it does not mean anyone is dodging a question."
+  ],
+  "practice": {
+    "prompt": "A teacher asks a student why her science homework is three days late.",
+    "options": [
+      "Rather than explain, Mia gave an evasive mumble about having a busy week.",
+      "Mia was so evasive that she confessed every detail before the teacher finished.",
+      "The teacher found Mia's evasive questions about his family rude and prying.",
+      "Mia finally handed in an evasive worksheet covered in neat handwriting."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A fuzzy excuse meant to avoid the real reason is a classic way of dodging.",
+      "Confessing everything at once is being frank, the reverse of avoiding the question.",
+      "Prying into private matters is invasive behavior, not avoiding an answer.",
+      "A worksheet cannot dodge anything, and neat handwriting has nothing to do with avoidance."
+    ]
+  }
+}

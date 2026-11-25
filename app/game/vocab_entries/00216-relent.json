@@ -1,0 +1,47 @@
+{
+  "id": 216,
+  "slug": "relent",
+  "word": "relent",
+  "pos": "verb",
+  "pronunciation": "/rɪˈlɛnt/",
+  "definition": "To finally give in or soften after refusing or resisting for a while.",
+  "difficulty": "Intermediate",
+  "example": "After a week of pleading, my grandmother relented and let us paint the porch purple.",
+  "synonyms": [
+    "give in",
+    "yield",
+    "soften",
+    "back down"
+  ],
+  "nuance": "Relent implies softening after firm resistance, while yield can mean giving way at once to force or pressure.",
+  "alternatives": [],
+  "prompt": "Campers beg their counselor to let them stay up past lights-out.",
+  "options": [
+    "The counselor held firm for an hour but chose to relent and allow twenty extra minutes.",
+    "The counselor asked a camper to relent his flashlight so she could check the trail.",
+    "The counselor chose to relent by banning flashlights and moving lights-out half an hour earlier.",
+    "The counselor seemed to relent the campers for keeping the whole cabin awake."
+  ],
+  "reasons": [
+    "She resisted at first and then eased her stance, which is giving way after refusing.",
+    "Relent takes no object; handing an item over would be relinquishing or lending it.",
+    "Tightening the rules is the opposite of easing up after resistance.",
+    "Feeling bitter toward someone is resenting them, not softening a firm position."
+  ],
+  "practice": {
+    "prompt": "Students keep asking their teacher to postpone a quiz.",
+    "options": [
+      "To relent, the teacher added a second quiz and made the first one twice as long.",
+      "The teacher had wanted to delay the quiz from the very start, so she was thrilled to relent.",
+      "When half the class caught the flu, the teacher decided to relent and move the quiz.",
+      "The student began to relent for copying a classmate's homework last week."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Piling on more work hardens a position instead of softening it.",
+      "Giving in requires earlier resistance; going along with your own plan is not yielding.",
+      "She had refused before but softened when circumstances changed, which is giving in.",
+      "Feeling sorry for a past wrong is repenting; this word means easing a stance."
+    ]
+  }
+}

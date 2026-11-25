@@ -1,0 +1,46 @@
+{
+  "id": 196,
+  "slug": "mediocre",
+  "word": "mediocre",
+  "pos": "adjective",
+  "pronunciation": "/ˌmiː.diˈoʊ.kər/",
+  "definition": "Of only ordinary quality; not very good and often disappointing.",
+  "difficulty": "Foundation",
+  "example": "The movie had a mediocre script but a wonderful soundtrack.",
+  "synonyms": [
+    "second-rate",
+    "middling",
+    "unremarkable"
+  ],
+  "nuance": "Mediocre is harsher than average: it suggests that something falls short of what it should be, not just that it sits in the middle.",
+  "alternatives": [],
+  "prompt": "A food critic writes a review of the pancakes at a new diner.",
+  "options": [
+    "She called the pancakes mediocre: edible, but bland and forgettable.",
+    "She called the pancakes mediocre because they were the finest she had ever tasted.",
+    "She ordered a mediocre stack, bigger than the small but smaller than the large.",
+    "She urged readers to drive across the state just for the mediocre pancakes."
+  ],
+  "reasons": [
+    "Food that is acceptable yet dull and unmemorable fits the word's meaning of disappointing ordinariness.",
+    "The finest pancakes ever tasted would be outstanding, which is the reverse of this word.",
+    "This confuses the word with medium; it describes quality, not portion size.",
+    "Nobody makes a long trip for food that is only so-so, so the praise contradicts the word."
+  ],
+  "practice": {
+    "prompt": "A swim coach looks back on one athlete's season.",
+    "options": [
+      "The coach served as a mediocre when two swimmers argued over lane assignments.",
+      "Teammates admired how mediocre she stayed, never bragging about a single win.",
+      "Her times were mediocre this year, nowhere near the speed she showed last spring.",
+      "Her mediocre times broke three school records and earned her a scholarship."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This mixes the word up with mediator; it is an adjective about quality, not a person who settles disputes.",
+      "This confuses the word with modest; it criticizes quality and does not describe humility.",
+      "Results that are unimpressive and below her own standard are exactly what the word describes.",
+      "Breaking records shows excellence, the opposite of merely ordinary performance."
+    ]
+  }
+}

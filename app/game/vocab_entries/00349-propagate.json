@@ -1,0 +1,47 @@
+{
+  "id": 349,
+  "slug": "propagate",
+  "word": "propagate",
+  "pos": "verb",
+  "pronunciation": "/ˈprɑː.pə.ɡeɪt/",
+  "definition": "To spread an idea, belief, or piece of information to more and more people.",
+  "difficulty": "Intermediate",
+  "example": "Old textbooks helped propagate the myth that people use only ten percent of their brains.",
+  "synonyms": [
+    "spread",
+    "disseminate",
+    "circulate",
+    "promulgate"
+  ],
+  "nuance": "Propagate stresses spreading something so it multiplies and reaches more people; promulgate means announcing it officially.",
+  "alternatives": [],
+  "prompt": "A rumor that the class field trip has been canceled is moving through a middle school.",
+  "options": [
+    "Group chats helped propagate the rumor until most of the grade believed the trip was off.",
+    "The principal's announcement propagated the rumor by proving it false and ending the gossip.",
+    "Maya chose to propagate the rumor by keeping it entirely to herself.",
+    "The vice principal propagated each student to learn who had started the story."
+  ],
+  "reasons": [
+    "Passing a claim from person to person until it reaches many people is exactly the spreading meant.",
+    "Disproving a story and stopping its spread is the reverse of what the word describes.",
+    "Something kept private is never passed along, so nothing spreads.",
+    "The word does not mean questioning people; that sense belongs to interrogate."
+  ],
+  "practice": {
+    "prompt": "A historian discovers that a famous quotation was never actually said by anyone.",
+    "options": [
+      "The archivist propagated the quotation by checking its date against old newspapers.",
+      "Quote websites still propagate the invented line, each copying it from the others.",
+      "The historian propagated the quotation by publishing evidence that no one had ever said it.",
+      "Desmond propagated the famous line for his own speech and claimed he had written it."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Checking when words first appeared is verification; it passes them to no one new.",
+      "Copying the false line from site to site keeps it reaching new readers, which is spreading it.",
+      "Exposing a claim as false works against its spread rather than helping it along.",
+      "Taking credit for someone else's words is appropriating, a look-alike with a different meaning."
+    ]
+  }
+}

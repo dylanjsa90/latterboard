@@ -1,0 +1,47 @@
+{
+  "id": 257,
+  "slug": "hegemony",
+  "word": "hegemony",
+  "pos": "noun",
+  "pronunciation": "/hɪˈdʒɛm.ə.ni/",
+  "definition": "Dominance or leadership by one group, nation, or idea over others.",
+  "difficulty": "Advanced",
+  "example": "For decades the town's only newspaper held a hegemony over local opinion that no newcomer could break.",
+  "synonyms": [
+    "dominance",
+    "supremacy",
+    "ascendancy",
+    "predominance"
+  ],
+  "nuance": "Hegemony suggests influence that others come to accept as normal, while dominance is the broader, plainer word for any control.",
+  "alternatives": [],
+  "prompt": "For ten years, a single style of music has filled nearly every hour of radio airtime.",
+  "options": [
+    "Pop ballads enjoyed a hegemony over the radio that left little airtime for any other style.",
+    "The hegemony of pop ballads meant that every genre on the radio got exactly equal airtime each day.",
+    "The trio's vocal hegemony was so sweet that their three voices blended into a single chord.",
+    "Her hegemony over the radio was limited to choosing the station in her own car."
+  ],
+  "reasons": [
+    "One style crowding out all rivals across the airwaves is exactly this kind of sway.",
+    "Equal shares for all genres describes balance, the reverse of one style ruling.",
+    "This confuses the word with harmony; blended voices have nothing to do with dominance.",
+    "The word means sway over many others, not one person turning her own dial."
+  ],
+  "practice": {
+    "prompt": "In one region, a single art academy shaped what painters were taught for a century.",
+    "options": [
+      "The academy's hegemony was so complete that young painters copied its rules without question.",
+      "Because the academy held hegemony, each painter chose freely among many styles that were all equally respected.",
+      "The gardener planted a hegemony of boxwood shrubs around the edge of the studio.",
+      "A shy student gained hegemony over the whole class simply by borrowing one brush."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Influence so widely accepted that nobody challenges it is the heart of the word.",
+      "Free choice among equal styles shows no single school leading the others.",
+      "This mistakes the word for hedge; it names a kind of dominance, not a row of plants.",
+      "Borrowing a single brush gives no one lasting leadership over a group."
+    ]
+  }
+}

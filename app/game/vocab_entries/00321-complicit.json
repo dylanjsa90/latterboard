@@ -1,0 +1,49 @@
+{
+  "id": 321,
+  "slug": "complicit",
+  "word": "complicit",
+  "pos": "adjective",
+  "pronunciation": "/kəmˈplɪs.ɪt/",
+  "definition": "Involved with others in something wrong, even if only by helping quietly or staying silent.",
+  "difficulty": "Intermediate",
+  "example": "By ignoring the fake reviews on the bakery's website, the manager became complicit in the deception.",
+  "synonyms": [
+    "implicated",
+    "collusive",
+    "in league",
+    "conniving"
+  ],
+  "nuance": "Complicit means sharing the guilt for a wrong; compliant just means obedient, and complacent means smugly unconcerned.",
+  "alternatives": [
+    "complacent"
+  ],
+  "prompt": "A student learns that a friend plans to copy answers during a quiz.",
+  "options": [
+    "Lending her answer sheet made the student complicit in the cheating.",
+    "The student was complicit with the teacher's rules and turned in her quiz on time.",
+    "By reporting the plan to the teacher, the student made herself complicit in it.",
+    "The quiz was so complicit that nobody finished the last page."
+  ],
+  "reasons": [
+    "Knowingly helping a friend cheat makes her share in the wrongdoing.",
+    "Following rules is being compliant; there is no wrongdoing to share here.",
+    "Exposing a wrong is the opposite of taking part in it.",
+    "This confuses the word with complicated; a quiz cannot share guilt."
+  ],
+  "practice": {
+    "prompt": "Club members discover their treasurer has been spending dues on personal snacks.",
+    "options": [
+      "Members who saw the receipts and stayed silent were complicit in the misuse.",
+      "Pleased with last year's success, the club grew complicit and stopped recruiting.",
+      "The member who first questioned the spending was the most complicit of all.",
+      "The club thanked its complicit volunteers for running a wonderful spring bake sale."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Knowing about the wrong and keeping quiet lets it continue, so they share the blame.",
+      "Lazy self-satisfaction is complacency, not involvement in a wrong.",
+      "Challenging the misuse of money is the opposite of going along with it.",
+      "The word carries guilt, so it can't be used to praise helpful volunteers."
+    ]
+  }
+}

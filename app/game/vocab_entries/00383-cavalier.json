@@ -1,0 +1,49 @@
+{
+  "id": 383,
+  "slug": "cavalier",
+  "word": "cavalier",
+  "pos": "adjective",
+  "pronunciation": "/ˌkæv.əˈlɪr/",
+  "definition": "Treating serious matters with careless, offhand disregard.",
+  "difficulty": "Intermediate",
+  "example": "Her cavalier attitude toward deadlines frustrated the rest of the team.",
+  "synonyms": [
+    "offhand",
+    "dismissive",
+    "careless",
+    "nonchalant"
+  ],
+  "nuance": "Nonchalant just means calmly unconcerned, while cavalier suggests careless disrespect toward something that deserves attention.",
+  "alternatives": [
+    "nonchalant"
+  ],
+  "prompt": "A homeowner learns that the roof might leak during tomorrow's storm.",
+  "options": [
+    "His cavalier shrug at the warning left the roofer shaking her head.",
+    "The cavalier homeowner hired two roofers and inspected every shingle herself.",
+    "Feeling cavalier, he politely held the door for the roofer and offered her lemonade.",
+    "The leak was so cavalier that water dripped steadily onto the couch."
+  ],
+  "reasons": [
+    "Shrugging off a real risk to the house shows offhand disregard for a serious problem.",
+    "Careful, thorough action is the opposite of brushing off a danger.",
+    "This confuses the word with chivalrous; good manners are not careless disregard.",
+    "The word describes a person's attitude, so a leak cannot be cavalier."
+  ],
+  "practice": {
+    "prompt": "A student borrows a friend's expensive camera for a weekend trip.",
+    "options": [
+      "Being cavalier, he wrapped the lens in soft cloth and returned the camera early.",
+      "Cavalier with cameras, he adjusted every setting as smoothly as a professional.",
+      "The cavalier camera captured sharp photos even in the dim evening light.",
+      "She was cavalier with the camera, tossing it into her bag without its case."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Protecting the camera and returning it early shows care, not disregard.",
+      "The word is about careless indifference, not skill or expertise.",
+      "A device has no attitude, so it cannot treat anything with disregard.",
+      "Handling someone else's valuable gear so carelessly shows a dismissive attitude."
+    ]
+  }
+}

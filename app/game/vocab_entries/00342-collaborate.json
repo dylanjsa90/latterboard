@@ -1,0 +1,49 @@
+{
+  "id": 342,
+  "slug": "collaborate",
+  "word": "collaborate",
+  "pos": "verb",
+  "pronunciation": "/kəˈlæb.ə.reɪt/",
+  "definition": "To work together with others to create or achieve something.",
+  "difficulty": "Foundation",
+  "example": "Nurses and doctors collaborate closely to plan each patient's recovery after surgery.",
+  "synonyms": [
+    "work together",
+    "team up",
+    "cooperate",
+    "join forces"
+  ],
+  "nuance": "To collaborate is to share the work on a common product, while to cooperate can simply mean going along with others or not getting in the way.",
+  "alternatives": [
+    "corroborate"
+  ],
+  "prompt": "Two students are assigned a joint science project about plant growth.",
+  "options": [
+    "The partners agreed to collaborate, splitting the research and writing the report together.",
+    "Her lab notes collaborate his claim that the bean plant grew three inches in a week.",
+    "To collaborate on the poster, each partner secretly built a separate one and refused to share.",
+    "The teacher will collaborate the finished reports into one neat binder for the class."
+  ],
+  "reasons": [
+    "Dividing tasks and producing one report as a pair is shared effort toward a common goal.",
+    "This confuses the word with corroborate, which means to confirm; notes cannot work with anyone.",
+    "Working in secret on separate posters is the opposite of joining forces.",
+    "This confuses the word with collate; gathering papers into order is not people working jointly."
+  ],
+  "practice": {
+    "prompt": "A poet and a guitarist meet to write a song for a school concert.",
+    "options": [
+      "The poet will collaborate the short chorus with extra lines until it runs for six whole minutes.",
+      "The guitarist plans to collaborate with herself, writing all the words and music alone in her room.",
+      "The poet and the guitarist chose to collaborate, trading lines and chords until the song felt finished.",
+      "The poet refused to collaborate, so she and the guitarist wrote every verse side by side at one desk."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This confuses the word with elaborate, which means to add detail, not to work with a partner.",
+      "One person working alone has no partner, so no joint effort is taking place.",
+      "Exchanging ideas back and forth to build one song is two people creating something jointly.",
+      "Writing every verse together is teamwork, so saying she refused contradicts the rest of the sentence."
+    ]
+  }
+}

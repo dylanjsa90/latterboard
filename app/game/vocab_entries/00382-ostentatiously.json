@@ -1,0 +1,49 @@
+{
+  "id": 382,
+  "slug": "ostentatiously",
+  "word": "ostentatiously",
+  "pos": "adverb",
+  "pronunciation": "/ˌɑː.stənˈteɪ.ʃəs.li/",
+  "definition": "In a showy way that is meant to attract attention or impress other people.",
+  "difficulty": "Intermediate",
+  "example": "He ostentatiously checked his new gold watch every few minutes during dinner.",
+  "synonyms": [
+    "showily",
+    "flamboyantly",
+    "pretentiously",
+    "flashily"
+  ],
+  "nuance": "Conspicuously means only \"noticeably,\" but ostentatiously suggests a deliberate wish to be seen and admired.",
+  "alternatives": [
+    "conspicuously"
+  ],
+  "prompt": "A guest arrives at a neighbor's casual backyard barbecue.",
+  "options": [
+    "Priya ostentatiously jangled her gold bracelets whenever someone glanced her way.",
+    "Hoping no one would notice her late arrival, the guest ostentatiously slipped in through the side gate.",
+    "She ostentatiously came to help cook, but she really just wanted free burgers.",
+    "The guest ostentatiously sneezed twice because of the pollen in the yard."
+  ],
+  "reasons": [
+    "Making her jewelry jingle on purpose so people notice it is a showy bid for attention.",
+    "Trying to go unseen is the reverse of showing off.",
+    "This confuses the word with ostensibly, which means \"seemingly\" or \"supposedly.\"",
+    "An involuntary sneeze is not a deliberate effort to impress anyone."
+  ],
+  "practice": {
+    "prompt": "A student gets the highest score in the class on a math exam.",
+    "options": [
+      "After weeks of practice, Marcus ostentatiously understood every formula on the test.",
+      "Marcus ostentatiously waved his graded test over his head as he walked to his seat.",
+      "Without a word, Marcus ostentatiously folded the test and tucked it into his backpack.",
+      "Marcus ostentatiously thanked his tutor in a brief note he slipped under her door."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Understanding happens privately in the mind, so it can't be a show put on for others.",
+      "Parading the paper so that every classmate has to see it is a deliberate display.",
+      "Quietly putting the result away shows modesty, not a wish to be admired.",
+      "A private note has no audience, so it can't be a showy performance."
+    ]
+  }
+}

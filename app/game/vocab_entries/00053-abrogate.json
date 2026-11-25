@@ -14,7 +14,11 @@
     "rescind"
   ],
   "nuance": "To abrogate is to formally end an existing rule or agreement; the look-alike arrogate means to claim something you have no right to.",
-  "alternatives": [],
+  "alternatives": [
+    "uphold",
+    "arrogate",
+    "ratify"
+  ],
   "prompt": "A homeowners' association reviews a decades-old rule about what colors fences may be painted.",
   "options": [
     "The board voted to abrogate the outdated fence rule, so residents could paint freely.",

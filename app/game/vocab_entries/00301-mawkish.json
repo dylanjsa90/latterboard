@@ -1,0 +1,47 @@
+{
+  "id": 301,
+  "slug": "mawkish",
+  "word": "mawkish",
+  "pos": "adjective",
+  "pronunciation": "/ˈmɔː.kɪʃ/",
+  "definition": "Sentimental in an overdone, sickly sweet way that feels forced or insincere.",
+  "difficulty": "Advanced",
+  "example": "With its slow-motion hugs and swelling violins, the holiday commercial struck many viewers as mawkish.",
+  "synonyms": [
+    "saccharine",
+    "maudlin",
+    "cloying",
+    "schmaltzy"
+  ],
+  "nuance": "Mawkish is harsher than sentimental: it says the feeling is so overdone that it turns sickly or embarrassing, never touching.",
+  "alternatives": [],
+  "prompt": "A critic reviews a novel whose final chapter is packed with tearful reunions.",
+  "options": [
+    "The critic found the ending mawkish, with three tearful reunions in ten pages.",
+    "The critic praised the mawkish chapter for its restrained, understated emotion.",
+    "The critic called the chapter mawkish because its tangled plot twists were hard for readers to follow.",
+    "The critic called the chapter mawkish because it cruelly mocked its own characters."
+  ],
+  "reasons": [
+    "Stacking up weepy scenes until the emotion feels forced is exactly what earns this label.",
+    "Restraint is the reverse; the word describes feeling that is laid on far too thick.",
+    "A confusing plot has nothing to do with gushing, excessive sentiment.",
+    "The word sounds a bit like \"mocking,\" but it refers to syrupy emotion, not ridicule."
+  ],
+  "practice": {
+    "prompt": "A songwriter revises the lyrics of a ballad about her childhood home.",
+    "options": [
+      "The mawkish lyrics were so spare and dry that listeners felt no emotion at all.",
+      "She chose a mawkish chord progression, which meant the guitar part was technically very difficult to play.",
+      "The ballad was mawkish in the best sense, moving listeners through honest, earned emotion.",
+      "Her first draft felt mawkish, so she cut the lines about tears falling like rain on the old porch."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Lyrics with no feeling are the opposite of emotion poured on too heavily.",
+      "How hard a part is to play says nothing about excessive sentiment.",
+      "The word is always critical; honest, earned feeling would be called poignant instead.",
+      "Spotting overwrought, syrupy imagery and trimming it uses the word correctly."
+    ]
+  }
+}

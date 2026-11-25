@@ -1,0 +1,46 @@
+{
+  "id": 252,
+  "slug": "humility",
+  "word": "humility",
+  "pos": "noun",
+  "pronunciation": "/hjuːˈmɪl.ə.ti/",
+  "definition": "A modest view of your own importance, free of pride or arrogance.",
+  "difficulty": "Foundation",
+  "example": "After winning the prize, the scientist spoke with humility about how much her lab assistants had contributed.",
+  "synonyms": [
+    "modesty",
+    "humbleness",
+    "lack of pride"
+  ],
+  "nuance": "Humility is a modesty a person chooses, while humiliation is a painful shame that others force on someone.",
+  "alternatives": [],
+  "prompt": "A chess champion is interviewed right after winning a close final match.",
+  "options": [
+    "With humility, she credited her coach and said her rival had nearly won.",
+    "Her humility came from the crowd mocking her early mistakes.",
+    "Showing humility, she announced that no player alive could ever beat her.",
+    "The humility in the crowded hall made everyone's shirts damp with sweat."
+  ],
+  "reasons": [
+    "Sharing credit and admitting the win was close shows a modest sense of her own importance.",
+    "Being mocked by others causes humiliation, which is a different word from humility.",
+    "Boasting that she is unbeatable is arrogance, the opposite of a modest attitude.",
+    "This mixes up humility with humidity, the moisture in the air."
+  ],
+  "practice": {
+    "prompt": "A new employee joins a team of experienced engineers.",
+    "options": [
+      "Out of humility, he rewrote everyone's code without asking, sure his was best.",
+      "He suffered terrible humility when his manager scolded him in front of the team.",
+      "His humility made his hands shake so badly he dropped his notes during meetings.",
+      "His humility showed when he asked senior colleagues to review his first design."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Assuming his work beats everyone else's is overconfidence, not modesty.",
+      "Public scolding causes humiliation; nobody 'suffers' humility because it is a chosen attitude.",
+      "Shaking hands point to nerves or fear, which is not the same as a modest view of oneself.",
+      "Asking more experienced people to check his work shows he doesn't overrate himself."
+    ]
+  }
+}

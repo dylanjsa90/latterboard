@@ -1,0 +1,49 @@
+{
+  "id": 384,
+  "slug": "prosperity",
+  "word": "prosperity",
+  "pos": "noun",
+  "pronunciation": "/prɑːˈspɛr.ə.ti/",
+  "definition": "The state of doing well, especially by having enough money and steady success.",
+  "difficulty": "Foundation",
+  "example": "Years of good harvests brought prosperity to the farming valley.",
+  "synonyms": [
+    "affluence",
+    "wealth",
+    "success",
+    "well-being"
+  ],
+  "nuance": "Prosperity is a lasting condition of thriving, broader than wealth, which only counts money or possessions.",
+  "alternatives": [
+    "posterity"
+  ],
+  "prompt": "A small fishing town changes after a new harbor opens.",
+  "options": [
+    "The new harbor ushered in years of prosperity for the town's families.",
+    "The townspeople buried a time capsule so prosperity could read their letters.",
+    "When the harbor closed and families moved away, prosperity filled the streets.",
+    "The fishermen showed great prosperity by sailing into the storm unafraid."
+  ],
+  "reasons": [
+    "Lasting gains for local households describe a community that is thriving.",
+    "Future generations are posterity; prosperity is a condition, not a group of people.",
+    "Closures and departures signal decline, the reverse of a town doing well.",
+    "Facing danger without fear is courage, not economic success."
+  ],
+  "practice": {
+    "prompt": "A family bakery grows busier over several years.",
+    "options": [
+      "The owners felt very prosperity after their cakes won a regional prize.",
+      "The baker measured the flour with careful prosperity so each loaf rose evenly.",
+      "The bakery's growing prosperity let the owners hire three more bakers.",
+      "The bakery's prosperity forced the owners to sell their ovens to pay off debts."
+    ],
+    "answer": 2,
+    "reasons": [
+      "The noun cannot describe people this way; the adjective prosperous is needed.",
+      "Exact measuring calls for precision; the word has nothing to do with care or accuracy.",
+      "Rising income that pays for new jobs reflects a business that is thriving.",
+      "Selling equipment to cover debts points to financial trouble, not success."
+    ]
+  }
+}

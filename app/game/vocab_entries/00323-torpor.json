@@ -1,0 +1,47 @@
+{
+  "id": 323,
+  "slug": "torpor",
+  "word": "torpor",
+  "pos": "noun",
+  "pronunciation": "/ˈtɔːr.pɚ/",
+  "definition": "A state of heavy sluggishness in which a person or animal has almost no energy or activity.",
+  "difficulty": "Advanced",
+  "example": "After the enormous holiday dinner, a pleasant torpor settled over the whole family.",
+  "synonyms": [
+    "lethargy",
+    "sluggishness",
+    "inertia",
+    "languor"
+  ],
+  "nuance": "Torpor suggests a heavy, almost numb inactivity, deeper and duller than the tired listlessness of lethargy.",
+  "alternatives": [],
+  "prompt": "A lizard lies motionless on a cold morning before the sun has warmed it.",
+  "options": [
+    "The cold left the lizard in a torpor until sunlight reached its rock.",
+    "The lizard's torpor sent it darting across the rocks at top speed.",
+    "The lizard twisted a twig with so much torpor that the stem snapped.",
+    "The lizard proudly raised its torpor, a ridge of spikes along its back."
+  ],
+  "reasons": [
+    "A chilled animal that barely moves until it warms up is in exactly this heavy, inactive state.",
+    "Darting at full speed is energetic, the reverse of a sluggish, motionless condition.",
+    "This treats the word like torque, a twisting force; torpor names a lack of energy, not a force.",
+    "Torpor is a condition of the body, not a physical feature that can be raised or shown off."
+  ],
+  "practice": {
+    "prompt": "A town has ignored its crumbling public library for many years.",
+    "options": [
+      "The council's torpor drove it to fix the roof a week after the first leak.",
+      "A wave of torpor swept the town as volunteers rushed to raise repair funds.",
+      "The librarian's torpor for old maps kept her up late cataloging them.",
+      "Years of civic torpor let the library roof leak without a single repair."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Quick, decisive repairs show energy and action, not a state of sluggishness.",
+      "Rushing volunteers signal excitement and effort, the opposite of a numb, idle mood.",
+      "This confuses the word with fervor; staying up out of passion is enthusiasm, not sluggishness.",
+      "A community too sluggish to act for years fits the idea of deep, dull inactivity."
+    ]
+  }
+}

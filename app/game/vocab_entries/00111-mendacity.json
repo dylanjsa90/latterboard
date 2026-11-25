@@ -15,7 +15,8 @@
   ],
   "nuance": "Mendacity names a habit of lying, not one falsehood, and is unrelated to mendicancy, which means begging.",
   "alternatives": [
-    "veracity"
+    "veracity",
+    "duplicity"
   ],
   "prompt": "A judge compares a witness's account with the official shipping records.",
   "options": [

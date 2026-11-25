@@ -1,0 +1,50 @@
+{
+  "id": 169,
+  "slug": "petulant",
+  "word": "petulant",
+  "pos": "adjective",
+  "pronunciation": "/ˈpɛtʃ.ə.lənt/",
+  "definition": "Bad-tempered and sulky in a childish way, especially over small annoyances.",
+  "difficulty": "Advanced",
+  "example": "After losing the coin toss, the captain gave a petulant shrug and refused to shake hands.",
+  "synonyms": [
+    "sulky",
+    "peevish",
+    "pouting",
+    "querulous"
+  ],
+  "nuance": "Petulant points to childish sulking over something minor, while irritable means a person is generally easy to annoy.",
+  "alternatives": [
+    "querulous",
+    "insolent"
+  ],
+  "prompt": "A teenager is told he cannot borrow the family car this weekend.",
+  "options": [
+    "He gave a petulant sigh, slammed his door, and skipped dinner in protest.",
+    "He gave a petulant nod, thanked his parents warmly, and offered to take the bus.",
+    "He raised a petulant point about the bus schedule that settled the matter fairly.",
+    "He made a calm, petulant case, listing three reasons he would drive carefully."
+  ],
+  "reasons": [
+    "Sighing, slamming doors, and sulking through dinner over a small letdown is childish bad temper.",
+    "Accepting the news warmly and without complaint is the reverse of sulky behavior.",
+    "This treats the word as if it meant pertinent; a relevant, fair point has nothing sulky about it.",
+    "A calm, reasoned argument has none of the pouting, childish edge the word requires."
+  ],
+  "practice": {
+    "prompt": "A chef reads a review saying her soup was slightly too salty.",
+    "options": [
+      "The petulant chef thanked the critic politely and adjusted the seasoning the very next morning.",
+      "The petulant aroma of garlic drifted from the kitchen into the dining room.",
+      "The petulant chef quietly spent a year studying salt to master the balance.",
+      "The petulant chef pulled the soup from the menu and sulked in her office all night."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Polite thanks and a quick fix show maturity, the opposite of sulkiness.",
+      "The word describes moody people or behavior, not smells; this confuses it with pungent.",
+      "Patient, disciplined effort to improve is grown-up, not a childish fit of temper.",
+      "Overreacting to mild criticism by pouting and withdrawing shows childish ill temper."
+    ]
+  }
+}

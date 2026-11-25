@@ -1,0 +1,47 @@
+{
+  "id": 229,
+  "slug": "ebullient",
+  "word": "ebullient",
+  "pos": "adjective",
+  "pronunciation": "/ɪˈbʊl.jənt/",
+  "definition": "Overflowing with cheerful energy and enthusiasm.",
+  "difficulty": "Advanced",
+  "example": "The ebullient tour guide sang snatches of old songs as she led us through the market.",
+  "synonyms": [
+    "exuberant",
+    "effervescent",
+    "high-spirited",
+    "buoyant"
+  ],
+  "nuance": "Unlike content, which suggests quiet happiness, ebullient describes joy that bubbles over visibly into talk and motion.",
+  "alternatives": [],
+  "prompt": "A team of students learns it has won the regional science fair.",
+  "options": [
+    "The ebullient students cheered and talked over one another all the way home.",
+    "The ebullient students sat in silence on the bus, staring gloomily at the floor the whole ride back.",
+    "Their ebullient mood slowly drained away until they felt too tired and flat to speak.",
+    "The ebullient students quietly rechecked the judges' arithmetic line by line."
+  ],
+  "reasons": [
+    "Loud, bubbling celebration is exactly the overflowing high spirits the word describes.",
+    "Gloomy silence is the opposite of bubbling, outward cheer.",
+    "The word describes energy spilling over, not energy ebbing or fading out.",
+    "Careful, calm checking shows diligence, not an outburst of enthusiasm."
+  ],
+  "practice": {
+    "prompt": "A grandmother hears that her grandson is coming to stay for the holidays.",
+    "options": [
+      "She was ebullient at the news, phoning three friends and planning a feast.",
+      "She was ebullient at the news, so she sighed heavily and went back to bed for the afternoon.",
+      "Her ebullient porch lamp shone so brightly that the visitor easily found the door.",
+      "She felt ebullient about the visit because she dreaded all the noise and mess."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Rushing to share the news and plan a celebration shows joy spilling outward.",
+      "A heavy sigh and retreat to bed signal weariness, not bubbling delight.",
+      "This confuses the word with effulgent; a lamp can glow but cannot feel enthusiasm.",
+      "Dread contradicts the eager, cheerful excitement the word requires."
+    ]
+  }
+}

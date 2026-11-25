@@ -1,0 +1,47 @@
+{
+  "id": 320,
+  "slug": "calumny",
+  "word": "calumny",
+  "pos": "noun",
+  "pronunciation": "/ˈkæl.əm.ni/",
+  "definition": "A false statement made on purpose to damage someone's good name.",
+  "difficulty": "Advanced",
+  "example": "The novelist spent years trying to clear her grandfather's name of an old calumny.",
+  "synonyms": [
+    "slander",
+    "defamation",
+    "smear",
+    "vilification"
+  ],
+  "nuance": "Criticism can be true and fair, but calumny is always false and spiteful; don't confuse it with calamity, which means a disaster.",
+  "alternatives": [],
+  "prompt": "A baker learns that a rival has been spreading untrue stories about her shop.",
+  "options": [
+    "The rival's calumny, an invented tale about sawdust in her bread, drove customers away.",
+    "The calumny of the flood left the bakery's ovens rusted and useless by morning.",
+    "Loyal customers heaped calumny on her, calling her pastries the finest in town.",
+    "The inspector's calumny correctly noted that her walk-in refrigerator was running two degrees too warm."
+  ],
+  "reasons": [
+    "A deliberately false story meant to hurt her business is exactly this kind of attack.",
+    "A flood is a disaster, which is calamity; this sentence mixes up the two look-alike words.",
+    "Warm praise is the reverse of a lie told to damage someone.",
+    "An accurate official finding is not false or malicious, so it cannot be this."
+  ],
+  "practice": {
+    "prompt": "A retired teacher receives an anonymous letter claiming he once cheated at a chess tournament.",
+    "options": [
+      "He dismissed the letter as calumny, since the tournament records proved he had played fairly.",
+      "The town honored his long career by presenting him with a calumny at his retirement dinner.",
+      "A calumny struck the school last spring when a burst pipe flooded the gymnasium floor.",
+      "His friend offered calumny by gently and truthfully pointing out a weak move in his favorite opening."
+    ],
+    "answer": 0,
+    "reasons": [
+      "The accusation is untrue and meant to tarnish him, so the label fits.",
+      "An honor given at a celebration is a tribute, not a damaging lie.",
+      "A burst pipe is a misfortune, which is calamity, not a false accusation.",
+      "Kind, honest feedback has none of the falsehood or ill will the word requires."
+    ]
+  }
+}

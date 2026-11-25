@@ -14,7 +14,9 @@
     "apportion"
   ],
   "nuance": "Allocate stresses planning how a limited supply is divided among uses; allot more often means giving each person a fixed share.",
-  "alternatives": [],
+  "alternatives": [
+    "hoard"
+  ],
   "prompt": "A school club must divide its small budget among several events this year.",
   "options": [
     "The members voted to allocate half of the money to the spring science fair.",

@@ -1,0 +1,50 @@
+{
+  "id": 185,
+  "slug": "renowned",
+  "word": "renowned",
+  "pos": "adjective",
+  "pronunciation": "/rɪˈnaʊnd/",
+  "definition": "Widely known and admired for an achievement, skill or quality.",
+  "difficulty": "Intermediate",
+  "example": "The coastal village is renowned for its hand-painted pottery.",
+  "synonyms": [
+    "celebrated",
+    "acclaimed",
+    "famed",
+    "eminent"
+  ],
+  "nuance": "Renowned means famous for something admirable, while notorious means famous for something bad.",
+  "alternatives": [
+    "notorious",
+    "obscure"
+  ],
+  "prompt": "For decades, a small bakery has drawn customers from all across the region.",
+  "options": [
+    "The bakery is renowned for its rye bread, which people drive for hours to buy.",
+    "When the lease ran out, the owner had the bakery's contract renowned for five more years.",
+    "The bakery is so renowned that almost nobody outside its own street has heard of it.",
+    "The bakery became renowned after inspectors found mice running through its kitchen."
+  ],
+  "reasons": [
+    "Wide fame earned through a quality that people admire fits the word exactly.",
+    "This confuses the word with renewed; a contract is extended, not made famous.",
+    "Being unknown beyond one street is obscurity, the reverse of wide fame.",
+    "Fame for a disgraceful reason is notoriety; the word implies admiration."
+  ],
+  "practice": {
+    "prompt": "Experts around the world cite a scientist's research on coral reefs.",
+    "options": [
+      "Her renowned findings were unknown to everyone except her lab partner.",
+      "The biologist renowned her grant application so the funding would continue next year.",
+      "The researcher was renowned for repeatedly inventing data in her published papers.",
+      "The renowned marine biologist was invited to give the opening lecture at the conference."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Work known to just one person has no wide reputation at all.",
+      "This mistakes the adjective for the verb renew, which means to extend.",
+      "Being known for dishonesty is notoriety, not the admiring fame the word suggests.",
+      "An invitation to open a major event reflects broad respect for her work."
+    ]
+  }
+}

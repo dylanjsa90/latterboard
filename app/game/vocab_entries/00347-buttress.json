@@ -1,0 +1,50 @@
+{
+  "id": 347,
+  "slug": "buttress",
+  "word": "buttress",
+  "pos": "verb",
+  "pronunciation": "/ˈbʌt.rəs/",
+  "definition": "To support or strengthen something, especially an argument or claim.",
+  "difficulty": "Intermediate",
+  "example": "The historian buttressed her claim with letters found in the town archive.",
+  "synonyms": [
+    "bolster",
+    "reinforce",
+    "shore up",
+    "support"
+  ],
+  "nuance": "Buttress suggests propping something up with added support, often evidence, while bolster more often means lifting spirits or confidence.",
+  "alternatives": [
+    "bolster",
+    "undermine"
+  ],
+  "prompt": "A student is preparing for a debate about later school start times.",
+  "options": [
+    "She gathered sleep studies to buttress her case for starting classes at nine.",
+    "She hoped to buttress her opponent's argument by exposing every one of its weakest statistics.",
+    "She planned to buttress each of her rival's claims by proving it was false.",
+    "She kept trying to buttress into the other team's speeches with loud interruptions."
+  ],
+  "reasons": [
+    "Research that backs up her position makes her argument stronger.",
+    "Exposing weak points tears an argument down instead of propping it up.",
+    "Proving a claim false means rebutting it, which is the reverse of supporting it.",
+    "This mixes the word up with \"butt in\"; it has nothing to do with interrupting."
+  ],
+  "practice": {
+    "prompt": "Workers inspect an old stone barn wall that has begun to lean outward.",
+    "options": [
+      "The crew built a brick pier to buttress the barn wall against further leaning.",
+      "To buttress the wall, the crew pulled out the last wooden beams holding it upright.",
+      "The crew chose to buttress the wall by painting it a brighter shade of red.",
+      "The crew used a sharp chisel to buttress the crumbling mortar out of the gaps between stones."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A solid pier pressed against the wall gives it the extra support it needs.",
+      "Taking away supports weakens the wall rather than strengthening it.",
+      "A fresh coat of paint changes the look but adds no structural strength.",
+      "Scraping material out is removal; the word never means digging or clearing away."
+    ]
+  }
+}

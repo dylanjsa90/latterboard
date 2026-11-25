@@ -1,0 +1,47 @@
+{
+  "id": 334,
+  "slug": "impulsive",
+  "word": "impulsive",
+  "pos": "adjective",
+  "pronunciation": "/ɪmˈpʌl.sɪv/",
+  "definition": "Acting suddenly on a feeling or wish without stopping to think first.",
+  "difficulty": "Foundation",
+  "example": "In an impulsive moment, he signed up for a pottery class he had never heard of before that morning.",
+  "synonyms": [
+    "rash",
+    "hasty",
+    "spontaneous",
+    "reckless"
+  ],
+  "nuance": "Impulsive stresses acting before thinking and often hints at regret; spontaneous is gentler and usually praises an unplanned choice.",
+  "alternatives": [],
+  "prompt": "A teenager walks past a shop window on the way home from school.",
+  "options": [
+    "Maya made an impulsive decision to spend her bus fare on a hat in the window.",
+    "Maya was impulsive, so she compared prices at six shops over a month before buying.",
+    "Being impulsive, Maya had to touch the glass exactly four times before she could walk on.",
+    "The impulsive display, with its glittering lights, made Maya stop and stare in awe."
+  ],
+  "reasons": [
+    "Spending money she needed, on the spot and without weighing it, is acting on a sudden urge.",
+    "A month of careful comparison is planned behavior, the reverse of acting on a whim.",
+    "A repeated ritual someone feels driven to perform is compulsive, not a sudden one-time urge.",
+    "This confuses the word with impressive; a window display cannot act without thinking."
+  ],
+  "practice": {
+    "prompt": "A group of friends is getting ready for a weekend camping trip.",
+    "options": [
+      "Jonah was impulsive about going because his parents ordered him to attend.",
+      "Jonah's impulsive suggestion to leave at midnight meant nobody remembered to pack the tent.",
+      "Jonah was impulsive, writing a checklist and studying the weather forecast every day for weeks.",
+      "The impulsive smell of the old sleeping bag made everyone hold their noses."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Doing something because others require it is obligation, not acting on one's own sudden urge.",
+      "Rushing off on a sudden idea, with no time to plan, led to a forgotten essential.",
+      "Weeks of steady preparation show forethought, which is the opposite of the word's meaning.",
+      "This mixes the word up with repulsive; a smell can be disgusting but cannot act rashly."
+    ]
+  }
+}

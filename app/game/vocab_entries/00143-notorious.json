@@ -13,7 +13,10 @@
     "of ill repute"
   ],
   "nuance": "Famous can be neutral or positive, but notorious always points to a bad reputation; it is often milder than infamous and fits small faults.",
-  "alternatives": [],
+  "alternatives": [
+    "renowned",
+    "obscure"
+  ],
   "prompt": "A food writer reviews a local diner where the service is very slow.",
   "options": [
     "The diner is notorious for making customers wait an hour for a sandwich.",

@@ -1,0 +1,46 @@
+{
+  "id": 295,
+  "slug": "perjury",
+  "word": "perjury",
+  "pos": "noun",
+  "pronunciation": "/ˈpɜːr.dʒə.ri/",
+  "definition": "The crime of knowingly lying after swearing an oath to tell the truth.",
+  "difficulty": "Intermediate",
+  "example": "The landlord faced a charge of perjury after lying under oath about the repairs he never made.",
+  "synonyms": [
+    "lying under oath",
+    "false testimony",
+    "false swearing"
+  ],
+  "nuance": "Not every lie counts: it must be a deliberate falsehood told under oath, unlike an honest mistake or a casual fib.",
+  "alternatives": [],
+  "prompt": "A witness takes the stand at a trial over a damaged rental car.",
+  "options": [
+    "Having sworn to tell the truth, she invented an alibi on the stand, which was perjury.",
+    "The witness committed perjury by honestly admitting she could not recall the date.",
+    "The twelve members of the perjury listened closely as the witness spoke.",
+    "Before being sworn in, he committed perjury by fibbing to a friend in the hallway."
+  ],
+  "reasons": [
+    "A deliberate falsehood told after taking an oath is exactly this crime.",
+    "Truthfully saying you don't remember is honesty, not a sworn lie.",
+    "This confuses the word with jury, the group that hears a case.",
+    "A lie told outside of any oath is an ordinary lie, not this legal offense."
+  ],
+  "practice": {
+    "prompt": "A contractor signs a sworn statement saying when a kitchen remodel was finished.",
+    "options": [
+      "The contractor committed perjury by accidentally misspelling the client's street.",
+      "Months of perjury left the builder so short of cash he could not pay his crew.",
+      "Knowingly backdating the finish date in that sworn statement amounted to perjury.",
+      "His perjury was a careful, accurate record that matched every receipt."
+    ],
+    "answer": 2,
+    "reasons": [
+      "An innocent typo lacks the intent to deceive that the crime requires.",
+      "This mixes the word up with penury, which means extreme poverty.",
+      "Signing a sworn document while knowing it is false is a lie under oath.",
+      "An accurate, truthful record is the reverse of a sworn falsehood."
+    ]
+  }
+}

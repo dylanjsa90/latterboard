@@ -14,7 +14,9 @@
     "fretful"
   ],
   "nuance": "Querulous means fretful, whiny complaining, not picking fights like quarrelsome or asking questions like a query, despite the similar sound.",
-  "alternatives": [],
+  "alternatives": [
+    "inquisitive"
+  ],
   "prompt": "A diner at a restaurant is unhappy with nearly everything on the table.",
   "options": [
     "In a querulous tone, the diner whined that the soup was lukewarm and the napkins scratchy.",

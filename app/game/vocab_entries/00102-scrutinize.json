@@ -14,7 +14,9 @@
     "analyze"
   ],
   "nuance": "Scrutinize is more intense than examine and usually suggests a critical search for flaws, not just a careful look.",
-  "alternatives": [],
+  "alternatives": [
+    "overlook"
+  ],
   "prompt": "A scientist gets experimental results that look surprisingly perfect.",
   "options": [
     "Wary of a fluke, she asked a colleague to scrutinize every measurement for errors.",

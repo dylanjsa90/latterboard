@@ -1,0 +1,49 @@
+{
+  "id": 159,
+  "slug": "astute",
+  "word": "astute",
+  "pos": "adjective",
+  "pronunciation": "/əˈstuːt/",
+  "definition": "Quick to understand a situation and use that understanding to your advantage.",
+  "difficulty": "Intermediate",
+  "example": "The astute coach saw the other team tiring in the final minutes and told her players to speed up the game.",
+  "synonyms": [
+    "shrewd",
+    "perceptive",
+    "sharp-witted",
+    "canny"
+  ],
+  "nuance": "Astute praises practical sharpness in reading a situation, while shrewd can hint at self-serving cunning.",
+  "alternatives": [
+    "obtuse"
+  ],
+  "prompt": "A shop owner notices that customers keep lingering near the front window.",
+  "options": [
+    "The astute owner moved the best-selling scarves into the window display.",
+    "The astute owner never noticed which items customers paused to look at.",
+    "After rearranging the window, the owner felt an astute pain in her lower back.",
+    "The astute owner rearranged the window at random and hoped something would sell."
+  ],
+  "reasons": [
+    "She read what shoppers were drawn to and turned that insight into more sales.",
+    "Missing an obvious clue about customers is the reverse of sharp perception.",
+    "This confuses the word with acute, which describes sharp or sudden pain.",
+    "Guessing at random shows no insight into the situation at all."
+  ],
+  "practice": {
+    "prompt": "A student is preparing for a debate against a skilled opponent.",
+    "options": [
+      "The astute debater accepted every claim his opponent made without asking for any evidence.",
+      "The astute debater studied her rival's past speeches and prepared a reply to each tactic.",
+      "The astute debater skipped all preparation, assuming the judges would simply favor him over his rival.",
+      "The debater was so astute by her opponent's opening that she dropped her note cards."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Believing everything without question is naive, the opposite of sharp judgment.",
+      "Anticipating an opponent's moves and planning for them shows keen practical insight.",
+      "Careless overconfidence ignores the real situation instead of reading it well.",
+      "This mistakes the word for astounded; it describes cleverness, not shock."
+    ]
+  }
+}

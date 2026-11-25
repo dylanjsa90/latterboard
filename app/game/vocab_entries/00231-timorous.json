@@ -1,0 +1,49 @@
+{
+  "id": 231,
+  "slug": "timorous",
+  "word": "timorous",
+  "pos": "adjective",
+  "pronunciation": "/ˈtɪm.ər.əs/",
+  "definition": "Easily frightened and lacking the courage or confidence to act.",
+  "difficulty": "Advanced",
+  "example": "A timorous knock at the door suggested the visitor half hoped no one would answer.",
+  "synonyms": [
+    "timid",
+    "fearful",
+    "faint-hearted",
+    "apprehensive"
+  ],
+  "nuance": "Timorous means nearly the same as timid but sounds more literary, and it often suggests fearfulness that is part of someone's nature.",
+  "alternatives": [
+    "intrepid"
+  ],
+  "prompt": "On the first day of class, a new student is asked to read a poem aloud.",
+  "options": [
+    "The timorous student whispered the first line and kept her eyes on the floor.",
+    "The timorous student volunteered first and read the whole poem in a booming voice.",
+    "The timorous student read for only a brief time before the bell rang.",
+    "The timorous student squinted because the print in her book was so tiny."
+  ],
+  "reasons": [
+    "Speaking barely above a whisper and avoiding eye contact are signs of fear and low confidence.",
+    "Eager volunteering and a loud, bold reading show confidence, which is the opposite.",
+    "This treats the word as if it were about time. It actually describes fearfulness.",
+    "Squinting at small print has to do with eyesight. It shows nothing about fear."
+  ],
+  "practice": {
+    "prompt": "A group of hikers reaches a narrow rope bridge over a deep gorge.",
+    "options": [
+      "The timorous bridge creaked and swung back and forth in the gusty wind.",
+      "The timorous hiker kept the group laughing with silly jokes the whole way over.",
+      "The timorous hiker turned back rather than step onto the swaying planks.",
+      "The timorous hiker sprinted across and dared everyone else to follow him."
+    ],
+    "answer": 2,
+    "reasons": [
+      "A bridge cannot feel fear. Swinging in the wind is just motion, which this word does not describe.",
+      "This mixes the word up with its look-alike humorous. Telling jokes has nothing to do with fear.",
+      "Backing away from a frightening crossing shows a nervous, easily scared nature.",
+      "Racing ahead and daring others is reckless boldness, not fearfulness."
+    ]
+  }
+}

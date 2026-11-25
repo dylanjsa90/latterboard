@@ -1,0 +1,49 @@
+{
+  "id": 224,
+  "slug": "approbation",
+  "word": "approbation",
+  "pos": "noun",
+  "pronunciation": "/ˌæp.rəˈbeɪ.ʃən/",
+  "definition": "Formal approval or praise, especially from someone with authority.",
+  "difficulty": "Advanced",
+  "example": "The young chef's new dish earned the approbation of even the restaurant's harshest critic.",
+  "synonyms": [
+    "approval",
+    "commendation",
+    "endorsement",
+    "sanction"
+  ],
+  "nuance": "Approbation is more formal than approval and often suggests official or respected judgment, not just casual liking.",
+  "alternatives": [
+    "opprobrium"
+  ],
+  "prompt": "A town council reviews a proposal to turn an empty lot into a community garden.",
+  "options": [
+    "The proposal won the council's approbation, and digging began the next spring.",
+    "The council placed the head gardener on approbation for six months after a missed deadline.",
+    "The council voiced its approbation by rejecting the plan outright and calling it wasteful.",
+    "The surveyor made a rough approbation of the lot, guessing it covered half an acre."
+  ],
+  "reasons": [
+    "The council formally endorsed the plan, which is exactly the kind of approval the word names.",
+    "This confuses the word with probation, a trial period of supervision.",
+    "Rejection and criticism are the reverse of endorsement, so the meaning is flipped.",
+    "A rough estimate is an approximation; the word has nothing to do with measuring."
+  ],
+  "practice": {
+    "prompt": "A young violinist plays a difficult piece for her demanding teacher.",
+    "options": [
+      "A single nod of approbation from her teacher meant more than any applause.",
+      "Her teacher frowned in approbation and listed every note she had played out of tune.",
+      "She felt such approbation before the lesson that her hands shook on the bow.",
+      "She was accused of approbation for taking another student's sheet music without asking."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A respected mentor's sign of praise fits the word's sense of valued, authoritative approval.",
+      "Frowning and listing mistakes show disapproval, the opposite of what the word means.",
+      "Nervous dread is apprehension; the word describes praise, not anxiety.",
+      "Taking something without permission is appropriation, a look-alike with an unrelated meaning."
+    ]
+  }
+}

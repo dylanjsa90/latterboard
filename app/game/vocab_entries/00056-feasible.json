@@ -15,7 +15,8 @@
   ],
   "nuance": "Feasible stresses that something can really be done with the means at hand, while possible can mean merely conceivable.",
   "alternatives": [
-    "plausible"
+    "plausible",
+    "viable"
   ],
   "prompt": "A town council is deciding whether to build a footbridge over a creek.",
   "options": [

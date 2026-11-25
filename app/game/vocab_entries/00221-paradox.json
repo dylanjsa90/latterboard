@@ -1,0 +1,46 @@
+{
+  "id": 221,
+  "slug": "paradox",
+  "word": "paradox",
+  "pos": "noun",
+  "pronunciation": "/ˈpær.ə.dɑːks/",
+  "definition": "A statement or situation that seems to contradict itself but may still be true.",
+  "difficulty": "Foundation",
+  "example": "It is a paradox that the busiest people often seem to find the most time to help others.",
+  "synonyms": [
+    "apparent contradiction",
+    "puzzle",
+    "anomaly"
+  ],
+  "nuance": "A contradiction is simply inconsistent, but a paradox only seems impossible and often hides a real truth.",
+  "alternatives": [],
+  "prompt": "A coach notices that her team plays better in weeks when it practices less.",
+  "options": [
+    "The coach puzzled over the paradox that resting more made her players faster.",
+    "The coach introduced a new paradox for how drills would be scheduled each week.",
+    "It was a paradox that the players who trained hardest grew strongest.",
+    "The players performed a funny paradox of the coach's pep talk for the bus ride."
+  ],
+  "reasons": [
+    "Doing less and improving more seems impossible yet turns out true, which is exactly a paradox.",
+    "This confuses the word with paradigm; a training model or plan is not a seeming contradiction.",
+    "Hard work leading to strength is what anyone would expect, so nothing here seems contradictory.",
+    "This mixes the word up with parody; a comic imitation is not a self-contradiction."
+  ],
+  "practice": {
+    "prompt": "A beginner learns that cutting back a rosebush makes it bloom more.",
+    "options": [
+      "The gardener's prize rose was a paradox of beauty, admired by every judge.",
+      "The gardener solved the paradox by finding his lost trowel in the shed.",
+      "Pruning a plant to help it grow seemed like a paradox to the new gardener.",
+      "The gardener watered the roses every day, a paradox that kept them healthy."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This treats the word like paragon; a perfect example of beauty contains no contradiction.",
+      "A misplaced tool is just a mystery, not an idea that seems to argue against itself.",
+      "Removing parts of a plant so it flourishes sounds self-defeating but works, so the word fits.",
+      "Water keeping plants healthy is ordinary cause and effect, with no apparent conflict."
+    ]
+  }
+}

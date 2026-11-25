@@ -15,7 +15,9 @@
   ],
   "nuance": "Meticulous praises careful attention, but pedantic criticizes it as showy fussing over points too minor to matter.",
   "alternatives": [
-    "meticulous"
+    "meticulous",
+    "pedestrian",
+    "cavalier"
   ],
   "prompt": "You are telling a funny story to friends at lunch when one of them speaks up.",
   "options": [

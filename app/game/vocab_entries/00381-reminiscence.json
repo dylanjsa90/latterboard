@@ -1,0 +1,46 @@
+{
+  "id": 381,
+  "slug": "reminiscence",
+  "word": "reminiscence",
+  "pos": "noun",
+  "pronunciation": "/ˌrɛm.əˈnɪs.əns/",
+  "definition": "A memory of past experiences that someone tells or writes about, often with fondness.",
+  "difficulty": "Intermediate",
+  "example": "The old sailor's reminiscence of a storm off the coast held the whole dock silent.",
+  "synonyms": [
+    "recollection",
+    "remembrance",
+    "memory"
+  ],
+  "nuance": "A recollection can be any neutral act of remembering, but a reminiscence is usually shared aloud or lingered over with warmth.",
+  "alternatives": [],
+  "prompt": "At her retirement party, a teacher talks about her first year in the classroom.",
+  "options": [
+    "Her reminiscence of that first noisy classroom drew knowing smiles.",
+    "Her reminiscence of the cruise she will take next spring filled the room with envy.",
+    "Her daughter bears a striking reminiscence to her at that age.",
+    "Guests wrapped up every reminiscence of the cake to take home."
+  ],
+  "reasons": [
+    "She is fondly sharing a memory from years ago, which fits the word exactly.",
+    "A trip that has not happened yet cannot be remembered; the word looks backward.",
+    "This confuses the word with resemblance, which describes looking alike.",
+    "Leftover pieces are remnants, not shared memories of the past."
+  ],
+  "practice": {
+    "prompt": "Two old friends meet at a café after twenty years apart.",
+    "options": [
+      "Each friend offered a careful reminiscence of the jobs they might hold in ten years.",
+      "The barista gave them a reminiscence to bring their own cups next time.",
+      "Neither friend mentioned the past, so their talk was full of reminiscence.",
+      "Over coffee, one friend's reminiscence about their old paper route made both of them grin."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Guessing about the future is prediction, the reverse of looking back.",
+      "A prompt about a future task is a reminder, not a memory of past events.",
+      "Avoiding the past entirely contradicts a conversation built on shared memories.",
+      "Telling a happy story from their shared childhood is exactly this kind of memory."
+    ]
+  }
+}

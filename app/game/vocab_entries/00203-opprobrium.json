@@ -1,0 +1,49 @@
+{
+  "id": 203,
+  "slug": "opprobrium",
+  "word": "opprobrium",
+  "pos": "noun",
+  "pronunciation": "/əˈproʊ.bri.əm/",
+  "definition": "Harsh public criticism or scorn, or the disgrace that comes from it.",
+  "difficulty": "Advanced",
+  "example": "The museum faced widespread opprobrium after it sold a beloved painting to a private collector.",
+  "synonyms": [
+    "condemnation",
+    "public disgrace",
+    "censure",
+    "obloquy"
+  ],
+  "nuance": "Opprobrium is strong scorn shared by many people, harsher than criticism, and it means the opposite of approbation, a word it resembles.",
+  "alternatives": [
+    "approbation"
+  ],
+  "prompt": "A bakery is discovered to have been using expired ingredients in its cakes.",
+  "options": [
+    "Customers heaped opprobrium on the bakery once the expired ingredients came to light.",
+    "The bakery's opprobrium for its fresh ingredients won it a blue ribbon at the county fair.",
+    "The baker felt a mild opprobrium when she misplaced her favorite rolling pin.",
+    "The health inspector granted the bakery opprobrium to reopen the next morning."
+  ],
+  "reasons": [
+    "A wide public outcry over a betrayal of trust is exactly this kind of scorn.",
+    "This treats the word as praise, confusing it with approbation.",
+    "The word means strong public condemnation, not a small private annoyance.",
+    "It is disgrace, not official permission or approval to do something."
+  ],
+  "practice": {
+    "prompt": "A well-known chess player is caught reading hidden notes during a tournament.",
+    "options": [
+      "The organizers presented the player with an opprobrium for outstanding sportsmanship.",
+      "The player endured the opprobrium of the whole chess world after the notes were found.",
+      "Fans roared with opprobrium when the player won a fair match the following year.",
+      "His opprobrium let him stay calm and focused through the tense final round."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Disgrace is not an honor or prize that anyone would award.",
+      "Cheating exposed in public brings broad, harsh disgrace from a whole community.",
+      "Cheering for a fair win is enthusiasm, the reverse of scornful condemnation.",
+      "The word names public scorn, not a mental quality like composure."
+    ]
+  }
+}

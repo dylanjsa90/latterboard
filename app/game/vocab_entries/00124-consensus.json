@@ -13,7 +13,10 @@
     "common ground"
   ],
   "nuance": "Consensus is broad shared agreement, not necessarily unanimity, and it never describes a single person's opinion.",
-  "alternatives": [],
+  "alternatives": [
+    "compromise",
+    "dissent"
+  ],
   "prompt": "A neighborhood committee must decide what to plant in the shared garden.",
   "options": [
     "After hearing every proposal, the committee reached a consensus to plant tomatoes and herbs.",

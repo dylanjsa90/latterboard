@@ -1,0 +1,47 @@
+{
+  "id": 273,
+  "slug": "doleful",
+  "word": "doleful",
+  "pos": "adjective",
+  "pronunciation": "/ˈdoʊl.fəl/",
+  "definition": "Showing or causing deep sadness, often in a way that others can plainly see or hear.",
+  "difficulty": "Intermediate",
+  "example": "His doleful face at dinner told us the team had lost again.",
+  "synonyms": [
+    "mournful",
+    "woeful",
+    "melancholy",
+    "sorrowful"
+  ],
+  "nuance": "Doleful describes sadness that shows in a look, voice or sound, while morose suggests sullen, bad-tempered gloom.",
+  "alternatives": [],
+  "prompt": "A puppy watches from the window as its family drives away for the day.",
+  "options": [
+    "The puppy let out a doleful whimper as the car backed down the driveway.",
+    "The doleful puppy bounced around the yard, wagging its tail with pure delight as they left.",
+    "The doleful puppy bared its teeth and growled a menacing threat at the departing car.",
+    "Before leaving, the family set out a doleful pile of treats, more than enough for the day."
+  ],
+  "reasons": [
+    "A sad little cry at being left behind is exactly the kind of visible sorrow the word names.",
+    "Bouncing with delight is joyful behavior, the reverse of what the word describes.",
+    "Growling and threatening suggest menace, which fits baleful, not a mournful mood.",
+    "The word has nothing to do with being full or plentiful; it is about sorrow."
+  ],
+  "practice": {
+    "prompt": "A cellist chooses a piece to play at a quiet evening concert.",
+    "options": [
+      "She picked a slow, doleful melody that left several listeners blinking back tears.",
+      "She picked a doleful tune so bright and bouncy that the crowd clapped along and cheered.",
+      "Before playing, she shot a doleful glare at the latecomers that warned them to keep quiet.",
+      "The concert hall was doleful, packed with listeners in every single one of its seats."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Music that moves people to tears is music that expresses and stirs grief.",
+      "A bright, bouncy tune that gets people cheering is cheerful, not sorrowful.",
+      "A warning glare is threatening; a sorrowful look would not scare anyone into silence.",
+      "Despite the ending, the word does not mean crowded or full; it refers to sadness."
+    ]
+  }
+}

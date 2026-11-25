@@ -1,0 +1,47 @@
+{
+  "id": 165,
+  "slug": "antagonize",
+  "word": "antagonize",
+  "pos": "verb",
+  "pronunciation": "/ænˈtæɡ.əˌnaɪz/",
+  "definition": "To make someone hostile or annoyed through your words or actions.",
+  "difficulty": "Intermediate",
+  "example": "Raising the rent twice in one year antagonized even the most patient tenants.",
+  "synonyms": [
+    "provoke",
+    "alienate",
+    "irritate",
+    "rile"
+  ],
+  "nuance": "To antagonize is to stir up hostility in someone else; to agonize is to suffer worry or anguish yourself.",
+  "alternatives": [],
+  "prompt": "A new manager needs the warehouse staff to accept an unpopular schedule change.",
+  "options": [
+    "She explained the change calmly, careful not to antagonize the workers who disliked it.",
+    "The manager would antagonize for hours over which shift she should take herself.",
+    "To antagonize the staff, she thanked them warmly and offered everyone longer breaks.",
+    "She posted a short memo on the break room wall to antagonize everyone about the new start times."
+  ],
+  "reasons": [
+    "Avoiding words that would turn already unhappy workers against her fits the term exactly.",
+    "Fretting over a personal choice is agonizing; the word needs someone who is being provoked.",
+    "Warm thanks and extra breaks soothe people, which is the reverse of stirring up resentment.",
+    "Simply informing people is neutral; the verb implies deliberately or carelessly creating ill will."
+  ],
+  "practice": {
+    "prompt": "Two neighbors have been arguing about the fence between their yards.",
+    "options": [
+      "Leaving his trash cans on her side of the fence was sure to antagonize his neighbor.",
+      "His neighbor began to antagonize over whether the fence should be painted white or gray.",
+      "He hoped a plate of homemade cookies would antagonize her and end the dispute.",
+      "The fence was antagonized by years of rain until its boards began to warp."
+    ],
+    "answer": 0,
+    "reasons": [
+      "An inconsiderate act during a dispute is likely to deepen her anger toward him.",
+      "Anxiously weighing paint colors is agonizing; no one here is being made hostile.",
+      "A friendly gift meant to settle a quarrel aims to calm her, not to provoke her.",
+      "The verb applies to people or animals roused to hostility, not objects worn down by weather."
+    ]
+  }
+}

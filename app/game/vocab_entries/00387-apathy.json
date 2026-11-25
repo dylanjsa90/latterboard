@@ -1,0 +1,46 @@
+{
+  "id": 387,
+  "slug": "apathy",
+  "word": "apathy",
+  "pos": "noun",
+  "pronunciation": "/ˈæp.ə.θi/",
+  "definition": "A lack of interest, enthusiasm, or concern about something.",
+  "difficulty": "Foundation",
+  "example": "After months of rain, a dull apathy settled over him, and even his favorite hobbies felt pointless.",
+  "synonyms": [
+    "indifference",
+    "unconcern",
+    "listlessness"
+  ],
+  "nuance": "Apathy is an absence of feeling, while its look-alike antipathy is a strong feeling of dislike.",
+  "alternatives": [],
+  "prompt": "A school club posts a sign-up sheet for a weekend park cleanup.",
+  "options": [
+    "Only three names appeared on the sheet, and the organizers blamed student apathy.",
+    "Students' apathy toward the club was so fierce that they complained loudly about every poster.",
+    "The apathy was overwhelming: the sheet filled within an hour and a waiting list began.",
+    "Moved by apathy for the polluted park, Lena wrote a heartfelt plea urging others to join."
+  ],
+  "reasons": [
+    "A nearly empty sheet suggests classmates simply did not care enough to join.",
+    "Fierce, loud hostility is antipathy; apathy means feeling too little to complain.",
+    "A rush of eager volunteers shows enthusiasm, the reverse of not caring.",
+    "Being moved to write a heartfelt plea reflects deep concern, not an absence of it."
+  ],
+  "practice": {
+    "prompt": "A coach watches a soccer team lose its fifth game in a row.",
+    "options": [
+      "The coach's apathy toward the rival team was so bitter that he refused to shake their coach's hand.",
+      "By the fifth loss, apathy had set in, and players barely chased loose balls.",
+      "The team's apathy showed in how passionately the players argued over strategy at halftime.",
+      "Out of apathy for their struggling goalie, teammates gathered around to comfort him after the match."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Bitter resentment of a rival is antipathy, an intense feeling rather than a lack of one.",
+      "Players who no longer bother to run show they have stopped caring about the outcome.",
+      "Passionate debate signals strong engagement, which is the opposite of not caring.",
+      "Comforting a teammate shows warmth; this confuses the word with empathy or sympathy."
+    ]
+  }
+}

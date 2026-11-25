@@ -1,0 +1,49 @@
+{
+  "id": 360,
+  "slug": "summarily",
+  "word": "summarily",
+  "pos": "adverb",
+  "pronunciation": "/səˈmɛr.ə.li/",
+  "definition": "Right away and without the usual discussion, process, or formalities.",
+  "difficulty": "Advanced",
+  "example": "On her first day, the new coach summarily dropped the team's old warm-up routine.",
+  "synonyms": [
+    "peremptorily",
+    "without ceremony",
+    "abruptly",
+    "forthwith"
+  ],
+  "nuance": "Summarily stresses skipping the normal steps or hearing, not just speed; abruptly only means suddenly, with no sense of bypassed procedure.",
+  "alternatives": [
+    "deliberately"
+  ],
+  "prompt": "Science fair judges discover that one entry breaks a clearly posted contest rule.",
+  "options": [
+    "The judges summarily disqualified the entry without hearing the student's explanation.",
+    "After weeks of hearings and patient review, the judges summarily reached their decision.",
+    "The judges summarily added the scores from each column to get a total.",
+    "The young scientist summarily hoped the judges would enjoy her volcano."
+  ],
+  "reasons": [
+    "Ruling on the spot and skipping any chance to respond is exactly this kind of shortcut.",
+    "A long, careful process is the opposite of acting without formalities.",
+    "The word has nothing to do with adding up a sum; it is not about arithmetic.",
+    "Hoping is not a decisive act that could bypass a procedure, so the word does not fit."
+  ],
+  "practice": {
+    "prompt": "A restaurant owner reads a supplier's new contract and finds unfair hidden fees.",
+    "options": [
+      "The owner summarily wished the delivery prices had been a bit lower.",
+      "The owner summarily rejected the contract and phoned another supplier.",
+      "The owner summarily went over each clause with a lawyer across several meetings.",
+      "The owner summarily ordered extra peaches for the busy summer season."
+    ],
+    "answer": 1,
+    "reasons": [
+      "A quiet wish involves no decision or skipped procedure, so the adverb is misapplied.",
+      "Refusing at once, with no negotiation or back-and-forth, shows the swift, no-process action.",
+      "Slow, step-by-step review is the reverse of acting without the usual process.",
+      "Despite the similar sound, the word has no link to summer or to seasons."
+    ]
+  }
+}

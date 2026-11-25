@@ -1,0 +1,47 @@
+{
+  "id": 255,
+  "slug": "dissemble",
+  "word": "dissemble",
+  "pos": "verb",
+  "pronunciation": "/dɪˈsɛm.bəl/",
+  "definition": "To hide your real feelings, motives, or thoughts behind a false appearance.",
+  "difficulty": "Advanced",
+  "example": "The ambassador learned to dissemble, hiding his alarm behind a calm and courteous smile.",
+  "synonyms": [
+    "dissimulate",
+    "feign",
+    "put on a front",
+    "mask one's feelings"
+  ],
+  "nuance": "Unlike lying outright, dissembling usually hides the truth through a misleading manner; don't confuse it with disassemble.",
+  "alternatives": [],
+  "prompt": "A job candidate is asked why she left her last position.",
+  "options": [
+    "Unwilling to admit she had been fired, she began to dissemble, calling it a mutual decision.",
+    "She explained that her old job was to dissemble broken printers and sort their parts for recycling.",
+    "She decided to dissemble, telling the interviewer exactly why she had been let go.",
+    "She hoped her new team would dissemble in the lobby each morning for a quick meeting."
+  ],
+  "reasons": [
+    "She covers an embarrassing truth with a misleading story, which is exactly what this verb describes.",
+    "Taking machines apart is disassembling; this word is about concealing the truth.",
+    "Giving a fully honest answer reveals the truth instead of masking it.",
+    "Gathering people together is assembling; the word has nothing to do with meeting up."
+  ],
+  "practice": {
+    "prompt": "A boy breaks his grandmother's vase while she is out running errands.",
+    "options": [
+      "When she asked about the vase, he tried to dissemble, shrugging as if puzzled.",
+      "He grabbed a screwdriver to dissemble the cabinet and sweep up the shards hidden beneath it.",
+      "He chose to dissemble, pointing to the shards and confessing the moment she walked in.",
+      "The replacement vase she bought will dissemble the old one so closely that no one will notice."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Pretending to be confused so his guilt stays hidden is a clear case of putting on a false front.",
+      "Unscrewing furniture is disassembling, a look-alike word with a completely different meaning.",
+      "An immediate confession exposes what happened rather than concealing it.",
+      "Looking like something else is resembling; this verb describes a person hiding feelings or motives."
+    ]
+  }
+}

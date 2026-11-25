@@ -1,0 +1,47 @@
+{
+  "id": 151,
+  "slug": "fulsome",
+  "word": "fulsome",
+  "pos": "adjective",
+  "pronunciation": "/ˈfʊl.səm/",
+  "definition": "Praising or flattering so heavily that it seems excessive or insincere.",
+  "difficulty": "Advanced",
+  "example": "Her fulsome thank-you note gushed so much that it read almost like sarcasm.",
+  "synonyms": [
+    "effusive",
+    "unctuous",
+    "cloying",
+    "overdone"
+  ],
+  "nuance": "Effusive praise can be sincere, but fulsome praise traditionally sounds false from excess. The word does not simply mean full or plentiful.",
+  "alternatives": [],
+  "prompt": "A salesperson greets a customer who is browsing for a new sofa.",
+  "options": [
+    "His fulsome praise of my taste felt like a sales tactic.",
+    "The fulsome sofa had cushions stuffed so thick they barely fit the frame.",
+    "His fulsome silence let me wander the showroom without any pressure at all.",
+    "His fulsome criticism of every sofa I touched made me want to leave the store."
+  ],
+  "reasons": [
+    "Gushing compliments that seem calculated are exactly the overdone flattery the word describes.",
+    "This confuses the word with full or overstuffed; it describes praise or manner, not padding.",
+    "Saying nothing offers no flattery, so there is nothing excessive to describe.",
+    "Constant fault-finding is the reverse of laying on compliments too thickly."
+  ],
+  "practice": {
+    "prompt": "A student introduces a visiting author before a school assembly.",
+    "options": [
+      "The fulsome introduction called her a genius so often that she squirmed.",
+      "The fulsome introduction was so curt that the author had barely stood before it ended.",
+      "The fulsome auditorium had no empty seats, so latecomers waited in the hall.",
+      "The fulsome introduction listed only the years her books came out, offering no opinion."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Repeated, heavy-handed praise that embarrasses the guest shows flattery gone too far.",
+      "A short, restrained introduction lacks the excess the word requires.",
+      "This mistakes the word for crowded or full; it has nothing to do with capacity.",
+      "A neutral list of dates contains no praise, let alone too much of it."
+    ]
+  }
+}

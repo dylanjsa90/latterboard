@@ -13,7 +13,10 @@
     "meticulousness"
   ],
   "nuance": "Precision is about exact, consistent detail, while accuracy is about being correct; a measurement can be precise yet still wrong.",
-  "alternatives": [],
+  "alternatives": [
+    "accuracy",
+    "precedence"
+  ],
   "prompt": "A carpenter is building cabinets that must fit into a narrow alcove.",
   "options": [
     "She measured each panel with precision, so the cabinets slid into place with no gaps.",

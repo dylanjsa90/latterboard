@@ -1,0 +1,49 @@
+{
+  "id": 328,
+  "slug": "blunt",
+  "word": "blunt",
+  "pos": "adjective",
+  "pronunciation": "/blʌnt/",
+  "definition": "Saying exactly what you think, plainly and directly, without trying to soften it.",
+  "difficulty": "Foundation",
+  "example": "My grandfather is blunt; he told the waiter the soup was too salty to eat.",
+  "synonyms": [
+    "frank",
+    "outspoken",
+    "straightforward",
+    "plain-spoken"
+  ],
+  "nuance": "Blunt suggests directness that may disregard feelings, while candid stresses honesty that is usually welcome.",
+  "alternatives": [
+    "candid"
+  ],
+  "prompt": "A coach talks to her team after they lose a game they had been favored to win.",
+  "options": [
+    "Her blunt verdict was that the team had stopped defending after halftime.",
+    "She was so blunt that the players left unsure whether she had criticized them at all.",
+    "Her blunt remarks were full of elaborate, flowery metaphors about the long season.",
+    "Without meaning to, she blunt out the final score before the announcer could."
+  ],
+  "reasons": [
+    "Stating the problem plainly, with no cushioning, is exactly what this word describes.",
+    "Leaving listeners confused about the message is the reverse of plain, direct speech.",
+    "Ornate, decorated language clashes with the plainness the word implies.",
+    "This confuses the word with the look-alike verb blurt, which means to say something suddenly."
+  ],
+  "practice": {
+    "prompt": "A friend asks Marco whether her new song is ready for the school talent show.",
+    "options": [
+      "Marco felt blunt after the long rehearsal and went home to take a nap.",
+      "Marco gave a blunt reply: the chorus dragged and needed to be cut in half.",
+      "Marco gave a blunt reply, carefully changing the subject so he would not have to judge.",
+      "Hoping to sound blunt, Marco buried his one concern under ten minutes of compliments."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word describes a direct way of speaking, not a feeling of tiredness.",
+      "He states his honest criticism outright instead of dressing it up.",
+      "Dodging the question is evasive, not direct.",
+      "Hiding a criticism under praise softens it, which is the opposite of the word's meaning."
+    ]
+  }
+}

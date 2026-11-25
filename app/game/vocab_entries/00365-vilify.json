@@ -1,0 +1,50 @@
+{
+  "id": 365,
+  "slug": "vilify",
+  "word": "vilify",
+  "pos": "verb",
+  "pronunciation": "/ˈvɪl.ə.faɪ/",
+  "definition": "To speak or write about someone in a harshly insulting way, often unfairly.",
+  "difficulty": "Intermediate",
+  "example": "Some fans vilified the referee after the close call, though the replay later showed he had been right.",
+  "synonyms": [
+    "malign",
+    "denigrate",
+    "demonize",
+    "defame"
+  ],
+  "nuance": "To vilify is to paint someone as wicked through harsh, public abuse, while to criticize can be mild, specific and fair.",
+  "alternatives": [
+    "extol",
+    "vindicate"
+  ],
+  "prompt": "A library director's plan to close the branch on Sundays upsets some residents.",
+  "options": [
+    "Angry letters began to vilify the director as if she wanted the whole town to stop reading.",
+    "Before printing the new schedule, the clerk called the main office to vilify the Sunday hours.",
+    "Grateful patrons gathered to vilify the director with flowers and a handwritten thank-you card.",
+    "The director hoped to vilify the dim reading room by adding brighter lamps and plants."
+  ],
+  "reasons": [
+    "The letters attack her character with exaggerated, hostile accusations, which is exactly this kind of abuse.",
+    "Calling to check that the hours are accurate would be verifying, a look-alike word with a different meaning.",
+    "Flowers and thanks are signs of praise, the opposite of harsh public condemnation.",
+    "Making a room livelier is closer to vivify; you cannot insult a room into being brighter."
+  ],
+  "practice": {
+    "prompt": "A young chef reads a harsh review of his new café in the local paper.",
+    "options": [
+      "Before printing the menu, the owner vilified each price to make sure it was correct.",
+      "Loyal diners vilified the chef in glowing posts that urged their friends to visit soon.",
+      "The server vilified tonight's specials by listing each dish in a calm, even voice.",
+      "The critic chose to vilify the chef, calling him a fraud over one cold bowl of soup."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Checking numbers for accuracy is verifying, not attacking anyone's reputation.",
+      "Glowing recommendations are praise, the reverse of hostile condemnation.",
+      "A calm, neutral description has none of the hostility or insult the word requires.",
+      "Branding him a fraud over a small lapse is an unfair attack on his reputation."
+    ]
+  }
+}

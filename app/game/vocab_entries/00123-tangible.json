@@ -14,7 +14,9 @@
     "real"
   ],
   "nuance": "Palpable often describes a mood felt in the air; tangible more often describes results or evidence you can point to or measure.",
-  "alternatives": [],
+  "alternatives": [
+    "tangential"
+  ],
   "prompt": "A town council reviews its new recycling program after its first full year.",
   "options": [
     "The program produced tangible savings, cutting the town's landfill bill by a third.",

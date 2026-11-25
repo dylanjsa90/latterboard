@@ -1,0 +1,47 @@
+{
+  "id": 287,
+  "slug": "panacea",
+  "word": "panacea",
+  "pos": "noun",
+  "pronunciation": "/ˌpæn.əˈsi.ə/",
+  "definition": "A single solution that is supposed to fix every problem or cure every illness.",
+  "difficulty": "Advanced",
+  "example": "No single diet is a panacea for good health, however loudly its fans insist.",
+  "synonyms": [
+    "cure-all",
+    "universal remedy",
+    "magic bullet",
+    "silver bullet"
+  ],
+  "nuance": "A remedy fixes one particular problem, but a panacea claims to fix all of them, so the word is often used skeptically.",
+  "alternatives": [],
+  "prompt": "A school principal is deciding whether to buy tablets for every classroom.",
+  "options": [
+    "The principal warned that tablets were no panacea for low reading scores without good teaching.",
+    "The principal called the tablets a panacea because they fixed only the slow Wi-Fi in one room.",
+    "The principal showed visitors a dazzling panacea of tablets, laptops, and screens in the library.",
+    "The principal feared the tablets would be a panacea that made every problem in the school worse."
+  ],
+  "reasons": [
+    "It correctly rejects the idea that one purchase could solve a broad, complicated problem.",
+    "A fix for one small, narrow issue is the opposite of a cure-all.",
+    "This confuses the word with panoply, meaning an impressive array or display.",
+    "The word names something that supposedly solves problems, not something that worsens them."
+  ],
+  "practice": {
+    "prompt": "A gardener reads an ad for a fertilizer that promises to solve every garden problem.",
+    "options": [
+      "The new fertilizer worked as a panacea only for the yellow leaves on her tomato plants.",
+      "The gardener called the weeds a panacea because they spread disease across every bed.",
+      "She doubted the fertilizer was a panacea, since no product fixes pests, drought, and poor soil.",
+      "He sprayed plain water as a panacea so his neighbor would think the wilting roses had been treated."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Helping with just one symptom contradicts the idea of curing everything.",
+      "Something that spreads harm everywhere is the reverse of a universal remedy.",
+      "Her doubt fits the word's usual skeptical sense: one product rarely solves everything.",
+      "A fake treatment meant to fool people is closer to a placebo than a cure-all."
+    ]
+  }
+}

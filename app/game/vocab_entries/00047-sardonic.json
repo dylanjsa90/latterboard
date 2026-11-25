@@ -14,7 +14,10 @@
     "wry"
   ],
   "nuance": "Sardonic is harsher than wry: wry humor is gently ironic, while sardonic humor carries bitterness or contempt.",
-  "alternatives": [],
+  "alternatives": [
+    "earnest",
+    "sartorial"
+  ],
   "prompt": "A veteran mechanic watches a customer's rattling car arrive at the shop for the fourth time this month.",
   "options": [
     "The mechanic gave a sardonic smile and said the car must really enjoy his company.",

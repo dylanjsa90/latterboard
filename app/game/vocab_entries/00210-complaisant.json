@@ -1,0 +1,49 @@
+{
+  "id": 210,
+  "slug": "complaisant",
+  "word": "complaisant",
+  "pos": "adjective",
+  "pronunciation": "/kəmˈpleɪ.sənt/",
+  "definition": "Eager to please others and quick to go along with what they want.",
+  "difficulty": "Advanced",
+  "example": "The complaisant host rearranged the seating chart twice to suit his guests' preferences.",
+  "synonyms": [
+    "obliging",
+    "accommodating",
+    "compliant",
+    "deferential"
+  ],
+  "nuance": "Complaisant means eager to please others; the look-alike complacent means smugly satisfied with yourself.",
+  "alternatives": [
+    "complacent"
+  ],
+  "prompt": "A college student's roommate asks her to change the hours when she practices the cello.",
+  "options": [
+    "Always complaisant, Mara agreed to shift her practice hours so her roommate could sleep.",
+    "Mara grew complaisant about her habits and assumed nothing she did needed improving.",
+    "Being so complaisant, Mara flatly refused to move even one minute of her weekly routine for anyone.",
+    "The complaisant cello sat in its case in the corner of the dorm room."
+  ],
+  "reasons": [
+    "Readily giving in to someone else's request is exactly what a complaisant person does.",
+    "Smug self-satisfaction describes complacent, a look-alike word, not eagerness to please.",
+    "Stubborn refusal is the reverse of obligingly going along with others.",
+    "An object cannot try to please anyone, so the word has nothing to describe here."
+  ],
+  "practice": {
+    "prompt": "A tour guide leads a large group through an old city neighborhood.",
+    "options": [
+      "The complaisant map showed the route in tiny print that nobody could read.",
+      "The complaisant guide added a stop at a bakery when several travelers asked for one.",
+      "The complaisant guide ignored every question and kept walking at his own brisk pace.",
+      "Having led the tour for years, the guide felt complaisant and never bothered to update his facts."
+    ],
+    "answer": 1,
+    "reasons": [
+      "A map has no wish to please, so calling it complaisant makes no sense.",
+      "Changing the plan to satisfy the group's wishes shows a readiness to oblige.",
+      "Brushing off the group's needs is the opposite of trying to accommodate them.",
+      "Lazy contentment with past work is complacency, which is easily confused with this word."
+    ]
+  }
+}

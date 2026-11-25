@@ -13,7 +13,10 @@
     "courtesy"
   ],
   "nuance": "Respect can be a feeling alone, but deference means actually giving way to someone else's wishes or judgment.",
-  "alternatives": [],
+  "alternatives": [
+    "defiance",
+    "reverence"
+  ],
   "prompt": "A new intern attends her first planning meeting with a team of experienced engineers.",
   "options": [
     "Out of deference to the senior engineers, the intern let them speak before sharing her idea.",

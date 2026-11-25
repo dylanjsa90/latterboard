@@ -1,0 +1,50 @@
+{
+  "id": 280,
+  "slug": "apotheosis",
+  "word": "apotheosis",
+  "pos": "noun",
+  "pronunciation": "/əˌpɑː.θiˈoʊ.sɪs/",
+  "definition": "The highest point or most perfect example of something.",
+  "difficulty": "Advanced",
+  "example": "Many critics regard the final symphony as the apotheosis of the composer's lifelong search for a new sound.",
+  "synonyms": [
+    "epitome",
+    "pinnacle",
+    "quintessence",
+    "culmination"
+  ],
+  "nuance": "Epitome means a typical example. Apotheosis suggests a glorified peak, and it can also mean literally raising someone to the status of a god.",
+  "alternatives": [
+    "nadir",
+    "apostasy"
+  ],
+  "prompt": "A food writer reviews a bakery famous for its croissants.",
+  "options": [
+    "The flaky, buttery croissant was the apotheosis of the pastry chef's craft.",
+    "The writer called the soggy croissant an apotheosis, meaning it was the bakery's lowest point.",
+    "The baker committed apotheosis by abandoning his grandmother's traditional recipe.",
+    "The apotheosis of the review was its opening line, which simply listed the bakery's hours."
+  ],
+  "reasons": [
+    "Calling the croissant the peak of years of skill fits the word's sense of supreme expression.",
+    "The lowest point is a nadir. This sentence flips the word to its opposite.",
+    "Abandoning a tradition is apostasy, a look-alike. Apotheosis is a summit, not a betrayal.",
+    "A plain list of hours is nothing exalted, and the word requires something truly supreme."
+  ],
+  "practice": {
+    "prompt": "A historian describes a retired gymnast's last championship routine.",
+    "options": [
+      "That flawless last routine was the apotheosis of a career spent perfecting every landing.",
+      "Her apotheosis came early, when she fell during her very first practice.",
+      "After the routine, the judges' apotheosis forced her to give back the medal.",
+      "Before the event, she bought cough drops at the apotheosis down the street."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A flawless performance that crowns a long career is exactly the kind of peak the word names.",
+      "A beginner's stumble is a low moment, not the glorious high point the word describes.",
+      "This treats the word as a penalty. It means exaltation, not punishment.",
+      "This confuses the word with apothecary, an old word for a pharmacy."
+    ]
+  }
+}

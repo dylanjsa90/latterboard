@@ -1,0 +1,48 @@
+{
+  "id": 251,
+  "slug": "tangential",
+  "word": "tangential",
+  "pos": "adjective",
+  "pronunciation": "/tænˈdʒɛn.ʃəl/",
+  "definition": "Only slightly connected to the main subject or point being discussed.",
+  "difficulty": "Intermediate",
+  "example": "His essay on bridges wandered into tangential remarks about his uncle's fishing boat.",
+  "synonyms": [
+    "peripheral",
+    "incidental",
+    "digressive"
+  ],
+  "nuance": "Tangential means touching a topic only lightly, while irrelevant means having no connection to it at all.",
+  "alternatives": [
+    "tangible"
+  ],
+  "prompt": "A student giving a history presentation keeps drifting away from her assigned topic.",
+  "options": [
+    "Her tangential story about a castle tour ate up time meant for the treaty.",
+    "She passed around a tangential coin from the era so classmates could hold it.",
+    "Her tangential thesis was the main claim that every one of her slides supported.",
+    "She gave a tangential answer that addressed exactly what her teacher had asked."
+  ],
+  "reasons": [
+    "A story that only brushes against the assigned subject pulls the talk off course.",
+    "Something you can physically handle is tangible; this mixes up two look-alike words.",
+    "A claim at the heart of the talk is central, the reverse of loosely related.",
+    "An answer aimed squarely at the question is on point, not off to the side."
+  ],
+  "practice": {
+    "prompt": "A book club meets to discuss the surprise ending of a mystery novel.",
+    "options": [
+      "The cover felt tangential, with raised letters you could trace with a fingertip.",
+      "A tangential reader finished the novel in a single sitting on Saturday.",
+      "One member raised a tangential point about the author's fondness for trains.",
+      "The tangential clue that solved the whole case drew most of the group's questions."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Texture you can feel belongs to tangible things; this confuses similar-sounding words.",
+      "The word describes remarks or topics, not how quickly or eagerly someone reads.",
+      "The writer's hobby links to the book only loosely, so it drifts from the ending.",
+      "A clue that cracks the mystery is essential to the plot, not barely connected."
+    ]
+  }
+}

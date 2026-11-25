@@ -1,0 +1,46 @@
+{
+  "id": 366,
+  "slug": "hasty",
+  "word": "hasty",
+  "pos": "adjective",
+  "pronunciation": "/ˈheɪ.sti/",
+  "definition": "Done or acting too quickly, without enough care or thought.",
+  "difficulty": "Foundation",
+  "example": "A hasty glance at the map sent the hikers down the wrong trail.",
+  "synonyms": [
+    "rash",
+    "hurried",
+    "precipitate"
+  ],
+  "nuance": "Hasty criticizes speed that costs care, while quick or prompt can praise speed that does no harm.",
+  "alternatives": [],
+  "prompt": "A student finishes an hour-long math test in only ten minutes.",
+  "options": [
+    "Her hasty answers left several careless errors on the test.",
+    "Her hasty answers came only after she checked each problem twice.",
+    "She turned in the test and walked out of the room in hasty.",
+    "Her hasty answers earned praise for being thoughtful and thorough."
+  ],
+  "reasons": [
+    "Rushing through the problems led to avoidable mistakes, which is exactly what the word points to.",
+    "Checking every problem twice shows patience and care, the reverse of rushing.",
+    "The phrase needs the noun haste; an adjective cannot follow the word in this way.",
+    "The word carries criticism for a lack of care, so it cannot describe thorough, praised work."
+  ],
+  "practice": {
+    "prompt": "A family is deciding whether to buy a house they toured for five minutes.",
+    "options": [
+      "The hasty house had a sunny yard and three large bedrooms.",
+      "Their hasty offer came only after they weighed every pro and con for a year.",
+      "Buying after one brief visit was a hasty decision they soon regretted.",
+      "After months of inspections and research, they made a hasty offer."
+    ],
+    "answer": 2,
+    "reasons": [
+      "A building cannot act too fast; the word describes people or their actions, not features.",
+      "A year of weighing pros and cons is the opposite of deciding without enough thought.",
+      "Committing to a big purchase after a short look, then regretting it, shows too little thought.",
+      "Months of careful research describe a slow, deliberate process, not a rushed one."
+    ]
+  }
+}

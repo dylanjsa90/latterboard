@@ -1,0 +1,49 @@
+{
+  "id": 241,
+  "slug": "imperious",
+  "word": "imperious",
+  "pos": "adjective",
+  "pronunciation": "/ɪmˈpɪr.i.əs/",
+  "definition": "Acting as if you have the right to give orders and expect others to obey without question.",
+  "difficulty": "Advanced",
+  "example": "With an imperious wave of her hand, the duchess sent the servants out of the hall.",
+  "synonyms": [
+    "domineering",
+    "overbearing",
+    "peremptory",
+    "haughty"
+  ],
+  "nuance": "Haughty means proud and aloof; imperious adds the habit of giving commands and expecting them to be obeyed at once.",
+  "alternatives": [
+    "impervious"
+  ],
+  "prompt": "A newly chosen team captain speaks to the players at their first practice.",
+  "options": [
+    "The imperious captain snapped her fingers and expected a player to fetch her water.",
+    "The imperious captain humbly asked each teammate which drills they would like to run.",
+    "The imperious captain kept jogging through the cold rain as if it could not touch her.",
+    "The imperious captain wore a jersey printed with the crest of an ancient empire."
+  ],
+  "reasons": [
+    "Issuing a curt command and assuming obedience shows a commanding, arrogant manner.",
+    "Modestly seeking others' opinions is the reverse of bossing them around.",
+    "Being unaffected by the weather describes impervious, a look-alike word.",
+    "Something linked to an empire is imperial; this word describes behavior, not a design."
+  ],
+  "practice": {
+    "prompt": "A wealthy traveler arrives at the front desk of a small hotel.",
+    "options": [
+      "The imperious guest slept soundly, untroubled by the traffic on the street below.",
+      "It was imperious that the guest check in before midnight, when the desk closed.",
+      "The imperious guest demanded a better room before the clerk had finished speaking.",
+      "The imperious guest apologized for arriving late and thanked the clerk twice."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Not being bothered by noise suggests impervious, which only sounds similar.",
+      "This treats the word as meaning necessary or urgent, which is imperative.",
+      "Cutting someone off to insist on what you want shows a lordly, bossy attitude.",
+      "Polite apologies and gratitude show courtesy, not a domineering attitude."
+    ]
+  }
+}

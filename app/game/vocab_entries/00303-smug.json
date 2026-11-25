@@ -1,0 +1,48 @@
+{
+  "id": 303,
+  "slug": "smug",
+  "word": "smug",
+  "pos": "adjective",
+  "pronunciation": "/ˈsmʌɡ/",
+  "definition": "Too pleased with yourself in a way that annoys other people.",
+  "difficulty": "Foundation",
+  "example": "He gave a smug little grin after correcting the tour guide's date.",
+  "synonyms": [
+    "self-satisfied",
+    "complacent",
+    "conceited"
+  ],
+  "nuance": "Smug stresses visible, irritating self-satisfaction; complacent stresses a lazy sense of security that overlooks danger.",
+  "alternatives": [
+    "complacent"
+  ],
+  "prompt": "A student shows off after winning the class spelling bee.",
+  "options": [
+    "With a smug grin, she reminded everyone she had never misspelled a word.",
+    "The smug sweater she wore kept her warm on the long walk home.",
+    "Smug about her win, she quietly praised the runner-up and gave the credit to luck.",
+    "Her smug smile showed how nervous she still felt about the final round."
+  ],
+  "reasons": [
+    "Bragging with a self-satisfied grin is the off-putting pride the word describes.",
+    "This confuses it with snug; clothing can't be smug, since the word describes attitude.",
+    "Modestly crediting others and luck is humility, the reverse of the word.",
+    "Nervousness is self-doubt, not pleased self-regard."
+  ],
+  "practice": {
+    "prompt": "A veteran chess player expects to beat a newcomer easily.",
+    "options": [
+      "Feeling smug, the veteran admitted the newcomer might be the stronger player.",
+      "The veteran wiped a smug off the glass face of the chess clock.",
+      "Feeling smug, the veteran trembled and asked for extra time on every move.",
+      "Feeling smug, the veteran barely glanced at the board between moves."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Admitting someone else may be better shows humility, not self-satisfaction.",
+      "This confuses it with smudge; the word is an adjective for attitude, not a mark.",
+      "Trembling and needing more time point to anxiety, which is the opposite of the word.",
+      "Showing off your confidence by ignoring your opponent fits the word."
+    ]
+  }
+}

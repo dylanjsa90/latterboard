@@ -1,0 +1,49 @@
+{
+  "id": 204,
+  "slug": "scrupulous",
+  "word": "scrupulous",
+  "pos": "adjective",
+  "pronunciation": "/ˈskruː.pjə.ləs/",
+  "definition": "Very careful to do things correctly and honestly, with close attention to every detail.",
+  "difficulty": "Intermediate",
+  "example": "She kept scrupulous notes on every seedling in the school greenhouse, recording its height each morning.",
+  "synonyms": [
+    "meticulous",
+    "conscientious",
+    "principled",
+    "punctilious"
+  ],
+  "nuance": "Meticulous describes only care with details, but scrupulous also suggests a moral concern with honesty and doing what is right.",
+  "alternatives": [
+    "meticulous"
+  ],
+  "prompt": "A chemist is writing up the results of a month of experiments.",
+  "options": [
+    "The scrupulous chemist reported the failed trials alongside the successful ones.",
+    "The scrupulous chemist quietly deleted the readings that contradicted her theory.",
+    "The scrupulous chemist guessed at several measurements because the deadline was near.",
+    "The scrupulous chemist assumed that all of her colleagues were faking their data."
+  ],
+  "reasons": [
+    "Including results that look bad shows honesty and care about keeping the full record.",
+    "Hiding inconvenient data is dishonest, which is the reverse of the word's meaning.",
+    "Guessing to save time is sloppy; the word calls for exactness.",
+    "Distrusting others is not the same as holding yourself to high standards."
+  ],
+  "practice": {
+    "prompt": "A student is writing a research paper that quotes several books.",
+    "options": [
+      "The scrupulous student cited the page number for every quotation she used.",
+      "The scrupulous student copied whole paragraphs and presented them as her own writing.",
+      "The scrupulous student finished the paper in ten minutes without checking a single fact.",
+      "The scrupulous student was so shy that she rarely raised her hand in class."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Crediting each source precisely reflects both care and honesty about others' work.",
+      "Passing off borrowed words as your own is dishonest, so the word does not fit.",
+      "Rushing and skipping every check shows carelessness, not close attention.",
+      "Shyness is a personality trait and has nothing to do with careful, honest work."
+    ]
+  }
+}

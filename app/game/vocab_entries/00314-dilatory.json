@@ -1,0 +1,49 @@
+{
+  "id": 314,
+  "slug": "dilatory",
+  "word": "dilatory",
+  "pos": "adjective",
+  "pronunciation": "/ˈdɪl.əˌtɔːr.i/",
+  "definition": "Slow to act, or tending to put things off and cause delay.",
+  "difficulty": "Advanced",
+  "example": "The dilatory landlord took six weeks to fix a leaking faucet.",
+  "synonyms": [
+    "tardy",
+    "procrastinating",
+    "sluggish",
+    "foot-dragging"
+  ],
+  "nuance": "Tardy just means late, but dilatory suggests a habit or tactic of stalling. It has nothing to do with dilated, which means widened.",
+  "alternatives": [
+    "desultory"
+  ],
+  "prompt": "A town committee has postponed its vote on the library budget for the third time.",
+  "options": [
+    "The committee's dilatory approach left the library unable to order new books.",
+    "The dilatory committee approved the budget within minutes of hearing the proposal.",
+    "The doctor checked whether the patient's pupils were dilatory after the eye drops.",
+    "The dilatory members dabbled in budgeting as a hobby without any real expertise."
+  ],
+  "reasons": [
+    "Putting off a decision again and again is exactly the stalling this word describes.",
+    "Acting within minutes is prompt, the reverse of dragging one's feet.",
+    "Pupils that widen are dilated; the look-alike word concerns delay, not expansion.",
+    "Dabbling as an amateur describes a dilettante, not someone who keeps postponing."
+  ],
+  "practice": {
+    "prompt": "A student has a science report due on Friday morning.",
+    "options": [
+      "Her dilatory habits had the report finished and proofread a week early.",
+      "She made the report more dilatory by stretching it from four pages to seven.",
+      "Staying up all night had a dilatory effect on her ability to focus in class.",
+      "Her dilatory habits meant the report sat untouched until Thursday night."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Finishing far ahead of the deadline is the opposite of procrastinating.",
+      "Making something longer is expanding it; the word refers to stalling, not length.",
+      "A harmful effect is deleterious; this look-alike describes delay, not damage.",
+      "Leaving the work until the last possible moment shows a habit of putting things off."
+    ]
+  }
+}

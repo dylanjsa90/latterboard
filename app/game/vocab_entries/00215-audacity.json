@@ -1,0 +1,49 @@
+{
+  "id": 215,
+  "slug": "audacity",
+  "word": "audacity",
+  "pos": "noun",
+  "pronunciation": "/ɔːˈdæs.ə.ti/",
+  "definition": "Daring boldness that ignores risk or normal rules, sometimes to the point of rudeness.",
+  "difficulty": "Intermediate",
+  "example": "The audacity of the architect's design, a library hanging over a canyon, stunned the judges.",
+  "synonyms": [
+    "boldness",
+    "daring",
+    "nerve",
+    "impudence"
+  ],
+  "nuance": "Unlike plain courage, audacity suggests boldness that defies convention, and it can signal shocking rudeness as easily as bravery.",
+  "alternatives": [
+    "temerity"
+  ],
+  "prompt": "A junior chess player faces the reigning club champion in the final round.",
+  "options": [
+    "With remarkable audacity, she sacrificed her queen on the sixth move against the champion.",
+    "Out of sheer audacity, she offered the champion a draw at once because she feared losing.",
+    "Her audacity showed in how she had patiently memorized every opening for years without giving up.",
+    "The audacity of the chess clock's ticking made it hard for her to concentrate."
+  ],
+  "reasons": [
+    "Giving up her strongest piece early is a risky, unexpected gamble that shows daring.",
+    "Backing away out of fear is timidity, the reverse of bold daring.",
+    "Years of steady effort describe persistence, or tenacity, not a bold risk.",
+    "The word has nothing to do with sound; it is not related to how audible something is."
+  ],
+  "practice": {
+    "prompt": "A customer brings a sweater back to a clothing store.",
+    "options": [
+      "He had the audacity to demand a full refund for a sweater he had clearly worn for months.",
+      "He had the audacity to thank the clerk politely and leave a kind note at the counter.",
+      "His audacity was obvious from how quietly he waited in line, hoping no one would notice him.",
+      "With great audacity, he carefully checked that the receipt matched the price tag."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Making a shameless demand that breaks ordinary fairness shows nerve bordering on rudeness.",
+      "Ordinary courtesy involves no boldness or defiance of norms.",
+      "Trying to go unnoticed is shyness, the opposite of daring behavior.",
+      "Careful checking is routine caution, not a bold or shocking act."
+    ]
+  }
+}

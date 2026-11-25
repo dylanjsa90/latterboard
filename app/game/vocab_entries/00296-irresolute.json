@@ -1,0 +1,49 @@
+{
+  "id": 296,
+  "slug": "irresolute",
+  "word": "irresolute",
+  "pos": "adjective",
+  "pronunciation": "/ɪˈrɛz.ə.luːt/",
+  "definition": "Unable to make up your mind about what to do; hesitant and uncertain.",
+  "difficulty": "Intermediate",
+  "example": "Irresolute about which college to attend, she let the reply deadline creep closer each week.",
+  "synonyms": [
+    "indecisive",
+    "hesitant",
+    "wavering",
+    "vacillating"
+  ],
+  "nuance": "Irresolute means lacking the firmness to decide or act, while ambivalent means having mixed feelings, which need not stop a decision.",
+  "alternatives": [
+    "ambivalent"
+  ],
+  "prompt": "A team captain must choose which player will take the final penalty kick.",
+  "options": [
+    "The irresolute captain kept switching her pick until the referee told her to hurry.",
+    "The irresolute captain named the kicker instantly and never second-guessed it.",
+    "The irresolute tie in the score sent the game into overtime.",
+    "Fans praised the irresolute captain for her bold and steady leadership."
+  ],
+  "reasons": [
+    "Changing her mind again and again without settling on anyone shows exactly this kind of hesitancy.",
+    "A quick, firm choice with no doubts afterward is the opposite of being indecisive.",
+    "The word describes a person's indecision; an unsettled situation would be called unresolved.",
+    "Bold, steady leadership calls for firmness, so the praise contradicts the word's meaning."
+  ],
+  "practice": {
+    "prompt": "A hiker reaches a fork in a mountain trail as daylight begins to fade.",
+    "options": [
+      "The trail map was irresolute because rain had smeared its ink.",
+      "The irresolute hiker was known in town for wasting money on reckless indulgence.",
+      "Irresolute at the fork, the hiker took a few steps down each path and then returned to the sign.",
+      "The irresolute hiker chose the left path at once and marched on without looking back."
+    ],
+    "answer": 2,
+    "reasons": [
+      "A smudged map is hard to read, but only a person can be hesitant about a decision.",
+      "This confuses the word with dissolute, which describes a careless, self-indulgent way of living.",
+      "Trying both routes and committing to neither shows someone stuck between choices.",
+      "Choosing immediately and never doubting the choice shows decisiveness, not hesitation."
+    ]
+  }
+}

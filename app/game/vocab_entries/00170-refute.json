@@ -1,0 +1,46 @@
+{
+  "id": 170,
+  "slug": "refute",
+  "word": "refute",
+  "pos": "verb",
+  "pronunciation": "/rɪˈfjuːt/",
+  "definition": "To prove with evidence or reasoning that a claim or idea is wrong.",
+  "difficulty": "Foundation",
+  "example": "Careful experiments refuted the old belief that heavier objects always fall faster than lighter ones.",
+  "synonyms": [
+    "disprove",
+    "debunk",
+    "invalidate"
+  ],
+  "nuance": "To refute is to show a claim is false; simply denying it or arguing back without proof is a denial or rebuttal, not a refutation.",
+  "alternatives": [],
+  "prompt": "During a class debate, a student insists the Great Wall of China can be seen from the Moon.",
+  "options": [
+    "Maya quoted astronauts who had searched for the wall in vain to refute the claim.",
+    "Maya was too polite to refute the cookie her classmate offered her after class.",
+    "To refute the claim, Maya listed more reasons the wall should be easy to spot from space.",
+    "Maya tried to refute the claim by rolling her eyes and saying nothing at all."
+  ],
+  "reasons": [
+    "Firsthand reports from people who looked and saw nothing are evidence that shows the claim is false.",
+    "Turning down a snack is refusing; you can only disprove statements, not objects or offers.",
+    "Adding reasons in favor of a claim supports it instead of proving it wrong.",
+    "A silent show of disagreement gives no evidence, so it cannot prove anything false."
+  ],
+  "practice": {
+    "prompt": "A science fair student tests the popular idea that plants grow faster when music is played to them.",
+    "options": [
+      "Two months of height records showing no difference helped her refute the idea.",
+      "Her results refute the idea, because the plants given music grew far taller.",
+      "She planned to refute each measurement twice so that no errors slipped through.",
+      "She chose to refute the judge's invitation to present her project first."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Measured results that contradict the idea are exactly the kind of proof that shows it is mistaken.",
+      "Taller plants with music would back up the idea, not show it to be false.",
+      "Checking your own numbers again is reviewing them; it does not mean proving a claim wrong.",
+      "Declining an invitation is refusing it, a look-alike word with a different meaning."
+    ]
+  }
+}

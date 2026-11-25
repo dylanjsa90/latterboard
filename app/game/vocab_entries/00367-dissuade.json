@@ -1,0 +1,49 @@
+{
+  "id": 367,
+  "slug": "dissuade",
+  "word": "dissuade",
+  "pos": "verb",
+  "pronunciation": "/dɪˈsweɪd/",
+  "definition": "To convince someone not to do something they were planning or considering.",
+  "difficulty": "Intermediate",
+  "example": "Reports of heavy fog dissuaded the hikers from attempting the summit that morning.",
+  "synonyms": [
+    "discourage",
+    "talk out of",
+    "deter",
+    "put off"
+  ],
+  "nuance": "Dissuade usually implies changing a mind through advice or argument, while deter often works through fear, cost or obstacles.",
+  "alternatives": [
+    "deter"
+  ],
+  "prompt": "A friend wants to quit the school orchestra one week before its big concert.",
+  "options": [
+    "Maya tried to dissuade her friend from quitting the orchestra so close to the concert.",
+    "Hoping he would leave, Maya tried to dissuade her friend by telling him to go right away.",
+    "The conductor dissuaded the orchestra through the final piece with a steady baton.",
+    "Maya dissuaded her friend from quitting, so he turned in his music folder that afternoon."
+  ],
+  "reasons": [
+    "Trying to talk a friend out of a plan he is considering is exactly the right use.",
+    "Urging someone to carry out a plan pushes them toward it, which is the reverse.",
+    "Guiding musicians through a piece is leading them, not talking anyone out of a plan.",
+    "If he was talked out of quitting, he would stay rather than hand in his folder."
+  ],
+  "practice": {
+    "prompt": "A young cook is about to pour a whole cup of salt into a pot of soup.",
+    "options": [
+      "To dissuade Leo, Grandpa handed him the salt and cheered while he poured it all in.",
+      "Grandpa dissuaded Leo that the soup needed more salt, so the boy added extra.",
+      "Leo dissuaded the soup with a wooden spoon until the noodles turned soft.",
+      "Grandpa managed to dissuade Leo from dumping a full cup of salt into the pot."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Cheering someone on encourages the plan instead of turning them away from it.",
+      "Convincing someone to add more is persuading, which points in the opposite direction.",
+      "Soup has no plans or intentions, so nobody can talk it out of anything.",
+      "Grandpa changes the boy's mind before he follows through on a bad idea."
+    ]
+  }
+}

@@ -14,7 +14,11 @@
     "outspoken"
   ],
   "nuance": "Candid suggests sincere openness, while blunt adds a sense of harshness or a lack of tact.",
-  "alternatives": [],
+  "alternatives": [
+    "evasive",
+    "blunt",
+    "guarded"
+  ],
   "prompt": "A manager asks an employee for honest feedback on a new work schedule.",
   "options": [
     "She gave a candid answer, admitting the new schedule left her too tired to focus.",

@@ -1,0 +1,47 @@
+{
+  "id": 363,
+  "slug": "stymie",
+  "word": "stymie",
+  "pos": "verb",
+  "pronunciation": "/ˈstaɪ.mi/",
+  "definition": "To block someone's progress or plans so that they cannot move forward.",
+  "difficulty": "Intermediate",
+  "example": "Tangled permit rules can stymie a small bakery that hopes to open a second shop.",
+  "synonyms": [
+    "thwart",
+    "hamper",
+    "frustrate",
+    "block"
+  ],
+  "nuance": "Stymie suggests being stuck in front of an obstacle, while hinder can mean only being slowed down.",
+  "alternatives": [],
+  "prompt": "A city crew is racing to repair a bridge before winter arrives.",
+  "options": [
+    "Weeks of freezing rain could stymie the crew's plan to finish by December.",
+    "The new crane will stymie the work by letting the crew finish two weeks early.",
+    "The foreman offered a bonus to stymie the workers into moving faster.",
+    "The crew will stymie the final bolt and celebrate the finished bridge."
+  ],
+  "reasons": [
+    "Bad weather standing in the way of the deadline is exactly the kind of obstacle the word describes.",
+    "A tool that speeds up the job helps progress, which is the reverse of blocking it.",
+    "This treats the word as if it meant spur or motivate, but it means getting in the way.",
+    "Tightening the last bolt completes the job; nothing here is stopped or frustrated."
+  ],
+  "practice": {
+    "prompt": "A student spends a weekend on a difficult logic puzzle.",
+    "options": [
+      "Lena was so stymied with joy at the end that she shouted the answer aloud.",
+      "One missing clue continued to stymie Lena for most of Saturday afternoon.",
+      "Her brother's helpful hint stymied her, and she solved the grid in seconds.",
+      "She stymied the answer key to check whether her solution was correct."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word describes being blocked, not being filled with a happy feeling.",
+      "A gap in the information that keeps her stuck for hours is a true roadblock.",
+      "A hint that leads to a quick solution removes an obstacle instead of creating one.",
+      "Looking at an answer key means consulting it, not putting up a barrier."
+    ]
+  }
+}

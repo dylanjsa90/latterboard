@@ -1,0 +1,46 @@
+{
+  "id": 219,
+  "slug": "histrionic",
+  "word": "histrionic",
+  "pos": "adjective",
+  "pronunciation": "/ˌhɪs.triˈɑː.nɪk/",
+  "definition": "Overly dramatic or emotional in a way that seems meant to draw attention.",
+  "difficulty": "Advanced",
+  "example": "His histrionic sighs over slightly cold soup made everyone at the dinner table roll their eyes.",
+  "synonyms": [
+    "melodramatic",
+    "theatrical",
+    "overwrought"
+  ],
+  "nuance": "Unlike genuine distress, histrionic behavior implies the feelings are inflated or performed for an audience.",
+  "alternatives": [],
+  "prompt": "A student reacts to getting a B-plus on a short quiz.",
+  "options": [
+    "Her histrionic wail over a B-plus made the whole row of students turn around.",
+    "The histrionic quiz was preserved in the school archive as an important record.",
+    "Her histrionic response was a small shrug before she slipped the quiz into her bag.",
+    "Her histrionic grasp of fractions explained why she missed only one problem."
+  ],
+  "reasons": [
+    "A loud, exaggerated outburst over a good grade is a showy display out of proportion to the event.",
+    "This confuses the word with historic; a quiz cannot put on an exaggerated emotional show.",
+    "A quiet shrug is understated, the opposite of an overblown performance.",
+    "The word describes overdone emotional display, not skill or understanding."
+  ],
+  "practice": {
+    "prompt": "An office worker finds that someone left the coffee pot empty.",
+    "options": [
+      "The histrionic coffee pot had sat on the same counter since the office first opened.",
+      "His histrionic reaction was to rinse the pot without a word and brew a fresh one.",
+      "Being histrionic, he measured the coffee grounds to the exact gram every morning.",
+      "His histrionic groan about the empty pot echoed down the hallway for a minute."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Being old or long-standing relates to history, not to exaggerated emotion.",
+      "Fixing the problem silently shows calm restraint, not dramatic excess.",
+      "Precise measuring reflects carefulness, which has nothing to do with theatrical behavior.",
+      "A long, loud groan over a minor annoyance is theatrical and attention-seeking."
+    ]
+  }
+}

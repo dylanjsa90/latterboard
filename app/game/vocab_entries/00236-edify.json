@@ -1,0 +1,47 @@
+{
+  "id": 236,
+  "slug": "edify",
+  "word": "edify",
+  "pos": "verb",
+  "pronunciation": "/ˈɛd.ɪ.faɪ/",
+  "definition": "To teach someone in a way that improves their mind or character.",
+  "difficulty": "Advanced",
+  "example": "The professor's short essays on friendship edify readers without ever sounding preachy.",
+  "synonyms": [
+    "enlighten",
+    "uplift",
+    "instruct",
+    "improve"
+  ],
+  "nuance": "Inform means passing on facts, while edify means improving someone morally or intellectually. It has nothing to do with building an edifice.",
+  "alternatives": [],
+  "prompt": "A history museum is planning a new exhibit on early farming villages.",
+  "options": [
+    "The curators designed the exhibit to edify visitors, not merely to entertain them.",
+    "Workers will edify a new glass wing on the museum's east side next spring.",
+    "The sloppy, mislabeled displays edified visitors by leaving them more confused than before.",
+    "A volunteer edified the sign by fixing two spelling errors in its first line."
+  ],
+  "reasons": [
+    "Wanting visitors to leave wiser, not just amused, fits the idea of improving the mind.",
+    "This mixes the verb up with edifice. Putting up a building does nothing to improve anyone's mind.",
+    "Leaving people more muddled is the reverse of improving their understanding.",
+    "Correcting a text is editing. The verb applies to people's minds, not to signs."
+  ],
+  "practice": {
+    "prompt": "A soccer coach speaks to her team after a hard loss.",
+    "options": [
+      "She edified the players by mocking each of their errors in front of the crowd.",
+      "The coach edified the players that the bus would leave at six o'clock sharp.",
+      "The scoreboard edified the final score in bright red numbers above the field.",
+      "Her quiet talk on learning from mistakes seemed to edify the whole team."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Public ridicule humiliates people instead of lifting them up, so nothing is improved.",
+      "Announcing a departure time only passes on a fact. It does not deepen anyone's mind or character.",
+      "A scoreboard only displays numbers. It takes a lesson or an example to improve a person.",
+      "The talk gave the players lasting insight, which is the kind of growth the verb describes."
+    ]
+  }
+}

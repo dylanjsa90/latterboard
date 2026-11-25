@@ -1,0 +1,50 @@
+{
+  "id": 277,
+  "slug": "scant",
+  "word": "scant",
+  "pos": "adjective",
+  "pronunciation": "/ˈskænt/",
+  "definition": "Barely enough, or not quite enough, in amount or degree.",
+  "difficulty": "Intermediate",
+  "example": "The hikers had scant water left by the time they reached the ridge.",
+  "synonyms": [
+    "meager",
+    "sparse",
+    "insufficient",
+    "limited"
+  ],
+  "nuance": "Scant usually sits right before an amount, as in scant evidence, while scarce often describes something hard to find.",
+  "alternatives": [
+    "scarce",
+    "abundant"
+  ],
+  "prompt": "A scientist announces a bold new theory at a conference.",
+  "options": [
+    "Critics noted that the theory rested on scant evidence from one small study.",
+    "With scant data from ten thousand careful trials, the theory seemed beyond dispute.",
+    "The scientist scant her notes quickly before stepping up to the podium.",
+    "She proudly called her findings scant to show how thorough the research had been."
+  ],
+  "reasons": [
+    "A single small study gives very little support, so the word fits.",
+    "Ten thousand trials is a large amount of data, which reverses the meaning.",
+    "This confuses the adjective with the verb scan, meaning to look over quickly.",
+    "Calling something too little is a criticism, not a boast about thoroughness."
+  ],
+  "practice": {
+    "prompt": "A family checks the pantry the night before a big snowstorm.",
+    "options": [
+      "With scant supplies in the cupboard, they shopped before the roads iced over.",
+      "The kitchen still held a faint scant of cinnamon from the morning's baking.",
+      "Mom stacked the scant boxes of cereal until they nearly reached the ceiling.",
+      "Relieved by the scant pile of firewood, they knew it would easily last all month."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Having too little food on hand is a good reason to go shopping.",
+      "This mixes it up with scent; the word is an adjective, not a smell.",
+      "A stack that tall shows plenty of cereal, the opposite of a small amount.",
+      "A tiny woodpile would cause worry, not relief about lasting a month."
+    ]
+  }
+}

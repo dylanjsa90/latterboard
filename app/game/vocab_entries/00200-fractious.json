@@ -1,0 +1,49 @@
+{
+  "id": 200,
+  "slug": "fractious",
+  "word": "fractious",
+  "pos": "adjective",
+  "pronunciation": "/ˈfræk.ʃəs/",
+  "definition": "Easily irritated and inclined to quarrel or resist control.",
+  "difficulty": "Advanced",
+  "example": "The fractious committee spent three hours arguing over the wording of a single rule.",
+  "synonyms": [
+    "unruly",
+    "quarrelsome",
+    "irritable",
+    "cantankerous"
+  ],
+  "nuance": "Fractious describes cranky, unruly people or animals, while contentious can also describe a disputed issue or topic.",
+  "alternatives": [
+    "contentious"
+  ],
+  "prompt": "A parent describes a toddler's evening after a missed nap.",
+  "options": [
+    "Without his nap, the toddler grew fractious and shoved every plate away.",
+    "Only a fractious sip of juice was left at the bottom of his cup.",
+    "The fractious toddler calmly agreed to his bath, his pajamas, and an early bedtime.",
+    "The doctor set the toddler's fractious wrist in a small blue cast."
+  ],
+  "reasons": [
+    "Cranky, resistant behavior from a tired child is exactly what the word captures.",
+    "This confuses the word with fractional; it describes temperament, not a small portion.",
+    "Calm cooperation is the reverse of an irritable, unruly mood.",
+    "The word sounds like fracture, but it never refers to a broken bone."
+  ],
+  "practice": {
+    "prompt": "A ranch hand tries to saddle a young horse for the first time.",
+    "options": [
+      "She measured the oats into fractious scoops so every stall got an equal share.",
+      "The fractious colt reared each time the saddle came near.",
+      "The fractious colt stood perfectly still while the ranch hand buckled the girth strap.",
+      "The ranch hand felt fractious with joy when the colt finally accepted the saddle."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Dividing feed into parts calls for fractional, not a word about temper.",
+      "Rearing against the saddle shows a restless, hard-to-manage temper.",
+      "Standing quietly for saddling shows obedience, not unruliness.",
+      "The word carries a sour, quarrelsome tone and cannot describe happiness."
+    ]
+  }
+}

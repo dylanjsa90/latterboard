@@ -1,0 +1,49 @@
+{
+  "id": 208,
+  "slug": "hesitant",
+  "word": "hesitant",
+  "pos": "adjective",
+  "pronunciation": "/ˈhɛz.ɪ.tənt/",
+  "definition": "Slow to act or speak because of doubt, worry, or uncertainty.",
+  "difficulty": "Foundation",
+  "example": "On her first day at the new school, Priya was hesitant to raise her hand in class.",
+  "synonyms": [
+    "reluctant",
+    "tentative",
+    "uncertain",
+    "wary"
+  ],
+  "nuance": "Hesitant suggests pausing out of doubt or nerves, while reluctant stresses not wanting to do something at all.",
+  "alternatives": [
+    "reluctant"
+  ],
+  "prompt": "A swimmer stands at the edge of a high diving board for the first time.",
+  "options": [
+    "The hesitant swimmer peered down at the water and stepped back twice before jumping.",
+    "The hesitant swimmer raced to the end of the board and dove off without a moment's pause.",
+    "Completely sure of herself, the hesitant swimmer never thought twice about the drop.",
+    "The hesitant diving board creaked and bent under the swimmer's weight."
+  ],
+  "reasons": [
+    "Stepping back and delaying the jump shows doubt holding her back.",
+    "Diving off instantly shows no delay or doubt, which is the reverse of the word.",
+    "Total confidence and no second thoughts contradict the uncertainty the word implies.",
+    "A board cannot feel doubt; the word describes people or their actions, not objects."
+  ],
+  "practice": {
+    "prompt": "A boy is offered a dish he has never eaten before at a family dinner.",
+    "options": [
+      "His grandmother called Marco hesitant because he asked for a third helping right away.",
+      "Marco gave the unfamiliar stew a hesitant sniff before taking a tiny taste.",
+      "Marco took a hesitant gulp and emptied the whole bowl in seconds.",
+      "Marco was hesitant about the stew because he had been craving it all week."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Asking for more at once shows enthusiasm, so the label fits the opposite behavior.",
+      "A cautious sniff followed by a small taste shows uncertainty slowing him down.",
+      "Gulping down a full bowl quickly shows eagerness, not caution.",
+      "Craving something makes a person eager, so there is no doubt to cause a delay."
+    ]
+  }
+}

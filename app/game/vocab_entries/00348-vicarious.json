@@ -1,0 +1,48 @@
+{
+  "id": 348,
+  "slug": "vicarious",
+  "word": "vicarious",
+  "pos": "adjective",
+  "pronunciation": "/vaɪˈkɛr.i.əs/",
+  "definition": "Felt or enjoyed by imagining another person's experience rather than living it yourself.",
+  "difficulty": "Advanced",
+  "example": "Through her older sister's letters from college, Mia enjoyed a vicarious taste of dorm life.",
+  "synonyms": [
+    "secondhand",
+    "indirect",
+    "surrogate"
+  ],
+  "nuance": "Empathetic means sharing someone's feelings; vicarious means living through what someone else does or undergoes.",
+  "alternatives": [
+    "precarious"
+  ],
+  "prompt": "A reader stuck at home follows a travel writer's journey across a mountain range.",
+  "options": [
+    "Each chapter gave the reader a vicarious thrill of standing on a windy summit.",
+    "The reader felt a vicarious thrill when she later climbed that summit on her own two feet.",
+    "The writer inched along a vicarious ledge that crumbled under his boots.",
+    "For the long trail, the writer packed vicarious snacks like nuts, fruit, and cheese."
+  ],
+  "reasons": [
+    "The reader feels the climb through the writer's account without ever leaving the house.",
+    "Climbing the peak herself is a direct experience, so it is not lived through someone else.",
+    "This confuses the word with precarious; a dangerously unstable ledge is not secondhand.",
+    "This mistakes the word for various; an assortment of food has nothing to do with imagined experience."
+  ],
+  "practice": {
+    "prompt": "A mother who never learned to bake watches her son compete in a pastry contest.",
+    "options": [
+      "The vicarious judge growled at every nervous contestant who approached the table.",
+      "The kitchen offered vicarious ovens, mixers, and pans for the bakers to choose from.",
+      "When his cake won first prize, she felt vicarious joy, as if the ribbon were hers.",
+      "She felt vicarious pride because she had mixed and frosted the winning cake by herself."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This confuses the word with vicious; harsh, snarling behavior is not experience felt through others.",
+      "This confuses the word with various; a range of equipment has nothing to do with secondhand feeling.",
+      "She shares in the win by imagining herself in her son's place, which fits the word.",
+      "Doing the baking herself makes her pride direct, not borrowed from another person."
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": 270,
+  "slug": "turgid",
+  "word": "turgid",
+  "pos": "adjective",
+  "pronunciation": "/ˈtɜːr.dʒɪd/",
+  "definition": "Written or spoken in a pompous, overstuffed style that makes it heavy and tiresome.",
+  "difficulty": "Advanced",
+  "example": "The committee's turgid report buried one useful idea under forty pages of jargon.",
+  "synonyms": [
+    "bombastic",
+    "pompous",
+    "overblown",
+    "grandiloquent"
+  ],
+  "nuance": "Turgid describes swollen, overloaded language; turbid means muddy or cloudy, and torpid means sluggish or inactive.",
+  "alternatives": [
+    "lucid"
+  ],
+  "prompt": "A student struggles through the first chapter of an old novel.",
+  "options": [
+    "The turgid opening piled clause upon clause until the plot vanished under adjectives.",
+    "The chapter was so turgid that every sentence used only three or four plain, simple words.",
+    "The student grew turgid in the warm library, too drowsy and sluggish to turn another page.",
+    "Her tea had gone turgid beside the book, turning into a murky brew she could not see through."
+  ],
+  "reasons": [
+    "Heaping on clauses and adjectives until meaning is smothered is exactly this kind of bloated style.",
+    "Short, plain sentences are the reverse of inflated, overloaded prose.",
+    "This confuses the word with torpid, which describes a sleepy, inactive state.",
+    "Cloudy, murky liquid is turbid; the word here concerns swollen style, not muddiness."
+  ],
+  "practice": {
+    "prompt": "A principal delivers a long speech at a school assembly.",
+    "options": [
+      "The students cheered the turgid address, praising its sparkling clarity and lean phrasing.",
+      "The turgid fish tank in the front lobby was far too cloudy for anyone to spot the fish.",
+      "His turgid speech said \"commence the utilization of\" where \"start using\" would do.",
+      "Her turgid remarks were so brief and direct that the assembly let out ten minutes early."
+    ],
+    "answer": 2,
+    "reasons": [
+      "The word is a criticism; it cannot describe speech admired for being clear and spare.",
+      "Cloudy water is turbid, a look-alike word; this one describes inflated writing or speech.",
+      "Swapping simple words for puffed-up phrases is a hallmark of this pompous, heavy style.",
+      "Brevity and directness are the opposite of overstuffed, long-winded language."
+    ]
+  }
+}

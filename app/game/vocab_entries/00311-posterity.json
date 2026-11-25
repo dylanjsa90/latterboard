@@ -1,0 +1,49 @@
+{
+  "id": 311,
+  "slug": "posterity",
+  "word": "posterity",
+  "pos": "noun",
+  "pronunciation": "/pɑːˈstɛr.ə.ti/",
+  "definition": "All the people who will live in the future, taken together.",
+  "difficulty": "Intermediate",
+  "example": "The town buried a time capsule so that posterity would know how its residents lived.",
+  "synonyms": [
+    "future generations",
+    "descendants",
+    "those who come after"
+  ],
+  "nuance": "Unlike descendants, which usually means one family's offspring, posterity usually means all future people, and it never means wealth, as prosperity does.",
+  "alternatives": [
+    "antiquity",
+    "prosperity"
+  ],
+  "prompt": "A scientist decides to record her field notes in careful detail.",
+  "options": [
+    "She wrote clearly so that posterity could check her findings long after she retired.",
+    "She hoped the notes would bring her posterity in the form of a large salary.",
+    "She studied posterity to learn how scientists a century ago had worked.",
+    "Her posterity, the lab assistant sitting beside her, read each page as she finished it."
+  ],
+  "reasons": [
+    "Readers who come generations later are exactly the audience the word names.",
+    "This mixes up the word with prosperity; a salary is money, not future people.",
+    "Scientists of a century ago belong to the past, but the word points forward in time.",
+    "A coworker in the room today is not a future generation, and one person is not a whole group."
+  ],
+  "practice": {
+    "prompt": "A city council debates whether to protect an old forest.",
+    "options": [
+      "The mayor promised that selling the timber would bring the town instant posterity.",
+      "The council hoped to finish the vote in posterity, well before the meeting ended later tonight.",
+      "Members argued that the trees should be saved for posterity, not cut for quick profit.",
+      "The council traced its posterity back to the settlers who first cleared the land."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Instant riches would be prosperity; the word refers to people of the future, not money.",
+      "Later tonight is only hours away, while the word refers to generations far in the future.",
+      "Protecting the forest for people not yet born fits the word's focus on later generations.",
+      "Early settlers are ancestors; tracing back in time reverses the word's direction."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 351,
+  "slug": "ossify",
+  "word": "ossify",
+  "pos": "verb",
+  "pronunciation": "/ˈɑː.sɪ.faɪ/",
+  "definition": "To become rigid and unable to change, or to make something stiff and fixed in this way.",
+  "difficulty": "Advanced",
+  "example": "Over the decades, the old professor's views began to ossify, and he stopped reading new research.",
+  "synonyms": [
+    "calcify",
+    "harden",
+    "stagnate",
+    "become set in its ways"
+  ],
+  "nuance": "Ossify stresses a slow stiffening that comes with age or habit, while stagnate stresses a lack of movement or growth.",
+  "alternatives": [],
+  "prompt": "A small startup has grown into a large company with many layers of managers.",
+  "options": [
+    "As approval layers piled up, the company's quick decision-making began to ossify.",
+    "The new manager hoped to ossify the team by encouraging fresh, flexible ideas at every weekly meeting.",
+    "The founder's harsh email seemed to ossify the summer interns, who sat frozen with fear at their desks.",
+    "The holiday bonus helped ossify the upset employees, who quickly calmed down."
+  ],
+  "reasons": [
+    "Added bureaucracy slowly makes a once-flexible process stiff and hard to change.",
+    "Encouraging flexibility loosens a group up; it does the reverse of making it rigid.",
+    "Scaring someone stiff is what petrify means; ossify describes hardened habits, not fright.",
+    "Soothing angry people is mollifying; ossify has nothing to do with calming anyone."
+  ],
+  "practice": {
+    "prompt": "A community choir has performed the same holiday program for twenty years.",
+    "options": [
+      "The audience cheered because the concert had ossified into something lively and surprising.",
+      "If nothing new is added, the choir's style may ossify into a routine no one enjoys.",
+      "The director picked bold new arrangements each season to ossify the choir's sound.",
+      "New microphones helped ossify the soloist's voice so the back row could hear her."
+    ],
+    "answer": 1,
+    "reasons": [
+      "The word suggests stiff and lifeless, so it cannot describe a lively, surprising show.",
+      "Repeating one program for years can harden a group's style until it cannot change.",
+      "Changing the music every year keeps a sound fresh, which is the opposite of rigid.",
+      "Making a sound louder is amplifying it; the verb here is about stiffness, not volume."
+    ]
+  }
+}

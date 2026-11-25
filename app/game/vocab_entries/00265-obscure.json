@@ -1,0 +1,48 @@
+{
+  "id": 265,
+  "slug": "obscure",
+  "word": "obscure",
+  "pos": "adjective",
+  "pronunciation": "/əbˈskjʊr/",
+  "definition": "Not widely known or noticed by most people.",
+  "difficulty": "Foundation",
+  "example": "Her thesis focused on an obscure poet who published only one small book of verse.",
+  "synonyms": [
+    "little-known",
+    "unheralded",
+    "unsung"
+  ],
+  "nuance": "Obscure means known to few, not to none; unlike unknown, it can also describe writing or meaning that is hard to understand.",
+  "alternatives": [
+    "renowned"
+  ],
+  "prompt": "A music fan describes a band she discovered in a tiny secondhand record shop.",
+  "options": [
+    "The band was so obscure that its only album sold a few hundred copies.",
+    "The obscure band's hit single played on nearly every radio station in the country.",
+    "The obscure lyrics were so rude that the shop owner refused to play them aloud.",
+    "Fans everywhere recognized the band's obscure guitar sound within a single note."
+  ],
+  "reasons": [
+    "Selling to just a few hundred listeners shows that hardly anyone has heard of the band.",
+    "Airplay on almost every station would make a band famous, the reverse of little-known.",
+    "This confuses the word with obscene; rudeness has nothing to do with being little-known.",
+    "A sound that fans everywhere instantly recognize is famous, not something few people know."
+  ],
+  "practice": {
+    "prompt": "A student is choosing a person to research for a history report.",
+    "options": [
+      "She called the inventor obscure because he cheated his business partners.",
+      "She chose an obscure inventor whose name appears in just a few old newspapers.",
+      "She chose an obscure inventor whose face is printed on the national currency.",
+      "Research was easy because every textbook covers the obscure inventor at great length."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Dishonesty is a moral failing; it says nothing about how few people know a person.",
+      "Showing up in only a handful of old sources marks someone history has mostly overlooked.",
+      "A person pictured on money that everyone handles is about as well known as anyone can be.",
+      "Thorough coverage in every textbook means the inventor is widely known and well documented."
+    ]
+  }
+}

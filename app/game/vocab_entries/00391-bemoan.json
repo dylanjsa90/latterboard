@@ -1,0 +1,49 @@
+{
+  "id": 391,
+  "slug": "bemoan",
+  "word": "bemoan",
+  "pos": "verb",
+  "pronunciation": "/bɪˈmoʊn/",
+  "definition": "To complain about something or express sadness over it, often again and again.",
+  "difficulty": "Intermediate",
+  "example": "Longtime residents still bemoan the closing of the town's old railroad station.",
+  "synonyms": [
+    "lament",
+    "deplore",
+    "complain about",
+    "grumble about"
+  ],
+  "nuance": "Bemoan often carries a note of complaint or grumbling, while lament usually suggests deeper and more serious grief.",
+  "alternatives": [
+    "lament"
+  ],
+  "prompt": "A group of chefs learns that their only fresh-herb supplier has closed.",
+  "options": [
+    "At the staff meeting, the chefs bemoan the loss of fragrant basil and mint.",
+    "Delighted by the news, the chefs bemoan their luck with wide grins and a cheerful toast.",
+    "The strange shortage seems to bemoan the chefs, leaving them puzzled and unsure.",
+    "To fix the problem, the chefs bemoan a new garden behind the kitchen."
+  ],
+  "reasons": [
+    "The chefs are voicing regret over losing something they valued, which is how the verb works.",
+    "Grins and a celebratory toast contradict the sorrowful complaining the verb requires.",
+    "This mixes the verb up with bemuse; a shortage cannot complain, and puzzling someone is another idea.",
+    "Complaining is not a way to build or plant anything, so the sentence makes no sense."
+  ],
+  "practice": {
+    "prompt": "A student's favorite library cuts its weekend hours.",
+    "options": [
+      "Every Saturday, Priya and her study group bemoan the locked library doors.",
+      "Pleased with the new schedule, Priya wrote the librarian a thank-you note to bemoan it.",
+      "Before closing, the librarian will bemoan the returned books onto the cart.",
+      "Priya bemoaned the change by calmly copying the new hours into her planner, untroubled."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Grumbling over and over about a loss you keep facing is a natural use of the verb.",
+      "A thank-you note expresses gratitude, which is the reverse of voicing unhappiness.",
+      "The verb describes expressing unhappiness, not a physical action like moving objects.",
+      "Calm acceptance with no complaint leaves out the dissatisfaction the verb needs."
+    ]
+  }
+}

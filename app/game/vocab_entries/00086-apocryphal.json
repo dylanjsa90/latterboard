@@ -14,7 +14,10 @@
     "fabled"
   ],
   "nuance": "Unlike false, apocryphal describes a widely told story whose truth is doubtful or unproven, not one that has simply been shown to be wrong.",
-  "alternatives": [],
+  "alternatives": [
+    "spurious",
+    "authentic"
+  ],
   "prompt": "A tour guide tells visitors a famous story about the old lighthouse keeper.",
   "options": [
     "Historians call the guide's tale of a midnight rescue apocryphal, as no record of it exists.",

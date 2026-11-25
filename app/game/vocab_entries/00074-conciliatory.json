@@ -14,7 +14,9 @@
     "pacifying"
   ],
   "nuance": "Conciliatory gestures aim to restore goodwill, while appeasing often suggests giving in too much just to avoid conflict.",
-  "alternatives": [],
+  "alternatives": [
+    "belligerent"
+  ],
   "prompt": "Two neighbors have been arguing for months over a fence on their shared property line.",
   "options": [
     "Hoping to end the feud, Mr. Ortiz made a conciliatory offer to split the cost of a new fence.",

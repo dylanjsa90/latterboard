@@ -1,0 +1,47 @@
+{
+  "id": 373,
+  "slug": "surreptitious",
+  "word": "surreptitious",
+  "pos": "adjective",
+  "pronunciation": "/ˌsɜːr.əpˈtɪʃ.əs/",
+  "definition": "Done secretly or quietly so that other people will not notice.",
+  "difficulty": "Intermediate",
+  "example": "During the long speech, she stole a surreptitious glance at the clock.",
+  "synonyms": [
+    "stealthy",
+    "furtive",
+    "covert",
+    "clandestine"
+  ],
+  "nuance": "Surreptitious stresses quietly avoiding notice; furtive adds a nervous, guilty air, and clandestine suggests an organized secret plan.",
+  "alternatives": [],
+  "prompt": "A hungry student wants a snack during a silent study hour in the school library.",
+  "options": [
+    "Mia took a surreptitious bite of her granola bar while the librarian's back was turned.",
+    "Mia crunched her chips so loudly that her surreptitious snack drew stares from every table.",
+    "Feeling surreptitious, Mia knocked twice on the wooden table for luck before eating.",
+    "Mia stood on a chair and made a surreptitious announcement that snacks were now allowed."
+  ],
+  "reasons": [
+    "Waiting until no one is watching to eat is exactly the kind of hidden act the word describes.",
+    "A snack that makes everyone stare is the opposite of one kept out of sight.",
+    "Knocking on wood for luck is superstitious, a look-alike word with a different meaning.",
+    "Standing up and announcing something to the room is open and public, not secret."
+  ],
+  "practice": {
+    "prompt": "A soccer team is planning a surprise party for its coach.",
+    "options": [
+      "The coach was surreptitious of the cake, so she refused to try a single slice.",
+      "The party was surreptitious because it was the biggest one the team had ever thrown.",
+      "The players kept their surreptitious planning to whispered talks after practice.",
+      "The players' surreptitious plan was painted on a giant banner in the gym lobby."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This confuses the word with suspicious; being distrustful is not acting in secret.",
+      "A party's size says nothing about whether it was kept hidden.",
+      "Whispering out of the coach's hearing keeps the plan hidden, which fits the word.",
+      "A banner anyone can read gives the secret away instead of keeping it."
+    ]
+  }
+}

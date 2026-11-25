@@ -1,0 +1,47 @@
+{
+  "id": 180,
+  "slug": "conventional",
+  "word": "conventional",
+  "pos": "adjective",
+  "pronunciation": "/kənˈvɛn.ʃə.nəl/",
+  "definition": "Following the usual, widely accepted way of doing things instead of trying something new.",
+  "difficulty": "Foundation",
+  "example": "Instead of a conventional cake, the couple served a tall stack of pancakes at their wedding.",
+  "synonyms": [
+    "traditional",
+    "customary",
+    "standard",
+    "orthodox"
+  ],
+  "nuance": "Conventional stresses fitting in with common practice today; traditional stresses continuity with customs handed down from the past.",
+  "alternatives": [],
+  "prompt": "A home cook is deciding how to prepare the family's holiday turkey.",
+  "options": [
+    "She chose the conventional method and roasted the bird slowly in the oven.",
+    "Her conventional plan was to cook the turkey in a way no one had ever attempted.",
+    "The market was conventional, just a block away, so she bought the turkey there.",
+    "Cooks from many states gathered downtown for a conventional meeting about turkeys."
+  ],
+  "reasons": [
+    "Oven roasting is the familiar, widely accepted way most families cook a holiday turkey.",
+    "A method nobody has tried before is unconventional, the reverse of the intended sense.",
+    "Being close and handy is what convenient means; this confuses two look-alike words.",
+    "A large gathering is a convention; the adjective describes customary practice, not a meeting."
+  ],
+  "practice": {
+    "prompt": "A student is choosing how to organize a science report.",
+    "options": [
+      "The library was conventional to his house, so he walked there to do research.",
+      "He used a conventional layout, with an introduction, methods, results, and a conclusion.",
+      "His conventional report was printed in a spiral on one round sheet of paper.",
+      "He wrote in a conventional tone, as if chatting casually with a friend at lunch."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Being easy to reach is convenient; the word here has nothing to do with accepted practice.",
+      "This is the standard structure that most science reports are expected to follow.",
+      "A strange, one-of-a-kind format breaks from normal practice rather than following it.",
+      "A relaxed, chatty style is conversational, a look-alike word with a different meaning."
+    ]
+  }
+}

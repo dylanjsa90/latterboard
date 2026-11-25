@@ -1,0 +1,47 @@
+{
+  "id": 152,
+  "slug": "censure",
+  "word": "censure",
+  "pos": "verb",
+  "pronunciation": "/ˈsɛn.ʃɚ/",
+  "definition": "To criticize someone strongly and formally, often in an official statement.",
+  "difficulty": "Intermediate",
+  "example": "The medical board voted to censure the surgeon for skipping required safety checks.",
+  "synonyms": [
+    "reprimand",
+    "rebuke",
+    "condemn",
+    "formally criticize"
+  ],
+  "nuance": "To censure is to formally voice strong disapproval, while to censor is to remove or suppress content.",
+  "alternatives": [],
+  "prompt": "A professional association reviews an engineer who falsified safety test results.",
+  "options": [
+    "The association voted to censure the engineer in a formal statement.",
+    "The association had to censure the report, blacking out every false figure.",
+    "To reward his honesty, the association voted to censure the engineer with a medal.",
+    "One member chose to censure the engineer by casually joking about him at lunch."
+  ],
+  "reasons": [
+    "An official vote that strongly condemns misconduct is exactly what this verb describes.",
+    "Blacking out content is censoring; this verb concerns disapproval, not deletion.",
+    "A medal is a form of praise, which is the reverse of formal condemnation.",
+    "A lunchtime joke is too casual and light to count as serious, formal disapproval."
+  ],
+  "practice": {
+    "prompt": "A youth soccer league learns that a coach repeatedly insulted referees during games.",
+    "options": [
+      "A parent will censure the coach by rolling his eyes during practice.",
+      "League officials will censure the coach at Monday's disciplinary hearing.",
+      "Officials will censure her emails, deleting the rude lines before parents read them.",
+      "Officials will censure the coach by thanking her for setting a fine example."
+    ],
+    "answer": 1,
+    "reasons": [
+      "An eye roll is mild and informal; the verb implies strong criticism, usually from an authority.",
+      "Officials condemning her conduct at a formal hearing fits the word's serious, official tone.",
+      "Cutting lines out of messages is censoring, not expressing disapproval of a person.",
+      "Thanking someone shows approval, which turns the meaning upside down."
+    ]
+  }
+}

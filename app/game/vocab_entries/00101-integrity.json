@@ -14,7 +14,9 @@
     "probity"
   ],
   "nuance": "Integrity goes beyond honesty: it means acting on your principles consistently, even when doing so costs you something.",
-  "alternatives": [],
+  "alternatives": [
+    "duplicity"
+  ],
   "prompt": "A cashier realizes a customer accidentally overpaid by twenty dollars and has already left.",
   "options": [
     "The cashier showed integrity by running after the customer to return the money.",

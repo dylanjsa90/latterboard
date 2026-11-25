@@ -13,7 +13,10 @@
     "waggish"
   ],
   "nuance": "Witty praises clever humor, but facetious suggests joking at the wrong time; don't confuse it with fictitious, which means made up.",
-  "alternatives": [],
+  "alternatives": [
+    "witty",
+    "earnest"
+  ],
   "prompt": "A coach is meeting with the team to talk about why they lost the championship game.",
   "options": [
     "When the coach asked what went wrong, Leo gave a facetious answer: the ball was too round.",

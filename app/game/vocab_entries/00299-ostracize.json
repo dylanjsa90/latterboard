@@ -1,0 +1,50 @@
+{
+  "id": 299,
+  "slug": "ostracize",
+  "word": "ostracize",
+  "pos": "verb",
+  "pronunciation": "/ˈɑː.strə.saɪz/",
+  "definition": "To shut someone out of a group and refuse to accept them socially.",
+  "difficulty": "Intermediate",
+  "example": "After he reported the cheating, a few teammates began to ostracize him in the locker room.",
+  "synonyms": [
+    "shun",
+    "exclude",
+    "cold-shoulder",
+    "blackball"
+  ],
+  "nuance": "Ostracize suggests a group shutting someone out together, while shun can describe one person avoiding anyone or anything.",
+  "alternatives": [
+    "embrace",
+    "castigate"
+  ],
+  "prompt": "A new member joins a chess club whose regulars dislike his unusual openings.",
+  "options": [
+    "The regulars began to ostracize the newcomer, leaving him without a partner every week.",
+    "The regulars chose to ostracize the newcomer by inviting him to every tournament dinner.",
+    "The club secretary helped ostracize the tournament schedule into neat rounds.",
+    "The regulars would ostracize his openings by writing a detailed analysis of each one."
+  ],
+  "reasons": [
+    "The group pushes him out of its social circle, which is exactly what the verb describes.",
+    "Including someone in every gathering is the reverse of shutting him out.",
+    "This confuses the word with organize; a schedule cannot be socially excluded.",
+    "Studying or critiquing someone's moves is not the same as excluding the person."
+  ],
+  "practice": {
+    "prompt": "Residents of a quiet street react to a neighbor who painted her house bright purple.",
+    "options": [
+      "The purple paint was so ostracize that drivers slowed down to stare at it.",
+      "One neighbor would ostracize her briefly by frowning once, then chatting as usual.",
+      "Some neighbors chose to ostracize her, no longer waving or inviting her to block parties.",
+      "Delighted by the color, the neighbors decided to ostracize her with a warm welcome basket."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This treats the verb as an adjective, probably mixing it up with ostentatious.",
+      "A single frown followed by normal friendliness does not push anyone out of a group.",
+      "Neighbors collectively cutting her off from social life fits the word.",
+      "A friendly gift signals acceptance, the opposite of rejection by a group."
+    ]
+  }
+}

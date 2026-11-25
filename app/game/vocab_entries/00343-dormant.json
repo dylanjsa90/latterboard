@@ -1,0 +1,49 @@
+{
+  "id": 343,
+  "slug": "dormant",
+  "word": "dormant",
+  "pos": "adjective",
+  "pronunciation": "/ˈdɔːr.mənt/",
+  "definition": "Inactive or resting for a time but still able to become active again later.",
+  "difficulty": "Foundation",
+  "example": "The seeds stayed dormant in the dry soil until the spring rains finally arrived.",
+  "synonyms": [
+    "inactive",
+    "latent",
+    "inert",
+    "asleep"
+  ],
+  "nuance": "Dormant means activity is paused and could start again, unlike extinct, which means it has ended for good.",
+  "alternatives": [
+    "latent"
+  ],
+  "prompt": "A geologist describes a volcano that has not erupted in several centuries.",
+  "options": [
+    "The volcano is dormant, so scientists still watch it for signs of waking.",
+    "The dormant volcano has been pouring out lava every day this week.",
+    "The dormant volcano towers over the other peaks and controls the region's weather.",
+    "Because it is dormant, the volcano can never erupt again under any conditions."
+  ],
+  "reasons": [
+    "A quiet volcano that could erupt again is exactly the kind that stays under watch.",
+    "Daily eruptions mean the volcano is active, the reverse of resting.",
+    "This confuses the word with dominant, which describes power or prominence.",
+    "A volcano that can never erupt is extinct; a resting one may still wake up."
+  ],
+  "practice": {
+    "prompt": "A retired man finds his old violin in the attic after thirty years.",
+    "options": [
+      "As the dormant member of the family band, he chose every song they played.",
+      "His dormant love of music was gone forever, so he gave the violin away.",
+      "After a few weeks of practice, his dormant skill came back to life.",
+      "His dormant practice routine had him playing six hours every single day."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Being in charge describes a dominant member, a look-alike with a different meaning.",
+      "Something gone forever is dead or extinct; the word implies it could return.",
+      "An ability that sat unused for decades and then returned fits the word well.",
+      "A demanding daily schedule is constant activity, not a pause."
+    ]
+  }
+}

@@ -14,7 +14,9 @@
     "inhibit"
   ],
   "nuance": "Deter usually works through fear, cost or obstacles, while dissuade usually means talking someone out of an action.",
-  "alternatives": [],
+  "alternatives": [
+    "dissuade"
+  ],
   "prompt": "A town wants fewer people to leave trash at a scenic overlook.",
   "options": [
     "A sign announcing a hefty fine should deter visitors from dumping trash there.",

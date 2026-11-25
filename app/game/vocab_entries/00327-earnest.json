@@ -1,0 +1,49 @@
+{
+  "id": 327,
+  "slug": "earnest",
+  "word": "earnest",
+  "pos": "adjective",
+  "pronunciation": "/ˈɜːr.nɪst/",
+  "definition": "Deeply sincere and serious about what one says, feels or does.",
+  "difficulty": "Foundation",
+  "example": "His earnest thank-you note listed every way the neighbors had helped after the flood.",
+  "synonyms": [
+    "sincere",
+    "serious",
+    "heartfelt",
+    "wholehearted"
+  ],
+  "nuance": "Earnest adds eager, committed effort to sincerity, and it can hint that someone takes things a bit too seriously to joke about them.",
+  "alternatives": [
+    "facetious"
+  ],
+  "prompt": "A student speaks at a school board meeting about saving the school garden.",
+  "options": [
+    "Her earnest appeal to the board showed how much the garden meant to her.",
+    "Her earnest appeal was a prank she invented to get out of math class.",
+    "With an earnest shrug, the student said the garden could close for all she cared.",
+    "Classmates laughed at the earnest sarcasm she aimed at the garden club."
+  ],
+  "reasons": [
+    "A heartfelt request from someone who truly cares is exactly what the word describes.",
+    "A made-up prank is insincere, which is the reverse of being earnest.",
+    "A shrug of indifference shows no genuine feeling, so it cannot be earnest.",
+    "Sarcasm mocks instead of meaning what it says, so it clashes with the word's sincerity."
+  ],
+  "practice": {
+    "prompt": "A new employee is learning to repair bicycles at a neighborhood shop.",
+    "options": [
+      "Pretending to listen while texting friends, the earnest trainee ignored the mechanic.",
+      "The earnest trainee was the one who received the biggest paycheck in the shop.",
+      "The earnest trainee practiced patching tubes after closing until every patch held.",
+      "The earnest trainee joked through every lesson and never tried a repair himself."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Faking attention is insincere, which contradicts what earnest means.",
+      "Despite the similar sound, earnest has nothing to do with earning money.",
+      "Staying late to work hard at a skill shows wholehearted, committed effort.",
+      "Treating lessons as a joke and skipping the work shows no seriousness at all."
+    ]
+  }
+}

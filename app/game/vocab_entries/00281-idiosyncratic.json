@@ -1,0 +1,49 @@
+{
+  "id": 281,
+  "slug": "idiosyncratic",
+  "word": "idiosyncratic",
+  "pos": "adjective",
+  "pronunciation": "/ˌɪd.i.oʊ.sɪŋˈkræt.ɪk/",
+  "definition": "Unusual in a way that belongs to one particular person or thing.",
+  "difficulty": "Intermediate",
+  "example": "The old hallway clock had an idiosyncratic habit of chiming twice at noon.",
+  "synonyms": [
+    "peculiar",
+    "quirky",
+    "distinctive",
+    "eccentric"
+  ],
+  "nuance": "Idiosyncratic points to one trait that marks someone as individual; eccentric usually calls the whole person strange.",
+  "alternatives": [
+    "conventional"
+  ],
+  "prompt": "A teacher is grading a stack of essays from her tenth-grade class.",
+  "options": [
+    "Maya's idiosyncratic habit of ending each essay with a riddle made her papers easy to spot.",
+    "The essays were so idiosyncratic that the teacher could not tell one student's paper from another's.",
+    "Jon's essay was idiosyncratic because it used common sayings like \"hit the books\" correctly.",
+    "The teacher called the answer idiosyncratic because it was simply foolish and careless."
+  ],
+  "reasons": [
+    "A personal quirk that sets one writer apart is exactly what the word describes.",
+    "Papers that all look the same lack the individual traits the word requires.",
+    "This mixes the word up with idiomatic, which is about familiar expressions.",
+    "The word sounds a bit like idiot, but it means individual, not stupid."
+  ],
+  "practice": {
+    "prompt": "A chef opens a small restaurant with an unusual menu.",
+    "options": [
+      "The chef's idiosyncratic menu paired every dessert with a pinch of black pepper.",
+      "The idiosyncratic menu simply copied the standard dishes served at every diner in town.",
+      "The chef felt idiosyncratic after skipping lunch and had to sit down for a while.",
+      "The cooks chopped onions in idiosyncratic rhythm, every knife striking at the same moment."
+    ],
+    "answer": 0,
+    "reasons": [
+      "An odd personal touch found in no other kitchen fits the word well.",
+      "Copying what everyone else serves is the opposite of being distinctive.",
+      "The word describes a distinctive trait, not a feeling like hunger or dizziness.",
+      "This confuses the word with synchronized; it means individual, not coordinated."
+    ]
+  }
+}

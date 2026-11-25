@@ -15,7 +15,8 @@
   ],
   "nuance": "Reluctant suggests hesitation that may still give way; reticent specifically means holding back from speaking or sharing feelings.",
   "alternatives": [
-    "reticent"
+    "reticent",
+    "hesitant"
   ],
   "prompt": "A shy student has been asked to give a short speech at the school assembly.",
   "options": [

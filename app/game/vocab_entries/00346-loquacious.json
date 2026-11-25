@@ -1,0 +1,49 @@
+{
+  "id": 346,
+  "slug": "loquacious",
+  "word": "loquacious",
+  "pos": "adjective",
+  "pronunciation": "/loʊˈkweɪ.ʃəs/",
+  "definition": "Tending to talk a great deal, often more than is needed.",
+  "difficulty": "Intermediate",
+  "example": "After two cups of coffee, my usually quiet uncle became loquacious at breakfast.",
+  "synonyms": [
+    "talkative",
+    "chatty",
+    "voluble",
+    "garrulous"
+  ],
+  "nuance": "Loquacious simply means fond of talking; garrulous adds a sense of rambling on about trivial things.",
+  "alternatives": [
+    "eloquent"
+  ],
+  "prompt": "A tour guide leads a group of visitors through an old history museum.",
+  "options": [
+    "The loquacious guide kept talking between exhibits, barely pausing for breath.",
+    "The loquacious guide led the whole tour in silence, pointing instead of speaking.",
+    "The loquacious guide offered only one brief sentence at each display case.",
+    "The loquacious gallery had velvet chairs and gold-framed mirrors."
+  ],
+  "reasons": [
+    "Constant chatter from one stop to the next shows a strong urge to talk.",
+    "Giving a tour without words is the opposite of being talkative.",
+    "Short, sparing remarks describe a reserved speaker, not a chatty one.",
+    "Velvet and gold suggest luxury; this word describes people who talk a lot, not rooms."
+  ],
+  "practice": {
+    "prompt": "A new student shares a seat with a classmate on a long bus ride.",
+    "options": [
+      "My loquacious seatmate was too shy to say a word until we arrived.",
+      "My loquacious seatmate chatted about her hobbies for the entire trip.",
+      "My loquacious seatmate answered each of my questions with a single nod.",
+      "The loquacious bus had plenty of room for everyone's backpacks and coats."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Shy silence for the whole ride is the reverse of chattiness.",
+      "Talking freely for hours on end is exactly what a talkative person does.",
+      "Replying with nods instead of words shows reluctance to speak.",
+      "Having lots of room means spacious; a vehicle cannot be talkative."
+    ]
+  }
+}

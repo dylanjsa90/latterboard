@@ -1,0 +1,49 @@
+{
+  "id": 197,
+  "slug": "anodyne",
+  "word": "anodyne",
+  "pos": "adjective",
+  "pronunciation": "/ˈæn.ə.daɪn/",
+  "definition": "Deliberately bland and inoffensive, so that it upsets no one but also excites no one.",
+  "difficulty": "Advanced",
+  "example": "The hotel lobby was painted an anodyne beige that no guest would ever remember.",
+  "synonyms": [
+    "bland",
+    "inoffensive",
+    "innocuous",
+    "insipid"
+  ],
+  "nuance": "Unlike innocuous, which simply means harmless, anodyne suggests a dull blandness that is often chosen on purpose to avoid any reaction.",
+  "alternatives": [
+    "innocuous"
+  ],
+  "prompt": "A company spokesperson must answer reporters' questions about a delayed product launch.",
+  "options": [
+    "The spokesperson gave an anodyne statement that promised nothing and offended no one.",
+    "The spokesperson's anodyne remarks were so inflammatory that reporters gasped in shock.",
+    "The statement was anodyne, so no reporter could figure out who had written it.",
+    "An anodyne crowd of reporters shouted angry questions over one another."
+  ],
+  "reasons": [
+    "A safe, empty statement designed to avoid any controversy fits the word exactly.",
+    "Inflammatory remarks provoke strong reactions, the reverse of what this word describes.",
+    "This confuses the word with anonymous; it describes bland content, not hidden authorship.",
+    "A loud, agitated crowd is the opposite of mild and unprovoking."
+  ],
+  "practice": {
+    "prompt": "A teenager is choosing a song to play during dinner with picky relatives.",
+    "options": [
+      "She chose an anodyne pop ballad, figuring no one at the table could object to it.",
+      "She chose an anodyne punk anthem packed with shocking lyrics meant to rattle her stern uncles.",
+      "She picked an anodyne recording from the 1920s simply because it was the oldest one she owned.",
+      "Her grandmother found the anodyne song so offensive that she left the table."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Picking something mild enough that nobody will complain matches the word's meaning.",
+      "Music meant to shock and rattle people is provocative, not bland.",
+      "This treats the word as if it meant old or antique; it has nothing to do with age.",
+      "Something truly inoffensive would not drive a listener away in protest."
+    ]
+  }
+}

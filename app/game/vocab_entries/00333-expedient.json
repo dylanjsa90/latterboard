@@ -1,0 +1,49 @@
+{
+  "id": 333,
+  "slug": "expedient",
+  "word": "expedient",
+  "pos": "adjective",
+  "pronunciation": "/ɪkˈspiː.di.ənt/",
+  "definition": "Useful for getting a quick or easy result, even if it is not entirely fair or right.",
+  "difficulty": "Intermediate",
+  "example": "Skipping the safety review was expedient, but it left the bridge project open to costly mistakes.",
+  "synonyms": [
+    "convenient",
+    "practical",
+    "advantageous",
+    "politic"
+  ],
+  "nuance": "Unlike expeditious, which means fast and efficient, expedient suggests choosing convenience, often at some cost to principle.",
+  "alternatives": [
+    "expeditious"
+  ],
+  "prompt": "A team running late on a science project must decide how to finish it in time.",
+  "options": [
+    "Copying last year's chart was expedient, though the team knew it was not quite honest.",
+    "The team hoped to expedient the project by working through lunch and staying late after school.",
+    "The expedient plan required months of extra work and helped no one finish on time.",
+    "The most expedient student on the team typed ninety words a minute."
+  ],
+  "reasons": [
+    "A shortcut that saves time while bending the rules fits the word exactly.",
+    "The word is an adjective; this sentence confuses it with the verb expedite.",
+    "A slow, unhelpful plan is the opposite of a convenient shortcut.",
+    "The word describes a convenient course of action, not a person's raw speed."
+  ],
+  "practice": {
+    "prompt": "A restaurant owner faces a sudden shortage of fresh basil on a busy night.",
+    "options": [
+      "Swapping in dried basil was an expedient fix, though regular diners noticed the flatter taste.",
+      "The owner went on an expedient into the hills to search for wild basil.",
+      "Driving four hours to a distant farm for basil was the most expedient choice she could make.",
+      "Out of deep respect for her recipes, the owner made the expedient decision to close until fresh basil arrived."
+    ],
+    "answer": 0,
+    "reasons": [
+      "A quick substitute that solves the problem but costs some quality shows the word's meaning.",
+      "This confuses the adjective with expedition, a noun meaning a journey.",
+      "A long, costly trip is the reverse of a handy, convenient solution.",
+      "Closing to protect standards puts principle first; the word implies favoring convenience instead."
+    ]
+  }
+}

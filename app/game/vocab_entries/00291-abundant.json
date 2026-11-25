@@ -1,0 +1,49 @@
+{
+  "id": 291,
+  "slug": "abundant",
+  "word": "abundant",
+  "pos": "adjective",
+  "pronunciation": "/əˈbʌn.dənt/",
+  "definition": "Present in large amounts; more than enough.",
+  "difficulty": "Foundation",
+  "example": "Fresh figs are abundant at the farmers' market in late summer.",
+  "synonyms": [
+    "plentiful",
+    "ample",
+    "copious",
+    "profuse"
+  ],
+  "nuance": "Abundant suggests a supply that is large or even overflowing, while ample means only that there is enough for the need.",
+  "alternatives": [
+    "scarce"
+  ],
+  "prompt": "A hiker describes a forest trail after a very rainy spring.",
+  "options": [
+    "Wild mushrooms were abundant along the trail after weeks of rain.",
+    "Water was so abundant on the hike that everyone rationed each tiny sip.",
+    "The trail was abundant, and weeds had covered it since no one walked there.",
+    "A single abundant pinecone lay in the middle of the path."
+  ],
+  "reasons": [
+    "Many mushrooms springing up after steady rain is a clear case of a plentiful supply.",
+    "People ration water when it is running short, not when there is plenty.",
+    "This confuses the word with the look-alike abandoned, which means deserted.",
+    "One object cannot be plentiful; the word describes a large quantity."
+  ],
+  "practice": {
+    "prompt": "A farmer reports on this year's apple harvest.",
+    "options": [
+      "The farmer felt abundant about the sunny forecast and smiled at breakfast all week.",
+      "Apples were abundant this year, so stores could barely find any to sell.",
+      "The harvest was so abundant that the farmer gave extra crates to neighbors.",
+      "The harvest was abundant, with only three apples on each tree."
+    ],
+    "answer": 2,
+    "reasons": [
+      "The word describes amounts of things, not a hopeful or cheerful mood.",
+      "Fruit that is hard to find is scarce, which contradicts a large supply.",
+      "Having so many apples that some can be given away shows a supply beyond what is needed.",
+      "A few apples per tree is a poor yield, the opposite of a plentiful one."
+    ]
+  }
+}

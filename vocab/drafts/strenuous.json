@@ -1,0 +1,63 @@
+{
+  "slug": "strenuous",
+  "word": "strenuous",
+  "pos": "adjective",
+  "difficulty": "Foundation",
+  "source": "generated",
+  "status": "invalid",
+  "attempts": 1,
+  "errors": [
+    "strenuous: nuance: 168 characters (max 160)"
+  ],
+  "note": "",
+  "entry": {
+    "slug": "strenuous",
+    "word": "strenuous",
+    "pos": "adjective",
+    "pronunciation": "/ˈstrɛn.ju.əs/",
+    "definition": "Needing or using a lot of physical or mental effort and energy.",
+    "difficulty": "Foundation",
+    "example": "After her cast came off, the doctor told her to avoid strenuous exercise for two more weeks.",
+    "synonyms": [
+      "taxing",
+      "arduous",
+      "demanding",
+      "exhausting"
+    ],
+    "nuance": "Strenuous stresses the energy a task uses up, while arduous stresses how long and hard it is to get through. Don't confuse it with strident, which means harsh and loud.",
+    "alternatives": [
+      "arduous",
+      "effortless",
+      "strident"
+    ],
+    "prompt": "A hiking guide is describing the day's route to a group of visitors.",
+    "options": [
+      "The last climb is strenuous, so rest and drink water before you start.",
+      "The flat, paved loop is so strenuous that toddlers stroll it in sandals.",
+      "The guide's strenuous voice grated on everyone's ears like a whistle.",
+      "From the summit, the view is strenuous, with soft colors fading into the valley."
+    ],
+    "reasons": [
+      "A steep climb that calls for rest and water beforehand takes a lot of exertion.",
+      "An easy walk that small children can manage is the opposite of hard work.",
+      "A harsh, piercing voice is strident. The two words look alike but mean different things.",
+      "A view takes no effort to look at, so the word doesn't fit a pleasant scene."
+    ],
+    "practice": {
+      "prompt": "A family spends a Saturday moving into a new apartment.",
+      "options": [
+        "The new kitchen smelled strenuous, like fresh paint and lemons.",
+        "Hauling the couch up four flights of stairs was the most strenuous job of the day.",
+        "Plugging in the lamp was strenuous, needing barely a flick of the wrist.",
+        "A neighbor's strenuous laugh cut sharply through the thin walls."
+      ],
+      "answer": 1,
+      "reasons": [
+        "A smell doesn't use up energy, so the word has nothing to describe here.",
+        "Lifting heavy furniture up many stairs takes great physical effort.",
+        "A task that takes almost no effort can't be called exhausting.",
+        "A shrill, grating sound is strident, not effortful. This mixes up two look-alike words."
+      ]
+    }
+  }
+}

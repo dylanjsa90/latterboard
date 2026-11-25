@@ -14,7 +14,11 @@
     "erratic"
   ],
   "nuance": "Capricious stresses impulsive whim behind the changes, while erratic can describe any irregular pattern, even a machine's.",
-  "alternatives": [],
+  "alternatives": [
+    "capacious",
+    "steadfast",
+    "fickle"
+  ],
   "prompt": "Employees describe how their manager sets the rules in their office.",
   "options": [
     "The capricious manager banned headphones on Monday, then required them on Friday for no stated reason.",

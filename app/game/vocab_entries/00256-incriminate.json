@@ -1,0 +1,46 @@
+{
+  "id": 256,
+  "slug": "incriminate",
+  "word": "incriminate",
+  "pos": "verb",
+  "pronunciation": "/ɪnˈkrɪm.ə.neɪt/",
+  "definition": "To make someone appear guilty of a crime or wrongdoing.",
+  "difficulty": "Intermediate",
+  "example": "Muddy paw prints across the sofa incriminated the dog, who sat by the door looking innocent.",
+  "synonyms": [
+    "implicate",
+    "inculpate",
+    "point to as guilty"
+  ],
+  "nuance": "Evidence incriminates by making someone look guilty, while to accuse is to openly blame someone, with or without proof.",
+  "alternatives": [],
+  "prompt": "A teacher is trying to find out who scribbled on the classroom whiteboard.",
+  "options": [
+    "Blue ink on her fingertips seemed to incriminate the girl seated by the board.",
+    "A hallway video showing him in the library all period served to incriminate the boy completely.",
+    "The teacher was careful not to incriminate between neat and messy handwriting when grading.",
+    "To thank her for cleaning up, the teacher chose to incriminate the helpful student with a gold star."
+  ],
+  "reasons": [
+    "Ink stains are a clue that makes the girl look responsible for the scribbles.",
+    "Proof that he was somewhere else clears him, which is the reverse of making him look guilty.",
+    "This mixes the word up with discriminate, which means telling things apart.",
+    "Giving a reward is praise, but the word only ever points toward guilt."
+  ],
+  "practice": {
+    "prompt": "Someone ate the last slice of pie at a family picnic.",
+    "options": [
+      "Grandma's confession that she ate the pie herself incriminated the twins and cleared their names.",
+      "Dad left the pie in the oven so long that he incriminated the crust to ashes.",
+      "Uncle Ray stood up and incriminated that the last slice had been his.",
+      "A smear of cherry filling on his chin was enough to incriminate Uncle Ray."
+    ],
+    "answer": 3,
+    "reasons": [
+      "Someone else's confession takes the blame off the twins instead of putting it on them.",
+      "This confuses the word with incinerate, which means to burn something up.",
+      "Admitting a fact is not the same thing. Evidence incriminates a person; it isn't a word for confessing.",
+      "Leftover filling on his face is evidence that makes him look like the pie thief."
+    ]
+  }
+}

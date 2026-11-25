@@ -1,0 +1,49 @@
+{
+  "id": 259,
+  "slug": "inimical",
+  "word": "inimical",
+  "pos": "adjective",
+  "pronunciation": "/ɪˈnɪm.ɪ.kəl/",
+  "definition": "Harmful to something or tending to hold it back; also unfriendly or hostile.",
+  "difficulty": "Advanced",
+  "example": "Cold temperatures are inimical to bacterial growth, so refrigerated food spoils more slowly.",
+  "synonyms": [
+    "harmful",
+    "hostile",
+    "detrimental",
+    "adverse"
+  ],
+  "nuance": "Unlike hostile, which usually describes people, inimical often describes conditions harmful to something, as in \"inimical to growth.\"",
+  "alternatives": [
+    "inimitable"
+  ],
+  "prompt": "A gardener explains why her seedlings keep dying along the coast.",
+  "options": [
+    "Salty sea spray is inimical to the tender seedlings planted along her fence.",
+    "Her inimical roses, unlike any others in town, win first prize every summer.",
+    "Gentle morning sun proved inimical, and the seedlings thrived beneath it.",
+    "Her inimical neighbor kindly offered spare compost and a packet of seeds."
+  ],
+  "reasons": [
+    "Salt spray damages young plants, so calling it harmful to them fits exactly.",
+    "This confuses the word with inimitable, which means impossible to copy.",
+    "Something that helps plants thrive is favorable, the reverse of damaging.",
+    "A generous, helpful neighbor is friendly, not hostile."
+  ],
+  "practice": {
+    "prompt": "A manager describes an office where new ideas are always mocked.",
+    "options": [
+      "Constant ridicule of new proposals created a climate inimical to creativity.",
+      "Because the meeting room felt so inimical, everyone spoke up freely.",
+      "The office had an inimical printer, a model no competitor could ever match.",
+      "The inimical conference room seated only four, so meetings felt cozy."
+    ],
+    "answer": 0,
+    "reasons": [
+      "Mockery discourages fresh ideas, so the climate works against creativity.",
+      "A setting that invites open speech is welcoming, the opposite of hostile.",
+      "This mixes the word up with inimitable; being unmatched is not being harmful.",
+      "The word means harmful or unfriendly; it says nothing about size or coziness."
+    ]
+  }
+}

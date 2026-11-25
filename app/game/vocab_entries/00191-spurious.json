@@ -1,0 +1,50 @@
+{
+  "id": 191,
+  "slug": "spurious",
+  "word": "spurious",
+  "pos": "adjective",
+  "pronunciation": "/ˈspjʊr.i.əs/",
+  "definition": "False or fake, even though it may seem real, valid, or well reasoned.",
+  "difficulty": "Intermediate",
+  "example": "The flyer quoted spurious statistics that no survey had ever actually produced.",
+  "synonyms": [
+    "false",
+    "bogus",
+    "fallacious",
+    "counterfeit"
+  ],
+  "nuance": "Specious stresses that a false claim looks convincing; spurious just means it is false or fake, whether or not it looks convincing.",
+  "alternatives": [
+    "specious",
+    "authentic"
+  ],
+  "prompt": "A researcher notices that ice cream sales and sunburns rise and fall together.",
+  "options": [
+    "She called the link spurious, since hot weather drives both numbers up on its own.",
+    "Three careful experiments confirmed that the spurious link was real and direct.",
+    "The spurious discovery felt so lively and thrilling that the whole lab began to cheer.",
+    "Feeling spurious of the numbers, she rechecked every entry in the spreadsheet."
+  ],
+  "reasons": [
+    "A third factor explains the pattern, so the apparent connection between the two is not real.",
+    "A connection that has been confirmed as real cannot also be false.",
+    "The word judges whether something is true, not how exciting or energetic it feels.",
+    "This mixes it up with suspicious; the word describes false things, not a person's distrust."
+  ],
+  "practice": {
+    "prompt": "A museum examines an old letter said to have been written by a famous explorer.",
+    "options": [
+      "Written in a bitter tone, the spurious letter revealed how furious the explorer had felt.",
+      "Experts declared the letter spurious after learning its paper was made decades too late.",
+      "Because the curators thought the letter spurious, they displayed it as a treasured original.",
+      "The letter's graceful, looping handwriting struck everyone as spurious and beautiful."
+    ],
+    "answer": 1,
+    "reasons": [
+      "A fake letter can't reveal the explorer's real feelings, and the word doesn't mean angry.",
+      "Paper that is too new shows the letter is a fake and not what it claims to be.",
+      "Nobody proudly displays a document as genuine after deciding it is fake.",
+      "Lovely penmanship says nothing about whether a document is fake."
+    ]
+  }
+}

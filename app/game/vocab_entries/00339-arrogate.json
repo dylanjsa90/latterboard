@@ -1,0 +1,49 @@
+{
+  "id": 339,
+  "slug": "arrogate",
+  "word": "arrogate",
+  "pos": "verb",
+  "pronunciation": "/ˈær.ə.ɡeɪt/",
+  "definition": "To claim or take a power, right, or privilege for yourself without having any right to it.",
+  "difficulty": "Advanced",
+  "example": "The new office manager tried to arrogate to himself the right to approve every purchase in the building.",
+  "synonyms": [
+    "usurp",
+    "appropriate",
+    "commandeer",
+    "seize"
+  ],
+  "nuance": "Arrogate means grabbing a right you were never given. It is often confused with abrogate, which means to formally cancel a law or agreement.",
+  "alternatives": [
+    "abrogate"
+  ],
+  "prompt": "A club treasurer starts making decisions that are supposed to belong to the whole board.",
+  "options": [
+    "The treasurer began to arrogate the power to cancel events without asking the board.",
+    "The board voted to arrogate the outdated rule about where meetings must be held.",
+    "Feeling overwhelmed, the treasurer decided to arrogate her authority and hand every decision back to the board.",
+    "After a fair vote, the members asked her to arrogate the budget duties for one more year."
+  ],
+  "reasons": [
+    "She is taking an authority that was never hers, which is exactly what this verb describes.",
+    "Formally repealing a rule is abrogating it. This mixes up two look-alike words.",
+    "Giving power away is the reverse of claiming it, so relinquish would fit here.",
+    "Duties granted by a fair vote are not taken without right, so the word's negative sense is lost."
+  ],
+  "practice": {
+    "prompt": "Four students are presenting a science project they built together.",
+    "options": [
+      "Generous to a fault, Malik offered to arrogate his share of the credit so his teammates would receive more praise.",
+      "Malik was pleased to arrogate the bonus points the teacher had fairly awarded to him.",
+      "Without asking anyone, Malik tried to arrogate all the credit for the group's results.",
+      "Malik began to arrogate his teammates about where they had found their data."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Giving up credit is the opposite of grabbing it.",
+      "Accepting points he earned fairly involves no unjust claim, so the verb does not fit.",
+      "Claiming shared credit for himself alone is taking something he has no right to.",
+      "Questioning people closely is interrogating them. This confuses the word with a similar-sounding one."
+    ]
+  }
+}

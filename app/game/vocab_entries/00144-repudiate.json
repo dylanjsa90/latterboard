@@ -14,7 +14,11 @@
     "renounce"
   ],
   "nuance": "To repudiate is to reject or disown something, while to refute is to prove it false with evidence.",
-  "alternatives": [],
+  "alternatives": [
+    "refute",
+    "embrace",
+    "endorse"
+  ],
   "prompt": "A chess club realizes that a bylaw it wrote long ago was unfair to beginners.",
   "options": [
     "The club voted to repudiate the old bylaw and publicly apologized to the beginners it had excluded.",

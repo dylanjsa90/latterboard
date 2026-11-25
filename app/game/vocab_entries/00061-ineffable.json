@@ -14,7 +14,10 @@
     "unutterable"
   ],
   "nuance": "Ineffable usually praises something wondrous or profound, while unspeakable more often suggests something too awful to name.",
-  "alternatives": [],
+  "alternatives": [
+    "inexplicable",
+    "mundane"
+  ],
   "prompt": "A young violinist tries to describe the moment she first heard a full orchestra play.",
   "options": [
     "She said the opening chord filled her with an ineffable joy she still cannot explain.",

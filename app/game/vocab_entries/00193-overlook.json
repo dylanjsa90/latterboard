@@ -1,0 +1,47 @@
+{
+  "id": 193,
+  "slug": "overlook",
+  "word": "overlook",
+  "pos": "verb",
+  "pronunciation": "/ˌoʊ.vərˈlʊk/",
+  "definition": "To fail to notice or think about something, especially something that matters.",
+  "difficulty": "Foundation",
+  "example": "Dazzled by the ocean view, the buyers overlooked the cracks in the old porch steps.",
+  "synonyms": [
+    "miss",
+    "neglect",
+    "pass over",
+    "disregard"
+  ],
+  "nuance": "Overlooking is usually accidental, unlike ignoring; do not confuse it with oversee (to supervise) or look over (to examine).",
+  "alternatives": [],
+  "prompt": "A team is checking a budget spreadsheet before sending it to the school board.",
+  "options": [
+    "Check the formulas again, since it's easy to overlook one misplaced decimal point.",
+    "Our treasurer will overlook the budget team and approve each person's work.",
+    "Please overlook every cell carefully so that no wrong number slips through.",
+    "When you overlook a missing receipt, circle it in red so we can find it later."
+  ],
+  "reasons": [
+    "A tiny decimal error is exactly the kind of detail people miss without meaning to.",
+    "Supervising a group and approving work is what oversee means, not overlook.",
+    "Examining something closely is looking it over; overlooking is what lets errors slip through.",
+    "You can't mark something you failed to notice, so this treats the word as if it meant spotting."
+  ],
+  "practice": {
+    "prompt": "A student is reading the entry rules for a science fair.",
+    "options": [
+      "The rules overlook how big each poster can be, listing exact measurements in inches.",
+      "Read the rules twice so you don't overlook the limit on poster size.",
+      "To overlook the safety guidelines, Lena highlighted each one and taped them above her desk.",
+      "Kenji asked his teacher to overlook his draft and suggest a few improvements."
+    ],
+    "answer": 1,
+    "reasons": [
+      "Rules that give exact measurements clearly address poster size instead of leaving it out.",
+      "Rereading protects against missing a small but important requirement.",
+      "Highlighting and posting the rules shows close attention, which is the reverse of missing them.",
+      "Reviewing a draft for feedback is looking it over; overlooking it would mean not noticing it at all."
+    ]
+  }
+}

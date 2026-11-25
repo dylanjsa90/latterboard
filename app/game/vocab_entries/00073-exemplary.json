@@ -14,7 +14,11 @@
     "ideal"
   ],
   "nuance": "Exemplary means worth copying, not just very good; excellent praises quality without suggesting that others should imitate it.",
-  "alternatives": [],
+  "alternatives": [
+    "mediocre",
+    "commendable",
+    "deplorable"
+  ],
   "prompt": "A community center is choosing which volunteer to honor at its annual dinner.",
   "options": [
     "The committee honored Jonah's exemplary service and urged others to follow his lead.",

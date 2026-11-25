@@ -1,0 +1,47 @@
+{
+  "id": 313,
+  "slug": "uphold",
+  "word": "uphold",
+  "pos": "verb",
+  "pronunciation": "/ʌpˈhoʊld/",
+  "definition": "To keep a rule, standard, or decision in place, especially when someone challenges it.",
+  "difficulty": "Foundation",
+  "example": "Volunteers uphold the garden's tradition of sharing the first harvest with neighbors.",
+  "synonyms": [
+    "maintain",
+    "defend",
+    "confirm",
+    "stand by"
+  ],
+  "nuance": "Unlike support, uphold applies to rules, values, or decisions and implies keeping them in force when they are tested.",
+  "alternatives": [],
+  "prompt": "A sports league reviews a penalty that a referee called during a close game.",
+  "options": [
+    "After studying the replay, the league voted to uphold the referee's penalty.",
+    "The league chose to uphold the penalty by canceling it and erasing it from the record.",
+    "The league decided to uphold the replay video so that reporters could not watch it.",
+    "The referee stumbled near the goal but managed to uphold until the final whistle."
+  ],
+  "reasons": [
+    "Reviewing a disputed call and letting it stand is exactly what this verb describes.",
+    "Canceling a decision is overturning it, the reverse of keeping it in force.",
+    "This confuses the word with withhold; keeping something back from others is not the meaning.",
+    "The verb needs an object like a rule or ruling; it does not mean staying on your feet."
+  ],
+  "practice": {
+    "prompt": "A student council discusses how to keep the school's honor code strong.",
+    "options": [
+      "The secretary will uphold a copy of the honor code to the school website tonight.",
+      "Students who uphold the honor code are often the ones caught copying answers on tests.",
+      "Each new council member signs a pledge to uphold the honor code.",
+      "The council voted to uphold the honor code, so the rules no longer apply to anyone."
+    ],
+    "answer": 2,
+    "reasons": [
+      "This mixes the word up with upload; posting a file online is unrelated.",
+      "Copying answers breaks the code, so these students are not honoring it.",
+      "Promising to follow and protect a set of rules fits the word perfectly.",
+      "Making rules stop applying does away with them instead of keeping them in place."
+    ]
+  }
+}

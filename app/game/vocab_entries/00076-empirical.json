@@ -14,7 +14,9 @@
     "experiential"
   ],
   "nuance": "Empirical stresses evidence gathered by observing or testing, while theoretical stresses ideas worked out by reasoning alone.",
-  "alternatives": [],
+  "alternatives": [
+    "speculative"
+  ],
   "prompt": "A team of students wants to find out whether music helps houseplants grow faster.",
   "options": [
     "They ran an empirical test, growing twenty plants with music and twenty in silence.",

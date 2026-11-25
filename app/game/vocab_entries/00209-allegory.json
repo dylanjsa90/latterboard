@@ -1,0 +1,46 @@
+{
+  "id": 209,
+  "slug": "allegory",
+  "word": "allegory",
+  "pos": "noun",
+  "pronunciation": "/ˈæl.ə.ɡɔːr.i/",
+  "definition": "A story or picture in which characters and events stand for larger ideas, such as moral lessons.",
+  "difficulty": "Intermediate",
+  "example": "The old painting works as an allegory, with each season standing for a stage of human life.",
+  "synonyms": [
+    "parable",
+    "fable",
+    "symbolic tale"
+  ],
+  "nuance": "An allegory carries a hidden meaning through a whole work, while a metaphor is usually a single figure of speech.",
+  "alternatives": [],
+  "prompt": "A teacher assigns a short story about a lone traveler crossing a vast desert.",
+  "options": [
+    "In the allegory, the desert represents grief and the distant oasis stands for healing.",
+    "A neighbor made an allegory that the traveler had stolen his camel.",
+    "The story counts as an allegory because every detail is meant only literally, with no hidden meaning.",
+    "The teacher pointed out a single allegory in the phrase \"a sea of sand.\""
+  ],
+  "reasons": [
+    "The setting and goal stand for an inner journey, which is how this kind of symbolic story works.",
+    "This confuses the word with allegation, which is a claim that someone did something wrong.",
+    "A symbolic second layer is the whole point, so a purely literal story is not one.",
+    "A brief comparison in one phrase is a metaphor, not a sustained symbolic narrative."
+  ],
+  "practice": {
+    "prompt": "A children's author is planning a picture book about two gardeners.",
+    "options": [
+      "Her allegory uses a patient gardener and a hasty one to show why persistence pays off.",
+      "The author wrote an allegory listing the best planting dates for common vegetables.",
+      "The gardener's allegory to pollen made her sneeze every spring.",
+      "One gardener filed an allegory with the city about a neighbor's noisy leaf blower."
+    ],
+    "answer": 0,
+    "reasons": [
+      "The two characters stand for ways of living, giving the tale a moral meaning beneath the surface.",
+      "A factual planting guide has no symbolic layer, so it is a reference list, not a symbolic tale.",
+      "This mixes the word up with allergy, a bodily reaction to something like pollen.",
+      "A formal complaint to officials is a grievance or allegation, not a symbolic story."
+    ]
+  }
+}

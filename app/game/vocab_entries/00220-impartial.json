@@ -1,0 +1,49 @@
+{
+  "id": 220,
+  "slug": "impartial",
+  "word": "impartial",
+  "pos": "adjective",
+  "pronunciation": "/ɪmˈpɑːr.ʃəl/",
+  "definition": "Treating all sides fairly, without favoring one person or group over another.",
+  "difficulty": "Foundation",
+  "example": "The science fair needed impartial judges who had never met any of the students.",
+  "synonyms": [
+    "unbiased",
+    "neutral",
+    "even-handed",
+    "fair-minded"
+  ],
+  "nuance": "Impartial means free of bias, not uninterested: an impartial judge can care a great deal about reaching a fair result.",
+  "alternatives": [
+    "indifferent"
+  ],
+  "prompt": "A referee is officiating a championship game between two rival schools.",
+  "options": [
+    "The impartial referee judged both teams' fouls by the same standard.",
+    "The impartial referee overlooked every foul committed by her hometown team.",
+    "The impartial referee got so bored that she stopped watching the second half.",
+    "Because she read every single rule aloud, her review of the rulebook was impartial."
+  ],
+  "reasons": [
+    "Applying one rule equally to both sides is exactly what fairness without favoritism looks like.",
+    "Letting one side off the hook is favoritism, the reverse of the word's meaning.",
+    "This confuses fairness with lack of interest; not paying attention is indifference.",
+    "The word is about fairness, not completeness; reading every rule shows thoroughness."
+  ],
+  "practice": {
+    "prompt": "A teacher must grade a stack of essays, and one of them was written by her nephew.",
+    "options": [
+      "She was so impartial about grading that the stack sat untouched for a week.",
+      "She finished only an impartial batch, so half the essays still had no grades.",
+      "To stay impartial, she covered the names on each essay before grading it.",
+      "Being impartial, she quietly added two bonus points to her nephew's score."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Neglecting the work reflects not caring, which is different from being fair.",
+      "This mistakes the word for partial, meaning incomplete; it has nothing to do with amount.",
+      "Hiding who wrote each essay keeps family ties from influencing the grades.",
+      "Giving a relative extra credit shows favoritism, which the word rules out."
+    ]
+  }
+}

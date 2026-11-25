@@ -1,0 +1,50 @@
+{
+  "id": 354,
+  "slug": "ardent",
+  "word": "ardent",
+  "pos": "adjective",
+  "pronunciation": "/ˈɑːr.dənt/",
+  "definition": "Feeling or showing strong, eager enthusiasm or devotion.",
+  "difficulty": "Intermediate",
+  "example": "Her grandfather was an ardent collector of old maps and spent his weekends searching estate sales.",
+  "synonyms": [
+    "passionate",
+    "fervent",
+    "devoted",
+    "zealous"
+  ],
+  "nuance": "Ardent suggests warm, glowing devotion, while zealous can hint at excessive or single-minded intensity; don't confuse it with arduous, \"difficult.\"",
+  "alternatives": [
+    "arduous",
+    "fervent"
+  ],
+  "prompt": "A student joins the school's astronomy club.",
+  "options": [
+    "As an ardent stargazer, Maya stayed up past midnight to log every meteor.",
+    "The ardent climb to the observatory roof left the club members gasping for air.",
+    "Leo was an ardent club member who skipped meetings and never glanced at the sky.",
+    "The club's ardent telescope sat unused in a closet all winter."
+  ],
+  "reasons": [
+    "Staying up late to track meteors shows eager, heartfelt commitment to the hobby.",
+    "This confuses the word with arduous; a steep climb is hard, not passionate.",
+    "Skipping meetings and ignoring the sky shows indifference, the reverse of strong enthusiasm.",
+    "An unused instrument has no feelings, so it cannot be eager or devoted."
+  ],
+  "practice": {
+    "prompt": "A town is restoring its old public library.",
+    "options": [
+      "The ardent residents shrugged and said they didn't care if the library ever reopened.",
+      "The librarian gave an ardent nod, barely looking up from her lukewarm coffee.",
+      "Ardent volunteers spent every Saturday repainting shelves and sorting donated books.",
+      "Restoring the library was an ardent task that took three exhausting years."
+    ],
+    "answer": 2,
+    "reasons": [
+      "Not caring about the outcome is apathy, the opposite of eager devotion.",
+      "A distracted, half-hearted nod lacks the intense feeling the word requires.",
+      "Giving up every weekend for unpaid work shows wholehearted dedication to the cause.",
+      "Here the word is mistaken for arduous; a task can be tiring but cannot feel passion."
+    ]
+  }
+}
